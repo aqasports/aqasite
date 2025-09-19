@@ -1,6 +1,6 @@
 [build]
-  command = ""          # no build command
-  publish = "."         # root folder, because your HTML is in the root
+  command = ""
+  publish = "."
 
 [functions]
   directory = "netlify/functions"
