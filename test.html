@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AQA – Page</title>
+
+  <!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+
+  <!-- Page content -->
+  <main>
+    <h1>Bienvenue à AQA</h1>
+    <p>Contenu de la page…</p>
+  </main>
+
+  <!-- Navbar JS -->
+  <script src="js/navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://aqasports.pro/</loc>
+    <lastmod>2025-08-26</lastmod>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Pricing page -->
+  <url>
+    <loc>https://aqasports.pro/tarif</loc>
+    <lastmod>2025-08-26</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Groups / Schedule page -->
+  <url>
+    <loc>https://aqasports.pro/aqa_groups_schedule</loc>
+    <lastmod>2025-08-26</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact page (if exists) -->
+  <url>
+    <loc>https://aqasports.pro/contact</loc>
+    <lastmod>2025-08-26</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

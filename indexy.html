@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Upload & Record Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .upload-section, .record-section {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        .upload-section:hover, .record-section:hover {
+            border-color: #007bff;
+        }
+        
+        .file-input-wrapper {
+            margin: 20px 0;
+        }
+        
+        #voiceInput {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .record-btn {
+            background: #dc3545;
+            font-size: 18px;
+            padding: 15px 30px;
+            border-radius: 50px;
+        }
+        
+        .record-btn:hover {
+            background: #c82333;
+        }
+        
+        .record-btn.recording {
+            background: #dc3545;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .record-btn.stopped {
+            background: #28a745;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .preview-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .preview-section.show {
+            display: block;
+        }
+        
+        audio {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .file-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .clear-btn {
+            background: #6c757d;
+        }
+        
+        .clear-btn:hover {
+            background: #5a6268;
+        }
+        
+        .record-timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc3545;
+            margin: 10px 0;
+        }
+        
+        .record-controls {
+            margin: 20px 0;
+        }
+        
+        .visualizer {
+            width: 100%;
+            height: 60px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .visualizer.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Audio Upload & Record Tester</h1>
+        
+        <div class="tabs">
+            <button class="tab active" data-tab="upload">📁 Upload File</button>
+            <button class="tab" data-tab="record">🎤 Record Audio</button>
+        </div>
+        
+        <!-- Upload Tab -->
+        <div id="upload" class="tab-content active">
+            <form id="uploadForm">
+                <div class="upload-section">
+                    <h3>Select Audio File</h3>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="voiceInput" name="file" accept="audio/*">
+                    </div>
+                    <button type="submit" id="uploadBtn">📤 Upload Audio</button>
+                    <button type="button" id="clearUploadBtn" class="clear-btn">🗑️ Clear</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Record Tab -->
+        <div id="record" class="tab-content">
+            <div class="record-section">
+                <h3>Record Audio</h3>
+                <div class="record-controls">
+                    <button id="recordBtn" class="record-btn">🎤 Start Recording</button>
+                    <div id="recordTimer" class="record-timer" style="display: none;">00:00</div>
+                    <canvas id="visualizer" class="visualizer"></canvas>
+                </div>
+                <button id="uploadRecordedBtn" style="display: none;">📤 Upload Recording</button>
+                <button id="clearRecordBtn" class="clear-btn" style="display: none;">🗑️ Clear Recording</button>
+            </div>
+        </div>
+        
+        <div id="previewSection" class="preview-section">
+            <h3>Preview</h3>
+            <audio id="audioPreview" controls></audio>
+            <div id="fileInfo" class="file-info"></div>
+        </div>
+        
+        <div id="statusSection"></div>
+    </div>
+
+    <script>
+        class AudioRecorderUploader {
+            constructor() {
+                this.mediaRecorder = null;
+                this.audioChunks = [];
+                this.recordedBlob = null;
+                this.isRecording = false;
+                this.recordingTime = 0;
+                this.recordingTimer = null;
+                this.audioContext = null;
+                this.analyser = null;
+                this.dataArray = null;
+                this.visualizerCanvas = null;
+                this.visualizerContext = null;
+                this.animationFrame = null;
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupElements();
+                this.setupEventListeners();
+                this.setupVisualizer();
+            }
+            
+            setupElements() {
+                this.form = document.getElementById('uploadForm');
+                this.fileInput = document.getElementById('voiceInput');
+                this.audioPreview = document.getElementById('audioPreview');
+                this.previewSection = document.getElementById('previewSection');
+                this.fileInfo = document.getElementById('fileInfo');
+                this.statusSection = document.getElementById('statusSection');
+                this.uploadBtn = document.getElementById('uploadBtn');
+                this.clearUploadBtn = document.getElementById('clearUploadBtn');
+                
+                this.recordBtn = document.getElementById('recordBtn');
+                this.recordTimer = document.getElementById('recordTimer');
+                this.uploadRecordedBtn = document.getElementById('uploadRecordedBtn');
+                this.clearRecordBtn = document.getElementById('clearRecordBtn');
+                this.visualizerCanvas = document.getElementById('visualizer');
+            }
+            
+            setupEventListeners() {
+                // Tab switching
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+                });
+                
+                // Upload functionality
+                this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+                this.clearUploadBtn.addEventListener('click', () => this.clearUpload());
+                this.form.addEventListener('submit', (e) => this.handleUpload(e));
+                
+                // Recording functionality
+                this.recordBtn.addEventListener('click', () => this.toggleRecording());
+                this.uploadRecordedBtn.addEventListener('click', () => this.uploadRecording());
+                this.clearRecordBtn.addEventListener('click', () => this.clearRecording());
+            }
+            
+            setupVisualizer() {
+                if (this.visualizerCanvas) {
+                    this.visualizerContext = this.visualizerCanvas.getContext('2d');
+                    this.visualizerCanvas.width = this.visualizerCanvas.offsetWidth;
+                    this.visualizerCanvas.height = 60;
+                }
+            }
+            
+            switchTab(tabName) {
+                document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+                
+                this.clearStatus();
+                this.hidePreview();
+            }
+            
+            async toggleRecording() {
+                if (!this.isRecording) {
+                    await this.startRecording();
+                } else {
+                    this.stopRecording();
+                }
+            }
+            
+            async startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ 
+                        audio: {
+                            echoCancellation: true,
+                            noiseSuppression: true,
+                            sampleRate: 44100
+                        }
+                    });
+                    
+                    // Setup audio context for visualization
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioContext.createAnalyser();
+                    const source = this.audioContext.createMediaStreamSource(stream);
+                    source.connect(this.analyser);
+                    
+                    this.analyser.fftSize = 256;
+                    this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+                    
+                    this.mediaRecorder = new MediaRecorder(stream, {
+                        mimeType: 'audio/webm;codecs=opus'
+                    });
+                    
+                    this.audioChunks = [];
+                    this.recordingTime = 0;
+                    
+                    this.mediaRecorder.ondataavailable = (event) => {
+                        this.audioChunks.push(event.data);
+                    };
+                    
+                    this.mediaRecorder.onstop = () => {
+                        this.recordedBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+                        this.showRecordedPreview();
+                        stream.getTracks().forEach(track => track.stop());
+                        if (this.audioContext) {
+                            this.audioContext.close();
+                        }
+                    };
+                    
+                    this.mediaRecorder.start();
+                    this.isRecording = true;
+                    
+                    this.recordBtn.textContent = '⏹️ Stop Recording';
+                    this.recordBtn.classList.add('recording');
+                    this.recordTimer.style.display = 'block';
+                    this.visualizerCanvas.classList.add('show');
+                    
+                    this.startTimer();
+                    this.startVisualizer();
+                    
+                    this.showStatus('🎤 Recording started...', 'loading');
+                    
+                } catch (error) {
+                    console.error('Error starting recording:', error);
+                    this.showStatus('❌ Could not access microphone. Please check permissions.', 'error');
+                }
+            }
+            
+            stopRecording() {
+                if (this.mediaRecorder && this.isRecording) {
+                    this.mediaRecorder.stop();
+                    this.isRecording = false;
+                    
+                    this.recordBtn.textContent = '🎤 Start Recording';
+                    this.recordBtn.classList.remove('recording');
+                    this.recordBtn.classList.add('stopped');
+                    
+                    this.stopTimer();
+                    this.stopVisualizer();
+                    
+                    this.showStatus('✅ Recording completed!', 'success');
+                }
+            }
+            
+            startTimer() {
+                this.recordingTimer = setInterval(() => {
+                    this.recordingTime++;
+                    const minutes = Math.floor(this.recordingTime / 60);
+                    const seconds = this.recordingTime % 60;
+                    this.recordTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            stopTimer() {
+                if (this.recordingTimer) {
+                    clearInterval(this.recordingTimer);
+                    this.recordingTimer = null;
+                }
+            }
+            
+            startVisualizer() {
+                const draw = () => {
+                    if (!this.isRecording) return;
+                    
+                    this.animationFrame = requestAnimationFrame(draw);
+                    
+                    this.analyser.getByteFrequencyData(this.dataArray);
+                    
+                    this.visualizerContext.fillStyle = '#f1f1f1';
+                    this.visualizerContext.fillRect(0, 0, this.visualizerCanvas.width, this.visualizerCanvas.height);
+                    
+                    const barWidth = (this.visualizerCanvas.width / this.dataArray.length) * 2.5;
+                    let barHeight;
+                    let x = 0;
+                    
+                    for (let i = 0; i < this.dataArray.length; i++) {
+                        barHeight = (this.dataArray[i] / 255) * this.visualizerCanvas.height;
+                        
+                        this.visualizerContext.fillStyle = `rgb(${barHeight + 100}, 50, 50)`;
+                        this.visualizerContext.fillRect(x, this.visualizerCanvas.height - barHeight / 2, barWidth, barHeight / 2);
+                        
+                        x += barWidth + 1;
+                    }
+                };
+                
+                draw();
+            }
+            
+            stopVisualizer() {
+                if (this.animationFrame) {
+                    cancelAnimationFrame(this.animationFrame);
+                }
+                this.visualizerCanvas.classList.remove('show');
+            }
+            
+            showRecordedPreview() {
+                const url = URL.createObjectURL(this.recordedBlob);
+                this.audioPreview.src = url;
+                
+                const sizeKB = (this.recordedBlob.size / 1024).toFixed(2);
+                const sizeMB = (this.recordedBlob.size / (1024 * 1024)).toFixed(2);
+                const duration = this.recordingTime;
+                const minutes = Math.floor(duration / 60);
+                const seconds = duration % 60;
+                
+                this.fileInfo.innerHTML = `
+                    <strong>Recording Details:</strong><br>
+                    Type: ${this.recordedBlob.type}<br>
+                    Size: ${sizeKB} KB (${sizeMB} MB)<br>
+                    Duration: ${minutes}:${seconds.toString().padStart(2, '0')}<br>
+                    Recorded: ${new Date().toLocaleString()}
+                `;
+                
+                this.previewSection.classList.add('show');
+                this.uploadRecordedBtn.style.display = 'inline-block';
+                this.clearRecordBtn.style.display = 'inline-block';
+            }
+            
+            async uploadRecording() {
+                if (!this.recordedBlob) {
+                    this.showStatus('❌ No recording to upload', 'error');
+                    return;
+                }
+                
+                const formData = new FormData();
+                const fileName = `recording_${Date.now()}.webm`;
+                formData.append('file', this.recordedBlob, fileName);
+                
+                await this.performUpload(formData);
+            }
+            
+            clearRecording() {
+                this.recordedBlob = null;
+                this.audioChunks = [];
+                this.recordingTime = 0;
+                this.recordBtn.textContent = '🎤 Start Recording';
+                this.recordBtn.classList.remove('recording', 'stopped');
+                this.recordTimer.style.display = 'none';
+                this.recordTimer.textContent = '00:00';
+                this.uploadRecordedBtn.style.display = 'none';
+                this.clearRecordBtn.style.display = 'none';
+                this.hidePreview();
+                this.clearStatus();
+            }
+            
+            handleFileSelect(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    this.showFilePreview(file);
+                } else {
+                    this.hidePreview();
+                }
+            }
+            
+            showFilePreview(file) {
+                const url = URL.createObjectURL(file);
+                this.audioPreview.src = url;
+                
+                const sizeKB = (file.size / 1024).toFixed(2);
+                const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                
+                this.fileInfo.innerHTML = `
+                    <strong>File Details:</strong><br>
+                    Name: ${file.name}<br>
+                    Type: ${file.type}<br>
+                    Size: ${sizeKB} KB (${sizeMB} MB)<br>
+                    Last Modified: ${new Date(file.lastModified).toLocaleString()}
+                `;
+                
+                this.previewSection.classList.add('show');
+            }
+            
+            clearUpload() {
+                this.fileInput.value = '';
+                this.hidePreview();
+                this.clearStatus();
+            }
+            
+            async handleUpload(e) {
+                e.preventDefault();
+                
+                const file = this.fileInput.files[0];
+                if (!file) {
+                    this.showStatus('❌ Please select an audio file first', 'error');
+                    return;
+                }
+                
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                await this.performUpload(formData);
+            }
+            
+            async performUpload(formData) {
+                try {
+                    this.showStatus('📤 Uploading file...', 'loading');
+                    this.uploadBtn.disabled = true;
+                    this.uploadRecordedBtn.disabled = true;
+                    
+                    const response = await fetch('http://localhost:3000/upload', {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const result = await response.json();
+                    console.log('✅ Success:', result);
+                    
+                    this.showStatus(`✅ Upload successful! File saved as: ${result.file.filename}`, 'success');
+                    
+                } catch (error) {
+                    console.error('❌ Upload error:', error);
+                    this.showStatus(`❌ Upload failed: ${error.message}`, 'error');
+                } finally {
+                    this.uploadBtn.disabled = false;
+                    this.uploadRecordedBtn.disabled = false;
+                }
+            }
+            
+            hidePreview() {
+                this.audioPreview.src = '';
+                this.fileInfo.innerHTML = '';
+                this.previewSection.classList.remove('show');
+                if (this.audioPreview.src) {
+                    URL.revokeObjectURL(this.audioPreview.src);
+                }
+            }
+            
+            showStatus(message, type) {
+                this.statusSection.innerHTML = `<div class="status ${type}">${message}</div>`;
+            }
+            
+            clearStatus() {
+                this.statusSection.innerHTML = '';
+            }
+        }
+        
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new AudioRecorderUploader();
+        });
+    </script>
+</body>
+</html>

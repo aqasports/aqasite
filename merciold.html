@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Merci – AQA</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      margin: 0;
+    }
+    .box {
+      background: rgba(0,153,255,0.1);
+      border: 2px solid rgba(0,153,255,0.3);
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      max-width: 500px;
+    }
+    h1 {
+      font-size: 2rem;
+      background: linear-gradient(135deg, #00ffff, #0099ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    p { opacity: 0.9; margin-bottom: 2rem; }
+    .important { color: #ff4444; font-weight: bold; margin-bottom: 2rem; }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 1.5rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.2rem;
+      background: linear-gradient(135deg, #0099ff, #00ffff);
+      color: #000;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .btn:hover { background: linear-gradient(135deg, #00ffff, #0099ff); transform: scale(1.05); opacity: .9; }
+    .btn:active { transform: scale(0.95); opacity: .7; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Merci pour votre inscription 🎉</h1>
+    <p>Votre demande a bien été envoyée à notre équipe.</p>
+    <p class="important">⚠️ Merci de régler votre abonnement avant le <strong>27 août</strong> afin d’éviter l’annulation de votre réservation.</p>
+
+    <p>Choisissez votre mode de paiement :</p>
+
+    <div class="options">
+      <a href="https://wa.me/213540454907?text=Je%20souhaite%20payer%20avec%20Baridimob%2C%20merci%20de%20m%27envoyer%20le%20RIP" target="_blank" class="btn">💳 Payer avec Baridimob</a>
+
+      <a href="https://wa.me/213540454907?text=Quand%20puis-je%20venir%20à%20la%20piscine%20pour%20régler%20mon%20abonnement%20%3F" target="_blank" class="btn">🏊 Régler à la Piscine</a>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <a href="index.html" class="btn">⬅ Retour à l’accueil</a>
+    </div>
+  </div>
+</body>
+</html>

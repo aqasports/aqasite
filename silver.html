@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Silver - AQA Pricing 2025</title>
+    <meta content="Détails de la formule Silver AQA pour 3 mois" name="description"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1930 0%, #1e3c72 50%, #2a5298 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 200, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 120, 200, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(120, 255, 200, 0.06) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            header {
+                padding: 1rem 2rem;
+            }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 32px;
+            filter: drop-shadow(0 2px 10px rgba(0, 123, 255, 0.3));
+        }
+
+        @media (min-width: 768px) {
+            .logo {
+                height: 50px;
+            }
+        }
+
+        header h1 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #66b3ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .lang-btn {
+            padding: 4px 8px;
+            border: 2px solid rgba(102, 179, 255, 0.5);
+            background: rgba(102, 179, 255, 0.1);
+            color: #66b3ff;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            .lang-btn {
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
+        }
+
+        .lang-btn:hover {
+            background: #66b3ff;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 179, 255, 0.3);
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero section */
+        .hero-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #66b3ff, #007bff);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .hero-content {
+            padding: 2rem;
+        }
+
+        .title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #66b3ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: 0;
+            background: linear-gradient(135deg, #ffc107, #ff8c00);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #66b3ff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 96px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #66b3ff, transparent);
+            border-radius: 2px;
+        }
+
+        /* Features container */
+        .features-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item.included {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .feature-item.not-included {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .feature-item:hover {
+            transform: translateX(8px);
+        }
+
+        .feature-item.included:hover {
+            background: rgba(34, 197, 94, 0.15);
+        }
+
+        .feature-item.not-included:hover {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        .feature-icon {
+            margin-right: 1rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #0056b3, #004494);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                padding: 1.5rem;
+            }
+
+            .feature-item {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .badge {
+                position: relative;
+                top: 0;
+                right: auto;
+                margin-bottom: 1rem;
+                display: block;
+                width: fit-content;
+            }
+
+            .title-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles"></div>
+    
+    <header>
+        <div class="header-content">
+            <img src="https://i.imgur.com/3dcksCn.png" alt="AQA Logo" class="logo">
+            <h1>Formules AQA 2025</h1>
+            <a class="lang-btn" href="#" onclick="alert('Language switcher')">العربية</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-card">
+            <div class="hero-content">
+                <div class="title-section">
+                    <h1 class="title">Silver - 3 Mois</h1>
+                    <div class="badge">Most Popular</div>
+                </div>
+                
+                <h2 class="section-title">Détails des avantages</h2>
+                
+                <div class="features-container">
+                    <ul class="features-list">
+                        <li class="feature-item included">
+                            <span class="feature-icon">✓</span>
+                            <span>Analyse vidéo personnalisée : Vous recevez une analyse vidéo détaillée de votre technique de nage afin d'améliorer vos performances.</span>
+                        </li>
+                        <li class="feature-item included">
+                            <span class="feature-icon">✓</span>
+                            <span>Planification trimestrielle : Un programme d'entraînement adapté sur 3 mois pour atteindre vos objectifs.</span>
+                        </li>
+                        <li class="feature-item included">
+                            <span class="feature-icon">✓</span>
+                            <span>Suivi technique AQA : Encadrement personnalisé avec corrections techniques à chaque séance.</span>
+                        </li>
+                        <li class="feature-item included">
+                            <span class="feature-icon">✓</span>
+                            <span>Accès complet à l'AQA App : Accédez à toutes les ressources de l'application : vidéos, statistiques, conseils.</span>
+                        </li>
+                        <li class="feature-item not-included">
+                            <span class="feature-icon">×</span>
+                            <span>Suivi physique individualisé : Un suivi spécifique de vos performances physiques avec tests et ajustements réguliers.</span>
+                        </li>
+                        <li class="feature-item not-included">
+                            <span class="feature-icon">×</span>
+                            <span>Matériel Arena offert : Un pack de matériel Arena (bonnet, lunettes, accessoires) inclus avec votre abonnement.</span>
+                        </li>
+                        <li class="feature-item not-included">
+                            <span class="feature-icon">×</span>
+                            <span>1 sortie AQA Event gratuite : Participez gratuitement à un événement exclusif AQA organisé pour la communauté.</span>
+                        </li>
+                        <li class="feature-item not-included">
+                            <span class="feature-icon">×</span>
+                            <span>3 sorties AQA Event gratuites : Profitez de 3 événements AQA gratuits pour progresser et rencontrer d'autres passionnés.</span>
+                        </li>
+                        <li class="feature-item not-included">
+                            <span class="feature-icon">×</span>
+                            <span>1 mois d'AQA Apnée offert : Accédez gratuitement pendant 1 mois au programme AQA Apnée.</span>
+                        </li>
+                        <li class="feature-item not-included">
+                            <span class="feature-icon">×</span>
+                            <span>3 séances d'initiation offertes pour 3 amis : Invitez 3 amis à découvrir gratuitement nos séances d'initiation.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <a href="aqa-pricing.html" class="btn">⬅ Retour</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <a class="lang-btn" href="#" onclick="alert('Language switcher')">العربية</a>
+        </div>
+    </footer>
+</body>
+</html>

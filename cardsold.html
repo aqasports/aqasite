@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AQA – Formules & Avantages</title>
+
+  <!-- === Navbar styles brought from index.html === -->
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:#000; color:#fff; line-height:1.6;
+      overflow-x:hidden; min-height:100vh; position:relative;
+    }
+
+     /* Header Styles */
+        header {
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            height: 80px;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-link:hover {
+            transform: scale(1.05);
+        }
+
+        .logo {
+            height: 65px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+        }
+
+    /* Mobile Toggle */
+    .menu-toggle{
+      display:none; flex-direction:column; cursor:pointer; padding:.5rem; border-radius:8px;
+      background:rgba(0,153,255,.1); border:1px solid rgba(0,153,255,.3);
+      transition:all .3s ease; z-index:1001;
+    }
+    .menu-toggle:hover{ background:rgba(0,153,255,.2); border-color:#0099ff; }
+    .menu-toggle span{
+      width:25px; height:3px; background:#00ffff; margin:3px 0; transition:all .3s ease;
+      border-radius:2px; box-shadow:0 0 5px rgba(0,255,255,.5);
+    }
+    .menu-toggle.active span:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }
+    .menu-toggle.active span:nth-child(2){ opacity:0; }
+    .menu-toggle.active span:nth-child(3){ transform:rotate(-45deg) translate(7px,-6px); }
+
+    /* Nav menu */
+   /* Desktop Navigation */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 70%;
+        }
+    /* Responsive */
+    @media (max-width:768px){
+      .menu-toggle{ display:flex; }
+      .nav-menu{ display:none; }
+      .nav-menu.mobile{ display:flex; }
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+
+  <!-- === Existing cards page styles (kept) === -->
+  <style>
+    .container{max-width:1200px;margin:auto;padding:2rem 1rem}
+    .section-title{
+      font-size:2rem;text-align:center;margin-bottom:2rem;
+      background:linear-gradient(135deg,#00ffff,#0099ff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+
+    .pricing-cards{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;padding:20px;justify-items:center;
+      align-items:start; /* desktop bug fix */
+    }
+    .card{
+      background:#111;border-radius:20px;overflow:hidden;cursor:pointer;
+      box-shadow:0 5px 15px rgba(0,0,0,.4);
+      transition:transform .35s ease,box-shadow .35s ease;
+      animation:float 4s ease-in-out infinite;position:relative
+    }
+    .card img{width:100%;display:block}
+    .card:hover{
+      transform:translateY(-12px) scale(1.06);
+      box-shadow:0 12px 25px rgba(0,153,255,.35);
+    }
+    .card.active{animation:none}
+
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+    /* Features panel */
+    .features{
+      display:none;
+      padding:1rem;
+      background:rgba(0,153,255,.08);
+      border-top:2px solid #0099ff;
+      text-align:left;
+      animation:fadeIn .4s ease;
+    }
+    .card.active .features{display:block}
+    .features h3{margin:0 0 .5rem}
+    .features ul{margin:0 0 1rem 1.2rem;padding:0}
+    .features li{margin:.4rem 0}
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(-10px)}
+      to {opacity:1; transform:translateY(0)}
+    }
+  </style>
+</head>
+<body>
+  <!-- === Copied navbar from index.html === -->
+  <header>
+    <div class="header-content">
+      <div class="logo-section">
+        <img src="https://i.imgur.com/3dcksCn.png" alt="AQA Logo" class="logo">
+        <div class="logo-text"></div>
+      </div>
+
+      <div class="menu-toggle" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarif.html" class="nav-link">Tarifs</a>
+        <a href="aqa_groups_schedule.html" class="nav-link">Groupes</a>
+        <a href="#" class="nav-link" onclick="alert('Section Piscines à venir')">Piscines</a>
+        <a href="#" class="nav-link" onclick="alert('Section Infos à venir')">Infos</a>
+        <a href="#" class="nav-link" onclick="alert('Section À propos à venir')">À propos</a>
+        <a href="#" class="nav-link" onclick="alert('WebTV à venir')">WebTV</a>
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1 class="section-title">Nos Formules & Avantages</h1>
+
+    <div class="pricing-cards" id="cards">
+
+      <!-- Starter -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="1.png" alt="Starter">
+        <div class="features">
+          <h3>Starter (1 mois)</h3>
+          <ul>
+            <li> Séances encadrées par coachs</li>
+            <li> Suivi technique de base</li>
+            <li> Pas d’analyse vidéo</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Silver -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="2.png" alt="Silver">
+        <div class="features">
+          <h3>Silver (3 mois)</h3>
+          <ul>
+            <li> Analyse vidéo personnalisée</li>
+            <li> Plan d’entraînement trimestriel</li>
+            <li> Suivi technique détaillé</li>
+            <li> Accès complet à l’app AQA</li>
+            <li> Séance Tester pour un ami gratuite</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Gold -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="3.png" alt="Gold">
+        <div class="features">
+          <h3>Gold (6 mois)</h3>
+          <ul>
+            <li> Analyse vidéo personnalisée</li>
+            <li> Planification sur 6 mois</li>
+            <li> Suivi technique + physique</li>
+            <li> Accès complet à l’app AQA</li>
+            <li> Équipement Arena offert</li>
+            <li> 1 événement AQA gratuit</li>
+            <li> 2 Séances Test pour amis gratuites</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Diamond -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="4.png" alt="Diamond">
+        <div class="features">
+          <h3>Diamond (9 mois)</h3>
+          <ul>
+            <li> Analyse vidéo personnalisée</li>
+            <li> Planification avancée sur 9 mois</li>
+            <li> Suivi technique + physique</li>
+            <li> Accès complet à l’app AQA</li>
+            <li> Équipement Arena offert</li>
+            <li> 3 événements AQA inclus</li>
+            <li> 1 mois apnée offert</li>
+            <li> 3 Séances Test pour amis gratuites</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- === Navbar JS from index.html + cards interactions === -->
+  <script>
+    let mobileMenuActive = false;
+
+    function toggleMobileMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const menuToggle = document.querySelector('.menu-toggle');
+
+      mobileMenuActive = !mobileMenuActive;
+
+      if (mobileMenuActive) {
+        navMenu.classList.add('mobile', 'active');
+        menuToggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        navMenu.classList.remove('mobile', 'active');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function toggleLanguage() {
+      alert('Version arabe à venir');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Close mobile menu when clicking on nav links
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 768 && mobileMenuActive) {
+            toggleMobileMenu();
+          }
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(e) {
+        const navMenu = document.getElementById('navMenu');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        if (mobileMenuActive &&
+            !navMenu.contains(e.target) &&
+            !menuToggle.contains(e.target)) {
+          toggleMobileMenu();
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && mobileMenuActive) {
+          const navMenu = document.getElementById('navMenu');
+          const menuToggle = document.querySelector('.menu-toggle');
+
+          navMenu.classList.remove('mobile', 'active');
+          menuToggle.classList.remove('active');
+          document.body.style.overflow = 'auto';
+          mobileMenuActive = false;
+        }
+      });
+    });
+
+    // Cards toggle
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const isActive = card.classList.contains('active');
+        // Close all
+        cards.forEach(c => {
+          c.classList.remove('active');
+          c.setAttribute('aria-expanded','false');
+        });
+        // Open clicked
+        if (!isActive) {
+          card.classList.add('active');
+          card.setAttribute('aria-expanded','true');
+        }
+      });
+    });
+  </script>
+
+  <div style="text-align:center; margin:2rem 0;">
+    <a href="tarif.html" class="tarif-btn">Voir les Tarifs</a>
+  </div>
+
+  <style>
+    .tarif-btn {
+      display:inline-block;
+      padding:12px 28px;
+      border-radius:30px;
+      font-size:1.1rem;
+      font-weight:600;
+      text-decoration:none;
+      color:#000;
+      background:linear-gradient(135deg,#00ffff,#0099ff);
+      box-shadow:0 4px 15px rgba(0,153,255,.4);
+      transition:all .3s ease;
+    }
+    .tarif-btn:hover {
+      transform:translateY(-3px);
+      box-shadow:0 6px 20px rgba(0,153,255,.6);
+    }
+
+  </style>
+
+</body>
+</html>

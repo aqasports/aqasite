@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQA Sports - Piscine ADM AZAL Reghaia</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero .location-badge {
+            display: inline-block;
+            background: rgba(0, 153, 255, 0.2);
+            border: 2px solid #00ffff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #00ffff;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Main image section */
+        .main-image {
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #00a8ff, #0078d4);
+            opacity: 0.8;
+        }
+
+        .main-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="wave" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 10 Q5 5 10 10 T20 10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23wave)"/></svg>');
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+        }
+
+        .main-image span {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            z-index: 1;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .feature-card:hover {
+            background: rgba(0, 153, 255, 0.2);
+            border-color: #00ffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: #000;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            color: #00ffff;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .feature-description {
+            color: #ffffff;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Transport section */
+        .transport-section {
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .transport-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .transport-section:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .transport-title {
+            font-size: 1.8rem;
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .transport-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .transport-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #00ffff;
+            flex-shrink: 0;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .cta-section:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0.5rem;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .back-btn {
+                top: 15px;
+                left: 15px;
+                padding: 0.7rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .main-image {
+                height: 250px;
+            }
+
+            .cta-button {
+                margin: 0.5rem 0;
+                display: block;
+                width: 100%;
+            }
+        }
+
+        /* Coming soon badge */
+        .coming-soon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-logo"></div>
+    
+    <a href="piscines.html" class="back-btn">← Retour aux Piscines</a>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Piscine ADM AZAL</h1>
+            <div class="location-badge">📍 Reghaia, Alger</div>
+            <p>Une installation semi-olympique d'excellence, conçue pour votre transformation sportive avec tous les équipements modernes et services premium.</p>
+        </section>
+
+        <div class="main-image">
+            <span>Piscine Semi-Olympique ADM AZAL</span>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Piscine Semi-Olympique</h3>
+                <p class="feature-description">Installation aux normes semi-olympiques, parfaitement adaptée à l'entraînement professionnel et à la progression technique de nos athlètes.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Propreté & Équipement</h3>
+                <p class="feature-description">Installations maintenues aux plus hauts standards de propreté avec équipements modernes et système de filtration avancé.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Réception Excellence</h3>
+                <p class="feature-description">Service clientèle de qualité premium avec accueil personnalisé et accompagnement professionnel pour tous nos membres.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Surveillance & Sécurité</h3>
+                <p class="feature-description">Système de surveillance par caméras 24h/24 pour votre sécurité et celle de vos biens. Parking surveillé et sécurisé.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Ouvert 7j/7</h3>
+                <p class="feature-description">Disponibilité maximale avec ouverture 7 jours sur 7 pour s'adapter à votre emploi du temps et assurer une progression continue.</p>
+            </div>
+
+            <div class="feature-card position-relative">
+                <div class="coming-soon">Prochainement</div>
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Salle de Sport</h3>
+                <p class="feature-description">Prochainement : salle de sport complète avec équipements de musculation et cardio pour un entraînement complet et une préparation physique optimale.</p>
+            </div>
+        </div>
+
+        <div class="transport-section">
+            <h2 class="transport-title">🚌 Transport & Accessibilité</h2>
+            <div class="transport-grid">
+                <div class="transport-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 15.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V5c0-3.5-3.58-4-8-4s-8 .5-8 4v10.5zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                    </svg>
+                    <div>
+                        <strong>Bus</strong><br>
+                        5 minutes à pied
+                    </div>
+                </div>
+                <div class="transport-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 15.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V5c0-3.5-3.58-4-8-4s-8 .5-8 4v10.5zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                    </svg>
+                    <div>
+                        <strong>Train</strong><br>
+                        12 minutes à pied
+                    </div>
+                </div>
+                <div class="transport-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                    </svg>
+                    <div>
+                        <strong>Parking</strong><br>
+                        Surveillé par caméras
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Commencez Votre Transformation</h2>
+            <p style="margin-bottom: 2rem; color: #ffffff; opacity: 0.9;">Rejoignez AQA Sports à la piscine ADM AZAL et découvrez l'excellence de nos installations.</p>
+            <button class="cta-button">Réserver Maintenant</button>
+            <button class="cta-button">Contacter</button>
+        </div>
+    </div>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .transport-section, .cta-section').forEach(el => {
+            observer.observe(el);
+        });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>

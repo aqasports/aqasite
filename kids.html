@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Kids - Natation pour enfants et adolescents</title>
+    <meta content="Programmes de natation spécialisés pour enfants et adolescents. Coaching personnalisé, compétitions, et développement aquatique dans un environnement sécurisé." name="description"/>
+    <meta content="AQA Kids, natation enfants, cours natation, école natation, coaching jeunes, compétition enfants" name="keywords"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+
+        /* Base styles from app.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .container {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Background effects from app.html */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                opacity: 0.3;
+                filter: blur(2px);
+            }
+            50% {
+                opacity: 0.6;
+                filter: blur(0px);
+            }
+        }
+
+        /* Section styling */
+        .kids-locations__phone {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .kids-hero {
+                padding: 2rem 0;
+            }
+  .kids-pricing__card {
+                padding: 2rem 1.5rem;
+            }
+            .kids-pricing__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kids-locations__container {
+                grid-template-columns: 1fr;
+            }
+
+            .kids-gallery__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .kids-competition__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kids-reviews__item {
+                padding: 2rem 1.5rem;
+            }
+
+            .kids-cta {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .kids-gallery__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kids-pricing__card {
+                padding: 2rem 1.5rem;
+            }
+
+            .kids-features__card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        .kids-pricing__button:focus,
+        .kids-competition__cta:focus,
+        .kids-cta__button:focus,
+        .kids-reviews__btn:focus,
+        .kids-faq__question:focus {
+            outline: 2px solid #00ffff;
+            outline-offset: 2px;
+        }
+    
+
+/* Trailing CSS merged from file end */
+
+.kids-section {
+            padding: 0rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .kids-section__title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .kids-section__subtitle {
+            font-size: 1.2rem;
+            color: #ffffff;
+            opacity: 0.9;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+/* Hero Section */
+.kids-hero {
+    text-align: center;
+    padding: 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Title with neon glow */
+.kids-hero__title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 900;
+    color: #00ffff;
+    margin-bottom: 2rem;
+}
+
+/* Image wrapper for effects */
+.kids-hero__image-wrapper {
+    perspective: 1000px; /* 3D perspective for motion */
+    margin-bottom: 2rem;
+}
+
+.kids-hero__image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,255,255,0.5);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+
+    /* Subtle floating effect */
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Floating effect keyframes */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateZ(0deg); }
+    25% { transform: translateY(-10px) rotateZ(1deg); }
+    50% { transform: translateY(-5px) rotateZ(-1deg); }
+    75% { transform: translateY(5px) rotateZ(1deg); }
+}
+
+/* Hover effect for image */
+.kids-hero__image:hover {
+    transform: scale(1.05) rotateZ(1deg);
+    box-shadow: 0 0 60px rgba(0,255,255,0.8);
+}
+
+/* Paragraph */
+.kids-hero__description {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    max-width: 700px;
+    line-height: 1.6;
+    color: #e0ffff;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+    opacity: 0.95;
+}
+
+
+        /* Pricing Section */
+        .kids-pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .kids-pricing__card {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .kids-pricing__card--featured {
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .kids-pricing__card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .kids-pricing__card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .kids-pricing__card:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border-color: #00ffff;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+        }
+
+        .kids-pricing__badge {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .kids-pricing__title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .kids-pricing__price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-pricing__period {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .kids-pricing__features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .kids-pricing__feature {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .kids-pricing__feature::before {
+            content: '✓';
+            color: #00ffff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .kids-pricing__button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.4);
+            border: 2px solid #00ffff;
+        }
+
+        .kids-pricing__button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+        }
+@media (max-width: 768px) {
+    .kids-pricing__grid {
+        gap: 1rem; /* réduit l'espace entre cartes */
+        margin: 1.5rem 0;
+    }
+
+    .kids-pricing__card {
+        padding: 1.5rem 1rem; /* moins de padding */
+        border-radius: 15px;
+    }
+
+    .kids-pricing__title {
+        font-size: 1.2rem;
+    }
+
+    .kids-pricing__price {
+        font-size: 2rem;
+    }
+
+    .kids-pricing__period {
+        font-size: 0.9rem;
+    }
+
+    .kids-pricing__button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+}
+
+        /* Features Section */
+        .kids-features__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .kids-features__card {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kids-features__card:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border-color: #00ffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .kids-features__icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            color: #00ffff;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .kids-features__title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+
+        .kids-features__description {
+            color: #ffffff;
+            opacity: 0.9;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Photo Gallery Section */
+        .kids-gallery__ticker {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+}
+
+.kids-gallery__track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+}
+
+.kids-gallery__item {
+  flex: 0 0 auto;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.kids-gallery__item img {
+  height: 160px; /* adjust ticker height */
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.kids-gallery__item img:hover {
+  transform: scale(1.08);
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+        /* Lightbox */
+        .kids-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 2rem;
+        }
+
+        .kids-lightbox__content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .kids-lightbox__image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .kids-lightbox__close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Video Section */
+        .kids-video__container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-video__player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .kids-video__placeholder {
+            color: #00ffff;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .kids-video__controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .kids-video__container:hover .kids-video__controls {
+            opacity: 1;
+        }
+.video-thumbs-wrapper .thumb:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 25px #00ffff;
+}
+        .kids-video__play-btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .kids-video__play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        
+
+        /* Reviews Section */
+        .kids-reviews__carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .kids-reviews__track {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .kids-reviews__item {
+            min-width: 100%;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-reviews__text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .kids-reviews__author {
+            color: #00ffff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-reviews__role {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .kids-reviews__stars {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .kids-reviews__nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .kids-reviews__btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #000;
+        }
+
+        .kids-reviews__btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .kids-reviews__dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .kids-reviews__dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .kids-reviews__dot--active {
+            background: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+       /* FAQ Section */
+.kids-faq__list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.kids-faq__item {
+  background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+  border: 1px solid rgba(0, 153, 255, 0.3);
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
+}
+
+.kids-faq__question {
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #00ffff;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.kids-faq__question:hover {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.kids-faq__answer {
+  padding: 0 2rem;         /* keep horizontal padding */
+  color: #ffffff;
+  opacity: 0.9;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s ease;
+}
+
+.kids-faq__item--active .kids-faq__answer {
+  max-height: 500px;       /* large enough for longest answer */
+  padding: 1rem 2rem 1.5rem;
+}
+
+.kids-faq__icon {
+  transition: transform 0.3s ease;
+  color: #00ffff;
+}
+
+.kids-faq__item--active .kids-faq__icon {
+  transform: rotate(180deg);
+}
+
+        /* Groups Section */
+        .kids-groups__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        @media (max-width: 768px) {
+  .kids-groups__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; /* smaller gap so it fits */
+  }
+
+  .kids-groups__card {
+    padding: 1rem; /* make cards lighter/compact */
+    font-size: 0.9rem;
+    text-align: left; /* optional: smaller text */
+  }
+}
+
+        .kids-groups__card {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 0rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-groups__card:hover {
+            border-color: #00ffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .kids-groups__icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            color: #00ffff;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .kids-groups__title {
+            font-size: 1.3rem;
+            color: #00ffff;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .kids-groups__age {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .kids-groups__description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .kids-groups__features {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .kids-groups__feature {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .kids-groups__feature::before {
+            content: '•';
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .kids-cta {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.15));
+            border-radius: 30px;
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            margin: 4rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-cta__title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .kids-cta__description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .kids-cta__button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+        }
+
+        .kids-cta__button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Locations Section */
+        .kids-locations__container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .kids-locations__map {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffff;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-locations__list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+      .kids-locations__item {
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+    border: 2px solid rgba(0, 153, 255, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    text-decoration: none; /* enlève soulignement */
+    color: inherit;        /* garde la couleur du texte */
+    cursor: pointer;
+}
+
+.kids-locations__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 153, 255, 0.3);
+      scale: 1.04;
+}
+
+      
+        .kids-locations__name {
+            font-size: 1.3rem;
+            color: #00ffff;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .kids-locations__address {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+        }
+
+        .kids
+        /* Hover glow effect on thumbnails */
+.video-thumbs .thumb:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 25px #00ffff;
+}
+
+/* Main video neon glow */
+.main-video video {
+    transition: box-shadow 0.3s ease;
+}
+ /* Equipment Pack Section */
+        .equip-section {
+            text-align: center;
+            padding: 3rem 0;
+            animation: slideIn 1s ease-out;
+        }
+
+        .equip-section h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .equip-section h2 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .pack-container {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .pack-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .arena-logo {
+            width: 120px;
+            height: auto;
+            margin: 0 auto 2rem;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
+        }
+
+        .equipment-item {
+            background: rgba(0, 153, 255, 0.05);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equipment-item:hover {
+            background: rgba(0, 153, 255, 0.15);
+            border-color: #00ffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .equipment-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .equipment-item:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .equipment-image {
+            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 153, 255, 0.4);
+        }
+
+        .equipment-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .equipment-image:hover img {
+            transform: scale(1.05);
+        
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .equipment-description {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .have-equipment-btn {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            color: #00ffff;
+            padding: 1rem 2rem;
+            border: 2px solid #00ffff;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .have-equipment-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .have-equipment-btn:hover::before {
+            left: 100%;
+        }
+
+        .have-equipment-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+
+        .equipment-step {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .equipment-step.active {
+            display: block;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 153, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            transform: scale(1.2);
+        }
+
+        .step-dot.completed {
+            background: #0099ff;
+            box-shadow: 0 0 8px rgba(0, 153, 255, 0.6);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-button1 {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .nav-button1:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+
+        .nav-button.secondary1 {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            color: #00ffff;
+        }
+
+        .nav-button.secondary1:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(0, 255, 255, 0.4));
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .container1 {
+                padding: 2rem 0.5rem;
+            }
+
+            .pack-container {
+                padding: 2rem 1rem;
+                margin: 1rem auto;
+            }
+
+            .equipment-item {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+
+            .navigation-buttons1 {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button1 {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        .equipment-item img {
+  max-width: 220px;   /* shrink the image width */
+  height: auto;       /* keep aspect ratio */
+  display: block;     /* prevents inline spacing issues */
+  margin: 0 auto 12px; /* center + space below */
+}
+.btn-app{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:.8rem 1.2rem;border-radius:14px;font-weight:700;
+  text-decoration:none;letter-spacing:.2px;
+  background:linear-gradient(135deg,#00c6ff,#00ffff);
+  color:#00131a;border:1px solid rgba(0,153,255,.35);
+  box-shadow:0 8px 22px rgba(0,255,255,.18);
+  transition:transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.btn-app:hover{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,255,255,.22); }
+.btn-app:active{ transform:translateY(0); opacity:.9; }
+</style>
+<!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+
+<body>
+    <iframe src="scroll.html" class="bg-frame"></iframe> 
+    <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+ 
+    <div class="bg-logo"></div>
+    
+    <div class="container">
+     <!-- Hero Section -->
+<section class="kids-hero">
+    <h1 class="kids-hero__title">AQA Kids</h1>
+
+    <!-- Hero Image -->
+    <div class="kids-hero__image-wrapper">
+        <img class="kids-hero__image" src="https://i.ibb.co/F49bgcpK/hero-kids.webp" alt="AQA Kids Hero">
+    </div>
+
+    <p class="kids-hero__description">
+        Apprentissage de la natation pour enfants de 5 à 12 ans avec coachs d’élite, suivi personnalisé et groupes restreints (Groupe de 10) pour progresser en sécurité et avec plaisir..
+    </p>
+</section>
+
+<!-- Features Section -->
+        <section class="kids-section kids-features animate-on-scroll">
+            <h2 class="kids-section__title">Nos Avantages</h2>
+            <div class="kids-features__grid">
+                <div class="kids-features__card">
+                    <div class="kids-features__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="kids-features__title">Coachs d'elite</h3>
+                    <p class="kids-features__description">
+                        Nos coachs sont hautement qualifiés et spécialisés dans l’accompagnement des enfants, garantissant sécurité, progression et plaisir à chaque séance de natation.
+                    </p>
+                </div>
+
+                <div class="kids-features__card">
+                    <div class="kids-features__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="kids-features__title">Sécurité Maximale</h3>
+                    <p class="kids-features__description">
+                        Piscines surveillées, matériel de sécurité et protocoles stricts pour la protection de vos enfants.
+                    </p>
+                </div>
+
+                <div class="kids-features__card">
+                    <div class="kids-features__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20m8-18H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="kids-features__title">Suivi Personnalisé</h3>
+                    <p class="kids-features__description">
+                        Chaque enfant bénéficie d'un suivi individuel adapté à son rythme et ses objectifs.
+                    </p>
+                </div>
+
+                <div class="kids-features__card">
+                    <div class="kids-features__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 class="kids-features__title">Apprentissage Ludique</h3>
+                    <p class="kids-features__description">
+                        Méthodes pédagogiques amusantes qui transforment l'apprentissage en moments de plaisir.
+                    </p>
+                </div>
+
+                <div class="kids-features__card">
+                    <div class="kids-features__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="2">
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-size="20" font-weight="regular" fill="none" stroke="currentColor">
+    G10
+  </text>
+</svg>
+
+                    </div>
+                    <h3 class="kids-features__title">Groupes de 10</h3>
+                    <p class="kids-features__description">
+                       Chaque groupe est limité à 10 enfants pour garantir un suivi personnalisé, des exercices adaptés et un apprentissage efficace dans un environnement sûr et motivant.
+                    </p>
+                </div>
+
+                <div class="kids-features__card">
+                    <div class="kids-features__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <!-- S-shaped spine -->
+  <path d="M12 2 
+           C10 6, 14 10, 12 14 
+           C10 18, 14 22, 12 22"/>
+</svg>
+
+
+                    </div>
+                    <h3 class="kids-features__title">Suivi physique</h3>
+                    <p class="kids-features__description">
+                        Chaque enfant bénéficie d’un suivi physique personnalisé pour détecter et corriger les obstacles ou déséquilibres corporels, comme la scoliose, qui pourraient freiner sa progression, garantissant un apprentissage sûr et efficace.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        
+       <!-- Photo Gallery Ticker Section -->
+<section class="kids-section kids-gallery animate-on-scroll">
+  <h2 class="kids-section__title">Galerie Photos</h2>
+  <p class="kids-section__subtitle">
+    Découvrez l'ambiance de nos cours et les sourires de nos jeunes nageurs en action.
+  </p>
+
+  <div class="kids-gallery__ticker">
+    <div class="kids-gallery__track">
+      <!-- Repeat images twice for smooth loop -->
+      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp')">
+        <img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp" alt="Cours bébé nageur">
+      </div>
+      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp')">
+        <img src="https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp" alt="Apprentissage natation enfants">
+      </div>
+      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/678rW5ZX/IMG20241104185311.webp')">
+        <img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp" alt="Entraînement jeunes">
+      </div>
+      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp')">
+        <img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp" alt="Compétition junior">
+      </div>
+      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/67j6c8TX/IMG20241202191301.webp')">
+        <img src="https://i.ibb.co/67j6c8TX/IMG20241202191301.webp" alt="Groupe enfants piscine">
+      </div>
+      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/bg58thQs/IMG20241209191126.webp')">
+        <img src="https://i.ibb.co/bg58thQs/IMG20241209191126.webp" alt="Perfectionnement technique">
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="kids-gallery__item"><img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp"></div>
+      <div class="kids-gallery__item"><img src="https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp"></div>
+      <div class="kids-gallery__item"><img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp"></div>
+      <div class="kids-gallery__item"><img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp"></div>
+      <div class="kids-gallery__item"><img src="https://i.ibb.co/67j6c8TX/IMG20241202191301.webp"></div>
+      <div class="kids-gallery__item"><img src="https://i.ibb.co/bg58thQs/IMG20241209191126.webp"></div>
+    </div>
+  </div>
+</section>
+<span></span>
+      <!-- Video Section 2 -->
+<section class="kids-section kids-video animate-on-scroll">
+    <h2 class="kids-section__title">Vidéos</h2>
+   
+    <div class="playlist-container" style="max-width: 900px; margin: auto;">
+        <!-- Main Video Player -->
+        <div class="main-video" style="margin-bottom: 20px; position: relative;">
+            <video id="mainVideo" width="100%" height="450" controls style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:block;">
+                <source src="https://files.catbox.moe/mqgl87.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas les vidéos HTML5.
+            </video>
+            <!-- YouTube iframe (hidden initially) -->
+            <iframe id="mainIframe" width="100%" height="450" 
+                src="https://www.youtube.com/embed/-umHYjVGbqY?si=Qjdcxg5h1LcBnTy6" 
+                title="Présentation de nos programmes kids" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen 
+                style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:none;">
+            </iframe>
+        </div>
+
+        <!-- Horizontal Thumbnails -->
+        <div class="video-thumbs-wrapper" style="overflow-x:auto; display:flex; gap:15px; padding-bottom:10px;">
+  
+
+
+            <!-- Catbox MP4 Thumbnails -->
+            <video class="thumb" src="https://files.catbox.moe/mqgl87.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/aym1ti.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/5z5uze.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/pehw1o.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/x1nkke.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/q3ixe4.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/52qqm9.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/lh7qpl.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+            <video class="thumb" src="https://files.catbox.moe/2eaqmr.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+        </div>
+    </div>
+</section>
+
+
+<!--Equipent-->
+<!-- Pack Équipement (replace your current section with this) -->
+<section class="equip-section">
+  <h1>Pack Équipement</h1>
+
+  <div class="pack-container">
+    <h2>Pack Starter Arena</h2>
+
+    <!-- Arena Logo -->
+    <img src="arena.png" alt="Arena Logo" class="arena-logo">
+
+    <!-- Step Indicator -->
+    <div class="step-indicator" aria-label="Indicateur d'étapes">
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 1"></div>
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 2"></div>
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 3"></div>
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 4"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="equipment-step active" id="step1">
+      <div class="equipment-item">
+        <img src="https://i.ibb.co/5XYzv2VH/Untitled-design.png" alt="">
+        <h3 class="equipment-name">Lunettes Bubble 3 + Bonnet Junior</h3>
+        <p class="equipment-description">Lunettes de natation Arena Bubble 3 ...</p>
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="equipment-step" id="step2">
+      <div class="equipment-item">
+        <img src="https://i.ibb.co/9H0FBx4y/Untitled-design-1.png" alt="">
+        <h3 class="equipment-name">Lunettes Junior Arena</h3>
+        <p class="equipment-description">Lunettes de natation spécialement conçues...</p>
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="equipment-step" id="step3">
+      <div class="equipment-item">
+        <img src="https://i.ibb.co/JjfXr0Zy/Untitled-design-2.png" alt="">
+        <h3 class="equipment-name">Arena Sortie de Bain</h3>
+        <p class="equipment-description">Peignoir Arena en microfibre ultra-absorbante...</p>
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="equipment-step" id="step4">
+      <div class="equipment-item">
+        <img src="https://i.ibb.co/d0G9g5pY/Untitled-design-3.png" alt="">
+        <h3 class="equipment-name">Arena Sac Spiky</h3>
+        <p class="equipment-description">Sac de sport Arena avec compartiments ventilés...</p>
+        <!-- NOTE: still uses next-btn so it loops to step 1 -->
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- Available Groups Section -->
+        <section class="kids-section kids-groups animate-on-scroll">
+            <h2 class="kids-section__title">Groupes Disponibles</h2>
+            <p class="kids-section__subtitle">
+                Chaque groupe est spécialement conçu pour répondre aux besoins et au développement de chaque tranche d'âge.
+            </p>
+            <div class="kids-groups__grid">
+                <div class="kids-groups__card">
+                    <div class="kids-groups__icon">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-size="16" font-family="Arial" fill="currentColor">
+    A
+  </text>
+</svg>
+
+                    </div>
+                    <h3 class="kids-groups__title">Groupe A</h3>
+                    <div class="kids-groups__age">Coach Abdelghani</div>
+                    
+                    <ul class="kids-groups__features">
+                        <li class="kids-groups__feature">Samedi 18h15</li>
+                        <li class="kids-groups__feature">Mercredi 18h</li>
+                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
+                        <li class="kids-groups__feature">Reghaia</li>
+                    </ul>
+                </div>
+
+                 <div class="kids-groups__card">
+                    <div class="kids-groups__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-size="16" font-family="Arial" fill="currentColor">
+    B
+  </text>
+</svg>
+
+                    </div>
+                    <h3 class="kids-groups__title">Groupe B</h3>
+                    <div class="kids-groups__age">Coach Younes</div>
+                    
+                    <ul class="kids-groups__features">
+                        <li class="kids-groups__feature">Dimanche 18h</li>
+                        <li class="kids-groups__feature">Jeudi 18h</li>
+                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
+                        <li class="kids-groups__feature">Reghaia</li>
+                    </ul>
+                </div>
+                 <div class="kids-groups__card">
+                    <div class="kids-groups__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-size="16" font-family="Arial" fill="currentColor">
+    C
+  </text>
+</svg>
+
+                    </div>
+                    <h3 class="kids-groups__title">Groupe C</h3>
+                    <div class="kids-groups__age">Coach Abdelghani et coach Younes</div>
+                    
+                    <ul class="kids-groups__features">
+                        <li class="kids-groups__feature">Dimanche 19h30</li>
+                        <li class="kids-groups__feature">Mercredi 19h30</li>
+                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
+                        <li class="kids-groups__feature">Reghaia</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="kids-section kids-pricing animate-on-scroll">
+            <h2 class="kids-section__title">Tarifs</h2>
+            <p class="kids-section__subtitle">
+                Des programmes adaptés à chaque âge et niveau, pour une progression optimale dans un environnement sécurisé.
+            </p>
+            <div class="kids-pricing__grid">
+                <div class="kids-pricing__card">
+                    <div class="kids-pricing__badge">Découverte</div>
+                    <h3 class="kids-pricing__title">3 mois</h3>
+                    <div class="kids-pricing__price">28700 DA</div>
+                    <div class="kids-pricing__period">trimestre</div>
+                    <ul class="kids-pricing__features">
+                        <li class="kids-pricing__feature">Groupe de 10</li>
+                        <li class="kids-pricing__feature">Coaching professionnel</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
+                        <li class="kids-pricing__feature">Suivi Technique</li>
+                        <li class="kids-pricing__feature">Suivi physique</li>
+                    </ul>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
+                </div>
+
+                     <div class="kids-pricing__card">
+                    <div class="kids-pricing__badge">Découverte</div>
+                    <h3 class="kids-pricing__title">6 mois</h3>
+                    <div class="kids-pricing__price">46500 DA</div>
+                    <div class="kids-pricing__period">Semestre</div>
+                    <ul class="kids-pricing__features">
+                        <li class="kids-pricing__feature">Groupe de 10</li>
+                        <li class="kids-pricing__feature">Coaching professionnel</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
+                        <li class="kids-pricing__feature">Suivi Technique</li>
+                        <li class="kids-pricing__feature">Suivi physique</li>
+                    </ul>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
+                </div>
+
+                    <div class="kids-pricing__card">
+                    <div class="kids-pricing__badge">Découverte</div>
+                    <h3 class="kids-pricing__title">9 mois</h3>
+                    <div class="kids-pricing__price">65800 DA</div>
+                    <div class="kids-pricing__period">trimestre</div>
+                    <ul class="kids-pricing__features">
+                        <li class="kids-pricing__feature">Groupe de 10</li>
+                        <li class="kids-pricing__feature">Coaching professionnel</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
+                        <li class="kids-pricing__feature">Suivi Technique</li>
+                        <li class="kids-pricing__feature">Suivi physique</li>
+                    </ul>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Lightbox -->
+        <div class="kids-lightbox" id="lightbox" onclick="closeLightbox()">
+            <div class="kids-lightbox__content" onclick="event.stopPropagation()">
+                <button class="kids-lightbox__close" onclick="closeLightbox()">×</button>
+                <img class="kids-lightbox__image" id="lightboxImage" src="" alt="">
+            </div>
+        </div>
+
+
+       
+        <!-- Reviews Section -->
+        <!--section class="kids-section kids-reviews animate-on-scroll">
+            <h2 class="kids-section__title">Témoignages Parents</h2>
+            <p class="kids-section__subtitle">
+                Découvrez ce que pensent les familles qui nous font confiance pour l'apprentissage aquatique de leurs enfants.
+            </p>
+            <div class="kids-reviews__carousel">
+                <div class="kids-reviews__track" id="reviewsTrack">
+                    <div class="kids-reviews__item">
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="kids-reviews__text">
+                            "Ma fille de 6 ans a appris à nager en seulement 2 mois ! Les coachs sont extraordinaires 
+                            avec les enfants, très patients et encourageants. Je recommande vivement AQA Kids."
+                        </p>
+                        <div class="kids-reviews__author">Sophie Martin</div>
+                        <div class="kids-reviews__role">Maman de Léa, 6 ans</div>
+                    </div>
+
+                    <div class="kids-reviews__item">
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="kids-reviews__text">
+                            "Mon fils était terrifié par l'eau. Grâce à l'équipe AQA Kids, il nage maintenant comme un poisson ! 
+                            L'approche ludique a fait toute la différence. Merci pour cette transformation incroyable."
+                        </p>
+                        <div class="kids-reviews__author">Thomas Dubois</div>
+                        <div class="kids-reviews__role">Papa de Lucas, 8 ans</div>
+                    </div>
+
+                    <div class="kids-reviews__item">
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="kids-reviews__text">
+                            "Les cours bébé nageur sont formidables ! C'est un moment privilégié avec mon bébé. 
+                            Les installations sont impeccables et l'équipe très professionnelle."
+                        </p>
+                        <div class="kids-reviews__author">Marie Leroy</div>
+                        <div class="kids-reviews__role">Maman d'Emma, 18 mois</div>
+                    </div>
+
+                    <div class="kids-reviews__item">
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
+                        <p class="kids-reviews__text">
+                            "Ma fille participe maintenant aux compétitions grâce à AQA Kids. Elle a gagné en confiance 
+                            et en technique. Le suivi personnalisé est remarquable."
+                        </p>
+                        <div class="kids-reviews__author">Catherine Moreau</div>
+                        <div class="kids-reviews__role">Maman de Chloé, 12 ans</div>
+                    </div>
+                </div>
+
+                <div class="kids-reviews__nav">
+                    <button class="kids-reviews__btn" onclick="previousReview()">‹</button>
+                    <div class="kids-reviews__dots" id="reviewsDots"></div>
+                    <button class="kids-reviews__btn" onclick="nextReview()">›</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="kids-section kids-faq animate-on-scroll">
+            <h2 class="kids-section__title">Questions Fréquentes</h2>
+            <div class="kids-faq__list">
+                <div class="kids-faq__item">
+                    <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span>À partir de quel âge peut-on commencer les cours de natation ?</span>
+                        <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="kids-faq__answer">
+                        Nos cours AQA Kids sont accessibles dès l’âge de 4.5 ans. Nous proposons également un programme spécial pour les bébés nageurs à partir de 6 mois, accompagné d’un parent bientot disponible.
+                    </div>
+                </div>
+
+                <div class="kids-faq__item">
+                    <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span>Combien d'enfants par groupe de cours ?</span>
+                        <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="kids-faq__answer">
+                        Nous limitons volontairement nos groupes pour assurer un suivi personnalisé : 10 enfants maximum Cette approche garantit la sécurité et la progression de chaque enfant.
+                    </div>
+                </div>
+
+                <div class="kids-faq__item">
+                    <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span>Faut-il savoir nager pour s’inscrire ?</span>
+                        <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="kids-faq__answer">
+                        Non, nos formules sont adaptées à tous les niveaux, des débutants aux nageurs confirmés. Nos entraîneurs certifiés accompagnent chaque enfant selon son niveau.
+                    </div>
+                </div>
+
+                <div class="kids-faq__item">
+                    <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span>Les parents peuvent-ils assister aux cours ?</span>
+                        <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="kids-faq__answer">
+                        Oui, chaque fin du mois. De plus, des groupes WhatsApp sont disponibles pour recevoir les vidéos de vos petits. Prochainement, l’application AQA Kids permettra de suivre encore plus facilement leurs progrès. 
+                </div>
+ </div>
+                <div class="kids-faq__item">
+                    <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span>Qu’est-ce que l’application AQA app</span>
+                        <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="kids-faq__answer">
+                        Une manière innovante de digitaliser le parcours de votre petit athlète. Grâce à l’application, vous suivez ses progrès en temps réel, recevez ses vidéos d’entraînement, consultez le planning des cours et restez connecté aux coachs et aux autres parents.
+                        <a href="/app.html" class="btn-app" aria-label="Ouvrir AQA Kids App">AQA app</a>
+                    </div>
+                </div>
+
+                <div class="kids-faq__item">
+                    <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
+                        <span>Comment s’inscrire ?</span>
+                        <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="kids-faq__answer">
+                        Les inscriptions se font en ligne ou directement à l’accueil. Plusieurs formules et localisations sont disponibles pour s’adapter aux besoins de chaque famille.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- CTA Section -->
+        <section class="kids-cta animate-on-scroll">
+            <h2 class="kids-cta__title">Prêt à Plonger dans l'Aventure ?</h2>
+            <p class="kids-cta__description">
+                Offrez à votre enfant la chance de découvrir les joies de la natation dans un environnement 
+                sécurisé et professionnel. Nos coachs experts l'accompagneront dans chaque étape de son 
+                parcours aquatique.
+            </p>
+            <a href="inscription.html" class="kids-cta__button">Réserver maintenant</a>
+        </section>
+<!-- Locations Section -->
+<section class="kids-section kids-locations animate-on-scroll">
+    <h2 class="kids-section__title">Nos Localisations</h2>
+    <p class="kids-section__subtitle">
+        Retrouvez nos programmes AQA Kids dans plusieurs centres aquatiques modernes et équipés.
+    </p>
+    <div class="kids-locations__container">
+
+        <a href="https://maps.app.goo.gl/s6nT3sUH1yN9U1mBA" 
+           target="_blank" 
+           class="kids-locations__item">
+            <h3 class="kids-locations__name">Complexe ADM AZAL</h3>
+            <div class="kids-locations__address">cité Signa Reghaia</div>
+        </a>
+
+        <a href="https://maps.app.goo.gl/M7fPHG78T3uTiStz7" 
+           target="_blank" 
+           class="kids-locations__item">
+            <h3 class="kids-locations__name">Piscine BK SPORT</h3>
+            <div class="kids-locations__address">cité Ammara Cheraga</div>
+        </a>
+
+    </div>
+</section>
+        </div>
+            </div>
+        </section>
+    </div>
+  <script src="js/navbar.js"></script>
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Toggle Function with BEM methodology
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('kids-faq__item--active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.kids-faq__item').forEach(item => {
+                item.classList.remove('kids-faq__item--active');
+                const question = item.querySelector('.kids-faq__question');
+                question.setAttribute('aria-expanded', 'false');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('kids-faq__item--active');
+                element.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Lightbox functionality
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            
+            lightboxImage.src = imageSrc;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Video functionality
+        let videoPlaying = false;
+
+        function toggleVideo() {
+            const player = document.getElementById('videoPlayer');
+            const playBtn = document.getElementById('playBtn');
+            
+            if (!videoPlaying) {
+                // Simulate video play
+                player.style.background = 'linear-gradient(45deg, #0099ff, #00ffff)';
+                player.innerHTML = '<div style="color: #000; font-size: 1.5rem; font-weight: bold;">🎬 Vidéo en cours de lecture...</div>';
+                playBtn.textContent = '⏸️';
+                videoPlaying = true;
+            } else {
+                // Simulate video pause
+                player.style.background = '#000';
+                player.innerHTML = '<div class="kids-video__placeholder"><div>▶️ Cliquez pour voir notre méthode en action</div></div>';
+                playBtn.textContent = '▶️';
+                videoPlaying = false;
+            }
+        }
+
+        // Reviews carousel functionality
+        let currentReview = 0;
+        const reviews = document.querySelectorAll('.kids-reviews__item');
+        const totalReviews = reviews.length;
+
+        // Create dots for reviews
+        function createReviewDots() {
+            const dotsContainer = document.getElementById('reviewsDots');
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < totalReviews; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'kids-reviews__dot';
+                if (i === 0) dot.classList.add('kids-reviews__dot--active');
+                dot.onclick = () => goToReview(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateReviewDisplay() {
+            const track = document.getElementById('reviewsTrack');
+            const dots = document.querySelectorAll('.kids-reviews__dot');
+            
+            track.style.transform = `translateX(-${currentReview * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('kids-reviews__dot--active', index === currentReview);
+            });
+        }
+
+        function nextReview() {
+            currentReview = (currentReview + 1) % totalReviews;
+            updateReviewDisplay();
+        }
+
+        function previousReview() {
+            currentReview = (currentReview - 1 + totalReviews) % totalReviews;
+            updateReviewDisplay();
+        }
+
+        function goToReview(index) {
+            currentReview = index;
+            updateReviewDisplay();
+        }
+
+        // Auto-play reviews
+        let reviewInterval;
+
+        function startReviewAutoPlay() {
+            reviewInterval = setInterval(nextReview, 5000); // Change every 5 seconds
+        }
+
+        function stopReviewAutoPlay() {
+            if (reviewInterval) {
+                clearInterval(reviewInterval);
+            }
+        }
+
+        // Initialize reviews
+        document.addEventListener('DOMContentLoaded', function() {
+            createReviewDots();
+            startReviewAutoPlay();
+            
+            // Pause auto-play on hover
+            const carousel = document.querySelector('.kids-reviews__carousel');
+            if (carousel) {
+                carousel.addEventListener('mouseenter', stopReviewAutoPlay);
+                carousel.addEventListener('mouseleave', startReviewAutoPlay);
+            }
+        });
+
+        // Keyboard navigation for FAQ
+        document.addEventListener('keydown', function(e) {
+            if (e.target.classList.contains('kids-faq__question')) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleFaq(e.target);
+                }
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced mobile experience
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Add to homescreen prompt for mobile
+                const addToHomeScreen = document.createElement('div');
+                addToHomeScreen.style.cssText = `
+                    position: fixed;
+                    bottom: 10px;
+                    left: 10px;
+                    right: 10px;
+                    background: linear-gradient(135deg, #0099ff, #00ffff);
+                    color: #000;
+                    padding: 1rem;
+                    border-radius: 15px;
+                    font-weight: 600;
+                    text-align: center;
+                    display: none;
+                    z-index: 1000;
+                    animation: slideIn 0.5s ease-out;
+                `;
+                addToHomeScreen.innerHTML = `
+                    رحلة ألف ميل تبدأ بخطوة
+                    <button onclick="this.parentElement.style.display='none'" 
+                            style="margin-left: 10px; background: rgba(0,0,0,0.2); border: none; color: #000; padding: 5px 10px; border-radius: 5px; cursor: pointer;">×</button>
+                `;
+                
+                // Show after 3 seconds on mobile
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        document.body.appendChild(addToHomeScreen);
+                        addToHomeScreen.style.display = 'block';
+                    }, 3000);
+                }
+            });
+        }
+
+        // Performance optimization: Lazy loading for images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Add loading states for pricing cards
+        document.querySelectorAll('.kids-pricing__button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const originalText = this.textContent;
+                this.textContent = 'Chargement...';
+                this.style.opacity = '0.7';
+                
+                // Simulate loading
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.opacity = '1';
+                    // Here you would typically redirect or show a booking form
+                    alert('Fonctionnalité de réservation à implémenter');
+                }, 1500);
+            });
+        });
+
+        // Add form validation for future contact forms
+        function validateForm(form) {
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#ff0066';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#00ffff';
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Add analytics tracking (placeholder)
+        function trackEvent(eventName, parameters) {
+            console.log('Analytics Event:', eventName, parameters);
+            // Here you would integrate with your analytics service
+        }
+
+        // Track pricing card clicks
+    document.querySelectorAll('.kids-pricing__button').forEach(button => {
+    button.addEventListener('click', function() {
+        window.location.href = "inscription.html";
+    });
+});
+    
+        
+// Grab main players
+const mainVideo = document.getElementById('mainVideo');
+const mainIframe = document.getElementById('mainIframe');
+
+// Switch videos on thumbnail click
+document.querySelectorAll('.thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+        const type = thumb.getAttribute('data-type');
+        if(type === "youtube") {
+            mainVideo.style.display = "none";
+            mainIframe.style.display = "block";
+            mainIframe.src = thumb.getAttribute('data-src');
+        } else {
+            mainIframe.style.display = "none";
+            mainVideo.style.display = "block";
+            mainVideo.src = thumb.src;
+            mainVideo.play();
+        }
+
+        // Highlight selected thumbnail
+        document.querySelectorAll('.thumb').forEach(t => t.style.boxShadow = "0 0 10px #00ffff");
+        thumb.style.boxShadow = "0 0 20px #00ffff";
+    });
+}); 
+document.addEventListener('DOMContentLoaded', function () {
+  const totalSteps = 4;
+  let currentStep = 1;
+
+  const prevBtn = document.getElementById('prevBtn');
+  const dots = Array.from(document.querySelectorAll('.step-dot'));
+  const nextBtns = Array.from(document.querySelectorAll('.next-btn'));
+  const steps = Array.from(document.querySelectorAll('.equipment-step'));
+
+  // normalize/wrap helper: maps any integer to 1..totalSteps
+  function wrap(n) {
+    return ((n - 1 + totalSteps) % totalSteps) + 1;
+  }
+
+  function showStep(n) {
+    currentStep = wrap(n);
+
+    // hide all
+    steps.forEach(s => s.classList.remove('active'));
+
+    // show current
+    const el = document.getElementById('step' + currentStep);
+    if (el) el.classList.add('active');
+
+    updateStepIndicator();
+  }
+
+  function updateStepIndicator() {
+    dots.forEach((dot, idx) => {
+      const stepIdx = idx + 1;
+      dot.classList.toggle('active', stepIdx === currentStep);
+      dot.classList.toggle('completed', stepIdx < currentStep);
+      // accessibility state
+      dot.setAttribute('aria-pressed', stepIdx === currentStep ? 'true' : 'false');
+    });
+  }
+
+  // Attach click + keyboard handlers to dots
+  dots.forEach((dot, idx) => {
+    const stepNum = idx + 1;
+
+    dot.addEventListener('click', () => {
+      showStep(stepNum);
+    });
+
+    dot.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showStep(stepNum);
+      }
+    });
+  });
+
+  // Next buttons inside steps (the "J'ai déjà cet équipement" buttons)
+  nextBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      showStep(currentStep + 1); // will wrap
+    });
+  });
+
+  // Prev button (loops)
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      showStep(currentStep - 1); // will wrap
+    });
+  }
+
+  // initialize
+  showStep(1);
+});
+        </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AQA – Inscription</title>
+  <meta name="description" content="Formulaire d’inscription AQA (Groupes + Formules)."/>
+
+  <!-- === Navbar styles from cards.html === -->
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:#000; color:#fff; line-height:1.6;
+      overflow-x:hidden; min-height:100vh; position:relative;
+    }
+
+    header{
+      background:rgba(0,0,0,0.95);
+      backdrop-filter:blur(20px);
+      border-bottom:2px solid #0099ff;
+      box-shadow:0 0 20px rgba(0,153,255,0.3);
+      padding:1rem; position:sticky; top:0; z-index:1000;
+      transition:all .3s ease;
+    }
+    .header-content{
+      max-width:1200px; margin:0 auto;
+      display:flex; justify-content:space-between; align-items:center; position:relative;
+    }
+    .logo-section{ display:flex; align-items:center; gap:.5rem; z-index:1001; }
+    .logo{ height:40px; filter:drop-shadow(0 0 10px #00ffff); }
+
+    /* Mobile Toggle */
+    .menu-toggle{
+      display:none; flex-direction:column; cursor:pointer; padding:.5rem; border-radius:8px;
+      background:rgba(0,153,255,.1); border:1px solid rgba(0,153,255,.3);
+      transition:all .3s ease; z-index:1001;
+    }
+    .menu-toggle span{
+      width:25px; height:3px; background:#00ffff; margin:3px 0; transition:all .3s ease;
+      border-radius:2px; box-shadow:0 0 5px rgba(0,255,255,.5);
+    }
+    .menu-toggle.active span:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }
+    .menu-toggle.active span:nth-child(2){ opacity:0; }
+    .menu-toggle.active span:nth-child(3){ transform:rotate(-45deg) translate(7px,-6px); }
+
+    .nav-menu{ display:flex; align-items:center; gap:1rem; transition:all .3s ease; }
+    .nav-menu.mobile{
+      position:fixed; top:0; left:0; width:100vw; height:100vh;
+      background:rgba(0,0,0,.98); backdrop-filter:blur(20px);
+      flex-direction:column; justify-content:center; gap:2rem;
+      transform:translateX(-100%); opacity:0; z-index:999;
+    }
+    .nav-menu.mobile.active{ transform:translateX(0); opacity:1; }
+
+    .nav-link{
+      color:#fff; text-decoration:none; font-weight:600;
+      padding:.8rem 1.2rem; border-radius:25px; transition:all .3s ease;
+      background:rgba(0,153,255,.1); border:1px solid rgba(0,153,255,.3);
+    }
+    .nav-link:hover{
+      background:rgba(0,153,255,.3); transform:translateY(-2px);
+      box-shadow:0 0 15px rgba(0,153,255,.5); border-color:#0099ff;
+    }
+    .lang-btn{
+      padding:8px 16px; border:2px solid #00ffff; background:rgba(0,255,255,.1);
+      color:#00ffff; border-radius:25px; text-decoration:none; font-weight:600;
+    }
+    .lang-btn:hover{ background:#00ffff; color:#000; }
+
+    @media (max-width:768px){
+      .menu-toggle{ display:flex; }
+      .nav-menu{ display:none; }
+      .nav-menu.mobile{ display:flex; }
+    }
+h1,h2,h3 {
+  background:linear-gradient(135deg,#00ffff,#0099ff,#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-align:center;
+  text-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+h1 {
+  font-size:clamp(1.8rem,6vw,3.5rem);
+  margin-bottom:1rem;
+}
+h2 {
+  font-size:clamp(1.4rem,5vw,2.5rem);
+  margin:2rem 0 1rem;
+}
+p {
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 1.5rem;
+  font-size:clamp(0.95rem,3.5vw,1.1rem);
+}
+
+  </style>
+
+  <!-- === Form + extra styles from old inscription.html kept === -->
+  <style>
+    .container { max-width: 700px; margin: auto; padding: 2rem 1rem; position: relative; text-align: center; }
+    .inscription-image { display:block; margin:0 auto -60px auto; width:480px; max-width:95%; pointer-events:none; position:relative; z-index:2; opacity:0; transform:translateY(-60px); animation:fadeInUp 1s ease forwards; }
+    @media (max-width:768px){ .inscription-image{ width:320px; margin-bottom:-40px; } }
+
+    form { position:relative; z-index:3; background:#0a1a2f; border:2px solid rgba(0,153,255,0.3); border-radius:15px; padding:2rem; display:flex; flex-direction:column; gap:1rem; box-shadow:0 0 25px rgba(0,153,255,0.6); transition:all 0.3s ease; max-width:100%; margin:0 auto; opacity:0; transform:translateY(30px); animation:fadeInUp 0.9s ease forwards; }
+    form:hover { box-shadow:0 0 40px rgba(0,153,255,0.9), 0 0 80px rgba(0,153,255,0.5); transform:translateY(-5px); }
+
+    label { font-weight: bold; }
+    input, select { padding:0.8rem; border-radius:8px; border:1px solid rgba(0,153,255,0.4); background:rgba(0,0,0,0.6); color:#fff; }
+    button { background:linear-gradient(135deg,#0099ff,#00ffff); color:#000; padding:0.8rem 1.2rem; border-radius:30px; font-weight:bold; border:none; cursor:pointer; transition:0.3s; }
+    button:hover { background:linear-gradient(135deg,#00ffff,#0099ff); }
+
+    footer { background:rgba(0,0,0,0.95); border-top:2px solid #0099ff; padding:2rem 1rem; text-align:center; }
+
+    @keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
+  </style>
+</head>
+<body>
+  <!-- Navbar copied from cards.html -->
+  <header>
+    <div class="header-content">
+      <div class="logo-section">
+        <img src="https://i.imgur.com/3dcksCn.png" alt="AQA Logo" class="logo">
+      </div>
+
+      <div class="menu-toggle" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="aqa_groups_schedule.html" class="nav-link">Groupes</a>
+        <a href="tarif.html" class="nav-link">Tarifs</a>
+        <a href="cards.html" class="nav-link">Formules</a>
+        <a href="#" class="nav-link" onclick="alert('Infos bientôt')">Infos</a>
+        <a href="#" class="nav-link" onclick="alert('À propos bientôt')">À propos</a>
+        <a href="#" class="nav-link" onclick="alert('WebTV bientôt')">WebTV</a>
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Formulaire d’inscription</h1>
+    <img src="https://i.ibb.co/5Wh3RwwC/Untitled-design-46-1.png" alt="AQA Cards" class="inscription-image">
+
+    <form name="inscription" method="POST" data-netlify="true" action="/merci.html">
+      <input type="hidden" name="form-name" value="inscription">
+
+      <label>Nom complet</label>
+      <input type="text" name="nom" required>
+
+      <label>Téléphone</label>
+      <input type="tel" name="telephone" required>
+
+      <label>Choisissez vos groupes</label>
+      <select name="groupes[]" multiple required>
+        <option value="Lundi 21h30-23h30 – G10">Lundi 21h30-23h30 – G10</option>
+        <option value="Mardi 7h-9h – G10">Mardi 7h-9h – G10</option>
+        <option value="Mardi 21h-23h – G10">Mardi 21h-23h – G10</option>
+        <option value="Mercredi 21h30-23h30 – G10">Mercredi 21h30-23h30 – G10</option>
+        <option value="Jeudi 7h-9h – G10">Jeudi 7h-9h – G10</option>
+        <option value="Jeudi 21h30-23h30 – G10">Jeudi 21h30-23h30 – G10</option>
+        <option value="Vendredi 20h-22h – G10">Vendredi 20h-22h – G10</option>
+        <option value="Samedi 6h-8h – G10">Samedi 6h-8h – G10</option>
+        <option value="Mardi 21h-23h – Max5">Mardi 21h-23h – Max5</option>
+        <option value="Mercredi 21h30-23h30 – Max5">Mercredi 21h30-23h30 – Max5</option>
+        <option value="Jeudi 21h30-23h30 – Max5">Jeudi 21h30-23h30 – Max5</option>
+        <option value="Samedi 20h45 – Elite">Samedi 20h45 – Elite</option>
+        <option value="Mercredi 21h30-23h30 – Apnée">Mercredi 21h30-23h30 – Apnée</option>
+        <option value="Vendredi 20h-22h – Liste d’attente">Vendredi 20h-22h – Liste d’attente</option>
+      </select>
+      <p style="font-size:0.9rem; opacity:0.8;">(Maintenez <b>CTRL</b> ou <b>⌘ Cmd</b> pour sélectionner plusieurs groupes)</p>
+
+      <label>Choisissez une formule</label>
+      <select name="formule" required>
+        <option value="">-- Sélectionnez --</option>
+        <option value="Starter">Starter</option>
+        <option value="Silver">Silver</option>
+        <option value="Gold">Gold</option>
+        <option value="Diamond">Diamond</option>
+      </select>
+
+      <button type="submit">Envoyer l’inscription</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>📞 0540454907 – ✉️ aqa.sports.academy@gmail.com</p>
+    <p>Piscines: Reghaia Piscine ADM AZAL | Cheraga BK Sport</p>
+  </footer>
+
+  <!-- Navbar JS -->
+  <script>
+    let mobileMenuActive = false;
+    function toggleMobileMenu(){
+      const navMenu=document.getElementById('navMenu');
+      const menuToggle=document.querySelector('.menu-toggle');
+      mobileMenuActive=!mobileMenuActive;
+      if(mobileMenuActive){
+        navMenu.classList.add('mobile','active');
+        menuToggle.classList.add('active');
+        document.body.style.overflow='hidden';
+      } else {
+        navMenu.classList.remove('mobile','active');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow='auto';
+      }
+    }
+    function toggleLanguage(){ alert('Version arabe à venir'); }
+  </script>
+</body>
+</html>

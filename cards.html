@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AQA – Formules & Avantages</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Global + Navbar CSS -->
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/navbar.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    .section-title{
+      font-size:2rem;text-align:center;margin-bottom:2rem;
+      background:linear-gradient(135deg,#00ffff,#0099ff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .pricing-cards{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;padding:20px;justify-items:center;align-items:start;
+    }
+    .card{
+      background:#111;border-radius:20px;overflow:hidden;cursor:pointer;
+      box-shadow:0 5px 15px rgba(0,0,0,.4);
+      transition:transform .35s ease,box-shadow .35s ease;
+      animation:float 4s ease-in-out infinite;position:relative
+    }
+    .card img{width:100%;display:block}
+    .card:hover{ transform:translateY(-12px) scale(1.06); box-shadow:0 12px 25px rgba(0,153,255,.35); }
+    .card.active{animation:none}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .features{ display:none; padding:1rem; background:rgba(0,153,255,.08); border-top:2px solid #0099ff; text-align:left; animation:fadeIn .4s ease; }
+    .card.active .features{display:block}
+    .features h3{margin:0 0 .5rem}
+    .features ul{margin:0 0 1rem 1.2rem;padding:0}
+    .features li{margin:.4rem 0}
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+    .tarif-btn{ display:inline-block; padding:12px 28px; border-radius:30px; font-size:1.1rem; font-weight:600; text-decoration:none; color:#000;
+      background:linear-gradient(135deg,#00ffff,#0099ff); box-shadow:0 4px 15px rgba(0,153,255,.4); transition:all .3s ease; }
+    .tarif-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,153,255,.6); }
+      .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+html {
+  background: #000;  /* solid fallback */
+}
+body {
+  background: transparent !important;
+  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+}
+  </style>
+</head>
+<body>
+
+<!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+<iframe src="scroll.html" class="bg-frame"></iframe> 
+  <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+
+
+  <div class="container">
+    <h1 class="section-title">Nos Formules & Avantages</h1>
+
+    <div class="pricing-cards" id="cards">
+      <!-- Starter -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="1.png" alt="Starter">
+        <div class="features">
+          <h3>Starter (1 mois)</h3>
+          <ul>
+            <li>Séances encadrées par coachs</li>
+            <li>Suivi technique de base</li>
+            <li>Pas d’analyse vidéo</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Silver -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="2.png" alt="Silver">
+        <div class="features">
+          <h3>Silver (3 mois)</h3>
+          <ul>
+            <li>Analyse vidéo personnalisée</li>
+            <li>Plan d’entraînement trimestriel</li>
+            <li>Suivi technique détaillé</li>
+            <li>Accès complet à l’app AQA</li>
+            <li>Séance Tester pour un ami gratuite</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Gold -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="3.png" alt="Gold">
+        <div class="features">
+          <h3>Gold (6 mois)</h3>
+          <ul>
+            <li>Analyse vidéo personnalisée</li>
+            <li>Planification sur 6 mois</li>
+            <li>Suivi technique + physique</li>
+            <li>Accès complet à l’app AQA</li>
+            <li>Équipement Arena offert</li>
+            <li>1 événement AQA gratuit</li>
+            <li>2 Séances Test pour amis gratuites</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Diamond -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="4.png" alt="Diamond">
+        <div class="features">
+          <h3>Diamond (9 mois)</h3>
+          <ul>
+            <li>Analyse vidéo personnalisée</li>
+            <li>Planification avancée sur 9 mois</li>
+            <li>Suivi technique + physique</li>
+            <li>Accès complet à l’app AQA</li>
+            <li>Équipement Arena offert</li>
+            <li>3 événements AQA inclus</li>
+            <li>1 mois apnée offert</li>
+            <li>3 Séances Test pour amis gratuites</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin:2rem 0;">
+    <a href="tarifs.html" class="tarif-btn">Voir les Tarifs</a>
+  </div>
+<footer>
+<!-- Add this div where you want the footer to appear -->
+<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
+
+  <!-- Load navbar logic, then inject and init -->
+  <script src="/js/navbar.js"></script>
+<!-- Add this script before closing </body> tag -->
+<script>
+async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadFooter);
+  <!-- Load navbar logic, then inject and init -->
+  <script src="/js/navbar.js"></script>
+  <script>
+    // Cards toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const isActive = card.classList.contains('active');
+          cards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-expanded','false'); });
+          if (!isActive) { card.classList.add('active'); card.setAttribute('aria-expanded','true'); }
+        });
+      });
+    });
+    
+  </script>
+</body>
+</html>
