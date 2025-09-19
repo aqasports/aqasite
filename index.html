@@ -1390,68 +1390,58 @@ class VoiceMessageHandler {
     this.audioPreview.style.display = 'none';
   }
 
-  async blobToBase64(blob) {
-    return await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        // reader.result is "data:audio/webm;codecs=opus;base64,AAA..."
-        const base64Data = String(reader.result).split(',')[1];
-        resolve(base64Data);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
+  async handleSubmit(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('userName').value.trim();
+  const email = document.getElementById('userEmail').value.trim();
+  const message = document.getElementById('messageText').value.trim();
+
+  let audioBase64 = null;
+  let audioFilename = null;
+
+  if (this.recordedBlob) {
+    audioBase64 = await this.blobToBase64(this.recordedBlob);
+    audioFilename = "voice-message.webm";
+  } else if (this.uploadedFile) {
+    audioBase64 = await this.fileToBase64(this.uploadedFile);
+    audioFilename = this.uploadedFile.name;
   }
 
-  async handleSubmit(e) {
-    e.preventDefault();
-    const name = (document.getElementById('userName').value || '').trim();
-    const email = (document.getElementById('userEmail').value || '').trim();
-    const message = (document.getElementById('messageText').value || '').trim();
+  const submissionData = {
+    name,
+    email,
+    message,
+    audio: audioBase64,
+    audioName: audioFilename
+  };
 
-    const hasText = !!(name || email || message);
-    const hasAudio = !!(this.recordedBlob || this.uploadedFile);
+  const res = await fetch('/.netlify/functions/sendMail', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(submissionData)
+  });
 
-    if (!hasText && !hasAudio) {
-      this.showStatus('Veuillez fournir au moins un nom, e-mail, message écrit ou audio', 'error');
-      return;
-    }
+  if (res.ok) {
+    this.showThankYou();
+  } else {
+    this.showStatus("Erreur lors de l'envoi du message ❌", "error");
+  }
+}
 
-    const payload = {
-      name, email, message, timestamp: new Date().toISOString(), hasAudio
-    };
+// Helpers
+blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
 
-    try {
-      this.setSubmitLoading(true);
-
-      // Attach audio if present (as base64)
-      if (this.recordedBlob) {
-        const base64 = await this.blobToBase64(this.recordedBlob);
-        payload.audio = {
-          filename: `voice-${Date.now()}.webm`,
-          contentType: this.recordedBlob.type || 'audio/webm',
-          data: base64
-        };
-      } else if (this.uploadedFile) {
-        const base64 = await this.blobToBase64(this.uploadedFile);
-        payload.audio = {
-          filename: this.uploadedFile.name,
-          contentType: this.uploadedFile.type || 'application/octet-stream',
-          data: base64
-        };
-      }
-
-      // POST to Netlify Function
-      const resp = await fetch('/.netlify/functions/submitMessage', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload),
-      });
-
-      if (!resp.ok) {
-        const text = await resp.text();
-        throw new Error('Server error: ' + (text || resp.status));
-      }
+fileToBase64(file) {
+  return this.blobToBase64(file);
+}
 
       // success
       this.showThankYou();
