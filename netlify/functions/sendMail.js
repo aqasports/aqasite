@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const TO_EMAIL = "your@email.com"; // change to your email
+const TO_EMAIL = "aqa.sports.academy@gmail.com"; // change to your email
 
 export default async (req, res) => {
   if (req.method !== "POST") {
