@@ -1,7 +1,6 @@
 [build]
-  base = ""
-  publish = "dist"
-  command = "npm run build"
+  command = ""          # no build command
+  publish = "."         # root folder, because your HTML is in the root
 
-[build.environment]
-  NODE_VERSION = "18"
+[functions]
+  directory = "netlify/functions"
