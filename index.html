@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg" />
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA SPORTS ACADEMY</title>
+    <meta content="AQA est un établissement sportif dédié à transformer les débutants en athlètes confiants. Grâce à des coachs d'élite, un suivi technique et physique personnalisé, et des groupes restreints, nous allions science et technologie pour assurer une progression réelle – du zéro au pro." name="description"/>
+    <meta content="AQA, natation, apnée, coaching, école natation, formation, Algérie" name="keywords"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Hero Video Styles */
+        .hero-video {
+            margin: 2rem auto;
+            max-width: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            border: 1px solid rgba(0, 153, 255, 0.5);
+            background: rgba(0, 153, 255, 0.1);
+            position: relative;
+        }
+
+        .hero-video::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #00ffff);
+            border-radius: 20px;
+            z-index: -1;
+            animation: neonPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                opacity: 0.6;
+                filter: blur(1px);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+
+        .transformation-video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 17px;
+            background: #000;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .transformation-video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .transformation-video::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Navigation Buttons Section - Mobile Optimized */
+        .nav-buttons {
+            margin: 3rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 3rem auto;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            color: #ffffff;
+            padding: 1.5rem 1rem;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            min-height: 100px;
+            justify-content: center;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .nav-btn:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.3), rgba(0, 255, 255, 0.3));
+            border-color: #00ffff;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .nav-btn-icon {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .nav-btn-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #00ffff;
+            stroke-width: 2.2;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .nav-btn:hover .nav-btn-icon svg {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ffffff;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .socials a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 153, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 153, 255, 0.5);
+        }
+
+        .socials a:hover {
+            background: #00ffff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .socials a:hover svg {
+            stroke: #000;
+        }
+
+        /* Floating Button - Mobile Optimized */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .floating-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+          
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .hero-video {
+                margin: 1.5rem auto;
+                max-width: 90%;
+            }
+
+            .transformation-video {
+                max-height: 250px;
+            }
+
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .floating-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.7rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            
+            
+            .cta-button {
+                border-width: 3px;
+            }
+        }
+ .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+html {
+  background: #000;  /* solid fallback */
+}
+body {
+  background: transparent !important;
+  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+}
+
+/* We Listen to You Section Styles */
+.listen-section {
+    padding: 4rem 0;
+    margin: 3rem 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 2px solid rgba(0, 153, 255, 0.3);
+    border-bottom: 2px solid rgba(0, 153, 255, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.listen-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.02), transparent);
+    pointer-events: none;
+}
+
+.listen-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    animation: slideIn 1s ease-out;
+}
+
+.listen-title {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.listen-subtitle {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: #00ffff;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+}
+
+.listen-form {
+    background: rgba(0, 153, 255, 0.05);
+    border: 1px solid rgba(0, 153, 255, 0.3);
+    border-radius: 20px;
+    padding: 2.5rem;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.input-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #00ffff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.message-textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(0, 153, 255, 0.3);
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 120px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.message-textarea:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.message-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.text-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid rgba(0, 153, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.text-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.voice-section {
+    margin: 2rem 0;
+}
+
+.voice-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.voice-btn, .upload-btn {
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+    border: 2px solid rgba(0, 153, 255, 0.5);
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+}
+
+.voice-btn:hover, .upload-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(0, 255, 255, 0.4));
+    border-color: #00ffff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.voice-btn.recording {
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.3), rgba(255, 100, 100, 0.3));
+    border-color: #ff4444;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.voice-input {
+    display: none;
+}
+
+.voice-btn svg, .upload-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.audio-preview {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(0, 153, 255, 0.1);
+    border: 1px solid rgba(0, 153, 255, 0.3);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.audio-player {
+    flex: 1;
+    height: 40px;
+}
+
+.audio-player::-webkit-media-controls-panel {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.remove-audio {
+    background: rgba(255, 0, 0, 0.2);
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.remove-audio:hover {
+    background: rgba(255, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.contact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #0099ff, #00ffff);
+    color: #000000;
+    padding: 1.2rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+    border: 2px solid #00ffff;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #00ffff, #0099ff);
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    transform: none;
+    cursor: not-allowed;
+}
+
+.submit-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.thank-you-message {
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid rgba(0, 255, 0, 0.3);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.thank-you-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    stroke: #00ff88;
+    margin-bottom: 1rem;
+}
+
+.thank-you-message h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #00ff88;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.thank-you-message p {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.new-message-btn {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.3));
+    border: 2px solid #00ff88;
+    color: #ffffff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-message-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.4), rgba(0, 255, 136, 0.5));
+    transform: translateY(-2px);
+}
+
+/* Loading animation for submit button */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .listen-form {
+        padding: 1.5rem;
+    }
+
+    .contact-row {
+        grid-template-columns: 1fr;
+    }
+
+    .voice-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .voice-btn, .upload-btn {
+        justify-content: center;
+    }
+
+    .audio-preview {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .listen-section {
+        padding: 2rem 0;
+        margin: 2rem 0;
+    }
+
+    .listen-title {
+        font-size: 2rem;
+    }
+
+    .listen-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+<!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+
+<body>
+<iframe src="scroll.html" class="bg-frame"></iframe>
+      <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+    <div class="bg-logo"></div>
+  
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>From Zero to Hero</h1>
+            
+            <!-- Featured Video -->
+            <div class="hero-video">
+                <video autoplay muted loop playsinline class="transformation-video">
+                    <source src="zero.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <p>AQA est un établissement sportif dédié à transformer les débutants en athlètes confiants. Avec des coachs d’élite, un suivi personnalisé et des groupes restreints, nous combinons science et technologie pour garantir une progression réelle – du zéro au pro.</p>
+          
+         <section class="nav-buttons">
+
+            <!-- Dollar sign -->
+            <a href="tarifs.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                     stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="2" x2="12" y2="22"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path>
+                </svg>
+              </div>
+              <div>Tarifs</div>
+            </a>
+
+            <!-- Swim -->
+            <a href="groupes.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                     stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 18c6-6 14-6 20 0"></path>
+                  <circle cx="12" cy="7" r="3"></circle>
+                </svg>
+              </div>
+              <div>Groupes</div>
+            </a>
+
+            <!-- Pen / Inscription -->
+            <a href="inscription.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                     stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                </svg>
+              </div>
+              <div>Inscription</div>
+            </a>
+
+            <!-- Info -->
+            <a href="infos.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                     stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12" y2="8"></line>
+                </svg>
+              </div>
+              <div>Infos</div>
+            </a>
+
+            <!-- Camera -->
+            <a href="webtv.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                     stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="15" height="10" rx="2" ry="2"></rect>
+                  <polygon points="17 11 22 7 22 17 17 13 17 11"></polygon>
+                </svg>
+              </div>
+              <div>WebTV</div>
+            </a>
+
+            <!-- Cards -->
+            <a href="cards.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     viewBox="0 0 24 24" fill="none" 
+                     stroke="#00ffff" stroke-width="2" 
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+              </div>
+              <div>Formules AQA</div>
+            </a>
+
+            <!-- Piscines -->
+            <a href="piscines.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     viewBox="0 0 24 24" fill="none" 
+                     stroke="#00ffff" stroke-width="2" 
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div>Piscines</div>
+            </a>
+
+            <!-- Events -->
+            <a href="events.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     viewBox="0 0 24 24" fill="none" 
+                     stroke="#00ffff" stroke-width="2" 
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <div>Events</div>
+            </a>
+
+            <!-- Activities -->
+            <a href="activities.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     viewBox="0 0 24 24" fill="none" 
+                     stroke="#00ffff" stroke-width="2" 
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2v20M2 12h20"></path>
+                  <path d="M4 4l16 16M20 4L4 20"></path>
+                </svg>
+              </div>
+              <div>Sports</div>
+            </a>
+
+            <!-- Team -->
+            <a href="team.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     viewBox="0 0 24 24" fill="none" 
+                     stroke="#00ffff" stroke-width="2" 
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <!-- Middle Person -->
+                  <circle cx="12" cy="7" r="3"></circle>
+                  <path d="M9 21v-2a3 3 0 0 1 6 0v2"></path>
+                  
+                  <!-- Left Person -->
+                  <circle cx="5" cy="9" r="2.5"></circle>
+                  <path d="M2 21v-2a3 3 0 0 1 6 0v2"></path>
+                  
+                  <!-- Right Person -->
+                  <circle cx="19" cy="9" r="2.5"></circle>
+                  <path d="M16 21v-2a3 3 0 0 1 6 0v2"></path>
+                </svg>
+              </div>
+              <div>Team</div>
+            </a>
+            <!-- App -->
+            <a href="app.html" class="nav-btn">
+              <div class="nav-btn-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 24 24" fill="none" 
+     stroke="#00ffff" stroke-width="2" 
+     stroke-linecap="round" stroke-linejoin="round">
+  <!-- Phone body -->
+  <rect x="6" y="2" width="12" height="20" rx="2" ry="2"></rect>
+  <!-- Home button -->
+  <line x1="12" y1="20" x2="12" y2="20"></line>
+</svg>
+
+              </div>
+              <div>AQA App</div>
+            </a>
+<!-- Store -->
+            <a href="store.html" class="nav-btn">
+           <div class="nav-btn-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" 
+       viewBox="0 0 24 24" fill="none" 
+       stroke="#00ffff" stroke-width="2" 
+       stroke-linecap="round" stroke-linejoin="round">
+    <!-- Store roof -->
+    <path d="M3 9l1-5h16l1 5z" />
+    <!-- Awning -->
+    <path d="M4 9a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0" />
+    <!-- Store body -->
+    <rect x="3" y="9" width="18" height="12" rx="2" />
+    <!-- Door -->
+    <path d="M10 21v-6h4v6" />
+  </svg>
+</div>
+
+              <div>AQA store</div>
+            </a>
+ <!-- aqa kids -->
+            <a href="kids.html" class="nav-btn">
+              <div class="nav-btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 24 24" fill="none" 
+     stroke="#00ffff" stroke-width="2" 
+     stroke-linecap="round" stroke-linejoin="round">
+  <!-- Head -->
+  <circle cx="12" cy="12" r="7"></circle>
+  
+  <!-- Eyes -->
+  <circle cx="10" cy="12" r="0.5"></circle>
+  <circle cx="14" cy="12" r="0.5"></circle>
+  
+  <!-- Smile -->
+  <path d="M9 15c1.5 1 4.5 1 6 0"></path>
+</svg>
+
+              </div>
+              <div>AQA Kids</div>
+            </a>
+ <!-- aqa wellness -->
+            <a href="well.html" class="nav-btn">
+              <div class="nav-btn-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 24 24" fill="none" 
+     stroke="#00ffff" stroke-width="2" 
+     stroke-linecap="round" stroke-linejoin="round">
+  <!-- Heart above -->
+  <path d="M12 4.5l-1.2-1.3a3.5 3.5 0 0 0-5 5L12 13l6.2-4.8a3.5 3.5 0 0 0-5-5L12 4.5z"/>
+  
+  <!-- Hand below -->
+  <path d="M3 18c1.5-1 3-2 5-2h6c1.5 0 2.5 1 2.5 2s-1 2-2.5 2H9c-1.5 0-2.5 1-3 2"/>
+</svg>
+
+
+              </div>
+              <div>AQA Wellness</div>
+            </a>
+             <!-- aqa wear -->
+            <a href="wear.html" class="nav-btn">
+              <div class="nav-btn-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 24 24" fill="none" 
+     stroke="#00ffff" stroke-width="2" 
+     stroke-linecap="round" stroke-linejoin="round">
+  <!-- Sleeves -->
+  <path d="M4 7l4-3h8l4 3v4l-2 2v8H6v-8l-2-2V7z"/>
+  
+  <!-- Collar -->
+  <path d="M9 4l1.5 2h3L15 4"/>
+</svg>
+
+
+
+              </div>
+              <div>AQA Wear</div>
+            </a>
+          </section>
+    </div>
+<!-- =========================
+     Nous vous écoutons (copy/paste)
+     ========================= -->
+<section class="listen-section">
+  <div class="listen-content">
+    <h2 class="listen-title">Nous vous écoutons</h2>
+    <p class="listen-subtitle">Partagez vos préoccupations, suggestions ou questions avec nous</p>
+
+    <div id="listenFormContainer">
+      <form id="listenForm" name="contact" data-netlify="true" netlify>
+        <input type="hidden" name="form-name" value="contact">
+
+        <div class="contact-row" style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div class="input-group" style="flex:1;min-width:200px;">
+            <label class="input-label" for="userName">Nom (optionnel)</label>
+            <input type="text" id="userName" name="name" class="text-input" placeholder="Votre nom">
+          </div>
+          <div class="input-group" style="flex:1;min-width:200px;">
+            <label class="input-label" for="userEmail">Email (optionnel)</label>
+            <input type="email" id="userEmail" name="email" class="text-input" placeholder="votre@email.com">
+          </div>
+        </div>
+
+        <div class="input-group" style="margin-top:12px;">
+          <label class="input-label" for="messageText">Message écrit (optionnel)</label>
+          <textarea id="messageText" name="message" class="message-textarea" rows="4" placeholder="Écrivez votre message ici..."></textarea>
+        </div>
+
+        <!-- Voice -->
+        <div class="voice-section" style="margin-top:12px;">
+          <label class="input-label">Message vocal (optionnel)</label>
+
+          <div class="voice-controls" style="display:flex;gap:12px;align-items:center;">
+            <button type="button" id="recordBtn" class="voice-btn">🎙 <span id="recordBtnText">Enregistrer</span></button>
+
+            <label for="voiceInput" class="upload-btn" style="cursor:pointer;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);">
+              ⤓ Importer Audio
+            </label>
+            <input type="file" id="voiceInput" name="file" accept="audio/*" style="display:none;">
+
+            <div id="recordTimer" style="display:none;margin-left:6px;">00:00</div>
+          </div>
+
+          <canvas id="visualizer" class="visualizer" style="display:none;width:100%;height:60px;margin-top:10px;"></canvas>
+
+          <div id="audioPreview" class="audio-preview" style="display:none;margin-top:10px;align-items:center;gap:8px;">
+            <audio id="audioPlayer" controls class="audio-player"></audio>
+            <button type="button" id="removeAudio" class="remove-audio" title="Supprimer l'audio">×</button>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <button type="submit" id="submitBtn" class="submit-btn" style="padding:10px 18px;border-radius:10px;">
+            <span id="submitText">Envoyer</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- thank-you -->
+    <div id="thankYouMessage" class="thank-you-message" style="display:none;margin-top:12px;">
+      <div class="thank-you-content">
+        <h3>Merci !</h3>
+        <p>Votre message a été envoyé. Nous vous répondrons bientôt.</p>
+        <button type="button" id="newMessageBtn" class="new-message-btn">Nouveau message</button>
+      </div>
+    </div>
+
+  </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA SPORTS ACADEMY - We Listen</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* We Listen Section Styles */
+        .listen-section {
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .listen-content {
+            text-align: center;
+        }
+
+        .listen-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .listen-subtitle {
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .listen-form {
+            background: rgba(0, 153, 255, 0.05);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-input, .message-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .message-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .text-input:focus, .message-textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .text-input::placeholder, .message-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contact-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .voice-section {
+            margin: 2rem 0;
+        }
+
+        .voice-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .voice-btn, .upload-btn {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            color: #ffffff;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .voice-btn:hover, .upload-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(0, 255, 255, 0.4));
+            border-color: #00ffff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .voice-btn.recording {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.3), rgba(255, 100, 100, 0.3));
+            border-color: #ff4444;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .visualizer {
+            width: 100%;
+            height: 60px;
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            margin-top: 1rem;
+        }
+
+        .audio-preview {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 153, 255, 0.1);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-player {
+            flex: 1;
+            height: 40px;
+        }
+
+        .remove-audio {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .remove-audio:hover {
+            background: rgba(255, 0, 0, 0.4);
+            transform: scale(1.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .thank-you-message {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .thank-you-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .thank-you-content p {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .new-message-btn {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.3));
+            border: 2px solid #00ff88;
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .new-message-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.4), rgba(0, 255, 136, 0.5));
+            transform: translateY(-2px);
+        }
+
+        .status-message {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .status-message.success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #00ff88;
+        }
+
+        .status-message.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff4444;
+        }
+
+        /* Loading animation */
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .listen-form {
+                padding: 1.5rem;
+            }
+
+            .contact-row {
+                grid-template-columns: 1fr;
+            }
+
+            .voice-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .voice-btn, .upload-btn {
+                justify-content: center;
+            }
+
+            .listen-section {
+                padding: 2rem 1rem;
+            }
+
+            .listen-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="listen-section">
+            <div class="listen-content">
+                <h2 class="listen-title">Nous vous écoutons</h2>
+                <p class="listen-subtitle">Partagez vos préoccupations, suggestions ou questions avec nous</p>
+
+                <div id="listenFormContainer">
+                    <div class="listen-form">
+                        <div class="contact-row">
+                            <div class="input-group">
+                                <label class="input-label" for="userName">Nom (optionnel)</label>
+                                <input type="text" id="userName" class="text-input" placeholder="Votre nom">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label" for="userEmail">Email (optionnel)</label>
+                                <input type="email" id="userEmail" class="text-input" placeholder="votre@email.com">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="messageText">Message écrit (optionnel)</label>
+                            <textarea id="messageText" class="message-textarea" rows="4" placeholder="Écrivez votre message ici..."></textarea>
+                        </div>
+
+                        <!-- Voice Section -->
+                        <div class="voice-section">
+                            <label class="input-label">Message vocal (optionnel)</label>
+
+                            <div class="voice-controls">
+                                <button type="button" id="recordBtn" class="voice-btn">
+                                    🎙️ <span id="recordBtnText">Enregistrer</span>
+                                </button>
+
+                                <label for="voiceInput" class="upload-btn">
+                                    ⤴️ Importer Audio
+                                </label>
+                                <input type="file" id="voiceInput" accept="audio/*" style="display:none;">
+
+                                <div id="recordTimer" style="display:none; color:#00ffff; font-weight:bold;">00:00</div>
+                            </div>
+
+                            <canvas id="visualizer" class="visualizer" style="display:none;"></canvas>
+
+                            <div id="audioPreview" class="audio-preview" style="display:none;">
+                                <audio id="audioPlayer" controls class="audio-player"></audio>
+                                <button type="button" id="removeAudio" class="remove-audio" title="Supprimer l'audio">×</button>
+                            </div>
+                        </div>
+
+                        <button type="button" id="submitBtn" class="submit-btn">
+                            <span id="submitText">Envoyer</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thank you message -->
+                <div id="thankYouMessage" class="thank-you-message" style="display:none;">
+                    <div class="thank-you-content">
+                        <h3>Merci !</h3>
+                        <p>Votre message a été envoyé avec succès. Nous vous répondrons bientôt.</p>
+                        <button type="button" id="newMessageBtn" class="new-message-btn">Nouveau message</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        class VoiceMessageHandler {
+            constructor() {
+                this.mediaRecorder = null;
+                this.audioChunks = [];
+                this.recordedBlob = null;
+                this.uploadedFile = null;
+                this.isRecording = false;
+                this.recordingTime = 0;
+                this.recordingTimer = null;
+                this.audioContext = null;
+                this.analyser = null;
+                this.dataArray = null;
+                this.visualizerCanvas = document.getElementById('visualizer');
+                this.visualizerContext = this.visualizerCanvas?.getContext('2d');
+                this.maxRecordingSeconds = 300; // 5 minutes max
+
+                this.init();
+            }
+
+            init() {
+                this.cacheElements();
+                this.bindEvents();
+                this.resizeVisualizer();
+                window.addEventListener('resize', () => this.resizeVisualizer());
+            }
+
+            cacheElements() {
+                this.recordBtn = document.getElementById('recordBtn');
+                this.recordBtnText = document.getElementById('recordBtnText');
+                this.recordTimer = document.getElementById('recordTimer');
+                this.voiceInput = document.getElementById('voiceInput');
+                this.audioPreview = document.getElementById('audioPreview');
+                this.audioPlayer = document.getElementById('audioPlayer');
+                this.removeAudioBtn = document.getElementById('removeAudio');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.submitText = document.getElementById('submitText');
+                this.formContainer = document.getElementById('listenFormContainer');
+                this.thankYouMessage = document.getElementById('thankYouMessage');
+                this.newMessageBtn = document.getElementById('newMessageBtn');
+            }
+
+            bindEvents() {
+                if (this.recordBtn) this.recordBtn.addEventListener('click', () => this.toggleRecording());
+                if (this.voiceInput) this.voiceInput.addEventListener('change', e => this.handleFileUpload(e));
+                if (this.removeAudioBtn) this.removeAudioBtn.addEventListener('click', () => this.removeAudio());
+                if (this.submitBtn) this.submitBtn.addEventListener('click', () => this.handleSubmit());
+                if (this.newMessageBtn) this.newMessageBtn.addEventListener('click', () => this.resetForm());
+            }
+
+            resizeVisualizer() {
+                if (!this.visualizerCanvas) return;
+                this.visualizerCanvas.width = this.visualizerCanvas.offsetWidth || 600;
+                this.visualizerCanvas.height = 60;
+            }
+
+            async toggleRecording() {
+                if (!this.isRecording) await this.startRecording();
+                else this.stopRecording();
+            }
+
+            async startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioContext.createAnalyser();
+                    const source = this.audioContext.createMediaStreamSource(stream);
+                    source.connect(this.analyser);
+                    this.analyser.fftSize = 256;
+                    this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+
+                    this.mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+                    this.audioChunks = [];
+                    this.recordingTime = 0;
+
+                    this.mediaRecorder.ondataavailable = (e) => this.audioChunks.push(e.data);
+                    this.mediaRecorder.onstop = () => {
+                        this.recordedBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+                        this.showAudioPreview(this.recordedBlob);
+                        stream.getTracks().forEach(t => t.stop());
+                        if (this.audioContext) this.audioContext.close();
+                    };
+
+                    this.mediaRecorder.start();
+                    this.isRecording = true;
+                    this.recordBtn.classList.add('recording');
+                    this.recordBtnText.textContent = 'Arrêter';
+                    this.recordTimer.style.display = 'inline-block';
+                    if (this.visualizerCanvas) this.visualizerCanvas.style.display = 'block';
+                    this.startTimer();
+                    this.startVisualizer();
+
+                    this.autoStopTimeout = setTimeout(() => this.stopRecording(), this.maxRecordingSeconds * 1000);
+
+                } catch (err) {
+                    console.error('Recording error:', err);
+                    this.showStatus("Erreur : accès au micro refusé ou indisponible", 'error');
+                }
+            }
+
+            stopRecording() {
+                if (!this.mediaRecorder || !this.isRecording) return;
+                this.mediaRecorder.stop();
+                this.isRecording = false;
+                this.recordBtn.classList.remove('recording');
+                this.recordBtnText.textContent = 'Enregistrer';
+                this.stopTimer();
+                this.stopVisualizer();
+                clearTimeout(this.autoStopTimeout);
+            }
+
+            startTimer() {
+                this.recordTimer.textContent = '00:00';
+                let secs = 0;
+                this.recordingTimer = setInterval(() => {
+                    secs++;
+                    const m = String(Math.floor(secs/60)).padStart(2,'0');
+                    const s = String(secs%60).padStart(2,'0');
+                    this.recordTimer.textContent = `${m}:${s}`;
+                }, 1000);
+            }
+
+            stopTimer() {
+                if (this.recordingTimer) clearInterval(this.recordingTimer);
+                this.recordTimer.style.display = 'none';
+            }
+
+            startVisualizer() {
+                const draw = () => {
+                    if (!this.isRecording) return;
+                    this.animationFrame = requestAnimationFrame(draw);
+                    this.analyser.getByteFrequencyData(this.dataArray);
+                    if (!this.visualizerContext) return;
+                    this.visualizerContext.clearRect(0,0,this.visualizerCanvas.width, this.visualizerCanvas.height);
+                    const barWidth = (this.visualizerCanvas.width / this.dataArray.length) * 2.5;
+                    let x = 0;
+                    for (let i=0;i<this.dataArray.length;i++){
+                        const barHeight = (this.dataArray[i]/255) * this.visualizerCanvas.height;
+                        this.visualizerContext.fillStyle = '#00ffff';
+                        this.visualizerContext.fillRect(x, this.visualizerCanvas.height - barHeight, barWidth, barHeight);
+                        x += barWidth + 1;
+                    }
+                };
+                draw();
+            }
+
+            stopVisualizer() {
+                if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
+                if (this.visualizerCanvas) this.visualizerCanvas.style.display = 'none';
+            }
+
+            handleFileUpload(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                if (!file.type.startsWith('audio')) {
+                    this.showStatus('Veuillez sélectionner un fichier audio', 'error');
+                    this.voiceInput.value = '';
+                    return;
+                }
+                
+                // Check file size (max 25MB for Resend)
+                const maxSize = 25 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    this.showStatus('Fichier trop volumineux. Limite: 25MB', 'error');
+                    this.voiceInput.value = '';
+                    return;
+                }
+                
+                this.uploadedFile = file;
+                this.recordedBlob = null;
+                this.showAudioPreview(file);
+            }
+
+            showAudioPreview(source) {
+                const url = URL.createObjectURL(source);
+                this.audioPlayer.src = url;
+                this.audioPreview.style.display = 'flex';
+            }
+
+            removeAudio() {
+                this.recordedBlob = null;
+                this.uploadedFile = null;
+                this.voiceInput.value = '';
+                this.audioPlayer.src = '';
+                this.audioPreview.style.display = 'none';
+            }
+
+            async blobToBase64(blob) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const base64Data = reader.result.split(',')[1];
+                        resolve(base64Data);
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+            }
+
+            async handleSubmit() {
+                const name = document.getElementById('userName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
+                const message = document.getElementById('messageText').value.trim();
+
+                const hasText = !!(name || email || message);
+                const hasAudio = !!(this.recordedBlob || this.uploadedFile);
+
+                if (!hasText && !hasAudio) {
+                    this.showStatus('Veuillez fournir au moins un nom, e-mail, message écrit ou audio', 'error');
+                    return;
+                }
+
+                try {
+                    this.setSubmitLoading(true);
+
+                    // Prepare the data
+                    const formData = new FormData();
+                    formData.append('name', name);
+                    formData.append('email', email);
+                    formData.append('message', message);
+                    formData.append('timestamp', new Date().toISOString());
+
+                    // Add audio file if present
+                    if (this.recordedBlob) {
+                        formData.append('audio', this.recordedBlob, `voice-${Date.now()}.webm`);
+                    } else if (this.uploadedFile) {
+                        formData.append('audio', this.uploadedFile);
+                    }
+
+                    // Send to your backend endpoint
+                    const response = await fetch('/api/send-message', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        this.showThankYou();
+                    } else {
+                        throw new Error(result.error || 'Erreur inconnue');
+                    }
+
+                } catch (error) {
+                    console.error('Submit error:', error);
+                    this.showStatus('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+                } finally {
+                    this.setSubmitLoading(false);
+                }
+            }
+
+            setSubmitLoading(loading) {
+                if (loading) {
+                    this.submitBtn.disabled = true;
+                    this.submitText.textContent = 'Envoi en cours...';
+                    this.submitBtn.style.opacity = '0.7';
+                } else {
+                    this.submitBtn.disabled = false;
+                    this.submitText.textContent = 'Envoyer';
+                    this.submitBtn.style.opacity = '1';
+                }
+            }
+
+            showThankYou() {
+                this.formContainer.style.display = 'none';
+                this.thankYouMessage.style.display = 'block';
+            }
+
+            resetForm() {
+                document.getElementById('userName').value = '';
+                document.getElementById('userEmail').value = '';
+                document.getElementById('messageText').value = '';
+                this.removeAudio();
+                this.formContainer.style.display = 'block';
+                this.thankYouMessage.style.display = 'none';
+                const existingStatus = document.querySelector('.status-message');
+                if (existingStatus) existingStatus.remove();
+            }
+
+            showStatus(message, type = 'info') {
+                const existing = document.querySelector('.status-message');
+                if (existing) existing.remove();
+                
+                const div = document.createElement('div');
+                div.className = `status-message ${type}`;
+                div.textContent = message;
+                
+                this.formContainer.parentNode.insertBefore(div, this.formContainer.nextSibling);
+                
+                if (type !== 'error') {
+                    setTimeout(() => div.remove(), 5000);
+                }
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.voiceMessageHandler = new VoiceMessageHandler();
+        });
+    </script>
+
+</script>
+
+<footer>
+<!-- Add this div where you want the footer to appear -->
+<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
+<!-- Floating Button -->
+    <a href="cards.html" class="floating-btn" >Nouvelles formules </a>
+  <!-- Load navbar logic, then inject and init -->
+  <script src="/js/navbar.js"></script>
+<!-- Add this script before closing </body> tag -->
+<script>
+async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadFooter);
+</script>
+
+</body>
+</html>

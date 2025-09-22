@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Events - Sports Academy</title>
+    <meta content="Découvrez les événements AQA : compétitions de natation, sports équestres, wellness, eau libre et plus. Rejoignez notre communauté sportive d'élite." name="description"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, system-ui, sans-serif;
+            background: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00ffff 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            transition: all 0.3s ease;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #00ffff;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.7;
+        }
+
+        /* Particle system */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Dynamic background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 153, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 0, 153, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #000 0%, #001122 50%, #000 100%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(30deg) brightness(1.2); }
+        }
+
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom-color: rgba(0, 255, 255, 0.4);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ffff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ffffff, #00ffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+            margin-bottom: 1rem;
+            line-height: 0.9;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            font-weight: 300;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 1s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 1.5s forwards;
+        }
+
+        .cta-button {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(45deg, #00ffff, #0099ff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: #00ffff;
+            border: 2px solid #00ffff;
+        }
+
+        .cta-button.secondary:hover {
+            background: #00ffff;
+            color: #000;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Events Section */
+        .events-section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(45deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #00ffff, #0099ff);
+            border-radius: 2px;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.05));
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 1s ease;
+        }
+
+        .event-card:hover::before {
+            left: 100%;
+        }
+
+        .event-card:hover {
+            transform: translateY(-20px) rotateX(5deg);
+            box-shadow: 0 30px 80px rgba(0, 255, 255, 0.3);
+            border-color: #00ffff;
+        }
+
+        .event-image {
+            height: 250px;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .event-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            40% { transform: translate(-50%, -50%) translateY(-10px); }
+            60% { transform: translate(-50%, -50%) translateY(-5px); }
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+
+        .event-date {
+            color: #00ffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .event-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .event-location {
+            color: #00ffff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-price {
+            background: linear-gradient(45deg, #00ffff, #0099ff);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Interactive Timeline */
+        .timeline-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 50, 100, 0.1), transparent);
+        }
+
+        .timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #00ffff, #0099ff, #00ffff);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 4rem 0;
+            opacity: 0;
+            animation: slideInLeft 1s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(even) {
+            animation: slideInRight 1s ease-out forwards;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #00ffff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 20px #00ffff;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: rgba(0, 153, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* 3D Gallery */
+        .gallery-section {
+            padding: 8rem 2rem;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .gallery-3d {
+            perspective: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            height: 300px;
+            background: linear-gradient(45deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border-radius: 20px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.6s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: rotateY(15deg) rotateX(5deg) translateZ(50px);
+            box-shadow: 0 30px 60px rgba(0, 255, 255, 0.3);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(0, 255, 255, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Stats Counter */
+        .stats-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            counter-reset: stat-counter;
+            animation: countUp 2s ease-out;
+        }
+
+        .stat-label {
+            color: #ffffff;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #001122, #000);
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            outline: none;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-button {
+            background: linear-gradient(45deg, #00ffff, #0099ff);
+            color: #000;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #00ffff;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #00ffff;
+            transform: translateY(-5px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 8vw, 4rem);
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
+        }
+
+        .loading-logo {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s infinite;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+    
+
+/* Injected Navbar Styles */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Hero Video Styles */
+        .hero-video {
+            margin: 2rem auto;
+            max-width: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            border: 1px solid rgba(0, 153, 255, 0.5);
+            background: rgba(0, 153, 255, 0.1);
+            position: relative;
+        }
+
+        .hero-video::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #00ffff);
+            border-radius: 20px;
+            z-index: -1;
+            animation: neonPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                opacity: 0.6;
+                filter: blur(1px);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+
+        .transformation-video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 17px;
+            background: #000;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .transformation-video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .transformation-video::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Navigation Buttons Section - Mobile Optimized */
+        .nav-buttons {
+            margin: 3rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 3rem auto;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            color: #ffffff;
+            padding: 1.5rem 1rem;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            min-height: 100px;
+            justify-content: center;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .nav-btn:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.3), rgba(0, 255, 255, 0.3));
+            border-color: #00ffff;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .nav-btn-icon {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .nav-btn-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #00ffff;
+            stroke-width: 2.2;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .nav-btn:hover .nav-btn-icon svg {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ffffff;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .socials a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 153, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 153, 255, 0.5);
+        }
+
+        .socials a:hover {
+            background: #00ffff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .socials a:hover svg {
+            stroke: #000;
+        }
+
+        /* Floating Button - Mobile Optimized */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .floating-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+          
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .hero-video {
+                margin: 1.5rem auto;
+                max-width: 90%;
+            }
+
+            .transformation-video {
+                max-height: 250px;
+            }
+
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .floating-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.7rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            
+            
+            .cta-button {
+                border-width: 3px;
+            }
+        }
+ .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+html {
+  background: #000;  /* solid fallback */
+}
+body {
+  background: transparent !important;
+  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+}
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 1s ease;
+}
+
+.loading-logo {
+    max-width: 90vw;   /* takes almost full width */
+    max-height: 90vh;  /* takes almost full height */
+    object-fit: contain;
+    animation: pulse 1.5s infinite;
+}
+
+ .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+.tracking-in-expand {
+  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(.215,.61,.355,1.000) both;
+  animation: tracking-in-expand 0.7s cubic-bezier(.215,.61,.355,1.000) both;
+}
+
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+ <!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <img src="https://i.ibb.co/kVqnjDg0/20240310-135146-0002.png" 
+         alt="AQA Events Logo" class="loading-logo" style="max-width: 180px;">
+</div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- Particles -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Background Animation -->
+    <iframe src="scroll.html" class="bg-frame"></iframe>  
+
+
+
+     
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+     <div class="hero-title tracking-in-expand">AQA EVENTS</div>
+
+        <div class="hero-subtitle">L'Excellence en Mouvement</div>
+        <div class="hero-description">
+            Des moments uniques pour échapper au stress quotidien, surmonter vos peurs et embrasser la nouveauté.
+Entre activités aquatiques, expériences bien-être et instants de liberté, vivez une immersion conçue pour vous aider à respirer, vous régénérer et découvrir une nouvelle version de vous-même.
+        <div class="cta-buttons">
+            <a href="#events" class="cta-button">Découvrir les Événements</a>
+            <a href="https://wa.me/213540454907" class="cta-button secondary">Rejoindre WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section" id="events">
+        <h2 class="section-title">Activités</h2>
+        <div class="events-grid">
+            <div class="event-card" data-category="swimming">
+                <div class="event-image">
+                    <div class="event-icon">🏊‍♂️</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-date">AQA events</div>
+                    <h3 class="event-title">Initiation en sea swimming</h3>
+                    <p class="event-description">
+                        Une première immersion sécurisée pour apprendre les bases, gagner confiance et profiter pleinement de l’eau salée dans un cadre naturel et stimulant.
+                    </p>
+                    <div class="event-details">
+                        <div class="event-location">
+                            📍 Bounetah Reghaia et autre empl
+                        </div>
+                        <div class="event-price">1800 DA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card" data-category="triathlon">
+                <div class="event-image">
+                    <div class="event-icon">🏃‍♂️</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-date">AQA events</div>
+                    <h3 class="event-title">Traversées en mer</h3>
+                    <p class="event-description">
+                       Partez à l’aventure et relevez le défi de nager en mer sur des parcours allant de 800 m à 10 km ! Une expérience sportive unique pour tester votre endurance, gagner en confiance et profiter pleinement des paysages marins
+                    </p>
+                    <div class="event-details">
+                        <div class="event-location">
+                            📍 Variable
+                        </div>
+                        <div class="event-price">1800 DA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card" data-category="gala">
+                <div class="event-image">
+                    <div class="event-icon">🏆</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-date">AQA events</div>
+                    <h3 class="event-title">PMT découverte des profondeurs</h3>
+                    <p class="event-description">
+                      Plongée Palmes, Masque, Tuba : initiez-vous à l’exploration des profondeurs en mer ! Une expérience unique pour découvrir la faune et la flore marines, améliorer vos techniques de respiration et de palmage, le tout en toute sécurité.
+                    </p>
+                    <div class="event-details">
+                        <div class="event-location">
+                            📍 Fronco Rais hamidou et autre empl
+                        </div>
+                        <div class="event-price">2000 DA</div>
+                    </div>
+                </div>
+            </div>
+                  <div class="event-card" data-category="triathlon">
+                <div class="event-image">
+                    <div class="event-icon">🏃‍♂️</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-date">AQA events</div>
+                    <h3 class="event-title">Balade  </h3>
+                    <p class="event-description">
+      Profitez du paysage, renforcez votre endurance et vivez une expérience sportive et ludique adaptée à tous les niveaux.
+                    </p>
+                    <div class="event-details">
+                        <div class="event-location">
+                            📍 Variable
+                        </div>
+                        <div class="event-price">2500 DA</div>
+                    </div>
+                    Profitez du paysage, renforcez votre endurance et vivez une expérience sportive et ludique adaptée à tous les niveaux."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Timeline -->
+    <section class="timeline-section" id="timeline">
+        <h2 class="section-title">Planning 2024-2025</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 style="color: #00ffff; margin-bottom: 1rem;">Octobre 2024</h3>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Championnat Swimming & Equestrian Cup</h4>
+                    <p style="color: rgba(255,255,255,0.8);">Lancement de la saison avec nos deux événements phares</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 style="color: #00ffff; margin-bottom: 1rem;">Novembre 2024</h3>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Wellness Retreat & Challenges Aquatiques</h4>
+                    <p style="color: rgba(255,255,255,0.8);">Mois dédié au bien-être et aux défis en eau libre</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 style="color: #00ffff; margin-bottom: 1rem;">Décembre 2024</h3>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Gala des Champions</h4>
+                    <p style="color: rgba(255,255,255,0.8);">Célébration annuelle et remise des prix prestigieux</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 style="color: #00ffff; margin-bottom: 1rem;">2025</h3>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Expansion Internationale</h4>
+                    <p style="color: rgba(255,255,255,0.8);">Nouveaux événements et partenariats internationaux</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Gallery -->
+    <section class="gallery-section" id="gallery">
+        <h2 class="section-title">Galerie Immersive</h2>
+        <div class="gallery-3d">
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <div style="color: #000; font-weight: 800; font-size: 1.2rem;">Compétitions Natation</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <div style="color: #000; font-weight: 800; font-size: 1.2rem;">Sports Équestres</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <div style="color: #000; font-weight: 800; font-size: 1.2rem;">Sessions Wellness</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <div style="color: #000; font-weight: 800; font-size: 1.2rem;">Défis Eau Libre</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <div style="color: #000; font-weight: 800; font-size: 1.2rem;">Triathlon Elite</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <div style="color: #000; font-weight: 800; font-size: 1.2rem;">Gala Champions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Counter -->
+    <section class="stats-section">
+        <h2 class="section-title">Nos Performances</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-count="500">0</div>
+                <div class="stat-label">Athlètes Participants</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="25">0</div>
+                <div class="stat-label">Événements Annuels</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="15">0</div>
+                <div class="stat-label">Records Battus</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="100">0</div>
+                <div class="stat-label">Médailles Remportées</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section" id="contact">
+        <h2 class="section-title">Restez Connectés</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+            Recevez les dernières nouvelles sur nos événements exclusifs et opportunités VIP
+        </p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Votre email pour les updates exclusives">
+            <button type="submit" class="newsletter-button">S'abonner</button>
+        </form>
+        <div style="margin-top: 3rem;">
+            <a href="https://wa.me/213540454907" class="cta-button" style="display: inline-block;">
+                📱 Rejoindre WhatsApp VIP
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AQA Sports Academy</h3>
+                <p>L'excellence sportive à votre portée</p>
+                <p>📞 0540454907</p>
+                <p>✉️ aqa.sports.academy@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Nos Centres</h3>
+                <p>🏊‍♂️ Reghaia - Piscine ADM AZAL</p>
+                <p>🏋️‍♂️ Cheraga - Bk Sport</p>
+                <p>🐎 Alger - Club Équestre Elite</p>
+            </div>
+            <div class="footer-section">
+                <h3>Services Premium</h3>
+                <p>• Coaching Personnel</p>
+                <p>• Événements Privés</p>
+                <p>• Formation Elite</p>
+                <p>• Wellness & Spa</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100063686885387" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3.5l.5-4H14V7a1 1 0 011-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/aqa.sports/" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                            <circle cx="17.5" cy="6.5" r="1.5"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@aqa.sports.academ" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/213540454907" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(0,255,255,0.2);">
+            <p style="color: rgba(255,255,255,0.6);">© 2024 AQA Sports Academy. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('fade-out');
+            }, 2000);
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const trails = [];
+        
+        for (let i = 0; i < 5; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trails.push(trail);
+        }
+
+        let mouseX = 0, mouseY = 0;
+        let trailX = [], trailY = [];
+        
+        for (let i = 0; i < 5; i++) {
+            trailX[i] = 0;
+            trailY[i] = 0;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function animateTrails() {
+            for (let i = 0; i < 5; i++) {
+                trailX[i] += (mouseX - trailX[i]) * (0.1 + i * 0.05);
+                trailY[i] += (mouseY - trailY[i]) * (0.1 + i * 0.05);
+                trails[i].style.left = trailX[i] + 'px';
+                trails[i].style.top = trailY[i] + 'px';
+                trails[i].style.opacity = 1 - i * 0.15;
+            }
+            requestAnimationFrame(animateTrails);
+        }
+        animateTrails();
+
+        // Particle System
+        const particlesContainer = document.getElementById('particles');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            particlesContainer.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+
+        setInterval(createParticle, 200);
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Event Cards 3D Effect
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+            });
+        });
+
+        // Stats Counter Animation
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    animateCounter(counter, target);
+                    statsObserver.unobserve(counter);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-number').forEach(counter => {
+            statsObserver.observe(counter);
+        });
+
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.floor(current);
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 20);
+        }
+
+        // Timeline Animation
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 200);
+                    timelineObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            timelineObserver.observe(item);
+        });
+
+        // Gallery 3D Effects
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = `rotateY(${15 + Math.random() * 10}deg) rotateX(${5 + Math.random() * 5}deg) translateZ(50px)`;
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px)';
+            });
+        });
+
+        // Newsletter Form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.querySelector('.newsletter-input').value;
+            if (email) {
+                alert('Merci de votre inscription ! Vous recevrez bientôt nos updates exclusives.');
+                document.querySelector('.newsletter-input').value = '';
+            }
+        });
+
+        // Enhanced Cursor Interactions
+        document.querySelectorAll('.cta-button, .event-card, .gallery-item').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+                cursor.style.background = 'radial-gradient(circle, rgba(0,255,255,0.8) 0%, transparent 70%)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.background = 'radial-gradient(circle, #00ffff 0%, transparent 70%)';
+            });
+        });
+
+        // Background Animation Interaction
+        document.addEventListener('mousemove', (e) => {
+            const bgAnimation = document.querySelector('.bg-animation');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            bgAnimation.style.background = `
+                radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at ${(1-x) * 100}% ${(1-y) * 100}%, rgba(0, 153, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 0, 153, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #000 0%, #001122 50%, #000 100%)
+            `;
+        });
+
+        // Performance Optimization
+        let ticking = false;
+        function updateAnimations() {
+            // Batch DOM updates here
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateAnimations);
+                ticking = true;
+            }
+        }
+
+        // Add performance monitoring
+        window.addEventListener('scroll', requestTick);
+        window.addEventListener('mousemove', requestTick);
+
+        // Initialize all animations
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('AQA Events - Mind-blowing experience loaded! 🚀');
+        });
+    </script>
+</body>
+</html>
+                        <div class="event-location">
+                            📍 Piscine Olympique Reghaia
+                        </div>
+                        <div class="event-price">Gratuit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card" data-category="equestrian">
+                <div class="event-image">
+                    <div class="event-icon">🐎</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-date">22 Octobre 2024</div>
+                    <h3 class="event-title">AQA Equestrian Cup</h3>
+                    <p class="event-description">
+                        Tournoi d'équitation prestigieux avec saut d'obstacles et dressage. 
+                        Ouvert aux cavaliers de tous niveaux avec encadrement professionnel et chevaux d'élite.
+                    </p>
+                    <div class="event-details">
+                        <div class="event-location">
+                            📍 Club Équestre Elite Alger
+                        </div>
+                        <div class="event-price">2500 DA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card" data-category="wellness">
+                <div class="event-image">
+                    <div class="event-icon">🧘‍♀️</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-date">5 Novembre 2024</div>
+                    <h3 class="event-title">AQA Wellness Retreat</h3>
+                    <p class="event-description">
+                        Week-end wellness immersif avec yoga aquatique, méditation guidée, 
+                        nutrition sportive et soins corporels dans un cadre luxueux face à la mer.
+                    </p>
+                    <div class="event-details">
+                        <div class="event-location">
+                            📍 Resort Premium Tipaza
+                        </div>
+                        <div class="event-price">15000 DA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card" data-category="openwater">
+                <div class="event-image">
+                    <div class="event-icon">🌊</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-date">12 Novembre 2024</div>
+                    <h3 class="event-title">Open Water Challenge</h3>
+                    <p class="event-description">
+                        Défi de nage en eau libre sur 2km dans la magnifique Baie d'Alger. 
+                        Parcours sécurisé avec équipe de sauvetage professionnelle et ravitaillement premium.
+                    </p>
+                    <div class="event-details">

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Equipment Pack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        /* Equipment Pack Section */
+        .equip-section {
+            text-align: center;
+            padding: 3rem 0;
+            animation: slideIn 1s ease-out;
+        }
+
+        .equip-section h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .equip-section h2 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .pack-container {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .pack-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .arena-logo {
+            width: 120px;
+            height: auto;
+            margin: 0 auto 2rem;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
+        }
+
+        .equipment-item {
+            background: rgba(0, 153, 255, 0.05);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equipment-item:hover {
+            background: rgba(0, 153, 255, 0.15);
+            border-color: #00ffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .equipment-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .equipment-item:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .equipment-image {
+            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 153, 255, 0.4);
+        }
+
+        .equipment-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .equipment-image:hover img {
+            transform: scale(1.05);
+        }
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .equipment-description {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .have-equipment-btn {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            color: #00ffff;
+            padding: 1rem 2rem;
+            border: 2px solid #00ffff;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .have-equipment-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .have-equipment-btn:hover::before {
+            left: 100%;
+        }
+
+        .have-equipment-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+
+        .equipment-step {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .equipment-step.active {
+            display: block;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 153, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            transform: scale(1.2);
+        }
+
+        .step-dot.completed {
+            background: #0099ff;
+            box-shadow: 0 0 8px rgba(0, 153, 255, 0.6);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+
+        .nav-button.secondary {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            color: #00ffff;
+        }
+
+        .nav-button.secondary:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(0, 255, 255, 0.4));
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 0.5rem;
+            }
+
+            .pack-container {
+                padding: 2rem 1rem;
+                margin: 1rem auto;
+            }
+
+            .equipment-item {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-button {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-logo"></div>
+    
+    <div class="container">
+        <section class="equip-section">
+            <h1>Pack Équipement</h1>
+            <h2>Pack Starter Arena</h2>
+
+            <div class="pack-container">
+                <!-- Arena Logo -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Arena_logo.svg/2560px-Arena_logo.svg.png" 
+                     alt="Arena Logo" class="arena-logo">
+
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step-dot active"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                </div>
+
+                <!-- Step 1: Goggles Bubble 3 + Swim Cap -->
+                <div class="equipment-step active" id="step1">
+                    <div class="equipment-item">
+                        <h3 class="equipment-name">Lunettes Bubble 3 + Bonnet Junior</h3>
+                        <p class="equipment-description">
+                            Lunettes de natation Arena Bubble 3 avec technologie anti-buée et bonnet de bain junior en silicone pour un confort optimal dans l'eau.
+                        </p>
+                        <button class="have-equipment-btn" onclick="nextStep()">
+                            J'ai déjà cet équipement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Junior Goggles -->
+                <div class="equipment-step" id="step2">
+                    <div class="equipment-item">
+                        <h3 class="equipment-name">Lunettes Junior Arena</h3>
+                        <p class="equipment-description">
+                            Lunettes de natation spécialement conçues pour les jeunes nageurs, avec joint souple et système d'ajustement facile.
+                        </p>
+                        <button class="have-equipment-btn" onclick="nextStep()">
+                            J'ai déjà cet équipement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Arena Robe -->
+                <div class="equipment-step" id="step3">
+                    <div class="equipment-item">
+                        <h3 class="equipment-name">Arena Sortie de Bain</h3>
+                        <p class="equipment-description">
+                            Peignoir Arena en microfibre ultra-absorbante, parfait pour se sécher rapidement après l'entraînement tout en gardant la chaleur corporelle.
+                        </p>
+                        <button class="have-equipment-btn" onclick="nextStep()">
+                            J'ai déjà cet équipement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Arena Spiky Bag -->
+                <div class="equipment-step" id="step4">
+                    <div class="equipment-item">
+                        <h3 class="equipment-name">Arena Sac Spiky</h3>
+                        <p class="equipment-description">
+                            Sac de sport Arena avec compartiments ventilés, parfait pour transporter tout votre équipement de natation. Design iconique et résistant à l'eau.
+                        </p>
+                        <button class="have-equipment-btn" onclick="completeSelection()">
+                            J'ai déjà cet équipement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Final Step -->
+                <div class="equipment-step" id="final">
+                    <div class="equipment-item">
+                        <h3 class="equipment-name">✨ Pack Personnalisé Créé !</h3>
+                        <p class="equipment-description">
+                            Votre pack d'équipement Arena a été personnalisé selon vos besoins. Contactez-nous pour finaliser votre commande et commencer votre aventure AQA !
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="navigation-buttons">
+                    <button class="nav-button secondary" id="prevBtn" onclick="previousStep()" style="display: none;">
+                        ← Précédent
+                    </button>
+                    <button class="nav-button" id="resetBtn" onclick="resetSteps()" style="display: none;">
+                        Recommencer
+                    </button>
+                    <button class="nav-button" id="contactBtn" onclick="contact()" style="display: none;">
+                        Nous Contacter
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function updateStepIndicator() {
+            const dots = document.querySelectorAll('.step-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 < currentStep) {
+                    dot.classList.add('completed');
+                } else if (index + 1 === currentStep) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.equipment-step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show current step
+            const currentStepElement = document.getElementById(`step${stepNumber}`);
+            if (currentStepElement) {
+                currentStepElement.classList.add('active');
+            }
+
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const contactBtn = document.getElementById('contactBtn');
+
+            if (stepNumber > 1 && stepNumber <= totalSteps) {
+                prevBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            if (stepNumber > totalSteps) {
+                resetBtn.style.display = 'block';
+                contactBtn.style.display = 'block';
+            } else {
+                resetBtn.style.display = 'none';
+                contactBtn.style.display = 'none';
+            }
+
+            updateStepIndicator();
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function completeSelection() {
+            currentStep = totalSteps + 1;
+            document.querySelectorAll('.equipment-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('final').classList.add('active');
+            
+            // Update step indicator - mark all as completed
+            const dots = document.querySelectorAll('.step-dot');
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                dot.classList.add('completed');
+            });
+
+            showStep(totalSteps + 1);
+        }
+
+        function resetSteps() {
+            currentStep = 1;
+            showStep(1);
+        }
+
+        function contact() {
+            window.open('https://wa.me/213540454907', '_blank');
+        }
+
+        // Initialize
+        showStep(1);
+
+        // Prevent zoom on double tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>

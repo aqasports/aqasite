@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA SPORTS ACADEMY - We Listen</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* We Listen Section Styles */
+        .listen-section {
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .listen-content {
+            text-align: center;
+        }
+
+        .listen-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .listen-subtitle {
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .listen-form {
+            background: rgba(0, 153, 255, 0.05);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-input, .message-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .message-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .text-input:focus, .message-textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .text-input::placeholder, .message-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contact-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .voice-section {
+            margin: 2rem 0;
+        }
+
+        .voice-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .voice-btn, .upload-btn {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            color: #ffffff;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .voice-btn:hover, .upload-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(0, 255, 255, 0.4));
+            border-color: #00ffff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .voice-btn.recording {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.3), rgba(255, 100, 100, 0.3));
+            border-color: #ff4444;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .visualizer {
+            width: 100%;
+            height: 60px;
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            margin-top: 1rem;
+        }
+
+        .audio-preview {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 153, 255, 0.1);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-player {
+            flex: 1;
+            height: 40px;
+        }
+
+        .remove-audio {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .remove-audio:hover {
+            background: rgba(255, 0, 0, 0.4);
+            transform: scale(1.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .thank-you-message {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .thank-you-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .thank-you-content p {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .new-message-btn {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.3));
+            border: 2px solid #00ff88;
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .new-message-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.4), rgba(0, 255, 136, 0.5));
+            transform: translateY(-2px);
+        }
+
+        .status-message {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .status-message.success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #00ff88;
+        }
+
+        .status-message.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff4444;
+        }
+
+        /* Loading animation */
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .listen-form {
+                padding: 1.5rem;
+            }
+
+            .contact-row {
+                grid-template-columns: 1fr;
+            }
+
+            .voice-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .voice-btn, .upload-btn {
+                justify-content: center;
+            }
+
+            .listen-section {
+                padding: 2rem 1rem;
+            }
+
+            .listen-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="listen-section">
+            <div class="listen-content">
+                <h2 class="listen-title">Nous vous écoutons</h2>
+                <p class="listen-subtitle">Partagez vos préoccupations, suggestions ou questions avec nous</p>
+
+                <div id="listenFormContainer">
+                    <div class="listen-form">
+                        <div class="contact-row">
+                            <div class="input-group">
+                                <label class="input-label" for="userName">Nom (optionnel)</label>
+                                <input type="text" id="userName" class="text-input" placeholder="Votre nom">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label" for="userEmail">Email (optionnel)</label>
+                                <input type="email" id="userEmail" class="text-input" placeholder="votre@email.com">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="messageText">Message écrit (optionnel)</label>
+                            <textarea id="messageText" class="message-textarea" rows="4" placeholder="Écrivez votre message ici..."></textarea>
+                        </div>
+
+                        <!-- Voice Section -->
+                        <div class="voice-section">
+                            <label class="input-label">Message vocal (optionnel)</label>
+
+                            <div class="voice-controls">
+                                <button type="button" id="recordBtn" class="voice-btn">
+                                    🎙️ <span id="recordBtnText">Enregistrer</span>
+                                </button>
+
+                                <label for="voiceInput" class="upload-btn">
+                                    ⤴️ Importer Audio
+                                </label>
+                                <input type="file" id="voiceInput" accept="audio/*" style="display:none;">
+
+                                <div id="recordTimer" style="display:none; color:#00ffff; font-weight:bold;">00:00</div>
+                            </div>
+
+                            <canvas id="visualizer" class="visualizer" style="display:none;"></canvas>
+
+                            <div id="audioPreview" class="audio-preview" style="display:none;">
+                                <audio id="audioPlayer" controls class="audio-player"></audio>
+                                <button type="button" id="removeAudio" class="remove-audio" title="Supprimer l'audio">×</button>
+                            </div>
+                        </div>
+
+                        <button type="button" id="submitBtn" class="submit-btn">
+                            <span id="submitText">Envoyer</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thank you message -->
+                <div id="thankYouMessage" class="thank-you-message" style="display:none;">
+                    <div class="thank-you-content">
+                        <h3>Merci !</h3>
+                        <p>Votre message a été envoyé avec succès. Nous vous répondrons bientôt.</p>
+                        <button type="button" id="newMessageBtn" class="new-message-btn">Nouveau message</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        class VoiceMessageHandler {
+            constructor() {
+                this.mediaRecorder = null;
+                this.audioChunks = [];
+                this.recordedBlob = null;
+                this.uploadedFile = null;
+                this.isRecording = false;
+                this.recordingTime = 0;
+                this.recordingTimer = null;
+                this.audioContext = null;
+                this.analyser = null;
+                this.dataArray = null;
+                this.visualizerCanvas = document.getElementById('visualizer');
+                this.visualizerContext = this.visualizerCanvas?.getContext('2d');
+                this.maxRecordingSeconds = 300; // 5 minutes max
+
+                this.init();
+            }
+
+            init() {
+                this.cacheElements();
+                this.bindEvents();
+                this.resizeVisualizer();
+                window.addEventListener('resize', () => this.resizeVisualizer());
+            }
+
+            cacheElements() {
+                this.recordBtn = document.getElementById('recordBtn');
+                this.recordBtnText = document.getElementById('recordBtnText');
+                this.recordTimer = document.getElementById('recordTimer');
+                this.voiceInput = document.getElementById('voiceInput');
+                this.audioPreview = document.getElementById('audioPreview');
+                this.audioPlayer = document.getElementById('audioPlayer');
+                this.removeAudioBtn = document.getElementById('removeAudio');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.submitText = document.getElementById('submitText');
+                this.formContainer = document.getElementById('listenFormContainer');
+                this.thankYouMessage = document.getElementById('thankYouMessage');
+                this.newMessageBtn = document.getElementById('newMessageBtn');
+            }
+
+            bindEvents() {
+                if (this.recordBtn) this.recordBtn.addEventListener('click', () => this.toggleRecording());
+                if (this.voiceInput) this.voiceInput.addEventListener('change', e => this.handleFileUpload(e));
+                if (this.removeAudioBtn) this.removeAudioBtn.addEventListener('click', () => this.removeAudio());
+                if (this.submitBtn) this.submitBtn.addEventListener('click', () => this.handleSubmit());
+                if (this.newMessageBtn) this.newMessageBtn.addEventListener('click', () => this.resetForm());
+            }
+
+            resizeVisualizer() {
+                if (!this.visualizerCanvas) return;
+                this.visualizerCanvas.width = this.visualizerCanvas.offsetWidth || 600;
+                this.visualizerCanvas.height = 60;
+            }
+
+            async toggleRecording() {
+                if (!this.isRecording) await this.startRecording();
+                else this.stopRecording();
+            }
+
+            async startRecording() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioContext.createAnalyser();
+                    const source = this.audioContext.createMediaStreamSource(stream);
+                    source.connect(this.analyser);
+                    this.analyser.fftSize = 256;
+                    this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+
+                    this.mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+                    this.audioChunks = [];
+                    this.recordingTime = 0;
+
+                    this.mediaRecorder.ondataavailable = (e) => this.audioChunks.push(e.data);
+                    this.mediaRecorder.onstop = () => {
+                        this.recordedBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+                        this.showAudioPreview(this.recordedBlob);
+                        stream.getTracks().forEach(t => t.stop());
+                        if (this.audioContext) this.audioContext.close();
+                    };
+
+                    this.mediaRecorder.start();
+                    this.isRecording = true;
+                    this.recordBtn.classList.add('recording');
+                    this.recordBtnText.textContent = 'Arrêter';
+                    this.recordTimer.style.display = 'inline-block';
+                    if (this.visualizerCanvas) this.visualizerCanvas.style.display = 'block';
+                    this.startTimer();
+                    this.startVisualizer();
+
+                    this.autoStopTimeout = setTimeout(() => this.stopRecording(), this.maxRecordingSeconds * 1000);
+
+                } catch (err) {
+                    console.error('Recording error:', err);
+                    this.showStatus("Erreur : accès au micro refusé ou indisponible", 'error');
+                }
+            }
+
+            stopRecording() {
+                if (!this.mediaRecorder || !this.isRecording) return;
+                this.mediaRecorder.stop();
+                this.isRecording = false;
+                this.recordBtn.classList.remove('recording');
+                this.recordBtnText.textContent = 'Enregistrer';
+                this.stopTimer();
+                this.stopVisualizer();
+                clearTimeout(this.autoStopTimeout);
+            }
+
+            startTimer() {
+                this.recordTimer.textContent = '00:00';
+                let secs = 0;
+                this.recordingTimer = setInterval(() => {
+                    secs++;
+                    const m = String(Math.floor(secs/60)).padStart(2,'0');
+                    const s = String(secs%60).padStart(2,'0');
+                    this.recordTimer.textContent = `${m}:${s}`;
+                }, 1000);
+            }
+
+            stopTimer() {
+                if (this.recordingTimer) clearInterval(this.recordingTimer);
+                this.recordTimer.style.display = 'none';
+            }
+
+            startVisualizer() {
+                const draw = () => {
+                    if (!this.isRecording) return;
+                    this.animationFrame = requestAnimationFrame(draw);
+                    this.analyser.getByteFrequencyData(this.dataArray);
+                    if (!this.visualizerContext) return;
+                    this.visualizerContext.clearRect(0,0,this.visualizerCanvas.width, this.visualizerCanvas.height);
+                    const barWidth = (this.visualizerCanvas.width / this.dataArray.length) * 2.5;
+                    let x = 0;
+                    for (let i=0;i<this.dataArray.length;i++){
+                        const barHeight = (this.dataArray[i]/255) * this.visualizerCanvas.height;
+                        this.visualizerContext.fillStyle = '#00ffff';
+                        this.visualizerContext.fillRect(x, this.visualizerCanvas.height - barHeight, barWidth, barHeight);
+                        x += barWidth + 1;
+                    }
+                };
+                draw();
+            }
+
+            stopVisualizer() {
+                if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
+                if (this.visualizerCanvas) this.visualizerCanvas.style.display = 'none';
+            }
+
+            handleFileUpload(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                if (!file.type.startsWith('audio')) {
+                    this.showStatus('Veuillez sélectionner un fichier audio', 'error');
+                    this.voiceInput.value = '';
+                    return;
+                }
+                
+                // Check file size (max 25MB for Resend)
+                const maxSize = 25 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    this.showStatus('Fichier trop volumineux. Limite: 25MB', 'error');
+                    this.voiceInput.value = '';
+                    return;
+                }
+                
+                this.uploadedFile = file;
+                this.recordedBlob = null;
+                this.showAudioPreview(file);
+            }
+
+            showAudioPreview(source) {
+                const url = URL.createObjectURL(source);
+                this.audioPlayer.src = url;
+                this.audioPreview.style.display = 'flex';
+            }
+
+            removeAudio() {
+                this.recordedBlob = null;
+                this.uploadedFile = null;
+                this.voiceInput.value = '';
+                this.audioPlayer.src = '';
+                this.audioPreview.style.display = 'none';
+            }
+
+            async blobToBase64(blob) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const base64Data = reader.result.split(',')[1];
+                        resolve(base64Data);
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+            }
+
+            async handleSubmit() {
+                const name = document.getElementById('userName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
+                const message = document.getElementById('messageText').value.trim();
+
+                const hasText = !!(name || email || message);
+                const hasAudio = !!(this.recordedBlob || this.uploadedFile);
+
+                if (!hasText && !hasAudio) {
+                    this.showStatus('Veuillez fournir au moins un nom, e-mail, message écrit ou audio', 'error');
+                    return;
+                }
+
+                try {
+                    this.setSubmitLoading(true);
+
+                    // Prepare the data
+                    const formData = new FormData();
+                    formData.append('name', name);
+                    formData.append('email', email);
+                    formData.append('message', message);
+                    formData.append('timestamp', new Date().toISOString());
+
+                    // Add audio file if present
+                    if (this.recordedBlob) {
+                        formData.append('audio', this.recordedBlob, `voice-${Date.now()}.webm`);
+                    } else if (this.uploadedFile) {
+                        formData.append('audio', this.uploadedFile);
+                    }
+
+                    // Send to your backend endpoint
+                    const response = await fetch('/api/send-message', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        this.showThankYou();
+                    } else {
+                        throw new Error(result.error || 'Erreur inconnue');
+                    }
+
+                } catch (error) {
+                    console.error('Submit error:', error);
+                    this.showStatus('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+                } finally {
+                    this.setSubmitLoading(false);
+                }
+            }
+
+            setSubmitLoading(loading) {
+                if (loading) {
+                    this.submitBtn.disabled = true;
+                    this.submitText.textContent = 'Envoi en cours...';
+                    this.submitBtn.style.opacity = '0.7';
+                } else {
+                    this.submitBtn.disabled = false;
+                    this.submitText.textContent = 'Envoyer';
+                    this.submitBtn.style.opacity = '1';
+                }
+            }
+
+            showThankYou() {
+                this.formContainer.style.display = 'none';
+                this.thankYouMessage.style.display = 'block';
+            }
+
+            resetForm() {
+                document.getElementById('userName').value = '';
+                document.getElementById('userEmail').value = '';
+                document.getElementById('messageText').value = '';
+                this.removeAudio();
+                this.formContainer.style.display = 'block';
+                this.thankYouMessage.style.display = 'none';
+                const existingStatus = document.querySelector('.status-message');
+                if (existingStatus) existingStatus.remove();
+            }
+
+            showStatus(message, type = 'info') {
+                const existing = document.querySelector('.status-message');
+                if (existing) existing.remove();
+                
+                const div = document.createElement('div');
+                div.className = `status-message ${type}`;
+                div.textContent = message;
+                
+                this.formContainer.parentNode.insertBefore(div, this.formContainer.nextSibling);
+                
+                if (type !== 'error') {
+                    setTimeout(() => div.remove(), 5000);
+                }
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.voiceMessageHandler = new VoiceMessageHandler();
+        });
+    </script>
+</body>
+</html>

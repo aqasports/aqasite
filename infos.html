@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AQA - L'Académie du Sport et de la Transformation</title>
+  <meta content="AQA : Académie sportive unique - Transformation du zéro au pro avec coachs d'élite, science et technologie" name="description"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style>
+
+    * {margin:0;padding:0;box-sizing:border-box;}
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      background:#000;color:#fff;line-height:1.6;
+      overflow-x:hidden;min-height:100vh;position:relative;
+    }
+
+    /* Enhanced Background with Animated Particles */
+    .bg-logo {
+      position:fixed;top:50%;left:50%;
+      transform:translate(-50%,-50%);
+      width:80vw;height:80vh;
+      background-image:url('https://i.imgur.com/3dcksCn.png');
+      background-size:contain;background-repeat:no-repeat;background-position:center;
+      opacity:0.06;z-index:-3;pointer-events:none;
+      animation:float 8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {transform:translate(-50%,-50%) scale(1);}
+      50% {transform:translate(-50%,-50%) scale(1.08);}
+    }
+
+    /* Animated Particle Background */
+    .particles {
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      z-index:-2;pointer-events:none;
+      background:radial-gradient(circle at 20% 30%, rgba(0,255,255,0.08) 0%, transparent 50%),
+                 radial-gradient(circle at 80% 70%, rgba(0,153,255,0.08) 0%, transparent 50%),
+                 radial-gradient(circle at 50% 50%, rgba(0,255,255,0.04) 0%, transparent 70%);
+      animation:particleMove 25s linear infinite;
+    }
+
+    @keyframes particleMove {
+      0% {background-position:0% 0%, 100% 100%, 50% 50%;}
+      50% {background-position:100% 50%, 0% 50%, 0% 100%;}
+      100% {background-position:0% 0%, 100% 100%, 50% 50%;}
+    }
+
+    /* Hero Video Styling */
+    .video {
+      margin: 1rem auto;
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+    .video video {width: 100%;height: 100%;object-fit: cover;display: block;}
+
+    body::before {
+      content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+      background:linear-gradient(45deg,#00ffff,#0099ff,#0066ff,#3333ff,#6600ff,#9900ff,#cc00ff,#ff0099,#ff0066,#ff3333) border-box;
+      -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      z-index:-1;animation:neonGlow 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonGlow{
+      0%,100%{filter:drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff);}
+      50%{filter:drop-shadow(0 0 25px #00ffff) drop-shadow(0 0 45px #0099ff);}
+    }
+
+    /* Enhanced Typography */
+    h1,h2,h3{
+      background:linear-gradient(135deg,#00ffff,#0099ff,#fff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;text-shadow:0 0 20px rgba(0,255,255,0.3);
+      position:relative;
+    }
+    
+    h1{font-size:clamp(2.2rem,7vw,4rem);margin-bottom:1rem;animation:titleGlow 4s ease-in-out infinite alternate;}
+    h2{font-size:clamp(1.6rem,5vw,2.8rem);margin:2rem 0 1.5rem;position:relative;}
+    h3{font-size:clamp(1.2rem,4vw,1.8rem);margin:1rem 0 0.5rem;}
+    h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:60px;height:3px;background:linear-gradient(90deg,#00ffff,#0099ff);border-radius:2px;}
+
+    @keyframes titleGlow {
+      0%,100%{text-shadow:0 0 20px rgba(0,255,255,0.3), 0 0 40px rgba(0,153,255,0.2);}
+      50%{text-shadow:0 0 30px rgba(0,255,255,0.6), 0 0 60px rgba(0,153,255,0.4);}
+    }
+
+    p{text-align:center;max-width:900px;margin:0 auto 1.5rem;font-size:clamp(1rem,3.5vw,1.15rem);opacity:0.92;line-height:1.7;}
+    
+    /* Container with reduced spacing */
+    .container{padding:2rem 1rem 1rem;}
+
+    /* Floating Button */
+    .floating-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #0099ff, #00ffff);
+        color: #000;
+        padding: 0.8rem 1.2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+        z-index: 2000;
+        transition: all 0.3s ease;
+        border: 2px solid #00ffff;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .floating-btn:hover {
+        background: linear-gradient(135deg, #00ffff, #0099ff);
+        transform: translateY(-3px);
+        box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+    }
+    
+    /* Floating Section Navigation - Enhanced with better tooltips */
+    .floating-nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .floating-nav:hover {
+      opacity: 1;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(0, 255, 255, 0.3);
+      border: 2px solid rgba(0, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-dot:hover {
+      background: rgba(0, 255, 255, 0.7);
+      transform: scale(1.4);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    }
+
+    .nav-dot.active {
+      background: #00ffff;
+      border-color: #00ffff;
+      transform: scale(1.3);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.9);
+    }
+
+    .nav-dot::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 20, 40, 0.95);
+      color: #00ffff;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-dot:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-50%) translateX(-5px);
+    }
+
+    /* Hero Section with Enhanced Visuals */
+    .hero-section {
+      position:relative;
+      overflow:hidden;
+      padding:3rem 1rem 4rem;
+      background:radial-gradient(ellipse at center, rgba(0,255,255,0.05) 0%, transparent 70%);
+    }
+
+    .hero-content {
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-subtitle {
+      font-size:clamp(1rem,4vw,1.3rem);
+      color:#00ffff;
+      margin-bottom:1.5rem;
+      font-weight:500;
+      opacity:0.9;
+    }
+
+    .hero-wave {
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:120px;
+      z-index:-1;
+    }
+
+    /* Section Image Containers */
+    .section-image {
+      width: 100%;
+      max-width: 600px;
+      height: 250px;
+      margin: 1.5rem auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+      border: 2px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .section-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .section-image:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Vision Section with Background Image */
+    .vision-section {
+      background:linear-gradient(135deg, rgba(0,153,255,0.1), rgba(0,255,255,0.05));
+      border-radius:25px;
+      padding:3rem 2rem;
+      margin:2rem 0;
+      border:2px solid rgba(0,255,255,0.2);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .vision-section::before {
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      width:50%;
+      height:100%;
+      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M500,50 Q800,300 500,550 Q200,800 500,950 Q800,700 500,450 Q200,200 500,50 Z" fill="none" stroke="rgba(0,255,255,0.1)" stroke-width="2"/></svg>') no-repeat center;
+      background-size:contain;
+      opacity:0.3;
+    }
+
+    /* Enhanced Grid Layout for Desktop */
+    .disciplines-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+    
+    @media (min-width: 1200px) {
+      .disciplines-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .discipline-card {
+      background:rgba(0,20,40,0.6);
+      border:2px solid rgba(0,255,255,0.15);
+      border-radius:20px;
+      padding:2rem 1.5rem;
+      text-align:center;
+      transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter:blur(15px);
+      height: 100%;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .discipline-card::before {
+      content:'';
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background:radial-gradient(circle,rgba(0,255,255,0.08) 0%,transparent 70%);
+      opacity:0;
+      transition:opacity 0.4s ease;
+      z-index:0;
+    }
+
+    /* New hover image system */
+    .discipline-card::after {
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-image: url('https://via.placeholder.com/300x200/0099ff/ffffff?text=Image+Placeholder');
+      background-size:cover;
+      background-position:center;
+      opacity:0;
+      transition:all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index:1;
+      transform: translateY(30px);
+      border-radius: 20px;
+    }
+
+    .discipline-card:hover::before {opacity:1;}
+    .discipline-card:hover::after {
+      opacity:0.15;
+      transform: translateY(0px);
+    }
+    
+    .discipline-card:hover {
+      transform:translateY(-10px) scale(1.02);
+      box-shadow:0 20px 40px rgba(0,255,255,0.25);
+      border-color:#00ffff;
+    }
+
+    .discipline-content {
+      position:relative;
+      z-index:2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .discipline-title {
+      color:#00ffff;
+      margin-bottom:1rem;
+      font-weight:700;
+      font-size:1.1rem;
+    }
+
+    .discipline-description {
+      color:rgba(255,255,255,0.85);
+      line-height:1.6;
+      text-align:left;
+      font-size:0.95rem;
+      flex:1;
+    }
+
+    /* Method Section with Scientific Visual */
+    .method-section {
+      background:linear-gradient(45deg, rgba(0,153,255,0.08), rgba(0,255,255,0.04));
+      border-radius:25px;
+      padding:3rem 2rem;
+      margin:2rem 0;
+      border:2px solid rgba(0,255,255,0.2);
+      position:relative;
+    }
+
+    .method-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+
+    .method-item {
+      background:linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+      padding:1.5rem;
+      border-radius:15px;
+      border:1px solid rgba(0,255,255,0.2);
+      transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: fit-content;
+      backdrop-filter: blur(10px);
+    }
+
+    .method-item:hover {
+      background:rgba(0,60,120,0.4);
+      transform:translateY(-5px);
+      box-shadow:0 10px 30px rgba(0,255,255,0.2);
+    }
+
+    .method-icon {
+      color:#00ffff;
+      font-size:1.5rem;
+      margin-bottom:1rem;
+    }
+
+    /* Team Section with Profile Cards */
+    .team-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+
+    .team-card {
+      background:rgba(0,30,60,0.5);
+      border:2px solid rgba(0,255,255,0.2);
+      border-radius:18px;
+      padding:1.5rem;
+      text-align:center;
+      transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position:relative;
+      overflow:hidden;
+      height: fit-content;
+      backdrop-filter: blur(10px);
+    }
+
+    .team-card::before {
+      content:'';
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg,transparent,rgba(0,255,255,0.1),transparent);
+      transition:left 0.6s ease;
+    }
+
+    .team-card:hover::before {left:100%;}
+    .team-card:hover {
+      transform:scale(1.03);
+      border-color:#00ffff;
+      box-shadow:0 15px 40px rgba(0,255,255,0.3);
+    }
+
+    .coach-avatar {
+      width:60px;
+      height:60px;
+      background:linear-gradient(135deg,#0099ff,#00ffff);
+      border-radius:50%;
+      margin:0 auto 1rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.2rem;
+      font-weight:bold;
+      color:#000;
+    }
+
+    .coach-name {
+      color:#00ffff;
+      font-size:1.1rem;
+      font-weight:700;
+      margin-bottom:0.3rem;
+    }
+
+    .coach-title {
+      color:rgba(255,255,255,0.8);
+      font-size:0.85rem;
+      margin-bottom:0.8rem;
+    }
+
+    .coach-description {
+      color:rgba(255,255,255,0.7);
+      font-size:0.9rem;
+      line-height:1.5;
+    }
+
+    /* Advantages Section */
+    .advantages-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+
+    .advantage-card {
+      background:rgba(0,153,255,0.05);
+      border:2px solid rgba(0,255,255,0.2);
+      border-radius:18px;
+      padding:1.5rem;
+      text-align:center;
+      transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter:blur(10px);
+      height: fit-content;
+    }
+
+    .advantage-card::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background:radial-gradient(circle,rgba(0,255,255,0.1) 0%,transparent 70%);
+      opacity:0;
+      transition:opacity 0.4s ease;
+      z-index:0;
+    }
+
+    .advantage-card:hover::before{opacity:1;}
+    .advantage-card:hover{
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 20px 40px rgba(0,255,255,0.3);
+      border-color:#00ffff;
+    }
+
+    .advantage-content{position:relative;z-index:1;}
+
+    /* Enhanced CTA Section */
+    .cta-section{
+      background:linear-gradient(135deg,rgba(0,153,255,0.15),rgba(0,255,255,0.08));
+      border-radius:25px;
+      padding:3rem 2rem;
+      margin:2rem 0;
+      border:2px solid rgba(0,255,255,0.3);
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+      backdrop-filter: blur(10px);
+    }
+
+    .cta-section::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      left:50%;
+      width: 100%;
+      height:100%;
+      background:radial-gradient(circle,rgba(0,255,255,0.1) 0%,transparent 70%);
+      animation:pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100%{transform:scale(1);opacity:0.3;}
+      50%{transform:scale(1.1);opacity:0.6;}
+    }
+
+    .cta-button{
+      display:inline-block;
+      margin-top:1.5rem;
+      margin-bottom: 15px;
+      background:linear-gradient(135deg,#0099ff,#00ffff);
+      color:#000;
+      padding:1.2rem 2.5rem;
+      border-radius:50px;
+      font-weight:700;
+      font-size:1rem;
+      text-decoration:none;
+      box-shadow:0 0 30px rgba(0,255,255,0.6);
+      transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position:relative;
+      z-index:1;
+    }
+
+    .cta-button:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 50px rgba(0,255,255,0.8);
+      background:linear-gradient(135deg,#00ffff,#0099ff);
+    }
+
+    /* Enhanced Footer */
+    footer{
+      background:rgba(0,0,0,0.98);
+      border-top:2px solid #0099ff;
+      padding:2rem 1rem 1.5rem;
+      margin-top:1rem;
+      position:relative;
+    }
+
+    footer::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:1px;
+      background:linear-gradient(90deg,transparent,#00ffff,transparent);
+    }
+
+    .footer-content{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:2rem;
+      text-align:center;
+    }
+
+    .footer-section{
+      transition:transform 0.3s ease;
+    }
+
+    .footer-section:hover{
+      transform:translateY(-3px);
+    }
+
+    .footer-section h4{
+      color:#00ffff;
+      margin-bottom:1rem;
+      font-size:1.1rem;
+      position:relative;
+    }
+
+    .footer-section h4::after{
+      content:'';
+      position:absolute;
+      bottom:-5px;
+      left:50%;
+      transform:translateX(-50%);
+      width:30px;
+      height:2px;
+      background:#0099ff;
+      border-radius:2px;
+    }
+
+    .social-icons{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      margin-top:1rem;
+    }
+
+    .social-icon{
+      width:35px;
+      height:35px;
+      background:rgba(0,153,255,0.1);
+      border:1px solid rgba(0,255,255,0.3);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration:none;
+      color:#00ffff;
+    }
+
+    .social-icon:hover{
+      background:rgba(0,255,255,0.2);
+      transform:scale(1.1);
+      box-shadow:0 0 15px rgba(0,255,255,0.5);
+    }
+
+    /* Enhanced Mobile Responsiveness */
+    @media (max-width:768px){
+      .container{padding:1.5rem 1rem 0.5rem;}
+      .hero-section{padding:2rem 1rem 3rem;}
+      .disciplines-grid{grid-template-columns:1fr;gap:1rem;}
+      .team-grid{grid-template-columns:1fr;gap:1rem;}
+      .advantages-grid{grid-template-columns:1fr;gap:1rem;}
+      .floating-btn{bottom:10px;right:10px;font-size:0.8rem;padding:0.7rem 1rem;}
+      footer{padding:1.5rem 1rem;}
+      .cta-section{padding:2rem 1rem;}
+      .hero-wave{height:60px;}
+      .vision-section{padding:2rem 1rem;}
+      .method-section{padding:2rem 1rem;}
+      .section-image {height: 180px;}
+      .floating-nav {right: 10px;gap: 8px;}
+      h2{margin:1.5rem 0 1rem;}
+      .discipline-card, .team-card, .advantage-card, .method-item {
+        min-height: auto;
+      }
+    }
+
+    /* Enhanced smooth scrolling with momentum */
+    @supports (scroll-behavior: smooth) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+
+    /* iOS momentum scrolling */
+    body {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    /* Optimize animations for better performance */
+    @media (prefers-reduced-motion: no-preference) {
+      .discipline-card, .team-card, .advantage-card {
+        will-change: transform;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+     .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+html {
+  background: #000;  /* solid fallback */
+}
+body {
+  background: transparent !important;
+  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+}
+  </style>
+
+<!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+<iframe src="scroll.html" class="bg-frame"></iframe> 
+  <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+  
+  <div class="bg-logo"></div>
+  <div class="particles"></div>
+
+  <!-- Floating Section Navigation -->
+  <div class="floating-nav">
+    <div class="nav-dot" data-tooltip="Accueil" onclick="scrollToSection('hero')"></div>
+    <div class="nav-dot" data-tooltip="Notre Vision" onclick="scrollToSection('vision')"></div>
+    <div class="nav-dot" data-tooltip="Disciplines" onclick="scrollToSection('disciplines')"></div>
+    <div class="nav-dot" data-tooltip="Notre Méthode" onclick="scrollToSection('method')"></div>
+    <div class="nav-dot" data-tooltip="Équipe" onclick="scrollToSection('team')"></div>
+    <div class="nav-dot" data-tooltip="Nos Avantages" onclick="scrollToSection('advantages')"></div>
+    <div class="nav-dot" data-tooltip="Nous Rejoindre" onclick="scrollToSection('cta')"></div>
+    <div class="nav-dot" data-tooltip="Contact" onclick="scrollToSection('contact')"></div>
+  </div>
+
+  <!-- Enhanced Hero Section -->
+  <section id="hero" class="hero-section parallax-section">
+    <div class="container hero-content">
+      <h1>AQA : Du Zéro au Pro</h1>
+
+     <div class="video">
+<video autoplay muted loop playsinline class="hero-video">
+<source src="https://files.catbox.moe/hvtmq3.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</div>
+      
+      <p>Dans un monde où la santé, la performance et le bien-être prennent une place de plus en plus importante, AQA s'impose comme une académie sportive unique en son genre. Plus qu'un centre d'entraînement, AQA est une véritable école de transformation qui accompagne chaque individu, du novice absolu à l'athlète confirmé.</p>
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section id="vision" class="container parallax-section">
+    <div class="vision-section">
+      <h2>Notre Vision</h2>
+      
+      <div class="section-image">
+        <img src="https://i.ibb.co/DPr2FhgQ/GET-TRANSFORMED.png" 
+             alt="Entraîneur professionnel avec nageurs" />
+      </div>
+      
+      <p>AQA n'est pas simplement un espace d'entraînement. C'est une vision : permettre à chacun de découvrir son plein potentiel. Notre objectif est clair – transformer des débutants, parfois freinés par la peur de l'eau ou le manque d'expérience, en sportifs accomplis capables de performer dans plusieurs disciplines.</p>
+      <p>Nous croyons que le sport est une passerelle vers la confiance en soi, la résilience et l'épanouissement. Chez AQA, il ne s'agit pas seulement de nager, de monter à cheval ou de pratiquer une activité : il s'agit de bâtir une identité sportive et personnelle solide.</p>
+    </div>
+  </section>
+
+  <!-- Disciplines Section -->
+  <section id="disciplines" class="container parallax-section">
+    <h2>Les Disciplines AQA</h2>
+    
+    <div class="section-image">
+      <img src="https://i.ibb.co/q3Tb0Yh9/Untitled-design-47.png" 
+           alt="Multiple sports et activités aquatiques" />
+    </div>
+    
+    <p>AQA regroupe plusieurs domaines qui se complètent, permettant une approche holistique du sport et du bien-être.</p>
+    
+    <div class="disciplines-grid">
+      <div class="discipline-card">
+        <div class="discipline-content">
+          <h3 class="discipline-title">Natation pour Débutant Adulte (Zero to Hero)</h3>
+          <p class="discipline-description">Programme intensif et progressif pour adultes débutants afin de vaincre l'aquaphobie, apprendre à nager et atteindre un niveau avancé avec confiance.</p>
+        </div>
+      </div>
+
+      <div class="discipline-card">
+        <div class="discipline-content">
+          <h3 class="discipline-title">AQA Kids</h3>
+          <p class="discipline-description">Chez AQA, nous proposons un apprentissage de la natation pour enfants en groupes de 10, avec un suivi attentif et une orientation vers l'entraînement compétitif et de haut niveau. Nous réalisons également une inspection physique des enfants afin de détecter précocement d'éventuels troubles comme la scoliose.</p>
+        </div>
+      </div>
+
+      <div class="discipline-card">
+        <div class="discipline-content">
+          <h3 class="discipline-title">AQA Event</h3>
+          <p class="discipline-description">AQA Event réunit les activités spéciales d'AQA : nage en mer, dépassement de la peur, traversées, kayak, découverte des profondeurs, équitation, cyclisme, camping et randonnée. Ces événements offrent un cadre structuré et convivial, favorisant le progrès et l'esprit de groupe. Un groupe WhatsApp est disponible pour suivre le calendrier et rester informé en temps réel.</p>
+        </div>
+      </div>
+
+      <div class="discipline-card">
+        <div class="discipline-content">
+          <h3 class="discipline-title">AQA Apnea</h3>
+          <p class="discipline-description">Programme dédié à l'entraînement en apnée avec pour objectif d'atteindre 4 minutes d'apnée statique. Idéal pour les chasseurs sous-marins, plongeurs scaphandre et athlètes souhaitant améliorer endurance et contrôle.</p>
+        </div>
+      </div>
+
+      <div class="discipline-card">
+        <div class="discipline-content">
+          <h3 class="discipline-title">AQA Wellness</h3>
+          <p class="discipline-description">Programmes axés sur la santé et le bien-être : renforcement musculaire, correction posturale et relaxation pour un corps équilibré et sans douleur.</p>
+        </div>
+      </div>
+
+      <div class="discipline-card">
+        <div class="discipline-content">
+          <h3 class="discipline-title">Other Sports</h3>
+          <p class="discipline-description">Le concept AQA s'élargit pour intégrer de nouvelles disciplines sportives, offrant toujours plus d'opportunités de découvrir et pratiquer différents sports.</p>
+        </div>
+      </div>
+
+      <div class="discipline-card">
+        <div class="discipline-content">
+          <h3 class="discipline-title">AQA Store</h3>
+          <p class="discipline-description">Une boutique dédiée à l'équipement sportif et aux produits AQA, afin d'accompagner les sportifs dans leur progression et leur quotidien.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Section -->
+  <section id="method" class="container parallax-section">
+    <div class="method-section">
+      <h2>Une Méthode Unique</h2>
+      
+      <div class="section-image">
+        <img src="https://i.ibb.co/k6xr5NVN/app-1.jpg" alt="Méthode" />
+      </div>
+
+      <p>Ce qui distingue AQA, c'est son approche scientifique et structurée. La promesse AQA est simple : un accompagnement de haute qualité, traçable et évolutif, soutenu par la technologie et les outils numériques d'AQA.</p>
+      
+      <div class="method-grid">
+        <div class="method-item">
+          <div class="method-icon"></div>
+          <h3>Suivi Technique</h3>
+          <p>Barème d'évaluation unifié, vidéos d'analyse détaillées et rapports réguliers pour mesurer précisément vos progrès et ajuster l'entraînement en conséquence. Chaque nouvel adhérent bénéficie d'une vidéo initiale pour suivre l'évolution.</p>
+        </div>
+        
+        <div class="method-item">
+          <div class="method-icon"></div>
+          <h3>Suivi Physique</h3>
+          <p>Inspection des troubles et obstacles physiques qui ralentissent ou bloquent l'évolution. Adaptation de l'entraînement pour corriger ces points et permettre une progression optimale.</p>
+        </div>
+        
+        <div class="method-item">
+          <div class="method-icon"></div>
+          <h3>Groupes Restreints</h3>
+          <p>Une pédagogie personnalisée avec une attention particulière portée à chaque sportif, favorisant l'apprentissage et la motivation collective.</p>
+        </div>
+
+        <div class="method-item">
+          <div class="method-icon"></div>
+          <h3>AQA app</h3>
+          <p>Suivi en temps réel de votre progression, accès aux rapports personnalisés, planification des séances et traçabilité de l'assiduité directement depuis votre smartphone.</p>
+        </div>
+         
+        <div class="method-item">
+          <div class="method-icon"></div>
+          <h3>Video Analysis</h3>
+          <p>Montage détaillé montrant le nageur au ralenti, avec schémas des erreurs et narration explicative du coach, pour corriger et améliorer chaque mouvement.</p>
+        </div>
+        
+        <div class="method-item">
+          <div class="method-icon"></div>
+          <h3>Accompagnement Évolutif</h3>
+          <p>Un parcours adaptatif qui évolue avec vous, du débutant complet jusqu'au niveau professionnel, avec des étapes clairement définies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="container parallax-section">
+    <h2>L'Équipe AQA</h2>
+    
+    <div class="section-image">
+      <img src="https://i.ibb.co/x8Szx43Q/IMG20241119220338.jpg" 
+           alt="Équipe de coachs professionnels AQA" />
+    </div>
+    
+    <p>Derrière AQA se trouve une équipe soudée et passionnée, composée de coachs d'élite et d'anciens champions qui mettent leur expertise au service de votre transformation.</p>
+    
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="coach-avatar">A</div>
+        <div class="coach-name">Abdelghani</div>
+        <div class="coach-title">Head Coach</div>
+        <p class="coach-description">Plus d'informations seront disponibles prochainement</p>
+      </div>
+      
+      <div class="team-card">
+        <div class="coach-avatar">Y</div>
+        <div class="coach-name">Youcef</div>
+        <div class="coach-title">Coach expérimenté</div>
+        <p class="coach-description">Plus d'informations seront disponibles prochainement</p>
+      </div>
+      
+      <div class="team-card">
+        <div class="coach-avatar">R</div>
+        <div class="coach-name">Riad</div>
+        <div class="coach-title">Expert Aquaphobie</div>
+        <p class="coach-description">Plus d'informations seront disponibles prochainement</p>
+      </div>
+      
+      <div class="team-card">
+        <div class="coach-avatar">S</div>
+        <div class="coach-name">Sabrina</div>
+        <div class="coach-title">Coach professionnelle</div>
+        <p class="coach-description">Plus d'informations seront disponibles prochainement</p>
+      </div>
+      
+      <div class="team-card">
+        <div class="coach-avatar">N</div>
+        <div class="coach-name">Nouga Mohamed</div>
+        <div class="coach-title">Maître Apnéiste</div>
+        <p class="coach-description">Plus d'informations seront disponibles prochainement</p>
+      </div>
+
+      <div class="team-card">
+        <div class="coach-avatar">Y</div>
+        <div class="coach-name">Younes</div>
+        <div class="coach-title">Coach for kids</div>
+        <p class="coach-description">Plus d'informations seront disponibles prochainement</p>
+      </div>
+
+      <div class="team-card">
+        <div class="coach-avatar">A</div>
+        <div class="coach-name">Abdelmounaim</div>
+        <div class="coach-title">Kinésithérapeute</div>
+        <p class="coach-description">Plus d'informations seront disponibles prochainement</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages Section -->
+  <section id="advantages" class="container parallax-section">
+    <h2>Pourquoi Choisir AQA ?</h2>
+    
+    <div class="section-image">
+      <img src="https://i.ibb.co/qYZPp1Mz/app-2.jpg" 
+           alt="Excellence et innovation sportive" />
+    </div>
+    
+    <div class="advantages-grid">
+      <div class="advantage-card">
+        <div class="advantage-content">
+          <h3>Coachs d'Élite</h3>
+          <p>Une expertise internationale et une pédagogie éprouvée par d'anciens champions et des professionnels reconnus dans leur domaine.</p>
+        </div>
+      </div>
+      
+      <div class="advantage-card">
+        <div class="advantage-content">
+          <h3>Suivi Scientifique</h3>
+          <p>Traçabilité complète, analyse vidéo, bilans réguliers et méthodes basées sur les dernières recherches en sciences du sport.</p>
+        </div>
+      </div>
+      
+      <div class="advantage-card">
+        <div class="advantage-content">
+          <h3>Groupes Restreints</h3>
+          <p>Qualité de l'accompagnement garantie avec une attention personnalisée pour chaque participant.</p>
+        </div>
+      </div>
+      
+      <div class="advantage-card">
+        <div class="advantage-content">
+          <h3>Programmes Variés</h3>
+          <p>De la natation à l'équitation, du bien-être à l'apnée, une approche complète du développement sportif et personnel.</p>
+        </div>
+      </div>
+      
+      <div class="advantage-card">
+        <div class="advantage-content">
+          <h3>Transformation Garantie</h3>
+          <p>Chaque sportif est suivi pas à pas dans son parcours vers l'excellence, avec des résultats mesurables et durables.</p>
+        </div>
+      </div>
+      
+      <div class="advantage-card">
+        <div class="advantage-content">
+          <h3>Académie de Vie</h3>
+          <p>Plus qu'un club, une véritable école de vie sportive où se rencontrent discipline, passion et dépassement de soi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced CTA Section -->
+  <section id="cta" class="container cta-section parallax-section">
+    <h2>Prêt à Transformer Votre Vie ?</h2>
+    
+    <img src="https://i.ibb.co/Jwtfs859/CARDS.png"
+         alt="Transformation sportive réussie" />
+    
+    <p>AQA n'est pas un simple club, mais une académie de vie sportive. C'est l'endroit où la discipline rencontre la passion, où la science rencontre l'humain, et où chaque individu trouve l'opportunité de se dépasser.</p>
+    <p>Avec AQA, vous ne vous contentez pas de pratiquer un sport : <strong>vous entrez dans un parcours de transformation du zéro au pro</strong>.</p>
+    <div><a href="inscription.html" class="cta-button">Rejoignez l'Académie AQA</a></div>
+  </section>
+
+  <!-- Enhanced Footer -->
+  <footer id="contact">
+    <a href="inscription.html" class="floating-btn">S'inscrire</a>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p>📞 0540454907</p>
+        <p>✉️ aqa.sports.academy@gmail.com</p>
+        <p>🌐 Disponible 7j/7 pour vos questions</p>
+      </div>
+      <div class="footer-section">
+        <h4>Nos Piscines</h4>
+        <p>🏊‍♂️ Reghaia - Piscine ADM AZAL</p>
+        <p>🏊‍♀️ Cheraga - Bk Sport</p>
+        <p>🌊 Entraînements en mer disponibles</p>
+      </div>
+      <div class="footer-section">
+        <h4>Suivez AQA</h4>
+        <div class="social-icons">
+          <a href="#" class="social-icon" title="Facebook">f</a>
+          <a href="#" class="social-icon" title="Instagram">📷</a>
+          <a href="#" class="social-icon" title="TikTok">🎵</a>
+          <a href="#" class="social-icon" title="WhatsApp">💬</a>
+        </div>
+        <p style="margin-top:1rem; color:rgba(255,255,255,0.7); font-size:0.9rem;">Rejoignez notre communauté !</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="js/navbar.js"></script>
+
+  <script>
+    // Enhanced smooth scrolling with better performance
+    function scrollToSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerHeight = document.getElementById('header')?.offsetHeight || 0;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 10;
+        
+        // Use requestAnimationFrame for smoother scrolling
+        const startPosition = window.pageYOffset;
+        const distance = offsetPosition - startPosition;
+        const duration = Math.min(Math.abs(distance) * 0.5, 800); // Adaptive duration
+        let start = null;
+
+        function animation(currentTime) {
+          if (start === null) start = currentTime;
+          const timeElapsed = currentTime - start;
+          const progress = Math.min(timeElapsed / duration, 1);
+          
+          // Easing function for smooth animation
+          const easeInOutCubic = progress < 0.5 
+            ? 4 * progress * progress * progress 
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+          
+          window.scrollTo(0, startPosition + distance * easeInOutCubic);
+          
+          if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+          }
+        }
+        
+        requestAnimationFrame(animation);
+      }
+    }
+
+    // Optimized active navigation dot update with throttling
+    let ticking = false;
+    
+    function updateActiveNavDot() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const sections = ['hero', 'vision', 'disciplines', 'method', 'team', 'advantages', 'cta', 'contact'];
+          const navDots = document.querySelectorAll('.nav-dot');
+          const headerHeight = document.getElementById('header')?.offsetHeight || 0;
+          
+          let currentSection = '';
+          const scrollPosition = window.pageYOffset;
+          
+          sections.forEach((sectionId) => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              const sectionTop = rect.top + scrollPosition - headerHeight - 50;
+              const sectionBottom = sectionTop + rect.height;
+              
+              if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                currentSection = sectionId;
+              }
+            }
+          });
+          
+          navDots.forEach((dot, index) => {
+            dot.classList.toggle('active', sections[index] === currentSection);
+          });
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    // Enhanced card interactions with performance optimization
+    const cards = document.querySelectorAll('.discipline-card, .team-card, .advantage-card');
+    cards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.05}s`;
+    });
+
+    // Optimized intersection observer for better performance
+    const observerOptions = {
+      threshold: [0.1, 0.5],
+      rootMargin: '0px 0px -30px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          if (entry.intersectionRatio > 0.5) {
+            observer.unobserve(entry.target); // Stop observing once fully visible
+          }
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all containers for smooth animations
+    document.querySelectorAll('.container, .parallax-section').forEach(container => {
+      observer.observe(container);
+    });
+
+    // Throttled scroll event listener
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = setTimeout(updateActiveNavDot, 10);
+    }, { passive: true });
+
+    // Initialize on page load with proper timing
+    window.addEventListener('load', () => {
+      setTimeout(updateActiveNavDot, 100);
+    });
+
+    // Preload critical images for better performance
+    const criticalImages = [
+      'https://i.ibb.co/DPr2FhgQ/GET-TRANSFORMED.png',
+      'https://i.ibb.co/q3Tb0Yh9/Untitled-design-47.png'
+    ];
+    
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // Enhanced touch support for mobile devices
+    if ('ontouchstart' in window) {
+      document.body.classList.add('touch-device');
+    }
+  </script>
+
+</body>
+</html>

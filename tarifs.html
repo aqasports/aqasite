@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Tarifs 2025</title>
+    <meta content="Découvrez les formules d'abonnement AQA pour 2025, adaptées à vos besoins en coaching natation et apnée." name="description"/>
+    <meta content="AQA, pricing, formules 2025, abonnement, coaching, natation, apnée" name="keywords"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.05;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(200deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            height: 40px;
+            filter: drop-shadow(0 0 10px #00ffff);
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+
+        .category-btn {
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
+        }
+
+        .category-btn:hover {
+            background: rgba(0, 153, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .category-btn.active::before {
+            display: none;
+        }
+
+        /* Content sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            border-radius: 3px;
+        }
+
+        /* Pricing tables */
+        .pricing-section {
+            margin-bottom: 4rem;
+        }
+
+        .table-container {
+            background: rgba(0, 153, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.2);
+            margin-bottom: 2rem;
+            position: relative;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .table-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00ffff, #0099ff, #00ffff);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.3), rgba(0, 255, 255, 0.2));
+            color: #00ffff;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: none;
+            position: relative;
+            border-bottom: 2px solid #0099ff;
+        }
+
+        td {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid rgba(0, 153, 255, 0.3);
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        td:first-child {
+            background: rgba(0, 255, 255, 0.1);
+            font-weight: 700;
+            color: #00ffff;
+        }
+
+        .pricing-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .pricing-highlight:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .pricing-highlight:hover {
+            background: rgba(0, 153, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .price-value {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: 800;
+            color: #ffffff;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .price-savings {
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            color: #00ff88;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .pricing-highlight:hover .price-savings {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .session-duration {
+            text-align: center;
+            color: #00ffff;
+            font-weight: 600;
+            margin: 1rem 0;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 153, 255, 0.5);
+        }
+
+        /* Apnea Training Section */
+        .apnea-container {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .apnea-card {
+            background: linear-gradient(145deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.1));
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(0, 153, 255, 0.4);
+            border-radius: 25px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 153, 255, 0.3);
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        .apnea-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.5);
+            border-color: #00ffff;
+        }
+
+        .apnea-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .apnea-image {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palm-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6));
+            transition: all 0.4s ease;
+        }
+
+        .apnea-title h4 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .apnea-title p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background: rgba(0, 153, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            width: 2.5rem;
+            text-align: center;
+        }
+
+        .apnea-pricing {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .price-main, .price-renewal {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.4);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .price-label {
+            display: block;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #00ffff;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-amount {
+            display: block;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-note {
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        /* Feature cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .card {
+            background: rgba(0, 153, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            border-color: #00ffff;
+        }
+
+        .card h3 {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge {
+            position: absolute;
+            top: 5px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffd900, #ff8800);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .card ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .card li {
+            margin: 0.8rem 0;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            display: flex;
+            align-items: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            width: 100%;
+            border: none;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Floating Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .floating-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+       
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .category-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .apnea-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .apnea-pricing {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .feature-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            th, td {
+                padding: 1rem 0.5rem;
+            }
+
+            .container {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1.5rem 0;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            th, td {
+                padding: 0.8rem 0.3rem;
+            }
+
+            .floating-btn {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.75rem;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+         /* Pricing Section */
+        .kids-pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .kids-pricing__card {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .kids-pricing__card--featured {
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .kids-pricing__card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .kids-pricing__card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .kids-pricing__card:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border-color: #00ffff;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+        }
+
+        .kids-pricing__badge {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .kids-pricing__title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .kids-pricing__price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-pricing__period {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .kids-pricing__features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .kids-pricing__feature {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .kids-pricing__feature::before {
+            content: '✓';
+            color: #00ffff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .kids-pricing__button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.4);
+            border: 2px solid #00ffff;
+        }
+
+        .kids-pricing__button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+        }
+@media (max-width: 768px) {
+    .kids-pricing__grid {
+        gap: 1rem; /* réduit l'espace entre cartes */
+        margin: 1.5rem 0;
+    }
+
+    .kids-pricing__card {
+        padding: 1.5rem 1rem; /* moins de padding */
+        border-radius: 15px;
+    }
+
+    .kids-pricing__title {
+        font-size: 1.2rem;
+    }
+
+    .kids-pricing__price {
+        font-size: 2rem;
+    }
+
+    .kids-pricing__period {
+        font-size: 0.9rem;
+    }
+
+    .kids-pricing__button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+}
+ .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+.content-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.content-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+    <style>
+        /* Enhanced focus styles for keyboard navigation */
+        .keyboard-nav .category-btn:focus,
+        .keyboard-nav .btn:focus {
+            outline: 3px solid #00ffff;
+            outline-offset: 2px;
+        }
+
+        /* Loading states */
+        .content-section {
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .content-section:not(.active) {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Enhanced mobile styles */
+        @media (max-width: 768px) {
+            .table-scroll {
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .table-scroll::-webkit-scrollbar {
+                height: 8px;
+            }
+            
+            .table-scroll::-webkit-scrollbar-track {
+                background: rgba(0, 153, 255, 0.1);
+                border-radius: 10px;
+            }
+            
+            .table-scroll::-webkit-scrollbar-thumb {
+                background: linear-gradient(90deg, #0099ff, #00ffff);
+                border-radius: 10px;
+            }
+            
+            .category-nav {
+                padding: 0 0.5rem;
+            }
+            
+            .apnea-card {
+                margin: 0 0.5rem;
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .floating-btn,
+            .category-nav,
+          
+            .content-section {
+                display: block !important;
+                page-break-after: always;
+            }
+            
+            .table-container {
+                break-inside: avoid;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .category-btn {
+                border-width: 3px;
+            }
+            
+            .table-container {
+                border-width: 3px;
+            }
+            
+            .pricing-highlight {
+                border: 2px solid #00ffff;
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .content-section {
+                transition: none;
+            }
+            
+            .category-btn {
+                transition: none;
+            }
+            
+            .pricing-highlight {
+                transition: none;
+            }
+        }
+  
+
+    </style>
+  
+
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+    <iframe src="scroll.html" class="bg-frame"></iframe>  
+    <div class="bg-logo"></div>
+    
+<header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+
+    <div class="container">
+        <section class="hero">
+            <h1>Formules AQA 2025</h1>
+            <p>Des programmes d'entraînement personnalisés pour tous les niveaux, avec des prix transparents et des économies attractives</p>
+        </section>
+
+        <!-- Category Navigation -->
+        <nav class="category-nav">
+            <button class="category-btn active" data-category="homme">Homme</button>
+            <button class="category-btn" data-category="femme">Femme</button>
+            <button class="category-btn" data-category="enfants">Enfants</button>
+            <button class="category-btn" data-category="apnea">Apnée</button>
+        </nav>
+
+        <!-- Content Sections -->
+        
+        <!-- Homme Section -->
+        <section class="content-section active" id="homme">
+            <h3 class="section-title">Tarifs - Homme</h3>
+            
+            <!-- Une fois par semaine -->
+            <div class="pricing-section">
+                <h4 class="section-title" style="font-size: 1.5rem;">Une fois par semaine</h4>
+                <div class="table-container">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Durée</th>
+                                    <th title="G10: Groupe de 10">G10<br><small>Groupe 10</small></th>
+                                    <th title="MAX5: Max 5 participants">MAX5<br><small>Max 5</small></th>
+                                    <th title="INDIVID: Session individuelle">INDIVID<br><small>Personnel</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">7,300 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">9,500 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">19,900 DA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>3 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">19,900 DA</span><div class="price-savings">Économisez 2,000 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">26,700 DA</span><div class="price-savings">Économisez 1,800 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">58,800 DA</span><div class="price-savings">Économisez 900 DA</div></td>
+                                </tr>
+                                <tr>
+                                    <td>6 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">38,800 DA</span><div class="price-savings">Économisez 5,000 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">51,900 DA</span><div class="price-savings">Économisez 5,100 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">115,000 DA</span><div class="price-savings">Économisez 4,400 DA</div></td>
+                                </tr>
+                                <tr>
+                                    <td>9 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">57,900 DA</span><div class="price-savings">Économisez 7,800 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">76,000 DA</span><div class="price-savings">Économisez 9,500 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">170,000 DA</span><div class="price-savings">Économisez 9,100 DA</div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="session-duration">Durée de séance: Deux heures</div>
+                </div>
+            </div>
+
+            <!-- Deux fois par semaine -->
+            <div class="pricing-section">
+                <h4 class="section-title" style="font-size: 1.5rem;">Deux fois par semaine</h4>
+                <div class="table-container">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Durée</th>
+                                    <th title="2G10: 2 Groupes de 10">2G10<br><small>2×G10</small></th>
+                                    <th title="2MAX5: 2 Max 5 participants">2MAX5<br><small>2×Max5</small></th>
+                                    <th title="G10MAX5: Groupe de 10 + Max 5">G10MAX5<br><small>Mixte</small></th>
+                                    <th title="2INDIVID: 2 Sessions individuelles">2INDIVID<br><small>2×Personnel</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">12,700 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">17,000 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">15,100 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">35,900 DA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>3 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">36,900 DA</span><div class="price-savings">Économisez 1,200 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">48,900 DA</span><div class="price-savings">Économisez 2,100 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">41,900 DA</span><div class="price-savings">Économisez 3,400 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">105,000 DA</span><div class="price-savings">Économisez 2,700 DA</div></td>
+                                </tr>
+                                <tr>
+                                    <td>6 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">72,000 DA</span><div class="price-savings">Économisez 4,200 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">96,000 DA</span><div class="price-savings">Économisez 6,000 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">80,900 DA</span><div class="price-savings">Économisez 9,700 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">199,000 DA</span><div class="price-savings">Économisez 16,400 DA</div></td>
+                                </tr>
+                                <tr>
+                                    <td>9 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">105,000 DA</span><div class="price-savings">Économisez 9,300 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">143,000 DA</span><div class="price-savings">Économisez 10,000 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">120,000 DA</span><div class="price-savings">Économisez 15,900 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">295,000 DA</span><div class="price-savings">Économisez 28,100 DA</div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="session-duration">Durée de séance: Deux heures</div>
+                </div>
+            </div>
+
+            <!-- Trois fois par semaine -->
+            <div class="pricing-section">
+                <h4 class="section-title" style="font-size: 1.5rem;">Trois fois par semaine</h4>
+                <div class="table-container">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Durée</th>
+                                    <th title="3G10: 3 Groupes de 10">3G10<br><small>3×G10</small></th>
+                                    <th title="3MAX5: 3 Max 5 participants">3MAX5<br><small>3×Max5</small></th>
+                                    <th title="2G10MAX: 2 Groupes de 10 + Max">2G10MAX<br><small>2G10+Max</small></th>
+                                    <th title="G10/2MAX5: Groupe de 10 / 2 Max 5">G10/2MAX5<br><small>Mix</small></th>
+                                    <th title="3INDIVID: 3 Sessions individuelles">3INDIVID<br><small>3×Personnel</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">18,700 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">24,500 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">20,900 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">23,900 DA</span></td>
+                                    <td class="pricing-highlight"><span class="price-value">52,000 DA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>3 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">53,500 DA</span><div class="price-savings">Économisez 2,600 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">69,500 DA</span><div class="price-savings">Économisez 4,000 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">59,500 DA</span><div class="price-savings">Économisez 3,200 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">65,500 DA</span><div class="price-savings">Économisez 6,200 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">149,000 DA</span><div class="price-savings">Économisez 7,000 DA</div></td>
+                                </tr>
+                                <tr>
+                                    <td>6 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">105,000 DA</span><div class="price-savings">Économisez 7,200 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">135,000 DA</span><div class="price-savings">Économisez 12,000 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">115,000 DA</span><div class="price-savings">Économisez 10,400 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">130,500 DA</span><div class="price-savings">Économisez 12,900 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">298,000 DA</span><div class="price-savings">Économisez 14,000 DA</div></td>
+                                </tr>
+                                <tr>
+                                    <td>9 Mois</td>
+                                    <td class="pricing-highlight"><span class="price-value">153,000 DA</span><div class="price-savings">Économisez 15,300 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">199,000 DA</span><div class="price-savings">Économisez 21,500 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">173,000 DA</span><div class="price-savings">Économisez 15,100 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">196,000 DA</span><div class="price-savings">Économisez 19,100 DA</div></td>
+                                    <td class="pricing-highlight"><span class="price-value">454,000 DA</span><div class="price-savings">Économisez 14,000 DA</div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="session-duration">Durée de séance: Deux heures</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Femme Section -->
+        <section class="content-section" id="femme">
+            <h3 class="section-title">Tarifs - Femme</h3>
+         <h3 style="text-align: center;">Les groupes de femmes seront bientôt disponibles</h3>
+
+            <!-- (Femme tables commented out in original) -->
+        </section>
+
+<!-- Pricing Section -->
+<section class="content-section" id="enfants">
+    <h3 class="section-title">Tarifs - Enfants</h3>
+    
+    <div class="kids-pricing__grid">
+        <div class="kids-pricing__card">
+            <div class="kids-pricing__badge">Découverte</div>
+            <h3 class="kids-pricing__title">3 mois</h3>
+            <div class="kids-pricing__price">28700 DA</div>
+            <div class="kids-pricing__period">Trimestre</div>
+            <ul class="kids-pricing__features">
+                <li class="kids-pricing__feature">Groupe de 10</li>
+                <li class="kids-pricing__feature">Coaching professionnel</li>
+                <li class="kids-pricing__feature">Pack de matériel offert</li>
+                <li class="kids-pricing__feature">Suivi Technique</li>
+                <li class="kids-pricing__feature">Suivi physique</li>
+            </ul>
+            <a href="inscription.html" class="kids-pricing__button">Réserver</a>
+        </div>
+
+        <div class="kids-pricing__card">
+            <div class="kids-pricing__badge">Découverte</div>
+            <h3 class="kids-pricing__title">6 mois</h3>
+            <div class="kids-pricing__price">46500 DA</div>
+            <div class="kids-pricing__period">Semestre</div>
+            <ul class="kids-pricing__features">
+                <li class="kids-pricing__feature">Groupe de 10</li>
+                <li class="kids-pricing__feature">Coaching professionnel</li>
+                <li class="kids-pricing__feature">Pack de matériel offert</li>
+                <li class="kids-pricing__feature">Suivi Technique</li>
+                <li class="kids-pricing__feature">Suivi physique</li>
+            </ul>
+            <a href="inscription.html" class="kids-pricing__button">Réserver</a>
+        </div>
+
+        <div class="kids-pricing__card">
+            <div class="kids-pricing__badge">Découverte</div>
+            <h3 class="kids-pricing__title">9 mois</h3>
+            <div class="kids-pricing__price">65800 DA</div>
+            <div class="kids-pricing__period">Trimestre</div>
+            <ul class="kids-pricing__features">
+                <li class="kids-pricing__feature">Groupe de 10</li>
+                <li class="kids-pricing__feature">Coaching professionnel</li>
+                <li class="kids-pricing__feature">Pack de matériel offert</li>
+                <li class="kids-pricing__feature">Suivi Technique</li>
+                <li class="kids-pricing__feature">Suivi physique</li>
+            </ul>
+            <a href="inscription.html" class="kids-pricing__button">Réserver</a>
+        </div>
+    </div>
+</section>
+
+        <!-- Apnée Section -->
+        <section class="content-section" id="apnea">
+            <h3 class="section-title">Formation Apnée</h3>
+            <div class="apnea-container">
+                <div class="apnea-card">
+                    <div class="apnea-header">
+                       
+                        <div class="apnea-title">
+                            <h4> Apnée Complet</h4>
+                            <p>Formation + Équipement</p>
+                        </div>
+                    </div>
+                    <div class="apnea-content">
+                        <div class="apnea-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🏊‍♂️</span>
+                                <span>4 séances de deux heures</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🏅</span>
+                                <span>Palmes de Piscine (Conquest) offertes</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">⭐</span>
+                                <span>Formation technique complète</span>
+                            </div>
+                        </div>
+                        <div class="apnea-pricing">
+                            <div class="price-main">
+                                <span class="price-label">Formation Initiale</span>
+                                <span class="price-amount">10,500 DA</span>
+                            </div>
+                            <div class="price-renewal">
+                                <span class="price-label">Renouvellement</span>
+                                <span class="price-amount">7,300 DA</span>
+                                <span class="price-note">Sans équipement</span>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="showInfo('Formation Apnée')">
+                            S'inscrire à l'Apnée
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Floating Button -->
+    <a href="inscription.html" class="floating-btn" >Inscription</a>
+<!-- Add this div where you want the footer to appear -->
+
+<!-- Add this script before closing </body> tag -->
+<script>
+async function loadFooter() {
+        try {
+          const response = await fetch('footer.html');
+          const footerHTML = await response.text();
+          document.getElementById('footer-container').innerHTML = footerHTML;
+        } catch (error) {
+          console.error('Error loading footer:', error);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', loadFooter);
+</script>
+
+    <div id="footer-container"></div>
+ <script src="js/navbar.js"></script>
+
+<script>
+/* Robust tab switcher + helpers
+   - Keeps your HTML/CSS untouched (except it will attach missing ids to their section)
+   - Resolves duplicated ids by keeping the element with more content
+   - Restores hover effects and best-value marking
+*/
+(function(){
+  const categories = ['homme','femme','enfants','apnea'];
+
+  // heuristics: find and normalize sections (attach missing IDs to nearest section)
+  function normalizeSections(){
+    categories.forEach(id=>{
+      let el = document.getElementById(id);
+      if (!el) {
+        try {
+          if (id === 'enfants') {
+            const grid = document.querySelector('.kids-pricing__grid');
+            if (grid) {
+              const sec = grid.closest('section') || grid.parentElement;
+              if (sec) { sec.id = 'enfants'; sec.classList.add('content-section'); el = sec; }
+            }
+          } else if (id === 'apnea') {
+            const ap = document.querySelector('.apnea-container') || document.querySelector('.apnea-card');
+            if (ap) {
+              const sec = ap.closest('section') || ap.parentElement;
+              if (sec) { sec.id = 'apnea'; sec.classList.add('content-section'); el = sec; }
+            }
+          } else {
+            const title = Array.from(document.querySelectorAll('.section-title, h3, h4')).find(t =>
+              t.textContent && t.textContent.toLowerCase().includes(id)
+            );
+            if (title) {
+              const sec = title.closest('section') || title.parentElement;
+              if (sec) { sec.id = id; sec.classList.add('content-section'); el = sec; }
+            }
+          }
+        } catch (err) {
+          console.warn('normalizeSections error for', id, err);
+        }
+      } else {
+        if (!el.classList.contains('content-section')) el.classList.add('content-section');
+      }
+    });
+
+    // If multiple elements share the same id, keep the one with most text content
+    categories.forEach(id=>{
+      const nodes = Array.from(document.querySelectorAll(`#${CSS.escape(id)}`));
+      if (nodes.length > 1) {
+        nodes.sort((a,b) => (b.textContent || '').trim().length - (a.textContent || '').trim().length);
+        const keep = nodes[0];
+        nodes.slice(1).forEach(n => n.removeAttribute('id'));
+        if (keep && !keep.classList.contains('content-section')) keep.classList.add('content-section');
+        console.info(`Multiple #${id} found — kept the one with more content.`);
+      }
+    });
+  }
+
+  // highlight best value per row (original feature)
+  function highlightBestValue(){
+    const tables = document.querySelectorAll('table');
+    tables.forEach(table => {
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('td:not(:first-child)'));
+        let bestValue = null;
+        let bestCell = null;
+
+        cells.forEach(cell => {
+          const priceText = cell.querySelector('.price-value')?.textContent || cell.textContent;
+          if (priceText) {
+            const price = parseInt(String(priceText).replace(/[^0-9]/g, ''));
+            if (!isNaN(price)) {
+              if (bestValue === null || price < bestValue) {
+                bestValue = price;
+                bestCell = cell;
+              }
+            }
+          }
+        });
+
+        if (bestCell && cells.length > 1) {
+          bestCell.style.borderLeft = '4px solid #00ff88';
+        }
+      });
+    });
+  }
+
+  // hover visuals for pricing-highlight
+  function attachPricingHover(){
+    const pricingCells = document.querySelectorAll('.pricing-highlight');
+    pricingCells.forEach(cell => {
+      cell.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.02)';
+        this.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.4)';
+      });
+      cell.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+        this.style.boxShadow = 'none';
+      });
+    });
+  }
+
+  // mobile optimization helper (original)
+  function optimizeForMobile() {
+    try {
+      if (window.innerWidth <= 768) {
+        const categoryNav = document.querySelector('.category-nav');
+        if (categoryNav) categoryNav.style.flexDirection = 'column';
+        const buttons = document.querySelectorAll('.category-btn');
+        buttons.forEach(btn => {
+          btn.style.width = '100%';
+          btn.style.maxWidth = '300px';
+        });
+      } else {
+        const categoryNav = document.querySelector('.category-nav');
+        if (categoryNav) categoryNav.style.flexDirection = '';
+        const buttons = document.querySelectorAll('.category-btn');
+        buttons.forEach(btn => {
+          btn.style.width = '';
+          btn.style.maxWidth = '';
+        });
+      }
+    } catch (err) { console.warn('optimizeForMobile error', err); }
+  }
+
+  // set active view
+  function setActive(category){
+    const buttons = document.querySelectorAll('.category-btn');
+    const sections = document.querySelectorAll('.content-section');
+
+    buttons.forEach(b => {
+      const is = b.getAttribute('data-category') === category;
+      b.classList.toggle('active', is);
+      b.setAttribute('aria-selected', is ? 'true' : 'false');
+    });
+
+    sections.forEach(s => {
+      s.classList.toggle('active', s.id === category);
+    });
+
+    const target = document.getElementById(category);
+    if (target) {
+      setTimeout(() => target.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+    } else {
+      console.warn('Target section not found for category:', category);
+    }
+  }
+
+  // initialize
+  document.addEventListener('DOMContentLoaded', function(){
+    normalizeSections();
+
+    // Attach click handlers
+    const buttons = Array.from(document.querySelectorAll('.category-btn'));
+    if (buttons.length === 0) {
+      console.warn('No category buttons found.');
+    } else {
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          const cat = btn.getAttribute('data-category');
+          if (!cat) return;
+          setActive(cat);
+        });
+      });
+    }
+
+    // Attach other behaviors
+    attachPricingHover();
+    highlightBestValue();
+    optimizeForMobile();
+
+    // warn if duplicate #enfants still present
+    const enfantsNodes = document.querySelectorAll('#enfants');
+    if (enfantsNodes.length > 1) console.warn('Multiple #enfants elements found:', enfantsNodes.length);
+
+    // choose default active: first .category-btn that has active class OR homme
+    const initial = document.querySelector('.category-btn.active') || document.querySelector('.category-btn[data-category=\"homme\"]') || buttons[0];
+    if (initial) setActive(initial.getAttribute('data-category'));
+  });
+
+  window.addEventListener('resize', optimizeForMobile);
+
+  // Keep showInfo available globally (original behavior)
+  window.showInfo = function(type){
+    alert(`Plus d'informations sur ${type} - Contactez-nous au 0540454907 ou par email à aqa.sports.academy@gmail.com`);
+  };
+
+})();
+</script>
+
+
+</body>
+</html>

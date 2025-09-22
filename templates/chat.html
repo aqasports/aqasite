@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Chat AQA</title>
+<style>
+#chatbox { width: 400px; margin: auto; border: 1px solid #ccc; padding: 10px; border-radius: 10px; }
+#messages { height: 300px; overflow-y: auto; border-bottom: 1px solid #ccc; margin-bottom: 10px; padding: 5px; }
+.message-user { color: blue; }
+.message-bot { color: green; }
+input { width: 75%; padding: 5px; }
+button { width: 20%; }
+</style>
+</head>
+<body>
+<div id="chatbox">
+    <div id="messages"></div>
+    <input type="text" id="user-input" placeholder="Ask me about AQA..."/>
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+async function sendMessage() {
+    const input = document.getElementById("user-input");
+    const userText = input.value;
+    if(!userText) return;
+
+    const msgBox = document.getElementById("messages");
+    msgBox.innerHTML += `<p class="message-user"><b>You:</b> ${userText}</p>`;
+    input.value = "";
+
+    const res = await fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({question: userText})
+    });
+    const data = await res.json();
+    msgBox.innerHTML += `<p class="message-bot"><b>Bot:</b> ${data.answer}</p>`;
+    msgBox.scrollTop = msgBox.scrollHeight;
+}
+</script>
+</body>
+</html>

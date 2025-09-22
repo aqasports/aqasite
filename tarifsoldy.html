@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Pricing 2025</title>
+    <meta content="Découvrez les formules d'abonnement AQA pour 2025, adaptées à vos besoins en coaching natation et apnée." name="description"/>
+    <meta content="AQA, pricing, formules 2025, abonnement, coaching, natation, apnée" name="keywords"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.05;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(200deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            border-radius: 3px;
+        }
+
+        /* Pricing tables */
+        .pricing-section {
+            margin-bottom: 4rem;
+        }
+
+        .table-container {
+            background: rgba(0, 153, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.2);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .table-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00ffff, #0099ff, #00ffff);
+            border-radius: 20px 20px 0 0;
+            animation: neonGlow 3s ease-in-out infinite alternate;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.3), rgba(0, 255, 255, 0.2));
+            color: #00ffff;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: none;
+            position: relative;
+            border-bottom: 2px solid #0099ff;
+        }
+
+        td {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid rgba(0, 153, 255, 0.3);
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        td:first-child {
+            background: rgba(0, 255, 255, 0.1);
+            font-weight: 700;
+            color: #00ffff;
+        }
+
+        .pricing-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .pricing-highlight:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .pricing-highlight:hover {
+            background: rgba(0, 153, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .price-value {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: 800;
+            color: #ffffff;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .price-savings {
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            color: #00ff88;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .pricing-highlight:hover .price-savings {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .session-duration {
+            text-align: center;
+            color: #00ffff;
+            font-weight: 600;
+            margin: 1rem 0;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 153, 255, 0.5);
+        }
+
+        /* Apnea Training Section Styles */
+        .apnea-container {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .apnea-card {
+            background: linear-gradient(145deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.1));
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(0, 153, 255, 0.4);
+            border-radius: 25px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 153, 255, 0.3);
+        }
+
+        .apnea-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s ease;
+            opacity: 0;
+        }
+
+        .apnea-card:hover::before {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .apnea-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.5);
+            border-color: #00ffff;
+        }
+
+        .apnea-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .apnea-image {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .palm-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6));
+            transition: all 0.4s ease;
+            animation: floatPalm 3s ease-in-out infinite;
+            position: relative;
+            z-index: 3;
+        }
+
+        @keyframes floatPalm {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        .apnea-card:hover .palm-image {
+            transform: scale(1.1) rotate(10deg);
+            filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.8));
+        }
+
+        .palm-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.4s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .apnea-card:hover .palm-glow {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .apnea-title h4 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .apnea-title p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+        }
+
+        .apnea-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .apnea-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background: rgba(0, 153, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            transition: all 0.3s ease;
+            transform: translateX(-10px);
+            opacity: 0.8;
+        }
+
+        .apnea-card:hover .feature-item {
+            transform: translateX(0);
+            opacity: 1;
+            background: rgba(0, 153, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .feature-item:nth-child(1) { transition-delay: 0.1s; }
+        .feature-item:nth-child(2) { transition-delay: 0.2s; }
+        .feature-item:nth-child(3) { transition-delay: 0.3s; }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            width: 2.5rem;
+            text-align: center;
+        }
+
+        .apnea-pricing {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .price-main, .price-renewal {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.4);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-main::before, .price-renewal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .price-main:hover::before, .price-renewal:hover::before {
+            left: 100%;
+        }
+
+        .price-main:hover, .price-renewal:hover {
+            transform: scale(1.05);
+            border-color: #00ffff;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .price-label {
+            display: block;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #00ffff;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-amount {
+            display: block;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-note {
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        .apnea-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            border: 3px solid #00ffff;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            padding: 1.2rem 2rem;
+            z-index: 2;
+        }
+
+        .btn-arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .apnea-btn:hover .btn-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Feature cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .card {
+            background: rgba(0, 153, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            border-color: #00ffff;
+        }
+
+        .card h3 {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card p {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            position: absolute;
+            top: 5px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffd900, #ff8800);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .card ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .card li {
+            margin: 0.8rem 0;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .card li:hover {
+            transform: translateX(5px);
+        }
+
+        .card li span {
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .included { color: #ffffff; }
+
+        .not-included {
+            color: #ff6b6b;
+            opacity: 0.7;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            width: 100%;
+            border: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ffffff;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 153, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 153, 255, 0.5);
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: #00ffff;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        /* Floating Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .floating-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Social icons styles */
+        .socials { 
+            text-align: center; 
+            margin: 32px 0; 
+        }
+        
+        .socials h2 { 
+            margin: 0 0 10px; 
+            color: #0099ff; 
+        }
+        
+        .social-icons {
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .social-icons a svg {
+            width: 30px; 
+            height: 30px;
+            stroke: #0099ff; 
+            stroke-width: 2; 
+            fill: none;
+            transition: transform .25s ease, opacity .25s ease;
+        }
+        
+        .social-icons a:hover svg { 
+            transform: scale(1.2); 
+            opacity: .75; 
+        }
+        
+        .social-icons a:active svg { 
+            transform: scale(1.3); 
+            opacity: .6; 
+        }
+         .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+html {
+  background: #000;  /* solid fallback */
+}
+body {
+  background: transparent !important;
+  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+}
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-menu.mobile {
+                display: flex;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .feature-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            th, td {
+                padding: 1rem 0.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .table-container {
+                margin: 0 3pt;
+                border-radius: 0;
+            }
+
+            .table-scroll::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .table-scroll::-webkit-scrollbar-track {
+                background: rgba(0, 153, 255, 0.1);
+                border-radius: 10px;
+            }
+
+            .table-scroll::-webkit-scrollbar-thumb {
+                background: linear-gradient(90deg, #0099ff, #00ffff);
+                border-radius: 10px;
+            }
+
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .floating-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.7rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            /* Apnea card mobile styles */
+            .apnea-card {
+                padding: 2rem 1.5rem;
+                margin: 0 0.5rem;
+            }
+
+            .apnea-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .apnea-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .palm-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .apnea-pricing {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .feature-item {
+                font-size: clamp(0.8rem, 2.5vw, 1rem);
+                padding: 0.6rem;
+            }
+
+            .feature-icon {
+                font-size: 1.2rem;
+                width: 2rem;
+            }
+            .floating-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.7rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 35px;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .hero {
+                padding: 1.5rem 0;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            th, td {
+                padding: 0.8rem 0.3rem;
+            }
+
+            .floating-btn {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.75rem;
+                bottom: 10px;
+                right: 10px;
+            }
+
+            header {
+                padding: 0.8rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .card:active {
+                transform: translateY(-5px) scale(0.98);
+                background: rgba(0, 153, 255, 0.2);
+            }
+
+            .btn:active {
+                transform: translateY(-1px) scale(0.98);
+            }
+
+            .nav-link:active {
+                background: rgba(0, 153, 255, 0.3);
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.05;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(200deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Header - Enhanced Scroll Behavior */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1001;
+        }
+
+        .logo {
+            height: 40px;
+            filter: drop-shadow(0 0 10px #00ffff);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Demo content for scrolling */
+        .demo-content {
+            padding: 50px 0;
+            margin: 50px 0;
+        }
+
+        .demo-section {
+            background: rgba(0, 153, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 2px solid rgba(0, 153, 255, 0.3);
+        }
+
+        .demo-section h3 {
+            color: #00ffff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .demo-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Floating Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .floating-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex !important;
+            }
+
+            .nav-menu {
+                display: none !important;
+            }
+
+            body {
+                padding-top: 70px;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            header {
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 65px;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            header {
+                transition: none !important;
+            }
+        }
+         /* Floating Button - Mobile Optimized */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .floating-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+  
+     <!-- Floating Button -->
+  <a href="inscription.html" class="floating-btn">📋 Inscription</a>
+    <div class="bg-logo"></div>
+    
+
+
+</script>
+<!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+      <iframe src="scroll.html" class="bg-frame"></iframe>  
+  <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+
+
+    <div class="container">
+        <section class="hero">
+            <h1>Formules AQA 2025</h1>
+            <h2>Hommes</h2>
+            <p>Des programmes d'entraînement personnalisés pour tous les niveaux, avec des prix transparents et des économies attractives</p>
+        </section>
+        <!-- Pricing Table Section: Une fois par semaine -->
+        <section class="pricing-section">
+            <h3 class="section-title">Une fois par semaine</h3>
+            <div class="table-container">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Durée</th>
+                                <th title="G10: Groupe de 10">G10<br><small>Groupe 10</small></th>
+                                <th title="MAX5: Max 5 participants">MAX5<br><small>Max 5</small></th>
+                                <th title="INDIVID: Session individuelle">INDIVID<br><small>Personnel</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">7,300 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">9,500 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">19,900 DA</span></td>
+                            </tr>
+                            <tr>
+                                <td>3 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">19,900 DA</span><div class="price-savings">Économisez 2,000 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">26,700 DA</span><div class="price-savings">Économisez 1,800 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">58,800 DA</span><div class="price-savings">Économisez 900 DA</div></td>
+                            </tr>
+                            <tr>
+                                <td>6 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">38,800 DA</span><div class="price-savings">Économisez 5,000 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">51,900 DA</span><div class="price-savings">Économisez 5,100 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">115,000 DA</span><div class="price-savings">Économisez 4,400 DA</div></td>
+                            </tr>
+                            <tr>
+                                <td>9 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">57,900 DA</span><div class="price-savings">Économisez 7,800 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">76,000 DA</span><div class="price-savings">Économisez 9,500 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">170,000 DA</span><div class="price-savings">Économisez 9,100 DA</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="session-duration">Durée de séance: Deux heures</div>
+            </div>
+        </section>
+
+        <!-- Pricing Table Section: Deux fois par semaine -->
+        <section class="pricing-section">
+            <h3 class="section-title">Deux fois par semaine</h3>
+            <div class="table-container">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Durée</th>
+                                <th title="2G10: 2 Groupes de 10">2G10<br><small>2×G10</small></th>
+                                <th title="2MAX5: 2 Max 5 participants">2MAX5<br><small>2×Max5</small></th>
+                                <th title="G10MAX5: Groupe de 10 + Max 5">G10MAX5<br><small>Mixte</small></th>
+                                <th title="2INDIVID: 2 Sessions individuelles">2INDIVID<br><small>2×Personnel</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">12,700 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">17,000 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">15,100 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">35,900 DA</span></td>
+                            </tr>
+                            <tr>
+                                <td>3 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">36,900 DA</span><div class="price-savings">Économisez 1,200 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">48,900 DA</span><div class="price-savings">Économisez 2,100 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">41,900 DA</span><div class="price-savings">Économisez 3,400 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">105,000 DA</span><div class="price-savings">Économisez 2,700 DA</div></td>
+                            </tr>
+                            <tr>
+                                <td>6 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">72,000 DA</span><div class="price-savings">Économisez 4,200 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">96,000 DA</span><div class="price-savings">Économisez 6,000 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">80,900 DA</span><div class="price-savings">Économisez 9,700 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">199,000 DA</span><div class="price-savings">Économisez 16,400 DA</div></td>
+                            </tr>
+                            <tr>
+                                <td>9 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">105,000 DA</span><div class="price-savings">Économisez 9,300 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">143,000 DA</span><div class="price-savings">Économisez 10,000 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">120,000 DA</span><div class="price-savings">Économisez 15,900 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">295,000 DA</span><div class="price-savings">Économisez 28,100 DA</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="session-duration">Durée de séance: Deux heures</div>
+            </div>
+        </section>
+
+        <!-- Pricing Table Section: Trois fois par semaine -->
+        <section class="pricing-section">
+            <h3 class="section-title">Trois fois par semaine</h3>
+            <div class="table-container">
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Durée</th>
+                                <th title="3G10: 3 Groupes de 10">3G10<br><small>3×G10</small></th>
+                                <th title="3MAX5: 3 Max 5 participants">3MAX5<br><small>3×Max5</small></th>
+                                <th title="2G10MAX: 2 Groupes de 10 + Max">2G10MAX<br><small>2G10+Max</small></th>
+                                <th title="G10/2MAX5: Groupe de 10 / 2 Max 5">G10/2MAX5<br><small>Mix</small></th>
+                                <th title="3INDIVID: 3 Sessions individuelles">3INDIVID<br><small>3×Personnel</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">18,700 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">24,500 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">20,900 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">23,900 DA</span></td>
+                                <td class="pricing-highlight"><span class="price-value">52,000 DA</span></td>
+                            </tr>
+                            <tr>
+                                <td>3 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">53,500 DA</span><div class="price-savings">Économisez 2,600 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">69,500 DA</span><div class="price-savings">Économisez 4,000 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">59,500 DA</span><div class="price-savings">Économisez 3,200 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">65,500 DA</span><div class="price-savings">Économisez 6,200 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">149,000 DA</span><div class="price-savings">Économisez 7,000 DA</div></td>
+                            </tr>
+                            <tr>
+                                <td>6 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">105,000 DA</span><div class="price-savings">Économisez 7,200 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">135,000 DA</span><div class="price-savings">Économisez 12,000 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">115,000 DA</span><div class="price-savings">Économisez 10,400 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">130,500 DA</span><div class="price-savings">Économisez 12,900 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">298,000 DA</span><div class="price-savings">Économisez 14,000 DA</div></td>
+                            </tr>
+                            <tr>
+                                <td>9 Mois</td>
+                                <td class="pricing-highlight"><span class="price-value">153,000 DA</span><div class="price-savings">Économisez 15,300 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">199,000 DA</span><div class="price-savings">Économisez 21,500 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">173,000 DA</span><div class="price-savings">Économisez 15,100 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">196,000 DA</span><div class="price-savings">Économisez 19,100 DA</div></td>
+                                <td class="pricing-highlight"><span class="price-value">454,000 DA</span><div class="price-savings">Économisez 14,000 DA</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="session-duration">Durée de séance: Deux heures</div>
+            </div>
+        </section>
+
+             <!-- Apnea Training Section -->
+        <section class="pricing-section">
+            <h3 class="section-title">Formation Apnée</h3>
+            <div class="apnea-container">
+                <div class="apnea-card">
+                    <div class="apnea-header">
+                        <div class="apnea-image">
+                            <img src="palm.png" alt="Palmes Conquest" class="palm-image">
+                            <div class="palm-glow"></div>
+                        </div>
+                        <div class="apnea-title">
+                            <h4>Pack Apnée Complet</h4>
+                            <p>Formation + Équipement</p>
+                        </div>
+                    </div>
+                    <div class="apnea-content">
+                        <div class="apnea-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🏊‍♂️</span>
+                                <span>4 séances de deux heures</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🏅</span>
+                                <span>Palmes de Piscine (Conquest) offertes</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">⭐</span>
+                                <span>Formation technique complète</span>
+                            </div>
+                        </div>
+                        <div class="apnea-pricing">
+                            <div class="price-main">
+                                <span class="price-label">Formation Initiale</span>
+                                <span class="price-amount">10,500 DA</span>
+                            </div>
+                            <div class="price-renewal">
+                                <span class="price-label">Renouvellement</span>
+                                <span class="price-amount">7,300 DA</span>
+                                <span class="price-note">Sans équipement</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn apnea-btn" onclick="alert('Plus d\'informations sur la formation apnée')">
+                        S'inscrire à l'Apnée
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+                    <h2 class="section-title">Comparaison des Formules</h2>
+        <!-- Feature Comparison Cards -->
+        <section id="feature-cards" class="feature-cards">
+
+            
+            <!-- Starter -->
+            <div class="card">
+                <h3>Starter</h3>
+                <p>(1 Mois)</p>
+                 <ul>
+                    <li>✓ Séances encadrées par coachs</li>
+                    <li>✓ Suivi technique de base</li>
+                    <li>✘ Pas d'analyse vidéo</li>
+                </ul>
+                <button class="btn" onclick="alert('Plus d\'informations sur Starter')">Plus d'info</button>
+            </div>
+
+            <!-- Silver -->
+            <div class="card">
+                <div class="badge">Most Popular</div>
+                <h3>Silver</h3>
+                <p>(3 Mois)</p>
+                <ul>
+                    <li>✓ Analyse vidéo personnalisée</li>
+                    <li>✓ Plan d'entraînement trimestriel</li>
+                    <li>✓ Suivi technique détaillé</li>
+                    <li>✓ Accès complet à l'app AQA</li>
+		<li>✓ Séance Tester pour un amis gratuite</li>
+                </ul>
+                <button class="btn" onclick="alert('Plus d\'informations sur Silver')">Plus d'info</button>
+            </div>
+
+            <!-- Gold -->
+            <div class="card">
+                <h3>Gold</h3>
+                <p>(6 Mois)</p>
+                <ul>
+		<li>✓ Analyse vidéo personnalisée</li>
+                    <li>✓ Planification sur 6 mois</li>
+                    <li>✓ Suivi technique + physique</li>
+		<li>✓ Accès complet à l'app AQA</li>
+                    <li>✓ Équipement Arena offert</li>
+                    <li>✓ 1 événement AQA gratuit</li>
+		<li>✓ 2 Séance Tester pour amis gratuites</li>
+                </ul>
+                <button class="btn" onclick="alert('Plus d\'informations sur Gold')">Plus d'info</button>
+            </div>
+
+            <!-- Diamond -->
+            <div class="card">
+                <h3>Diamond</h3>
+                <p>(9 Mois)</p>
+                <ul>
+                    <li>✓ Analyse vidéo personnalisée</li>
+                    <li>✓ Planification avancée sur 9 mois</li>
+		<li>✓ Suivi technique + physique</li>
+		<li>✓ Accès complet à l'app AQA</li>
+                    <li>✓ Équipement Arena offert</li>
+                    <li>✓ 3 événements AQA inclus</li>
+                    <li>✓ 1 mois apnée offert</li>
+		<li>✓ 3 Séance Tester pour amis gratuites</li>
+                </ul>
+                <button class="btn" onclick="alert('Plus d\'informations sur Diamond')">Plus d'info</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <a href="inscription.html" class="floating-btn">S'inscrire</a>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>📞 0540454907</p>
+                <p>✉️ aqa.sports.academy@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Piscines</h4>
+                <p>- Reghaia Piscine ADM AZAL</p>
+                <p>- Cheraga Bk sport</p>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-nous</h4>
+                <section class="socials">
+  <div class="social-icons">
+       <!-- Facebook -->
+    <a href="https://www.facebook.com/profile.php?id=100063686885387" target="_blank" aria-label="Facebook">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" 
+           stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           width="30" height="30">
+        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3.5l.5-4H14V7a1 1 0 011-1h3z"/>
+      </svg>
+    </a>
+ <!-- Instagram -->
+    <a href="https://www.instagram.com/aqa.sports/" target="_blank" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+           stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           width="30" height="30">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+        <circle cx="17.5" cy="6.5" r="1.5"/>
+      </svg>
+    </a>
+     <!-- TikTok -->
+    <a href="https://www.tiktok.com/@aqa.sports.academ" target="_blank" aria-label="TikTok">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" 
+           width="30" height="30" fill="none" stroke="#00ffff" stroke-width="2">
+        <path d="M32 6c1 4 4 8 9 9v6c-4 0-8-2-9-5v14a12 12 0 11-12-12"/>
+      </svg>
+    </a>
+    
+    <!-- WhatsApp -->
+    <a href="https://wa.me/213540454907" target="_blank" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" 
+           width="30" height="30" fill="none" stroke="#00ffff" stroke-width="2">
+        <path d="M16 3C9 3 3 9 3 16c0 2.6.8 5 2.2 7L3 29l6-2c2 1.3"/>
+ </svg>
+    </a>
+     </footer>
+     <script src="js/navbar.js"></script>
+</body>
+ </html>
+
+   
+
+   

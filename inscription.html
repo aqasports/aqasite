@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AQA Inscription</title>
+  <meta name="description" content="Formulaire d'inscription AQA (Groupes + Formules)."/>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- === Navbar styles from cards.html === -->
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:#000; color:#fff; line-height:1.6;
+      overflow-x:hidden; min-height:100vh; position:relative;
+    }
+
+  
+    h1,h2,h3 {
+      background:linear-gradient(135deg,#00ffff,#0099ff,#fff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-align:center;
+      text-shadow:0 0 20px rgba(0,255,255,0.3);
+    }
+    h1 {
+      font-size:clamp(1.8rem,6vw,3.5rem);
+      margin-bottom:1rem;
+    }
+    h2 {
+      font-size:clamp(1.4rem,5vw,2.5rem);
+      margin:2rem 0 1rem;
+    }
+    p {
+      text-align:center;
+      max-width:900px;
+      margin:0 auto 1.5rem;
+      font-size:clamp(0.95rem,3.5vw,1.1rem);
+    }
+
+    /* Enhanced Form Wizard Styles */
+    .container { 
+      max-width: 800px; 
+      margin: auto; 
+      padding: 2rem 1rem; 
+      position: relative; 
+      text-align: center; 
+    }
+
+    /* Dynamic Theme Variables */
+    :root {
+      --primary-color: #0099ff;
+      --secondary-color: #00ffff;
+      --shadow-color: rgba(0,153,255,0.6);
+      --glow-color: rgba(0,255,255,0.3);
+    }
+
+    /* Theme Classes */
+    .theme-women {
+      --primary-color: #ff1493;
+      --secondary-color: #ff69b4;
+      --shadow-color: rgba(255,20,147,0.6);
+      --glow-color: rgba(255,105,180,0.3);
+    }
+
+    .theme-teens {
+      --primary-color: #ff0000;
+      --secondary-color: #ff4444;
+      --shadow-color: rgba(255,0,0,0.6);
+      --glow-color: rgba(255,68,68,0.3);
+    }
+
+    .theme-kids {
+      --primary-color: #ffd700;
+      --secondary-color: #ffff00;
+      --shadow-color: rgba(255,215,0,0.6);
+      --glow-color: rgba(255,255,0,0.3);
+    }
+
+    .theme-babies {
+      --primary-color: #00ff0d;
+      --secondary-color: #08a100;
+      --shadow-color: rgba(159, 255, 186, 0.6);
+      --glow-color: rgba(255,255,255,0.3);
+    }
+
+    .inscription-image { 
+      display:block; 
+      margin:0 auto -60px auto; 
+      width:480px; 
+      max-width:95%; 
+      pointer-events:none; 
+      position:relative; 
+      z-index:2; 
+      opacity:0; 
+      transform:translateY(-60px); 
+      animation:fadeInUp 1s ease forwards; 
+    }
+    @media (max-width:768px){ 
+      .inscription-image{ width:320px; margin-bottom:-40px; } 
+    }
+
+    .wizard-form { 
+      position:relative; 
+      z-index:3; 
+      background:#0a1a2f; 
+      border:2px solid var(--shadow-color); 
+      border-radius:15px; 
+      padding:2rem; 
+      box-shadow:0 0 25px var(--shadow-color); 
+      transition:all 0.3s ease; 
+      max-width:100%; 
+      margin:0 auto; 
+      opacity:0; 
+      transform:translateY(30px); 
+      animation:fadeInUp 0.9s ease forwards; 
+    }
+    .wizard-form:hover { 
+      box-shadow:0 0 40px var(--shadow-color), 0 0 80px var(--glow-color); 
+      transform:translateY(-5px); 
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(128,128,128,0.2);
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 14%;
+    }
+    .step-counter {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--secondary-color);
+      font-size: 0.9rem;
+    }
+
+    /* Step Container */
+    .step {
+      display: none;
+    }
+    .step.active {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .step h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--secondary-color);
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 2px solid rgba(0,153,255,0.4);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 10px var(--glow-color);
+    }
+    .form-group input.error,
+    .form-group select.error {
+      border-color: #ff4444;
+      box-shadow: 0 0 10px rgba(255,68,68,0.3);
+    }
+    .form-group select:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Error Messages */
+    .error-message {
+      color: #ff4444;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+      display: none;
+    }
+    .error-message.show {
+      display: block;
+    }
+
+    /* No Groups Message */
+    .no-groups-message {
+      background: rgba(255,193,7,0.2);
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      color: #ffc107;
+      text-align: center;
+      display: none;
+    }
+    .no-groups-message.show {
+      display: block;
+    }
+
+    /* Category Selection */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .category-option {
+      background: rgba(0,153,255,0.1);
+      border: 2px solid rgba(0,153,255,0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    .category-option:hover {
+      background: rgba(0,153,255,0.2);
+      border-color: var(--primary-color);
+    }
+    .category-option.selected {
+      background: var(--glow-color);
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 15px var(--glow-color);
+    }
+
+    /* Formule Cards */
+    .formule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .formule-card {
+      background: rgba(0,153,255,0.1);
+      border: 2px solid rgba(0,153,255,0.3);
+      border-radius: 15px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    .formule-card:hover {
+      background: rgba(0,153,255,0.2);
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+    .formule-card.selected {
+      background: var(--glow-color);
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 15px var(--glow-color);
+      transform: translateY(-2px);
+    }
+    .formule-image {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 0.5rem;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    /* Frequency Selection */
+    .frequency-options {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .frequency-option {
+      background: rgba(0,153,255,0.1);
+      border: 2px solid rgba(0,153,255,0.3);
+      border-radius: 25px;
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 100px;
+      text-align: center;
+    }
+    .frequency-option:hover {
+      background: rgba(0,153,255,0.2);
+      border-color: var(--primary-color);
+    }
+    .frequency-option.selected {
+      background: var(--glow-color);
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 10px var(--glow-color);
+    }
+
+    /* Buttons */
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      flex: 1;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      transform: translateY(-2px);
+    }
+    .btn-primary:disabled {
+      background: rgba(128,128,128,0.5);
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-secondary {
+      background: rgba(0,153,255,0.2);
+      color: #00ffff;
+      border: 1px solid rgba(0,153,255,0.5);
+    }
+    .btn-secondary:hover {
+      background: rgba(0,153,255,0.3);
+    }
+
+    /* Summary */
+    .summary-section {
+      background: rgba(0,153,255,0.1);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      text-align: left;
+    }
+    .summary-item {
+      margin-bottom: 1rem;
+    }
+    .summary-label {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+    .summary-value {
+      color: #fff;
+      margin-top: 0.25rem;
+    }
+
+    /* Success State */
+    .success-message {
+      background: rgba(40,167,69,0.2);
+      border: 2px solid #28a745;
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      color: #28a745;
+      display: none;
+    }
+    .success-message.show {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    footer { 
+      background:rgba(0,0,0,0.95); 
+      border-top:2px solid #0099ff; 
+      padding:2rem 1rem; 
+      text-align:center; 
+    }
+
+    @keyframes fadeInUp { 
+      to { opacity:1; transform:translateY(0); } 
+    }
+
+    @media (max-width: 768px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+      .button-group {
+        flex-direction: column;
+      }
+    }
+      .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+html {
+  background: #000;  /* solid fallback */
+}
+body {
+  background: transparent !important;
+  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+}
+
+  </style>
+<!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+<iframe src="scroll.html" class="bg-frame"></iframe> 
+  <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+   
+
+  <div class="container">
+    <h1>Formulaire d'inscription</h1>
+    <img src="https://i.ibb.co/5Wh3RwwC/Untitled-design-46-1.png" alt="AQA Cards" class="inscription-image">
+
+    <!-- Enhanced Multi-Step Wizard Form -->
+    <div class="wizard-form">
+      <!-- Progress Indicator -->
+      <div class="step-counter">
+        Étape <span id="currentStep">1</span> / 7
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+<div class="success-message" id="successMessage">
+  <h3>✅ Inscription envoyée avec succès!</h3>
+  <p>Nous avons bien reçu votre demande d'inscription. Vous recevrez une confirmation par téléphone sous 24h.</p>
+  <div class="summary-section" id="finalSummary"></div>
+  <button class="btn btn-primary" onclick="window.location.href='inscription.html'">
+    Nouvelle inscription
+  </button>
+</div>
+
+      <!-- Main Form -->
+      <form id="inscriptionForm" name="inscription" netlify method="POST" data-netlify="true" action="/merci.html" style="display: block;">
+        <input type="hidden" name="form-name" value="inscription">
+        
+        <!-- Hidden fields for Netlify form detection -->
+        <input type="hidden" name="category" id="categoryInput">
+        <input type="hidden" name="piscine" id="piscineInput">
+        <input type="hidden" name="formule" id="formuleInput">
+        <input type="hidden" name="frequency" id="frequencyInput">
+        <input type="hidden" name="groupes" id="groupesInput">
+        <input type="hidden" name="nom" id="nomInput">
+        <input type="hidden" name="telephone" id="telephoneInput">
+        <input type="hidden" name="ville" id="villeInput">
+        <input type="hidden" name="equipement" id="equipementInput">
+        <input type="hidden" name="payload" id="payloadInput">
+
+        <!-- Step 1: Catégorie -->
+        <div class="step active" id="step1">
+          <h3>Choisissez votre catégorie</h3>
+          <div class="category-grid">
+            <div class="category-option" data-category="men">
+              <strong>Hommes</strong><br>
+              <small>Adultes</small>
+            </div>
+            <div class="category-option" data-category="women">
+              <strong>Femmes</strong><br>
+              <small>Adultes et Ados</small>
+            </div>
+            <div class="category-option" data-category="teens">
+              <strong>Ados Garçon</strong><br>
+              <small>13-16 ans</small>
+            </div>
+            <div class="category-option" data-category="kids">
+              <strong>Enfants</strong><br>
+              <small>5-12 ans</small>
+            </div>
+            <div class="category-option" data-category="babies">
+              <strong>AQA apnea</strong><br>
+              <small>atteindre 4min en apnéé</small>
+            </div>
+          </div>
+          <div class="error-message" id="categoryError">Veuillez sélectionner une catégorie</div>
+        </div>
+
+        <!-- Step 2: Piscine -->
+        <div class="step" id="step2">
+          <h3>Choisissez votre piscine</h3>
+          <div class="form-group">
+            <label for="piscineSelect">Emplacement :</label>
+            <select id="piscineSelect" required>
+              <option value="">-- Sélectionnez une piscine --</option>
+            </select>
+            <div class="error-message" id="piscineError">Veuillez sélectionner une piscine</div>
+          </div>
+        </div>
+
+        <!-- Step 3: Formule Selection -->
+        <div class="step" id="step3">
+          <h3>Choisissez votre formule</h3>
+          <div class="formule-grid">
+            <div class="formule-card" data-formule="starter">
+              <div class="formule-image">🥉</div>
+              <strong>Starter</strong><br>
+              <small>1 mois</small>
+            </div>
+            <div class="formule-card" data-formule="silver">
+              <div class="formule-image">🥈</div>
+              <strong>Silver</strong><br>
+              <small>3 mois</small>
+            </div>
+            <div class="formule-card" data-formule="gold">
+              <div class="formule-image">🥇</div>
+              <strong>Gold</strong><br>
+              <small>6 mois</small>
+            </div>
+            <div class="formule-card" data-formule="diamond">
+              <div class="formule-image">💎</div>
+              <strong>Diamond</strong><br>
+              <small>9 mois</small>
+            </div>
+          </div>
+          <div class="error-message" id="formuleError">Veuillez sélectionner une formule</div>
+        </div>
+
+        <!-- Step 4: Frequency Selection -->
+        <div class="step" id="step4">
+          <h3>Choisissez votre fréquence</h3>
+          <h5>Séance = 2 heures</h5>
+          <div class="frequency-options">
+            <div class="frequency-option" data-frequency="1">
+              <strong>1 fois</strong><br>
+              <small>par semaine</small>
+            </div>
+            <div class="frequency-option" data-frequency="2">
+              <strong>2 fois</strong><br>
+              <small>par semaine</small>
+            </div>
+            <div class="frequency-option" data-frequency="3">
+              <strong>3 fois</strong><br>
+              <small>par semaine</small>
+            </div>
+          </div>
+          <div class="error-message" id="frequencyError">Veuillez sélectionner une fréquence</div>
+        </div>
+
+        <!-- Step 5: Groupes -->
+        <div class="step" id="step5">
+          <h3>Choisissez vos groupes</h3>
+          <div class="form-group">
+            <label for="groupeSelect">Groupes disponibles :</label>
+            <select id="groupeSelect" multiple size="5" required disabled>
+              <option value="">-- Complétez d'abord les étapes précédentes --</option>
+            </select>
+            <p style="font-size:0.9rem; opacity:0.8; margin-top:0.5rem;">
+              Sélectionnez <span id="maxGroups">1</span> groupe(s) selon votre fréquence
+            </p>
+            <div class="error-message" id="groupeError">Veuillez sélectionner le bon nombre de groupes</div>
+            <div class="no-groups-message" id="noGroupsMessage">
+              Aucun groupe disponible pour cette combinaison. Essayez un autre emplacement.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: Informations personnelles -->
+        <div class="step" id="step6">
+          <h3>Vos informations personnelles</h3>
+          <div class="form-group">
+            <label for="nomComplet">Nom complet :</label>
+            <input type="text" id="nomComplet" required>
+            <div class="error-message" id="nomError">Veuillez saisir votre nom complet</div>
+          </div>
+          <div class="form-group">
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" id="telephone" required pattern="[0-9 +()-]{8,}">
+            <div class="error-message" id="telephoneError">Veuillez saisir un numéro de téléphone valide</div>
+          </div>
+          <div class="form-group">
+            <label for="ville">Quelle est votre ville ?</label>
+            <input type="text" id="ville" required>
+            <div class="error-message" id="villeError">Veuillez saisir votre ville</div>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="equipement" style="width: auto; margin-right: 0.5rem;">
+              Avez-vous besoin d'équipement ?
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 7: Récapitulatif -->
+        <div class="step" id="step7">
+          <h3>Récapitulatif de votre inscription</h3>
+          <div class="summary-section" id="summarySection">
+            <!-- Summary will be populated dynamically -->
+          </div>
+          <p style="text-align: center; margin-top: 1rem; opacity: 0.8;">
+            Vérifiez vos informations avant de confirmer votre inscription.
+          </p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="button-group">
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+            Suivant
+          </button>
+          <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+            Précédent
+          </button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">
+            Confirmer l'inscription
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>📞 0540454907 — ✉️ aqa.sports.academy@gmail.com</p>
+    <p>Piscines: Reghaia Piscine ADM AZAL | Cheraga BK Sport</p>
+  </footer>
+
+  <!-- Enhanced JavaScript with Configuration -->
+   <script src="js/navbar.js"></script>
+  <script>
+    
+
+    // Configuration-driven data
+ const AQA_GROUPS = {
+      men: {
+        reghaia: [
+          { id: "men_reg_morn_mon", label: "Samedi 21h-23h - Groupe de 10 Youcef" },
+          { id: "men_reg_even_tue", label: "Mardi - 21h-23h - Max5 - Complet" },
+          { id: "men_reg_even_wed", label: "Mercredi - 21h30-23h30 - G10" },
+          { id: "men_reg_even_thu", label: "Jeudi - 21h30-23h30 - G10  Complet" },
+          { id: "men_reg_even_fri", label: "Vendredi - 20h-22h -  Complet" },
+          { id: "men_reg_even_sun", label: "Dimanche - 21h30-23h30 - Groupe de 10" },
+          { id: "men_reg_even_tue2", label: "Mardi - 21h-23h - Max5 (riadh)" },
+          { id: "men_reg_even_wed2", label: "Mercredi - 21h30-23h30 - Max5" },
+          { id: "men_reg_morn_tue", label: "Mardi - 7h-9h - Groupe de 10" },
+          { id: "men_reg_even_tue3", label: "Mardi - 21h-23h - G10  Complet" },
+          { id: "men_reg_morn_thu", label: "Jeudi - 7h-9h - Groupe de 10" },
+          { id: "men_reg_even_thu2", label: "Jeudi - 21h30-23h30 - Max5 Complet" },
+          { id: "men_reg_even_fri2", label: "Vendredi - 20h-22h - G10  Complet" },
+          { id: "men_reg_morn_sat", label: "Samedi - 6h-8h - G10 " },
+          { id: "men_reg_even_sat", label: "Samedi - 21h-23h - G10 Abdelghani" }
+        ],
+        cheraga: []
+      },
+      women: {
+        reghaia: [],
+        cheraga: []
+      },
+      teens: {
+        reghaia: [],
+        cheraga: []
+      },
+      kids: {
+        reghaia: [
+          { id: "men_reg_morn_mon", label: "Groupe A" },
+          { id: "men_reg_even_tue", label: "Groupe B" },
+          { id: "men_reg_even_tue", label: "Groupe C" },
+        ],
+        cheraga: []
+      },
+      babies: {
+        reghaia: [
+          { id: "men_reg_apnee_wed", label: "Mercredi - 21h30-23h30 - Apnée" },
+        ],
+        cheraga: []
+      }
+    };
+
+    const AQA_POOLS = {
+      reghaia: "Reghaïa - ADM AZAL",
+      cheraga: "Cheraga - BK Sport"
+    };
+
+    const AQA_CATEGORIES = {
+      men: "Hommes",
+      women: "Femmes", 
+      teens: "Adolescents",
+      kids: "Enfants",
+      babies: "apnea"
+    };
+
+    // Wizard state
+    let currentStepNum = 1;
+    let selectedData = {
+      category: null,
+      piscine: null,
+      formule: null,
+      frequency: null,
+      groupes: [],
+      personalInfo: {}
+    };
+
+    // Initialize wizard
+    (() => {
+      populatePiscineOptions();
+      setupCategorySelection();
+      setupFormuleSelection();
+      setupFrequencySelection();
+      setupEventListeners();
+      updateProgress();
+    })();
+
+    function populatePiscineOptions() {
+      const piscineSelect = document.getElementById('piscineSelect');
+      piscineSelect.innerHTML = '<option value="">-- Sélectionnez une piscine --</option>';
+      
+      Object.keys(AQA_POOLS).forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = AQA_POOLS[key];
+        piscineSelect.appendChild(option);
+      });
+    }
+
+    function setupCategorySelection() {
+      const categoryOptions = document.querySelectorAll('.category-option');
+      categoryOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          // Remove previous selection
+          categoryOptions.forEach(opt => opt.classList.remove('selected'));
+          
+          // Add selection to clicked option
+          option.classList.add('selected');
+          selectedData.category = option.dataset.category;
+          
+          // Apply theme based on category
+          applyTheme(selectedData.category);
+          
+          // Clear error if present
+          hideError('categoryError');
+          
+          // Auto-advance to next step after short delay
+          setTimeout(() => {
+            if (validateCurrentStep()) {
+              changeStep(1);
+            }
+          }, 300);
+        });
+      });
+    }
+
+    function applyTheme(category) {
+      const body = document.body;
+      // Remove all theme classes
+      body.classList.remove('theme-women', 'theme-teens', 'theme-kids', 'theme-babies');
+      
+      // Apply specific theme
+      switch(category) {
+        case 'women':
+          body.classList.add('theme-women');
+          break;
+        case 'teens':
+          body.classList.add('theme-teens');
+          break;
+        case 'kids':
+          body.classList.add('theme-kids');
+          break;
+        case 'babies':
+          body.classList.add('theme-babies');
+          break;
+        // men keeps default blue theme
+      }
+    }
+
+    function setupFormuleSelection() {
+      const formuleCards = document.querySelectorAll('.formule-card');
+      formuleCards.forEach(card => {
+        card.addEventListener('click', () => {
+          // Remove previous selection
+          formuleCards.forEach(c => c.classList.remove('selected'));
+          
+          // Add selection to clicked card
+          card.classList.add('selected');
+          selectedData.formule = card.dataset.formule;
+          
+          // Clear error if present
+          hideError('formuleError');
+          
+          // Auto-advance to next step after short delay
+          setTimeout(() => {
+            if (validateCurrentStep()) {
+              changeStep(1);
+            }
+          }, 300);
+        });
+      });
+    }
+
+    function setupFrequencySelection() {
+      const frequencyOptions = document.querySelectorAll('.frequency-option');
+      frequencyOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          // Remove previous selection
+          frequencyOptions.forEach(opt => opt.classList.remove('selected'));
+          
+          // Add selection to clicked option
+          option.classList.add('selected');
+          selectedData.frequency = parseInt(option.dataset.frequency);
+          
+          // Update max groups display
+          document.getElementById('maxGroups').textContent = selectedData.frequency;
+          
+          // Clear error if present
+          hideError('frequencyError');
+          
+          // Update groups when frequency changes
+          updateGroupeOptions();
+          
+          // Auto-advance to next step after short delay
+          setTimeout(() => {
+            if (validateCurrentStep()) {
+              changeStep(1);
+            }
+          }, 300);
+        });
+      });
+    }
+
+    function setupEventListeners() {
+      // Piscine selection
+      document.getElementById('piscineSelect').addEventListener('change', (e) => {
+        selectedData.piscine = e.target.value;
+        hideError('piscineError');
+        updateGroupeOptions();
+      });
+
+      // Groupe selection (multiple)
+      document.getElementById('groupeSelect').addEventListener('change', (e) => {
+        const selectedOptions = Array.from(e.target.selectedOptions);
+        selectedData.groupes = selectedOptions.map(option => option.value);
+        hideError('groupeError');
+      });
+
+      // Personal info fields
+      ['nomComplet', 'telephone', 'ville'].forEach(fieldId => {
+        document.getElementById(fieldId).addEventListener('input', () => {
+          hideError(fieldId.replace('Complet', '') + 'Error');
+        });
+      });
+
+      // Form submission
+      document.getElementById('inscriptionForm').addEventListener('submit', handleSubmit);
+    }
+
+    function updateGroupeOptions() {
+      const groupeSelect = document.getElementById('groupeSelect');
+      const noGroupsMessage = document.getElementById('noGroupsMessage');
+      
+      // Clear previous options
+      groupeSelect.innerHTML = '<option value="">-- Sélectionnez vos groupes --</option>';
+      
+      // Check if category, piscine, and frequency are selected
+      if (!selectedData.category || !selectedData.piscine || !selectedData.frequency) {
+        groupeSelect.disabled = true;
+        groupeSelect.innerHTML = '<option value="">-- Complétez d\'abord les étapes précédentes --</option>';
+        noGroupsMessage.classList.remove('show');
+        return;
+      }
+
+      // Get available groups for this combination
+      const categoryGroups = AQA_GROUPS[selectedData.category];
+      const availableGroups = categoryGroups && categoryGroups[selectedData.piscine] ? categoryGroups[selectedData.piscine] : [];
+
+      if (availableGroups.length === 0) {
+        // No groups available
+        groupeSelect.disabled = true;
+        groupeSelect.innerHTML = '<option value="">Aucun groupe disponible</option>';
+        noGroupsMessage.classList.add('show');
+      } else {
+        // Populate available groups
+        groupeSelect.disabled = false;
+        noGroupsMessage.classList.remove('show');
+        
+        availableGroups.forEach(group => {
+          const option = document.createElement('option');
+          option.value = group.id;
+          option.textContent = group.label;
+          groupeSelect.appendChild(option);
+        });
+      }
+
+      // Clear previous group selection
+      selectedData.groupes = [];
+    }
+
+    function changeStep(direction) {
+      const currentStep = document.getElementById(`step${currentStepNum}`);
+      
+      // Validate current step before proceeding (only when going forward)
+      if (direction > 0 && !validateCurrentStep()) {
+        return;
+      }
+
+      // Hide current step
+      currentStep.classList.remove('active');
+
+      // Update step number
+      currentStepNum += direction;
+
+      // Show new step
+      const newStep = document.getElementById(`step${currentStepNum}`);
+      newStep.classList.add('active');
+
+      // Update UI
+      updateProgress();
+      updateButtons();
+      
+      // Update summary if on step 7
+      if (currentStepNum === 7) {
+        updateSummary();
+      }
+    }
+
+    function validateCurrentStep() {
+      switch (currentStepNum) {
+        case 1:
+          if (!selectedData.category) {
+            showError('categoryError', 'Veuillez sélectionner une catégorie');
+            return false;
+          }
+          return true;
+
+        case 2:
+          if (!selectedData.piscine) {
+            showError('piscineError', 'Veuillez sélectionner une piscine');
+            return false;
+          }
+          return true;
+
+        case 3:
+          if (!selectedData.formule) {
+            showError('formuleError', 'Veuillez sélectionner une formule');
+            return false;
+          }
+          return true;
+
+        case 4:
+          if (!selectedData.frequency) {
+            showError('frequencyError', 'Veuillez sélectionner une fréquence');
+            return false;
+          }
+          return true;
+
+        case 5:
+          if (!selectedData.groupes || selectedData.groupes.length !== selectedData.frequency) {
+            showError('groupeError', `Veuillez sélectionner exactement ${selectedData.frequency} groupe(s)`);
+            return false;
+          }
+          return true;
+
+        case 6:
+          return validatePersonalInfo();
+
+        default:
+          return true;
+      }
+    }
+
+    function validatePersonalInfo() {
+      let isValid = true;
+      
+      // Validate nom
+      const nom = document.getElementById('nomComplet').value.trim();
+      if (!nom) {
+        showError('nomError', 'Veuillez saisir votre nom complet');
+        isValid = false;
+      } else {
+        selectedData.personalInfo.nom = nom;
+      }
+
+      // Validate telephone
+      const telephone = document.getElementById('telephone').value.trim();
+      const phonePattern = /^[0-9 +()-]{8,}$/;
+      if (!telephone || !phonePattern.test(telephone)) {
+        showError('telephoneError', 'Veuillez saisir un numéro de téléphone valide (au moins 8 caractères)');
+        isValid = false;
+      } else {
+        selectedData.personalInfo.telephone = telephone;
+      }
+
+      // Validate ville
+      const ville = document.getElementById('ville').value.trim();
+      if (!ville) {
+        showError('villeError', 'Veuillez saisir votre ville');
+        isValid = false;
+      } else {
+        selectedData.personalInfo.ville = ville;
+      }
+
+      // Get equipment preference
+      selectedData.personalInfo.equipement = document.getElementById('equipement').checked;
+
+      return isValid;
+    }
+
+    function showError(errorId, message) {
+      const errorElement = document.getElementById(errorId);
+      const inputElement = errorElement.previousElementSibling;
+      
+      errorElement.textContent = message;
+      errorElement.classList.add('show');
+      if (inputElement.tagName === 'INPUT' || inputElement.tagName === 'SELECT') {
+        inputElement.classList.add('error');
+      }
+    }
+
+    function hideError(errorId) {
+      const errorElement = document.getElementById(errorId);
+      const inputElement = errorElement.previousElementSibling;
+      
+      errorElement.classList.remove('show');
+      if (inputElement.tagName === 'INPUT' || inputElement.tagName === 'SELECT') {
+        inputElement.classList.remove('error');
+      }
+    }
+
+    function updateProgress() {
+      const progress = (currentStepNum / 7) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('currentStep').textContent = currentStepNum;
+    }
+
+    function updateButtons() {
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const submitBtn = document.getElementById('submitBtn');
+
+      // Show/hide previous button
+      if (currentStepNum === 1) {
+        prevBtn.style.display = 'none';
+      } else {
+        prevBtn.style.display = 'block';
+      }
+
+      // Show/hide next/submit buttons
+      if (currentStepNum === 7) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'block';
+      } else {
+        nextBtn.style.display = 'block';
+        submitBtn.style.display = 'none';
+      }
+
+      // Disable next button if no groups available on step 5
+      if (currentStepNum === 5) {
+        const groupeSelect = document.getElementById('groupeSelect');
+        const noGroupsVisible = document.getElementById('noGroupsMessage').classList.contains('show');
+        nextBtn.disabled = noGroupsVisible || groupeSelect.disabled;
+      } else {
+        nextBtn.disabled = false;
+      }
+    }
+
+    function updateSummary() {
+      const summarySection = document.getElementById('summarySection');
+      
+      // Get selected group details
+      const selectedGroups = getSelectedGroupsDetails();
+      
+      summarySection.innerHTML = `
+        <div class="summary-item">
+          <div class="summary-label">Catégorie :</div>
+          <div class="summary-value">${AQA_CATEGORIES[selectedData.category]}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Piscine :</div>
+          <div class="summary-value">${AQA_POOLS[selectedData.piscine]}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Formule :</div>
+          <div class="summary-value">${selectedData.formule.charAt(0).toUpperCase() + selectedData.formule.slice(1)}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Fréquence :</div>
+          <div class="summary-value">${selectedData.frequency} fois par semaine</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Groupes sélectionnés :</div>
+          <div class="summary-value">
+            ${selectedGroups.map(group => `• ${group.label}`).join('<br>')}
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Nom complet :</div>
+          <div class="summary-value">${selectedData.personalInfo.nom}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Téléphone :</div>
+          <div class="summary-value">${selectedData.personalInfo.telephone}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Ville :</div>
+          <div class="summary-value">${selectedData.personalInfo.ville}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Équipement nécessaire :</div>
+          <div class="summary-value">${selectedData.personalInfo.equipement ? 'Oui' : 'Non'}</div>
+        </div>
+      `;
+    }
+
+    function getSelectedGroupsDetails() {
+      if (!selectedData.category || !selectedData.piscine || !selectedData.groupes.length) {
+        return [];
+      }
+      
+      const categoryGroups = AQA_GROUPS[selectedData.category];
+      const piscineGroups = categoryGroups[selectedData.piscine];
+      return selectedData.groupes.map(groupId => 
+        piscineGroups.find(group => group.id === groupId)
+      ).filter(Boolean);
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      
+      // Final validation
+      if (!validateCurrentStep()) {
+        return;
+      }
+
+      // Update hidden fields for Netlify
+      document.getElementById('categoryInput').value = AQA_CATEGORIES[selectedData.category];
+      document.getElementById('piscineInput').value = AQA_POOLS[selectedData.piscine];
+      document.getElementById('formuleInput').value = selectedData.formule;
+      document.getElementById('frequencyInput').value = selectedData.frequency;
+      document.getElementById('groupesInput').value = getSelectedGroupsDetails().map(group => group.label).join(', ');
+      document.getElementById('nomInput').value = selectedData.personalInfo.nom;
+      document.getElementById('telephoneInput').value = selectedData.personalInfo.telephone;
+      document.getElementById('villeInput').value = selectedData.personalInfo.ville;
+      document.getElementById('equipementInput').value = selectedData.personalInfo.equipement ? 'Oui' : 'Non';
+
+      // Prepare payload
+      const selectedGroups = getSelectedGroupsDetails();
+      const payload = {
+        category: AQA_CATEGORIES[selectedData.category],
+        piscine: AQA_POOLS[selectedData.piscine],
+        formule: selectedData.formule,
+        frequency: selectedData.frequency,
+        groupes: selectedGroups.map(group => group.label),
+        personalInfo: selectedData.personalInfo,
+        timestamp: new Date().toISOString()
+      };
+
+      // Set hidden payload input
+      document.getElementById('payloadInput').value = JSON.stringify(payload);
+
+      // Show success message
+      document.getElementById('inscriptionForm').style.display = 'none';
+      const successMessage = document.getElementById('successMessage');
+      showSuccessMessage();
+      // Update final summary
+      const finalSummary = document.getElementById('finalSummary');
+      finalSummary.innerHTML = `
+        <div class="summary-item">
+          <div class="summary-label">Catégorie :</div>
+          <div class="summary-value">${payload.category}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Piscine :</div>
+          <div class="summary-value">${payload.piscine}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Formule :</div>
+          <div class="summary-value">${payload.formule.charAt(0).toUpperCase() + payload.formule.slice(1)}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Fréquence :</div>
+          <div class="summary-value">${payload.frequency} fois par semaine</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Groupes :</div>
+          <div class="summary-value">${payload.groupes.join(', ')}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Contact :</div>
+          <div class="summary-value">${payload.personalInfo.nom} - ${payload.personalInfo.telephone}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Ville :</div>
+          <div class="summary-value">${payload.personalInfo.ville}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Équipement :</div>
+          <div class="summary-value">${payload.personalInfo.equipement ? 'Oui' : 'Non'}</div>
+        </div>
+      `;
+      
+      successMessage.classList.add('show');
+
+      // Submit the form to Netlify
+      setTimeout(() => {
+        e.target.submit();
+      }, 1000);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.type !== 'submit') {
+        e.preventDefault();
+        if (currentStepNum < 7 && validateCurrentStep()) {
+          changeStep(1);
+        }
+      }
+    });
+
+    // Update buttons on initial load
+    updateButtons();
+
+    function showSuccessMessage() {
+      const el = document.getElementById("successMessage");
+      if (!el) return;
+
+      // Afficher le bloc succès avec animation
+      el.classList.add("show");
+    }
+  </script>
+  
+     
+</body>
+</html>
