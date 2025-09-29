@@ -296,34 +296,51 @@
             opacity: 0.8;
         }
 
-        /* We Listen to You Section Styles */
-        .listen-section {
-            padding: 4rem 0;
-            margin: 3rem 0;
-            background: rgba(0, 0, 0, 0.8);
-            border-top: 2px solid rgba(0, 153, 255, 0.3);
-            border-bottom: 2px solid rgba(0, 153, 255, 0.3);
-            backdrop-filter: blur(10px);
-            position: relative;
-        }
+.listen-section {
+    position: relative;
+    padding: 4rem 0;
+    margin: 3rem 0;
+    border-top: 2px solid rgba(0, 153, 255, 0.3);
+    border-bottom: 2px solid rgba(0, 153, 255, 0.3);
+    overflow: hidden;
+}
 
-        .listen-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.02), transparent);
-            pointer-events: none;
-        }
+/* Image de fond */
+.listen-section::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+   
+    background-size: cover;
+    z-index: 0; /* en arrière-plan */
+}
 
-        .listen-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            animation: slideIn 1s ease-out;
-        }
+/* Overlay sombre + flou */
+.listen-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 70%,   /* transparent at top */
+        rgba(0,0,0,0.7) 100% /* dark at bottom */
+    );
+    z-index: 1;
+    pointer-events: none; /* don’t block clicks */
+}
+
+/* Le contenu au-dessus de tout */
+.listen-content {
+    position: relative;
+     background: url("https://i.ibb.co/MxgtmShB/Untitled-design-8.png") no-repeat  center bottom ;
+     background-size: 80% auto;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    animation: slideIn 1s ease-out;
+}
+
 
         .listen-title {
             font-size: clamp(2rem, 6vw, 2.5rem);
@@ -348,7 +365,7 @@
             border: 1px solid rgba(0, 153, 255, 0.3);
             border-radius: 20px;
             padding: 2.5rem;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(7px);
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
             margin-bottom: 2rem;
         }
