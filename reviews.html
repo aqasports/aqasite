@@ -1,0 +1,336 @@
+<section class="reviews-section">
+  <div class="reviews-container">
+    <h2 class="reviews-title">Avis de nos Nageurs</h2>
+    <p class="reviews-subtitle">Avis authentiques de notre communauté</p>
+
+    <!-- Rating Overview -->
+    <div class="reviews-stats">
+      <div class="rating-overview">
+        <div class="rating-number" id="avgRating">–</div>
+        <div class="stars-display" id="avgStars">★★★★★</div>
+        <div class="total-reviews" id="totalReviews">– avis</div>
+      </div>
+
+      <div class="rating-bars" id="ratingBars"></div>
+    </div>
+
+    <!-- Reviews Carousel -->
+    <div class="reviews-carousel">
+      <div class="reviews-track" id="reviewsTrack"></div>
+
+      <!-- Carousel Controls -->
+      <div class="carousel-controls-reviews">
+        <button class="carousel-btn" id="prevReview">‹</button>
+        <button class="carousel-btn" id="nextReview">›</button>
+      </div>
+    </div>
+
+    <!-- Write Review CTA -->
+    <div class="write-review-cta">
+      <a href="https://search.google.com/local/reviews?placeid=ChIJHzTSYgBDjhIROjJECWA0dWk" 
+         target="_blank" class="write-review-btn">
+        <span>✍️</span> Partagez votre expérience
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Container */
+.reviews-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.reviews-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #00ffff;
+  margin-bottom: 0.5rem;
+}
+
+.reviews-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+}
+
+/* Stats Overview */
+.reviews-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+
+.rating-overview {
+  text-align: center;
+}
+
+.rating-number {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffd700;
+}
+
+.stars-display {
+  font-size: 1.5rem;
+  color: #ffd700;
+  margin: 0.5rem 0;
+}
+
+.total-reviews {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.rating-bars {
+  flex: 1;
+}
+
+.rating-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.3rem 0;
+}
+
+.bar-label {
+  width: 30px;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bar-track {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  height: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  background: linear-gradient(90deg, #ffd700, #ffa500);
+  height: 100%;
+  width: 0;
+  transition: width 1s ease;
+}
+
+.bar-count {
+  width: 40px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+/* Carousel */
+.reviews-carousel {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.reviews-track {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 2rem 0;
+  scrollbar-width: none;
+}
+.reviews-track::-webkit-scrollbar { display: none; }
+
+.review-card {
+  min-width: 400px;
+  max-width: 400px;
+  background: linear-gradient(145deg, rgba(0, 30, 60, 0.5), rgba(0, 10, 30, 0.3));
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 2.5rem;
+  backdrop-filter: blur(30px);
+  scroll-snap-align: start;
+  position: relative;
+  flex-shrink: 0;
+  transition: transform 0.5s ease;
+}
+.review-card:hover {
+  transform: translateY(-10px);
+  border-color: #00ffff;
+  box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 1.5rem;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.reviewer-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00ffff, #0099ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.reviewer-details h4 {
+  color: #00ffff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.review-stars {
+  color: #ffd700;
+  font-size: 1.2rem;
+}
+
+.review-text {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.review-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Carousel Controls */
+.carousel-controls-reviews {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.carousel-btn {
+  background: rgba(0, 255, 255, 0.2);
+  border: none;
+  color: #00ffff;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.3s;
+}
+.carousel-btn:hover { background: rgba(0, 255, 255, 0.5); }
+
+/* CTA */
+.write-review-cta {
+  text-align: center;
+}
+.write-review-btn {
+  background: linear-gradient(90deg, #00ffff, #0099ff);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.3s;
+}
+.write-review-btn:hover { transform: scale(1.05); }
+</style>
+
+<script>
+async function loadGoogleReviews() {
+  try {
+    const res = await fetch("/.netlify/functions/reviews");
+    const data = await res.json();
+
+    const reviews = data.reviews || [];
+    const avgRating = data.averageRating || 0;
+    const total = data.totalReviewCount || reviews.length;
+
+    // Update stats
+    document.getElementById("avgRating").textContent = avgRating.toFixed(1);
+    document.getElementById("avgStars").textContent =
+      "★".repeat(Math.round(avgRating)) + "☆".repeat(5 - Math.round(avgRating));
+    document.getElementById("totalReviews").textContent = `${total} avis`;
+
+    // Build rating bars
+    const counts = [0, 0, 0, 0, 0];
+    reviews.forEach(r => counts[r.starRating - 1]++);
+    const bars = document.getElementById("ratingBars");
+    bars.innerHTML = counts.map((c, i) => {
+      const star = 5 - i;
+      const pct = total ? (c / total) * 100 : 0;
+      return `
+        <div class="rating-bar-row">
+          <span class="bar-label">${star}★</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${pct}%"></div>
+          </div>
+          <span class="bar-count">${c}</span>
+        </div>`;
+    }).join("");
+
+    // Build review cards
+    const track = document.getElementById("reviewsTrack");
+    track.innerHTML = reviews.map(r => `
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              ${r.reviewer?.displayName?.[0] || "?"}
+            </div>
+            <div class="reviewer-details">
+              <h4>${r.reviewer?.displayName || "Client"}</h4>
+            </div>
+          </div>
+          <div class="review-stars">
+            ${"★".repeat(r.starRating || 0)}${"☆".repeat(5 - (r.starRating || 0))}
+          </div>
+        </div>
+        <p class="review-text">"${r.comment || "Pas de commentaire"}"</p>
+        <div class="review-footer">
+          <span>${new Date(r.createTime).toLocaleDateString("fr-FR")}</span>
+        </div>
+      </div>
+    `).join("");
+
+  } catch (err) {
+    console.error("Erreur avis:", err);
+    document.getElementById("reviewsTrack").innerHTML = "<p>⚠️ Impossible de charger les avis Google.</p>";
+  }
+}
+
+loadGoogleReviews();
+
+// Carousel controls
+const reviewsTrack = document.getElementById("reviewsTrack");
+const prevBtn = document.getElementById("prevReview");
+const nextBtn = document.getElementById("nextReview");
+let scrollAmount = 0;
+const cardWidth = 420;
+
+nextBtn.addEventListener("click", () => {
+  scrollAmount = Math.min(scrollAmount + cardWidth, reviewsTrack.scrollWidth - reviewsTrack.clientWidth);
+  reviewsTrack.scrollTo({ left: scrollAmount, behavior: "smooth" });
+});
+prevBtn.addEventListener("click", () => {
+  scrollAmount = Math.max(scrollAmount - cardWidth, 0);
+  reviewsTrack.scrollTo({ left: scrollAmount, behavior: "smooth" });
+});
+</script>
