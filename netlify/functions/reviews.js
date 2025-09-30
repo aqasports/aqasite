@@ -1,7 +1,6 @@
-// netlify/functions/reviews.js
+// netlify/functions/reviews.js - DEBUG VERSION
 const https = require('https');
 
-// Helper function to make HTTPS requests
 function httpsRequest(options, postData = null) {
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
@@ -21,13 +20,11 @@ function httpsRequest(options, postData = null) {
   });
 }
 
-// In-memory cache
 let cachedReviews = null;
 let lastFetched = 0;
 const CACHE_DURATION = 3600000; // 1 hour
 
 exports.handler = async function(event, context) {
-  // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -35,10 +32,16 @@ exports.handler = async function(event, context) {
     'Content-Type': 'application/json'
   };
 
-  // Handle OPTIONS request for CORS
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
   }
+
+  // DEBUG: Log environment variables (without exposing full values)
+  console.log('DEBUG: Checking environment variables...');
+  console.log('PLACE_ID exists:', !!process.env.PLACE_ID);
+  console.log('PLACE_ID length:', process.env.PLACE_ID?.length || 0);
+  console.log('API_KEY exists:', !!process.env.GOOGLE_MAPS_API_KEY);
+  console.log('API_KEY length:', process.env.GOOGLE_MAPS_API_KEY?.length || 0);
 
   try {
     const now = Date.now();
@@ -52,6 +55,7 @@ exports.handler = async function(event, context) {
         body: JSON.stringify({
           success: true,
           cached: true,
+          source: 'cache',
           reviews: cachedReviews,
           timestamp: lastFetched
         })
@@ -60,28 +64,39 @@ exports.handler = async function(event, context) {
 
     // Validate environment variables
     if (!process.env.PLACE_ID) {
-      throw new Error('PLACE_ID not configured');
+      throw new Error('PLACE_ID environment variable not set in Netlify');
     }
     if (!process.env.GOOGLE_MAPS_API_KEY) {
-      throw new Error('GOOGLE_MAPS_API_KEY not configured');
+      throw new Error('GOOGLE_MAPS_API_KEY environment variable not set in Netlify');
     }
 
-    console.log('Fetching fresh reviews from Google Places API');
+    console.log('Fetching fresh reviews from Google Places API...');
 
-    // Use Google Places API (simpler than My Business API)
     const placeId = process.env.PLACE_ID;
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
     
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,reviews,user_ratings_total&key=${apiKey}&language=fr`;
+    const path = `/maps/api/place/details/json?place_id=${encodeURIComponent(placeId)}&fields=name,rating,reviews,user_ratings_total&key=${apiKey}&language=fr`;
+    
+    console.log('Making request to Google Places API...');
 
     const options = {
       hostname: 'maps.googleapis.com',
-      path: `/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,reviews,user_ratings_total&key=${apiKey}&language=fr`,
+      path: path,
       method: 'GET',
       headers: { 'Accept': 'application/json' }
     };
 
     const data = await httpsRequest(options);
+
+    console.log('Google API Response Status:', data.status);
+
+    if (data.status === 'REQUEST_DENIED') {
+      throw new Error(`Google API: ${data.error_message || 'Request denied - check API key and restrictions'}`);
+    }
+
+    if (data.status === 'INVALID_REQUEST') {
+      throw new Error(`Google API: ${data.error_message || 'Invalid request - check Place ID format'}`);
+    }
 
     if (data.status !== 'OK') {
       throw new Error(`Google API error: ${data.status} - ${data.error_message || 'Unknown error'}`);
@@ -89,10 +104,17 @@ exports.handler = async function(event, context) {
 
     const result = data.result;
     
+    if (!result) {
+      throw new Error('No result returned from Google API');
+    }
+
+    console.log('Successfully fetched reviews:', result.reviews?.length || 0, 'reviews');
+    
     // Transform reviews to match our format
     const transformedReviews = {
       averageRating: result.rating || 0,
       totalReviews: result.user_ratings_total || 0,
+      placeName: result.name || 'AQA Swimming Pool',
       reviews: (result.reviews || []).map(review => ({
         authorName: review.author_name,
         authorInitial: review.author_name.charAt(0).toUpperCase(),
@@ -117,38 +139,54 @@ exports.handler = async function(event, context) {
     cachedReviews = transformedReviews;
     lastFetched = now;
 
+    console.log('Successfully cached reviews');
+
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
         cached: false,
+        source: 'google_api',
         reviews: transformedReviews,
-        timestamp: now
+        timestamp: now,
+        debug: {
+          totalReviews: transformedReviews.totalReviews,
+          avgRating: transformedReviews.averageRating,
+          reviewCount: transformedReviews.reviews.length
+        }
       })
     };
 
   } catch (error) {
-    console.error('Error fetching reviews:', error);
+    console.error('ERROR:', error.message);
+    console.error('Full error:', error);
     
-    // Return mock data if API fails
+    // Return error details for debugging
     return {
-      statusCode: 200,
+      statusCode: 200, // Still return 200 to avoid frontend errors
       headers,
       body: JSON.stringify({
         success: false,
         error: error.message,
-        reviews: getMockReviews()
+        source: 'error_fallback',
+        reviews: getMockReviews(),
+        debug: {
+          errorType: error.name,
+          errorMessage: error.message,
+          hasPlaceId: !!process.env.PLACE_ID,
+          hasApiKey: !!process.env.GOOGLE_MAPS_API_KEY
+        }
       })
     };
   }
 };
 
-// Fallback mock data
 function getMockReviews() {
   return {
     averageRating: 4.9,
     totalReviews: 524,
+    placeName: 'AQA Swimming Pool (Mock Data)',
     ratingDistribution: [2, 3, 10, 42, 467],
     reviews: [
       {
@@ -174,30 +212,6 @@ function getMockReviews() {
         text: "J'avais peur de l'eau depuis toujours. Grâce à l'équipe AQA, j'ai vaincu ma phobie et maintenant je nage régulièrement.",
         relativeTime: "il y a 1 semaine",
         time: Date.now() - 604800000
-      },
-      {
-        authorName: "Ahmed F.",
-        authorInitial: "A",
-        rating: 5,
-        text: "Les séances Aqua Fitness sont géniales! J'ai perdu 12kg en 5 mois. Les équipements sont modernes.",
-        relativeTime: "il y a 2 semaines",
-        time: Date.now() - 1209600000
-      },
-      {
-        authorName: "Nadia T.",
-        authorInitial: "N",
-        rating: 5,
-        text: "Meilleur investissement de ma vie! Les entraîneurs sont passionnés et les infrastructures exceptionnelles.",
-        relativeTime: "il y a 3 semaines",
-        time: Date.now() - 1814400000
-      },
-      {
-        authorName: "Yacine D.",
-        authorInitial: "Y",
-        rating: 4,
-        text: "Très content des cours. Parfois un peu de monde aux heures de pointe mais ça reste gérable.",
-        relativeTime: "il y a 1 mois",
-        time: Date.now() - 2592000000
       }
     ]
   };
