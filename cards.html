@@ -128,6 +128,50 @@
 .video-link:hover::after {
   transform: translateX(4px);
 }
+ .app-link {
+  cursor: pointer;
+  color: #00e5ff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s ease;
+}
+
+.app-link::after {
+ 
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.app-link::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.app-link:hover {
+  color: #0099ff;
+}
+
+.app-link:hover::before {
+  transform: scaleX(1);
+}
+
+.app-link:hover::after {
+  transform: translateX(4px);
+}
+
 
     @media(max-width:768px){
       .popup-content{width:95%;max-height:95vh}
@@ -295,7 +339,7 @@ body {
            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
             <li>Plan d’entraînement trimestriel</li>
             <li>Suivi technique détaillé</li>
-           <li><span class="video-link">Accès complet à l'app AQA</span></li>
+           <li><span class="app-link">Accès complet à l'app AQA</span></li>
             <li>Séance Tester pour un ami gratuite</li>
           </ul>
         </div>
@@ -309,7 +353,7 @@ body {
             <li><span class="video-link">Analyse vidéo personnalisée</span></li>
             <li>Planification sur 6 mois</li>
             <li>Suivi technique + physique</li>
-            <li><span class="video-link">Accès complet à l'app AQA</span></li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
             <li>Équipement Arena offert</li>
             <li>1 événement AQA gratuit</li>
             <li>2 Séances Test pour amis gratuites</li>
@@ -325,7 +369,7 @@ body {
             <li><span class="video-link">Analyse vidéo personnalisée</span></li>
             <li>Planification avancée sur 9 mois</li>
             <li>Suivi technique + physique</li>
-            <li><span class="video-link">Accès complet à l'app AQA</span></li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
             <li>Équipement Arena offert</li>
             <li>3 événements AQA inclus</li>
             <li>1 mois apnée offert</li>
@@ -491,44 +535,35 @@ async function loadFooter() {
 
 document.addEventListener('DOMContentLoaded', loadFooter);
 
- 
-    // Cards toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('click', () => {
-          const isActive = card.classList.contains('active');
-          cards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-expanded','false'); });
-          if (!isActive) { card.classList.add('active'); card.setAttribute('aria-expanded','true'); }
-        });
+// ===== Cards toggle =====
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const isActive = card.classList.contains('active');
+      cards.forEach(c => { 
+        c.classList.remove('active'); 
+        c.setAttribute('aria-expanded','false'); 
       });
+      if (!isActive) { 
+        card.classList.add('active'); 
+        card.setAttribute('aria-expanded','true'); 
+      }
     });
-      // Video analysis popup functionality
-    const videoLinks = document.querySelectorAll('.video-link');
-    videoLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent card toggle
-            openVideoPopup();
-        });
+  });
+});
+
+// ===== Video analysis popup =====
+const videoLinks = document.querySelectorAll('.video-link');
+videoLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card toggle
+        openVideoPopup();
     });
-    
-    // Close popup on overlay click
-    const popupOverlay = document.getElementById('videoPopup');
-    if (popupOverlay) {
-        popupOverlay.addEventListener('click', (e) => {
-            if (e.target.id === 'videoPopup') {
-                closeVideoPopup();
-            }
-        });
-    }
-    
-    // Close popup on ESC key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeVideoPopup();
-        }
-    });
+});
+
 function openVideoPopup() {
+    closeAppPopup(); // ✅ ensure only video popup is open
     const popup = document.getElementById('videoPopup');
     if (popup) {
         popup.classList.add('active');
@@ -541,36 +576,61 @@ function closeVideoPopup() {
     if (popup) {
         popup.classList.remove('active');
         document.body.style.overflow = '';
-        
         // Pause video when closing
         const video = popup.querySelector('video');
         if (video) {
             video.pause();
         }
     }
-}  
- // App links
-      const appLinks = document.querySelectorAll('.video-link');
-      appLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openAppPopup();
-        });
-      });
-       function openAppPopup() {
-      document.getElementById('appPopup').classList.add('active');
-      document.body.style.overflow = 'hidden';
+}
+
+// ===== App popup =====
+const appLinks = document.querySelectorAll('.app-link');
+appLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openAppPopup();
+  });
+});
+
+function openAppPopup() {
+    closeVideoPopup(); // ✅ ensure only app popup is open
+    const popup = document.getElementById('appPopup');
+    if (popup) {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
-    
-    function closeAppPopup() {
-      document.getElementById('appPopup').classList.remove('active');
-      document.body.style.overflow = '';
+}
+
+function closeAppPopup() {
+    const popup = document.getElementById('appPopup');
+    if (popup) {
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
     }
-        function closeAllPopups() {
-      closeVideoPopup();
-      closeAppPopup();
-      closeEquipmentPopup();
+}
+
+// ===== Overlay click to close =====
+document.querySelectorAll('.popup-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+        if (e.target.classList.contains('popup-overlay')) {
+            closeAllPopups();
+        }
+    });
+});
+
+// ===== Close all popups (ESC key support) =====
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeAllPopups();
     }
-  </script>
+});
+
+function closeAllPopups() {
+    closeVideoPopup();
+    closeAppPopup();
+}
+</script>
+
 </body>
 </html>
