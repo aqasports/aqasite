@@ -40,18 +40,8 @@
     .tarif-btn{ display:inline-block; padding:12px 28px; border-radius:30px; font-size:1.1rem; font-weight:600; text-decoration:none; color:#000;
       background:linear-gradient(135deg,#00ffff,#0099ff); box-shadow:0 4px 15px rgba(0,153,255,.4); transition:all .3s ease; }
     .tarif-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,153,255,.6); }
-      .bg-frame {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  z-index: -1;
-  pointer-events: none;
-  background: transparent;
-}
-/* Video Analysis Popup */
+    
+    /* Video Analysis Popup */
     .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);
       backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;animation:fadeIn .3s ease}
     .popup-overlay.active{display:flex}
@@ -85,69 +75,34 @@
       color:#000;text-decoration:none;text-align:center;border-radius:30px;font-size:1.2rem;font-weight:600;
       box-shadow:0 4px 15px rgba(0,153,255,.4);transition:.3s;border:none;cursor:pointer}
     .popup-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,153,255,.6)}
-    .video-link {
-  cursor: pointer;
-  color: #00e5ff;
-  font-weight: 600;
-  font-size: 1.1rem;
-  text-decoration: none;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.3s ease;
-}
-
-.video-link::after {
-  content: '🎥';
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.video-link::before {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.video-link:hover {
-  color: #0099ff;
-}
-
-.video-link:hover::before {
-  transform: scaleX(1);
-}
-
-.video-link:hover::after {
-  transform: translateX(4px);
-}
-  
+    .video-link{cursor:pointer;color:#00ffff;text-decoration:underline;transition:.3s;position:relative}
+    .video-link:hover{color:#0099ff}
+    .video-link::after{content:'🎥';margin-left:5px;font-size:.9em}
     @media(max-width:768px){
       .popup-content{width:95%;max-height:95vh}
       .popup-header h2{font-size:1.5rem}
       .popup-features{grid-template-columns:1fr}
     }
+      .bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
 html {
-  background: #000;  /* solid fallback */
+  background: #000;
 }
 body {
   background: transparent !important;
-  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+  overscroll-behavior: none;
 }
-
   </style>
-</head>
-<body>
-
-<!-- Navbar CSS -->
-  <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
 <iframe src="scroll.html" class="bg-frame"></iframe> 
@@ -210,7 +165,7 @@ body {
           <ul>
             <li>Séances encadrées par coachs</li>
             <li>Suivi technique de base</li>
-            <li>Pas d’analyse vidéo</li>
+            <li>Pas d'analyse vidéo</li>
           </ul>
         </div>
       </div>
@@ -220,10 +175,10 @@ body {
         <div class="features">
           <h3>Silver (3 mois)</h3>
           <ul>
-           <li><span class="video-link">Analyse vidéo personnalisée</span></li>
-            <li>Plan d’entraînement trimestriel</li>
+            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
+            <li>Plan d'entraînement trimestriel</li>
             <li>Suivi technique détaillé</li>
-            <li>Accès complet à l’app AQA</li>
+            <li>Accès complet à l'app AQA</li>
             <li>Séance Tester pour un ami gratuite</li>
           </ul>
         </div>
@@ -237,7 +192,7 @@ body {
             <li><span class="video-link">Analyse vidéo personnalisée</span></li>
             <li>Planification sur 6 mois</li>
             <li>Suivi technique + physique</li>
-            <li>Accès complet à l’app AQA</li>
+            <li>Accès complet à l'app AQA</li>
             <li>Équipement Arena offert</li>
             <li>1 événement AQA gratuit</li>
             <li>2 Séances Test pour amis gratuites</li>
@@ -253,7 +208,7 @@ body {
             <li><span class="video-link">Analyse vidéo personnalisée</span></li>
             <li>Planification avancée sur 9 mois</li>
             <li>Suivi technique + physique</li>
-            <li>Accès complet à l’app AQA</li>
+            <li>Accès complet à l'app AQA</li>
             <li>Équipement Arena offert</li>
             <li>3 événements AQA inclus</li>
             <li>1 mois apnée offert</li>
@@ -267,7 +222,8 @@ body {
   <div style="text-align:center; margin:2rem 0;">
     <a href="tarifs.html" class="tarif-btn">Voir les Tarifs</a>
   </div>
-<!-- Video Analysis Popup -->
+
+  <!-- Video Analysis Popup -->
   <div class="popup-overlay" id="videoPopup">
     <div class="popup-content">
       <button class="popup-close" onclick="closeVideoPopup()" aria-label="Close"></button>
@@ -303,9 +259,8 @@ body {
         </div>
         
         <div class="video-container">
-          <video controls width="640" height="360" 
-  poster="https://i.ibb.co/LXk3Fgfh/Untitled-design-3.jpg">
-  <source src="https://files.catbox.moe/w4iirq.mp4" type="video/mp4">
+          <video controls poster="https://via.placeholder.com/1280x720/0099ff/ffffff?text=Video+Analysis+Sample">
+            <source src="sample-video.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la vidéo.
           </video>
         </div>
@@ -320,35 +275,49 @@ body {
 <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
 </footer>
 
-  <!-- Load navbar logic, then inject and init -->
+  <!-- Load navbar logic -->
   <script src="/js/navbar.js"></script>
-<!-- Add this script before closing </body> tag -->
-<script>
+
+  <!-- Main JavaScript -->
+  <script>
 async function loadFooter() {
     try {
         const response = await fetch('footer.html');
         const footerHTML = await response.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
+        const footerContainer = document.getElementById('footer-container');
+        if (footerContainer) {
+            footerContainer.innerHTML = footerHTML;
+        }
     } catch (error) {
         console.error('Error loading footer:', error);
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadFooter);
-
- 
-    // Cards toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('click', () => {
-          const isActive = card.classList.contains('active');
-          cards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-expanded','false'); });
-          if (!isActive) { card.classList.add('active'); card.setAttribute('aria-expanded','true'); }
+document.addEventListener('DOMContentLoaded', function() {
+    loadFooter();
+    
+    // Cards toggle functionality
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Check if click was on video link
+            if (e.target.classList.contains('video-link')) {
+                return; // Don't toggle card, let video link handler take over
+            }
+            
+            const isActive = card.classList.contains('active');
+            cards.forEach(c => { 
+                c.classList.remove('active'); 
+                c.setAttribute('aria-expanded','false'); 
+            });
+            if (!isActive) { 
+                card.classList.add('active'); 
+                card.setAttribute('aria-expanded','true'); 
+            }
         });
-      });
     });
-      // Video analysis popup functionality
+
+    // Video analysis popup functionality
     const videoLinks = document.querySelectorAll('.video-link');
     videoLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -373,6 +342,8 @@ document.addEventListener('DOMContentLoaded', loadFooter);
             closeVideoPopup();
         }
     });
+});
+
 function openVideoPopup() {
     const popup = document.getElementById('videoPopup');
     if (popup) {
@@ -393,7 +364,7 @@ function closeVideoPopup() {
             video.pause();
         }
     }
-}  
+}
   </script>
 </body>
 </html>
