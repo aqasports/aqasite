@@ -1,6 +1,6 @@
 [build]
   functions = "netlify/functions"
-  publish = "aqa-app-suivi"
+  publish = "."
 
 [functions]
   node_bundler = "esbuild"
