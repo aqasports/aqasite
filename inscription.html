@@ -391,12 +391,7 @@
       animation: fadeInUp 0.5s ease;
     }
 
-    footer { 
-      background:rgba(0,0,0,0.95); 
-      border-top:2px solid #0099ff; 
-      padding:2rem 1rem; 
-      text-align:center; 
-    }
+   
 
     @keyframes fadeInUp { 
       to { opacity:1; transform:translateY(0); } 
@@ -681,11 +676,10 @@ body {
       </form>
     </div>
   </div>
-
-  <footer>
-    <p>📞 0540454907 — ✉️ aqa.sports.academy@gmail.com</p>
-    <p>Piscines: Reghaia Piscine ADM AZAL | Cheraga BK Sport</p>
-  </footer>
+<footer>
+<!-- Add this div where you want the footer to appear -->
+<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
 
   <!-- Enhanced JavaScript with Configuration -->
    <script src="js/navbar.js"></script>
@@ -1286,6 +1280,15 @@ body {
       // Afficher le bloc succès avec animation
       el.classList.add("show");
     }
+    async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
   </script>
   
      

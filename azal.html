@@ -593,6 +593,10 @@
             <button class="cta-button">Contacter</button>
         </div>
     </div>
+<footer>
+<!-- Add this div where you want the footer to appear -->
+<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
 
     <script>
         const observerOptions = {
@@ -620,6 +624,15 @@
             }
             lastTouchEnd = now;
         }, false);
+        async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
     </script>
 </body>
 </html>

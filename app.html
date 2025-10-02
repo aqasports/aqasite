@@ -776,11 +776,38 @@ body {
   background: transparent !important;
   overscroll-behavior: none; /* prevent pull-to-refresh glow */
 }
+/* Floating Scroll Button */
+.floating-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0099ff, #00ffff);
+    color: #000;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border: 2px solid #00ffff;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 999;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+}
 
     </style>
     <!-- Navbar CSS -->
   <link rel="stylesheet" href="css/navbar.css">
 </head>
+<!-- Floating Button -->
+<button id="scrollToDownload" class="floating-btn" aria-label="Aller au téléchargement">
+    ⬇
+</button>
 
 <body>
 <iframe src="scroll.html" class="bg-frame"></iframe>  
@@ -1106,7 +1133,10 @@ body {
             <a href="https://aqasuivi.netlify.app" class="cta-button">Utilisez version Web</a>
         </section>
     </div>
-
+<footer>
+<!-- Add this div where you want the footer to appear -->
+<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
     <script>
         // Scroll animations
         const observerOptions = {
@@ -1253,7 +1283,25 @@ body {
                 }
             });
         }
-        
+        // Scroll to Download Section
+document.getElementById('scrollToDownload').addEventListener('click', () => {
+    const downloadSection = document.querySelector('.final-cta');
+    if (downloadSection) {
+        downloadSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+});
+async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
     </script>
     <script src="js/navbar.js"></script>
 </body>

@@ -442,147 +442,7 @@
             background: transparent;
         }
 
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.95);
-            border-top: 2px solid #0099ff;
-            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
-            padding: 2rem 1rem;
-            margin-top: 3rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .footer-section h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .footer-section p, .footer-section a {
-            color: #ffffff;
-            opacity: 0.8;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a:hover {
-            opacity: 1;
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .socials a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 153, 255, 0.2);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 153, 255, 0.5);
-        }
-
-        .socials a:hover {
-            background: #00ffff;
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
-
-        .socials a:hover svg {
-            stroke: #000;
-        }
-
-        /* Floating Button */
-        .floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000;
-            padding: 1rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-decoration: none;
-            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.4);
-            z-index: 2000;
-            transition: all 0.3s ease;
-            border: 2px solid #00ffff;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            animation: floatBtn 3s ease-in-out infinite;
-        }
-
-        @keyframes floatBtn {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .floating-btn:hover {
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.6);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem 0.5rem;
-            }
-
-            .page-header {
-                padding: 2rem 0;
-            }
-
-            .activities-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 2rem;
-            }
-
-            .activity-card {
-                padding: 2rem 1.5rem;
-                min-height: 250px;
-            }
-
-            .activity-icon {
-                width: 70px;
-                height: 70px;
-            }
-
-            .floating-btn {
-                bottom: 15px;
-                right: 15px;
-                padding: 0.8rem 1.2rem;
-                font-size: 0.8rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-        }
+       
 
         /* Accessibility */
         @media (prefers-reduced-motion: reduce) {
@@ -809,21 +669,8 @@
  </footer>
 <!-- Add this script before closing </body> tag -->
 <script>
-async function loadFooter() {
-    try {
-        const response = await fetch('footer.html');
-        const footerHTML = await response.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
-    } catch (error) {
-        console.error('Error loading footer:', error);
-    }
-}
-
-   
-    <script>
-    
 <a href="index.html" class="floating-btn">← Retour Accueil</a>
-    
+ </script>   
     <script src="js/navbar.js"></script>
     <script>
         // Performance optimized animations
@@ -957,6 +804,15 @@ async function loadFooter() {
             script.src = 'https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver';
             document.head.appendChild(script);
         }
+        async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
     </script>
 </body>
 </html>

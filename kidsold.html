@@ -1682,21 +1682,33 @@
   </div>
 </section>
 
-
 <!-- Available Groups Section -->
-<section class="kids-section kids-groups animate-on-scroll" id="groups">
-  <h2 class="kids-section__title">Groupes Disponibles</h2>
-  <p class="kids-section__subtitle">
-    Chaque groupe est spécialement conçu pour répondre aux besoins et au développement de chaque tranche d'âge.
-  </p>
+        <section class="kids-section kids-groups animate-on-scroll">
+            <h2 class="kids-section__title">Groupes Disponibles</h2>
+            <p class="kids-section__subtitle">
+                Chaque groupe est spécialement conçu pour répondre aux besoins et au développement de chaque tranche d'âge.
+            </p>
+            <div class="kids-groups__grid">
+                <div class="kids-groups__card">
+                    <div class="kids-groups__icon">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-size="16" font-family="Arial" fill="currentColor">
+    A
+  </text>
+</svg>
+
+<section class="kids-groups">
+  <h2 class="kids-groups__heading">Groupes AQA Kids</h2>
 
   <div class="kids-groups__wrapper">
+    
     <!-- Groupe A -->
-    <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe A">
-      <div class="kids-groups__icon" aria-hidden="true">A</div>
+    <div class="kids-groups__card animate-on-scroll">
+      <div class="kids-groups__icon">A</div>
       <h3 class="kids-groups__title">Groupe A</h3>
       <div class="kids-groups__age">Coach Abdelghani</div>
-      <ul class="kids-groups__features" aria-hidden="false">
+      <ul class="kids-groups__features">
         <li class="kids-groups__feature">Samedi 18h15</li>
         <li class="kids-groups__feature">Mercredi 18h</li>
         <li class="kids-groups__feature">Piscine ADM AZAL</li>
@@ -1705,8 +1717,8 @@
     </div>
 
     <!-- Groupe B -->
-    <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe B">
-      <div class="kids-groups__icon" aria-hidden="true">B</div>
+    <div class="kids-groups__card animate-on-scroll">
+      <div class="kids-groups__icon">B</div>
       <h3 class="kids-groups__title">Groupe B</h3>
       <div class="kids-groups__age">Coach Younes</div>
       <ul class="kids-groups__features">
@@ -1718,8 +1730,8 @@
     </div>
 
     <!-- Groupe C -->
-    <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe C">
-      <div class="kids-groups__icon" aria-hidden="true">C</div>
+    <div class="kids-groups__card animate-on-scroll">
+      <div class="kids-groups__icon">C</div>
       <h3 class="kids-groups__title">Groupe C</h3>
       <div class="kids-groups__age">Coach Abdelghani et Coach Younes</div>
       <ul class="kids-groups__features">
@@ -1729,29 +1741,12 @@
         <li class="kids-groups__feature">Reghaia</li>
       </ul>
     </div>
+
   </div>
 </section>
 
-<!-- IntersectionObserver + staggered reveal for animate-on-scroll elements -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const nodes = Array.from(document.querySelectorAll('.animate-on-scroll'));
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const idx = nodes.indexOf(entry.target);
-        // apply small stagger based on index (ms)
-        entry.target.style.transitionDelay = (idx * 100) + 'ms';
-        entry.target.classList.add('animate');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
-  nodes.forEach(n => observer.observe(n));
-});
-</script>
-<!-- Pricing Section -->
+        <!-- Pricing Section -->
         <section class="kids-section kids-pricing animate-on-scroll">
             <h2 class="kids-section__title">Tarifs</h2>
             <p class="kids-section__subtitle">
@@ -1991,10 +1986,6 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         </section>
     </div>
-    <footer>
-<!-- Add this div where you want the footer to appear -->
-<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
-</footer>
   <script src="js/navbar.js"></script>
     <script>
         // Scroll animations
@@ -2390,6 +2381,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
   });
+        </script>
+        <script>
 async function loadFooter() {
     try {
         const response = await fetch('footer.html');
@@ -2401,7 +2394,7 @@ async function loadFooter() {
 }
 
 document.addEventListener('DOMContentLoaded', loadFooter);
+</script>
 
-        </script>
 </body>
 </html>
