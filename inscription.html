@@ -685,27 +685,19 @@ body {
    <script src="js/navbar.js"></script>
   <script>
     
+// Configuration-driven data
+const AQA_GROUPS = {
+  men: {
+    reghaia: [
+      { id: "men_reg_apnea_wed", label: "Mercredi - 21h30-23h30 - Apnée - Coach Nouga" },
+      { id: "men_reg_morn_wed", label: "Mercredi - 6h-8h - Groupe de 5 - Coach Abdelghani" },
+      { id: "men_reg_morn_tue", label: "Mardi - 7h-9h - Groupe de 10 - Coach Abdelghani" },
+      { id: "men_reg_morn_thu", label: "Jeudi - 7h-9h - Groupe de 10 - Coach Abdelghani" },
+      { id: "men_reg_morn_sat", label: "Samedi - 6h-8h - Groupe de 10 - Coach Abdelghani" }
+    ]
+  }
+};
 
-    // Configuration-driven data
- const AQA_GROUPS = {
-      men: {
-        reghaia: [
-          { id: "men_reg_morn_mon", label: "Samedi 21h-23h - Groupe de 10 Youcef" },
-          { id: "men_reg_even_tue", label: "Mardi - 21h-23h - Max5 - Complet" },
-          { id: "men_reg_even_wed", label: "Mercredi - 21h30-23h30 - G10" },
-          { id: "men_reg_even_thu", label: "Jeudi - 21h30-23h30 - G10  Complet" },
-          { id: "men_reg_even_fri", label: "Vendredi - 20h-22h -  Complet" },
-          { id: "men_reg_even_sun", label: "Dimanche - 21h30-23h30 - Groupe de 10" },
-          { id: "men_reg_even_tue2", label: "Mardi - 21h-23h - Max5 (riadh)" },
-          { id: "men_reg_even_wed2", label: "Mercredi - 21h30-23h30 - Max5" },
-          { id: "men_reg_morn_tue", label: "Mardi - 7h-9h - Groupe de 10" },
-          { id: "men_reg_even_tue3", label: "Mardi - 21h-23h - G10  Complet" },
-          { id: "men_reg_morn_thu", label: "Jeudi - 7h-9h - Groupe de 10" },
-          { id: "men_reg_even_thu2", label: "Jeudi - 21h30-23h30 - Max5 Complet" },
-          { id: "men_reg_even_fri2", label: "Vendredi - 20h-22h - G10  Complet" },
-          { id: "men_reg_morn_sat", label: "Samedi - 6h-8h - G10 " },
-          { id: "men_reg_even_sat", label: "Samedi - 21h-23h - G10 Abdelghani" }
-        ],
         cheraga: []
       },
       women: {
