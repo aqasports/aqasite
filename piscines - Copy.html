@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AQA — Page en construction</title>
+  <meta name="description" content="AQA Sports Academy — page en construction. Retour bientôt avec nouveautés & AQA Techs."/>
+  <link rel="icon" href="favicon.ico" />
+
+  <style>
+    :root{
+      --bg-1: #020617;
+      --bg-2: #00162b;
+      --accent: #00f0ff;
+      --accent-2:#00aaff;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(0,255,255,0.06);
+      --card-border: rgba(0,255,255,0.12);
+      --max-width: 1100px;
+      --logo-url: url('https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png');
+      --big-bg-url: url('https://i.imgur.com/3dcksCn.png');
+      --mono: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:var(--mono);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(0,160,255,0.06), transparent 10%),
+        radial-gradient(900px 500px at 90% 85%, rgba(0,255,200,0.03), transparent 10%),
+        linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#eef7fb;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+    }
+
+    /* subtle animated background logo */
+    .bg-logo{
+      position:fixed;
+      inset:0;
+      background-image: var(--big-bg-url);
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size: 70vmin;
+      opacity:0.03;
+      filter: blur(1px);
+      transform: translateZ(0);
+      pointer-events:none;
+    }
+    @media (max-width:600px){ .bg-logo{ background-size:120vmin; } }
+
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:2rem;
+      align-items:center;
+    }
+
+    /* mobile fallback: single column */
+    @media (max-width:920px){
+      .wrap{ grid-template-columns:1fr; padding:0 1rem; }
+    }
+
+    /* left column: content */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      border-radius:16px;
+      padding:2.25rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px) saturate(120%);
+      overflow:hidden;
+      position:relative;
+      animation: cardEnter 700ms cubic-bezier(.2,.9,.3,1) both;
+    }
+
+    @keyframes cardEnter{
+      from{ transform: translateY(14px); opacity:0 }
+      to{ transform: translateY(0); opacity:1 }
+    }
+
+    header.site-head{
+      display:flex;
+      gap:1rem;
+      align-items:center;
+      margin-bottom:1rem;
+    }
+    .logo{
+      width:82px;
+      height:82px;
+      background-image: var(--logo-url);
+      background-size: contain;
+      background-repeat:no-repeat;
+      background-position:center;
+      border-radius:14px;
+      transform-origin:center;
+      animation: floatLogo 4s ease-in-out infinite;
+      box-shadow: 0 6px 22px rgba(0,160,255,0.06), inset 0 -10px 30px rgba(0,0,0,0.25);
+    }
+    @keyframes floatLogo{
+      0%{ transform: translateY(0) rotate(-1deg) }
+      50%{ transform: translateY(-6px) rotate(1deg) }
+      100%{ transform: translateY(0) rotate(-1deg) }
+    }
+
+    .site-title h1{
+      font-size:1.6rem;
+      color:var(--accent);
+      letter-spacing:-0.6px;
+      margin-bottom:6px;
+    }
+    .site-title p{
+      font-size:0.95rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .status-pill{
+      display:inline-flex;
+      gap:.6rem;
+      align-items:center;
+      margin:1rem 0;
+      padding:.55rem .9rem;
+      background: linear-gradient(90deg, rgba(0,255,255,0.05), rgba(0,170,255,0.02));
+      border:1px solid rgba(0,255,255,0.12);
+      border-radius:999px;
+      width:max-content;
+      font-weight:700;
+      color: #dffeff;
+    }
+    .status-dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--accent);
+      box-shadow: 0 0 12px rgba(0,255,255,0.6);
+      animation: beat 1400ms infinite;
+    }
+    @keyframes beat{
+      0%{ transform: scale(1); opacity:1 }
+      50%{ transform: scale(.7); opacity:.6 }
+      100%{ transform: scale(1); opacity:1 }
+    }
+
+    .lead{
+      font-size:1.05rem;
+      line-height:1.7;
+      color:rgba(255,255,255,0.92);
+      margin:1rem 0 1.4rem;
+      opacity:0;
+      transform: translateY(6px);
+      animation: fadeInUp 700ms 120ms forwards;
+    }
+
+    .message{
+      border-radius:12px;
+      padding:1.25rem;
+      background: linear-gradient(180deg, rgba(0,160,255,0.03), rgba(0,255,255,0.02));
+      border:1px solid var(--card-border);
+      box-shadow: 0 8px 30px rgba(0,160,255,0.03);
+      color:rgba(255,255,255,0.92);
+      font-size:0.98rem;
+      line-height:1.7;
+      position:relative;
+      overflow:hidden;
+      animation: fadeInUp 700ms 220ms forwards;
+    }
+
+    .message::before{
+      content:'';
+      position:absolute;
+      inset:-2px;
+      border-radius:14px;
+      background: linear-gradient(90deg, transparent 0%, rgba(0,255,255,0.04) 40%, rgba(0,170,255,0.06) 60%, transparent 100%);
+      filter: blur(16px);
+      opacity:0.8;
+      pointer-events:none;
+      z-index:0;
+    }
+    .message p{ position:relative; z-index:1 }
+
+    @keyframes fadeInUp {
+      to{ opacity:1; transform:none }
+    }
+
+    /* right column: actions & contact */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      align-items:stretch;
+      justify-content:flex-start;
+      animation: slideIn 700ms cubic-bezier(.2,.9,.3,1) both;
+    }
+    @keyframes slideIn{ from{ transform: translateX(12px); opacity:0 } to{ transform:none; opacity:1 } }
+
+    .card.small{
+      padding:1rem;
+      border-radius:14px;
+    }
+
+    .countdown{
+      font-weight:800;
+      font-size:2.3rem;
+      color:var(--accent);
+      letter-spacing:-1px;
+      margin-top:.4rem;
+      text-align:center;
+    }
+
+    .cta{
+      display:block;
+      margin-top:1rem;
+      text-decoration:none;
+      text-align:center;
+      padding:.95rem 1rem;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#00121a;
+      font-weight:800;
+      border-radius:999px;
+      border:2px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 30px rgba(0,170,255,0.12);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .cta:hover{ transform:translateY(-4px); box-shadow: 0 18px 40px rgba(0,170,255,0.16); }
+
+    .info{
+      font-size:0.95rem;
+      color:rgba(255,255,255,0.8);
+      text-align:center;
+      margin-top:.6rem;
+    }
+
+    .contact-row{
+      display:flex;
+      gap:.8rem;
+      align-items:center;
+      justify-content:center;
+      margin-top:1rem;
+      flex-wrap:wrap;
+    }
+    .chip{
+      background:var(--glass);
+      padding:.5rem .8rem;
+      border-radius:999px;
+      border:1px dashed rgba(255,255,255,0.04);
+      font-weight:700;
+      font-size:.9rem;
+      color:rgba(255,255,255,0.9);
+    }
+
+    footer.smallprint{
+      margin-top:1.25rem;
+      font-size:0.82rem;
+      color:rgba(255,255,255,0.55);
+      text-align:center;
+      line-height:1.4;
+    }
+
+    /* navbar (top-left small) */
+    .topbar{
+      position:fixed;
+      top:18px;
+      left:18px;
+      background: rgba(0,0,0,0.35);
+      padding:.45rem .8rem;
+      border-radius:999px;
+      display:flex;
+      gap:.6rem;
+      align-items:center;
+      border:1px solid rgba(255,255,255,0.03);
+      z-index:60;
+      backdrop-filter: blur(6px);
+    }
+    .topbar a{ color:var(--accent); font-weight:700; text-decoration:none; font-size:0.95rem }
+
+    /* small decorative animated lines */
+    .accent-lines{
+      position:absolute;
+      right:-120px;
+      top:10%;
+      width:420px;
+      height:420px;
+      pointer-events:none;
+      opacity:0.12;
+      transform: rotate(14deg);
+      background:
+        linear-gradient(90deg, transparent, rgba(0,255,255,0.07) 10%, rgba(0,170,255,0.05) 30%, transparent 60%);
+      filter: blur(12px);
+      border-radius:40%;
+    }
+    @media (max-width:920px){ .accent-lines{ display:none } }
+
+    /* accessible focus */
+    a:focus, button:focus { outline:3px solid rgba(0,255,255,0.14); outline-offset:3px; border-radius:8px }
+
+  </style>
+</head>
+<body>
+  <div class="bg-logo" aria-hidden="true"></div>
+
+  <div class="topbar" role="navigation" aria-label="Navigation rapide">
+    <a href="index.html">AQA Home</a>
+    <span style="opacity:.6"> · </span>
+    <a href="infos.html">Infos</a>
+  </div>
+
+  <main class="wrap" role="main" aria-labelledby="pageTitle">
+    <!-- left: main card -->
+    <section class="card" aria-labelledby="pageTitle">
+      <header class="site-head">
+        <div class="logo" role="img" aria-label="AQA logo"></div>
+        <div class="site-title">
+          <h1 id="pageTitle">AQA — Page en Construction</h1>
+          <p>Nous préparons quelque chose de grand : convergence sport × technologie.</p>
+        </div>
+      </header>
+
+      <div class="status-pill" aria-hidden="false">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>En développement — AQA Techs bientôt disponible</span>
+      </div>
+
+      <p class="lead">
+        Merci pour votre patience — nous travaillons sur la nouvelle identité d'AQA : suivi technique, analytics, R&D sportive, et services B2B. 
+      </p>
+
+      <div class="message" role="status" aria-live="polite">
+        <p><strong>Ce qui arrive bientôt :</strong></p>
+        <ul style="margin:12px 0 0 18px; color:rgba(255,255,255,0.9); line-height:1.7;">
+          <li>Section <em>AQA Techs</em> : recherche & développement de technologies sportives.</li>
+          <li>Mise à jour en continu des applications AQA (suivi technique & physique).</li>
+          <li>Programmes B2B pour entreprises (formations et accueil d'employés).</li>
+          <li>Offres AQA Kids, Wellness et modules connectés avec analyses vidéo.</li>
+        </ul>
+        <p style="margin-top:.8rem; opacity:.9">Nous revenons très vite avec une expérience plus riche et interactive.</p>
+      </div>
+
+      <div style="display:flex; gap:12px; margin-top:18px; flex-wrap:wrap;">
+        <a class="cta" href="index.html" aria-label="Retour à l'accueil">← Retour à l'accueil</a>
+        <a class="cta" href="contact.html" style="background:transparent; color:var(--accent); border:1px solid rgba(0,255,255,0.08); box-shadow:none">Contact / Partenariat</a>
+      </div>
+
+      <div class="accent-lines" aria-hidden="true"></div>
+
+      <footer class="smallprint" aria-hidden="false">
+        AQA Sports Academy — technologie & entraînement. © <span id="year"></span>
+      </footer>
+    </section>
+
+    <!-- right: sidebar -->
+    <aside class="side" aria-label="Informations complémentaires">
+      <div class="card small" role="region" aria-labelledby="launchTitle">
+        <h3 id="launchTitle" style="color:var(--accent); font-size:1.05rem; margin-bottom:.4rem">Prochain lancement</h3>
+        <div class="countdown" id="countdown" aria-live="polite">—</div>
+        <p class="info">Date cible : <strong id="targetDate">01 novembre 2025</strong></p>
+      </div>
+
+      <div class="card small" role="region" aria-labelledby="contactTitle">
+        <h3 id="contactTitle" style="color:var(--accent); font-size:1.05rem; margin-bottom:.4rem">Contact rapide</h3>
+        <div class="contact-row">
+          <div class="chip">contact@aqa-academy.com</div>
+          <div class="chip">+213 6X XX XX XX</div>
+        </div>
+        <p style="font-size:.92rem; color:rgba(255,255,255,0.8); margin-top:.9rem; text-align:center">Pour partenariats B2B & recrutement : envoyez votre CV et proposition.</p>
+      </div>
+
+      <div class="card small" role="region" aria-labelledby="rolesTitle">
+        <h3 id="rolesTitle" style="color:var(--accent); font-size:1.05rem; margin-bottom:.4rem">Rôles clés</h3>
+        <p style="font-size:.95rem; color:rgba(255,255,255,0.9); line-height:1.6">
+          AQA Techs • Développeurs • R&D sportive • Partenariats B2B • Suivi technique & vidéo.
+        </p>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    // simple year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // countdown (to the target date above)
+    (function(){
+      const target = new Date(document.getElementById('targetDate').textContent + ' 00:00:00').getTime();
+      const el = document.getElementById('countdown');
+
+      function update(){
+        const now = Date.now();
+        const diff = target - now;
+        if(diff <= 0){
+          el.textContent = 'Bientôt disponible';
+          return;
+        }
+        const days = Math.floor(diff / (1000*60*60*24));
+        const hrs = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+        const mins = Math.floor((diff % (1000*60*60))/(1000*60));
+        el.textContent = `${days}j ${hrs}h ${mins}m`;
+      }
+      update();
+      setInterval(update, 60*1000);
+    })();
+
+    // optional keyboard shortcut for quick preview (Ctrl+M toggles reduced motion)
+    (function(){
+      let reduced = false;
+      window.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.key.toLowerCase() === 'm'){
+          reduced = !reduced;
+          document.documentElement.style.setProperty('--motion', reduced ? 'none' : 'normal');
+          alert('Animations ' + (reduced ? 'désactivées' : 'activées') );
+        }
+      });
+    })();
+
+  </script>
+</body>
+</html>
