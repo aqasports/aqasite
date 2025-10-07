@@ -585,26 +585,27 @@ body {
           <div class="error-message" id="formuleError">Veuillez sélectionner une formule</div>
         </div>
 
-        <!-- Step 4: Frequency Selection -->
-        <div class="step" id="step4">
-          <h3>Choisissez votre fréquence</h3>
-          <h5>Séance = 2 heures</h5>
-          <div class="frequency-options">
-            <div class="frequency-option" data-frequency="1">
-              <strong>1 fois</strong><br>
-              <small>par semaine</small>
-            </div>
-            <div class="frequency-option" data-frequency="2">
-              <strong>2 fois</strong><br>
-              <small>par semaine</small>
-            </div>
-            <div class="frequency-option" data-frequency="3">
-              <strong>3 fois</strong><br>
-              <small>par semaine</small>
-            </div>
-          </div>
-          <div class="error-message" id="frequencyError">Veuillez sélectionner une fréquence</div>
-        </div>
+     <!-- Step 4: Frequency Selection -->
+<div class="step" id="step4">
+  <h3>Choisissez votre fréquence</h3>
+  <h5 id="sessionDuration">Séance = 2 heures</h5>
+  <div class="frequency-options">
+    <div class="frequency-option" data-frequency="1">
+      <strong>1 fois</strong><br>
+      <small>par semaine</small>
+    </div>
+    <div class="frequency-option" data-frequency="2">
+      <strong>2 fois</strong><br>
+      <small>par semaine</small>
+    </div>
+    <div class="frequency-option" data-frequency="3">
+      <strong>3 fois</strong><br>
+      <small>par semaine</small>
+    </div>
+  </div>
+  <div class="error-message" id="frequencyError">Veuillez sélectionner une fréquence</div>
+</div>
+
 
         <!-- Step 5: Groupes -->
         <div class="step" id="step5">
@@ -621,6 +622,13 @@ body {
             <div class="no-groups-message" id="noGroupsMessage">
               Aucun groupe disponible pour cette combinaison. Essayez un autre emplacement.
             </div>
+            <div class="no-groups-message" id="noGroupsMessage">
+  Aucun groupe disponible pour cette combinaison. Essayez un autre emplacement.
+</div>
+<div class="no-groups-message" id="womenMessage" style="display: none; color: #ff69b4;">
+  Les groupes de femmes seront bientôt disponibles.
+</div>
+
           </div>
         </div>
 
@@ -689,53 +697,58 @@ body {
 const AQA_GROUPS = {
   men: {
     reghaia: [
-      { id: "men_reg_apnea_wed", label: "Mercredi - 21h30-23h30 - Apnée - Coach Nouga" },
       { id: "men_reg_morn_wed", label: "Mercredi - 6h-8h - Groupe de 5 - Coach Abdelghani" },
       { id: "men_reg_morn_tue", label: "Mardi - 7h-9h - Groupe de 10 - Coach Abdelghani" },
       { id: "men_reg_morn_thu", label: "Jeudi - 7h-9h - Groupe de 10 - Coach Abdelghani" },
       { id: "men_reg_morn_sat", label: "Samedi - 6h-8h - Groupe de 10 - Coach Abdelghani" }
-    ]
+    ],
+    cheraga: []
+  },
+
+  women: {
+    reghaia: [
+      { id: "women_group_a", label: "Lundi - 18h-20h - Coach Sabrina" },
+      { id: "women_group_b", label: "Mercredi - 18h-20h - Coach Sabrina" }
+    ],
+    cheraga: []
+  },
+
+  teens: {
+    reghaia: [
+    ],
+    cheraga: []
+  },
+
+  kids: {
+    reghaia: [
+      { id: "kids_group_a", label: "Sam Merc 18h - Groupe A" },
+      { id: "kids_group_b", label: "Dim Jeu 18h - Groupe B" },
+      { id: "kids_group_c", label: "Dim Merc 19h20 - Groupe C" }
+    ],
+    cheraga: []
+  },
+
+  apnea: {
+    reghaia: [
+      { id: "apnea_group_1", label: "Mercredi - 21h30-23h30 - Objectif 4 min - Coach Nouga" }
+    ],
+    cheraga: []
   }
 };
 
-        cheraga: []
-      },
-      women: {
-        reghaia: [],
-        cheraga: []
-      },
-      teens: {
-        reghaia: [],
-        cheraga: []
-      },
-      kids: {
-        reghaia: [
-          { id: "men_reg_morn_mon", label: "Groupe A" },
-          { id: "men_reg_even_tue", label: "Groupe B" },
-          { id: "men_reg_even_tue", label: "Groupe C" },
-        ],
-        cheraga: []
-      },
-      babies: {
-        reghaia: [
-          { id: "men_reg_apnee_wed", label: "Mercredi - 21h30-23h30 - Apnée" },
-        ],
-        cheraga: []
-      }
-    };
+const AQA_POOLS = {
+  reghaia: "Reghaïa - ADM AZAL",
+  cheraga: "Chéraga - BK Sport"
+};
 
-    const AQA_POOLS = {
-      reghaia: "Reghaïa - ADM AZAL",
-      cheraga: "Cheraga - BK Sport"
-    };
+const AQA_CATEGORIES = {
+  men: "Hommes",
+  women: "Femmes",
+  teens: "Adolescents",
+  kids: "Enfants",
+  apnea: "Apnée"
+};
 
-    const AQA_CATEGORIES = {
-      men: "Hommes",
-      women: "Femmes", 
-      teens: "Adolescents",
-      kids: "Enfants",
-      babies: "apnea"
-    };
 
     // Wizard state
     let currentStepNum = 1;
@@ -783,7 +796,7 @@ const AQA_GROUPS = {
           
           // Apply theme based on category
           applyTheme(selectedData.category);
-          
+          updateSessionDuration(); 
           // Clear error if present
           hideError('categoryError');
           
@@ -1281,6 +1294,17 @@ const AQA_GROUPS = {
         console.error('Error loading footer:', error);
     }
 }
+function updateSessionDuration() {
+  const durationLabel = document.getElementById('sessionDuration');
+  if (!durationLabel) return;
+
+  if (selectedData.category === 'kids') {
+    durationLabel.textContent = 'Séance = 1 heure';
+  } else {
+    durationLabel.textContent = 'Séance = 2 heures';
+  }
+}
+
   </script>
   
      

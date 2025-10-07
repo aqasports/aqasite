@@ -1,1170 +1,333 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg" />
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>AQA SPORTS ACADEMY - Formation Apnée</title>
-    <meta content="Maîtrisez l'art de l'apnée avec AQA Sports Academy. Formation progressive, instructeurs certifiés, sécurité garantie. Atteignez 4 minutes d'apnée statique." name="description"/>
-    <meta content="AQA, apnée, formation apnée, respiration, relaxation, sport aquatique, Algérie" name="keywords"/>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-<style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #000428, #004e92);
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        /* Animated background particles */
-        .bg-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.8), transparent);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-
-        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 2s; }
-        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 4s; }
-        .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 6s; }
-        .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 8s; }
-        .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 10s; }
-        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 12s; }
-        .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 14s; }
-        .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 16s; }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
-
-        /* Background logo and neon effects */
-        .bg-logo {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 80vh;
-            background-image: url('https://i.imgur.com/3dcksCn.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.05;
-            z-index: -1;
-            pointer-events: none;
-            animation: pulse 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.03; transform: translate(-50%, -50%) scale(0.95); }
-            100% { opacity: 0.08; transform: translate(-50%, -50%) scale(1.05); }
-        }
-
-        /* Neon border effects */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            z-index: -1;
-            animation: neonGlow 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonGlow {
-            0% { 
-                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff);
-                border-width: 1px;
-            }
-            50% {
-                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
-                border-width: 3px;
-            }
-            100% { 
-                filter: drop-shadow(0 0 15px #00ffff) drop-shadow(0 0 30px #0099ff);
-                border-width: 2px;
-            }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes cardAppear {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.9);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* Main container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-            margin-bottom: 4rem;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 4, 40, 0.8), rgba(0, 78, 146, 0.6));
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            padding: 2rem;
-            animation: slideIn 1s ease-out;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff, #00ffff);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-            line-height: 1.2;
-            
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            opacity: 0.9;
-            color: #ffffff;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            color: #000;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
-            box-shadow: 0 15px 35px rgba(0, 255, 255, 0.4);
-            border: 2px solid #00ffff;
-            transition: all 0.3s ease;
-            animation: floatBtn 3s ease-in-out infinite;
-        }
-
-        @keyframes floatBtn {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .hero-cta:hover {
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 45px rgba(0, 255, 255, 0.6);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 4rem 0;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 700;
-            color: #00ffff;
-            text-align: center;
-            margin-bottom: 3rem;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
-            animation: lineGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes lineGlow {
-            0% { box-shadow: 0 0 5px #00ffff; }
-            100% { box-shadow: 0 0 20px #00ffff, 0 0 30px #0099ff; }
-        }
-
-        /* Objective Section */
-        .objective-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 3rem 2rem;
-            background: linear-gradient(145deg, rgba(0, 200, 150, 0.15), rgba(100, 255, 200, 0.1));
-            border: 2px solid #00c896;
-            border-radius: 25px;
-            backdrop-filter: blur(20px);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            animation: cardAppear 0.8s ease-out;
-        }
-
-        .objective-icon {
-            font-size: 4rem;
-            color: #00c896;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 20px rgba(0, 200, 150, 0.5);
-        }
-
-        .objective-text {
-            font-size: 1.3rem;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        /* Features Section */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: linear-gradient(145deg, rgba(15, 15, 35, 0.9), rgba(25, 25, 55, 0.8));
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 2.5rem 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: cardAppear 0.8s ease-out;
-            opacity: 0;
-        }
-
-        .feature-card:nth-child(1) { animation-delay: 0.1s; }
-        .feature-card:nth-child(2) { animation-delay: 0.2s; }
-        .feature-card:nth-child(3) { animation-delay: 0.3s; }
-        .feature-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: #00ffff;
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: #00ffff;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 1rem;
-        }
-
-        .feature-description {
-            color: #ffffff;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-
-        /* Photo Section */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .photo-item {
-            position: relative;
-            height: 300px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            animation: cardAppear 0.8s ease-out;
-            opacity: 0;
-        }
-
-        .photo-item:nth-child(1) { animation-delay: 0.1s; }
-        .photo-item:nth-child(2) { animation-delay: 0.2s; }
-        .photo-item:nth-child(3) { animation-delay: 0.3s; }
-
-        .photo-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 45px rgba(0, 255, 255, 0.2);
-        }
-
-        .photo-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 200, 150, 0.3), rgba(0, 150, 255, 0.3));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-align: center;
-            border: 2px dashed rgba(0, 255, 255, 0.5);
-        }
-
-        /* Achievements Section */
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .achievement-card {
-            background: linear-gradient(145deg, rgba(255, 150, 0, 0.15), rgba(255, 200, 100, 0.1));
-            border: 2px solid #ff9600;
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: cardAppear 0.8s ease-out;
-            opacity: 0;
-        }
-
-        .achievement-card:nth-child(1) { animation-delay: 0.1s; }
-        .achievement-card:nth-child(2) { animation-delay: 0.2s; }
-        .achievement-card:nth-child(3) { animation-delay: 0.3s; }
-
-        .achievement-stat {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #ff9600;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 15px rgba(255, 150, 0, 0.5);
-        }
-
-        .achievement-label {
-            font-size: 1.1rem;
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        /* Pricing Section */
-        .pricing-card {
-            max-width: 500px;
-            margin: 0 auto;
-            background: linear-gradient(145deg, rgba(50, 150, 255, 0.15), rgba(100, 200, 255, 0.1));
-            border: 2px solid #3296ff;
-            border-radius: 25px;
-            padding: 3rem 2rem;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            animation: cardAppear 0.8s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #3296ff, #00ffff, #3296ff);
-            border-radius: 25px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .pricing-card:hover::before {
-            opacity: 0.3;
-        }
-
-        .pricing-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #3296ff;
-            margin-bottom: 1rem;
-        }
-
-        .pricing-amount {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #00ffff;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .pricing-period {
-            color: #ffffff;
-            opacity: 0.8;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .pricing-features li {
-            padding: 0.5rem 0;
-            color: #ffffff;
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .pricing-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #00ffff;
-            font-weight: bold;
-        }
-
-        .pricing-cta {
-            display: inline-block;
-            background: linear-gradient(135deg, #3296ff, #00ffff);
-            color: #000;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(50, 150, 255, 0.4);
-        }
-
-        .pricing-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(50, 150, 255, 0.6);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(0, 40, 80, 0.6));
-            border-radius: 25px;
-            padding: 4rem 2rem;
-            text-align: center;
-            margin: 4rem 0;
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(0, 255, 255, 0.3);
-        }
-
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #00ffff;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .cta-text {
-            font-size: 1.2rem;
-            color: #ffffff;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            color: #000;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
-            box-shadow: 0 15px 35px rgba(0, 255, 255, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: transparent;
-            color: #00ffff;
-            border: 2px solid #00ffff;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn-primary:hover, .cta-btn-secondary:hover {
-            transform: translateY(-5px) scale(1.05);
-        }
-
-        .cta-btn-secondary:hover {
-            background: #00ffff;
-            color: #000;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.95);
-            border-top: 2px solid #0099ff;
-            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
-            padding: 2rem 1rem;
-            margin-top: 3rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .footer-section h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .footer-section p, .footer-section a {
-            color: #ffffff;
-            opacity: 0.8;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a:hover {
-            opacity: 1;
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .socials a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 153, 255, 0.2);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 153, 255, 0.5);
-        }
-
-        .socials a:hover {
-            background: #00ffff;
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
-
-        .socials a:hover svg {
-            stroke: #000;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .hero-section {
-                min-height: 80vh;
-                margin-bottom: 2rem;
-            }
-
-            .hero-content {
-                padding: 1rem;
-            }
-
-            .features-grid,
-            .photo-gallery,
-            .achievements-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-btn-primary,
-            .cta-btn-secondary {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-
-            .pricing-card {
-                margin: 0 1rem;
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-</style>
-<!-- Navbar CSS -->
-<link rel="stylesheet" href="css/navbar.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AQA Apnea — Dominez votre souffle</title>
+  <meta name="description" content="AQA Apnea — entraînement de l'apnée statique avec suivi scientifique. Objectif : 4 minutes. Rejoignez notre programme encadré et sécurisé." />
+  <link rel="icon" href="favicon.ico" />
+
+  <!-- Basic style variables matched to index.html theme -->
+  <style>
+    :root{
+      --bg:#000;
+      --panel:#071226;
+      --primary:#0099ff;
+      --secondary:#00ffff;
+      --accent-gradient: linear-gradient(135deg,var(--primary),var(--secondary));
+      --glow: 0 6px 28px rgba(0,153,255,0.14), 0 0 60px rgba(0,255,255,0.06);
+      --radius: 14px;
+      --glass: rgba(255,255,255,0.02);
+      --muted: rgba(255,255,255,0.65);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:#fff;-webkit-font-smoothing:antialiased;}
+    img{max-width:100%;display:block;}
+    a{color:inherit;text-decoration:none}
+
+    /* Container & Layout (consistent with index) */
+    .container{max-width:1100px;margin:0 auto;padding:28px;}
+    header.site-header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+    .logo{height:48px;display:inline-block}
+
+    /* Hero */
+    .hero{position:relative;border-radius:20px;overflow:hidden;padding:48px 32px;background:
+      radial-gradient(ellipse at center, rgba(0,153,255,0.06) 0%, transparent 40%), linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+      border:2px solid rgba(0,153,255,0.12); box-shadow:var(--glow); margin-bottom:28px;
+      display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;
+    }
+    @media (max-width:900px){ .hero{grid-template-columns:1fr; padding:28px 18px} }
+
+    .hero-left h1{font-size:clamp(1.6rem,4.6vw,2.8rem); margin:0 0 10px;
+      background: linear-gradient(135deg,var(--secondary),#bffaff 70%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 6px 30px rgba(0,153,255,0.06);
+    }
+    .hero-left p.lead{color:var(--muted);margin:0 0 18px;font-size:1.02rem}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .cta-button{
+      background:var(--accent-gradient); color:#000; padding:12px 22px;border-radius:999px;border:none;font-weight:700;cursor:pointer;
+      box-shadow:0 8px 32px rgba(0,153,255,0.18);transform:translateY(0);transition:transform .18s ease, box-shadow .18s;
+    }
+    .cta-button:active{transform:translateY(1px)}
+    .secondary-btn{background:transparent;border:1px solid rgba(0,255,255,0.08); color:var(--secondary); padding:10px 18px;border-radius:999px}
+
+    /* Hero media */
+    .hero-media{border-radius:12px;overflow:hidden; background:linear-gradient(180deg,#001022, #001836); border:1px solid rgba(0,255,255,0.04)}
+    .hero-media video{width:100%;height:100%;object-fit:cover;display:block;min-height:240px}
+
+    /* Sections */
+    section{margin:28px 0;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));border:1px solid rgba(0,153,255,0.03)}
+    h2.section-title{font-size:1.25rem;margin:0 0 10px;color:var(--secondary)}
+    p{color:var(--muted);line-height:1.5}
+
+    /* Gallery */
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media (max-width:900px){ .gallery-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:520px){ .gallery-grid{grid-template-columns:1fr} }
+    .gallery-item{position:relative;border-radius:10px;overflow:hidden;cursor:pointer}
+    .gallery-item img{display:block;width:100%;height:220px;object-fit:cover;transition:transform .45s ease, filter .35s ease}
+    .gallery-item .caption{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.5));color:#fff;font-size:0.95rem;opacity:0;transform:translateY(8px);transition:all .3s;}
+    .gallery-item:hover img{transform:scale(1.06);filter:brightness(0.86)}
+    .gallery-item:hover .caption{opacity:1;transform:none}
+
+    /* Video placeholders */
+    .videos-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:900px){ .videos-row{grid-template-columns:1fr} }
+    .video-card{position:relative;border-radius:10px;overflow:hidden}
+    .video-card .overlay-text{position:absolute;left:12px;top:12px;background:rgba(0,0,0,0.36);padding:8px 10px;border-radius:8px;font-weight:600;color:#fff}
+    .video-card video, .video-card img{width:100%;height:220px;object-fit:cover;display:block}
+
+    /* Success / testimonials */
+    .success-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:900px){ .success-grid{grid-template-columns:1fr} }
+    .milestone{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(0,153,255,0.02), rgba(0,153,255,0.01));border:1px solid rgba(0,153,255,0.04)}
+    .testimonial{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));border-left:4px solid rgba(0,153,255,0.08)}
+
+    /* AQA Suivi block */
+    .suivi-list{display:flex;flex-direction:column;gap:8px}
+    .suivi-item{display:flex;gap:12px;align-items:flex-start}
+    .suivi-item .icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center;font-weight:700;color:#000}
+
+    /* CTA footer */
+    .page-cta{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(0,153,255,0.02), rgba(0,153,255,0.01));margin-top:18px}
+    @media (max-width:640px){ .page-cta{flex-direction:column;align-items:stretch} }
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
+    .lightbox.show{display:flex}
+    .lightbox img, .lightbox video{max-width:100%;max-height:90vh;border-radius:10px}
+    .lightbox .close{position:absolute;right:18px;top:18px;background:rgba(255,255,255,0.02);border-radius:10px;padding:8px 10px;cursor:pointer;border:1px solid rgba(255,255,255,0.06)}
+
+    /* small utilities */
+    .muted { color:var(--muted) }
+    .pill { padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(0,153,255,0.04);font-weight:700;color:var(--secondary) }
+    .spacer{height:12px}
+    footer.site-footer{padding:28px 0;color:var(--muted);font-size:0.95rem;text-align:center}
+    /* accessibility */
+    @media (prefers-reduced-motion:reduce){
+      *{transition:none !important;animation:none !important;}
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Animated Background Particles -->
-    <div class="bg-particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+  <div class="container">
 
-    <div class="bg-logo"></div>
-
-    <!-- ===== NAVBAR ===== -->
-    <header id="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <a href="index.html">
-                    <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
-                         alt="AQA Logo" class="logo">
-                </a>
-            </div>
-
-            <!-- Desktop Navigation -->
-            <nav class="nav-menu" id="navMenu">
-                <a href="tarifs.html" class="nav-link">Tarifs</a>
-                <a href="groupes.html" class="nav-link">Groupes</a>
-                <a href="piscines.html" class="nav-link">Piscines</a>
-                <a href="infos.html" class="nav-link">Infos</a>
-                <a href="events.html" class="nav-link">Events</a>
-                <a href="webtv.html" class="nav-link">WebTV</a>
-                <a href="store.html" class="nav-link">Store</a>
-            </nav>
-
-            <div class="right-actions">
-                <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
-                <div class="menu-toggle" onclick="toggleMobileMenu()">
-                    <span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
+    <!-- Header (reuse site header style) -->
+    <header class="site-header" aria-label="AQA navigation">
+      <a href="index.html">
+        <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+      </a>
+      <nav aria-label="Main menu">
+        <a href="index.html" class="pill" style="margin-right:8px">Accueil</a>
+        <a href="inscription.html" class="pill">Inscription</a>
+      </nav>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-        <div class="menu-close" onclick="toggleMobileMenu()">
-            <span></span><span></span>
+    <!-- HERO -->
+    <section class="hero" role="banner" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <h1 id="hero-title">AQA Apnea — Dominez votre souffle.</h1>
+        <p class="lead">Programme d'apnée statique guidé par des coachs d'élite et un suivi scientifique. Objectif : <strong>4 minutes</strong> d'apnée statique en toute sécurité.</p>
+        <div class="cta-row">
+          <a class="cta-button" href="inscription.html#apnea" aria-label="Rejoignez AQA Apnea">Rejoignez AQA Apnea</a>
+          <a class="secondary-btn" href="#suivi">Découvrir le suivi AQA</a>
         </div>
-        <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-        <a href="groupes.html" class="mobile-nav-link">Groupes</a>
-        <a href="piscines.html" class="mobile-nav-link">Piscines</a>
-        <a href="infos.html" class="mobile-nav-link">Infos</a>
-        <a href="events.html" class="mobile-nav-link">Events</a>
-        <a href="webtv.html" class="mobile-nav-link">WebTV</a>
-        <a href="store.html" class="mobile-nav-link">Store</a>
-        <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
-    </div>
-    <!-- ===== /NAVBAR ===== -->
+      </div>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <!-- Replace with actual video: src="path/to/apnea-training-video.mp4" -->
-        <video class="hero-video" autoplay muted loop>
-            <source src="#" type="video/mp4">
-            <!-- Placeholder video - replace with actual apnea training footage -->
+      <div class="hero-media" aria-hidden="true">
+        <!-- Placeholder video file – replace with your production asset -->
+        <video autoplay muted loop playsinline poster="/assets/apnea-hero.jpg">
+          <source src="/assets/apnea-hero.mp4" type="video/mp4">
         </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Formation Apnée</h1>
-            <p class="hero-subtitle">
-                Découvrez l'art ancestral de l'apnée avec AQA Sports Academy. 
-                Maîtrisez votre respiration, explorez vos limites et atteignez une harmonie parfaite 
-                entre corps et esprit dans un environnement sécurisé.
-            </p>
-            <a href="#pricing" class="hero-cta">
-                🌊 Commencer Maintenant
-            </a>
-        </div>
+      </div>
     </section>
 
-    <div class="container">
-        <!-- Objective Section -->
-        <section class="section">
-            <h2 class="section-title">Votre Objectif</h2>
-            <div class="objective-content">
-                <div class="objective-icon">🎯</div>
-                <div class="objective-text">
-                    <strong>Atteignez jusqu'à 4 minutes d'apnée statique</strong> avec notre programme 
-                    d'entraînement progressif et personnalisé. Nos méthodes éprouvées vous permettront 
-                    de dépasser vos limites en toute sécurité.
-                </div>
-            </div>
-        </section>
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title">Qu'est-ce que l'apnée statique ?</h2>
+      <p>
+        L'apnée statique consiste à retenir volontairement sa respiration sous l'eau en position immobile.
+        C'est une discipline qui développe la tolérance au CO₂, la capacité pulmonaire, la maîtrise du stress et la concentration.
+      </p>
+      <p>
+        Chez <strong>AQA</strong>, nous appliquons une méthode progressive et sûre : évaluations initiales, entraînements guidés, supervision rapprochée et protocole de sécurité strict (observateur, prise de pouls, récupération active).
+      </p>
+    </section>
 
-        <!-- Features Section -->
-        <section class="section">
-            <h2 class="section-title">Nos Avantages</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍🏫</div>
-                    <h3 class="feature-title">Instructeurs Professionnels</h3>
-                    <p class="feature-description">
-                        Formateurs certifiés avec plus de 10 ans d'expérience en apnée 
-                        et techniques de respiration avancées.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3 class="feature-title">Sécurité Prioritaire</h3>
-                    <p class="feature-description">
-                        Protocoles de sécurité stricts, surveillance constante et équipement 
-                        de sauvetage professionnel toujours disponible.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3 class="feature-title">Entraînement Progressif</h3>
-                    <p class="feature-description">
-                        Programme adapté à votre niveau avec progression mesurée et 
-                        objectifs personnalisés pour chaque apnéiste.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🧘‍♂️</div>
-                    <h3 class="feature-title">Techniques de Relaxation</h3>
-                    <p class="feature-description">
-                        Méthodes de méditation, yoga et techniques de gestion du stress 
-                        pour optimiser vos performances.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Photo Section -->
-        <section class="section">
-            <h2 class="section-title">Moments d'Entraînement</h2>
-            <div class="photo-gallery">
-                <div class="photo-item">
-                    <!-- Replace src with actual training photos -->
-                    <div class="photo-placeholder">
-                        📸 Photo Entraînement Apnée #1
-                        <br><small>Session de respiration en piscine</small>
-                    </div>
-                </div>
-                
-                <div class="photo-item">
-                    <!-- Replace src with actual training photos -->
-                    <div class="photo-placeholder">
-                        📸 Photo Entraînement Apnée #2
-                        <br><small>Techniques de relaxation</small>
-                    </div>
-                </div>
-                
-                <div class="photo-item">
-                    <!-- Replace src with actual training photos -->
-                    <div class="photo-placeholder">
-                        📸 Photo Entraînement Apnée #3
-                        <br><small>Progression des élèves</small>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Achievements Section -->
-        <section class="section">
-            <h2 class="section-title">Réussites de Nos Clients</h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <div class="achievement-stat">90%</div>
-                    <div class="achievement-label">
-                        Atteignent 4 min d'apnée<br>en 3 mois
-                    </div>
-                </div>
-                
-                <div class="achievement-card">
-                    <div class="achievement-stat">100%</div>
-                    <div class="achievement-label">
-                        Sécurité garantie<br>Zéro accident
-                    </div>
-                </div>
-                
-                <div class="achievement-card">
-                    <div class="achievement-stat">250+</div>
-                    <div class="achievement-label">
-                        Apnéistes formés<br>avec succès
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section class="section" id="pricing">
-            <h2 class="section-title">Tarification</h2>
-            <div class="pricing-card">
-                <h3 class="pricing-title">Formation Apnée Complète</h3>
-                <div class="pricing-amount">25.000</div>
-                <div class="pricing-period">DA / 8 sessions</div>
-                
-                <ul class="pricing-features">
-                    <li>8 sessions d'entraînement de 2h</li>
-                    <li>Techniques de respiration avancées</li>
-                    <li>Suivi personnalisé de progression</li>
-                    <li>Matériel d'apnée inclus</li>
-                    <li>Certification de niveau</li>
-                    <li>Accès aux sessions de révision</li>
-                </ul>
-                
-                <a href="#cta" class="pricing-cta">S'inscrire Maintenant</a>
-            </div>
-        </section>
-
-        <!-- Call to Action Section -->
-        <section class="cta-section" id="cta">
-            <h2 class="cta-title">Prêt à Explorer Vos Limites ?</h2>
-            <p class="cta-text">
-                Rejoignez notre communauté d'apnéistes passionnés et découvrez les profondeurs 
-                de vos capacités. L'aventure commence maintenant !
-            </p>
-            <div class="cta-buttons">
-                <a href="tel:0540454907" class="cta-btn-primary">
-                    📞 Réserver Maintenant
-                </a>
-                <a href="mailto:aqa.sports.academy@gmail.com" class="cta-btn-secondary">
-                    ✉️ Plus d'Infos
-                </a>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p>📞 0540454907</p>
-                <p>✉️ aqa.sports.academy@gmail.com</p>
-            </div>
-            <div class="footer-section">
-                <h4>Piscines</h4>
-                <p>- Reghaia Piscine ADM AZAL</p>
-                <p>- Cheraga Bk sport</p>
-            </div>
-            <div class="footer-section">
-                <h4>Suivez-nous</h4>
-                <div class="socials">
-                    <!-- Facebook -->
-                    <a href="https://www.facebook.com/profile.php?id=100063686885387" target="_blank" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" 
-                             stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             width="30" height="30">
-                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3.5l.5-4H14V7a1 1 0 011-1h3z"/>
-                        </svg>
-                    </a>
-
-                    <!-- Instagram -->
-                    <a href="https://www.instagram.com/aqa.sports/" target="_blank" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                             stroke="#00ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             width="30" height="30">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                            <circle cx="17.5" cy="6.5" r="1.5"/>
-                        </svg>
-                    </a>
-
-                    <!-- TikTok -->
-                    <a href="https://www.tiktok.com/@aqa.sports.academ" target="_blank" aria-label="TikTok">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" 
-                             width="30" height="30" fill="none" stroke="#00ffff" stroke-width="2">
-                            <path d="M32 6c1 4 4 8 9 9v6c-4 0-8-2-9-5v14a12 12 0 11-12-12"/>
-                        </svg>
-                    </a>
-
-                    <!-- WhatsApp -->
-                    <a href="https://wa.me/213540454907" target="_blank" aria-label="WhatsApp">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" 
-                             width="30" height="30" fill="none" stroke="#00ffff" stroke-width="2">
-                            <path d="M16 3C9 3 3 9 3 16c0 2.6.8 5 2.2 7L3 29l6-2c2 1.3 4.4 2 7 2 7 0 13-6 13-13S23 3 16 3z"/>
-                            <path d="M21 19c-.4 0-.9-.2-1.3-.3-.5-.2-1-.4-1.5-.6-.5-.3-.8-.5-1.1-.9l-.3-.4c-.2-.2-.3-.5-.1-.8l.5-1c.1-.3.2-.6 0-.9l-1-2c-.2-.4-.5-.4-.8-.4h-.7c-.2 0-.5.1-.7.3-.3.3-.7.8-.8 1.3-.2.6-.3 1.2-.3 1.8 0 .8.3 1.5.6 2.2.6 1.1 1.6 2 2.7 2.6.9.5 2 .8 3.1.9.6 0 1.1 0 1.7-.1.5-.1 1.2-.5 1.4-1 .2-.4.2-.9.1-1.3 0-.2-.3-.3-.5-.4z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+    <!-- PHOTO GALLERY -->
+    <section aria-labelledby="gallery-title">
+      <h2 class="section-title" id="gallery-title">Galerie</h2>
+      <div class="gallery-grid" role="list">
+        <div class="gallery-item" role="listitem" data-src="/assets/apnea-01.jpg">
+          <img src="/assets/apnea-01-thumb.jpg" alt="Séance d'apnée en piscine AQA">
+          <div class="caption">Séance d'entraînement — contrôle du souffle</div>
         </div>
+        <div class="gallery-item" data-src="/assets/apnea-02.jpg">
+          <img src="/assets/apnea-02-thumb.jpg" alt="Coach AQA guide un athlète">
+          <div class="caption">Coaching et sécurité</div>
+        </div>
+        <div class="gallery-item" data-src="/assets/apnea-03.jpg">
+          <img src="/assets/apnea-03-thumb.jpg" alt="Respiration et relaxation">
+          <div class="caption">Techniques de respiration</div>
+        </div>
+        <div class="gallery-item" data-src="/assets/apnea-04.jpg">
+          <img src="/assets/apnea-04-thumb.jpg" alt="Moment de réussite">
+          <div class="caption">Atteindre un nouveau record</div>
+        </div>
+        <div class="gallery-item" data-src="/assets/apnea-05.jpg">
+          <img src="/assets/apnea-05-thumb.jpg" alt="Analyse vidéo">
+          <div class="caption">Analyse vidéo pour progression</div>
+        </div>
+        <div class="gallery-item" data-src="/assets/apnea-06.jpg">
+          <img src="/assets/apnea-06-thumb.jpg" alt="Equipe AQA">
+          <div class="caption">Équipe AQA — encadrement</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO HIGHLIGHTS -->
+    <section aria-labelledby="videos-title">
+      <h2 class="section-title" id="videos-title">Vidéos — Moments forts</h2>
+      <div class="videos-row">
+        <div class="video-card" data-video="/assets/apnea-video1.mp4" aria-hidden="false">
+          <img src="/assets/apnea-video1-thumb.jpg" alt="Vidéo entraînement AQA">
+          <div class="overlay-text">La maîtrise du souffle, c'est la maîtrise de soi</div>
+        </div>
+        <div class="video-card" data-video="/assets/apnea-video2.mp4">
+          <img src="/assets/apnea-video2-thumb.jpg" alt="Vidéo réussite membre">
+          <div class="overlay-text">Technique & récupération</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESSES & TESTIMONIALS -->
+    <section aria-labelledby="success-title">
+      <h2 class="section-title" id="success-title">Succès & Témoignages</h2>
+      <div class="success-grid">
+        <div class="milestone">
+          <strong>Objectif atteint :</strong>
+          <p class="muted">Plusieurs adhérents ont atteint ou dépassé les <strong>4 minutes</strong> en apnée statique sous supervision AQA.</p>
+          <ul class="muted">
+            <li>Programme progressif et sécurisé</li>
+            <li>Suivi individuel et rapports visuels</li>
+            <li>Sessions de préparation mentale et relaxation</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="testimonial">
+            <strong>Abdelghani — Head Coach</strong>
+            <p class="muted">“Nous construisons la progression autour de la sécurité et de la science : respiration contrôlée, tolérance CO₂ et récupération optimale.”</p>
+          </div>
+          <div style="height:12px"></div>
+          <div class="testimonial">
+            <strong>Sara — Adhérente AQA</strong>
+            <p class="muted">“Avec le suivi AQA, j'ai gagné en calme et atteint 3min40 lors d'un test — la route vers 4min est claire.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AQA SUIVI -->
+    <section id="suivi" aria-labelledby="suivi-title">
+      <h2 class="section-title" id="suivi-title">AQA Suivi — science & traçabilité</h2>
+      <p class="muted">Notre suivi combine vidéos analytiques, métriques respiratoires et comptes-rendus réguliers pour maximiser la progression en toute sécurité.</p>
+
+      <div class="suivi-list" style="margin-top:12px">
+        <div class="suivi-item">
+          <div class="icon">1</div>
+          <div>
+            <strong>Vidéo analyse</strong><br>
+            <span class="muted">Séquences d'entraînement analysées pour corriger la posture et la relaxation.</span>
+          </div>
+        </div>
+        <div class="suivi-item">
+          <div class="icon">2</div>
+          <div>
+            <strong>Métriques respiratoires</strong><br>
+            <span class="muted">Mesures de récupération, fréquence cardiaque et tolérance CO₂.</span>
+          </div>
+        </div>
+        <div class="suivi-item">
+          <div class="icon">3</div>
+          <div>
+            <strong>Rapports périodiques</strong><br>
+            <span class="muted">Bilan visuel et recommandations personnalisées tous les 45 jours.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="page-cta" aria-labelledby="cta-title">
+      <div>
+        <h2 id="cta-title" style="margin:0">Prêt à commencer ?</h2>
+        <p class="muted" style="margin:6px 0 0">Rejoignez AQA Apnea et travaillez vers l'objectif de <strong>4 minutes</strong> avec un encadrement scientifique.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="cta-button" href="inscription.html#apnea">Rejoignez AQA Apnea</a>
+        <a class="secondary-btn" href="contact.html">Contactez-nous</a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      © AQA — Tous droits réservés · <a href="infos.html" style="color:var(--secondary)">Infos & sécurité</a>
     </footer>
 
-    <!-- Back to Activities Button -->
-    <a href="activities.html" class="hero-cta" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-size: 0.9rem; padding: 1rem 1.5rem;">
-        ← Retour Sports
-    </a>
+  </div>
 
-    <script src="js/navbar.js"></script>
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  <!-- Lightbox / Video modal -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="close" aria-label="Fermer">✕</button>
+    <div id="lightbox-content"></div>
+  </div>
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+  <!-- Minimal JS for gallery lightbox & video open -->
+  <script>
+    (function(){
+      const lightbox = document.getElementById('lightbox');
+      const lbContent = document.getElementById('lightbox-content');
+      const closeBtn = lightbox.querySelector('.close');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.animation = 'cardAppear 0.8s ease-out forwards';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all animated elements
-        document.querySelectorAll('.feature-card, .photo-item, .achievement-card').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Enhanced button interactions
-        document.querySelectorAll('.hero-cta, .pricing-cta, .cta-btn-primary, .cta-btn-secondary').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Add ripple effect
-                const ripple = document.createElement('div');
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(0, 255, 255, 0.5);
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    pointer-events: none;
-                `;
-                
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
-                ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
-                
-                this.style.position = 'relative';
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                0% { transform: scale(0); opacity: 1; }
-                100% { transform: scale(2); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Video fallback for unsupported browsers
-        const video = document.querySelector('.hero-video');
-        if (video) {
-            video.addEventListener('error', function() {
-                // Replace video with static background image if video fails
-                this.style.display = 'none';
-                const heroSection = document.querySelector('.hero-section');
-                heroSection.style.background = 'linear-gradient(135deg, rgba(0, 200, 150, 0.3), rgba(0, 150, 255, 0.3)), url("hero-apnea-bg.jpg") center/cover';
-            });
+      function openLightbox(el){
+        const imgSrc = el.dataset.src || el.querySelector('img')?.src;
+        const videoSrc = el.dataset.video;
+        lbContent.innerHTML = '';
+        if(videoSrc){
+          const v = document.createElement('video');
+          v.src = videoSrc; v.controls = true; v.autoplay = true; v.playsInline = true;
+          lbContent.appendChild(v);
+        } else if(imgSrc){
+          const im = document.createElement('img');
+          im.src = imgSrc; im.alt = el.querySelector('img')?.alt || '';
+          lbContent.appendChild(im);
         }
+        lightbox.classList.add('show');
+        lightbox.setAttribute('aria-hidden','false');
+      }
 
-        // Performance optimization
-        window.addEventListener('load', function() {
-            // Remove unused animations after page load
-            document.body.classList.add('loaded');
-        });
+      // gallery items
+      document.querySelectorAll('.gallery-item').forEach(item=>{
+        item.addEventListener('click',()=>openLightbox(item));
+      });
 
-        // Prevent zoom on double tap for mobile
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
+      // video cards
+      document.querySelectorAll('.video-card').forEach(vc=>{
+        vc.addEventListener('click',()=>openLightbox(vc));
+      });
 
-        // Enhanced pricing card interaction
-        const pricingCard = document.querySelector('.pricing-card');
-        if (pricingCard) {
-            pricingCard.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            pricingCard.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        }
-
-        // Achievement counters animation
-        const achievementStats = document.querySelectorAll('.achievement-stat');
-        const animateCounters = () => {
-            achievementStats.forEach(stat => {
-                const target = parseInt(stat.textContent.replace(/\D/g, ''));
-                const suffix = stat.textContent.replace(/\d/g, '');
-                let current = 0;
-                const increment = target / 50;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    stat.textContent = Math.floor(current) + suffix;
-                }, 50);
-            });
-        };
-
-        // Trigger counter animation when achievements section is visible
-        const achievementsSection = document.querySelector('.achievements-grid');
-        if (achievementsSection) {
-            const achievementObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setTimeout(animateCounters, 500);
-                        achievementObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            achievementObserver.observe(achievementsSection);
-        }
-    </script>
+      function closeLB(){
+        // stop playing video if any
+        const media = lbContent.querySelector('video');
+        if(media){ try{ media.pause(); media.currentTime = 0; }catch(e){} }
+        lbContent.innerHTML = '';
+        lightbox.classList.remove('show');
+        lightbox.setAttribute('aria-hidden','true');
+      }
+      closeBtn.addEventListener('click', closeLB);
+      lightbox.addEventListener('click',(e)=>{ if(e.target === lightbox) closeLB(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLB(); });
+    })();
+  </script>
 </body>
 </html>
