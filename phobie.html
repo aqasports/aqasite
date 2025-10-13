@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Anti-Aquaphobie - Formation Accélérée</title>
+    <meta content="Formation accélérée AQA pour vaincre la peur de l'eau. Encadrement professionnel, méthode scientifique, progression garantie en 4 à 6 séances." name="description"/>
+    <meta content="AQA, aquaphobie, peur de l'eau, formation natation, confiance, Algérie" name="keywords"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+    /* ==================== RESET & BASE ==================== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        background: #000;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: transparent !important;
+        color: #ffffff;
+        line-height: 1.6;
+        overflow-x: hidden;
+        position: relative;
+        min-height: 100vh;
+        overscroll-behavior: none;
+    }
+
+    /* ==================== BACKGROUND EFFECTS ==================== */
+    .bg-logo {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        height: 80vh;
+        background-image: url('https://i.imgur.com/3dcksCn.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.1;
+        z-index: -2;
+        pointer-events: none;
+    }
+
+    .bg-frame {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        z-index: -1;
+        pointer-events: none;
+        background: transparent;
+    }
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 0px solid transparent;
+        background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        z-index: -1;
+        animation: neonGlow 4s ease-in-out infinite alternate;
+    }
+
+    /* ==================== ANIMATIONS ==================== */
+    @keyframes neonGlow {
+        0%, 100% {
+            filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+        }
+        50% {
+            filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+        }
+    }
+
+    @keyframes slideIn {
+        from { 
+            opacity: 0; 
+            transform: translateY(30px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    @keyframes pulse {
+        0%, 100% { 
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% { 
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* ==================== LAYOUT ==================== */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+        text-align: center;
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+        animation: slideIn 1s ease-out;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 800;
+        background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        line-height: 1.2;
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.2rem, 4vw, 2rem);
+        font-weight: 600;
+        color: #00ffff;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        letter-spacing: 0.5px;
+    }
+
+    .hero-image {
+        max-width: 650px;
+        width: 100%;
+        height: auto;
+        border-radius: 25px;
+        margin: 2rem auto;
+        display: block;
+        border: 4px solid rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+        transition: all 0.4s ease;
+    }
+
+    .hero-image:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 70px rgba(0, 255, 255, 0.6);
+        border-color: #00ffff;
+    }
+
+    /* ==================== CONTENT SECTIONS ==================== */
+    .content-section {
+        background: rgba(0, 153, 255, 0.05);
+        border: 2px solid rgba(0, 153, 255, 0.3);
+        border-radius: 25px;
+        padding: 3rem 2rem;
+        margin-bottom: 2.5rem;
+        backdrop-filter: blur(10px);
+        animation: slideIn 1s ease-out;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+
+    .content-section::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 153, 255, 0.1));
+        border-radius: 25px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .content-section:hover::before {
+        opacity: 1;
+    }
+
+    .content-section:hover {
+        border-color: rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 30px rgba(0, 153, 255, 0.2);
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        font-weight: 700;
+        color: #00ffff;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        letter-spacing: 0.5px;
+    }
+
+    .section-icon {
+        font-size: clamp(2rem, 6vw, 3.2rem);
+        filter: drop-shadow(0 0 15px currentColor);
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .section-content {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        color: #ffffff;
+        opacity: 0.95;
+        line-height: 1.8;
+    }
+
+    .section-content p {
+        margin-bottom: 1rem;
+    }
+
+    /* ==================== FEATURE LIST ==================== */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+    }
+
+    .feature-list li {
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1rem;
+        background: rgba(0, 153, 255, 0.1);
+        border-left: 4px solid #00ffff;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, #00ffff, #0099ff);
+        box-shadow: 0 0 10px #00ffff;
+    }
+
+    .feature-list li:hover {
+        background: rgba(0, 153, 255, 0.2);
+        transform: translateX(10px);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+        border-left-width: 6px;
+    }
+
+    .feature-list li strong {
+        color: #00ffff;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    /* ==================== PHASES GRID ==================== */
+    .phases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .phase-card {
+        background: rgba(0, 153, 255, 0.1);
+        border: 2px solid rgba(0, 153, 255, 0.3);
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .phase-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .phase-card:hover::before {
+        left: 100%;
+    }
+
+    .phase-card:hover {
+        background: rgba(0, 153, 255, 0.2);
+        border-color: #00ffff;
+        transform: translateY(-12px);
+        box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+    }
+
+    .phase-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #00ffff;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        display: inline-block;
+        position: relative;
+    }
+
+    .phase-number::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        box-shadow: 0 0 10px #00ffff;
+    }
+
+    .phase-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #00ffff;
+        margin-bottom: 0.8rem;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    .phase-description {
+        font-size: 1.05rem;
+        color: #ffffff;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    /* ==================== PRICING SECTION ==================== */
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+        padding: 1rem 0;
+    }
+
+    .pricing-card {
+        background: rgba(0, 153, 255, 0.08);
+        border: 3px solid rgba(0, 153, 255, 0.4);
+        border-radius: 30px;
+        padding: 3rem 2rem;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .pricing-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+    }
+
+    .pricing-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 30px;
+        padding: 3px;
+        background: linear-gradient(135deg, #00ffff, #0099ff, #00ffff);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .pricing-card:hover::before {
+        opacity: 1;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .pricing-card:hover::after {
+        opacity: 0.6;
+    }
+
+    .pricing-card:hover {
+        background: rgba(0, 153, 255, 0.15);
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(0, 255, 255, 0.5);
+    }
+
+    .pricing-featured {
+        border-color: #00ffff;
+        background: rgba(0, 153, 255, 0.12);
+        box-shadow: 0 10px 40px rgba(0, 255, 255, 0.35);
+        transform: scale(1.05);
+    }
+
+    .pricing-featured::after {
+        opacity: 0.3;
+    }
+
+    .pricing-featured:hover {
+        transform: translateY(-15px) scale(1.08);
+        box-shadow: 0 25px 70px rgba(0, 255, 255, 0.6);
+    }
+
+    .pricing-ribbon {
+        position: absolute;
+        top: 25px;
+        right: -40px;
+        background: linear-gradient(135deg, #00ffff, #0099ff);
+        color: #000;
+        padding: 0.6rem 3.5rem;
+        font-weight: 900;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transform: rotate(45deg);
+        box-shadow: 0 4px 20px rgba(0, 255, 255, 0.7);
+        z-index: 10;
+    }
+
+    .pricing-badge {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: #00ffff;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .pricing-sessions {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        margin: 0.5rem 0;
+        line-height: 1.2;
+    }
+
+    .pricing-duration {
+        font-size: 1.1rem;
+        color: #00ffff;
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .pricing-amount {
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #00ffff 0%, #0099ff 50%, #00ffff 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 1.5rem 0;
+        filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6));
+        letter-spacing: -2px;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .pricing-bonus {
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(0, 153, 255, 0.15));
+        border: 2px solid rgba(0, 255, 255, 0.4);
+        border-radius: 20px;
+        padding: 1.3rem 1.5rem;
+        font-size: 1.1rem;
+        color: #ffffff;
+        line-height: 1.6;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .pricing-bonus::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        animation: shimmer 3s infinite;
+    }
+
+    .pricing-bonus strong {
+        color: #00ffff;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        font-weight: 800;
+    }
+
+    .pricing-description {
+        font-size: 1.05rem;
+        color: #ffffff;
+        opacity: 0.85;
+        line-height: 1.7;
+        margin-top: 0.5rem;
+        font-style: italic;
+    }
+
+    /* ==================== CTA SECTION ==================== */
+    .cta-section {
+        background: linear-gradient(135deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.15));
+        border: 3px solid rgba(0, 255, 255, 0.5);
+        border-radius: 30px;
+        padding: 4rem 2rem;
+        text-align: center;
+        margin: 3rem 0;
+        animation: slideIn 1s ease-out;
+        box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 60%);
+        animation: pulse 4s ease-in-out infinite;
+    }
+
+    .cta-title {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 900;
+        background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-subtitle {
+        font-size: clamp(1.2rem, 4vw, 1.7rem);
+        color: #ffffff;
+        opacity: 0.95;
+        margin-bottom: 2.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ==================== FORM STYLES ==================== */
+    .form-container {
+        background: rgba(0, 153, 255, 0.08);
+        border: 2px solid rgba(0, 153, 255, 0.4);
+        border-radius: 25px;
+        padding: 3rem 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        backdrop-filter: blur(10px);
+    }
+
+    .form-group {
+        margin-bottom: 1.8rem;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        color: #00ffff;
+        font-weight: 600;
+        margin-bottom: 0.7rem;
+        font-size: 1.1rem;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="number"] {
+        width: 100%;
+        padding: 1.1rem 1.2rem;
+        background: rgba(0, 0, 0, 0.4);
+        border: 2px solid rgba(0, 153, 255, 0.4);
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 1.05rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #00ffff;
+        background: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .form-group input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .radio-group {
+        display: flex;
+        gap: 2.5rem;
+        margin-top: 0.7rem;
+    }
+
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .radio-option:hover {
+        transform: translateX(5px);
+    }
+
+    .radio-option input[type="radio"] {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+        accent-color: #00ffff;
+    }
+
+    .radio-option label {
+        color: #ffffff;
+        font-size: 1.05rem;
+        cursor: pointer;
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .submit-btn {
+        background: linear-gradient(135deg, #0099ff, #00ffff);
+        color: #000000;
+        padding: 1.3rem 3rem;
+        border: 3px solid #00ffff;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 1.3rem;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.4s ease;
+        box-shadow: 0 0 30px rgba(0, 153, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .submit-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .submit-btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .submit-btn:hover {
+        background: linear-gradient(135deg, #00ffff, #0099ff);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 60px rgba(0, 255, 255, 0.8);
+        border-color: #ffffff;
+    }
+
+    .submit-btn:active {
+        transform: translateY(-2px);
+    }
+
+    /* ==================== FOOTER ==================== */
+    footer {
+        background: rgba(0, 0, 0, 0.95);
+        border-top: 2px solid #0099ff;
+        box-shadow: 0 -5px 30px rgba(0, 153, 255, 0.3);
+        padding: 2rem 1rem;
+        margin-top: 4rem;
+    }
+
+    /* ==================== RESPONSIVE DESIGN ==================== */
+    @media (max-width: 768px) {
+        .container {
+            padding: 1rem 0.5rem;
+        }
+
+        .hero {
+            padding: 2rem 0;
+        }
+
+        .content-section {
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            flex-direction: column;
+            text-align: center;
+            gap: 0.5rem;
+        }
+
+        .phases-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .pricing-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            padding: 2.5rem 1.5rem;
+        }
+
+        .pricing-featured {
+            transform: scale(1);
+        }
+
+        .pricing-featured:hover {
+            transform: translateY(-15px) scale(1.02);
+        }
+
+        .pricing-ribbon {
+            font-size: 0.85rem;
+            padding: 0.5rem 3rem;
+            top: 20px;
+            right: -35px;
+        }
+
+        .pricing-amount {
+            font-size: 2.8rem;
+        }
+
+        .cta-section {
+            padding: 3rem 1.5rem;
+        }
+
+        .radio-group {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-container {
+            padding: 2rem 1.5rem;
+        }
+
+        .feature-list li {
+            padding: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pricing-ribbon {
+            font-size: 0.75rem;
+            padding: 0.4rem 2.5rem;
+        }
+
+        .pricing-amount {
+            font-size: 2.5rem;
+        }
+
+        .submit-btn {
+            font-size: 1.1rem;
+            padding: 1.2rem 2rem;
+        }
+    }
+
+    /* Accessibility - Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* Print Styles */
+    @media print {
+        body::before,
+        .bg-logo,
+        .bg-frame {
+            display: none;
+        }
+
+        .pricing-card {
+            break-inside: avoid;
+        }
+    }
+</style>
+    <!-- Navbar CSS -->
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+
+<body>
+<iframe src="scroll.html" class="bg-frame"></iframe>
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+
+    <div class="bg-logo"></div>
+  
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>AQA Anti-Aquaphobie</h1>
+            <p class="hero-subtitle">Formation Accélérée</p>
+            <img src="https://i.ibb.co/ndXbsZj/AQUAPHOBE-Instagram-Post-20240710-131657-0000-Copy.jpg" 
+                 alt="Formation Anti-Aquaphobie AQA" 
+                 class="hero-image">
+        </section>
+
+        <!-- Objectif Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">🧠</span>
+                Objectif
+            </h2>
+            <div class="section-content">
+                <p>Aider chaque participant à vaincre sa peur de l'eau et à retrouver confiance, aisance et autonomie dans le milieu aquatique, quel que soit son niveau de départ.</p>
+            </div>
+        </section>
+
+        <!-- Méthode Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">⚙️</span>
+                Méthode
+            </h2>
+            <div class="section-content">
+                <ul class="feature-list">
+                    <li><strong>Formation accélérée</strong> composée de 4 à 6 séances de deux heures</li>
+                    <li><strong>Encadrement professionnel</strong> par des moniteurs expérimentés, spécialisés dans la gestion de l'aquaphobie</li>
+                    <li><strong>Environnement sécurisé</strong> : séances organisées dans une piscine entièrement sécurisée</li>
+                    <li><strong>Suivi technique AQA</strong> : traçabilité et analyses personnalisées pour chaque participant</li>
+                    <li><strong>Approche scientifique</strong> fondée sur la psychologie comportementale et la progression de la confiance</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Phases du programme Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">🧭</span>
+                Phases du programme
+            </h2>
+            <div class="phases-grid">
+                <div class="phase-card">
+                    <div class="phase-number">1</div>
+                    <h3 class="phase-title">Contact & Respiration</h3>
+                    <p class="phase-description">Apprivoisement de l'eau, gestion du stress et du souffle</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">2</div>
+                    <h3 class="phase-title">Contrôle du corps</h3>
+                    <p class="phase-description">Immersion progressive, équilibre et flottabilité</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">3</div>
+                    <h3 class="phase-title">Autonomie de base</h3>
+                    <p class="phase-description">Déplacements simples, gestion du corps dans l'eau</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">4</div>
+                    <h3 class="phase-title">Suppression de la phobie</h3>
+                    <p class="phase-description">Confort total dans l'eau, confiance et libération de la peur</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valeurs AQA Section -->
+        <!--section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">🧩</span>
+                Valeurs AQA
+            </h2>
+            <div class="values-container">
+                <div class="value-badge">Science</div>
+                <div class="value-badge">Sécurité</div>
+                <div class="value-badge">Confiance</div>
+                <div class="value-badge">Transformation</div>
+            </div>
+        </section>
+        
+        <!-- Tarifs Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">💰</span>
+                Tarifs
+            </h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-badge">Programme Standard</div>
+                    <div class="pricing-sessions">4 séances</div>
+                    <div class="pricing-duration">2 heures par séance</div>
+                    <div class="pricing-amount">10,500 DA</div>
+                    <div class="pricing-bonus">
+                        🎁 <strong>Lunettes de natation offertes</strong>
+                    </div>
+                    <div class="pricing-description">
+                        Idéal pour surmonter l'aquaphobie légère à modérée
+                    </div>
+                </div>
+
+                <div class="pricing-card pricing-featured">
+                    <div class="pricing-ribbon">Recommandé</div>
+                    <div class="pricing-badge">Programme Intensif</div>
+                    <div class="pricing-sessions">6 séances</div>
+                    <div class="pricing-duration">2 heures par séance</div>
+                    <div class="pricing-amount">15,500 DA</div>
+                    <div class="pricing-bonus">
+                        🎁 <strong>Lunettes de natation + Bonnet offerts</strong>
+                    </div>
+                    <div class="pricing-description">
+                        Pour les phobies plus persistantes nécessitant un accompagnement renforcé
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- CTA Section with Form -->
+<section class="cta-section">
+    <h2 class="cta-title">Prêt à commencer ?</h2>
+    <p class="cta-subtitle">Reprenez le contrôle et découvrez le plaisir de l'eau</p>
+    
+    <div class="form-container">
+        <form 
+            name="phobie" 
+            method="POST" 
+            data-netlify="true" 
+            id="inscriptionForm"
+        >
+            <!-- Hidden input for Netlify form handling -->
+            <input type="hidden" name="form-name" value="phobie">
+
+            <div class="form-group">
+                <label for="nomPrenom">Nom et Prénom *</label>
+                <input type="text" id="nomPrenom" name="nomPrenom" required placeholder="Entrez votre nom complet">
+            </div>
+
+            <div class="form-group">
+                <label for="age">Âge *</label>
+                <input type="number" id="age" name="age" min="1" max="120" required placeholder="Entrez votre âge">
+            </div>
+
+            <div class="form-group">
+                <label>Genre *</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="homme" name="genre" value="homme" required>
+                        <label for="homme">Homme</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="femme" name="genre" value="femme" required>
+                        <label for="femme">Femme</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Téléphone *</label>
+                <input type="tel" id="telephone" name="telephone" placeholder="+213 XX XX XX XX" required>
+            </div>
+
+            <button type="submit" class="submit-btn">👉 Envoyer la demande</button>
+        </form>
+    </div>
+</section>
+</div>
+
+<footer>
+    <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
+
+<!-- Load navbar logic -->
+<script src="/js/navbar.js"></script>
+
+<script>
+// Form submission handler
+document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        nomPrenom: document.getElementById('nomPrenom').value,
+        age: document.getElementById('age').value,
+        genre: document.querySelector('input[name="genre"]:checked').value,
+        telephone: document.getElementById('telephone').value
+    };
+    
+    console.log('Données du formulaire:', formData);
+    
+    // Show success message
+    alert('✅ Merci pour votre inscription !\n\nNous vous contacterons bientôt pour confirmer votre participation au programme AQA Anti-Aquaphobie.');
+    
+    // Reset form
+    this.reset();
+});
+</script>
+
+</body>
+</html>
