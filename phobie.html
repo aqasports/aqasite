@@ -1026,46 +1026,41 @@
     <p class="cta-subtitle">Reprenez le contrôle et découvrez le plaisir de l'eau</p>
     
     <div class="form-container">
-        <form 
-            name="phobie" 
-            method="POST" 
-            data-netlify="true" 
-            id="inscriptionForm"
-        >
-            <!-- Hidden input for Netlify form handling -->
-            <input type="hidden" name="form-name" value="phobie">
+        <form name="phobie" method="POST" data-netlify="true" id="inscriptionForm">
+  <input type="hidden" name="form-name" value="phobie">
 
-            <div class="form-group">
-                <label for="nomPrenom">Nom et Prénom *</label>
-                <input type="text" id="nomPrenom" name="nomPrenom" required placeholder="Entrez votre nom complet">
-            </div>
+  <div class="form-group">
+    <label for="nomPrenom">Nom et Prénom *</label>
+    <input type="text" id="nomPrenom" name="nomPrenom" required placeholder="Entrez votre nom complet">
+  </div>
 
-            <div class="form-group">
-                <label for="age">Âge *</label>
-                <input type="number" id="age" name="age" min="1" max="120" required placeholder="Entrez votre âge">
-            </div>
+  <div class="form-group">
+    <label for="age">Âge *</label>
+    <input type="number" id="age" name="age" min="1" max="120" required placeholder="Entrez votre âge">
+  </div>
 
-            <div class="form-group">
-                <label>Genre *</label>
-                <div class="radio-group">
-                    <div class="radio-option">
-                        <input type="radio" id="homme" name="genre" value="homme" required>
-                        <label for="homme">Homme</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="femme" name="genre" value="femme" required>
-                        <label for="femme">Femme</label>
-                    </div>
-                </div>
-            </div>
+  <div class="form-group">
+    <label>Genre *</label>
+    <div class="radio-group">
+      <div class="radio-option">
+        <input type="radio" id="homme" name="genre" value="homme" required>
+        <label for="homme">Homme</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" id="femme" name="genre" value="femme" required>
+        <label for="femme">Femme</label>
+      </div>
+    </div>
+  </div>
 
-            <div class="form-group">
-                <label for="telephone">Téléphone *</label>
-                <input type="tel" id="telephone" name="telephone" placeholder="+213 XX XX XX XX" required>
-            </div>
+  <div class="form-group">
+    <label for="telephone">Téléphone *</label>
+    <input type="tel" id="telephone" name="telephone" placeholder="+213 XX XX XX XX" required>
+  </div>
 
-            <button type="submit" class="submit-btn">👉 Envoyer la demande</button>
-        </form>
+  <button type="submit" class="submit-btn">👉 Envoyer la demande</button>
+</form>
+
     </div>
 </section>
 </div>
