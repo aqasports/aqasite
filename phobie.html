@@ -1021,12 +1021,7 @@
             </div>
         </section>
 <!-- CTA Section with Form -->
-<section class="cta-section">
-    <h2 class="cta-title">Prêt à commencer ?</h2>
-    <p class="cta-subtitle">Reprenez le contrôle et découvrez le plaisir de l'eau</p>
-    
-    <div class="form-container">
-        <form name="phobie" method="POST" data-netlify="true" id="inscriptionForm">
+<form name="phobie" method="POST" data-netlify="true" id="inscriptionForm">
   <input type="hidden" name="form-name" value="phobie">
 
   <div class="form-group">
@@ -1060,6 +1055,32 @@
 
   <button type="submit" class="submit-btn">👉 Envoyer la demande</button>
 </form>
+
+<!-- Success message -->
+<div id="merciMessage" style="display:none; text-align:center; margin-top:20px; color:#007BFF; font-weight:600;">
+  ✅ Merci ! Votre demande a été envoyée avec succès.
+</div>
+
+<script>
+  const form = document.getElementById("inscriptionForm");
+  const merciMessage = document.getElementById("merciMessage");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // prevent normal reload
+    const formData = new FormData(form);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then(() => {
+        form.style.display = "none";
+        merciMessage.style.display = "block";
+      })
+      .catch(() => alert("Une erreur est survenue. Veuillez réessayer."));
+  });
+</script>
 
     </div>
 </section>
