@@ -726,14 +726,46 @@
         transform: translateY(-2px);
     }
 
-    /* ==================== FOOTER ==================== */
-    footer {
-        background: rgba(0, 0, 0, 0.95);
-        border-top: 2px solid #0099ff;
-        box-shadow: 0 -5px 30px rgba(0, 153, 255, 0.3);
-        padding: 2rem 1rem;
-        margin-top: 4rem;
-    }
+ /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ffffff;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
 
     /* ==================== RESPONSIVE DESIGN ==================== */
     @media (max-width: 768px) {
@@ -1064,7 +1096,15 @@
 <div id="merciMessage" style="display:none; text-align:center; margin-top:20px; color:#007BFF; font-weight:600;">
   ✅ Merci ! Votre demande a été envoyée avec succès.
 </div>
+</section>
+<footer>
 
+<!-- Add this div where you want the footer to appear -->
+<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
+
+
+<script src="/js/navbar.js"></script>
 <script>
 (function () {
   const form = document.getElementById('inscriptionForm');
@@ -1105,8 +1145,18 @@
     });
   });
 })();
+
+async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadFooter);
 </script>
-
-
 </body>
 </html>
