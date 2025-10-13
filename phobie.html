@@ -1021,7 +1021,12 @@
             </div>
         </section>
 <!-- CTA Section with Form -->
-<form name="phobie" method="POST" data-netlify="true" id="inscriptionForm">
+<section class="cta-section">
+    <h2 class="cta-title">Prêt à commencer ?</h2>
+    <p class="cta-subtitle">Reprenez le contrôle et découvrez le plaisir de l'eau</p>
+    
+    <div class="form-container">
+       <form name="phobie" method="POST" data-netlify="true" id="inscriptionForm" action="/phobie.html">
   <input type="hidden" name="form-name" value="phobie">
 
   <div class="form-group">
@@ -1056,64 +1061,52 @@
   <button type="submit" class="submit-btn">👉 Envoyer la demande</button>
 </form>
 
-<!-- Success message -->
 <div id="merciMessage" style="display:none; text-align:center; margin-top:20px; color:#007BFF; font-weight:600;">
   ✅ Merci ! Votre demande a été envoyée avec succès.
 </div>
 
 <script>
-  const form = document.getElementById("inscriptionForm");
-  const merciMessage = document.getElementById("merciMessage");
+(function () {
+  const form = document.getElementById('inscriptionForm');
+  const merci = document.getElementById('merciMessage');
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // prevent normal reload
-    const formData = new FormData(form);
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    })
-      .then(() => {
-        form.style.display = "none";
-        merciMessage.style.display = "block";
-      })
-      .catch(() => alert("Une erreur est survenue. Veuillez réessayer."));
-  });
-</script>
-
-    </div>
-</section>
-</div>
-
-<footer>
-    <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
-</footer>
-
-<!-- Load navbar logic -->
-<script src="/js/navbar.js"></script>
-
-<script>
-// Form submission handler
-document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
-    
-    const formData = {
-        nomPrenom: document.getElementById('nomPrenom').value,
-        age: document.getElementById('age').value,
-        genre: document.querySelector('input[name="genre"]:checked').value,
-        telephone: document.getElementById('telephone').value
-    };
-    
-    console.log('Données du formulaire:', formData);
-    
-    // Show success message
-    alert('✅ Merci pour votre inscription !\n\nNous vous contacterons bientôt pour confirmer votre participation au programme AQA Anti-Aquaphobie.');
-    
-    // Reset form
-    this.reset();
-});
+
+    // disable button to prevent double submit
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours…';
+
+    // Build payload
+    const formData = new FormData(form);
+    const body = new URLSearchParams();
+    for (const pair of formData.entries()) body.append(pair[0], pair[1]);
+
+    // Post to the form action (must match deployed page or '/')
+    const postUrl = form.getAttribute('action') || '/';
+
+    fetch(postUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString()
+    })
+    .then(response => {
+      // Netlify returns a 200/204 on success — treat any ok as success
+      if (!response.ok) throw new Error('Network response was not ok');
+      form.style.display = 'none';
+      merci.style.display = 'block';
+    })
+    .catch(err => {
+      console.error('Form submit error:', err);
+      // Fallback: try a normal submit so Netlify still receives it
+      form.removeEventListener('submit', arguments.callee);
+      form.submit();
+    });
+  });
+})();
 </script>
+
 
 </body>
 </html>
