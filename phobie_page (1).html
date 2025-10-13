@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Anti-Aquaphobie - Formation Accélérée</title>
+    <meta content="Formation accélérée AQA pour vaincre la peur de l'eau. Encadrement professionnel, méthode scientifique, progression garantie en 4 à 6 séances." name="description"/>
+    <meta content="AQA, aquaphobie, peur de l'eau, formation natation, confiance, Algérie" name="keywords"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background logo and neon effects */
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Neon border effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .bg-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            z-index: -1;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        html {
+            background: #000;
+        }
+
+        body {
+            background: transparent !important;
+            overscroll-behavior: none;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 0;
+            margin-bottom: 3rem;
+            animation: slideIn 1s ease-out;
+            position: relative;
+        }
+
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background-image: url('https://i.imgur.com/YourImageID.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+            border: 3px solid rgba(0, 255, 255, 0.4);
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 153, 255, 0.2) 50%,
+                rgba(0, 0, 0, 0.5) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #00ffff);
+            border-radius: 30px;
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(15px);
+            animation: neonPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        .hero-emoji {
+            font-size: clamp(3rem, 10vw, 5rem);
+            margin-bottom: 1rem;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: #FFD700;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            padding: 0 1rem;
+        }
+
+        .hero-social {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            color: #FFD700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #FFD700;
+            color: #000;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Content sections */
+        .content-section {
+            background: rgba(0, 153, 255, 0.05);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px);
+            animation: slideIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 153, 255, 0.1));
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-section:hover::before {
+            opacity: 1;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-icon {
+            font-size: clamp(2rem, 6vw, 3rem);
+            filter: drop-shadow(0 0 15px currentColor);
+        }
+
+        .section-content {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #ffffff;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* List styling */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(0, 153, 255, 0.1);
+            border-left: 4px solid #00ffff;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            background: rgba(0, 153, 255, 0.2);
+            transform: translateX(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Phases grid */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .phase-card {
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .phase-card:hover::before {
+            left: 100%;
+        }
+
+        .phase-card:hover {
+            background: rgba(0, 153, 255, 0.2);
+            border-color: #00ffff;
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .phase-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-description {
+            font-size: 1rem;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        /* Values section */
+        .values-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .value-badge {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border: 2px solid rgba(0, 153, 255, 0.5);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .value-badge:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.4), rgba(0, 255, 255, 0.4));
+            border-color: #00ffff;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.15));
+            border: 3px solid rgba(0, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            animation: slideIn 1s ease-out;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 153, 255, 0.6);
+            border: 3px solid #00ffff;
+            cursor: pointer;
+            min-width: 250px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .phases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .value-badge {
+                width: 100%;
+                text-align: center;
+            }
+
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-title {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+</style>
+    <!-- Navbar CSS -->
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+
+<body>
+<iframe src="scroll.html" class="bg-frame"></iframe>
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <a href="index.html">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+               alt="AQA Logo" class="logo">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="tarifs.html" class="nav-link">Tarifs</a>
+        <a href="groupes.html" class="nav-link">Groupes</a>
+        <a href="piscines.html" class="nav-link">Piscines</a>
+        <a href="infos.html" class="nav-link">Infos</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="webtv.html" class="nav-link">WebTV</a>
+        <a href="store.html" class="nav-link">Store</a>
+      </nav>
+
+      <div class="right-actions">
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </div>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link">Infos</a>
+    <a href="events.html" class="mobile-nav-link">Events</a>
+    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+    <a href="store.html" class="mobile-nav-link">Store</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+  </div>
+  <!-- ===== /NAVBAR ===== -->
+
+    <div class="bg-logo"></div>
+  
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <span class="hero-emoji">💧</span>
+                    <h1>AQUAPHOBE?</h1>
+                    <p class="hero-subtitle">Formation Accélérée</p>
+                    <p class="hero-description">
+                        Formation accélérée pour lutter contre la aquaphobie, assurée par des moniteurs professionnels dans une piscine sécurisée places limitées
+                    </p>
+                    <div class="hero-social">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">📸</a>
+                        <a href="#" class="social-icon">🎵</a>
+                        <a href="#" class="social-icon">💬</a>
+                        <a href="#" class="social-icon">🌐</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objectif Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">🧠</span>
+                Objectif
+            </h2>
+            <div class="section-content">
+                <p>Aider chaque participant à vaincre sa peur de l'eau et à retrouver confiance, aisance et autonomie dans le milieu aquatique, quel que soit son niveau de départ.</p>
+            </div>
+        </section>
+
+        <!-- Méthode Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">⚙️</span>
+                Méthode
+            </h2>
+            <div class="section-content">
+                <ul class="feature-list">
+                    <li><strong>Formation accélérée</strong> composée de 4 à 6 séances de deux heures</li>
+                    <li><strong>Encadrement professionnel</strong> par des moniteurs expérimentés, spécialisés dans la gestion de l'aquaphobie</li>
+                    <li><strong>Environnement sécurisé</strong> : séances organisées dans une piscine entièrement sécurisée</li>
+                    <li><strong>Suivi technique AQA</strong> : traçabilité et analyses personnalisées pour chaque participant</li>
+                    <li><strong>Approche scientifique</strong> fondée sur la psychologie comportementale et la progression de la confiance</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Phases du programme Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">🧭</span>
+                Phases du programme
+            </h2>
+            <div class="phases-grid">
+                <div class="phase-card">
+                    <div class="phase-number">1</div>
+                    <h3 class="phase-title">Contact & Respiration</h3>
+                    <p class="phase-description">Apprivoisement de l'eau, gestion du stress et du souffle</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">2</div>
+                    <h3 class="phase-title">Contrôle du corps</h3>
+                    <p class="phase-description">Immersion progressive, équilibre et flottabilité</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">3</div>
+                    <h3 class="phase-title">Autonomie de base</h3>
+                    <p class="phase-description">Déplacements simples, gestion du corps dans l'eau</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">4</div>
+                    <h3 class="phase-title">Suppression de la phobie</h3>
+                    <p class="phase-description">Confort total dans l'eau, confiance et libération de la peur</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valeurs AQA Section -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <span class="section-icon">🧩</span>
+                Valeurs AQA
+            </h2>
+            <div class="values-container">
+                <div class="value-badge">Science</div>
+                <div class="value-badge">Sécurité</div>
+                <div class="value-badge">Confiance</div>
+                <div class="value-badge">Transformation</div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <span class="hero-emoji">💡</span>
+            <h2 class="cta-title">Prêt à commencer ?</h2>
+            <p class="cta-subtitle">Reprenez le contrôle et découvrez le plaisir de l'eau</p>
+            <a href="inscription.html" class="cta-button">👉 Remplir le formulaire</a>
+        </section>
+    </div>
+
+<footer>
+    <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+</footer>
+
+<!-- Load navbar logic -->
+<script src="/js/navbar.js"></script>
+
+</body>
+</html>
