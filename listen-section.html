@@ -592,26 +592,39 @@
                 try {
                     this.setSubmitLoading(true);
 
-                    // Prepare form data
-                    const formData = new FormData();
-                    formData.append('name', name);
-                    formData.append('email', email);
-                    formData.append('message', message);
-                    
+                    // Prepare payload
+                    const payload = {
+                        name: name || '',
+                        email: email || '',
+                        message: message || '',
+                        timestamp: new Date().toISOString()
+                    };
+
+                    // Convert audio to base64 if present
                     if (hasAudio) {
                         const audioFile = this.recordedBlob || this.uploadedFile;
-                        formData.append('audio', audioFile, 'voice-message.webm');
+                        const base64Audio = await this.blobToBase64(audioFile);
+                        payload.audioBase64 = base64Audio;
+                        payload.audioFilename = `voice-${Date.now()}.webm`;
                     }
 
-                    // Send to Netlify Function
+                    console.log('Sending payload:', {
+                        ...payload,
+                        audioBase64: payload.audioBase64 ? `[${payload.audioBase64.length} characters]` : undefined
+                    });
+
+                    // Send to Netlify Function as JSON
                     const response = await fetch('/.netlify/functions/send-message', {
                         method: 'POST',
-                        body: formData
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
                     });
 
                     const result = await response.json();
 
-                    if (!response.ok) {
+                    if (!response.ok || !result.success) {
                         throw new Error(result.error || 'Erreur lors de l\'envoi');
                     }
 
@@ -620,10 +633,24 @@
 
                 } catch (error) {
                     console.error('Submit error:', error);
-                    this.showStatus('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+                    this.showStatus(`Erreur: ${error.message}`, 'error');
                 } finally {
                     this.setSubmitLoading(false);
                 }
+            }
+
+            // Convert Blob to base64 string
+            blobToBase64(blob) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        // Remove data URL prefix (e.g., "data:audio/webm;base64,")
+                        const base64 = reader.result.split(',')[1];
+                        resolve(base64);
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
             }
 
             setSubmitLoading(loading) {
