@@ -592,30 +592,16 @@
                 try {
                     this.setSubmitLoading(true);
 
-                    // Prepare form data
-                    const formData = new FormData();
-                    formData.append('name', name);
-                    formData.append('email', email);
-                    formData.append('message', message);
+                    // Simulate sending data (replace with actual API call)
+                    await new Promise(resolve => setTimeout(resolve, 1500));
                     
-                    if (hasAudio) {
-                        const audioFile = this.recordedBlob || this.uploadedFile;
-                        formData.append('audio', audioFile, 'voice-message.webm');
-                    }
-
-                    // Send to Netlify Function
-                    const response = await fetch('/.netlify/functions/send-message', {
-                        method: 'POST',
-                        body: formData
+                    console.log('Form data:', {
+                        name,
+                        email,
+                        message,
+                        hasAudio: hasAudio
                     });
 
-                    const result = await response.json();
-
-                    if (!response.ok) {
-                        throw new Error(result.error || 'Erreur lors de l\'envoi');
-                    }
-
-                    console.log('Message sent successfully!', result);
                     this.showThankYou();
 
                 } catch (error) {
