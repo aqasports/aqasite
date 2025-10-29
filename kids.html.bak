@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>AQA Kids - Natation pour enfants et adolescents</title>
-    <meta content="Programmes de natation spÃ©cialisÃ©s pour enfants et adolescents. Coaching personnalisÃ©, compÃ©titions, et dÃ©veloppement aquatique dans un environnement sÃ©curisÃ©." name="description"/>
-    <meta content="AQA Kids, natation enfants, cours natation, Ã©cole natation, coaching jeunes, compÃ©tition enfants" name="keywords"/>
+    <meta content="Programmes de natation spécialisés pour enfants et adolescents. Coaching personnalisé, compétitions, et développement aquatique dans un environnement sécurisé." name="description"/>
+    <meta content="AQA Kids, natation enfants, cours natation, école natation, coaching jeunes, compétition enfants" name="keywords"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
 
@@ -365,7 +365,7 @@
         }
 
         .kids-pricing__feature::before {
-            content: 'âœ“';
+            content: '✓';
             color: #00ffff;
             font-weight: bold;
             font-size: 1.2rem;
@@ -394,7 +394,7 @@
         }
 @media (max-width: 768px) {
     .kids-pricing__grid {
-        gap: 1rem; /* rÃ©duit l'espace entre cartes */
+        gap: 1rem; /* réduit l'espace entre cartes */
         margin: 1.5rem 0;
     }
 
@@ -849,7 +849,7 @@
         }
 
         .kids-groups__feature::before {
-            content: 'â€¢';
+            content: '•';
             color: #00ffff;
             font-weight: bold;
         }
@@ -948,7 +948,7 @@
     align-items: center;
     text-align: center;
 
-    text-decoration: none; /* enlÃ¨ve soulignement */
+    text-decoration: none; /* enlève soulignement */
     color: inherit;        /* garde la couleur du texte */
     cursor: pointer;
 }
@@ -1357,7 +1357,7 @@
 }
 
 .kids-groups__feature::before {
-  content: "âœ”";
+  content: "✔";
   color: #00ffff;
   position: absolute;
   left: 0;
@@ -1404,7 +1404,7 @@
       </nav>
 
       <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
         <div class="menu-toggle" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
         </div>
@@ -1424,7 +1424,7 @@
     <a href="events.html" class="mobile-nav-link">Events</a>
     <a href="webtv.html" class="mobile-nav-link">WebTV</a>
     <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
   </div>
   <!-- ===== /NAVBAR ===== -->
  
@@ -1441,7 +1441,7 @@
     </div>
 
     <p class="kids-hero__description">
-        Apprentissage de la natation pour enfants de 5 Ã  12 ans avec coachs dâ€™Ã©lite, suivi personnalisÃ© et groupes restreints (Groupe de 10) pour progresser en sÃ©curitÃ© et avec plaisir..
+        Apprentissage de la natation pour enfants de 5 à 12 ans avec coachs d’élite, suivi personnalisé et groupes restreints (Groupe de 10) pour progresser en sécurité et avec plaisir..
     </p>
 </section>
 
@@ -1458,7 +1458,7 @@
                     </div>
                     <h3 class="kids-features__title">Coachs d'elite</h3>
                     <p class="kids-features__description">
-                        Nos coachs sont hautement qualifiÃ©s et spÃ©cialisÃ©s dans lâ€™accompagnement des enfants, garantissant sÃ©curitÃ©, progression et plaisir Ã  chaque sÃ©ance de natation.
+                        Nos coachs sont hautement qualifiés et spécialisés dans l’accompagnement des enfants, garantissant sécurité, progression et plaisir à chaque séance de natation.
                     </p>
                 </div>
 
@@ -1468,9 +1468,9 @@
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="kids-features__title">SÃ©curitÃ© Maximale</h3>
+                    <h3 class="kids-features__title">Sécurité Maximale</h3>
                     <p class="kids-features__description">
-                        Piscines surveillÃ©es, matÃ©riel de sÃ©curitÃ© et protocoles stricts pour la protection de vos enfants.
+                        Piscines surveillées, matériel de sécurité et protocoles stricts pour la protection de vos enfants.
                     </p>
                 </div>
 
@@ -1480,9 +1480,9 @@
                             <path d="M12 2v20m8-18H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
                         </svg>
                     </div>
-                    <h3 class="kids-features__title">Suivi PersonnalisÃ©</h3>
+                    <h3 class="kids-features__title">Suivi Personnalisé</h3>
                     <p class="kids-features__description">
-                        Chaque enfant bÃ©nÃ©ficie d'un suivi individuel adaptÃ© Ã  son rythme et ses objectifs.
+                        Chaque enfant bénéficie d'un suivi individuel adapté à son rythme et ses objectifs.
                     </p>
                 </div>
 
@@ -1497,7 +1497,7 @@
                     </div>
                     <h3 class="kids-features__title">Apprentissage Ludique</h3>
                     <p class="kids-features__description">
-                        MÃ©thodes pÃ©dagogiques amusantes qui transforment l'apprentissage en moments de plaisir.
+                        Méthodes pédagogiques amusantes qui transforment l'apprentissage en moments de plaisir.
                     </p>
                 </div>
 
@@ -1513,7 +1513,7 @@
                     </div>
                     <h3 class="kids-features__title">Groupes de 10</h3>
                     <p class="kids-features__description">
-                       Chaque groupe est limitÃ© Ã  10 enfants pour garantir un suivi personnalisÃ©, des exercices adaptÃ©s et un apprentissage efficace dans un environnement sÃ»r et motivant.
+                       Chaque groupe est limité à 10 enfants pour garantir un suivi personnalisé, des exercices adaptés et un apprentissage efficace dans un environnement sûr et motivant.
                     </p>
                 </div>
 
@@ -1530,7 +1530,7 @@
                     </div>
                     <h3 class="kids-features__title">Suivi physique</h3>
                     <p class="kids-features__description">
-                        Chaque enfant bÃ©nÃ©ficie dâ€™un suivi physique personnalisÃ© pour dÃ©tecter et corriger les obstacles ou dÃ©sÃ©quilibres corporels, comme la scoliose, qui pourraient freiner sa progression, garantissant un apprentissage sÃ»r et efficace.
+                        Chaque enfant bénéficie d’un suivi physique personnalisé pour détecter et corriger les obstacles ou déséquilibres corporels, comme la scoliose, qui pourraient freiner sa progression, garantissant un apprentissage sûr et efficace.
                     </p>
                 </div>
             </div>
@@ -1541,23 +1541,23 @@
 <section class="kids-section kids-gallery animate-on-scroll">
   <h2 class="kids-section__title">Galerie Photos</h2>
   <p class="kids-section__subtitle">
-    DÃ©couvrez l'ambiance de nos cours et les sourires de nos jeunes nageurs en action.
+    Découvrez l'ambiance de nos cours et les sourires de nos jeunes nageurs en action.
   </p>
 
   <div class="kids-gallery__ticker">
     <div class="kids-gallery__track">
       <!-- Repeat images twice for smooth loop -->
       <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp')">
-        <img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp" alt="Cours bÃ©bÃ© nageur">
+        <img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp" alt="Cours bébé nageur">
       </div>
       <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp')">
         <img src="https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp" alt="Apprentissage natation enfants">
       </div>
       <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/678rW5ZX/IMG20241104185311.webp')">
-        <img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp" alt="EntraÃ®nement jeunes">
+        <img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp" alt="Entraînement jeunes">
       </div>
       <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp')">
-        <img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp" alt="CompÃ©tition junior">
+        <img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp" alt="Compétition junior">
       </div>
       <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/67j6c8TX/IMG20241202191301.webp')">
         <img src="https://i.ibb.co/67j6c8TX/IMG20241202191301.webp" alt="Groupe enfants piscine">
@@ -1579,19 +1579,19 @@
 <span></span>
       <!-- Video Section 2 -->
 <section class="kids-section kids-video animate-on-scroll">
-    <h2 class="kids-section__title">VidÃ©os</h2>
+    <h2 class="kids-section__title">Vidéos</h2>
    
     <div class="playlist-container" style="max-width: 900px; margin: auto;">
         <!-- Main Video Player -->
         <div class="main-video" style="margin-bottom: 20px; position: relative;">
             <video id="mainVideo" width="100%" height="450" controls style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:block;">
                 <source src="https://files.catbox.moe/mqgl87.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas les vidÃ©os HTML5.
+                Votre navigateur ne supporte pas les vidéos HTML5.
             </video>
             <!-- YouTube iframe (hidden initially) -->
             <iframe id="mainIframe" width="100%" height="450" 
                 src="https://www.youtube.com/embed/-umHYjVGbqY?si=Qjdcxg5h1LcBnTy6" 
-                title="PrÃ©sentation de nos programmes kids" 
+                title="Présentation de nos programmes kids" 
                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen 
                 style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:none;">
@@ -1619,22 +1619,22 @@
 
 
 <!--Equipent-->
-<!-- Pack Ã‰quipement (replace your current section with this) -->
+<!-- Pack Équipement (replace your current section with this) -->
 <section class="equip-section">
-  <h1>Pack Ã‰quipement</h1>
+  <h1>Pack Équipement</h1>
 
   <div class="pack-container">
     <h2>Pack Starter Arena</h2>
 
     <!-- Arena Logo -->
-    <img src="arenimages/a.webp" alt="Arena Logo" class="arena-logo">
+    <img src="arena.png" alt="Arena Logo" class="arena-logo">
 
     <!-- Step Indicator -->
-    <div class="step-indicator" aria-label="Indicateur d'Ã©tapes">
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 1"></div>
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 2"></div>
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 3"></div>
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 4"></div>
+    <div class="step-indicator" aria-label="Indicateur d'étapes">
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 1"></div>
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 2"></div>
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 3"></div>
+      <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 4"></div>
     </div>
 
     <!-- Step 1 -->
@@ -1643,7 +1643,7 @@
         <img src="https://i.ibb.co/5XYzv2VH/Untitled-design.png" alt="">
         <h3 class="equipment-name">Lunettes Bubble 3 + Bonnet Junior</h3>
         <p class="equipment-description">Lunettes de natation Arena Bubble 3 ...</p>
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
       </div>
     </div>
 
@@ -1652,8 +1652,8 @@
       <div class="equipment-item">
         <img src="https://i.ibb.co/9H0FBx4y/Untitled-design-1.png" alt="">
         <h3 class="equipment-name">Lunettes Junior Arena</h3>
-        <p class="equipment-description">Lunettes de natation spÃ©cialement conÃ§ues...</p>
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
+        <p class="equipment-description">Lunettes de natation spécialement conçues...</p>
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
       </div>
     </div>
 
@@ -1663,7 +1663,7 @@
         <img src="https://i.ibb.co/JjfXr0Zy/Untitled-design-2.png" alt="">
         <h3 class="equipment-name">Arena Sortie de Bain</h3>
         <p class="equipment-description">Peignoir Arena en microfibre ultra-absorbante...</p>
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
       </div>
     </div>
 
@@ -1672,9 +1672,9 @@
       <div class="equipment-item">
         <img src="https://i.ibb.co/d0G9g5pY/Untitled-design-3.png" alt="">
         <h3 class="equipment-name">Arena Sac Spiky</h3>
-        <p class="equipment-description">Sac de sport Arena avec compartiments ventilÃ©s...</p>
+        <p class="equipment-description">Sac de sport Arena avec compartiments ventilés...</p>
         <!-- NOTE: still uses next-btn so it loops to step 1 -->
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
+        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
       </div>
     </div>
 
@@ -1687,7 +1687,7 @@
 <section class="kids-section kids-groups animate-on-scroll" id="groups">
   <h2 class="kids-section__title">Groupes Disponibles</h2>
   <p class="kids-section__subtitle">
-    Chaque groupe est spÃ©cialement conÃ§u pour rÃ©pondre aux besoins et au dÃ©veloppement de chaque tranche d'Ã¢ge.
+    Chaque groupe est spécialement conçu pour répondre aux besoins et au développement de chaque tranche d'âge.
   </p>
 
   <div class="kids-groups__wrapper">
@@ -1755,52 +1755,52 @@ document.addEventListener('DOMContentLoaded', function () {
         <section class="kids-section kids-pricing animate-on-scroll">
             <h2 class="kids-section__title">Tarifs</h2>
             <p class="kids-section__subtitle">
-                Des programmes adaptÃ©s Ã  chaque Ã¢ge et niveau, pour une progression optimale dans un environnement sÃ©curisÃ©.
+                Des programmes adaptés à chaque âge et niveau, pour une progression optimale dans un environnement sécurisé.
             </p>
             <div class="kids-pricing__grid">
                 <div class="kids-pricing__card">
-                    <div class="kids-pricing__badge">DÃ©couverte</div>
+                    <div class="kids-pricing__badge">Découverte</div>
                     <h3 class="kids-pricing__title">3 mois</h3>
                     <div class="kids-pricing__price">28700 DA</div>
                     <div class="kids-pricing__period">trimestre</div>
                     <ul class="kids-pricing__features">
                         <li class="kids-pricing__feature">Groupe de 10</li>
                         <li class="kids-pricing__feature">Coaching professionnel</li>
-                        <li class="kids-pricing__feature">Pack de matÃ©riel offert</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique</li>
                         <li class="kids-pricing__feature">Suivi physique</li>
                     </ul>
-                    <a href="inscription.html" class="kids-pricing__button">RÃ©server</a>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
                 </div>
 
                      <div class="kids-pricing__card">
-                    <div class="kids-pricing__badge">DÃ©couverte</div>
+                    <div class="kids-pricing__badge">Découverte</div>
                     <h3 class="kids-pricing__title">6 mois</h3>
                     <div class="kids-pricing__price">46500 DA</div>
                     <div class="kids-pricing__period">Semestre</div>
                     <ul class="kids-pricing__features">
                         <li class="kids-pricing__feature">Groupe de 10</li>
                         <li class="kids-pricing__feature">Coaching professionnel</li>
-                        <li class="kids-pricing__feature">Pack de matÃ©riel offert</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique</li>
                         <li class="kids-pricing__feature">Suivi physique</li>
                     </ul>
-                    <a href="inscription.html" class="kids-pricing__button">RÃ©server</a>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
                 </div>
 
                     <div class="kids-pricing__card">
-                    <div class="kids-pricing__badge">DÃ©couverte</div>
+                    <div class="kids-pricing__badge">Découverte</div>
                     <h3 class="kids-pricing__title">9 mois</h3>
                     <div class="kids-pricing__price">65800 DA</div>
                     <div class="kids-pricing__period">trimestre</div>
                     <ul class="kids-pricing__features">
                         <li class="kids-pricing__feature">Groupe de 10</li>
                         <li class="kids-pricing__feature">Coaching professionnel</li>
-                        <li class="kids-pricing__feature">Pack de matÃ©riel offert</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique</li>
                         <li class="kids-pricing__feature">Suivi physique</li>
                     </ul>
-                    <a href="inscription.html" class="kids-pricing__button">RÃ©server</a>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
                 </div>
 
             </div>
@@ -1810,7 +1810,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <!-- Lightbox -->
         <div class="kids-lightbox" id="lightbox" onclick="closeLightbox()">
             <div class="kids-lightbox__content" onclick="event.stopPropagation()">
-                <button class="kids-lightbox__close" onclick="closeLightbox()">Ã—</button>
+                <button class="kids-lightbox__close" onclick="closeLightbox()">×</button>
                 <img class="kids-lightbox__image" id="lightboxImage" src="" alt="">
             </div>
         </div>
@@ -1819,74 +1819,74 @@ document.addEventListener('DOMContentLoaded', function () {
        
         <!-- Reviews Section -->
         <!--section class="kids-section kids-reviews animate-on-scroll">
-            <h2 class="kids-section__title">TÃ©moignages Parents</h2>
+            <h2 class="kids-section__title">Témoignages Parents</h2>
             <p class="kids-section__subtitle">
-                DÃ©couvrez ce que pensent les familles qui nous font confiance pour l'apprentissage aquatique de leurs enfants.
+                Découvrez ce que pensent les familles qui nous font confiance pour l'apprentissage aquatique de leurs enfants.
             </p>
             <div class="kids-reviews__carousel">
                 <div class="kids-reviews__track" id="reviewsTrack">
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Ma fille de 6 ans a appris Ã  nager en seulement 2 mois ! Les coachs sont extraordinaires 
-                            avec les enfants, trÃ¨s patients et encourageants. Je recommande vivement AQA Kids."
+                            "Ma fille de 6 ans a appris à nager en seulement 2 mois ! Les coachs sont extraordinaires 
+                            avec les enfants, très patients et encourageants. Je recommande vivement AQA Kids."
                         </p>
                         <div class="kids-reviews__author">Sophie Martin</div>
-                        <div class="kids-reviews__role">Maman de LÃ©a, 6 ans</div>
+                        <div class="kids-reviews__role">Maman de Léa, 6 ans</div>
                     </div>
 
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Mon fils Ã©tait terrifiÃ© par l'eau. GrÃ¢ce Ã  l'Ã©quipe AQA Kids, il nage maintenant comme un poisson ! 
-                            L'approche ludique a fait toute la diffÃ©rence. Merci pour cette transformation incroyable."
+                            "Mon fils était terrifié par l'eau. Grâce à l'équipe AQA Kids, il nage maintenant comme un poisson ! 
+                            L'approche ludique a fait toute la différence. Merci pour cette transformation incroyable."
                         </p>
                         <div class="kids-reviews__author">Thomas Dubois</div>
                         <div class="kids-reviews__role">Papa de Lucas, 8 ans</div>
                     </div>
 
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Les cours bÃ©bÃ© nageur sont formidables ! C'est un moment privilÃ©giÃ© avec mon bÃ©bÃ©. 
-                            Les installations sont impeccables et l'Ã©quipe trÃ¨s professionnelle."
+                            "Les cours bébé nageur sont formidables ! C'est un moment privilégié avec mon bébé. 
+                            Les installations sont impeccables et l'équipe très professionnelle."
                         </p>
                         <div class="kids-reviews__author">Marie Leroy</div>
                         <div class="kids-reviews__role">Maman d'Emma, 18 mois</div>
                     </div>
 
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Ma fille participe maintenant aux compÃ©titions grÃ¢ce Ã  AQA Kids. Elle a gagnÃ© en confiance 
-                            et en technique. Le suivi personnalisÃ© est remarquable."
+                            "Ma fille participe maintenant aux compétitions grâce à AQA Kids. Elle a gagné en confiance 
+                            et en technique. Le suivi personnalisé est remarquable."
                         </p>
                         <div class="kids-reviews__author">Catherine Moreau</div>
-                        <div class="kids-reviews__role">Maman de ChloÃ©, 12 ans</div>
+                        <div class="kids-reviews__role">Maman de Chloé, 12 ans</div>
                     </div>
                 </div>
 
                 <div class="kids-reviews__nav">
-                    <button class="kids-reviews__btn" onclick="previousReview()">â€¹</button>
+                    <button class="kids-reviews__btn" onclick="previousReview()">‹</button>
                     <div class="kids-reviews__dots" id="reviewsDots"></div>
-                    <button class="kids-reviews__btn" onclick="nextReview()">â€º</button>
+                    <button class="kids-reviews__btn" onclick="nextReview()">›</button>
                 </div>
             </div>
         </section>
 
         <!-- FAQ Section -->
         <section class="kids-section kids-faq animate-on-scroll">
-            <h2 class="kids-section__title">Questions FrÃ©quentes</h2>
+            <h2 class="kids-section__title">Questions Fréquentes</h2>
             <div class="kids-faq__list">
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Ã€ partir de quel Ã¢ge peut-on commencer les cours de natation ?</span>
+                        <span>À partir de quel âge peut-on commencer les cours de natation ?</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Nos cours AQA Kids sont accessibles dÃ¨s lâ€™Ã¢ge de 4.5 ans. Nous proposons Ã©galement un programme spÃ©cial pour les bÃ©bÃ©s nageurs Ã  partir de 6 mois, accompagnÃ© dâ€™un parent bientot disponible.
+                        Nos cours AQA Kids sont accessibles dès l’âge de 4.5 ans. Nous proposons également un programme spécial pour les bébés nageurs à partir de 6 mois, accompagné d’un parent bientot disponible.
                     </div>
                 </div>
 
@@ -1898,19 +1898,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Nous limitons volontairement nos groupes pour assurer un suivi personnalisÃ© : 10 enfants maximum Cette approche garantit la sÃ©curitÃ© et la progression de chaque enfant.
+                        Nous limitons volontairement nos groupes pour assurer un suivi personnalisé : 10 enfants maximum Cette approche garantit la sécurité et la progression de chaque enfant.
                     </div>
                 </div>
 
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Faut-il savoir nager pour sâ€™inscrire ?</span>
+                        <span>Faut-il savoir nager pour s’inscrire ?</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Non, nos formules sont adaptÃ©es Ã  tous les niveaux, des dÃ©butants aux nageurs confirmÃ©s. Nos entraÃ®neurs certifiÃ©s accompagnent chaque enfant selon son niveau.
+                        Non, nos formules sont adaptées à tous les niveaux, des débutants aux nageurs confirmés. Nos entraîneurs certifiés accompagnent chaque enfant selon son niveau.
                     </div>
                 </div>
 
@@ -1922,31 +1922,31 @@ document.addEventListener('DOMContentLoaded', function () {
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Oui, chaque fin du mois. De plus, des groupes WhatsApp sont disponibles pour recevoir les vidÃ©os de vos petits. Prochainement, lâ€™application AQA Kids permettra de suivre encore plus facilement leurs progrÃ¨s. 
+                        Oui, chaque fin du mois. De plus, des groupes WhatsApp sont disponibles pour recevoir les vidéos de vos petits. Prochainement, l’application AQA Kids permettra de suivre encore plus facilement leurs progrès. 
                 </div>
  </div>
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Quâ€™est-ce que lâ€™application AQA app</span>
+                        <span>Qu’est-ce que l’application AQA app</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Une maniÃ¨re innovante de digitaliser le parcours de votre petit athlÃ¨te. GrÃ¢ce Ã  lâ€™application, vous suivez ses progrÃ¨s en temps rÃ©el, recevez ses vidÃ©os dâ€™entraÃ®nement, consultez le planning des cours et restez connectÃ© aux coachs et aux autres parents.
+                        Une manière innovante de digitaliser le parcours de votre petit athlète. Grâce à l’application, vous suivez ses progrès en temps réel, recevez ses vidéos d’entraînement, consultez le planning des cours et restez connecté aux coachs et aux autres parents.
                         <a href="/app.html" class="btn-app" aria-label="Ouvrir AQA Kids App">AQA app</a>
                     </div>
                 </div>
 
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Comment sâ€™inscrire ?</span>
+                        <span>Comment s’inscrire ?</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Les inscriptions se font en ligne ou directement Ã  lâ€™accueil. Plusieurs formules et localisations sont disponibles pour sâ€™adapter aux besoins de chaque famille.
+                        Les inscriptions se font en ligne ou directement à l’accueil. Plusieurs formules et localisations sont disponibles pour s’adapter aux besoins de chaque famille.
                     </div>
                 </div>
             </div>
@@ -1955,19 +1955,19 @@ document.addEventListener('DOMContentLoaded', function () {
         
         <!-- CTA Section -->
         <section class="kids-cta animate-on-scroll">
-            <h2 class="kids-cta__title">PrÃªt Ã  Plonger dans l'Aventure ?</h2>
+            <h2 class="kids-cta__title">Prêt à Plonger dans l'Aventure ?</h2>
             <p class="kids-cta__description">
-                Offrez Ã  votre enfant la chance de dÃ©couvrir les joies de la natation dans un environnement 
-                sÃ©curisÃ© et professionnel. Nos coachs experts l'accompagneront dans chaque Ã©tape de son 
+                Offrez à votre enfant la chance de découvrir les joies de la natation dans un environnement 
+                sécurisé et professionnel. Nos coachs experts l'accompagneront dans chaque étape de son 
                 parcours aquatique.
             </p>
-            <a href="inscription.html" class="kids-cta__button">RÃ©server maintenant</a>
+            <a href="inscription.html" class="kids-cta__button">Réserver maintenant</a>
         </section>
 <!-- Locations Section -->
 <section class="kids-section kids-locations animate-on-scroll">
     <h2 class="kids-section__title">Nos Localisations</h2>
     <p class="kids-section__subtitle">
-        Retrouvez nos programmes AQA Kids dans plusieurs centres aquatiques modernes et Ã©quipÃ©s.
+        Retrouvez nos programmes AQA Kids dans plusieurs centres aquatiques modernes et équipés.
     </p>
     <div class="kids-locations__container">
 
@@ -1975,14 +1975,14 @@ document.addEventListener('DOMContentLoaded', function () {
            target="_blank" 
            class="kids-locations__item">
             <h3 class="kids-locations__name">Complexe ADM AZAL</h3>
-            <div class="kids-locations__address">citÃ© Signa Reghaia</div>
+            <div class="kids-locations__address">cité Signa Reghaia</div>
         </a>
 
         <a href="https://maps.app.goo.gl/M7fPHG78T3uTiStz7" 
            target="_blank" 
            class="kids-locations__item">
             <h3 class="kids-locations__name">Piscine BK SPORT</h3>
-            <div class="kids-locations__address">citÃ© Ammara Cheraga</div>
+            <div class="kids-locations__address">cité Ammara Cheraga</div>
         </a>
 
     </div>
@@ -1998,7 +1998,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <script src="js/navbar.js"></script>
     <script>
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("âœ… AQA Kids script initialized");
+  console.log("✅ AQA Kids script initialized");
 
   /* ------------------------------
      1. Scroll Animations

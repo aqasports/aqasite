@@ -15,7 +15,8 @@
     "googleapis": "^160.0.0",
     "helmet": "^7.2.0",
     "multer": "1.4.5-lts.1",
-    "nodemailer": "^6.10.1"
+    "nodemailer": "^6.10.1",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

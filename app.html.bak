@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>AQA App - Ton Ã©volution, dans ta poche</title>
-    <meta content="TÃ©lÃ©charge l'app AQA pour suivre ta progression, analyser tes performances et transformer ton potentiel sportif oÃ¹ que tu sois." name="description"/>
-    <meta content="AQA, app mobile, natation, coaching, progression, analyse vidÃ©o, suivi performance" name="keywords"/>
+    <title>AQA App - Ton évolution, dans ta poche</title>
+    <meta content="Télécharge l'app AQA pour suivre ta progression, analyser tes performances et transformer ton potentiel sportif où que tu sois." name="description"/>
+    <meta content="AQA, app mobile, natation, coaching, progression, analyse vidéo, suivi performance" name="keywords"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 <style>
         * {
@@ -805,8 +805,8 @@ body {
   <link rel="stylesheet" href="css/navbar.css">
 </head>
 <!-- Floating Button -->
-<button id="scrollToDownload" class="floating-btn" aria-label="Aller au tÃ©lÃ©chargement">
-    â¬‡
+<button id="scrollToDownload" class="floating-btn" aria-label="Aller au téléchargement">
+    ⬇
 </button>
 
 <body>
@@ -835,7 +835,7 @@ body {
       </nav>
 
       <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
         <div class="menu-toggle" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
         </div>
@@ -855,7 +855,7 @@ body {
     <a href="events.html" class="mobile-nav-link">Events</a>
     <a href="webtv.html" class="mobile-nav-link">WebTV</a>
     <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
   </div>
   <!-- ===== /NAVBAR ===== -->
 
@@ -867,8 +867,8 @@ body {
         <!-- Hero Section -->
         <section class="hero">
             <h1>AQA App</h1>
-            <h2>Ton Ã©volution, dans ta poche</h2>
-            <p>Transforme ton potentiel sportif avec l'application officielle AQA. Suivi personnalisÃ©, analyse vidÃ©o, coaching en temps rÃ©el - tout ce dont tu as besoin pour passer du niveau zÃ©ro au niveau pro.</p>
+            <h2>Ton évolution, dans ta poche</h2>
+            <p>Transforme ton potentiel sportif avec l'application officielle AQA. Suivi personnalisé, analyse vidéo, coaching en temps réel - tout ce dont tu as besoin pour passer du niveau zéro au niveau pro.</p>
             
             <!-- Mobile Mockup -->
             <div class="mobile-mockup animate-on-scroll">
@@ -876,7 +876,7 @@ body {
                     <div class="phone-screen">
                         <video autoplay muted loop playsinline class="transformation-video">
                             <source src="https://files.catbox.moe/u6djh3.mov" type="video/mp4">
-                            Votre navigateur ne supporte pas la vidÃ©o.
+                            Votre navigateur ne supporte pas la vidéo.
                         </video>
                     </div>
                 </div>
@@ -885,7 +885,7 @@ body {
 
         <!-- Features Section -->
         <section class="features animate-on-scroll">
-            <h2>FonctionnalitÃ©s Premium</h2>
+            <h2>Fonctionnalités Premium</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -897,7 +897,7 @@ body {
                         </svg>
                     </div>
                     <h3>Dashboard Personnel</h3>
-                    <p>Vue d'ensemble complÃ¨te de tes performances, statistiques en temps rÃ©el et objectifs personnalisÃ©s.</p>
+                    <p>Vue d'ensemble complète de tes performances, statistiques en temps réel et objectifs personnalisés.</p>
                 </div>
 
                 <div class="feature-card">
@@ -909,7 +909,7 @@ body {
                         </svg>
                     </div>
                     <h3>Suivi de Progression</h3>
-                    <p>Analyse dÃ©taillÃ©e de ton Ã©volution avec graphiques interactifs et mÃ©triques avancÃ©es.</p>
+                    <p>Analyse détaillée de ton évolution avec graphiques interactifs et métriques avancées.</p>
                 </div>
 
 
@@ -928,7 +928,7 @@ body {
     </svg>
   </div>
   <h3>Boutique AQA</h3>
-  <p>Achetez facilement vos Ã©quipements et accessoires directement depuis lâ€™application.</p>
+  <p>Achetez facilement vos équipements et accessoires directement depuis l’application.</p>
 </div>
 
                 <div class="feature-card">
@@ -939,7 +939,7 @@ body {
                         </svg>
                     </div>
                     <h3>Notifications</h3>
-                    <p>Alertes motivantes et conseils quotidiens pour rester sur la voie du succÃ¨s.</p>
+                    <p>Alertes motivantes et conseils quotidiens pour rester sur la voie du succès.</p>
                 </div>
 
            <div class="feature-card">
@@ -958,7 +958,7 @@ body {
     </svg>
   </div>
   <h3>Classement</h3>
-  <p>Suis ta position dans le classement et mesure tes performances face aux autres athlÃ¨tes.</p>
+  <p>Suis ta position dans le classement et mesure tes performances face aux autres athlètes.</p>
 </div>
 
             </div>
@@ -966,73 +966,73 @@ body {
 
         <!-- How It Works -->
         <section class="how-it-works animate-on-scroll">
-            <h2>Comment Ã§a marche ?</h2>
+            <h2>Comment ça marche ?</h2>
             <div class="steps-timeline">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>TÃ©lÃ©charge</h3>
-                    <p>Installe l'app AQA gratuitement depuis ton app store et crÃ©e ton compte en quelques secondes.</p>
+                    <h3>Télécharge</h3>
+                    <p>Installe l'app AQA gratuitement depuis ton app store et crée ton compte en quelques secondes.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Connecte-toi</h3>
-                    <p>Synchronise ton profil AQA existant ou crÃ©e un nouveau compte pour accÃ©der Ã  toutes les fonctionnalitÃ©s.</p>
+                    <p>Synchronise ton profil AQA existant ou crée un nouveau compte pour accéder à toutes les fonctionnalités.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <h3>Progresse</h3>
-                    <p>Suis tes sÃ©ances, analyse tes performances et reÃ§ois des conseils personnalisÃ©s de nos coachs experts.</p>
+                    <p>Suis tes séances, analyse tes performances et reçois des conseils personnalisés de nos coachs experts.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
                     <h3>Transforme</h3>
-                    <p>Atteins tes objectifs plus rapidement avec un suivi constant et une motivation renforcÃ©e.</p>
+                    <p>Atteins tes objectifs plus rapidement avec un suivi constant et une motivation renforcée.</p>
                 </div>
             </div>
         </section>
 
         <!-- Achievements Section -->
         <section class="achievements animate-on-scroll">
-            <h2>Badges & RÃ©compenses</h2>
+            <h2>Badges & Récompenses</h2>
             <p class="achievements-description">
-                DÃ©bloquez des badges exclusifs en atteignant vos objectifs. Chaque badge reprÃ©sente une Ã©tape importante dans votre progression sportive et vous fait gagner des XP pour gravir les niveaux.
+                Débloquez des badges exclusifs en atteignant vos objectifs. Chaque badge représente une étape importante dans votre progression sportive et vous fait gagner des XP pour gravir les niveaux.
             </p>
             <div class="ticker-container" id="tickerContainer">
                 <div class="ticker-track" id="tickerTrack">
                     <!-- 15 badges -->
-        <img src="badgeimages/1.webp" alt="Badge 1" class="badge" data-score="100 XP">
-        <img src="badgeimages/2.webp" alt="Badge 2" class="badge" data-score="300 XP">
-        <img src="badgeimages/3.webp" alt="Badge 3" class="badge" data-score="500 XP">
-        <img src="badgeimages/4.webp" alt="Badge 4" class="badge" data-score="800 XP">
-        <img src="images/badge5.webp" alt="Badge 5" class="badge" data-score="1200 XP">
-        <img src="images/badge6.webp" alt="Badge 6" class="badge" data-score="1600 XP">
-        <img src="images/badge7.webp" alt="Badge 7" class="badge" data-score="2000 XP">
-        <img src="images/badge8.webp" alt="Badge 8" class="badge" data-score="2500 XP">
-        <img src="images/badge9.webp" alt="Badge 9" class="badge" data-score="3000 XP">
-        <img src="images/badge10.webp" alt="Badge 10" class="badge" data-score="3600 XP">
-        <img src="badge1images/1.webp" alt="Badge 11" class="badge" data-score="4200 XP">
-        <img src="badge1images/2.webp" alt="Badge 12" class="badge" data-score="5000 XP">
-        <img src="badge1images/3.webp" alt="Badge 13" class="badge" data-score="6000 XP">
-        <img src="badge1images/4.webp" alt="Badge 14" class="badge" data-score="7500 XP">
-        <img src="images/badge15.webp" alt="Badge 15" class="badge" data-score="10000 XP">
+        <img src="badge1.png" alt="Badge 1" class="badge" data-score="100 XP">
+        <img src="badge2.png" alt="Badge 2" class="badge" data-score="300 XP">
+        <img src="badge3.png" alt="Badge 3" class="badge" data-score="500 XP">
+        <img src="badge4.png" alt="Badge 4" class="badge" data-score="800 XP">
+        <img src="badge5.png" alt="Badge 5" class="badge" data-score="1200 XP">
+        <img src="badge6.png" alt="Badge 6" class="badge" data-score="1600 XP">
+        <img src="badge7.png" alt="Badge 7" class="badge" data-score="2000 XP">
+        <img src="badge8.png" alt="Badge 8" class="badge" data-score="2500 XP">
+        <img src="badge9.png" alt="Badge 9" class="badge" data-score="3000 XP">
+        <img src="badge10.png" alt="Badge 10" class="badge" data-score="3600 XP">
+        <img src="badge11.png" alt="Badge 11" class="badge" data-score="4200 XP">
+        <img src="badge12.png" alt="Badge 12" class="badge" data-score="5000 XP">
+        <img src="badge13.png" alt="Badge 13" class="badge" data-score="6000 XP">
+        <img src="badge14.png" alt="Badge 14" class="badge" data-score="7500 XP">
+        <img src="badge15.png" alt="Badge 15" class="badge" data-score="10000 XP">
 
                     <!-- Duplicate set for smooth infinite scroll -->
                    <!-- 15 badges -->
-        <img src="badgeimages/1.webp" alt="Badge 1" class="badge" data-score="100 XP">
-        <img src="badgeimages/2.webp" alt="Badge 2" class="badge" data-score="300 XP">
-        <img src="badgeimages/3.webp" alt="Badge 3" class="badge" data-score="500 XP">
-        <img src="badgeimages/4.webp" alt="Badge 4" class="badge" data-score="800 XP">
-        <img src="images/badge5.webp" alt="Badge 5" class="badge" data-score="1200 XP">
-        <img src="images/badge6.webp" alt="Badge 6" class="badge" data-score="1600 XP">
-        <img src="images/badge7.webp" alt="Badge 7" class="badge" data-score="2000 XP">
-        <img src="images/badge8.webp" alt="Badge 8" class="badge" data-score="2500 XP">
-        <img src="images/badge9.webp" alt="Badge 9" class="badge" data-score="3000 XP">
-        <img src="images/badge10.webp" alt="Badge 10" class="badge" data-score="3600 XP">
-        <img src="badge1images/1.webp" alt="Badge 11" class="badge" data-score="4200 XP">
-        <img src="badge1images/2.webp" alt="Badge 12" class="badge" data-score="5000 XP">
-        <img src="badge1images/3.webp" alt="Badge 13" class="badge" data-score="6000 XP">
-        <img src="badge1images/4.webp" alt="Badge 14" class="badge" data-score="7500 XP">
-        <img src="images/badge15.webp" alt="Badge 15" class="badge" data-score="10000 XP">
+        <img src="badge1.png" alt="Badge 1" class="badge" data-score="100 XP">
+        <img src="badge2.png" alt="Badge 2" class="badge" data-score="300 XP">
+        <img src="badge3.png" alt="Badge 3" class="badge" data-score="500 XP">
+        <img src="badge4.png" alt="Badge 4" class="badge" data-score="800 XP">
+        <img src="badge5.png" alt="Badge 5" class="badge" data-score="1200 XP">
+        <img src="badge6.png" alt="Badge 6" class="badge" data-score="1600 XP">
+        <img src="badge7.png" alt="Badge 7" class="badge" data-score="2000 XP">
+        <img src="badge8.png" alt="Badge 8" class="badge" data-score="2500 XP">
+        <img src="badge9.png" alt="Badge 9" class="badge" data-score="3000 XP">
+        <img src="badge10.png" alt="Badge 10" class="badge" data-score="3600 XP">
+        <img src="badge11.png" alt="Badge 11" class="badge" data-score="4200 XP">
+        <img src="badge12.png" alt="Badge 12" class="badge" data-score="5000 XP">
+        <img src="badge13.png" alt="Badge 13" class="badge" data-score="6000 XP">
+        <img src="badge14.png" alt="Badge 14" class="badge" data-score="7500 XP">
+        <img src="badge15.png" alt="Badge 15" class="badge" data-score="10000 XP">
                 </div>
                 <div class="score-popup" id="scorePopup"></div>
             </div>
@@ -1040,18 +1040,18 @@ body {
 
     <!-- Screenshots Section -->
 <section class="screenshots animate-on-scroll">
-  <h2>AperÃ§u de l'App</h2>
+  <h2>Aperçu de l'App</h2>
   <div class="screenshots-grid">
     <div class="screenshot-placeholder">
-      <img src="https://i.ibb.co/fG4Qnh63/5900099821690276916.jpg" alt="AperÃ§u de l'application" />
+      <img src="https://i.ibb.co/fG4Qnh63/5900099821690276916.jpg" alt="Aperçu de l'application" />
     </div>
     <div class="screenshot-placeholder">
-      <img src="https://i.ibb.co/RkJ57tK8/590009982169027691images/4.webp" alt="Statistiques" />
+      <img src="https://i.ibb.co/RkJ57tK8/5900099821690276914.jpg" alt="Statistiques" />
       <p>Statistiques</p>
     </div>
     <div class="screenshot-placeholder">
-      <img src="https://i.ibb.co/dw54j4c0/5900099821690276915.jpg" alt="Analyse VidÃ©o" />
-      <p>Analyse VidÃ©o</p>
+      <img src="https://i.ibb.co/dw54j4c0/5900099821690276915.jpg" alt="Analyse Vidéo" />
+      <p>Analyse Vidéo</p>
     </div>
   </div>
 </section>
@@ -1061,7 +1061,7 @@ body {
 
         <!-- FAQ Section -->
         <section class="faq animate-on-scroll">
-            <h2>Questions FrÃ©quentes</h2>
+            <h2>Questions Fréquentes</h2>
             <div class="faq-list">
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
@@ -1071,7 +1071,7 @@ body {
                         </svg>
                     </div>
                     <div class="faq-answer">
-                        L'application AQA est conÃ§ue exclusivement pour les titulaires des cartes Silver, Gold et Diamond.
+                        L'application AQA est conçue exclusivement pour les titulaires des cartes Silver, Gold et Diamond.
                     </div>
                 </div>
 
@@ -1083,43 +1083,43 @@ body {
                         </svg>
                     </div>
                     <div class="faq-answer">
-                      AprÃ¨s ton inscription et lâ€™obtention de ta carte Silver, Gold ou Diamond, il suffit de tÃ©lÃ©charger lâ€™application et de suivre les Ã©tapes dâ€™activation.
+                      Après ton inscription et l’obtention de ta carte Silver, Gold ou Diamond, il suffit de télécharger l’application et de suivre les étapes d’activation.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Lâ€™application AQA envoie-t-elle des mises Ã  jour rÃ©guliÃ¨res ?</span>
+                        <span>L’application AQA envoie-t-elle des mises à jour régulières ?</span>
                         <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="faq-answer">
-                      Oui, nous publions rÃ©guliÃ¨rement des mises Ã  jour pour amÃ©liorer les performances et ajouter de nouvelles fonctionnalitÃ©s.
+                      Oui, nous publions régulièrement des mises à jour pour améliorer les performances et ajouter de nouvelles fonctionnalités.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Lâ€™application est-elle complÃ¨te ?</span>
+                        <span>L’application est-elle complète ?</span>
                         <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="faq-answer">
-                      Il sâ€™agit seulement de la premiÃ¨re version de lâ€™application. De nouvelles fonctionnalitÃ©s seront ajoutÃ©es prochainement.
+                      Il s’agit seulement de la première version de l’application. De nouvelles fonctionnalités seront ajoutées prochainement.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Qui est le dÃ©veloppeur de lâ€™application AQA ?</span>
+                        <span>Qui est le développeur de l’application AQA ?</span>
                         <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="faq-answer">
-                        Lâ€™application AQA a Ã©tÃ© dÃ©veloppÃ©e par Tahar Ayati.
+                        L’application AQA a été développée par Tahar Ayati.
                     </div>
                 </div>
             </div>
@@ -1127,9 +1127,9 @@ body {
 
         <!-- Final CTA -->
         <section class="final-cta animate-on-scroll">
-            <h2>PrÃªt Ã  transformer ta vie ?</h2>
-            <p>Rejoins des milliers d'athlÃ¨tes qui ont dÃ©jÃ  commencÃ© leur transformation avec AQA.</p>
-            <a href="AQA-app-suivi-v1.2.apk" class="cta-button">TÃ©lÃ©chargez l'app AQA</a>
+            <h2>Prêt à transformer ta vie ?</h2>
+            <p>Rejoins des milliers d'athlètes qui ont déjà commencé leur transformation avec AQA.</p>
+            <a href="AQA-app-suivi-v1.2.apk" class="cta-button">Téléchargez l'app AQA</a>
             <a href="https://aqasuivi.netlify.app" class="cta-button">Utilisez version Web</a>
         </section>
     </div>
@@ -1270,8 +1270,8 @@ body {
                     animation: slideIn 0.5s ease-out;
                 `;
                 addToHomeScreen.innerHTML = `
-                    ðŸ“± Ajoute AQA Ã  ton Ã©cran d'accueil pour un accÃ¨s rapide !
-                    <button onclick="this.parentElement.style.display='none'" style="margin-left: 10px; background: rgba(0,0,0,0.2); border: none; color: #000; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Ã—</button>
+                    📱 Ajoute AQA à ton écran d'accueil pour un accès rapide !
+                    <button onclick="this.parentElement.style.display='none'" style="margin-left: 10px; background: rgba(0,0,0,0.2); border: none; color: #000; padding: 5px 10px; border-radius: 5px; cursor: pointer;">×</button>
                 `;
                 
                 // Show after 3 seconds on mobile

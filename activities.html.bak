@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg" />
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>AQA SPORTS ACADEMY - Sports</title>
-    <meta content="DÃ©couvrez toutes les activitÃ©s sportives proposÃ©es par AQA Sports Academy - Natation, ApnÃ©e, PlongÃ©e sous-marine, Ã‰quitation, RandonnÃ©e et bien plus encore." name="description"/>
-    <meta content="AQA, sports, natation, apnÃ©e, plongÃ©e, Ã©quitation, randonnÃ©e, activitÃ©s sportives, AlgÃ©rie" name="keywords"/>
+    <meta content="Découvrez toutes les activités sportives proposées par AQA Sports Academy - Natation, Apnée, Plongée sous-marine, Équitation, Randonnée et bien plus encore." name="description"/>
+    <meta content="AQA, sports, natation, apnée, plongée, équitation, randonnée, activités sportives, Algérie" name="keywords"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 <style>
         * {
@@ -354,7 +354,7 @@
         }
 
         .activity-card.coming-soon::after {
-            content: 'BIENTÃ”T';
+            content: 'BIENTÔT';
             position: absolute;
             top: 15px;
             right: 15px;
@@ -500,7 +500,7 @@
       </nav>
 
       <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
         <div class="menu-toggle" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
         </div>
@@ -520,7 +520,7 @@
     <a href="events.html" class="mobile-nav-link">Events</a>
     <a href="webtv.html" class="mobile-nav-link">WebTV</a>
     <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
   </div>
   <!-- ===== /NAVBAR ===== -->
     
@@ -530,17 +530,17 @@
         <!-- Page Header -->
         <section class="page-header">
             <h1>Nos Sports</h1>
-            <p>DÃ©couvrez notre large gamme d'activitÃ©s sportives conÃ§ues pour tous les niveaux. De la natation Ã  l'Ã©quitation, plongez dans l'aventure sportive avec AQA Sports Academy.</p>
+            <p>Découvrez notre large gamme d'activités sportives conçues pour tous les niveaux. De la natation à l'équitation, plongez dans l'aventure sportive avec AQA Sports Academy.</p>
         </section>
 
         <!-- Available Activities -->
         <section class="activities-section">
-            <h2 class="section-title">ActivitÃ©s Disponibles</h2>
+            <h2 class="section-title">Activités Disponibles</h2>
             <div class="activities-grid">
                 <!-- Swimming for Adults -->
                 <a href="infos.html" class="activity-card available swimming-adults">
                     <div class="activity-icon">
-                        <img src="images/swim.webp" alt="Natation Adultes" loading="lazy">
+                        <img src="swim.png" alt="Natation Adultes" loading="lazy">
                     </div>
                     <div class="activity-title">Natation Adultes</div>
                     <div class="activity-description">Cours de natation pour adultes, tous niveaux confondus</div>
@@ -549,7 +549,7 @@
                 <!-- Swimming for Kids -->
                 <a href="kids.html" class="activity-card available swimming-kids">
                     <div class="activity-icon">
-                        <img src="images/swim.webp" alt="Natation Enfants" loading="lazy">
+                        <img src="swim.png" alt="Natation Enfants" loading="lazy">
                     </div>
                     <div class="activity-title">Natation Enfants</div>
                     <div class="activity-description">Apprentissage ludique de la natation pour les plus jeunes</div>
@@ -558,34 +558,34 @@
                 <!-- Apnea -->
                 <a href="#" class="activity-card available apnea">
                     <div class="activity-icon">
-                        <img src="apneimages/a.webp" alt="ApnÃ©e" loading="lazy">
+                        <img src="apnea.png" alt="Apnée" loading="lazy">
                     </div>
-                    <div class="activity-title">ApnÃ©e</div>
-                    <div class="activity-description">MaÃ®trisez l'art de la respiration et de l'apnÃ©e</div>
+                    <div class="activity-title">Apnée</div>
+                    <div class="activity-description">Maîtrisez l'art de la respiration et de l'apnée</div>
                 </a>
 
                 <!-- Open Water -->
                 <a href="#" class="activity-card available open-water">
                     <div class="activity-icon">
-                        <img src="seimages/a.webp" alt="Eau Libre" loading="lazy">
+                        <img src="sea.png" alt="Eau Libre" loading="lazy">
                     </div>
                     <div class="activity-title">Eau Libre</div>
-                    <div class="activity-description">Natation en milieu naturel et compÃ©titions</div>
+                    <div class="activity-description">Natation en milieu naturel et compétitions</div>
                 </a>
 
                 <!-- Scuba Diving -->
                 <a href="#" class="activity-card available scuba-diving">
                     <div class="activity-icon">
-                        <img src="scubimages/a.webp" alt="PlongÃ©e Sous-marine" loading="lazy">
+                        <img src="scuba.png" alt="Plongée Sous-marine" loading="lazy">
                     </div>
-                    <div class="activity-title">PlongÃ©e Sous-marine</div>
-                    <div class="activity-description">Explorez les profondeurs marines en toute sÃ©curitÃ©</div>
+                    <div class="activity-title">Plongée Sous-marine</div>
+                    <div class="activity-description">Explorez les profondeurs marines en toute sécurité</div>
                 </a>
 
                 <!-- Spearfishing -->
                 <a href="#" class="activity-card available spearfishing">
                     <div class="activity-icon">
-                        <img src="images/spear.webp" alt="Chasse Sous-marine" loading="lazy">
+                        <img src="spear.png" alt="Chasse Sous-marine" loading="lazy">
                     </div>
                     <div class="activity-title">Chasse Sous-marine</div>
                     <div class="activity-description">Techniques de chasse sous-marine responsable</div>
@@ -594,31 +594,31 @@
                 <!-- Horse Riding -->
                 <a href="#" class="activity-card available horse-riding">
                     <div class="activity-icon">
-                        <img src="images/horse.webp" alt="Ã‰quitation" loading="lazy">
+                        <img src="horse.png" alt="Équitation" loading="lazy">
                     </div>
-                    <div class="activity-title">Ã‰quitation</div>
-                    <div class="activity-description">Apprentissage de l'Ã©quitation et soins des chevaux</div>
+                    <div class="activity-title">Équitation</div>
+                    <div class="activity-description">Apprentissage de l'équitation et soins des chevaux</div>
                 </a>
 
                 <!-- Hiking -->
                 <a href="#" class="activity-card available hiking">
                     <div class="activity-icon">
-                        <img src="images/hike.webp" alt="RandonnÃ©e" loading="lazy">
+                        <img src="hike.png" alt="Randonnée" loading="lazy">
                     </div>
-                    <div class="activity-title">RandonnÃ©e</div>
-                    <div class="activity-description">Explorez la nature Ã  travers des parcours adaptÃ©s</div>
+                    <div class="activity-title">Randonnée</div>
+                    <div class="activity-description">Explorez la nature à travers des parcours adaptés</div>
                 </a>
             </div>
         </section>
 
         <!-- Coming Soon Activities -->
         <section class="activities-section">
-            <h2 class="section-title">BientÃ´t Disponible</h2>
+            <h2 class="section-title">Bientôt Disponible</h2>
             <div class="activities-grid">
                 <!-- Basketball -->
                 <div class="activity-card coming-soon">
                     <div class="activity-icon">
-                        <img src="images/basket.webp" alt="Basketball" loading="lazy">
+                        <img src="basket.png" alt="Basketball" loading="lazy">
                     </div>
                     <div class="activity-title">Basketball</div>
                     <div class="activity-description">Cours de basketball pour tous niveaux</div>
@@ -627,37 +627,37 @@
                 <!-- Boxing -->
                 <div class="activity-card coming-soon">
                     <div class="activity-icon">
-                        <img src="images/box.webp" alt="Boxe" loading="lazy">
+                        <img src="box.png" alt="Boxe" loading="lazy">
                     </div>
                     <div class="activity-title">Boxe</div>
-                    <div class="activity-description">EntraÃ®nement de boxe et self-dÃ©fense</div>
+                    <div class="activity-description">Entraînement de boxe et self-défense</div>
                 </div>
 
                 <!-- Archery -->
                 <div class="activity-card coming-soon">
                     <div class="activity-icon">
-                        <img src="images/arch.webp" alt="Tir Ã  l'Arc" loading="lazy">
+                        <img src="arch.png" alt="Tir à l'Arc" loading="lazy">
                     </div>
-                    <div class="activity-title">Tir Ã  l'Arc</div>
-                    <div class="activity-description">PrÃ©cision et concentration avec le tir Ã  l'arc</div>
+                    <div class="activity-title">Tir à l'Arc</div>
+                    <div class="activity-description">Précision et concentration avec le tir à l'arc</div>
                 </div>
 
                 <!-- Chess -->
                 <div class="activity-card coming-soon">
                     <div class="activity-icon">
-                        <img src="images/chess.webp" alt="Ã‰checs" loading="lazy">
+                        <img src="chess.png" alt="Échecs" loading="lazy">
                     </div>
-                    <div class="activity-title">Ã‰checs</div>
-                    <div class="activity-description">DÃ©veloppez votre stratÃ©gie et votre rÃ©flexion</div>
+                    <div class="activity-title">Échecs</div>
+                    <div class="activity-description">Développez votre stratégie et votre réflexion</div>
                 </div>
 
                 <!-- Kickboxing -->
                 <div class="activity-card coming-soon">
                     <div class="activity-icon">
-                        <img src="images/kick.webp" alt="Kickboxing" loading="lazy">
+                        <img src="kick.png" alt="Kickboxing" loading="lazy">
                     </div>
                     <div class="activity-title">Kickboxing</div>
-                    <div class="activity-description">EntraÃ®nement cardio et techniques de combat</div>
+                    <div class="activity-description">Entraînement cardio et techniques de combat</div>
                 </div>
             </div>
         </section>
@@ -669,7 +669,7 @@
  </footer>
 <!-- Add this script before closing </body> tag -->
 <script>
-<a href="index.html" class="floating-btn">â† Retour Accueil</a>
+<a href="index.html" class="floating-btn">← Retour Accueil</a>
  </script>   
     <script src="js/navbar.js"></script>
     <script>
@@ -760,7 +760,7 @@
                     this.style.animation = '';
                 }, 500);
                 
-                alert(`â³ ${activityName} sera bientÃ´t disponible!\n\nðŸš€ Restez Ã  l'Ã©coute pour le lancement de cette nouvelle activitÃ©.\n\nðŸ“§ Inscrivez-vous Ã  notre newsletter pour Ãªtre informÃ© en premier!`);
+                alert(`⏳ ${activityName} sera bientôt disponible!\n\n🚀 Restez à l'écoute pour le lancement de cette nouvelle activité.\n\n📧 Inscrivez-vous à notre newsletter pour être informé en premier!`);
             });
         });
 
