@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
     <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg" />
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>AQA SPORTS ACADEMY</title>
-    <meta content="AQA est un établissement sportif dédié à transformer les débutants en athlètes confiants. Grâce à des coachs d'élite, un suivi technique et physique personnalisé, et des groupes restreints, nous allions science et technologie pour assurer une progression réelle – du zéro au pro." name="description"/>
-    <meta content="AQA, natation, apnée, coaching, école natation, formation, Algérie" name="keywords"/>
+    <title>أكاديمية أكا الرياضية</title>
+    <meta content="أكا هي مؤسسة رياضية مخصصة لتحويل المبتدئين إلى رياضيين واثقين. بفضل مدربين نخبة، متابعة فنية وبدنية شخصية، ومجموعات محدودة، نجمع بين العلم والتكنولوجيا لضمان تقدم حقيقي - من الصفر إلى المحترف." name="description"/>
+    <meta content="أكا، سباحة، غوص حر، تدريب، مدرسة سباحة، تكوين، الجزائر" name="keywords"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 <style>
         * {
@@ -84,6 +84,7 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            direction: rtl;
         }
 
         .bg-logo {
@@ -479,7 +480,7 @@
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.3s ease;
-  text-align: left;
+  text-align: right;
   opacity: 0;
   transform: translateY(30px);
 }
@@ -513,7 +514,7 @@
 }
 
 .review-author {
-  text-align: right;
+  text-align: left;
   color: #00ffff;
   font-weight: 600;
 }
@@ -643,7 +644,7 @@
 
         .input-group {
             margin-bottom: 2rem;
-            text-align: left;
+            text-align: right;
         }
 
         .input-label {
@@ -664,6 +665,7 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            direction: rtl;
         }
 
         .message-textarea {
@@ -717,7 +719,7 @@
         .floating-btn {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px;
             background: linear-gradient(135deg, #0099ff, #00ffff);
             color: #000;
             padding: 0.8rem 1.2rem;
@@ -803,136 +805,138 @@
             .section-subtitle {
                 font-size: 0.95rem;
             }
+/* Navigation Buttons - 2 Column Grid on Mobile */
+.nav-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
 
-            /* Navigation Buttons - 2 Column Grid on Mobile */
-            .nav-buttons {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
+.nav-btn {
+    padding: 1.25rem 0.75rem;
+    min-height: 90px;
+    font-size: 0.9rem;
+}
 
-            .nav-btn {
-                padding: 1.25rem 0.75rem;
-                min-height: 90px;
-                font-size: 0.9rem;
-            }
+.nav-btn-icon svg {
+    width: 24px;
+    height: 24px;
+}
 
-            .nav-btn-icon svg {
-                width: 24px;
-                height: 24px;
-            }
+.contact-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
 
-            .contact-row {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+.stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
+.stat-card {
+    padding: 1.5rem 1rem;
+}
 
-            .stat-card {
-                padding: 1.5rem 1rem;
-            }
+.stat-number {
+    font-size: 2.25rem;
+}
 
-            .stat-number {
-                font-size: 2.25rem;
-            }
+.stat-label {
+    font-size: 0.85rem;
+}
 
-            .stat-label {
-                font-size: 0.9rem;
-            }
+/* Tablet and Small Devices */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
 
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
+    .reviews-container {
+        gap: 1.5rem;
+    }
 
-            .reviews-container {
-                gap: 1.5rem;
-            }
+    .review-card {
+        flex: 0 1 100%;
+        padding: 1.25rem;
+    }
 
-            .review-card {
-                flex: 0 1 100%;
-                padding: 1.25rem;
-            }
+    .listen-section {
+        padding: 2.5rem 0;
+        margin: 2rem 0;
+    }
 
-            .listen-section {
-                padding: 2.5rem 0;
-                margin: 2rem 0;
-            }
+    .listen-form {
+        padding: 1.5rem;
+    }
 
-            .listen-form {
-                padding: 1.5rem;
-            }
+    .input-group {
+        margin-bottom: 1.5rem;
+    }
 
-            .input-group {
-                margin-bottom: 1.5rem;
-            }
+    .submit-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+    }
 
-            .submit-btn {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-                width: 100%;
-            }
+    .floating-btn {
+        bottom: 15px;
+        left: 15px;
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+    }
 
-            .floating-btn {
-                bottom: 15px;
-                right: 15px;
-                padding: 0.7rem 1rem;
-                font-size: 0.85rem;
-            }
+    footer {
+        padding: 1.5rem 0.75rem;
+    }
+}
 
-            footer {
-                padding: 1.5rem 0.75rem;
-            }
-        }
+/* Extra Small Mobile Devices */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
 
-        /* Extra Small Mobile Devices */
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.75rem;
-            }
+    .hero h2 {
+        font-size: 1.1rem;
+    }
 
-            .hero h2 {
-                font-size: 1.1rem;
-            }
+    .section-title {
+        font-size: 1.5rem;
+    }
 
-            .section-title {
-                font-size: 1.5rem;
-            }
+    .nav-btn {
+        font-size: 0.85rem;
+        padding: 1rem 0.5rem;
+        min-height: 85px;
+    }
 
-            .nav-btn {
-                font-size: 0.85rem;
-                padding: 1rem 0.5rem;
-                min-height: 85px;
-            }
+    .nav-btn-icon svg {
+        width: 22px;
+        height: 22px;
+    }
 
-            .nav-btn-icon svg {
-                width: 22px;
-                height: 22px;
-            }
+    .stat-number {
+        font-size: 2rem;
+    }
 
-            .stat-number {
-                font-size: 2rem;
-            }
+    .stat-label {
+        font-size: 0.8rem;
+    }
+}
 
-            .stat-label {
-                font-size: 0.85rem;
-            }
-        }
 </style>
     <link rel="stylesheet" href="css/navbar.css">
 </head>
-<a href="cards.html" class="floating-btn">Nouvelles formules</a>
+<a href="cards.html" class="floating-btn">العروض الجديدة</a>
 <body>
         <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <img src="https://i.imgur.com/3dcksCn.png" alt="AQA Logo" class="loading-logo">
+        <img src="https://i.imgur.com/3dcksCn.png" alt="شعار أكا" class="loading-logo">
         <div class="loading-bar-container">
             <div class="loading-bar"></div>
         </div>
-        <div class="loading-text">CHARGEMENT...</div>
+        <div class="loading-text">جاري التحميل...</div>
     </div>
 
 <iframe src="scroll.html" class="bg-frame"></iframe>
@@ -942,20 +946,20 @@
     <div class="header-content">
       <div class="logo-section">
         <a href="index.html">
-          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="شعار أكا" class="logo">
         </a>
       </div>
       <nav class="nav-menu" id="navMenu">
-        <a href="tarifs.html" class="nav-link">Tarifs</a>
-        <a href="groupes.html" class="nav-link">Groupes</a>
-        <a href="piscines.html" class="nav-link">Piscines</a>
-        <a href="infos.html" class="nav-link">Infos</a>
-        <a href="events.html" class="nav-link">Events</a>
-        <a href="phobie.html" class="nav-link">Formations</a>
-        <a href="store.html" class="nav-link">Store</a>
+        <a href="tarifs.html" class="nav-link">الأسعار</a>
+        <a href="groupes.html" class="nav-link">المجموعات</a>
+        <a href="piscines.html" class="nav-link">المسابح</a>
+        <a href="infos.html" class="nav-link">معلومات</a>
+        <a href="events.html" class="nav-link">الفعاليات</a>
+        <a href="phobie.html" class="nav-link">التكوينات</a>
+        <a href="store.html" class="nav-link">المتجر</a>
       </nav>
       <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <a class="lang-btn" href="index.html" onclick="toggleLanguage()">Français</a>
         <div class="menu-toggle" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
         </div>
@@ -967,14 +971,14 @@
     <div class="menu-close" onclick="toggleMobileMenu()">
       <span></span><span></span>
     </div>
-    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
-    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
-    <a href="infos.html" class="mobile-nav-link">Infos</a>
-    <a href="events.html" class="mobile-nav-link">Events</a>
-    <a href="phobie.html" class="mobile-nav-link">Formations</a>
-    <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+    <a href="tarifs.html" class="mobile-nav-link">الأسعار</a>
+    <a href="groupes.html" class="mobile-nav-link">المجموعات</a>
+    <a href="piscines.html" class="mobile-nav-link">المسابح</a>
+    <a href="infos.html" class="mobile-nav-link">معلومات</a>
+    <a href="events.html" class="mobile-nav-link">الفعاليات</a>
+    <a href="phobie.html" class="mobile-nav-link">التكوينات</a>
+    <a href="store.html" class="mobile-nav-link">المتجر</a>
+    <a class="mobile-nav-link lang-btn" href="index.html" onclick="toggleLanguage()">Français</a>
   </div>
 
     <div class="bg-logo"></div>
@@ -982,16 +986,16 @@
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <h1>From Zero to Hero</h1>
+            <h1>من الصفر إلى البطل</h1>
             
             <div class="hero-video">
                 <video autoplay muted loop playsinline class="transformation-video">
                     <source src="zero.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
+                    متصفحك لا يدعم تشغيل الفيديو.
                 </video>
             </div>
             
-            <p>AQA est un établissement sportif dédié à transformer les débutants en athlètes confiants. Avec des coachs d'élite, un suivi personnalisé et des groupes restreints, nous combinons science et technologie pour garantir une progression réelle – du zéro au pro.</p>
+            <p>أكا هي مؤسسة رياضية مخصصة لتحويل المبتدئين إلى رياضيين واثقين. بفضل مدربين نخبة، متابعة شخصية ومجموعات محدودة، نجمع بين العلم والتكنولوجيا لضمان تقدم حقيقي - من الصفر إلى المحترف.</p>
         </section>
 
        <!-- Stats Section -->
@@ -999,19 +1003,19 @@
     <div class="stats-grid">
         <div class="stat-card" data-delay="0">
             <div class="stat-number" data-target="500" data-suffix="+">0+</div>
-            <div class="stat-label">Athlètes formés</div>
+            <div class="stat-label">رياضي مدرب</div>
         </div>
         <div class="stat-card" data-delay="100">
             <div class="stat-number" data-target="8" data-suffix="+">0+</div>
-            <div class="stat-label">Coachs d'élite</div>
+            <div class="stat-label">مدرب نخبة</div>
         </div>
         <div class="stat-card" data-delay="200">
             <div class="stat-number" data-target="3" data-suffix="">0</div>
-            <div class="stat-label">Piscines partenaires</div>
+            <div class="stat-label">مسابح شريكة</div>
         </div>
         <div class="stat-card" data-delay="300">
             <div class="stat-number" data-target="98" data-suffix="%">0%</div>
-            <div class="stat-label">Satisfaction client</div>
+            <div class="stat-label">رضا العملاء</div>
         </div>
     </div>
 </section>
@@ -1019,9 +1023,9 @@
         <!-- Essential Services -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Nos Services Essentiels</h2>
+                <h2 class="section-title">خدماتنا الأساسية</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Tout ce dont vous avez besoin pour commencer votre transformation</p>
+                <p class="section-subtitle">كل ما تحتاجه لبدء تحولك</p>
             </div>
             
             <div class="nav-buttons">
@@ -1032,7 +1036,7 @@
                             <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path>
                         </svg>
                     </div>
-                    <div>Tarifs</div>
+                    <div>الأسعار</div>
                 </a>
 
                 <a href="groupes.html" class="nav-btn">
@@ -1042,7 +1046,7 @@
                             <circle cx="12" cy="7" r="3"></circle>
                         </svg>
                     </div>
-                    <div>Groupes</div>
+                    <div>المجموعات</div>
                 </a>
 
                 <a href="inscription.html" class="nav-btn">
@@ -1052,7 +1056,7 @@
                             <path d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4 12.5-12.5z"></path>
                         </svg>
                     </div>
-                    <div>Inscription</div>
+                    <div>التسجيل</div>
                 </a>
 
                 <a href="infos.html" class="nav-btn">
@@ -1063,7 +1067,7 @@
                             <line x1="12" y1="8" x2="12" y2="8"></line>
                         </svg>
                     </div>
-                    <div>Infos</div>
+                    <div>معلومات</div>
                 </a>
             
                    <a href="cards.html" class="nav-btn">
@@ -1073,7 +1077,7 @@
                             <line x1="1" y1="10" x2="23" y2="10"></line>
                         </svg>
                     </div>
-                    <div>Formules AQA</div>
+                    <div>عروض أكا</div>
                 </a>
                 </div>
         </section>
@@ -1081,9 +1085,9 @@
         <!-- services & Education -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Services & Formations</h2>
+                <h2 class="section-title">الخدمات والتكوينات</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Programmes spécialisés pour tous les niveaux</p>
+                <p class="section-subtitle">برامج متخصصة لجميع المستويات</p>
             </div>
             
             <div class="nav-buttons">
@@ -1094,7 +1098,7 @@
                             <path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"></path>
                         </svg>
                     </div>
-                    <div>Formations</div>
+                    <div>التكوينات</div>
                 </a>
 
          
@@ -1108,7 +1112,7 @@
                             <path d="M9 15c1.5 1 4.5 1 6 0"></path>
                         </svg>
                     </div>
-                    <div>AQA Kids</div>
+                    <div>أكا كيدز</div>
                 </a>
          <a href="well.html" class="nav-btn">
                     <div class="nav-btn-icon">
@@ -1117,7 +1121,7 @@
                             <path d="M3 18c1.5-1 3-2 5-2h6c1.5 0 2.5 1 2.5 2s-1 2-2.5 2H9c-1.5 0-2.5 1-3 2"/>
                         </svg>
                     </div>
-                    <div>AQA Wellness</div>
+                    <div>أكا ويلنس</div>
                 </a>
 
                 <a href="events.html" class="nav-btn">
@@ -1129,7 +1133,7 @@
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
                     </div>
-                    <div>AQA events</div>
+                    <div>فعاليات أكا</div>
                 </a>
                 
                 <a href="activities.html" class="nav-btn">
@@ -1140,7 +1144,7 @@
                             <path d="M4 4l16 16M20 4L4 20"></path>
                         </svg>
                     </div>
-                    <div>Sports</div>
+                    <div>الرياضات</div>
                 </a>
             </div>
         </section>
@@ -1148,9 +1152,9 @@
         <!-- Facilities & Events -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Structure et Média</h2>
+                <h2 class="section-title">البنية التحتية والإعلام</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Coordination visuelle et communication des activités AQA.</p>
+                <p class="section-subtitle">التنسيق البصري والتواصل لأنشطة أكا</p>
             </div>
             
             <div class="nav-buttons">
@@ -1161,7 +1165,7 @@
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
                     </div>
-                    <div>Piscines</div>
+                    <div>المسابح</div>
                 </a>
   <a href="team.html" class="nav-btn">
                     <div class="nav-btn-icon">
@@ -1174,7 +1178,7 @@
                             <path d="M16 21v-2a3 3 0 0 1 6 0v2"></path>
                         </svg>
                     </div>
-                    <div>Team</div>
+                    <div>الفريق</div>
                 </a>
                <a href="clients.html" class="nav-btn">
                     <div class="nav-btn-icon">
@@ -1193,7 +1197,7 @@
 </svg>
 
                     </div>
-                    <div>Adhérents</div>
+                    <div>المنخرطون</div>
                 </a>
                   <a href="webtv.html" class="nav-btn">
                     <div class="nav-btn-icon">
@@ -1204,7 +1208,7 @@
 </svg>
 
                     </div>
-                    <div>WebTV</div>
+                    <div>التلفزيون الإلكتروني</div>
                 </a>
                
                
@@ -1215,9 +1219,9 @@
         <!-- Wellness & Lifestyle -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Boutique et supports technique</h2>
+                <h2 class="section-title">المتجر والدعم الفني</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Équipez-vous avec les accessoires et guides AQA</p>
+                <p class="section-subtitle">تجهز بإكسسوارات وأدلة أكا</p>
             </div>
             
             <div class="nav-buttons">
@@ -1229,7 +1233,7 @@
                             <path d="M9 4l1.5 2h3L15 4"/>
                         </svg>
                     </div>
-                    <div>AQA Wear</div>
+                    <div>ملابس أكا</div>
                 </a>
 
                 <a href="store.html" class="nav-btn">
@@ -1241,7 +1245,7 @@
                             <path d="M10 21v-6h4v6" />
                         </svg>
                     </div>
-                    <div>AQA Store</div>
+                    <div>متجر أكا</div>
                 </a>
 
                 <a href="app.html" class="nav-btn">
@@ -1251,7 +1255,7 @@
                             <line x1="12" y1="20" x2="12" y2="20"></line>
                         </svg>
                     </div>
-                    <div>AQA App</div>
+                    <div>تطبيق أكا</div>
                 </a>
             </div>
         </section>
@@ -1259,28 +1263,28 @@
         <!-- Reviews Section -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Ce que disent nos athlètes</h2>
+                <h2 class="section-title">ماذا يقول رياضيونا</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Témoignages de transformation réussie</p>
+                <p class="section-subtitle">شهادات التحول الناجح</p>
             </div>
             
             <div class="reviews-container">
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
                     <p class="review-text">"واحد من أفضل نوادي تعليم السباحة في جزائر ، Great experience"</p>
-                    <p class="review-author">- amir abdelaziz</p>
+                    <p class="review-author">- أمير عبد العزيز</p>
                 </div>
                 
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
                     <p class="review-text">"الكلمة الوحيدة التي استطيع ان اقولها عن الفريق و الطاقم التدريبي :شكرا لكم انتم فريق محترف حقيقة!!!"</p>
-                    <p class="review-author">- Hakim Tazir</p>
+                    <p class="review-author">- حكيم تازير</p>
                 </div>
                 
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"افضل نادي سباحة مدربين محترفين ، السباحة على اصولها</p>
-                    <p class="review-author">- Raouf Benyakhlef</p>
+                    <p class="review-text">"افضل نادي سباحة مدربين محترفين ، السباحة على اصولها"</p>
+                    <p class="review-author">- رؤوف بن يخلف</p>
                 </div>
             </div>
             </section>
@@ -1289,23 +1293,23 @@
         <!-- Gallery Section -->
         <section class="section">
             <div class="section-header">
-                <h2 class="section-title">Nos Moments Forts</h2>
+                <h2 class="section-title">لحظاتنا القوية</h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle">Découvrez l'esprit AQA en images</p>
+                <p class="section-subtitle">اكتشف روح أكا في الصور</p>
             </div>
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/ksrvQyDK/IMG20240224224823.jpg?w=400" alt="Training session">
+                    <img src="https://i.ibb.co/ksrvQyDK/IMG20240224224823.jpg?w=400" alt="حصة تدريبية">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/9mz245Tp/IMG20240120224811.jpg?w=400" alt="Swimming pool">
+                    <img src="https://i.ibb.co/9mz245Tp/IMG20240120224811.jpg?w=400" alt="مسبح">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/9JzqTWS/images-1-1-1.jpg?w=400" alt="Competition">
+                    <img src="https://i.ibb.co/9JzqTWS/images-1-1-1.jpg?w=400" alt="منافسة">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/tMZ0R873/IMG20250705080230.jpg?w=400" alt="Kids training">
+                    <img src="https://i.ibb.co/tMZ0R873/IMG20250705080230.jpg?w=400" alt="تدريب الأطفال">
                 </div>
             </div>
         </section>
@@ -1320,7 +1324,7 @@
     allow="microphone *; camera *"
     allowfullscreen
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals allow-downloads"
-    title="We Listen Section">
+    title="قسم نحن نستمع">
 </iframe>
 
 <script>
@@ -1465,12 +1469,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = document.getElementById('messageText').value.trim();
 
         if (!name && !email && !message) {
-            alert('Veuillez remplir au moins un champ');
+            alert('الرجاء ملء حقل واحد على الأقل');
             return;
         }
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Envoi...';
+        submitBtn.textContent = 'جاري الإرسال...';
 
         try {
             // Simulate sending
@@ -1479,10 +1483,10 @@ document.addEventListener('DOMContentLoaded', () => {
             formContainer.style.display = 'none';
             thankYouMessage.style.display = 'block';
         } catch (error) {
-            alert('Erreur lors de l\'envoi');
+            alert('خطأ أثناء الإرسال');
         } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Envoyer';
+            submitBtn.textContent = 'إرسال';
         }
     });
 

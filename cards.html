@@ -1,15 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AQA â€“ Formules & Avantages</title>
+  <title>AQA Formules & Avantages</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-
+  
   <!-- Global + Navbar CSS -->
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/navbar.css">
-
+  
   <!-- Page-specific styles -->
   <style>
     .section-title{
@@ -40,17 +40,8 @@
     .tarif-btn{ display:inline-block; padding:12px 28px; border-radius:30px; font-size:1.1rem; font-weight:600; text-decoration:none; color:#000;
       background:linear-gradient(135deg,#00ffff,#0099ff); box-shadow:0 4px 15px rgba(0,153,255,.4); transition:all .3s ease; }
     .tarif-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,153,255,.6); }
-      .bg-frame {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  z-index: -1;
-  pointer-events: none;
-  background: transparent;
-}
+    
+    .bg-frame {   position: fixed;   top: 0;   left: 0;   width: 100vw;   height: 100vh;   border: none;   z-index: -1;   pointer-events: none;   background: transparent; }
 /* Video Analysis Popup */
     .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);
       backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;animation:fadeIn .3s ease}
@@ -73,7 +64,7 @@
     .video-container{position:relative;width:100%;padding-bottom:56.25%;background:#000;border-radius:15px;overflow:hidden;margin-bottom:2rem;
       box-shadow:0 8px 25px rgba(0,153,255,.2)}
     .video-container video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
-    .video-container::before{content:'â–¶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    .video-container::before{content:'▶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
       font-size:4rem;color:rgba(0,255,255,.8);pointer-events:none;opacity:0;transition:.3s;z-index:1}
     .video-container:hover::before{opacity:1}
     .popup-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
@@ -85,94 +76,19 @@
       color:#000;text-decoration:none;text-align:center;border-radius:30px;font-size:1.2rem;font-weight:600;
       box-shadow:0 4px 15px rgba(0,153,255,.4);transition:.3s;border:none;cursor:pointer}
     .popup-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,153,255,.6)}
-    .video-link {
-  cursor: pointer;
-  color: #00e5ff;
-  font-weight: 600;
-  font-size: 1.1rem;
-  text-decoration: none;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.3s ease;
-}
-
-.video-link::after {
- 
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.video-link::before {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.video-link:hover {
-  color: #0099ff;
-}
-
-.video-link:hover::before {
-  transform: scaleX(1);
-}
-
-.video-link:hover::after {
-  transform: translateX(4px);
-}
- .app-link {
-  cursor: pointer;
-  color: #00e5ff;
-  font-weight: 600;
-  font-size: 1.1rem;
-  text-decoration: none;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.3s ease;
-}
-
-.app-link::after {
- 
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.app-link::before {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.app-link:hover {
-  color: #0099ff;
-}
-
-.app-link:hover::before {
-  transform: scaleX(1);
-}
-
-.app-link:hover::after {
-  transform: translateX(4px);
-}
-
-
+    .video-link {   cursor: pointer;   color: #00e5ff;   font-weight: 600;   font-size: 1.1rem;   text-decoration: none;   position: relative;   display: inline-flex;   align-items: center;   gap: 6px;   transition: color 0.3s ease; }
+    .video-link::after {     font-size: 1rem;   transition: transform 0.3s ease; }
+    .video-link::before {   content: "";   position: absolute;   bottom: -3px;   left: 0;   width: 100%;   height: 2px;   background: currentColor;   transform: scaleX(0);   transform-origin: left;   transition: transform 0.3s ease; }
+    .video-link:hover {   color: #0099ff; }
+    .video-link:hover::before {   transform: scaleX(1); }
+    .video-link:hover::after {   transform: translateX(4px); }
+    .app-link {   cursor: pointer;   color: #00e5ff;   font-weight: 600;   font-size: 1.1rem;   text-decoration: none;   position: relative;   display: inline-flex;   align-items: center;   gap: 6px;   transition: color 0.3s ease; }
+    .app-link::after {     font-size: 1rem;   transition: transform 0.3s ease; }
+    .app-link::before {   content: "";   position: absolute;   bottom: -3px;   left: 0;   width: 100%;   height: 2px;   background: currentColor;   transform: scaleX(0);   transform-origin: left;   transition: transform 0.3s ease; }
+    .app-link:hover {   color: #0099ff; }
+    .app-link:hover::before {   transform: scaleX(1); }
+    .app-link:hover::after {   transform: translateX(4px); }
+    
     @media(max-width:768px){
       .popup-content{width:95%;max-height:95vh}
       .popup-header h2{font-size:1.5rem}
@@ -207,7 +123,7 @@
       background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
       border-radius: 30px;
       padding: 12px;
-      box-shadow: 
+      box-shadow:
         0 10px 40px rgba(0,0,0,.6),
         inset 0 0 0 2px rgba(0,153,255,.3),
         0 0 20px rgba(0,153,255,.2);
@@ -217,7 +133,7 @@
     
     .phone-frame:hover {
       transform: scale(1.05);
-      box-shadow: 
+      box-shadow:
         0 15px 50px rgba(0,0,0,.8),
         inset 0 0 0 2px rgba(0,153,255,.5),
         0 0 30px rgba(0,153,255,.4);
@@ -242,7 +158,8 @@
       object-fit: cover;
       display: block;
     }
-        @media(max-width: 768px) {
+    
+    @media(max-width: 768px) {
       .popup-content { width: 95%; max-height: 95vh; }
       .popup-header h2 { font-size: 1.5rem; }
       .popup-features { grid-template-columns: 1fr; }
@@ -251,13 +168,12 @@
       .phone-notch { width: 80px; height: 16px; }
     }
 html {
-  background: #000;  /* solid fallback */
+  background: #000; /* solid fallback */
 }
 body {
   background: transparent !important;
   overscroll-behavior: none; /* prevent pull-to-refresh glow */
 }
-
   </style>
 </head>
 <body>
@@ -266,17 +182,17 @@ body {
   <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
-<iframe src="scroll.html" class="bg-frame"></iframe> 
+<iframe src="scroll.html" class="bg-frame"></iframe>
+  
   <!-- ===== NAVBAR ===== -->
   <header id="header">
     <div class="header-content">
       <div class="logo-section">
         <a href="index.html">
-          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
-               alt="AQA Logo" class="logo">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
         </a>
       </div>
-
+      
       <!-- Desktop Navigation -->
       <nav class="nav-menu" id="navMenu">
         <a href="tarifs.html" class="nav-link">Tarifs</a>
@@ -287,16 +203,16 @@ body {
         <a href="webtv.html" class="nav-link">WebTV</a>
         <a href="store.html" class="nav-link">Store</a>
       </nav>
-
+      
       <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
         <div class="menu-toggle" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
         </div>
       </div>
     </div>
   </header>
-
+  
   <!-- Mobile Menu Overlay -->
   <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <div class="menu-close" onclick="toggleMobileMenu()">
@@ -309,14 +225,13 @@ body {
     <a href="events.html" class="mobile-nav-link">Events</a>
     <a href="webtv.html" class="mobile-nav-link">WebTV</a>
     <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
+    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
   </div>
   <!-- ===== /NAVBAR ===== -->
-
-
+  
   <div class="container">
     <h1 class="section-title">Nos Formules & Avantages</h1>
-
+    
     <div class="pricing-cards" id="cards">
       <!-- Starter -->
       <div class="card" role="button" aria-expanded="false">
@@ -324,113 +239,116 @@ body {
         <div class="features">
           <h3>Starter (1 mois)</h3>
           <ul>
-            <li>SÃ©ances encadrÃ©es par coachs</li>
+            <li>Séances encadrées par coachs</li>
             <li>Suivi technique de base</li>
-            <li>Pas dâ€™analyse vidÃ©o</li>
+            <li>Pas d'analyse vidéo</li>
           </ul>
         </div>
       </div>
+      
       <!-- Silver -->
       <div class="card" role="button" aria-expanded="false">
         <img src="images/2.webp" alt="Silver">
         <div class="features">
           <h3>Silver (3 mois)</h3>
           <ul>
-           <li><span class="video-link">Analyse vidÃ©o personnalisÃ©e</span></li>
-            <li>Plan dâ€™entraÃ®nement trimestriel</li>
-            <li>Suivi technique dÃ©taillÃ©</li>
-           <li><span class="app-link">AccÃ¨s complet Ã  l'app AQA</span></li>
-            <li>SÃ©ance Tester pour un ami gratuite</li>
+            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
+            <li>Plan d'entraînement trimestriel</li>
+            <li>Suivi technique détaillé</li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
+            <li>Séance Tester pour un ami gratuite</li>
           </ul>
         </div>
       </div>
+      
       <!-- Gold -->
       <div class="card" role="button" aria-expanded="false">
         <img src="images/3.webp" alt="Gold">
         <div class="features">
           <h3>Gold (6 mois)</h3>
           <ul>
-            <li><span class="video-link">Analyse vidÃ©o personnalisÃ©e</span></li>
+            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
             <li>Planification sur 6 mois</li>
             <li>Suivi technique + physique</li>
-            <li><span class="app-link">AccÃ¨s complet Ã  l'app AQA</span></li>
-            <li>Ã‰quipement Arena offert</li>
-            <li>1 Ã©vÃ©nement AQA gratuit</li>
-            <li>1 SÃ©ances Test pour amis gratuites</li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
+            <li>Équipement Arena offert</li>
+            <li>1 événement AQA gratuit</li>
+            <li>1 Séances Test pour amis gratuites</li>
           </ul>
         </div>
       </div>
+      
       <!-- Diamond -->
       <div class="card" role="button" aria-expanded="false">
         <img src="images/4.webp" alt="Diamond">
         <div class="features">
           <h3>Diamond (9 mois)</h3>
           <ul>
-            <li><span class="video-link">Analyse vidÃ©o personnalisÃ©e</span></li>
-            <li>Planification avancÃ©e sur 9 mois</li>
+            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
+            <li>Planification avancée sur 9 mois</li>
             <li>Suivi technique + physique</li>
-            <li><span class="app-link">AccÃ¨s complet Ã  l'app AQA</span></li>
-            <li>Ã‰quipement Arena offert</li>
-            <li>1 Ã©vÃ©nements AQA inclus</li>
-            <li>1 mois apnÃ©e offert</li>
-            <li>2 SÃ©ances Test pour amis gratuites</li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
+            <li>Équipement Arena offert</li>
+            <li>1 événements AQA inclus</li>
+            <li>1 mois apnée offert</li>
+            <li>2 Séances Test pour amis gratuites</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-
+  
   <div style="text-align:center; margin:2rem 0;">
     <a href="tarifs.html" class="tarif-btn">Voir les Tarifs</a>
   </div>
+
 <!-- Video Analysis Popup -->
   <div class="popup-overlay" id="videoPopup">
     <div class="popup-content">
       <button class="popup-close" onclick="closeVideoPopup()" aria-label="Close"></button>
       
       <div class="popup-header">
-        <h2>Analyse VidÃ©o PersonnalisÃ©e</h2>
+        <h2>Analyse Vidéo Personnalisée</h2>
       </div>
       
       <div class="popup-body">
         <p class="popup-description">
-          Optimisez votre technique de nage grÃ¢ce Ã  notre systÃ¨me d'analyse vidÃ©o avancÃ©. 
-          Nos coachs experts dÃ©cortiquent chaque mouvement pour identifier vos points forts 
-          et axes d'amÃ©lioration, vous permettant de progresser rapidement et efficacement.
+          Optimisez votre technique de nage grâce à notre système d'analyse vidéo avancé.
+          Nos coachs experts décortiquent chaque mouvement pour identifier vos points forts
+          et axes d'amélioration, vous permettant de progresser rapidement et efficacement.
         </p>
         
         <div class="popup-features">
           <div class="feature-item">
-            <h4>ðŸ“¹ Capture Multi-Angles</h4>
-            <p>Filmage sous et hors de l'eau pour une analyse complÃ¨te de votre technique</p>
+            <h4>🎥 Capture Multi-Angles</h4>
+            <p>Filmage sous et hors de l'eau pour une analyse complète de votre technique</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸŽ¯ Analyse DÃ©taillÃ©e</h4>
-            <p>DÃ©corticage de chaque phase de nage avec ralenti et annotations</p>
+            <h4>🔍 Analyse Détaillée</h4>
+            <p>Décorticage de chaque phase de nage avec ralenti et annotations</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸ“Š Rapports PersonnalisÃ©s</h4>
-            <p>Recommandations prÃ©cises basÃ©es sur votre niveau et objectifs</p>
+            <h4>📊 Rapports Personnalisés</h4>
+            <p>Recommandations précises basées sur votre niveau et objectifs</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸ’ª Suivi d'Ã‰volution</h4>
-            <p>Comparaison de vos progrÃ¨s entre les sessions d'entraÃ®nement</p>
+            <h4>📈 Suivi d'Évolution</h4>
+            <p>Comparaison de vos progrès entre les sessions d'entraînement</p>
           </div>
         </div>
         
         <div class="video-container">
-          <video controls width="640" height="360" 
-  poster="https://i.ibb.co/LXk3Fgfh/Untitled-design-images/3.webp">
-  <source src="https://files.catbox.moe/w4iirq.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la vidÃ©o.
+          <video controls width="640" height="360" poster="https://i.ibb.co/LXk3Fgfh/Untitled-design-images/3.webp">
+            <source src="https://files.catbox.moe/w4iirq.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
           </video>
         </div>
         
-        <a href="video-analysis.html" class="popup-btn">En savoir plus sur l'Analyse VidÃ©o</a>
+        <a href="video-analysis.html" class="popup-btn">En savoir plus sur l'Analyse Vidéo</a>
       </div>
     </div>
   </div>
-
+  
   <!-- AQA App Popup -->
   <div class="popup-overlay" id="appPopup">
     <div class="popup-content">
@@ -442,35 +360,35 @@ body {
       
       <div class="popup-body">
         <p class="popup-description">
-          Suivez votre progression en temps rÃ©el avec l'application AQA. 
-          Votre coach personnel dans votre poche : statistiques dÃ©taillÃ©es, 
-          programmes d'entraÃ®nement, suivi technique et bien plus encore.
+          Suivez votre progression en temps réel avec l'application AQA.
+          Votre coach personnel dans votre poche : statistiques détaillées,
+          programmes d'entraînement, suivi technique et bien plus encore.
         </p>
         
         <div class="popup-features">
           <div class="feature-item">
-            <h4>ðŸ“Š Dashboard Personnel</h4>
-            <p>Vue d'ensemble complÃ¨te de vos performances et statistiques en temps rÃ©el</p>
+            <h4>📊 Dashboard Personnel</h4>
+            <p>Vue d'ensemble complète de vos performances et statistiques en temps réel</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸ“ˆ Suivi de Progression</h4>
-            <p>Analyse dÃ©taillÃ©e de votre Ã©volution avec graphiques interactifs</p>
+            <h4>📈 Suivi de Progression</h4>
+            <p>Analyse détaillée de votre évolution avec graphiques interactifs</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸ›’ Boutique AQA</h4>
-            <p>Achetez vos Ã©quipements et accessoires directement depuis l'app</p>
+            <h4>🛒 Boutique AQA</h4>
+            <p>Achetez vos équipements et accessoires directement depuis l'app</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸ”” Notifications</h4>
-            <p>Alertes motivantes et conseils quotidiens pour rester sur la voie du succÃ¨s</p>
+            <h4>🔔 Notifications</h4>
+            <p>Alertes motivantes et conseils quotidiens pour rester sur la voie du succès</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸ† Classement</h4>
-            <p>Suivez votre position et mesurez vos performances face aux autres athlÃ¨tes</p>
+            <h4>🏆 Classement</h4>
+            <p>Suivez votre position et mesurez vos performances face aux autres athlètes</p>
           </div>
           <div class="feature-item">
-            <h4>ðŸŽ–ï¸ Badges & RÃ©compenses</h4>
-            <p>DÃ©bloquez des badges exclusifs et gagnez des XP en atteignant vos objectifs</p>
+            <h4>🏅️ Badges & Récompenses</h4>
+            <p>Débloquez des badges exclusifs et gagnez des XP en atteignant vos objectifs</p>
           </div>
         </div>
         
@@ -501,24 +419,25 @@ body {
         </div>
         
         <div style="background: rgba(0,153,255,.1); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #00ffff; margin: 2rem 0;">
-          <h4 style="margin: 0 0 1rem; color: #00ffff; font-size: 1.2rem;">ðŸ” Suivi Technique </h4>
+          <h4 style="margin: 0 0 1rem; color: #00ffff; font-size: 1.2rem;">🔍 Suivi Technique </h4>
           <p style="margin: 0; color: #ccc; line-height: 1.7;">
-            L'application AQA analyse en continu votre progression technique. 
-            GrÃ¢ce aux donnÃ©es collectÃ©es lors de vos entraÃ®nements et analyses vidÃ©o, 
-            vous recevez des recommandations personnalisÃ©es pour amÃ©liorer chaque aspect 
+            L'application AQA analyse en continu votre progression technique.
+            Grâce aux données collectées lors de vos entraînements et analyses vidéo,
+            vous recevez des recommandations personnalisées pour améliorer chaque aspect
             de votre nage : respiration, battements, amplitude, rythme et bien plus.
           </p>
         </div>
         
-        <a href="app.html" class="popup-btn" style="text-decoration: none; margin-bottom: 1rem;">DÃ©couvrir l'Application AQA</a>
+        <a href="app.html" class="popup-btn" style="text-decoration: none; margin-bottom: 1rem;">Découvrir l'Application AQA</a>
       </div>
     </div>
   </div>
+
 <footer>
 <!-- Add this div where you want the footer to appear -->
 <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
 </footer>
-
+  
   <!-- Load navbar logic, then inject and init -->
   <script src="/js/navbar.js"></script>
 <!-- Add this script before closing </body> tag -->
@@ -541,13 +460,13 @@ document.addEventListener('DOMContentLoaded', function() {
   cards.forEach(card => {
     card.addEventListener('click', () => {
       const isActive = card.classList.contains('active');
-      cards.forEach(c => { 
-        c.classList.remove('active'); 
-        c.setAttribute('aria-expanded','false'); 
+      cards.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-expanded','false');
       });
-      if (!isActive) { 
-        card.classList.add('active'); 
-        card.setAttribute('aria-expanded','true'); 
+      if (!isActive) {
+        card.classList.add('active');
+        card.setAttribute('aria-expanded','true');
       }
     });
   });
@@ -563,7 +482,7 @@ videoLinks.forEach(link => {
 });
 
 function openVideoPopup() {
-    closeAppPopup(); // âœ… ensure only video popup is open
+    closeAppPopup(); // ✅ ensure only video popup is open
     const popup = document.getElementById('videoPopup');
     if (popup) {
         popup.classList.add('active');
@@ -594,7 +513,7 @@ appLinks.forEach(link => {
 });
 
 function openAppPopup() {
-    closeVideoPopup(); // âœ… ensure only app popup is open
+    closeVideoPopup(); // ✅ ensure only app popup is open
     const popup = document.getElementById('appPopup');
     if (popup) {
         popup.classList.add('active');
@@ -634,4 +553,3 @@ function closeAllPopups() {
 
 </body>
 </html>
-
