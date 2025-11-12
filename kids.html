@@ -1,31 +1,32 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>AQA Kids - Natation pour enfants et adolescents</title>
-    <meta content="Programmes de natation spÃ©cialisÃ©s pour enfants et adolescents. Coaching personnalisÃ©, compÃ©titions, et dÃ©veloppement aquatique dans un environnement sÃ©curisÃ©." name="description"/>
-    <meta content="AQA Kids, natation enfants, cours natation, Ã©cole natation, coaching jeunes, compÃ©tition enfants" name="keywords"/>
+    <meta content="Programmes de natation spécialisés pour enfants et adolescents. Coaching personnalisé, compétitions, et développement aquatique dans un environnement sécurisé." name="description"/>
+    <meta content="AQA Kids, natation enfants, cours natation, école natation, coaching jeunes, compétition enfants" name="keywords"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-
         /* Base styles from app.html */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
- .bg-frame {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  z-index: -1;
-  pointer-events: none;
-  background: transparent;
-}
+ 
+        .bg-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            z-index: -1;
+            pointer-events: none;
+            background: transparent;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #000;
@@ -113,9 +114,11 @@
             .kids-hero {
                 padding: 2rem 0;
             }
-  .kids-pricing__card {
+            
+            .kids-pricing__card {
                 padding: 2rem 1.5rem;
             }
+            
             .kids-pricing__grid {
                 grid-template-columns: 1fr;
             }
@@ -173,11 +176,9 @@
             outline: 2px solid #00ffff;
             outline-offset: 2px;
         }
-    
 
-/* Trailing CSS merged from file end */
-
-.kids-section {
+        /* Trailing CSS merged from file end */
+        .kids-section {
             padding: 0rem 0;
             margin-bottom: 4rem;
         }
@@ -203,65 +204,63 @@
             margin: 0 auto 2rem;
             line-height: 1.6;
         }
-/* Hero Section */
-.kids-hero {
-    text-align: center;
-    padding: 2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-/* Title with neon glow */
-.kids-hero__title {
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-weight: 900;
-    color: #00ffff;
-    margin-bottom: 2rem;
-}
+        /* Hero Section */
+        .kids-hero {
+            text-align: center;
+            padding: 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Image wrapper for effects */
-.kids-hero__image-wrapper {
-    perspective: 1000px; /* 3D perspective for motion */
-    margin-bottom: 2rem;
-}
+        /* Title with neon glow */
+        .kids-hero__title {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 2rem;
+        }
 
-.kids-hero__image {
-    width: 100%;
-    max-width: 600px;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0,255,255,0.5);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+        /* Image wrapper for effects */
+        .kids-hero__image-wrapper {
+            perspective: 1000px;
+            margin-bottom: 2rem;
+        }
 
-    /* Subtle floating effect */
-    animation: float 6s ease-in-out infinite;
-}
+        .kids-hero__image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,255,255,0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            animation: float 6s ease-in-out infinite;
+        }
 
-/* Floating effect keyframes */
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotateZ(0deg); }
-    25% { transform: translateY(-10px) rotateZ(1deg); }
-    50% { transform: translateY(-5px) rotateZ(-1deg); }
-    75% { transform: translateY(5px) rotateZ(1deg); }
-}
+        /* Floating effect keyframes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateZ(0deg); }
+            25% { transform: translateY(-10px) rotateZ(1deg); }
+            50% { transform: translateY(-5px) rotateZ(-1deg); }
+            75% { transform: translateY(5px) rotateZ(1deg); }
+        }
 
-/* Hover effect for image */
-.kids-hero__image:hover {
-    transform: scale(1.05) rotateZ(1deg);
-    box-shadow: 0 0 60px rgba(0,255,255,0.8);
-}
+        /* Hover effect for image */
+        .kids-hero__image:hover {
+            transform: scale(1.05) rotateZ(1deg);
+            box-shadow: 0 0 60px rgba(0,255,255,0.8);
+        }
 
-/* Paragraph */
-.kids-hero__description {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    max-width: 700px;
-    line-height: 1.6;
-    color: #e0ffff;
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-    opacity: 0.95;
-}
-
+        /* Paragraph */
+        .kids-hero__description {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            max-width: 700px;
+            line-height: 1.6;
+            color: #e0ffff;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+            opacity: 0.95;
+        }
 
         /* Pricing Section */
         .kids-pricing__grid {
@@ -279,653 +278,6 @@
             text-align: center;
             transition: all 0.4s ease;
             backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .kids-pricing__card--featured {
-            border-color: #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-        }
-
-        .kids-pricing__card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-
-        .kids-pricing__card:hover::before {
-            opacity: 1;
-            animation: shimmer 1.5s ease-in-out;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .kids-pricing__card:hover {
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
-            border-color: #00ffff;
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
-        }
-
-        .kids-pricing__badge {
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-        }
-
-        .kids-pricing__title {
-            font-size: 1.5rem;
-            color: #00ffff;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .kids-pricing__price {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-        }
-
-        .kids-pricing__period {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-
-        .kids-pricing__features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .kids-pricing__feature {
-            padding: 0.5rem 0;
-            color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .kids-pricing__feature::before {
-            content: 'âœ“';
-            color: #00ffff;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .kids-pricing__button {
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000000;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 153, 255, 0.4);
-            border: 2px solid #00ffff;
-        }
-
-        .kids-pricing__button:hover {
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
-        }
-@media (max-width: 768px) {
-    .kids-pricing__grid {
-        gap: 1rem; /* rÃ©duit l'espace entre cartes */
-        margin: 1.5rem 0;
-    }
-
-    .kids-pricing__card {
-        padding: 1.5rem 1rem; /* moins de padding */
-        border-radius: 15px;
-    }
-
-    .kids-pricing__title {
-        font-size: 1.2rem;
-    }
-
-    .kids-pricing__price {
-        font-size: 2rem;
-    }
-
-    .kids-pricing__period {
-        font-size: 0.9rem;
-    }
-
-    .kids-pricing__button {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-        border-radius: 10px;
-    }
-}
-
-        /* Features Section */
-        .kids-features__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .kids-features__card {
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-            border: 2px solid rgba(0, 153, 255, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kids-features__card:hover {
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
-            border-color: #00ffff;
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-        }
-
-        .kids-features__icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
-            color: #00ffff;
-            filter: drop-shadow(0 0 10px currentColor);
-        }
-
-        .kids-features__title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 1rem;
-        }
-
-        .kids-features__description {
-            color: #ffffff;
-            opacity: 0.9;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        /* Photo Gallery Section */
-        .kids-gallery__ticker {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-  margin-top: 20px;
-}
-
-.kids-gallery__track {
-  display: flex;
-  width: max-content;
-  animation: scroll-left 30s linear infinite;
-}
-
-.kids-gallery__item {
-  flex: 0 0 auto;
-  margin: 0 10px;
-  cursor: pointer;
-}
-
-.kids-gallery__item img {
-  height: 160px; /* adjust ticker height */
-  border-radius: 12px;
-  transition: transform 0.3s;
-}
-
-.kids-gallery__item img:hover {
-  transform: scale(1.08);
-}
-
-@keyframes scroll-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-        /* Lightbox */
-        .kids-lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 2rem;
-        }
-
-        .kids-lightbox__content {
-            max-width: 90vw;
-            max-height: 90vh;
-            position: relative;
-        }
-
-        .kids-lightbox__image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-
-        .kids-lightbox__close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        /* Video Section */
-        .kids-video__container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-            border: 2px solid rgba(0, 153, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .kids-video__player {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .kids-video__placeholder {
-            color: #00ffff;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        .kids-video__controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .kids-video__container:hover .kids-video__controls {
-            opacity: 1;
-        }
-.video-thumbs-wrapper .thumb:hover {
-    transform: scale(1.1);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 25px #00ffff;
-}
-        .kids-video__play-btn {
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .kids-video__play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        
-
-        /* Reviews Section */
-        .kids-reviews__carousel {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 20px;
-        }
-
-        .kids-reviews__track {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .kids-reviews__item {
-            min-width: 100%;
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-            border: 2px solid rgba(0, 153, 255, 0.3);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .kids-reviews__text {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: #ffffff;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .kids-reviews__author {
-            color: #00ffff;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .kids-reviews__role {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .kids-reviews__stars {
-            color: #00ffff;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .kids-reviews__nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .kids-reviews__btn {
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #000;
-        }
-
-        .kids-reviews__btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .kids-reviews__dots {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .kids-reviews__dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .kids-reviews__dot--active {
-            background: #00ffff;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-       /* FAQ Section */
-.kids-faq__list {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.kids-faq__item {
-  background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-  border: 1px solid rgba(0, 153, 255, 0.3);
-  border-radius: 15px;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  transition: background 0.3s ease;
-}
-
-.kids-faq__question {
-  padding: 1.5rem 2rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  color: #00ffff;
-  transition: background 0.3s ease;
-  user-select: none;
-}
-
-.kids-faq__question:hover {
-  background: rgba(0, 255, 255, 0.1);
-}
-
-.kids-faq__answer {
-  padding: 0 2rem;         /* keep horizontal padding */
-  color: #ffffff;
-  opacity: 0.9;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, padding 0.3s ease;
-}
-
-.kids-faq__item--active .kids-faq__answer {
-  max-height: 500px;       /* large enough for longest answer */
-  padding: 1rem 2rem 1.5rem;
-}
-
-.kids-faq__icon {
-  transition: transform 0.3s ease;
-  color: #00ffff;
-}
-
-.kids-faq__item--active .kids-faq__icon {
-  transform: rotate(180deg);
-}
-
-        /* Groups Section */
-        .kids-groups__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        @media (max-width: 768px) {
-  .kids-groups__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem; /* smaller gap so it fits */
-  }
-
-  .kids-groups__card {
-    padding: 1rem; /* make cards lighter/compact */
-    font-size: 0.9rem;
-    text-align: left; /* optional: smaller text */
-  }
-}
-
-        .kids-groups__card {
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-            border: 2px solid rgba(0, 153, 255, 0.3);
-            border-radius: 20px;
-            padding: 0rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .kids-groups__card:hover {
-            border-color: #00ffff;
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-        }
-
-        .kids-groups__icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
-            color: #00ffff;
-            filter: drop-shadow(0 0 10px currentColor);
-        }
-
-        .kids-groups__title {
-            font-size: 1.3rem;
-            color: #00ffff;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .kids-groups__age {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .kids-groups__description {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-
-        .kids-groups__features {
-            list-style: none;
-            font-size: 0.9rem;
-        }
-
-        .kids-groups__feature {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.3rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .kids-groups__feature::before {
-            content: 'â€¢';
-            color: #00ffff;
-            font-weight: bold;
-        }
-
-        /* CTA Section */
-        .kids-cta {
-            padding: 4rem 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.15));
-            border-radius: 30px;
-            border: 2px solid rgba(0, 153, 255, 0.3);
-            margin: 4rem 0;
-            backdrop-filter: blur(10px);
-        }
-
-        .kids-cta__title {
-            font-size: clamp(2rem, 6vw, 3rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-        }
-
-        .kids-cta__description {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        .kids-cta__button {
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000000;
-            padding: 1.5rem 3rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 40px rgba(0, 153, 255, 0.6);
-            border: 2px solid #00ffff;
-        }
-
-        .kids-cta__button:hover {
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
-        }
-
-        /* Locations Section */
-        .kids-locations__container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin: 3rem 0;
-        }
-
-        .kids-locations__map {
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-            border: 2px solid rgba(0, 153, 255, 0.3);
-            border-radius: 20px;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #00ffff;
-            font-size: 1.2rem;
-            backdrop-filter: blur(10px);
         }
 
         .kids-locations__list {
@@ -934,32 +286,29 @@
             gap: 1.5rem;
         }
 
-      .kids-locations__item {
-    background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-    border: 2px solid rgba(0, 153, 255, 0.3);
-    border-radius: 15px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+        .kids-locations__item {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+        .kids-locations__item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 153, 255, 0.3);
+            scale: 1.04;
+        }
 
-    text-decoration: none; /* enlÃ¨ve soulignement */
-    color: inherit;        /* garde la couleur du texte */
-    cursor: pointer;
-}
-
-.kids-locations__item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 153, 255, 0.3);
-      scale: 1.04;
-}
-
-      
         .kids-locations__name {
             font-size: 1.3rem;
             color: #00ffff;
@@ -972,19 +321,19 @@
             margin-bottom: 0.5rem;
         }
 
-        .kids
         /* Hover glow effect on thumbnails */
-.video-thumbs .thumb:hover {
-    transform: scale(1.05);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 25px #00ffff;
-}
+        .video-thumbs .thumb:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px #00ffff;
+        }
 
-/* Main video neon glow */
-.main-video video {
-    transition: box-shadow 0.3s ease;
-}
- /* Equipment Pack Section */
+        /* Main video neon glow */
+        .main-video video {
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Equipment Pack Section */
         .equip-section {
             text-align: center;
             padding: 3rem 0;
@@ -1099,7 +448,9 @@
 
         .equipment-image:hover img {
             transform: scale(1.05);
-        
+        }
+
+        .equipment-name {
             font-size: clamp(1.3rem, 4vw, 1.8rem);
             font-weight: 700;
             color: #00ffff;
@@ -1252,200 +603,846 @@
             }
         }
 
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+        .equipment-item img {
+            max-width: 220px;
+            height: auto;
+            display: block;
+            margin: 0 auto 12px;
+        }
+
+        .btn-app {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: .8rem 1.2rem;
+            border-radius: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: .2px;
+            background: linear-gradient(135deg, #00c6ff, #00ffff);
+            color: #00131a;
+            border: 1px solid rgba(0, 153, 255, .35);
+            box-shadow: 0 8px 22px rgba(0, 255, 255, .18);
+            transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+        }
+
+        .btn-app:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 26px rgba(0, 255, 255, .22);
+        }
+
+        .btn-app:active {
+            transform: translateY(0);
+            opacity: .9;
+        }
+
+        .kids-groups {
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .kids-groups__heading {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(0,255,255,0.5);
+        }
+
+        .kids-groups__wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .kids-groups__card {
+            background: linear-gradient(135deg, rgba(0,153,255,0.08), rgba(0,255,255,0.08));
+            border: 2px solid rgba(0,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
+        }
+
+        .kids-groups__card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #00ffff;
+            box-shadow: 0 0 40px rgba(0,255,255,0.5);
+        }
+
+        .kids-groups__icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0,255,255,0.6);
+        }
+
+        .kids-groups__title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-groups__age {
+            font-size: 1rem;
+            color: #fff;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .kids-groups__features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .kids-groups__feature {
+            margin: 0.5rem 0;
+            color: #fff;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 1.5rem;
+            text-align: left;
+        }
+
+        .kids-groups__feature::before {
+            content: "✓";
+            color: #00ffff;
+            position: absolute;
+            left: 0;
+        }
+         position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .kids-pricing__card--featured {
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .kids-pricing__card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .kids-pricing__card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .kids-pricing__card:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border-color: #00ffff;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+        }
+
+        .kids-pricing__badge {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .kids-pricing__title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .kids-pricing__price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-pricing__period {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .kids-pricing__features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .kids-pricing__feature {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .kids-pricing__feature::before {
+            content: '✓';
+            color: #00ffff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .kids-pricing__button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.4);
+            border: 2px solid #00ffff;
+        }
+
+        .kids-pricing__button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .kids-pricing__grid {
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .kids-pricing__card {
+                padding: 1.5rem 1rem;
+                border-radius: 15px;
+            }
+
+            .kids-pricing__title {
+                font-size: 1.2rem;
+            }
+
+            .kids-pricing__price {
+                font-size: 2rem;
+            }
+
+            .kids-pricing__period {
+                font-size: 0.9rem;
+            }
+
+            .kids-pricing__button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                border-radius: 10px;
             }
         }
-        .equipment-item img {
-  max-width: 220px;   /* shrink the image width */
-  height: auto;       /* keep aspect ratio */
-  display: block;     /* prevents inline spacing issues */
-  margin: 0 auto 12px; /* center + space below */
-}
-.btn-app{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:.8rem 1.2rem;border-radius:14px;font-weight:700;
-  text-decoration:none;letter-spacing:.2px;
-  background:linear-gradient(135deg,#00c6ff,#00ffff);
-  color:#00131a;border:1px solid rgba(0,153,255,.35);
-  box-shadow:0 8px 22px rgba(0,255,255,.18);
-  transition:transform .15s ease, box-shadow .2s ease, opacity .2s ease;
-}
-.btn-app:hover{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,255,255,.22); }
-.btn-app:active{ transform:translateY(0); opacity:.9; }
-.kids-groups {
-  padding: 4rem 1rem;
-  text-align: center;
-}
 
-.kids-groups__heading {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #00ffff;
-  margin-bottom: 2rem;
-  text-shadow: 0 0 20px rgba(0,255,255,0.5);
-}
+        /* Features Section */
+        .kids-features__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
 
-.kids-groups__wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
+        .kids-features__card {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
 
-.kids-groups__card {
-  background: linear-gradient(135deg, rgba(0,153,255,0.08), rgba(0,255,255,0.08));
-  border: 2px solid rgba(0,255,255,0.2);
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.4s ease;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
-  backdrop-filter: blur(6px);
-}
+        .kids-features__card:hover {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border-color: #00ffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
 
-.kids-groups__card:hover {
-  transform: translateY(-10px) scale(1.02);
-  border-color: #00ffff;
-  box-shadow: 0 0 40px rgba(0,255,255,0.5);
-}
+        .kids-features__icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            color: #00ffff;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
 
-.kids-groups__icon {
-  width: 70px;
-  height: 70px;
-  margin: 0 auto 1rem;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0099ff, #00ffff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-size: 1.5rem;
-  font-weight: bold;
-  box-shadow: 0 0 20px rgba(0,255,255,0.6);
-}
+        .kids-features__title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
 
-.kids-groups__title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #00ffff;
-  margin-bottom: 0.5rem;
-}
+        .kids-features__description {
+            color: #ffffff;
+            opacity: 0.9;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
 
-.kids-groups__age {
-  font-size: 1rem;
-  color: #fff;
-  opacity: 0.8;
-  margin-bottom: 1rem;
-}
+        /* Photo Gallery Section */
+        .kids-gallery__ticker {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            margin-top: 20px;
+        }
 
-.kids-groups__features {
-  list-style: none;
-  padding: 0;
-}
+        .kids-gallery__track {
+            display: flex;
+            width: max-content;
+            animation: scroll-left 30s linear infinite;
+        }
 
-.kids-groups__feature {
-  margin: 0.5rem 0;
-  color: #fff;
-  font-size: 0.95rem;
-  position: relative;
-  padding-left: 1.5rem;
-  text-align: left;
-}
+        .kids-gallery__item {
+            flex: 0 0 auto;
+            margin: 0 10px;
+            cursor: pointer;
+        }
 
-.kids-groups__feature::before {
-  content: "âœ”";
-  color: #00ffff;
-  position: absolute;
-  left: 0;
-}
+        .kids-gallery__item img {
+            height: 160px;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
 
-/* Animation scroll */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
-}
+        .kids-gallery__item img:hover {
+            transform: scale(1.08);
+        }
 
-.animate-on-scroll.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
+        @keyframes scroll-left {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
 
-</style>
-<!-- Navbar CSS -->
-  <link rel="stylesheet" href="css/navbar.css">
+        /* Lightbox */
+        .kids-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 2rem;
+        }
+
+        .kids-lightbox__content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .kids-lightbox__image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .kids-lightbox__close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Video Section */
+        .kids-video__container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-video__player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .kids-video__placeholder {
+            color: #00ffff;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .kids-video__controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .kids-video__container:hover .kids-video__controls {
+            opacity: 1;
+        }
+
+        .video-thumbs-wrapper .thumb:hover {
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px #00ffff;
+        }
+
+        .kids-video__play-btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .kids-video__play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Reviews Section */
+        .kids-reviews__carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .kids-reviews__track {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .kids-reviews__item {
+            min-width: 100%;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-reviews__text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .kids-reviews__author {
+            color: #00ffff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-reviews__role {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .kids-reviews__stars {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .kids-reviews__nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .kids-reviews__btn {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #000;
+        }
+
+        .kids-reviews__btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .kids-reviews__dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .kids-reviews__dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .kids-reviews__dot--active {
+            background: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* FAQ Section */
+        .kids-faq__list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .kids-faq__item {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+        }
+
+        .kids-faq__question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #00ffff;
+            transition: background 0.3s ease;
+            user-select: none;
+        }
+
+        .kids-faq__question:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .kids-faq__answer {
+            padding: 0 2rem;
+            color: #ffffff;
+            opacity: 0.9;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+        }
+
+        .kids-faq__item--active .kids-faq__answer {
+            max-height: 500px;
+            padding: 1rem 2rem 1.5rem;
+        }
+
+        .kids-faq__icon {
+            transition: transform 0.3s ease;
+            color: #00ffff;
+        }
+
+        .kids-faq__item--active .kids-faq__icon {
+            transform: rotate(180deg);
+        }
+
+        /* Groups Section */
+        .kids-groups__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .kids-groups__grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .kids-groups__card {
+                padding: 1rem;
+                font-size: 0.9rem;
+                text-align: left;
+            }
+        }
+
+        .kids-groups__card {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 0rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-groups__card:hover {
+            border-color: #00ffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .kids-groups__icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            color: #00ffff;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .kids-groups__title {
+            font-size: 1.3rem;
+            color: #00ffff;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .kids-groups__age {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .kids-groups__description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .kids-groups__features {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .kids-groups__feature {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .kids-groups__feature::before {
+            content: '•';
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .kids-cta {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.15));
+            border-radius: 30px;
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            margin: 4rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .kids-cta__title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .kids-cta__description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .kids-cta__button {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000000;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 153, 255, 0.6);
+            border: 2px solid #00ffff;
+        }
+
+        .kids-cta__button:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+        }
+
+        /* Locations Section */
+        .kids-locations__container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .kids-locations__map {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffff;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+    
+    <!-- Navbar CSS -->
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 
 <body>
     <iframe src="scroll.html" class="bg-frame"></iframe> 
     <!-- ===== NAVBAR ===== -->
-  <header id="header">
-    <div class="header-content">
-      <div class="logo-section">
-        <a href="index.html">
-          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
-               alt="AQA Logo" class="logo">
-        </a>
-      </div>
+    <header id="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+                         alt="AQA Logo" class="logo">
+                </a>
+            </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="nav-menu" id="navMenu">
-        <a href="tarifs.html" class="nav-link">Tarifs</a>
-        <a href="groupes.html" class="nav-link">Groupes</a>
-        <a href="piscines.html" class="nav-link">Piscines</a>
-        <a href="infos.html" class="nav-link">Infos</a>
-        <a href="events.html" class="nav-link">Events</a>
-        <a href="webtv.html" class="nav-link">WebTV</a>
-        <a href="store.html" class="nav-link">Store</a>
-      </nav>
+            <!-- Desktop Navigation -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="tarifs.html" class="nav-link">Tarifs</a>
+                <a href="groupes.html" class="nav-link">Groupes</a>
+                <a href="piscines.html" class="nav-link">Piscines</a>
+                <a href="infos.html" class="nav-link">Infos</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="webtv.html" class="nav-link">WebTV</a>
+                <a href="store.html" class="nav-link">Store</a>
+            </nav>
 
-      <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
-        <div class="menu-toggle" onclick="toggleMobileMenu()">
-          <span></span><span></span><span></span>
+            <div class="right-actions">
+                <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+                <div class="menu-toggle" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Mobile Menu Overlay -->
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-    <div class="menu-close" onclick="toggleMobileMenu()">
-      <span></span><span></span>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="menu-close" onclick="toggleMobileMenu()">
+            <span></span><span></span>
+        </div>
+        <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+        <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+        <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+        <a href="infos.html" class="mobile-nav-link">Infos</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+        <a href="store.html" class="mobile-nav-link">Store</a>
+        <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
     </div>
-    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
-    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
-    <a href="infos.html" class="mobile-nav-link">Infos</a>
-    <a href="events.html" class="mobile-nav-link">Events</a>
-    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
-    <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
-  </div>
-  <!-- ===== /NAVBAR ===== -->
+    <!-- ===== /NAVBAR ===== -->
  
     <div class="bg-logo"></div>
     
     <div class="container">
-     <!-- Hero Section -->
-<section class="kids-hero">
-    <h1 class="kids-hero__title">AQA Kids</h1>
+        <!-- Hero Section -->
+        <section class="kids-hero">
+            <h1 class="kids-hero__title">AQA Kids</h1>
 
-    <!-- Hero Image -->
-    <div class="kids-hero__image-wrapper">
-        <img class="kids-hero__image" src="https://i.ibb.co/F49bgcpK/hero-kids.webp" alt="AQA Kids Hero">
-    </div>
+            <!-- Hero Image -->
+            <div class="kids-hero__image-wrapper">
+                <img class="kids-hero__image" src="https://i.ibb.co/F49bgcpK/hero-kids.webp" alt="AQA Kids Hero">
+            </div>
 
-    <p class="kids-hero__description">
-        Apprentissage de la natation pour enfants de 5 Ã  12 ans avec coachs dâ€™Ã©lite, suivi personnalisÃ© et groupes restreints (Groupe de 10) pour progresser en sÃ©curitÃ© et avec plaisir..
-    </p>
-</section>
+            <p class="kids-hero__description">
+                Apprentissage de la natation pour enfants de 5 à 12 ans avec coachs d'élite, suivi personnalisé et groupes restreints (Groupe de 10) pour progresser en sécurité et avec plaisir.
+            </p>
+        </section>
 
-<!-- Features Section -->
+        <!-- Features Section -->
         <section class="kids-section kids-features animate-on-scroll">
             <h2 class="kids-section__title">Nos Avantages</h2>
             <div class="kids-features__grid">
@@ -1458,7 +1455,7 @@
                     </div>
                     <h3 class="kids-features__title">Coachs d'elite</h3>
                     <p class="kids-features__description">
-                        Nos coachs sont hautement qualifiÃ©s et spÃ©cialisÃ©s dans lâ€™accompagnement des enfants, garantissant sÃ©curitÃ©, progression et plaisir Ã  chaque sÃ©ance de natation.
+                        Nos coachs sont hautement qualifiés et spécialisés dans l'accompagnement des enfants, garantissant sécurité, progression et plaisir à chaque séance de natation.
                     </p>
                 </div>
 
@@ -1468,9 +1465,9 @@
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="kids-features__title">SÃ©curitÃ© Maximale</h3>
+                    <h3 class="kids-features__title">Sécurité Maximale</h3>
                     <p class="kids-features__description">
-                        Piscines surveillÃ©es, matÃ©riel de sÃ©curitÃ© et protocoles stricts pour la protection de vos enfants.
+                        Piscines surveillées, matériel de sécurité et protocoles stricts pour la protection de vos enfants.
                     </p>
                 </div>
 
@@ -1480,9 +1477,9 @@
                             <path d="M12 2v20m8-18H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
                         </svg>
                     </div>
-                    <h3 class="kids-features__title">Suivi PersonnalisÃ©</h3>
+                    <h3 class="kids-features__title">Suivi Personnalisé</h3>
                     <p class="kids-features__description">
-                        Chaque enfant bÃ©nÃ©ficie d'un suivi individuel adaptÃ© Ã  son rythme et ses objectifs.
+                        Chaque enfant bénéficie d'un suivi individuel adapté à son rythme et ses objectifs.
                     </p>
                 </div>
 
@@ -1497,396 +1494,357 @@
                     </div>
                     <h3 class="kids-features__title">Apprentissage Ludique</h3>
                     <p class="kids-features__description">
-                        MÃ©thodes pÃ©dagogiques amusantes qui transforment l'apprentissage en moments de plaisir.
+                        Méthodes pédagogiques amusantes qui transforment l'apprentissage en moments de plaisir.
                     </p>
                 </div>
 
                 <div class="kids-features__card">
                     <div class="kids-features__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="2">
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
-        font-size="20" font-weight="regular" fill="none" stroke="currentColor">
-    G10
-  </text>
-</svg>
-
+                            <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+                                  font-size="20" font-weight="regular" fill="none" stroke="currentColor">
+                                G10
+                            </text>
+                        </svg>
                     </div>
                     <h3 class="kids-features__title">Groupes de 10</h3>
                     <p class="kids-features__description">
-                       Chaque groupe est limitÃ© Ã  10 enfants pour garantir un suivi personnalisÃ©, des exercices adaptÃ©s et un apprentissage efficace dans un environnement sÃ»r et motivant.
+                        Chaque groupe est limité à 10 enfants pour garantir un suivi personnalisé, des exercices adaptés et un apprentissage efficace dans un environnement sûr et motivant.
                     </p>
                 </div>
 
                 <div class="kids-features__card">
                     <div class="kids-features__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-  <!-- S-shaped spine -->
-  <path d="M12 2 
-           C10 6, 14 10, 12 14 
-           C10 18, 14 22, 12 22"/>
-</svg>
-
-
+                            <path d="M12 2 C10 6, 14 10, 12 14 C10 18, 14 22, 12 22"/>
+                        </svg>
                     </div>
                     <h3 class="kids-features__title">Suivi physique</h3>
                     <p class="kids-features__description">
-                        Chaque enfant bÃ©nÃ©ficie dâ€™un suivi physique personnalisÃ© pour dÃ©tecter et corriger les obstacles ou dÃ©sÃ©quilibres corporels, comme la scoliose, qui pourraient freiner sa progression, garantissant un apprentissage sÃ»r et efficace.
+                        Chaque enfant bénéficie d'un suivi physique personnalisé pour détecter et corriger les obstacles ou déséquilibres corporels, comme la scoliose, qui pourraient freiner sa progression, garantissant un apprentissage sûr et efficace.
                     </p>
                 </div>
             </div>
         </section>
 
-        
-       <!-- Photo Gallery Ticker Section -->
-<section class="kids-section kids-gallery animate-on-scroll">
-  <h2 class="kids-section__title">Galerie Photos</h2>
-  <p class="kids-section__subtitle">
-    DÃ©couvrez l'ambiance de nos cours et les sourires de nos jeunes nageurs en action.
-  </p>
+        <!-- Photo Gallery Ticker Section -->
+        <section class="kids-section kids-gallery animate-on-scroll">
+            <h2 class="kids-section__title">Galerie Photos</h2>
+            <p class="kids-section__subtitle">
+                Découvrez l'ambiance de nos cours et les sourires de nos jeunes nageurs en action.
+            </p>
 
-  <div class="kids-gallery__ticker">
-    <div class="kids-gallery__track">
-      <!-- Repeat images twice for smooth loop -->
-      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp')">
-        <img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp" alt="Cours bÃ©bÃ© nageur">
-      </div>
-      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp')">
-        <img src="https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp" alt="Apprentissage natation enfants">
-      </div>
-      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/678rW5ZX/IMG20241104185311.webp')">
-        <img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp" alt="EntraÃ®nement jeunes">
-      </div>
-      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp')">
-        <img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp" alt="CompÃ©tition junior">
-      </div>
-      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/67j6c8TX/IMG20241202191301.webp')">
-        <img src="https://i.ibb.co/67j6c8TX/IMG20241202191301.webp" alt="Groupe enfants piscine">
-      </div>
-      <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/bg58thQs/IMG20241209191126.webp')">
-        <img src="https://i.ibb.co/bg58thQs/IMG20241209191126.webp" alt="Perfectionnement technique">
-      </div>
+            <div class="kids-gallery__ticker">
+                <div class="kids-gallery__track">
+                    <!-- Repeat images twice for smooth loop -->
+                    <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp')">
+                        <img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp" alt="Cours bébé nageur">
+                    </div>
+                    <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp')">
+                        <img src="https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp" alt="Apprentissage natation enfants">
+                    </div>
+                    <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/678rW5ZX/IMG20241104185311.webp')">
+                        <img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp" alt="Entraînement jeunes">
+                    </div>
+                    <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp')">
+                        <img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp" alt="Compétition junior">
+                    </div>
+                    <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/67j6c8TX/IMG20241202191301.webp')">
+                        <img src="https://i.ibb.co/67j6c8TX/IMG20241202191301.webp" alt="Groupe enfants piscine">
+                    </div>
+                    <div class="kids-gallery__item" onclick="openLightbox('https://i.ibb.co/bg58thQs/IMG20241209191126.webp')">
+                        <img src="https://i.ibb.co/bg58thQs/IMG20241209191126.webp" alt="Perfectionnement technique">
+                    </div>
 
-      <!-- Duplicate for seamless loop -->
-      <div class="kids-gallery__item"><img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp"></div>
-      <div class="kids-gallery__item"><img src="https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp"></div>
-      <div class="kids-gallery__item"><img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp"></div>
-      <div class="kids-gallery__item"><img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp"></div>
-      <div class="kids-gallery__item"><img src="https://i.ibb.co/67j6c8TX/IMG20241202191301.webp"></div>
-      <div class="kids-gallery__item"><img src="https://i.ibb.co/bg58thQs/IMG20241209191126.webp"></div>
-    </div>
-  </div>
-</section>
-<span></span>
-      <!-- Video Section 2 -->
-<section class="kids-section kids-video animate-on-scroll">
-    <h2 class="kids-section__title">VidÃ©os</h2>
-   
-    <div class="playlist-container" style="max-width: 900px; margin: auto;">
-        <!-- Main Video Player -->
-        <div class="main-video" style="margin-bottom: 20px; position: relative;">
-            <video id="mainVideo" width="100%" height="450" controls style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:block;">
-                <source src="https://files.catbox.moe/mqgl87.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas les vidÃ©os HTML5.
-            </video>
-            <!-- YouTube iframe (hidden initially) -->
-            <iframe id="mainIframe" width="100%" height="450" 
-                src="https://www.youtube.com/embed/-umHYjVGbqY?si=Qjdcxg5h1LcBnTy6" 
-                title="PrÃ©sentation de nos programmes kids" 
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen 
-                style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:none;">
-            </iframe>
-        </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="kids-gallery__item"><img src="https://i.ibb.co/0Rnb9YhR/IMG20240223181542.webp" alt="Duplicate"></div>
+                    <div class="kids-gallery__item"><img src="https://i.ibb.co/R4MLpjZf/IMG20240531183927.webp" alt="Duplicate"></div>
+                    <div class="kids-gallery__item"><img src="https://i.ibb.co/678rW5ZX/IMG20241104185311.webp" alt="Duplicate"></div>
+                    <div class="kids-gallery__item"><img src="https://i.ibb.co/VpjvHVzV/IMG20241104185317.webp" alt="Duplicate"></div>
+                    <div class="kids-gallery__item"><img src="https://i.ibb.co/67j6c8TX/IMG20241202191301.webp" alt="Duplicate"></div>
+                    <div class="kids-gallery__item"><img src="https://i.ibb.co/bg58thQs/IMG20241209191126.webp" alt="Duplicate"></div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Horizontal Thumbnails -->
-        <div class="video-thumbs-wrapper" style="overflow-x:auto; display:flex; gap:15px; padding-bottom:10px;">
-  
+        <!-- Video Section -->
+        <section class="kids-section kids-video animate-on-scroll">
+            <h2 class="kids-section__title">Vidéos</h2>
+           
+            <div class="playlist-container" style="max-width: 900px; margin: auto;">
+                <!-- Main Video Player -->
+                <div class="main-video" style="margin-bottom: 20px; position: relative;">
+                    <video id="mainVideo" width="100%" height="450" controls style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:block;">
+                        <source src="https://files.catbox.moe/mqgl87.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <!-- YouTube iframe (hidden initially) -->
+                    <iframe id="mainIframe" width="100%" height="450" 
+                        src="https://www.youtube.com/embed/-umHYjVGbqY?si=Qjdcxg5h1LcBnTy6" 
+                        title="Présentation de nos programmes kids" 
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen 
+                        style="border-radius:15px; box-shadow:0 0 20px #00ffff; display:none;">
+                    </iframe>
+                </div>
 
+                <!-- Horizontal Thumbnails -->
+                <div class="video-thumbs-wrapper" style="overflow-x:auto; display:flex; gap:15px; padding-bottom:10px;">
+                    <!-- Catbox MP4 Thumbnails -->
+                    <video class="thumb" src="https://files.catbox.moe/mqgl87.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/aym1ti.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/5z5uze.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/pehw1o.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/x1nkke.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/q3ixe4.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/52qqm9.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/lh7qpl.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                    <video class="thumb" src="https://files.catbox.moe/2eaqmr.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
+                </div>
+            </div>
+        </section>
 
-            <!-- Catbox MP4 Thumbnails -->
-            <video class="thumb" src="https://files.catbox.moe/mqgl87.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/aym1ti.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/5z5uze.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/pehw1o.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/x1nkke.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/q3ixe4.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/52qqm9.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/lh7qpl.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-            <video class="thumb" src="https://files.catbox.moe/2eaqmr.mp4" muted preload="metadata" data-type="mp4" style="height:100px; cursor:pointer; border-radius:10px; box-shadow:0 0 10px #00ffff;"></video>
-        </div>
-    </div>
-</section>
+        <!-- Equipment Pack Section -->
+        <section class="equip-section">
+            <h1>Pack Équipement</h1>
 
+            <div class="pack-container">
+                <h2>Pack Starter Arena</h2>
 
-<!--Equipent-->
-<!-- Pack Ã‰quipement (replace your current section with this) -->
-<section class="equip-section">
-  <h1>Pack Ã‰quipement</h1>
+                <!-- Arena Logo -->
+                <img src="images/arena.webp" alt="Arena Logo" class="arena-logo">
 
-  <div class="pack-container">
-    <h2>Pack Starter Arena</h2>
+                <!-- Step Indicator -->
+                <div class="step-indicator" aria-label="Indicateur d'étapes">
+                    <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 1"></div>
+                    <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 2"></div>
+                    <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 3"></div>
+                    <div class="step-dot" role="button" tabindex="0" aria-label="Aller à l'étape 4"></div>
+                </div>
 
-    <!-- Arena Logo -->
-    <img src="arenimages/a.webp" alt="Arena Logo" class="arena-logo">
+                <!-- Step 1 -->
+                <div class="equipment-step active" id="step1">
+                    <div class="equipment-item">
+                        <img src="https://i.ibb.co/5XYzv2VH/Untitled-design.png" alt="Lunettes Bubble 3 + Bonnet Junior">
+                        <h3 class="equipment-name">Lunettes Bubble 3 + Bonnet Junior</h3>
+                        <p class="equipment-description">Lunettes de natation Arena Bubble 3 avec bonnet junior pour un confort optimal.</p>
+                        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+                    </div>
+                </div>
 
-    <!-- Step Indicator -->
-    <div class="step-indicator" aria-label="Indicateur d'Ã©tapes">
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 1"></div>
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 2"></div>
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 3"></div>
-      <div class="step-dot" role="button" tabindex="0" aria-label="Aller Ã  l'Ã©tape 4"></div>
-    </div>
+                <!-- Step 2 -->
+                <div class="equipment-step" id="step2">
+                    <div class="equipment-item">
+                        <img src="https://i.ibb.co/9H0FBx4y/Untitled-design-1.png" alt="Lunettes Junior Arena">
+                        <h3 class="equipment-name">Lunettes Junior Arena</h3>
+                        <p class="equipment-description">Lunettes de natation spécialement conçues pour les jeunes nageurs.</p>
+                        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+                    </div>
+                </div>
 
-    <!-- Step 1 -->
-    <div class="equipment-step active" id="step1">
-      <div class="equipment-item">
-        <img src="https://i.ibb.co/5XYzv2VH/Untitled-design.png" alt="">
-        <h3 class="equipment-name">Lunettes Bubble 3 + Bonnet Junior</h3>
-        <p class="equipment-description">Lunettes de natation Arena Bubble 3 ...</p>
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
-      </div>
-    </div>
+                <!-- Step 3 -->
+                <div class="equipment-step" id="step3">
+                    <div class="equipment-item">
+                        <img src="https://i.ibb.co/JjfXr0Zy/Untitled-design-2.png" alt="Arena Sortie de Bain">
+                        <h3 class="equipment-name">Arena Sortie de Bain</h3>
+                        <p class="equipment-description">Peignoir Arena en microfibre ultra-absorbante pour un séchage rapide.</p>
+                        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+                    </div>
+                </div>
 
-    <!-- Step 2 -->
-    <div class="equipment-step" id="step2">
-      <div class="equipment-item">
-        <img src="https://i.ibb.co/9H0FBx4y/Untitled-design-1.png" alt="">
-        <h3 class="equipment-name">Lunettes Junior Arena</h3>
-        <p class="equipment-description">Lunettes de natation spÃ©cialement conÃ§ues...</p>
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
-      </div>
-    </div>
+                <!-- Step 4 -->
+                <div class="equipment-step" id="step4">
+                    <div class="equipment-item">
+                        <img src="https://i.ibb.co/d0G9g5pY/Untitled-design-3.png" alt="Arena Sac Spiky">
+                        <h3 class="equipment-name">Arena Sac Spiky</h3>
+                        <p class="equipment-description">Sac de sport Arena avec compartiments ventilés pour tout votre équipement.</p>
+                        <button class="have-equipment-btn next-btn" type="button">J'ai déjà cet équipement</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Step 3 -->
-    <div class="equipment-step" id="step3">
-      <div class="equipment-item">
-        <img src="https://i.ibb.co/JjfXr0Zy/Untitled-design-2.png" alt="">
-        <h3 class="equipment-name">Arena Sortie de Bain</h3>
-        <p class="equipment-description">Peignoir Arena en microfibre ultra-absorbante...</p>
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
-      </div>
-    </div>
+        <!-- Available Groups Section -->
+        <section class="kids-section kids-groups animate-on-scroll" id="groups">
+            <h2 class="kids-section__title">Groupes Disponibles</h2>
+            <p class="kids-section__subtitle">
+                Chaque groupe est spécialement conçu pour répondre aux besoins et au développement de chaque tranche d'âge.
+            </p>
 
-    <!-- Step 4 -->
-    <div class="equipment-step" id="step4">
-      <div class="equipment-item">
-        <img src="https://i.ibb.co/d0G9g5pY/Untitled-design-3.png" alt="">
-        <h3 class="equipment-name">Arena Sac Spiky</h3>
-        <p class="equipment-description">Sac de sport Arena avec compartiments ventilÃ©s...</p>
-        <!-- NOTE: still uses next-btn so it loops to step 1 -->
-        <button class="have-equipment-btn next-btn" type="button">J'ai dÃ©jÃ  cet Ã©quipement</button>
-      </div>
-    </div>
+            <div class="kids-groups__wrapper">
+                <!-- Groupe A -->
+                <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe A">
+                    <div class="kids-groups__icon" aria-hidden="true">A</div>
+                    <h3 class="kids-groups__title">Groupe A</h3>
+                    <div class="kids-groups__age">Coach Abdelghani</div>
+                    <ul class="kids-groups__features" aria-hidden="false">
+                        <li class="kids-groups__feature">Samedi 18h15</li>
+                        <li class="kids-groups__feature">Mercredi 18h</li>
+                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
+                        <li class="kids-groups__feature">Reghaia</li>
+                    </ul>
+                </div>
 
+                <!-- Groupe B -->
+                <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe B">
+                    <div class="kids-groups__icon" aria-hidden="true">B</div>
+                    <h3 class="kids-groups__title">Groupe B</h3>
+                    <div class="kids-groups__age">Coach Younes</div>
+                    <ul class="kids-groups__features">
+                        <li class="kids-groups__feature">Dimanche 18h</li>
+                        <li class="kids-groups__feature">Jeudi 18h</li>
+                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
+                        <li class="kids-groups__feature">Reghaia</li>
+                    </ul>
+                </div>
 
-  </div>
-</section>
+                <!-- Groupe C -->
+                <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe C">
+                    <div class="kids-groups__icon" aria-hidden="true">C</div>
+                    <h3 class="kids-groups__title">Groupe C</h3>
+                    <div class="kids-groups__age">Coach Abdelghani et Coach Younes</div>
+                    <ul class="kids-groups__features">
+                        <li class="kids-groups__feature">Dimanche 19h30</li>
+                        <li class="kids-groups__feature">Mercredi 19h30</li>
+                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
+                        <li class="kids-groups__feature">Reghaia</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-
-<!-- Available Groups Section -->
-<section class="kids-section kids-groups animate-on-scroll" id="groups">
-  <h2 class="kids-section__title">Groupes Disponibles</h2>
-  <p class="kids-section__subtitle">
-    Chaque groupe est spÃ©cialement conÃ§u pour rÃ©pondre aux besoins et au dÃ©veloppement de chaque tranche d'Ã¢ge.
-  </p>
-
-  <div class="kids-groups__wrapper">
-    <!-- Groupe A -->
-    <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe A">
-      <div class="kids-groups__icon" aria-hidden="true">A</div>
-      <h3 class="kids-groups__title">Groupe A</h3>
-      <div class="kids-groups__age">Coach Abdelghani</div>
-      <ul class="kids-groups__features" aria-hidden="false">
-        <li class="kids-groups__feature">Samedi 18h15</li>
-        <li class="kids-groups__feature">Mercredi 18h</li>
-        <li class="kids-groups__feature">Piscine ADM AZAL</li>
-        <li class="kids-groups__feature">Reghaia</li>
-      </ul>
-    </div>
-
-    <!-- Groupe B -->
-    <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe B">
-      <div class="kids-groups__icon" aria-hidden="true">B</div>
-      <h3 class="kids-groups__title">Groupe B</h3>
-      <div class="kids-groups__age">Coach Younes</div>
-      <ul class="kids-groups__features">
-        <li class="kids-groups__feature">Dimanche 18h</li>
-        <li class="kids-groups__feature">Jeudi 18h</li>
-        <li class="kids-groups__feature">Piscine ADM AZAL</li>
-        <li class="kids-groups__feature">Reghaia</li>
-      </ul>
-    </div>
-
-    <!-- Groupe C -->
-    <div class="kids-groups__card animate-on-scroll" role="article" aria-label="Groupe C">
-      <div class="kids-groups__icon" aria-hidden="true">C</div>
-      <h3 class="kids-groups__title">Groupe C</h3>
-      <div class="kids-groups__age">Coach Abdelghani et Coach Younes</div>
-      <ul class="kids-groups__features">
-        <li class="kids-groups__feature">Dimanche 19h30</li>
-        <li class="kids-groups__feature">Mercredi 19h30</li>
-        <li class="kids-groups__feature">Piscine ADM AZAL</li>
-        <li class="kids-groups__feature">Reghaia</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- IntersectionObserver + staggered reveal for animate-on-scroll elements -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const nodes = Array.from(document.querySelectorAll('.animate-on-scroll'));
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const idx = nodes.indexOf(entry.target);
-        // apply small stagger based on index (ms)
-        entry.target.style.transitionDelay = (idx * 100) + 'ms';
-        entry.target.classList.add('animate');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-
-  nodes.forEach(n => observer.observe(n));
-});
-</script>
-<!-- Pricing Section -->
+        <!-- Pricing Section -->
         <section class="kids-section kids-pricing animate-on-scroll">
             <h2 class="kids-section__title">Tarifs</h2>
             <p class="kids-section__subtitle">
-                Des programmes adaptÃ©s Ã  chaque Ã¢ge et niveau, pour une progression optimale dans un environnement sÃ©curisÃ©.
+                Des programmes adaptés à chaque âge et niveau, pour une progression optimale dans un environnement sécurisé.
             </p>
             <div class="kids-pricing__grid">
                 <div class="kids-pricing__card">
-                    <div class="kids-pricing__badge">DÃ©couverte</div>
+                    <div class="kids-pricing__badge">Découverte</div>
                     <h3 class="kids-pricing__title">3 mois</h3>
                     <div class="kids-pricing__price">28700 DA</div>
                     <div class="kids-pricing__period">trimestre</div>
                     <ul class="kids-pricing__features">
                         <li class="kids-pricing__feature">Groupe de 10</li>
                         <li class="kids-pricing__feature">Coaching professionnel</li>
-                        <li class="kids-pricing__feature">Pack de matÃ©riel offert</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique</li>
                         <li class="kids-pricing__feature">Suivi physique</li>
                     </ul>
-                    <a href="inscription.html" class="kids-pricing__button">RÃ©server</a>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
                 </div>
 
-                     <div class="kids-pricing__card">
-                    <div class="kids-pricing__badge">DÃ©couverte</div>
+                <div class="kids-pricing__card">
+                    <div class="kids-pricing__badge">Découverte</div>
                     <h3 class="kids-pricing__title">6 mois</h3>
                     <div class="kids-pricing__price">46500 DA</div>
                     <div class="kids-pricing__period">Semestre</div>
                     <ul class="kids-pricing__features">
                         <li class="kids-pricing__feature">Groupe de 10</li>
                         <li class="kids-pricing__feature">Coaching professionnel</li>
-                        <li class="kids-pricing__feature">Pack de matÃ©riel offert</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique</li>
                         <li class="kids-pricing__feature">Suivi physique</li>
                     </ul>
-                    <a href="inscription.html" class="kids-pricing__button">RÃ©server</a>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
                 </div>
 
-                    <div class="kids-pricing__card">
-                    <div class="kids-pricing__badge">DÃ©couverte</div>
+                <div class="kids-pricing__card">
+                    <div class="kids-pricing__badge">Découverte</div>
                     <h3 class="kids-pricing__title">9 mois</h3>
                     <div class="kids-pricing__price">65800 DA</div>
                     <div class="kids-pricing__period">trimestre</div>
                     <ul class="kids-pricing__features">
                         <li class="kids-pricing__feature">Groupe de 10</li>
                         <li class="kids-pricing__feature">Coaching professionnel</li>
-                        <li class="kids-pricing__feature">Pack de matÃ©riel offert</li>
+                        <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique</li>
                         <li class="kids-pricing__feature">Suivi physique</li>
                     </ul>
-                    <a href="inscription.html" class="kids-pricing__button">RÃ©server</a>
+                    <a href="inscription.html" class="kids-pricing__button">Réserver</a>
                 </div>
-
             </div>
         </section>
-
 
         <!-- Lightbox -->
         <div class="kids-lightbox" id="lightbox" onclick="closeLightbox()">
             <div class="kids-lightbox__content" onclick="event.stopPropagation()">
-                <button class="kids-lightbox__close" onclick="closeLightbox()">Ã—</button>
-                <img class="kids-lightbox__image" id="lightboxImage" src="" alt="">
+                <button class="kids-lightbox__close" onclick="closeLightbox()">×</button>
+                <img class="kids-lightbox__image" id="lightboxImage" src="" alt="Gallery Image">
             </div>
         </div>
 
-
-       
         <!-- Reviews Section -->
-        <!--section class="kids-section kids-reviews animate-on-scroll">
-            <h2 class="kids-section__title">TÃ©moignages Parents</h2>
+        <section class="kids-section kids-reviews animate-on-scroll">
+            <h2 class="kids-section__title">Témoignages Parents</h2>
             <p class="kids-section__subtitle">
-                DÃ©couvrez ce que pensent les familles qui nous font confiance pour l'apprentissage aquatique de leurs enfants.
+                Découvrez ce que pensent les familles qui nous font confiance pour l'apprentissage aquatique de leurs enfants.
             </p>
             <div class="kids-reviews__carousel">
                 <div class="kids-reviews__track" id="reviewsTrack">
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Ma fille de 6 ans a appris Ã  nager en seulement 2 mois ! Les coachs sont extraordinaires 
-                            avec les enfants, trÃ¨s patients et encourageants. Je recommande vivement AQA Kids."
+                            "Ma fille de 6 ans a appris à nager en seulement 2 mois ! Les coachs sont extraordinaires 
+                            avec les enfants, très patients et encourageants. Je recommande vivement AQA Kids."
                         </p>
                         <div class="kids-reviews__author">Sophie Martin</div>
-                        <div class="kids-reviews__role">Maman de LÃ©a, 6 ans</div>
+                        <div class="kids-reviews__role">Maman de Léa, 6 ans</div>
                     </div>
 
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Mon fils Ã©tait terrifiÃ© par l'eau. GrÃ¢ce Ã  l'Ã©quipe AQA Kids, il nage maintenant comme un poisson ! 
-                            L'approche ludique a fait toute la diffÃ©rence. Merci pour cette transformation incroyable."
+                            "Mon fils était terrifié par l'eau. Grâce à l'équipe AQA Kids, il nage maintenant comme un poisson ! 
+                            L'approche ludique a fait toute la différence. Merci pour cette transformation incroyable."
                         </p>
                         <div class="kids-reviews__author">Thomas Dubois</div>
                         <div class="kids-reviews__role">Papa de Lucas, 8 ans</div>
                     </div>
 
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Les cours bÃ©bÃ© nageur sont formidables ! C'est un moment privilÃ©giÃ© avec mon bÃ©bÃ©. 
-                            Les installations sont impeccables et l'Ã©quipe trÃ¨s professionnelle."
+                            "Les cours bébé nageur sont formidables ! C'est un moment privilégié avec mon bébé. 
+                            Les installations sont impeccables et l'équipe très professionnelle."
                         </p>
                         <div class="kids-reviews__author">Marie Leroy</div>
                         <div class="kids-reviews__role">Maman d'Emma, 18 mois</div>
                     </div>
 
                     <div class="kids-reviews__item">
-                        <div class="kids-reviews__stars">â­â­â­â­â­</div>
+                        <div class="kids-reviews__stars">⭐⭐⭐⭐⭐</div>
                         <p class="kids-reviews__text">
-                            "Ma fille participe maintenant aux compÃ©titions grÃ¢ce Ã  AQA Kids. Elle a gagnÃ© en confiance 
-                            et en technique. Le suivi personnalisÃ© est remarquable."
+                            "Ma fille participe maintenant aux compétitions grâce à AQA Kids. Elle a gagné en confiance 
+                            et en technique. Le suivi personnalisé est remarquable."
                         </p>
                         <div class="kids-reviews__author">Catherine Moreau</div>
-                        <div class="kids-reviews__role">Maman de ChloÃ©, 12 ans</div>
+                        <div class="kids-reviews__role">Maman de Chloé, 12 ans</div>
                     </div>
                 </div>
 
                 <div class="kids-reviews__nav">
-                    <button class="kids-reviews__btn" onclick="previousReview()">â€¹</button>
+                    <button class="kids-reviews__btn" onclick="previousReview()">‹</button>
                     <div class="kids-reviews__dots" id="reviewsDots"></div>
-                    <button class="kids-reviews__btn" onclick="nextReview()">â€º</button>
+                    <button class="kids-reviews__btn" onclick="nextReview()">›</button>
                 </div>
             </div>
         </section>
 
         <!-- FAQ Section -->
         <section class="kids-section kids-faq animate-on-scroll">
-            <h2 class="kids-section__title">Questions FrÃ©quentes</h2>
+            <h2 class="kids-section__title">Questions Fréquentes</h2>
             <div class="kids-faq__list">
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Ã€ partir de quel Ã¢ge peut-on commencer les cours de natation ?</span>
+                        <span>À partir de quel âge peut-on commencer les cours de natation ?</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Nos cours AQA Kids sont accessibles dÃ¨s lâ€™Ã¢ge de 4.5 ans. Nous proposons Ã©galement un programme spÃ©cial pour les bÃ©bÃ©s nageurs Ã  partir de 6 mois, accompagnÃ© dâ€™un parent bientot disponible.
+                        Nos cours AQA Kids sont accessibles dès l'âge de 4.5 ans. Nous proposons également un programme spécial pour les bébés nageurs à partir de 6 mois, accompagné d'un parent bientôt disponible.
                     </div>
                 </div>
 
@@ -1898,19 +1856,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Nous limitons volontairement nos groupes pour assurer un suivi personnalisÃ© : 10 enfants maximum Cette approche garantit la sÃ©curitÃ© et la progression de chaque enfant.
+                        Nous limitons volontairement nos groupes pour assurer un suivi personnalisé : 10 enfants maximum. Cette approche garantit la sécurité et la progression de chaque enfant.
                     </div>
                 </div>
 
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Faut-il savoir nager pour sâ€™inscrire ?</span>
+                        <span>Faut-il savoir nager pour s'inscrire ?</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Non, nos formules sont adaptÃ©es Ã  tous les niveaux, des dÃ©butants aux nageurs confirmÃ©s. Nos entraÃ®neurs certifiÃ©s accompagnent chaque enfant selon son niveau.
+                        Non, nos formules sont adaptées à tous les niveaux, des débutants aux nageurs confirmés. Nos entraîneurs certifiés accompagnent chaque enfant selon son niveau.
                     </div>
                 </div>
 
@@ -1922,309 +1880,316 @@ document.addEventListener('DOMContentLoaded', function () {
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Oui, chaque fin du mois. De plus, des groupes WhatsApp sont disponibles pour recevoir les vidÃ©os de vos petits. Prochainement, lâ€™application AQA Kids permettra de suivre encore plus facilement leurs progrÃ¨s. 
+                        Oui, chaque fin du mois. De plus, des groupes WhatsApp sont disponibles pour recevoir les vidéos de vos petits. Prochainement, l'application AQA Kids permettra de suivre encore plus facilement leurs progrès.
+                    </div>
                 </div>
- </div>
+
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Quâ€™est-ce que lâ€™application AQA app</span>
+                        <span>Qu'est-ce que l'application AQA app</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Une maniÃ¨re innovante de digitaliser le parcours de votre petit athlÃ¨te. GrÃ¢ce Ã  lâ€™application, vous suivez ses progrÃ¨s en temps rÃ©el, recevez ses vidÃ©os dâ€™entraÃ®nement, consultez le planning des cours et restez connectÃ© aux coachs et aux autres parents.
+                        Une manière innovante de digitaliser le parcours de votre petit athlète. Grâce à l'application, vous suivez ses progrès en temps réel, recevez ses vidéos d'entraînement, consultez le planning des cours et restez connecté aux coachs et aux autres parents.
                         <a href="/app.html" class="btn-app" aria-label="Ouvrir AQA Kids App">AQA app</a>
                     </div>
                 </div>
 
                 <div class="kids-faq__item">
                     <div class="kids-faq__question" onclick="toggleFaq(this)" tabindex="0" role="button" aria-expanded="false">
-                        <span>Comment sâ€™inscrire ?</span>
+                        <span>Comment s'inscrire ?</span>
                         <svg class="kids-faq__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="kids-faq__answer">
-                        Les inscriptions se font en ligne ou directement Ã  lâ€™accueil. Plusieurs formules et localisations sont disponibles pour sâ€™adapter aux besoins de chaque famille.
+                        Les inscriptions se font en ligne ou directement à l'accueil. Plusieurs formules et localisations sont disponibles pour s'adapter aux besoins de chaque famille.
                     </div>
                 </div>
             </div>
         </section>
 
-        
         <!-- CTA Section -->
         <section class="kids-cta animate-on-scroll">
-            <h2 class="kids-cta__title">PrÃªt Ã  Plonger dans l'Aventure ?</h2>
+            <h2 class="kids-cta__title">Prêt à Plonger dans l'Aventure ?</h2>
             <p class="kids-cta__description">
-                Offrez Ã  votre enfant la chance de dÃ©couvrir les joies de la natation dans un environnement 
-                sÃ©curisÃ© et professionnel. Nos coachs experts l'accompagneront dans chaque Ã©tape de son 
+                Offrez à votre enfant la chance de découvrir les joies de la natation dans un environnement 
+                sécurisé et professionnel. Nos coachs experts l'accompagneront dans chaque étape de son 
                 parcours aquatique.
             </p>
-            <a href="inscription.html" class="kids-cta__button">RÃ©server maintenant</a>
+            <a href="inscription.html" class="kids-cta__button">Réserver maintenant</a>
         </section>
-<!-- Locations Section -->
-<section class="kids-section kids-locations animate-on-scroll">
-    <h2 class="kids-section__title">Nos Localisations</h2>
-    <p class="kids-section__subtitle">
-        Retrouvez nos programmes AQA Kids dans plusieurs centres aquatiques modernes et Ã©quipÃ©s.
-    </p>
-    <div class="kids-locations__container">
 
-        <a href="https://maps.app.goo.gl/s6nT3sUH1yN9U1mBA" 
-           target="_blank" 
-           class="kids-locations__item">
-            <h3 class="kids-locations__name">Complexe ADM AZAL</h3>
-            <div class="kids-locations__address">citÃ© Signa Reghaia</div>
-        </a>
+        <!-- Locations Section -->
+        <section class="kids-section kids-locations animate-on-scroll">
+            <h2 class="kids-section__title">Nos Localisations</h2>
+            <p class="kids-section__subtitle">
+                Retrouvez nos programmes AQA Kids dans plusieurs centres aquatiques modernes et équipés.
+            </p>
+            <div class="kids-locations__container">
+                <a href="https://maps.app.goo.gl/s6nT3sUH1yN9U1mBA" 
+                   target="_blank" 
+                   class="kids-locations__item">
+                    <h3 class="kids-locations__name">Complexe ADM AZAL</h3>
+                    <div class="kids-locations__address">cité Signa Reghaia</div>
+                </a>
 
-        <a href="https://maps.app.goo.gl/M7fPHG78T3uTiStz7" 
-           target="_blank" 
-           class="kids-locations__item">
-            <h3 class="kids-locations__name">Piscine BK SPORT</h3>
-            <div class="kids-locations__address">citÃ© Ammara Cheraga</div>
-        </a>
-
-    </div>
-</section>
-        </div>
+                <a href="https://maps.app.goo.gl/M7fPHG78T3uTiStz7" 
+                   target="_blank" 
+                   class="kids-locations__item">
+                    <h3 class="kids-locations__name">Piscine BK SPORT</h3>
+                    <div class="kids-locations__address">cité Ammara Cheraga</div>
+                </a>
             </div>
         </section>
     </div>
+
     <footer>
-<!-- Add this div where you want the footer to appear -->
-<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
-</footer>
-  <script src="js/navbar.js"></script>
+        <!-- Add this div where you want the footer to appear -->
+        <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    </footer>
+
+    <script src="js/navbar.js"></script>
     <script>
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("âœ… AQA Kids script initialized");
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("✅ AQA Kids script initialized");
 
-  /* ------------------------------
-     1. Scroll Animations
-  ------------------------------ */
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-  };
+            /* ------------------------------
+               1. Scroll Animations
+            ------------------------------ */
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
 
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("animate");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("animate");
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
 
-    document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
-  } else {
-    document.querySelectorAll(".animate-on-scroll").forEach(el => el.classList.add("animate"));
-  }
+                document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+            } else {
+                document.querySelectorAll(".animate-on-scroll").forEach(el => el.classList.add("animate"));
+            }
 
-  /* ------------------------------
-     2. FAQ Toggle (Accessible)
-  ------------------------------ */
-  function toggleFaq(el) {
-    const item = el.closest(".kids-faq__item");
-    const active = item.classList.contains("kids-faq__item--active");
+            /* ------------------------------
+               2. FAQ Toggle (Accessible)
+            ------------------------------ */
+            window.toggleFaq = function(el) {
+                const item = el.closest(".kids-faq__item");
+                const active = item.classList.contains("kids-faq__item--active");
 
-    document.querySelectorAll(".kids-faq__item").forEach(i => {
-      i.classList.remove("kids-faq__item--active");
-      const q = i.querySelector(".kids-faq__question");
-      if (q) q.setAttribute("aria-expanded", "false");
-    });
+                document.querySelectorAll(".kids-faq__item").forEach(i => {
+                    i.classList.remove("kids-faq__item--active");
+                    const q = i.querySelector(".kids-faq__question");
+                    if (q) q.setAttribute("aria-expanded", "false");
+                });
 
-    if (!active) {
-      item.classList.add("kids-faq__item--active");
-      el.setAttribute("aria-expanded", "true");
-    }
-  }
+                if (!active) {
+                    item.classList.add("kids-faq__item--active");
+                    el.setAttribute("aria-expanded", "true");
+                }
+            };
 
-  document.querySelectorAll(".kids-faq__question").forEach(q => {
-    q.addEventListener("click", () => toggleFaq(q));
-    q.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggleFaq(q);
-      }
-    });
-  });
+            document.querySelectorAll(".kids-faq__question").forEach(q => {
+                q.addEventListener("keydown", e => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        toggleFaq(q);
+                    }
+                });
+            });
 
-  /* ------------------------------
-     3. Lightbox
-  ------------------------------ */
-  window.openLightbox = function (src) {
-    const lb = document.getElementById("lightbox");
-    const img = document.getElementById("lightboxImage");
-    if (lb && img) {
-      img.src = src;
-      lb.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }
-  };
+            /* ------------------------------
+               3. Lightbox
+            ------------------------------ */
+            window.openLightbox = function (src) {
+                const lb = document.getElementById("lightbox");
+                const img = document.getElementById("lightboxImage");
+                if (lb && img) {
+                    img.src = src;
+                    lb.style.display = "flex";
+                    document.body.style.overflow = "hidden";
+                }
+            };
 
-  window.closeLightbox = function () {
-    const lb = document.getElementById("lightbox");
-    if (lb) {
-      lb.style.display = "none";
-      document.body.style.overflow = "auto";
-    }
-  };
+            window.closeLightbox = function () {
+                const lb = document.getElementById("lightbox");
+                if (lb) {
+                    lb.style.display = "none";
+                    document.body.style.overflow = "auto";
+                }
+            };
 
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeLightbox();
-  });
+            document.addEventListener("keydown", e => {
+                if (e.key === "Escape") closeLightbox();
+            });
 
-  /* ------------------------------
-     4. Video Thumbnail Switcher
-  ------------------------------ */
-  const mainVideo = document.getElementById("mainVideo");
-  const mainIframe = document.getElementById("mainIframe");
+            /* ------------------------------
+               4. Video Thumbnail Switcher
+            ------------------------------ */
+            const mainVideo = document.getElementById("mainVideo");
+            const mainIframe = document.getElementById("mainIframe");
 
-  document.querySelectorAll(".thumb").forEach(thumb => {
-    thumb.addEventListener("click", () => {
-      const type = thumb.getAttribute("data-type");
-      if (type === "youtube") {
-        mainVideo.style.display = "none";
-        mainIframe.style.display = "block";
-        mainIframe.src = thumb.getAttribute("data-src");
-      } else {
-        mainIframe.style.display = "none";
-        mainVideo.style.display = "block";
-        mainVideo.src = thumb.src;
-        mainVideo.play();
-      }
-      document.querySelectorAll(".thumb").forEach(t => t.style.boxShadow = "0 0 10px #00ffff");
-      thumb.style.boxShadow = "0 0 20px #00ffff";
-    });
-  });
+            document.querySelectorAll(".thumb").forEach(thumb => {
+                thumb.addEventListener("click", () => {
+                    const type = thumb.getAttribute("data-type");
+                    if (type === "youtube") {
+                        mainVideo.style.display = "none";
+                        mainIframe.style.display = "block";
+                        mainIframe.src = thumb.getAttribute("data-src");
+                    } else {
+                        mainIframe.style.display = "none";
+                        mainVideo.style.display = "block";
+                        mainVideo.src = thumb.src;
+                        mainVideo.play();
+                    }
+                    document.querySelectorAll(".thumb").forEach(t => t.style.boxShadow = "0 0 10px #00ffff");
+                    thumb.style.boxShadow = "0 0 20px #00ffff";
+                });
+            });
 
-  /* ------------------------------
-     5. Reviews Carousel
-  ------------------------------ */
-  const reviews = document.querySelectorAll(".kids-reviews__item");
-  const track = document.getElementById("reviewsTrack");
-  const dotsContainer = document.getElementById("reviewsDots");
-  let currentReview = 0;
+            /* ------------------------------
+               5. Reviews Carousel
+            ------------------------------ */
+            const reviews = document.querySelectorAll(".kids-reviews__item");
+            const track = document.getElementById("reviewsTrack");
+            const dotsContainer = document.getElementById("reviewsDots");
+            let currentReview = 0;
 
-  if (reviews.length && track && dotsContainer) {
-    dotsContainer.innerHTML = "";
-    reviews.forEach((_, i) => {
-      const dot = document.createElement("div");
-      dot.className = "kids-reviews__dot" + (i === 0 ? " kids-reviews__dot--active" : "");
-      dot.addEventListener("click", () => goToReview(i));
-      dotsContainer.appendChild(dot);
-    });
+            if (reviews.length && track && dotsContainer) {
+                dotsContainer.innerHTML = "";
+                reviews.forEach((_, i) => {
+                    const dot = document.createElement("div");
+                    dot.className = "kids-reviews__dot" + (i === 0 ? " kids-reviews__dot--active" : "");
+                    dot.addEventListener("click", () => goToReview(i));
+                    dotsContainer.appendChild(dot);
+                });
 
-    function goToReview(i) {
-      currentReview = i;
-      track.style.transform = `translateX(-${i * 100}%)`;
-      document.querySelectorAll(".kids-reviews__dot").forEach((dot, idx) => {
-        dot.classList.toggle("kids-reviews__dot--active", idx === i);
-      });
-    }
+                function goToReview(i) {
+                    currentReview = i;
+                    track.style.transform = `translateX(-${i * 100}%)`;
+                    document.querySelectorAll(".kids-reviews__dot").forEach((dot, idx) => {
+                        dot.classList.toggle("kids-reviews__dot--active", idx === i);
+                    });
+                }
 
-    function nextReview() {
-      currentReview = (currentReview + 1) % reviews.length;
-      goToReview(currentReview);
-    }
+                window.nextReview = function() {
+                    currentReview = (currentReview + 1) % reviews.length;
+                    goToReview(currentReview);
+                };
 
-    let interval = setInterval(nextReview, 5000);
-    const carousel = document.querySelector(".kids-reviews__carousel");
-    if (carousel) {
-      carousel.addEventListener("mouseenter", () => clearInterval(interval));
-      carousel.addEventListener("mouseleave", () => interval = setInterval(nextReview, 5000));
-    }
-  }
+                window.previousReview = function() {
+                    currentReview = (currentReview - 1 + reviews.length) % reviews.length;
+                    goToReview(currentReview);
+                };
 
-  /* ------------------------------
-     6. Equipment Pack Stepper
-  ------------------------------ */
-  const steps = Array.from(document.querySelectorAll(".equipment-step"));
-  const dots = Array.from(document.querySelectorAll(".step-dot"));
-  const nextBtns = Array.from(document.querySelectorAll(".next-btn"));
-  let currentStep = 0;
+                let interval = setInterval(window.nextReview, 5000);
+                const carousel = document.querySelector(".kids-reviews__carousel");
+                if (carousel) {
+                    carousel.addEventListener("mouseenter", () => clearInterval(interval));
+                    carousel.addEventListener("mouseleave", () => interval = setInterval(window.nextReview, 5000));
+                }
+            }
 
-  function showStep(i) {
-    steps.forEach((s, idx) => s.classList.toggle("active", idx === i));
-    dots.forEach((d, idx) => {
-      d.classList.toggle("active", idx === i);
-      d.classList.toggle("completed", idx < i);
-    });
-  }
+            /* ------------------------------
+               6. Equipment Pack Stepper
+            ------------------------------ */
+            const steps = Array.from(document.querySelectorAll(".equipment-step"));
+            const dots = Array.from(document.querySelectorAll(".step-dot"));
+            const nextBtns = Array.from(document.querySelectorAll(".next-btn"));
+            let currentStep = 0;
 
-  nextBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      currentStep = (currentStep + 1) % steps.length;
-      showStep(currentStep);
-    });
-  });
+            function showStep(i) {
+                steps.forEach((s, idx) => s.classList.toggle("active", idx === i));
+                dots.forEach((d, idx) => {
+                    d.classList.toggle("active", idx === i);
+                    d.classList.toggle("completed", idx < i);
+                });
+            }
 
-  dots.forEach((dot, i) => {
-    dot.addEventListener("click", () => {
-      currentStep = i;
-      showStep(currentStep);
-    });
-  });
+            nextBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    currentStep = (currentStep + 1) % steps.length;
+                    showStep(currentStep);
+                });
+            });
 
-  showStep(currentStep);
+            dots.forEach((dot, i) => {
+                dot.addEventListener("click", () => {
+                    currentStep = i;
+                    showStep(currentStep);
+                });
+            });
 
-  /* ------------------------------
-     7. Smooth Anchor Scroll
-  ------------------------------ */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener("click", e => {
-      const target = document.querySelector(a.getAttribute("href"));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  });
+            showStep(currentStep);
 
-  /* ------------------------------
-     8. Pricing Buttons Redirect
-  ------------------------------ */
-  document.querySelectorAll(".kids-pricing__button").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.preventDefault();
-      window.location.href = "inscription.html";
-    });
-  });
+            /* ------------------------------
+               7. Smooth Anchor Scroll
+            ------------------------------ */
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener("click", e => {
+                    const target = document.querySelector(a.getAttribute("href"));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
+            });
 
-  /* ------------------------------
-     9. Lazy Loading Images
-  ------------------------------ */
-  if ("IntersectionObserver" in window) {
-    const imageObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.remove("lazy");
-          obs.unobserve(img);
-        }
-      });
-    });
-    document.querySelectorAll("img[data-src]").forEach(img => imageObserver.observe(img));
-  }
+            /* ------------------------------
+               8. Pricing Buttons Redirect
+            ------------------------------ */
+            document.querySelectorAll(".kids-pricing__button").forEach(btn => {
+                btn.addEventListener("click", e => {
+                    e.preventDefault();
+                    window.location.href = "inscription.html";
+                });
+            });
 
-  /* ------------------------------
-     10. Footer Loader
-  ------------------------------ */
-  async function loadFooter() {
-    try {
-      const res = await fetch("footer.html");
-      document.getElementById("footer-container").innerHTML = await res.text();
-    } catch (err) {
-      console.error("Footer load error:", err);
-    }
-  }
-  loadFooter();
-});
-</script>
+            /* ------------------------------
+               9. Lazy Loading Images
+            ------------------------------ */
+            if ("IntersectionObserver" in window) {
+                const imageObserver = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove("lazy");
+                            obs.unobserve(img);
+                        }
+                    });
+                });
+                document.querySelectorAll("img[data-src]").forEach(img => imageObserver.observe(img));
+            }
 
+            /* ------------------------------
+               10. IntersectionObserver + staggered reveal
+            ------------------------------ */
+            const nodes = Array.from(document.querySelectorAll('.animate-on-scroll'));
+            const staggerObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const idx = nodes.indexOf(entry.target);
+                        entry.target.style.transitionDelay = (idx * 100) + 'ms';
+                        entry.target.classList.add('animate');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+            nodes.forEach(n => staggerObserver.observe(n));
+        });
+    </script>
 </body>
 </html>
+                    
+           
