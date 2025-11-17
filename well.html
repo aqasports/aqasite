@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQA Wellness - Votre chemin vers une vie plus saine</title>
+    <meta name="description" content="AQA Wellness : programmes de santé, prévention des maladies chroniques, atelier du dos, camps de transformation et newsletter quotidienne gratuite.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+            animation: neonGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border-bottom: 2px solid rgba(0, 153, 255, 0.3);
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: #00ffff;
+            opacity: 0.9;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        section p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge-free {
+            background: linear-gradient(135deg, #00ff88, #00ffff);
+            color: #000;
+        }
+
+        .badge-paid {
+            background: linear-gradient(135deg, #ff9900, #ffcc00);
+            color: #000;
+        }
+
+        .card-title {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+
+        .card-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .card-description {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+
+        .program-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .program-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        .program-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00ffff;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        #upcoming {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: rgba(0, 153, 255, 0.05);
+            border-radius: 20px;
+            border: 2px solid rgba(0, 153, 255, 0.2);
+        }
+
+        #upcoming p {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: #00ffff;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid #0099ff;
+            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 2rem 1rem;
+            }
+
+            section {
+                padding: 2rem 0;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .program-list li {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-logo"></div>
+
+    <!-- NAVBAR -->
+    <header id="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+                </a>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="tarifs.html" class="nav-link">Tarifs</a>
+                <a href="groupes.html" class="nav-link">Groupes</a>
+                <a href="piscines.html" class="nav-link">Piscines</a>
+                <a href="infos.html" class="nav-link">Infos</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="phobie.html" class="nav-link">Formations</a>
+                <a href="store.html" class="nav-link">Store</a>
+            </nav>
+            <div class="right-actions">
+                <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+                <div class="menu-toggle" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="menu-close" onclick="toggleMobileMenu()">
+            <span></span><span></span>
+        </div>
+        <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+        <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+        <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+        <a href="infos.html" class="mobile-nav-link">Infos</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="phobie.html" class="mobile-nav-link">Formations</a>
+        <a href="store.html" class="mobile-nav-link">Store</a>
+        <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1>AQA Wellness</h1>
+        <p>Votre chemin vers une vie plus saine et plus équilibrée</p>
+    </div>
+
+    <!-- SECTION: LE CONCEPT -->
+    <section id="concept">
+        <div class="container">
+            <h2>Le Concept</h2>
+            <p>
+                AQA Wellness est une filière de santé intégrée dans AQA Sports, créée pour accompagner chaque personne vers une vie plus saine et équilibrée. Notre mission est d'aider les gens à améliorer leur santé globale, éviter les maladies chroniques, adopter des habitudes de vie durables et récupérer efficacement des douleurs ou troubles musculo-squelettiques.
+            </p>
+            <p>
+                Nous combinons plusieurs expertises pour offrir un accompagnement complet : activités sportives adaptées, thérapie et rééducation professionnelle, entraînement en piscine, approche scientifique de la prévention, outils digitaux innovants et surtout un accompagnement humain personnalisé. Chez AQA Wellness, votre santé est notre priorité.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION: PROGRAMMES DISPONIBLES -->
+    <section id="available-programs">
+        <div class="container">
+            <h2>Programmes Disponibles</h2>
+
+            <!-- Programme 1 - Gratuit -->
+            <div class="card">
+                <span class="badge badge-free">GRATUIT</span>
+                <h3 class="card-title">Éviter le Cancer ! — Newsletter Quotidienne</h3>
+                <p class="card-description">
+                    Une newsletter quotidienne gratuite publiée sur les réseaux sociaux. Chaque jour, vous recevez un conseil court, basé sur des preuves scientifiques, pour réduire vos risques de cancer. Nous abordons l'activité physique, la nutrition, le sommeil, l'environnement et les habitudes de vie. Un geste simple pour une santé durable.
+                </p>
+            </div>
+
+            <!-- Programme 2 - Payant -->
+            <div class="card">
+                <span class="badge badge-paid">PAYANT</span>
+                <h3 class="card-title">Atelier du Dos</h3>
+                <p class="card-description">
+                    Un service spécialement conçu pour les personnes souffrant de douleurs lombaires. Cet atelier se déroule en piscine et est encadré par des kinésithérapeutes qualifiés. Les séances comprennent des exercices adaptés dans l'eau, un travail de mobilité pour soulager les douleurs, un renforcement du dos en décharge et un suivi personnalisé selon le cas de chaque patient. L'eau offre un environnement idéal pour récupérer en douceur.
+                </p>
+            </div>
+
+            <!-- Programme 3 - Payant -->
+            <div class="card">
+                <span class="badge badge-paid">PAYANT</span>
+                <h3 class="card-title">Camps AQA — Transformations en 1 Semaine</h3>
+                <p class="card-subtitle">Une série de camps organisés par AQA Events, conçus pour sortir les participants de leur routine pendant une semaine complète.</p>
+                
+                <ul class="program-list">
+                    <li>1 semaine pour arrêter de fumer</li>
+                    <li>1 semaine pour manger sain à vie</li>
+                    <li>1 semaine pour perdre du poids</li>
+                    <li>1 semaine pour éliminer le stress</li>
+                    <li>1 semaine pour profiter des douches thermales et récupération totale</li>
+                </ul>
+
+                <p class="card-description">
+                    Chaque camp est encadré par des experts AQA spécialisés en sport, thérapie et nutrition. L'objectif : provoquer un changement rapide et durable grâce à un environnement contrôlé, une immersion totale et un accompagnement professionnel. Une semaine qui peut transformer votre vie.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: PROGRAMMES À VENIR -->
+    <section id="upcoming">
+        <div class="container">
+            <h2>Programmes à Venir</h2>
+            <p>De nouveaux programmes de santé AQA seront ajoutés prochainement. Restez connectés pour découvrir nos prochaines innovations en matière de bien-être et de prévention.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="/auto-translate.js"></script>
+</body>
+</html>

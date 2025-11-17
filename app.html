@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>AQA App - Ton Ã©volution, dans ta poche</title>
-    <meta content="TÃ©lÃ©charge l'app AQA pour suivre ta progression, analyser tes performances et transformer ton potentiel sportif oÃ¹ que tu sois." name="description"/>
-    <meta content="AQA, app mobile, natation, coaching, progression, analyse vidÃ©o, suivi performance" name="keywords"/>
+    <title>AQA App - Ton évolution, dans ta poche</title>
+    <meta content="Télécharge l'app AQA pour suivre ta progression, analyser tes performances et transformer ton potentiel sportif où que tu sois." name="description"/>
+    <meta content="AQA, app mobile, natation, coaching, progression, analyse vidéo, suivi performance" name="keywords"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 <style>
         * {
@@ -378,35 +378,34 @@
             gap: 2rem;
             align-items: center;
             padding: 0 calc(var(--edge-fade-width) + 20px);
-             min-height: 200px;       /* adjust until badges fit */
-  line-height: 200px; 
+            min-height: 200px;
+            line-height: 200px; 
             box-sizing: border-box;
             width: max-content;
             animation: scroll var(--scroll-speed) linear infinite;
-    
         }
 
-.badge {
-  position: relative;
-  overflow: visible;   /* let image expand on hover */
-  width: 80px;         /* control frame size */
-  height: 80px;
-  flex: 0 0 auto;  
-   transform: scale(1.5);    /* keep badges from shrinking */
-}
+        .badge {
+            position: relative;
+            overflow: visible;
+            width: 80px;
+            height: 80px;
+            flex: 0 0 auto;  
+            transform: scale(1.5);
+        }
 
-.badge img {
-  position: relative;
-  z-index: 10;         /* always above */
-  width: 100%;         /* fit inside badge frame */
-  height: 100%;
-  object-fit: contain; /* keep proportions */
-  transition: transform 0.2s;
-}
+        .badge img {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.2s;
+        }
 
-.badge img:hover {
-  transform: scale(1.5); /* enlarges slightly */
-}
+        .badge img:hover {
+            transform: scale(1.5);
+        }
 
         /* Paused state */
         .ticker-track.paused {
@@ -483,17 +482,20 @@
         }
 
         .screenshot-placeholder {
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #f4f4f4;
             aspect-ratio: 9/16;
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
             border: 2px solid rgba(0, 153, 255, 0.3);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #00ffff;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
             transition: all 0.4s ease;
+        }
+
+        .screenshot-placeholder img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: inherit;
         }
 
         .screenshot-placeholder:hover {
@@ -677,6 +679,7 @@
             overflow: hidden;
             box-shadow: 0 0 40px rgba(0, 153, 255, 0.6);
             border: 2px solid #00ffff;
+            margin: 0.5rem;
         }
 
         .cta-button:hover {
@@ -695,6 +698,54 @@
         .animate-on-scroll.animate {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Floating Scroll Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+        }
+
+        .bg-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            z-index: -1;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        html {
+            background: #000;
+        }
+
+        body {
+            background: transparent !important;
+            overscroll-behavior: none;
         }
 
         /* Mobile Responsive */
@@ -743,132 +794,72 @@
                 transition-duration: 0.01ms !important;
             }
         }
-   .screenshot-placeholder {
-  display: inline-block;   /* shrink-wraps to image size */
-  overflow: hidden;
-  border-radius: 12px;     /* optional rounded corners */
-  background: #f4f4f4;     /* fallback if image missing */
-}
-
-.screenshot-placeholder img {
-  display: block;          /* removes inline spacing */
-  max-width: 100%;         /* keeps responsive */
-  height: auto;            /* keeps natural aspect ratio */
-  border-radius: inherit;  /* follows parent corners */
-}
-
- .bg-frame {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  z-index: -1;
-  pointer-events: none;
-  background: transparent;
-}
-
-html {
-  background: #000;  /* solid fallback */
-}
-body {
-  background: transparent !important;
-  overscroll-behavior: none; /* prevent pull-to-refresh glow */
-}
-/* Floating Scroll Button */
-.floating-btn {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0099ff, #00ffff);
-    color: #000;
-    font-size: 1.8rem;
-    font-weight: bold;
-    border: 2px solid #00ffff;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 999;
-}
-
-.floating-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
-}
-
     </style>
     <!-- Navbar CSS -->
-  <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
-<!-- Floating Button -->
-<button id="scrollToDownload" class="floating-btn" aria-label="Aller au tÃ©lÃ©chargement">
-    â¬‡
-</button>
-
 <body>
-<iframe src="scroll.html" class="bg-frame"></iframe>  
-      <!-- ===== NAVBAR ===== -->
-</head>
+    <!-- Floating Button -->
+    <button id="scrollToDownload" class="floating-btn" aria-label="Aller au téléchargement">
+        ⬇
+    </button>
+
+    <iframe src="scroll.html" class="bg-frame"></iframe>  
+    
     <!-- ===== NAVBAR ===== -->
-  <header id="header">
-    <div class="header-content">
-      <div class="logo-section">
-        <a href="index.html">
-          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
-               alt="AQA Logo" class="logo">
-        </a>
-      </div>
+    <header id="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
+                         alt="AQA Logo" class="logo">
+                </a>
+            </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="nav-menu" id="navMenu">
-        <a href="tarifs.html" class="nav-link">Tarifs</a>
-        <a href="groupes.html" class="nav-link">Groupes</a>
-        <a href="piscines.html" class="nav-link">Piscines</a>
-        <a href="infos.html" class="nav-link">Infos</a>
-        <a href="events.html" class="nav-link">Events</a>
-        <a href="webtv.html" class="nav-link">WebTV</a>
-        <a href="store.html" class="nav-link">Store</a>
-      </nav>
+            <!-- Desktop Navigation -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="tarifs.html" class="nav-link">Tarifs</a>
+                <a href="groupes.html" class="nav-link">Groupes</a>
+                <a href="piscines.html" class="nav-link">Piscines</a>
+                <a href="infos.html" class="nav-link">Infos</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="webtv.html" class="nav-link">WebTV</a>
+                <a href="store.html" class="nav-link">Store</a>
+            </nav>
 
-      <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
-        <div class="menu-toggle" onclick="toggleMobileMenu()">
-          <span></span><span></span><span></span>
+            <div class="right-actions">
+                <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+                <div class="menu-toggle" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
         </div>
-      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="menu-close" onclick="toggleMobileMenu()">
+            <span></span><span></span>
+        </div>
+        <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+        <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+        <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+        <a href="infos.html" class="mobile-nav-link">Infos</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="webtv.html" class="mobile-nav-link">WebTV</a>
+        <a href="store.html" class="mobile-nav-link">Store</a>
+        <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
     </div>
-  </header>
+    <!-- ===== /NAVBAR ===== -->
 
-  <!-- Mobile Menu Overlay -->
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-    <div class="menu-close" onclick="toggleMobileMenu()">
-      <span></span><span></span>
-    </div>
-    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
-    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
-    <a href="infos.html" class="mobile-nav-link">Infos</a>
-    <a href="events.html" class="mobile-nav-link">Events</a>
-    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
-    <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a>
-  </div>
-  <!-- ===== /NAVBAR ===== -->
-
-
-<body>
     <div class="bg-logo"></div>
     
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
             <h1>AQA App</h1>
-            <h2>Ton Ã©volution, dans ta poche</h2>
-            <p>Transforme ton potentiel sportif avec l'application officielle AQA. Suivi personnalisÃ©, analyse vidÃ©o, coaching en temps rÃ©el - tout ce dont tu as besoin pour passer du niveau zÃ©ro au niveau pro.</p>
+            <h2>Ton évolution, dans ta poche</h2>
+            <p>Transforme ton potentiel sportif avec l'application officielle AQA. Suivi personnalisé, analyse vidéo, coaching en temps réel - tout ce dont tu as besoin pour passer du niveau zéro au niveau pro.</p>
             
             <!-- Mobile Mockup -->
             <div class="mobile-mockup animate-on-scroll">
@@ -876,7 +867,7 @@ body {
                     <div class="phone-screen">
                         <video autoplay muted loop playsinline class="transformation-video">
                             <source src="https://files.catbox.moe/u6djh3.mov" type="video/mp4">
-                            Votre navigateur ne supporte pas la vidÃ©o.
+                            Votre navigateur ne supporte pas la vidéo.
                         </video>
                     </div>
                 </div>
@@ -885,7 +876,7 @@ body {
 
         <!-- Features Section -->
         <section class="features animate-on-scroll">
-            <h2>FonctionnalitÃ©s Premium</h2>
+            <h2>Fonctionnalités Premium</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -897,7 +888,7 @@ body {
                         </svg>
                     </div>
                     <h3>Dashboard Personnel</h3>
-                    <p>Vue d'ensemble complÃ¨te de tes performances, statistiques en temps rÃ©el et objectifs personnalisÃ©s.</p>
+                    <p>Vue d'ensemble complète de tes performances, statistiques en temps réel et objectifs personnalisés.</p>
                 </div>
 
                 <div class="feature-card">
@@ -909,27 +900,21 @@ body {
                         </svg>
                     </div>
                     <h3>Suivi de Progression</h3>
-                    <p>Analyse dÃ©taillÃ©e de ton Ã©volution avec graphiques interactifs et mÃ©triques avancÃ©es.</p>
+                    <p>Analyse détaillée de ton évolution avec graphiques interactifs et métriques avancées.</p>
                 </div>
 
-
-             <div class="feature-card">
-  <div class="feature-icon">
-    <!-- Shopping Bag Icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" 
-         viewBox="0 0 24 24" 
-         fill="none" 
-         stroke="currentColor" 
-         stroke-width="2">
-      <path d="M6 2l1 4h10l1-4z"/>
-      <path d="M3 6h18l-1.5 14h-15z"/>
-      <path d="M9 10v4"/>
-      <path d="M15 10v4"/>
-    </svg>
-  </div>
-  <h3>Boutique AQA</h3>
-  <p>Achetez facilement vos Ã©quipements et accessoires directement depuis lâ€™application.</p>
-</div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 2l1 4h10l1-4z"/>
+                            <path d="M3 6h18l-1.5 14h-15z"/>
+                            <path d="M9 10v4"/>
+                            <path d="M15 10v4"/>
+                        </svg>
+                    </div>
+                    <h3>Boutique AQA</h3>
+                    <p>Achetez facilement vos équipements et accessoires directement depuis l'application.</p>
+                </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -939,129 +924,117 @@ body {
                         </svg>
                     </div>
                     <h3>Notifications</h3>
-                    <p>Alertes motivantes et conseils quotidiens pour rester sur la voie du succÃ¨s.</p>
+                    <p>Alertes motivantes et conseils quotidiens pour rester sur la voie du succès.</p>
                 </div>
 
-           <div class="feature-card">
-  <div class="feature-icon">
-    <!-- Trophy / Ranking Icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" 
-         viewBox="0 0 24 24" 
-         fill="none" 
-         stroke="currentColor" 
-         stroke-width="2">
-      <path d="M8 21h8v-2H8v2z"/>
-      <path d="M12 17c2.8 0 5-2.2 5-5V4H7v8c0 2.8 2.2 5 5 5z"/>
-      <path d="M5 4h14v2H5V4z"/>
-      <path d="M7 4a5 5 0 0 1-5 5"/>
-      <path d="M17 4a5 5 0 0 0 5 5"/>
-    </svg>
-  </div>
-  <h3>Classement</h3>
-  <p>Suis ta position dans le classement et mesure tes performances face aux autres athlÃ¨tes.</p>
-</div>
-
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 21h8v-2H8v2z"/>
+                            <path d="M12 17c2.8 0 5-2.2 5-5V4H7v8c0 2.8 2.2 5 5 5z"/>
+                            <path d="M5 4h14v2H5V4z"/>
+                            <path d="M7 4a5 5 0 0 1-5 5"/>
+                            <path d="M17 4a5 5 0 0 0 5 5"/>
+                        </svg>
+                    </div>
+                    <h3>Classement</h3>
+                    <p>Suis ta position dans le classement et mesure tes performances face aux autres athlètes.</p>
+                </div>
             </div>
         </section>
 
         <!-- How It Works -->
         <section class="how-it-works animate-on-scroll">
-            <h2>Comment Ã§a marche ?</h2>
+            <h2>Comment ça marche ?</h2>
             <div class="steps-timeline">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>TÃ©lÃ©charge</h3>
-                    <p>Installe l'app AQA gratuitement depuis ton app store et crÃ©e ton compte en quelques secondes.</p>
+                    <h3>Télécharge</h3>
+                    <p>Installe l'app AQA gratuitement depuis ton app store et crée ton compte en quelques secondes.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Connecte-toi</h3>
-                    <p>Synchronise ton profil AQA existant ou crÃ©e un nouveau compte pour accÃ©der Ã  toutes les fonctionnalitÃ©s.</p>
+                    <p>Synchronise ton profil AQA existant ou crée un nouveau compte pour accéder à toutes les fonctionnalités.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <h3>Progresse</h3>
-                    <p>Suis tes sÃ©ances, analyse tes performances et reÃ§ois des conseils personnalisÃ©s de nos coachs experts.</p>
+                    <p>Suis tes séances, analyse tes performances et reçois des conseils personnalisés de nos coachs experts.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
                     <h3>Transforme</h3>
-                    <p>Atteins tes objectifs plus rapidement avec un suivi constant et une motivation renforcÃ©e.</p>
+                    <p>Atteins tes objectifs plus rapidement avec un suivi constant et une motivation renforcée.</p>
                 </div>
             </div>
         </section>
 
         <!-- Achievements Section -->
         <section class="achievements animate-on-scroll">
-            <h2>Badges & RÃ©compenses</h2>
+            <h2>Badges & Récompenses</h2>
             <p class="achievements-description">
-                DÃ©bloquez des badges exclusifs en atteignant vos objectifs. Chaque badge reprÃ©sente une Ã©tape importante dans votre progression sportive et vous fait gagner des XP pour gravir les niveaux.
+                Débloquez des badges exclusifs en atteignant vos objectifs. Chaque badge représente une étape importante dans votre progression sportive et vous fait gagner des XP pour gravir les niveaux.
             </p>
             <div class="ticker-container" id="tickerContainer">
                 <div class="ticker-track" id="tickerTrack">
                     <!-- 15 badges -->
-        <img src="badgeimages/1.webp" alt="Badge 1" class="badge" data-score="100 XP">
-        <img src="badgeimages/2.webp" alt="Badge 2" class="badge" data-score="300 XP">
-        <img src="badgeimages/3.webp" alt="Badge 3" class="badge" data-score="500 XP">
-        <img src="badgeimages/4.webp" alt="Badge 4" class="badge" data-score="800 XP">
-        <img src="images/badge5.webp" alt="Badge 5" class="badge" data-score="1200 XP">
-        <img src="images/badge6.webp" alt="Badge 6" class="badge" data-score="1600 XP">
-        <img src="images/badge7.webp" alt="Badge 7" class="badge" data-score="2000 XP">
-        <img src="images/badge8.webp" alt="Badge 8" class="badge" data-score="2500 XP">
-        <img src="images/badge9.webp" alt="Badge 9" class="badge" data-score="3000 XP">
-        <img src="images/badge10.webp" alt="Badge 10" class="badge" data-score="3600 XP">
-        <img src="badge1images/1.webp" alt="Badge 11" class="badge" data-score="4200 XP">
-        <img src="badge1images/2.webp" alt="Badge 12" class="badge" data-score="5000 XP">
-        <img src="badge1images/3.webp" alt="Badge 13" class="badge" data-score="6000 XP">
-        <img src="badge1images/4.webp" alt="Badge 14" class="badge" data-score="7500 XP">
-        <img src="images/badge15.webp" alt="Badge 15" class="badge" data-score="10000 XP">
+                    <img src="images/badge1.webp" alt="Badge 1" class="badge" data-score="100 XP">
+                    <img src="images/badge2.webp" alt="Badge 2" class="badge" data-score="300 XP">
+                    <img src="images/badge3.webp" alt="Badge 3" class="badge" data-score="500 XP">
+                    <img src="images/badge4.webp" alt="Badge 4" class="badge" data-score="800 XP">
+                    <img src="images/badge5.webp" alt="Badge 5" class="badge" data-score="1200 XP">
+                    <img src="images/badge6.webp" alt="Badge 6" class="badge" data-score="1600 XP">
+                    <img src="images/badge7.webp" alt="Badge 7" class="badge" data-score="2000 XP">
+                    <img src="images/badge8.webp" alt="Badge 8" class="badge" data-score="2500 XP">
+                    <img src="images/badge9.webp" alt="Badge 9" class="badge" data-score="3000 XP">
+                    <img src="images/badge10.webp" alt="Badge 10" class="badge" data-score="3600 XP">
+                    <img src="images/badge11.webp" alt="Badge 11" class="badge" data-score="4200 XP">
+                    <img src="images/badge12.webp" alt="Badge 12" class="badge" data-score="5000 XP">
+                    <img src="images/badge13.webp" alt="Badge 13" class="badge" data-score="6000 XP">
+                    <img src="images/badge14.webp" alt="Badge 14" class="badge" data-score="7500 XP">
+                    <img src="images/badge15.webp" alt="Badge 15" class="badge" data-score="10000 XP">
 
                     <!-- Duplicate set for smooth infinite scroll -->
-                   <!-- 15 badges -->
-        <img src="badgeimages/1.webp" alt="Badge 1" class="badge" data-score="100 XP">
-        <img src="badgeimages/2.webp" alt="Badge 2" class="badge" data-score="300 XP">
-        <img src="badgeimages/3.webp" alt="Badge 3" class="badge" data-score="500 XP">
-        <img src="badgeimages/4.webp" alt="Badge 4" class="badge" data-score="800 XP">
-        <img src="images/badge5.webp" alt="Badge 5" class="badge" data-score="1200 XP">
-        <img src="images/badge6.webp" alt="Badge 6" class="badge" data-score="1600 XP">
-        <img src="images/badge7.webp" alt="Badge 7" class="badge" data-score="2000 XP">
-        <img src="images/badge8.webp" alt="Badge 8" class="badge" data-score="2500 XP">
-        <img src="images/badge9.webp" alt="Badge 9" class="badge" data-score="3000 XP">
-        <img src="images/badge10.webp" alt="Badge 10" class="badge" data-score="3600 XP">
-        <img src="badge1images/1.webp" alt="Badge 11" class="badge" data-score="4200 XP">
-        <img src="badge1images/2.webp" alt="Badge 12" class="badge" data-score="5000 XP">
-        <img src="badge1images/3.webp" alt="Badge 13" class="badge" data-score="6000 XP">
-        <img src="badge1images/4.webp" alt="Badge 14" class="badge" data-score="7500 XP">
-        <img src="images/badge15.webp" alt="Badge 15" class="badge" data-score="10000 XP">
+                    <img src="images/badge1.webp" alt="Badge 1" class="badge" data-score="100 XP">
+                    <img src="images/badge2.webp" alt="Badge 2" class="badge" data-score="300 XP">
+                    <img src="images/badge3.webp" alt="Badge 3" class="badge" data-score="500 XP">
+                    <img src="images/badge4.webp" alt="Badge 4" class="badge" data-score="800 XP">
+                    <img src="images/badge5.webp" alt="Badge 5" class="badge" data-score="1200 XP">
+                    <img src="images/badge6.webp" alt="Badge 6" class="badge" data-score="1600 XP">
+                    <img src="images/badge7.webp" alt="Badge 7" class="badge" data-score="2000 XP">
+                    <img src="images/badge8.webp" alt="Badge 8" class="badge" data-score="2500 XP">
+                    <img src="images/badge9.webp" alt="Badge 9" class="badge" data-score="3000 XP">
+                    <img src="images/badge10.webp" alt="Badge 10" class="badge" data-score="3600 XP">
+                    <img src="images/badge11.webp" alt="Badge 11" class="badge" data-score="4200 XP">
+                    <img src="images/badge12.webp" alt="Badge 12" class="badge" data-score="5000 XP">
+                    <img src="images/badge13.webp" alt="Badge 13" class="badge" data-score="6000 XP">
+                    <img src="images/badge14.webp" alt="Badge 14" class="badge" data-score="7500 XP">
+                    <img src="images/badge15.webp" alt="Badge 15" class="badge" data-score="10000 XP">
                 </div>
                 <div class="score-popup" id="scorePopup"></div>
             </div>
         </section>
 
-    <!-- Screenshots Section -->
-<section class="screenshots animate-on-scroll">
-  <h2>AperÃ§u de l'App</h2>
-  <div class="screenshots-grid">
-    <div class="screenshot-placeholder">
-      <img src="https://i.ibb.co/fG4Qnh63/5900099821690276916.jpg" alt="AperÃ§u de l'application" />
-    </div>
-    <div class="screenshot-placeholder">
-      <img src="https://i.ibb.co/RkJ57tK8/590009982169027691images/4.webp" alt="Statistiques" />
-      <p>Statistiques</p>
-    </div>
-    <div class="screenshot-placeholder">
-      <img src="https://i.ibb.co/dw54j4c0/5900099821690276915.jpg" alt="Analyse VidÃ©o" />
-      <p>Analyse VidÃ©o</p>
-    </div>
-  </div>
-</section>
-
-
-   
+        <!-- Screenshots Section -->
+        <section class="screenshots animate-on-scroll">
+            <h2>Aperçu de l'App</h2>
+            <div class="screenshots-grid">
+                <div class="screenshot-placeholder">
+                    <img src="https://i.ibb.co/fG4Qnh63/5900099821690276916.jpg" alt="Aperçu de l'application" />
+                </div>
+                <div class="screenshot-placeholder">
+                    <img src="https://i.ibb.co/RkJ57tK8/590009982169027691images/4.webp" alt="Statistiques" />
+                </div>
+                <div class="screenshot-placeholder">
+                    <img src="https://i.ibb.co/dw54j4c0/5900099821690276915.jpg" alt="Analyse Vidéo" />
+                </div>
+            </div>
+        </section>
 
         <!-- FAQ Section -->
         <section class="faq animate-on-scroll">
-            <h2>Questions FrÃ©quentes</h2>
+            <h2>Questions Fréquentes</h2>
             <div class="faq-list">
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
@@ -1071,55 +1044,55 @@ body {
                         </svg>
                     </div>
                     <div class="faq-answer">
-                        L'application AQA est conÃ§ue exclusivement pour les titulaires des cartes Silver, Gold et Diamond.
+                        L'application AQA est conçue exclusivement pour les titulaires des cartes Silver, Gold et Diamond.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Comment activer mon compte AQA ? </span>
+                        <span>Comment activer mon compte AQA ?</span>
                         <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="faq-answer">
-                      AprÃ¨s ton inscription et lâ€™obtention de ta carte Silver, Gold ou Diamond, il suffit de tÃ©lÃ©charger lâ€™application et de suivre les Ã©tapes dâ€™activation.
+                        Après ton inscription et l'obtention de ta carte Silver, Gold ou Diamond, il suffit de télécharger l'application et de suivre les étapes d'activation.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Lâ€™application AQA envoie-t-elle des mises Ã  jour rÃ©guliÃ¨res ?</span>
+                        <span>L'application AQA envoie-t-elle des mises à jour régulières ?</span>
                         <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="faq-answer">
-                      Oui, nous publions rÃ©guliÃ¨rement des mises Ã  jour pour amÃ©liorer les performances et ajouter de nouvelles fonctionnalitÃ©s.
+                        Oui, nous publions régulièrement des mises à jour pour améliorer les performances et ajouter de nouvelles fonctionnalités.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Lâ€™application est-elle complÃ¨te ?</span>
+                        <span>L'application est-elle complète ?</span>
                         <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="faq-answer">
-                      Il sâ€™agit seulement de la premiÃ¨re version de lâ€™application. De nouvelles fonctionnalitÃ©s seront ajoutÃ©es prochainement.
+                        Il s'agit seulement de la première version de l'application. De nouvelles fonctionnalités seront ajoutées prochainement.
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Qui est le dÃ©veloppeur de lâ€™application AQA ?</span>
+                        <span>Qui est le développeur de l'application AQA ?</span>
                         <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </div>
                     <div class="faq-answer">
-                        Lâ€™application AQA a Ã©tÃ© dÃ©veloppÃ©e par Tahar Ayati.
+                        L'application AQA a été développée par Tahar Ayati.
                     </div>
                 </div>
             </div>
@@ -1127,16 +1100,18 @@ body {
 
         <!-- Final CTA -->
         <section class="final-cta animate-on-scroll">
-            <h2>PrÃªt Ã  transformer ta vie ?</h2>
-            <p>Rejoins des milliers d'athlÃ¨tes qui ont dÃ©jÃ  commencÃ© leur transformation avec AQA.</p>
-            <a href="AQA-app-suivi-v1.2.apk" class="cta-button">TÃ©lÃ©chargez l'app AQA</a>
+            <h2>Prêt à transformer ta vie ?</h2>
+            <p>Rejoins des milliers d'athlètes qui ont déjà commencé leur transformation avec AQA.</p>
+            <a href="AQA-app-suivi-v1.2.apk" class="cta-button">Téléchargez l'app AQA</a>
             <a href="https://aqasuivi.netlify.app" class="cta-button">Utilisez version Web</a>
         </section>
     </div>
-<footer>
-<!-- Add this div where you want the footer to appear -->
-<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
-</footer>
+
+    <footer>
+        <!-- Footer iframe -->
+        <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    </footer>
+
     <script>
         // Scroll animations
         const observerOptions = {
@@ -1183,7 +1158,6 @@ body {
         badges.forEach(badge => {
             badge.addEventListener('click', (e) => {
                 const rect = badge.getBoundingClientRect();
-                // Place popup centered above badge
                 popup.style.left = (rect.left + rect.width / 2) + 'px';
                 popup.style.top = (rect.top) + 'px';
                 popup.textContent = badge.dataset.score || '';
@@ -1211,7 +1185,7 @@ body {
             setTimeout(resumeTicker, 100);
         }, {passive: true});
 
-        // Pointer events (covers mouse & pen)
+        // Pointer events
         container.addEventListener('pointerdown', pauseTicker, {passive: true});
         container.addEventListener('pointerup', () => {
             setTimeout(resumeTicker, 120);
@@ -1221,7 +1195,6 @@ body {
         badges.forEach(badge => {
             badge.addEventListener('focus', pauseTicker);
             badge.addEventListener('blur', resumeTicker);
-            // Make badges focusable
             badge.setAttribute('tabindex', '0');
         });
 
@@ -1235,7 +1208,7 @@ body {
             lastTouchEnd = now;
         }, false);
 
-        // Add smooth scrolling for anchor links
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1249,10 +1222,20 @@ body {
             });
         });
 
-        // Enhanced mobile experience
+        // Scroll to Download Section
+        document.getElementById('scrollToDownload').addEventListener('click', () => {
+            const downloadSection = document.querySelector('.final-cta');
+            if (downloadSection) {
+                downloadSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+
+        // Enhanced mobile experience - Add to homescreen
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                // Add to homescreen prompt for mobile
                 const addToHomeScreen = document.createElement('div');
                 addToHomeScreen.style.cssText = `
                     position: fixed;
@@ -1270,8 +1253,8 @@ body {
                     animation: slideIn 0.5s ease-out;
                 `;
                 addToHomeScreen.innerHTML = `
-                    ðŸ“± Ajoute AQA Ã  ton Ã©cran d'accueil pour un accÃ¨s rapide !
-                    <button onclick="this.parentElement.style.display='none'" style="margin-left: 10px; background: rgba(0,0,0,0.2); border: none; color: #000; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Ã—</button>
+                    📱 Ajoute AQA à ton écran d'accueil pour un accès rapide !
+                    <button onclick="this.parentElement.style.display='none'" style="margin-left: 10px; background: rgba(0,0,0,0.2); border: none; color: #000; padding: 5px 10px; border-radius: 5px; cursor: pointer;">×</button>
                 `;
                 
                 // Show after 3 seconds on mobile
@@ -1283,25 +1266,6 @@ body {
                 }
             });
         }
-        // Scroll to Download Section
-document.getElementById('scrollToDownload').addEventListener('click', () => {
-    const downloadSection = document.querySelector('.final-cta');
-    if (downloadSection) {
-        downloadSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-});
-async function loadFooter() {
-    try {
-        const response = await fetch('footer.html');
-        const footerHTML = await response.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
-    } catch (error) {
-        console.error('Error loading footer:', error);
-    }
-}
     </script>
     <script src="js/navbar.js"></script>
 </body>
