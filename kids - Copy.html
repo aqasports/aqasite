@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Kids - Natation pour enfants et adolescents</title>
+    <meta content="Programmes de natation spécialisés pour enfants et adolescents." name="description"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <style>
+        /* 1. RESET & CORE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; background: #000; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000; color: #fff; line-height: 1.6;
+            overflow-x: hidden; position: relative;
+        }
+
+        /* 2. BACKGROUND & NEON FRAME (Fixed for clicks) */
+        .bg-logo {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80vw; height: 80vh; background: url('https://i.imgur.com/3dcksCn.png') center/contain no-repeat;
+            opacity: 0.08; z-index: -2; pointer-events: none;
+        }
+        
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #6600ff, #ff0099) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            z-index: 9999; pointer-events: none; opacity: 0.4;
+        }
+
+        /* 3. LAYOUT */
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+        section { padding: 4rem 0; }
+        
+        h1, h2, h3 { color: #00ffff; text-align: center; font-weight: 800; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin-top: 5rem; }
+        h2 { font-size: 2rem; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        /* 4. CARDS (Original Content Only) */
+        .card {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px; padding: 2rem; transition: 0.3s; text-align: center;
+        }
+        .card:hover { border-color: #00ffff; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1); }
+
+        /* 5. EQUIPMENT STEPPER (Original Data) */
+        .stepper { background: rgba(0, 20, 40, 0.5); border: 2px solid #00ffff; border-radius: 25px; padding: 2rem; max-width: 800px; margin: 0 auto; text-align: center; }
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .step img { max-height: 200px; margin: 1.5rem 0; border-radius: 10px; }
+
+        /* 6. BUTTONS */
+        .btn {
+            display: inline-block; background: #00ffff; color: #000; padding: 0.8rem 2rem;
+            border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s;
+            cursor: pointer; border: none; margin-top: 1rem;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px #00ffff; }
+
+        /* 7. FAQ & REVIEWS */
+        .faq-item { background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.1); border-radius: 15px; margin-bottom: 1rem; cursor: pointer; }
+        .faq-q { padding: 1.2rem; display: flex; justify-content: space-between; font-weight: bold; }
+        .faq-a { padding: 0 1.2rem; max-height: 0; overflow: hidden; transition: 0.3s; opacity: 0; }
+        .faq-item.active .faq-a { max-height: 200px; padding-bottom: 1.2rem; opacity: 1; }
+
+        /* MOBILE FIX */
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            h1 { padding-top: 2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+    <div class="bg-logo"></div>
+
+    <header id="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="index.html"><img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo"></a>
+            </div>
+            <nav class="nav-menu">
+                <a href="tarifs.html" class="nav-link">Tarifs</a>
+                <a href="groupes.html" class="nav-link">Groupes</a>
+                <a href="piscines.html" class="nav-link">Piscines</a>
+                <a href="infos.html" class="nav-link">Infos</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="webtv.html" class="nav-link">WebTV</a>
+                <a href="store.html" class="nav-link">Store</a>
+            </nav>
+            <div class="right-actions">
+                <a class="lang-btn" href="#">العربية</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="hero">
+            <h1>AQA Kids</h1>
+            <div style="text-align:center;">
+                <img src="https://i.ibb.co/0ydW5QGf/IMG20251112191340.webp" style="width:100%; max-width:850px; border-radius:20px; box-shadow: 0 0 30px rgba(0,255,255,0.3);">
+            </div>
+            <p style="text-align:center; max-width:800px; margin:2rem auto; font-size:1.1rem;">
+                Apprentissage de la natation pour enfants de 5 à 12 ans avec coachs d'élite, suivi personnalisé et groupes restreints (Groupe de 10) pour progresser en sécurité.
+            </p>
+        </section>
+
+        <section id="groups">
+            <h2>Nos Groupes</h2>
+            <div class="grid">
+                <div class="card">
+                    <div style="background:#00ffff; color:#000; width:40px; height:40px; border-radius:50%; line-height:40px; margin:0 auto 1rem; font-weight:bold;">A</div>
+                    <h3>Groupe A</h3>
+                    <p>Coach Abdelghani</p>
+                    <p>Samedi 18h15 / Mercredi 18h</p>
+                    <p>Piscine ADM AZAL (Reghaia)</p>
+                </div>
+                <div class="card">
+                    <div style="background:#00ffff; color:#000; width:40px; height:40px; border-radius:50%; line-height:40px; margin:0 auto 1rem; font-weight:bold;">B</div>
+                    <h3>Groupe B</h3>
+                    <p>Coach Younes</p>
+                    <p>Dimanche 18h / Jeudi 18h</p>
+                    <p>Piscine ADM AZAL (Reghaia)</p>
+                </div>
+                <div class="card">
+                    <div style="background:#00ffff; color:#000; width:40px; height:40px; border-radius:50%; line-height:40px; margin:0 auto 1rem; font-weight:bold;">C</div>
+                    <h3>Groupe C</h3>
+                    <p>Coach Abdelghani & Younes</p>
+                    <p>Dimanche 19h30 / Mercredi 19h30</p>
+                    <p>Piscine ADM AZAL (Reghaia)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipment">
+            <h2>Pack Équipement</h2>
+            <div class="stepper">
+                <div class="step active" id="st1">
+                    <h3>Lunettes Bubble 3 + Bonnet</h3>
+                    <img src="https://i.ibb.co/5XYzv2VH/Untitled-design.png">
+                    <p>Arena Bubble 3 Junior</p>
+                    <button class="btn" onclick="goStep(2)">Suivant</button>
+                </div>
+                <div class="step" id="st2">
+                    <h3>Sortie de Bain</h3>
+                    <img src="https://i.ibb.co/JjfXr0Zy/Untitled-design-2.png">
+                    <p>Peignoir Microfibre Arena</p>
+                    <button class="btn" onclick="goStep(3)">Suivant</button>
+                </div>
+                <div class="step" id="st3">
+                    <h3>Sac Spiky</h3>
+                    <img src="https://i.ibb.co/d0G9g5pY/Untitled-design-3.png">
+                    <p>Sac Arena haute performance</p>
+                    <button class="btn" onclick="goStep(1)">Recommencer</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing">
+            <h2>Abonnements</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>3 MOIS</h3>
+                    <div style="font-size:2rem; margin:1rem 0;">28 700 DA</div>
+                    <p>Groupe de 10 + Pack Matériel + Suivi Physique</p>
+                    <a href="inscription.html" class="btn">S'inscrire</a>
+                </div>
+                <div class="card" style="border-color:#00ffff;">
+                    <h3>6 MOIS</h3>
+                    <div style="font-size:2rem; margin:1rem 0;">46 500 DA</div>
+                    <p>Toutes options incluses + Bonus Fidelité</p>
+                    <a href="inscription.html" class="btn">S'inscrire</a>
+                </div>
+                <div class="card">
+                    <h3>9 MOIS</h3>
+                    <div style="font-size:2rem; margin:1rem 0;">65 800 DA</div>
+                    <p>Saison complète au meilleur tarif</p>
+                    <a href="inscription.html" class="btn">S'inscrire</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="videos">
+            <h2>Vidéos de l'Académie</h2>
+            <div style="max-width:800px; margin:0 auto; border:2px solid #00ffff; border-radius:20px; overflow:hidden;">
+                <video id="vid" controls style="width:100%; display:block;">
+                    <source src="https://files.catbox.moe/mqgl87.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div style="display:flex; gap:10px; overflow-x:auto; margin-top:1rem; padding-bottom:1rem;">
+                <img src="https://i.ibb.co/0ydW5QGf/IMG20251112191340.webp" style="height:80px; cursor:pointer;" onclick="setVid('https://files.catbox.moe/mqgl87.mp4')">
+                <img src="https://i.ibb.co/0ydW5QGf/IMG20251112191340.webp" style="height:80px; cursor:pointer;" onclick="setVid('https://files.catbox.moe/aym1ti.mp4')">
+                <img src="https://i.ibb.co/0ydW5QGf/IMG20251112191340.webp" style="height:80px; cursor:pointer;" onclick="setVid('https://files.catbox.moe/5z5uze.mp4')">
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>Questions</h2>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-q">À partir de quel âge ? <span>+</span></div>
+                <div class="faq-a">Dès 4.5 ans pour le programme Kids.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-q">Combien d'enfants ? <span>+</span></div>
+                <div class="faq-a">Maximum 10 par groupe pour un suivi réel.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <iframe src="footer.html" style="width:100%; border:none; min-height:500px;"></iframe>
+    </footer>
+
+    <script>
+        function goStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('st'+n).classList.add('active');
+        }
+        function setVid(src) {
+            const v = document.getElementById('vid');
+            v.src = src;
+            v.play();
+        }
+    </script>
+</body>
+</html>
