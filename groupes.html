@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<html lang="fr"><head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>AQA - Groupes Disponibles 2025</title>
-    <meta content="Découvrez nos créneaux d'entraînement disponibles avec nos coachs experts AQA." name="description"/>
-    <meta content="AQA, groupes, créneaux, coaches, natation, apnée, planning" name="keywords"/>
+    <meta content="Découvrez nos créneaux d'entraînement disponibles avec nos coachs experts AQA." name="description">
+    <meta content="AQA, groupes, créneaux, coaches, natation, apnée, planning" name="keywords">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-<style>
+    
+    <link rel="stylesheet" href="css/navbar.css">
+
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #000000; color: #ffffff; line-height: 1.6; overflow-x: hidden;
             position: relative; min-height: 100vh;
+            /* Prevent pull-to-refresh glow */
+            overscroll-behavior: none; 
         }
+        
+        /* Background Effects */
         .bg-logo {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 80vw; height: 80vh; background-image: url('https://i.imgur.com/qfmkm8n.png');
@@ -26,43 +32,35 @@
             -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor; mask-composite: exclude; z-index: -1; animation: neonGlow 4s ease-in-out infinite alternate;
         }
+        .bg-frame {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; border: none; z-index: -1; pointer-events: none; background: transparent;
+        }
+
         @keyframes neonGlow { 0%, 100% { filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);} 50% { filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);} }
         @keyframes slideIn { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
-        @keyframes fadeIn { from { opacity: 0;} to { opacity: 1;} }
+        @keyframes shimmer { 0%{transform: translateX(-100%);} 100%{transform: translateX(100%);} }
+
+        /* Layout */
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+        
+        /* Hero */
         .hero { text-align: center; padding: 3rem 0; margin-bottom: 1.5rem; animation: slideIn 1s ease-out; }
         .hero h1 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 800; background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; text-shadow: 0 0 30px rgba(0, 255, 255, 0.3); line-height: 1.2; }
         .hero h2 { margin-top: .25rem; }
         .hero p { font-size: clamp(1rem, 3vw, 1.2rem); opacity: 0.9; max-width: 800px; margin: 0 auto 2.5rem; color: #ffffff; line-height: 1.6; }
 
-        /* NEW: Availability Card */
+        /* Availability Header Card */
         .availability-card {
-            background: rgba(0, 153, 255, 0.12);
-            border: 1px solid rgba(0, 153, 255, 0.35);
-            border-radius: 18px;
-            padding: 1.25rem 1.25rem 1.5rem;
-            margin: 0 auto 2rem;
-            max-width: 760px;
-            text-align: center;
-            box-shadow: 0 0 24px rgba(0, 255, 255, 0.18);
-            position: relative;
-            overflow: hidden;
+            background: rgba(0, 153, 255, 0.12); border: 1px solid rgba(0, 153, 255, 0.35); border-radius: 18px;
+            padding: 1.25rem 1.25rem 1.5rem; margin: 0 auto 2rem; max-width: 760px; text-align: center;
+            box-shadow: 0 0 24px rgba(0, 255, 255, 0.18); position: relative; overflow: hidden;
         }
         .availability-card::before{
             content:''; position:absolute; inset:-2px; pointer-events:none;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            transform: translateX(-100%);
-            animation: shimmer 2s infinite;
+            transform: translateX(-100%); animation: shimmer 2s infinite;
         }
-        @keyframes shimmer { 0%{transform: translateX(-100%);} 100%{transform: translateX(100%);} }
-        .availability-title {
-            font-weight: 800; font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-            color: #00ffff; text-shadow: 0 0 16px rgba(0,255,255,.45);
-            margin-bottom: .5rem;
-        }
-        .availability-sub {
-            font-weight: 600; opacity: .9; margin-bottom: 1rem;
-        }
+        .availability-title { font-weight: 800; font-size: clamp(1.1rem, 3.5vw, 1.5rem); color: #00ffff; text-shadow: 0 0 16px rgba(0,255,255,.45); margin-bottom: .5rem; }
         .progress-wrap { background: rgba(0, 153, 255, 0.18); border: 1px solid rgba(0, 153, 255, 0.35); border-radius: 14px; height: 16px; overflow: hidden; margin: 0 auto 1rem; max-width: 520px; }
         .progress-bar { height: 100%; width: 95%; background: linear-gradient(135deg, #ff0000, #ff9900); box-shadow: 0 0 20px rgba(0,255,255,.5); }
         .progress-legend { font-size: .95rem; opacity: .9; }
@@ -74,115 +72,103 @@
         .legend-item:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(0, 153, 255, 0.3); }
         .legend-color { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; }
 
-        /* Cards / Schedules (unchanged styles from your file) */
+        /* Sections & Titles */
         .coach-section { margin-bottom: 3rem; }
         .coach-title { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: #00ffff; position: relative; text-shadow: 0 0 15px rgba(0, 255, 255, 0.5); }
         .coach-title::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: linear-gradient(90deg, transparent, #00ffff, transparent); border-radius: 3px; }
-        .schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .schedule-card { background: rgba(0, 153, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(0, 153, 255, 0.3); border-radius: 15px; padding: 0.6rem; position: relative; transition: all 0.4s ease; overflow: hidden; }
+        
+        /* Grid Layout */
+.schedule-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 1rem; 
+    margin-bottom: 2rem; 
+    align-items: flex-start; /* <--- THIS STOPS NEIGHBORS FROM STRETCHING */
+}        
+        /* === NEW CARD STYLES FOR AVAILABILITY === */
+        .schedule-card { 
+            background: rgba(0, 153, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(0, 153, 255, 0.3); 
+            border-radius: 15px; padding: 0.6rem; position: relative; transition: all 0.4s ease; overflow: hidden;
+            cursor: pointer; /* Clickable cursor */
+            z-index: 1;
+        }
         .schedule-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent); transform: rotate(45deg); transition: all 0.6s ease; opacity: 0; }
         .schedule-card:hover::before { opacity: 1; animation: shimmer 1.5s ease-in-out; }
         .schedule-card:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); border-color: #00ffff; }
+
+        /* Hidden Details Section */
+        .card-details {
+            max-height: 0; opacity: 0; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.4); border-radius: 8px; margin-top: 0;
+        }
+        /* Expanded State */
+        .schedule-card.expanded .card-details {
+            max-height: 150px; opacity: 1; margin-top: 10px; padding: 10px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        /* Details Typography */
+        .details-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; font-size: 0.9rem; color: #e0e0e0; }
+        .highlight-val { color: #00ffff; font-weight: bold; font-size: 1.1rem; }
+        /* Mini Progress Bar */
+        .mini-progress-wrap { background: rgba(255, 255, 255, 0.1); height: 6px; border-radius: 3px; width: 100%; margin-top: 5px; overflow: hidden; }
+        .mini-progress-bar { height: 100%; background: linear-gradient(90deg, #00ffff, #0099ff); width: 0%; transition: width 0.6s ease; }
+        .mini-progress-bar.danger { background: linear-gradient(90deg, #ff9900, #ff0000); }
+        /* ======================================== */
+
         .day-time { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
         .day { font-size: 1.1rem; font-weight: 700; color: #00ffff; }
         .time { font-size: 1rem; font-weight: 600; color: #ffffff; background: rgba(0, 153, 255, 0.2); padding: 0.3rem 0.8rem; border-radius: 15px; border: 1px solid rgba(0, 153, 255, 0.3); white-space: nowrap; }
+        
+        /* Group Type Badges */
         .group-type { text-align: center; font-size: 1rem; font-weight: 700; padding: 0.7rem; border-radius: 12px; position: relative; overflow: hidden; }
         .type-g10 { background: linear-gradient(135deg, #28a745, #20c997); color: #ffffff; box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3); }
         .type-max5 { background: linear-gradient(135deg, #007bff, #6610f2); color: #ffffff; box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); }
         .type-apnea { background: linear-gradient(135deg, #fd7e14, #e83e8c); color: #ffffff; box-shadow: 0 5px 15px rgba(253, 126, 20, 0.3); }
         .type-elite { background: linear-gradient(135deg, #ffc107, #ff6b35); color: #000; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3); }
-        .type-attant { background: linear-gradient(135deg, #ff0000, #cc0000); color: #ffffff; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3); }
         .type-complet { background: linear-gradient(135deg, #636363, #b4b4b4); color: #2a2a2a; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3); }
         .group-type::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s ease; }
         .group-type:hover::before { left: 100%; }
-.reprise { font-size: 1.1rem; font-weight: 700; color: #ffb700;align-items: center; position: relative;flex-direction: column; align-items: stretch; text-align: center;}
-        .summary-section { background: rgba(0, 153, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(0, 153, 255, 0.3); padding: 2rem; margin: 3rem 0; text-align: center; }
-        .summary-title { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; color: #00ffff; margin-bottom: 1.5rem; text-shadow: 0 0 15px rgba(0, 255, 255, 0.5); }
-        .summary-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .stat-card { background: rgba(0, 153, 255, 0.1); border: 1px solid rgba(0, 153, 255, 0.3); border-radius: 15px; padding: 1rem; transition: all 0.3s ease; }
-        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 0 20px rgba(0, 153, 255, 0.4); border-color: #00ffff; }
-        .stat-number { font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800; color: #00ffff; display: block; }
-        .stat-label { font-size: 0.9rem; color: #ffffff; opacity: 0.8; }
 
+        /* Buttons */
         .cta-button { background: linear-gradient(135deg, #0099ff, #00ffff); color: #000000; padding: 1.0rem 2rem; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: clamp(1rem, 3vw, 1.1rem); transition: all 0.3s ease; display: inline-block; position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(0, 153, 255, 0.6); border: 2px solid #00ffff; cursor: pointer; min-width: 180px; }
         .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); transition: left 0.5s ease; }
         .cta-button:hover::before { left: 100%; }
         .cta-button:hover { background: linear-gradient(135deg, #00ffff, #0099ff); transform: translateY(-3px); box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
 
-       
         .floating-btn { position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, #0099ff, #00ffff); color: #000; padding: 0.8rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 0 30px rgba(0, 153, 255, 0.6); z-index: 2000; transition: all 0.3s ease; border: 2px solid #00ffff; display: flex; align-items: center; gap: 0.5rem; }
         .floating-btn:hover { background: linear-gradient(135deg, #00ffff, #0099ff); transform: translateY(-3px); box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .container { padding: 1rem 0.5rem; }
             .hero { padding: 2rem 0; }
-            .schedule-grid {   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-  gap: 10px; /* space between cards */
-  padding: 10px; }
+            .schedule-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; }
             .schedule-card { padding: 0.5rem; }
             .day-time { flex-direction: column; align-items: stretch; text-align: center; }
             .legend { grid-template-columns: 1fr; padding: 1rem; }
-            .summary-stats { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
-            .stat-card { padding: 0.8rem 0.5rem; }
             .floating-btn { bottom: 15px; right: 15px; padding: 0.7rem 1rem; font-size: 0.8rem; }
             .header-content { flex-wrap: wrap; gap: 1rem; }
-            .logo-section { order: 1; }
-            .back-btn { order: 2; }
-            .lang-btn { order: 3; }
         }
         @media (max-width: 480px) {
             .hero { padding: 1.5rem 0; }
             .schedule-card { padding: 0.5rem; }
-            .summary-stats { grid-template-columns: repeat(2, 1fr); }
             .legend-item { font-size: 0.85rem; padding: 0.4rem; }
             .floating-btn { padding: 0.6rem 0.8rem; font-size: 0.75rem; bottom: 10px; right: 10px; }
             .cta-button { padding: 1rem 1.5rem; min-width: 180px; font-size: 1rem; }
         }
-        @media (hover: none) and (pointer: coarse) {
-            .schedule-card:active { transform: translateY(-1px) scale(0.98); background: rgba(0, 153, 255, 0.2); }
-            .cta-button:active { transform: translateY(-1px) scale(0.98); }
-            .stat-card:active { transform: translateY(-1px) scale(0.98); }
-        }
-        @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
-        @media (prefers-contrast: high) { .schedule-card, .stat-card { border-width: 2px; } .cta-button { border-width: 3px; } }
-   .bg-frame {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: none;
-  z-index: -1;
-  pointer-events: none;
-  background: transparent;
-}
-
-html {
-  background: #000;  /* solid fallback */
-}
-body {
-  background: transparent !important;
-  overscroll-behavior: none; /* prevent pull-to-refresh glow */
-}
-   </style>
-
-<!-- Navbar CSS -->
-  <link rel="stylesheet" href="css/navbar.css">
+    </style>
 </head>
 <body>
   <iframe src="scroll.html" class="bg-frame"></iframe> 
-  <!-- ===== NAVBAR ===== -->
+  
   <header id="header">
     <div class="header-content">
       <div class="logo-section">
         <a href="index.html">
-          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
-               alt="AQA Logo" class="logo">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
         </a>
       </div>
-
-      <!-- Desktop Navigation -->
       <nav class="nav-menu" id="navMenu">
         <a href="tarifs.html" class="nav-link">Tarifs</a>
         <a href="groupes.html" class="nav-link">Groupes</a>
@@ -192,7 +178,6 @@ body {
         <a href="webtv.html" class="nav-link">WebTV</a>
         <a href="store.html" class="nav-link">Store</a>
       </nav>
-
       <div class="right-actions">
         <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
         <div class="menu-toggle" onclick="toggleMobileMenu()">
@@ -202,11 +187,8 @@ body {
     </div>
   </header>
 
-  <!-- Mobile Menu Overlay -->
   <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-    <div class="menu-close" onclick="toggleMobileMenu()">
-      <span></span><span></span>
-    </div>
+    <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
     <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
     <a href="groupes.html" class="mobile-nav-link">Groupes</a>
     <a href="piscines.html" class="mobile-nav-link">Piscines</a>
@@ -216,16 +198,12 @@ body {
     <a href="store.html" class="mobile-nav-link">Store</a>
     <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
   </div>
-  <!-- ===== /NAVBAR ===== -->
-
-    <div class="container">
-        <!-- Hero Section -->
+  <div class="container">
         <section class="hero">
             <h1>Nos Créneaux d'Entraînement</h1>
             <h2>Piscine: Reghaia (HOMME)</h2>
         </section>
 
-        <!-- NEW: Availability / Urgency Card just under hero -->
         <section class="availability-card" aria-live="polite">
             <div class="availability-title">⏳ Il ne reste que <span style="font-size:1.25em">5%</span> des places disponibles</div>
             <div class="progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="31">
@@ -237,7 +215,6 @@ body {
             </div>
         </section>
 
-        <!-- Legend -->
         <div class="legend">
             <div class="legend-item">
                 <div class="legend-color" style="background: linear-gradient(135deg, #28a745, #20c997);"></div>
@@ -257,212 +234,224 @@ body {
             </div>
         </div>
 
-        <!-- Coach Youcef -->
         <section class="coach-section">
             <h3 class="coach-title">Coach Youcef</h3>
             <div class="schedule-grid">
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Samedi</span>
-                        <span class="time">21h - 23h</span>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="9">
+                    <div class="day-time"><span class="day">Samedi</span><span class="time">21h - 23h</span></div>
+                    <div class="group-type type-g10">Groupe de 10</div>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
                     </div>
-                    <div class="group-type type-complet">Complet</div>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Mardi</span>
-                        <span class="time">21h - 23h</span>
-                    </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="5" data-taken="5">
+                    <div class="day-time"><span class="day">Mardi</span><span class="time">21h - 23h</span></div>
                     <div class="group-type type-complet">Max5 - Complet</div>
-                </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Mercredi</span>
-                        <span class="time">21h30-23h30</span>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">5</span>/5</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
                     </div>
-                    <div class="group-type type-complet">Complet</div>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Jeudi</span>
-                        <span class="time">21h30-23h30</span>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="8">
+                    <div class="day-time"><span class="day">Mercredi</span><span class="time">21h30-23h30</span></div>
+                    <div class="group-type type-g10">Groupe de 10</div>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
                     </div>
-                    <div class="group-type type-complet">Complet</div>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Vendredi</span>
-                        <span class="time">20h - 22h</span>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="9">
+                    <div class="day-time"><span class="day">Jeudi</span><span class="time">21h30-23h30</span></div>
+                    <div class="group-type type-g10">Groupe de 10</div>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
                     </div>
+                </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="5" data-taken="5">
+                    <div class="day-time"><span class="day">Vendredi</span><span class="time">20h - 22h</span></div>
                     <div class="group-type type-complet">Max5 - Complet</div>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">5</span>/5</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
+                    </div>
                 </div>
-
+            </div>
         </section>
 
-
-  <!-----  Coach  Section (Commented Out)>
-
-<section class="coach-section">
-        <h3 class="coach-title">Coach Riadh</h3>
-        <div class="reprise">Reprise mois d'octobre</div>
-
-        <div class="schedule-grid">
-            <div class="schedule-card">
-                <div class="day-time">
-                    <span class="day">Dimanche</span>
-                    <span class="time">21h30-23h30</span>
+        <section class="coach-section">
+            <h3 class="coach-title">Coach Bilal</h3>
+            <div class="schedule-grid">
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="5" data-taken="4">
+                    <div class="day-time"><span class="day">Dimanche</span><span class="time">21h30-23h30</span></div>
+                    <div class="group-type type-max5">Groupe de 5</div>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">4</span>/5</span><span>Restant: <span class="highlight-val val-left">1</span></span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar" style="width: 80%;"></div></div>
+                        <div style="text-align:center;font-size:0.75rem;opacity:0.7;margin-top:4px;">Cliquer pour fermer</div>
+                    </div>
                 </div>
-                <div class="group-type type-g10">Groupe de 10</div>
+                
             </div>
-            <div class="schedule-card">
-                <div class="day-time">
-                    <span class="day">Jeudi</span>
-                    <span class="time">21h30-23h30</span>
-                </div>
-                <div class="group-type type-complet">Duo - Complet</div>
-            </div>
-            <div class="schedule-card">
-                <div class="day-time">
-                    <span class="day">Mardi</span>
-                    <span class="time">21h - 23h</span>
-                </div>
-                <div class="group-type type-max5">Maximum 5</div>
-            </div>
-            <div class="schedule-card">
-                <div class="day-time">
-                    <span class="day">Mercredi</span>
-                    <span class="time">21h30-23h30</span>
-                </div>
-                <div class="group-type type-max5">Maximum 5</div>
-            </div>
-        </div>
-    </section>
--->
-<!-- COACH BILAL -->
-
-<section class="coach-section">
-        <h3 class="coach-title">Coach Bilal</h3>
-      
-
-        <div class="schedule-grid">
-            <div class="schedule-card">
-                <div class="day-time">
-                    <span class="day">Dimanche</span>
-                    <span class="time">21h30-23h30</span>
-                </div>
-                <div class="group-type type-max5">Groupe de 5</div>
-            </div>
-                   <div class="schedule-card">
-                <div class="day-time">
-                    <span class="day">Vendredi</span>
-                    <span class="time">20h-22h</span>
-                </div>
-                <div class="group-type type-max5">Groupe de 5</div>
-            </div>
-            
-           
         </section>
-        <!-- Coach Nouga -->
+
         <section class="coach-section">
             <h3 class="coach-title">Coach Nouga</h3>
             <div class="schedule-grid">
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Mercredi</span>
-                        <span class="time">21h30-23h30</span>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="3">
+                    <div class="day-time"><span class="day">Mercredi</span><span class="time">21h30-23h30</span></div>
+                    <div class="group-type type-apnea">Apnée</div>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">3</span>/10</span><span>Restant: <span class="highlight-val val-left">7</span></span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar" style="width: 30%;"></div></div>
                     </div>
-                    <div class="group-type type-apnea">Apnée - Entraînement spécialisé</div>
                 </div>
             </div>
         </section>
 
-        <!-- Coach Abdelghani -->
         <section class="coach-section">
             <h3 class="coach-title">Coach Abdelghani</h3>
             <div class="schedule-grid">
-                 <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Mercredi</span>
-                        <span class="time">8h - 10h</span>
-                    </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="5" data-taken="2">
+                    <div class="day-time"><span class="day">Mercredi</span><span class="time">8h - 10h</span></div>
                     <div class="group-type type-max5">Groupe de 5</div>
-                </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Mardi</span>
-                        <span class="time">7h - 9h</span>
+                    <div class="card-details">
+                        <div class="details-row"><span>Inscrits: <span class="val-taken">2</span>/5</span><span>Restant: <span class="highlight-val val-left">3</span></span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar" style="width: 40%;"></div></div>
                     </div>
+                </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="9">
+                    <div class="day-time"><span class="day">Mardi</span><span class="time">7h - 9h</span></div>
                     <div class="group-type type-g10">Groupe de 10</div>
+                    <div class="card-details">
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">9</span>/10</span>
+                    <span>Restant: <span class="highlight-val val-left">1</span></span>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Mardi</span>
-                        <span class="time">21h - 23h</span>
-                    </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar " style="width:90%"></div>
+                </div>
+            </div>
+                </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                    <div class="day-time"><span class="day">Mardi</span><span class="time">21h - 23h</span></div>
                     <div class="group-type type-complet">Complet</div>
-                </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Jeudi</span>
-                        <span class="time">7h - 9h</span>
+                    <div class="card-details">
+                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
                     </div>
+                </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="6">
+                    <div class="day-time"><span class="day">Jeudi</span><span class="time">7h - 9h</span></div>
                     <div class="group-type type-g10">Groupe de 10</div>
+                    <div class="card-details">
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">6</span>/10</span>
+                    <span>Restant: <span class="highlight-val val-left">4</span></span>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Jeudi</span>
-                        <span class="time">21h30-23h30</span>
-                    </div>
-                    <div class="group-type type-complet">Complet</div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar " style="width:60%"></div>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Vendredi</span>
-                        <span class="time">20h-22h</span>
-                    </div>
-                    <div class="group-type type-complet">Complet</div>
+            </div>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Samedi</span>
-                        <span class="time">6h-8h</span>
-                    </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                    <div class="day-time"><span class="day">Jeudi</span><span class="time">21h30-23h30</span></div>
                     <div class="group-type type-complet">Complet</div>
+                     <div class="card-details">
+                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
+                    </div>
                 </div>
-                <div class="schedule-card">
-                    <div class="day-time">
-                        <span class="day">Samedi</span>
-                        <span class="time">21h - 23h</span>
-                    </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                    <div class="day-time"><span class="day">Vendredi</span><span class="time">20h-22h</span></div>
                     <div class="group-type type-complet">Complet</div>
+                     <div class="card-details">
+                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
+                    </div>
+                </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                    <div class="day-time"><span class="day">Samedi</span><span class="time">6h-8h</span></div>
+                    <div class="group-type type-complet">Complet</div>
+                     <div class="card-details">
+                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
+                    </div>
+                </div>
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                    <div class="day-time"><span class="day">Samedi</span><span class="time">21h - 23h</span></div>
+                    <div class="group-type type-complet">Complet</div>
+                     <div class="card-details">
+                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
+                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Floating Button -->
-        <a href="inscription.html" class="floating-btn"> Inscription</a>
+        <a href="inscription.html" class="floating-btn">Inscription</a>
     </div>
 
-<footer>
-<!-- Add this div where you want the footer to appear -->
-<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
-</footer>
-<!-- Floating Button -->
-    <a href="inscription.html" class="floating-btn" >Inscription </a>
-  <!-- Load navbar logic, then inject and init -->
-  <script src="/js/navbar.js"></script>
-<script>
-async function loadFooter() {
-    try {
-        const response = await fetch('footer.html');
-        const footerHTML = await response.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
-    } catch (error) {
-        console.error('Error loading footer:', error);
-    }
-}
+    <footer>
+        <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    </footer>
 
-document.addEventListener('DOMContentLoaded', loadFooter);
-</script>     
-</body>
-</html>
+<script src="/js/navbar.js"></script>
+    <script>
+    // Logic for the Click-to-Reveal Availability Cards
+    function toggleAvailability(card) {
+        // 1. Get the details container inside the clicked card
+        const details = card.querySelector('.card-details');
+        
+        // 2. Simple Toggle Logic: If open, close it. If closed, open it.
+        // WE REMOVED THE CODE THAT SEARCHES FOR OTHER CARDS TO CLOSE THEM
+        if (card.classList.contains('expanded')) {
+            card.classList.remove('expanded');
+            return; // Stop here, we are just closing
+        }
+
+        // 3. Update Data (Only necessary when opening)
+        const total = parseInt(card.getAttribute('data-total') || 10);
+        const taken = parseInt(card.getAttribute('data-taken') || 0);
+        const left = Math.max(0, total - taken);
+        const percentage = (taken / total) * 100;
+
+        // Update the numbers specific to THIS card
+        const takenSpan = card.querySelector('.val-taken');
+        const leftSpan = card.querySelector('.val-left');
+        
+        if(takenSpan) takenSpan.innerText = taken;
+        if(leftSpan) leftSpan.innerText = left;
+        
+        // Update the progress bar specific to THIS card
+        const bar = card.querySelector('.mini-progress-bar');
+        if(bar) {
+            bar.style.width = percentage + '%';
+            if (left <= 2) {
+                bar.classList.add('danger');
+            } else {
+                bar.classList.remove('danger');
+            }
+        }
+
+        // 4. Finally, expand the card
+        card.classList.add('expanded');
+    }
+
+    // Footer Loader
+    async function loadFooter() {
+        try {
+            const response = await fetch('footer.html');
+            if(response.ok) {
+                // Footer loaded logic if needed
+            }
+        } catch (error) {
+            console.error('Error loading footer:', error);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', loadFooter);
+    </script>
+  
+
+</body></html>
