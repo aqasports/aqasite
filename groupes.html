@@ -293,7 +293,19 @@
                     </div>
                 </div>
                 
+            <div class="schedule-card" onclick="toggleAvailability(this)" data-taken="3" data-total="5" data-base-type="type-max5">
+            <div class="day-time"><span class="day">Lundi</span><span class="time">21h30-23h30</span></div>
+            <div class="group-type type-max5">Groupe de 5</div>
+            <div class="card-details">
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">3</span>/5</span>
+                    <span>Restant: <span class="highlight-val val-left">2</span></span>
+                </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar " style="width:60%"></div>
+                </div>
             </div>
+        </div></div>
         </section>
 
         <section class="coach-section">
@@ -355,13 +367,18 @@
                 </div>
             </div>
                 </div>
-                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="5" data-taken="5" data-base-type="type-max5">
                     <div class="day-time"><span class="day">Jeudi</span><span class="time">21h30-23h30</span></div>
                     <div class="group-type type-complet">Complet</div>
                      <div class="card-details">
-                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
-                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
-                    </div>
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">5</span>/5</span>
+                    <span style="color:#ff3333">COMPLET</span>
+                </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar danger" style="width:100%"></div>
+                </div>
+            </div>
                 </div>
                 <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
                     <div class="day-time"><span class="day">Vendredi</span><span class="time">20h-22h</span></div>
