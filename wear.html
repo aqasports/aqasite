@@ -305,6 +305,29 @@
             .wa-terminal { padding: 1.5rem; margin: 3rem 1rem; }
             .wa-text { font-size: 1rem; }
         }
+        /* MOBILE BLINKING WHATSAPP BUTTON */
+@media (max-width: 768px) {
+    .wa-btn {
+        animation: waBlink 1.2s infinite;
+        box-shadow: 0 0 20px #0f0;
+    }
+}
+
+@keyframes waBlink {
+    0% {
+        opacity: 1;
+        box-shadow: 0 0 10px #0f0;
+    }
+    50% {
+        opacity: 0.4;
+        box-shadow: 0 0 30px #0f0;
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 10px #0f0;
+    }
+}
+
     </style>
 </head>
 <body>
