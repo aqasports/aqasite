@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA WEAR // CLASSIFIED</title>
+    <meta content="AQA Wear - Équipement technique en développement. Accès restreint." name="description"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/navbar.css">
+    
+    <style>
+        :root {
+            --neon-blue: #00ffff;
+            --deep-blue: #0099ff;
+            --bg-dark: #050505;
+            --card-bg: rgba(10, 20, 30, 0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Tech mono font */
+            background: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- CRT SCREEN OVERLAY --- */
+        .crt-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.6;
+        }
+
+        /* --- MOVING GRID BACKGROUND --- */
+        .cyber-grid {
+            position: fixed; top: 0; left: 0; width: 200vw; height: 200vh;
+            background-image: 
+                linear-gradient(var(--card-bg) 1px, transparent 1px),
+                linear-gradient(90deg, var(--card-bg) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridMove 20s linear infinite;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px) translateZ(-200px); }
+        }
+
+        /* --- LOADING SCREEN --- */
+        .loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; }
+        .loader-ring {
+            width: 80px; height: 80px; border: 4px solid transparent;
+            border-top: 4px solid var(--neon-blue); border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; position: relative; z-index: 2; }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            text-align: center;
+            padding: 8rem 0 4rem;
+            position: relative;
+        }
+
+        /* --- RESTORED GLITCH TITLE (VERSION 1) --- */
+        .glitch-title {
+            font-family: 'Segoe UI', sans-serif; /* Strong font for title */
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            color: #fff;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .glitch-title::before, .glitch-title::after {
+            content: 'AQA WEAR';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch-title::before { 
+            color: #00ffff; 
+            z-index: -1; 
+            animation: glitch 3s infinite; 
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); 
+            transform: translate(-2px); 
+        }
+        
+        .glitch-title::after { 
+            color: #0099ff; 
+            z-index: -2; 
+            animation: glitch 2.5s infinite reverse; 
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); 
+            transform: translate(2px); 
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .status-badge {
+            display: inline-block;
+            border: 1px solid var(--neon-blue);
+            padding: 0.5rem 1rem;
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 10px var(--neon-blue);
+            animation: pulse 2s infinite;
+        }
+
+        /* --- THE VAULT (GRID) --- */
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        /* --- HUD CARD DESIGN --- */
+        .hud-card {
+            position: relative;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        /* HUD Corners */
+        .hud-card::before, .hud-card::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            border: 2px solid var(--neon-blue); transition: all 0.3s ease;
+            z-index: 5;
+        }
+        .hud-card::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .hud-card::after { bottom: 0; right: 0; border-left: none; border-top: none; }
+        
+        /* Inner HUD Corners (via span) */
+        .hud-corners { position: absolute; inset: 0; pointer-events: none; }
+        .hud-corners::before, .hud-corners::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            border: 2px solid var(--neon-blue); transition: all 0.3s ease;
+            z-index: 5;
+        }
+        .hud-corners::before { top: 0; right: 0; border-left: none; border-bottom: none; }
+        .hud-corners::after { bottom: 0; left: 0; border-right: none; border-top: none; }
+
+        /* Hover Effect for Corners */
+        .hud-card:hover::before { width: 100%; height: 2px; border: none; background: var(--neon-blue); }
+        .hud-card:hover::after { width: 100%; height: 2px; border: none; background: var(--neon-blue); }
+
+        /* Image & Filters */
+        .card-visual {
+            width: 100%; height: 100%;
+            position: relative;
+        }
+        
+        .card-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2) brightness(0.4);
+            transition: 0.2s;
+        }
+
+        /* Glitch Effect on Hover */
+        .hud-card:hover .card-img {
+            filter: grayscale(0%) contrast(1.1) brightness(0.6) hue-rotate(180deg);
+            transform: scale(1.05) translateX(2px);
+        }
+
+        /* Scanning Laser Line */
+        .scanner-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            opacity: 0.5;
+            animation: scan 3s linear infinite;
+            z-index: 4;
+        }
+
+        @keyframes scan {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        .hud-content {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, #000 0%, transparent 100%);
+            z-index: 6;
+        }
+
+        .product-code {
+            color: var(--neon-blue);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .product-title {
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        .lock-status {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 6;
+        }
+
+        .lock-icon {
+            width: 50px; height: 50px; stroke: #fff;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+            margin-bottom: 10px;
+        }
+
+        /* --- WHATSAPP TERMINAL --- */
+        .wa-terminal {
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #0f0;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 6rem auto;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
+        }
+
+        .wa-terminal::before {
+            content: 'SYSTEM_ALERT: PRIORITY_MESSAGE';
+            position: absolute; top: -12px; left: 20px;
+            background: #000; color: #0f0; padding: 0 10px;
+            font-size: 0.9rem; letter-spacing: 2px;
+        }
+
+        .wa-text {
+            color: #0f0; font-family: 'Courier New', monospace;
+            font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        .wa-btn {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #0f0;
+            color: #0f0;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wa-btn:hover {
+            background: #0f0;
+            color: #000;
+            box-shadow: 0 0 30px #0f0;
+        }
+
+        /* Footer Adjust */
+        footer { margin-top: 0; border-top: 1px solid rgba(0,255,255,0.2); }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .glitch-title { font-size: 2.8rem; }
+            .wa-terminal { padding: 1.5rem; margin: 3rem 1rem; }
+            .wa-text { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="crt-overlay"></div>
+    <div class="cyber-grid"></div>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-ring"></div>
+        <div style="margin-top: 20px; color: var(--neon-blue); letter-spacing: 3px;">INITIALIZING...</div>
+    </div>
+
+    <header id="header">
+        <div class="header-content">
+          <div class="logo-section">
+            <a href="index.html">
+              <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+            </a>
+          </div>
+          <nav class="nav-menu" id="navMenu">
+            <a href="tarifs.html" class="nav-link">Tarifs</a>
+            <a href="groupes.html" class="nav-link">Groupes</a>
+            <a href="piscines.html" class="nav-link">Piscines</a>
+            <a href="infos.html" class="nav-link">Infos</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="store.html" class="nav-link active">Store</a>
+          </nav>
+          <div class="right-actions">
+            <div class="menu-toggle" onclick="toggleMobileMenu()">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section class="hero-section">
+            <h1 class="glitch-title">AQA WEAR</h1>
+            <br>
+            <div class="status-badge">/// SYSTEM STATUS: LOCKED ///</div>
+            <p style="color: #ccc; letter-spacing: 2px; margin-top: 2rem;">NEXT GEN ATHLETIC GEAR</p>
+        </section>
+
+        <section class="vault-grid">
+            
+            <div class="hud-card">
+                <div class="hud-corners"></div>
+                <div class="card-visual">
+                    <div class="scanner-line"></div>
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800" alt="T-Shirt" class="card-img">
+                    <div class="lock-status">
+                        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                </div>
+                <div class="hud-content">
+                    <div class="product-code">ID: AQA-TS-001</div>
+                    <div class="product-title">Elite T-Shirt</div>
+                </div>
+            </div>
+
+            <div class="hud-card">
+                <div class="hud-corners"></div>
+                <div class="card-visual">
+                    <div class="scanner-line" style="animation-delay: 1s;"></div>
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800" alt="Hoodie" class="card-img">
+                    <div class="lock-status">
+                        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                </div>
+                <div class="hud-content">
+                    <div class="product-code">ID: AQA-HD-099</div>
+                    <div class="product-title">Tech Hoodie</div>
+                </div>
+            </div>
+
+            <div class="hud-card">
+                <div class="hud-corners"></div>
+                <div class="card-visual">
+                    <div class="scanner-line" style="animation-delay: 0.5s;"></div>
+                    <img src="https://m.media-amazon.com/images/I/61eskerhCRL._AC_SL1000_.jpg?q=80&w=800" alt="Towel" class="card-img">
+                    <div class="lock-status">
+                        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                </div>
+                <div class="hud-content">
+                    <div class="product-code">ID: AQA-TW-X1</div>
+                    <div class="product-title">Microfiber</div>
+                </div>
+            </div>
+
+            <div class="hud-card">
+                <div class="hud-corners"></div>
+                <div class="card-visual">
+                    <div class="scanner-line" style="animation-delay: 1.5s;"></div>
+                    <img src="https://www.bfgcdn.com/600_600_90/050-2176-0211/arena-zeal-robe-peignoir-de-bain.jpg?q=80&w=800" alt="Showersuit" class="card-img">
+                    <div class="lock-status">
+                        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                </div>
+                <div class="hud-content">
+                    <div class="product-code">ID: AQA-SS-PRO</div>
+                    <div class="product-title">Showersuit</div>
+                </div>
+            </div>
+            
+             <div class="hud-card">
+                <div class="hud-corners"></div>
+                <div class="card-visual">
+                    <div class="scanner-line" style="animation-delay: 2s;"></div>
+                    <img src="https://i.ibb.co/F4BF5NXS/Gemini-Generated-Image-7o49ok7o49ok7o49-1.png?q=80&w=800" alt="Swimsuit" class="card-img">
+                    <div class="lock-status">
+                        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                </div>
+                <div class="hud-content">
+                    <div class="product-code">ID: AQA-SW-002</div>
+                    <div class="product-title">Pro Prods</div>
+                </div>
+                
+            </div>
+<div class="hud-card">
+    <div class="hud-corners"></div>
+    <div class="card-visual">
+        <div class="scanner-line" style="animation-delay: 2.5s;"></div>
+        <img src="https://m.media-amazon.com/images/I/81kge3K4x4L._AC_SL400_.jpg?q=80&w=800" alt="Backpack" class="card-img">
+        <div class="lock-status">
+            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+        </div>
+    </div>
+    <div class="hud-content">
+        <div class="product-code">ID: AQA-BAG-77</div>
+        <div class="product-title">Bags & Backpacks</div>
+    </div>
+</div>
+        </section>
+
+        <section class="wa-terminal">
+            <p class="wa-text">
+                > INCOMING TRANSMISSION...<br>
+                > SOURCE: AQA <br>
+                > MESSAGE: NEVER MISS THE RELEASE.<br>
+                > ACTION REQUIRED: JOIN PRIORITY LIST.
+            </p>
+            <div style="text-align: center;">
+                <a href="https://chat.whatsapp.com/DcJm9dgx6WMLqsQmpreOZp" class="wa-btn" target="_blank">
+                    [ ACCESS WA GROUP ]
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <iframe src="footer.html" style="width:100%; border:none; min-height:500px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1200);
+        });
+
+        // Add random "glitch" movement to cards periodically
+        setInterval(() => {
+            const cards = document.querySelectorAll('.hud-card');
+            const randomCard = cards[Math.floor(Math.random() * cards.length)];
+            
+            randomCard.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
+            setTimeout(() => {
+                randomCard.style.transform = 'translateX(0)';
+            }, 100);
+        }, 2000);
+    </script>
+</body>
+</html>
