@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AQA Wellness - Votre chemin vers une vie plus saine</title>
-    <meta name="description" content="AQA Wellness : programmes de santé, prévention des maladies chroniques, atelier du dos, camps de transformation et newsletter quotidienne gratuite.">
+    <title>AQA Wellness | Santé & Prévention</title>
+    <meta name="description" content="AQA Wellness : programmes de santé, prévention des maladies chroniques, atelier du dos, camps de transformation.">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/navbar.css">
     <style>
+        /* --- RESET & CORE --- */
         * {
             margin: 0;
             padding: 0;
@@ -16,257 +18,353 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000;
+            background: #050505;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
             min-height: 100vh;
         }
 
-        .bg-logo {
+        /* --- BACKGROUND EFFECTS --- */
+        .bg-fixed {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 80vh;
-            background-image: url('https://i.imgur.com/3dcksCn.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.1;
+            top: 0; left: 0; right: 0; bottom: 0;
             z-index: -2;
-            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, #0a1a2a 0%, #000000 100%);
         }
 
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 0px solid transparent;
-            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, rgba(0,255,255,0.03), rgba(0,153,255,0.03));
             z-index: -1;
-            animation: neonGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
-            }
-            50% {
-                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
-            }
+            pointer-events: none;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 2rem 1.5rem;
         }
 
-        .page-header {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 255, 255, 0.1));
-            border-bottom: 2px solid rgba(0, 153, 255, 0.3);
-            margin-bottom: 3rem;
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            line-height: 1.2;
         }
 
-        .page-header h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
+    /* --- HERO SECTION (REFINED WELLNESS) --- */
+.hero {
+    position: relative;
+    height: 80vh; /* Taller for a more "cinematic" feel */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
 
-        .page-header p {
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
-            color: #00ffff;
-            opacity: 0.9;
-        }
+.hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Deeper vignette to focus eye on center text */
+    background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(5,5,5,1) 90%),
+                url('https://images.unsplash.com/photo-1544367563-12123d89a576?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
 
+.hero-content {
+    z-index: 1;
+    padding: 2rem;
+    max-width: 900px;
+}
+
+.hero-tagline {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #00ffff;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.hero h1 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.hero h1 span {
+    display: block; /* Moves Wellness to its own line for better impact */
+    font-weight: 300;
+    letter-spacing: 12px;
+    margin-right: -12px; /* Offsets the last letter spacing to keep it centered */
+    color: #00ffff;
+    font-size: 0.6em; /* Makes Wellness slightly smaller and more elegant */
+    margin-top: 0.5rem;
+}
+
+.hero-divider {
+    width: 60px;
+    height: 4px;
+    background: #ffffff; /* White divider is cleaner for medical concepts */
+    margin: 2rem auto;
+    border-radius: 2px;
+}
+
+.hero p {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #cbd5e1;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+       /* --- SECTION STYLES --- */
         section {
-            padding: 3rem 0;
+            padding: 4rem 0;
         }
 
         section h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             text-align: center;
+            margin-bottom: 3rem;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            margin: 10px auto 0;
         }
 
-        section p {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.8;
+        /* --- CONCEPT SECTION (Split Layout) --- */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .concept-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 153, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .concept-text p {
+            font-size: 1.15rem;
+            color: #ddd;
             margin-bottom: 1.5rem;
         }
 
-        .card {
-            background: rgba(0, 153, 255, 0.1);
-            border: 2px solid rgba(0, 153, 255, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+        /* --- FEATURES ICONS --- */
+        .features-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: center;
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        .feature-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(0,255,255,0.1);
         }
-
-        .badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .badge-free {
-            background: linear-gradient(135deg, #00ff88, #00ffff);
-            color: #000;
-        }
-
-        .badge-paid {
-            background: linear-gradient(135deg, #ff9900, #ffcc00);
-            color: #000;
-        }
-
-        .card-title {
-            font-size: clamp(1.3rem, 3vw, 1.8rem);
-            font-weight: 700;
+        .feature-item i {
+            font-size: 2.5rem;
             color: #00ffff;
             margin-bottom: 1rem;
         }
+        .feature-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- PROGRAMS GRID --- */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: rgba(10, 20, 30, 0.6);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffff;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(0, 153, 255, 0.2);
+        }
+
+        .card-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        .badge-free { background: linear-gradient(135deg, #00ff88, #00ffff); color: #000; }
+        .badge-paid { background: linear-gradient(135deg, #ff9900, #ffcc00); color: #000; }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
 
         .card-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            color: #aaa;
             margin-bottom: 1rem;
             font-style: italic;
         }
 
         .card-description {
-            font-size: clamp(0.95rem, 2vw, 1.1rem);
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.7;
+            color: #e0e0e0;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .program-list {
+        .camp-list {
             list-style: none;
-            margin: 1.5rem 0;
+            display: grid;
+            gap: 0.8rem;
+            margin-top: auto;
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 10px;
         }
 
-        .program-list li {
-            padding: 0.8rem 0;
-            padding-left: 2rem;
-            position: relative;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        .camp-list li {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            color: #ccc;
         }
 
-        .program-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
+        .camp-list li i {
             color: #00ffff;
-            font-weight: 700;
-            font-size: 1.2rem;
+            width: 25px;
+            margin-right: 10px;
         }
 
+        /* --- UPCOMING SECTION --- */
         #upcoming {
             text-align: center;
-            padding: 4rem 1rem;
-            background: rgba(0, 153, 255, 0.05);
-            border-radius: 20px;
-            border: 2px solid rgba(0, 153, 255, 0.2);
+            background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0, 153, 255, 0.1));
+            border-top: 1px solid rgba(0, 153, 255, 0.2);
         }
 
-        #upcoming p {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
+        #upcoming i {
+            font-size: 3rem;
             color: #00ffff;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 20px #00ffff; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
 
         footer {
-            background: rgba(0, 0, 0, 0.95);
+            background: #000;
             border-top: 2px solid #0099ff;
-            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
-            padding: 2rem 1rem;
-            margin-top: 3rem;
+            padding: 0;
+            margin-top: 0;
         }
 
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .page-header {
-                padding: 2rem 1rem;
-            }
-
-            section {
-                padding: 2rem 0;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .program-list li {
-                padding-left: 1.5rem;
-            }
+            .concept-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.8rem; }
+            .card-img-top { height: 180px; }
+            .hero { height: 60vh; }
+            .hero-content { padding: 1.5rem; width: 90%; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-logo"></div>
+    <div class="bg-fixed"></div>
 
-    <!-- NAVBAR -->
     <header id="header">
         <div class="header-content">
-            <div class="logo-section">
-                <a href="index.html">
-                    <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
-                </a>
+          <div class="logo-section">
+            <a href="index.html">
+              <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+            </a>
+          </div>
+          <nav class="nav-menu" id="navMenu">
+            <a href="tarifs.html" class="nav-link">Tarifs</a>
+            <a href="groupes.html" class="nav-link">Groupes</a>
+            <a href="piscines.html" class="nav-link">Piscines</a>
+            <a href="infos.html" class="nav-link">Infos</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="formation.html" class="nav-link">Formations</a>
+            <a href="store.html" class="nav-link">Store</a>
+          </nav>
+          <div class="right-actions">
+            <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+            <div class="menu-toggle" onclick="toggleMobileMenu()">
+              <span></span><span></span><span></span>
             </div>
-            <nav class="nav-menu" id="navMenu">
-                <a href="tarifs.html" class="nav-link">Tarifs</a>
-                <a href="groupes.html" class="nav-link">Groupes</a>
-                <a href="piscines.html" class="nav-link">Piscines</a>
-                <a href="infos.html" class="nav-link">Infos</a>
-                <a href="events.html" class="nav-link">Events</a>
-                <a href="phobie.html" class="nav-link">Formations</a>
-                <a href="store.html" class="nav-link">Store</a>
-            </nav>
-            <div class="right-actions">
-                <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
-                <div class="menu-toggle" onclick="toggleMobileMenu()">
-                    <span></span><span></span><span></span>
-                </div>
-            </div>
+          </div>
         </div>
     </header>
 
     <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-        <div class="menu-close" onclick="toggleMobileMenu()">
-            <span></span><span></span>
-        </div>
+        <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
         <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
         <a href="groupes.html" class="mobile-nav-link">Groupes</a>
         <a href="piscines.html" class="mobile-nav-link">Piscines</a>
@@ -276,79 +374,109 @@
         <a href="store.html" class="mobile-nav-link">Store</a>
         <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
     </div>
-
-    <!-- PAGE HEADER -->
-    <div class="page-header">
-        <h1>AQA Wellness</h1>
-        <p>Votre chemin vers une vie plus saine et plus équilibrée</p>
+<div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <div class="hero-tagline">Expertise Santé</div>
+        <h1>AQA <span>Wellness</span></h1>
+        <div class="hero-divider"></div>
+        <p>Prévention • Thérapie • Transformation</p>
     </div>
-
-    <!-- SECTION: LE CONCEPT -->
+</div>
     <section id="concept">
         <div class="container">
             <h2>Le Concept</h2>
-            <p>
-                AQA Wellness est une filière de santé intégrée dans AQA Sports, créée pour accompagner chaque personne vers une vie plus saine et équilibrée. Notre mission est d'aider les gens à améliorer leur santé globale, éviter les maladies chroniques, adopter des habitudes de vie durables et récupérer efficacement des douleurs ou troubles musculo-squelettiques.
-            </p>
-            <p>
-                Nous combinons plusieurs expertises pour offrir un accompagnement complet : activités sportives adaptées, thérapie et rééducation professionnelle, entraînement en piscine, approche scientifique de la prévention, outils digitaux innovants et surtout un accompagnement humain personnalisé. Chez AQA Wellness, votre santé est notre priorité.
-            </p>
+            <div class="concept-grid">
+                <div class="concept-text">
+                    <p>
+                        <strong style="color:#00ffff; font-size:1.2rem;">La santé ne s'attend pas, elle se construit.</strong><br>
+                        AQA Wellness est une filière de santé intégrée dans AQA Sports, créée pour accompagner chaque personne vers une vie plus saine. Notre mission est d'aider à améliorer la santé globale, prévenir les maladies chroniques et récupérer efficacement.
+                    </p>
+                    <p>
+                        Nous combinons plusieurs expertises pour offrir un accompagnement complet : activités sportives adaptées, thérapie, entraînement en piscine, et une approche scientifique de la prévention.
+                    </p>
+                    
+                    <div class="features-row">
+                        <div class="feature-item">
+                            <i class="fas fa-heart-pulse"></i>
+                            <h4>Prévention</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-user-md"></i>
+                            <h4>Experts</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-water"></i>
+                            <h4>Aquathérapie</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="concept-image">
+                    <img src="https://health-e.in/wp-content/uploads/2023/09/family-shape-figure-with-heart-stethoscope.webp" alt="Coach AQA Wellness">
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- SECTION: PROGRAMMES DISPONIBLES -->
     <section id="available-programs">
         <div class="container">
-            <h2>Programmes Disponibles</h2>
+            <h2>Nos Programmes</h2>
+            <div class="programs-grid">
 
-            <!-- Programme 1 - Gratuit -->
-            <div class="card">
-                <span class="badge badge-free">GRATUIT</span>
-                <h3 class="card-title">Éviter le Cancer ! — Newsletter Quotidienne</h3>
-                <p class="card-description">
-                    Une newsletter quotidienne gratuite publiée sur les réseaux sociaux. Chaque jour, vous recevez un conseil court, basé sur des preuves scientifiques, pour réduire vos risques de cancer. Nous abordons l'activité physique, la nutrition, le sommeil, l'environnement et les habitudes de vie. Un geste simple pour une santé durable.
-                </p>
-            </div>
+                <div class="card">
+                    <span class="badge badge-free">GRATUIT</span>
+                    <img src="https://logo-marque.com/wp-content/uploads/2022/03/Breast-Cancer-Logo.png?q=80&w=2070&auto=format&fit=crop" alt="Santé Naturelle" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Éviter le Cancer</h3>
+                        <div class="card-subtitle">Newsletter Quotidienne</div>
+                        <p class="card-description">
+                            Recevez chaque jour un conseil court, basé sur des preuves scientifiques, pour réduire vos risques. Nutrition, sommeil, activité physique et habitudes de vie saines directement sur votre fil.
+                        </p>
+                    </div>
+                </div>
 
-            <!-- Programme 2 - Payant -->
-            <div class="card">
-                <span class="badge badge-paid">PAYANT</span>
-                <h3 class="card-title">Atelier du Dos</h3>
-                <p class="card-description">
-                    Un service spécialement conçu pour les personnes souffrant de douleurs lombaires. Cet atelier se déroule en piscine et est encadré par des kinésithérapeutes qualifiés. Les séances comprennent des exercices adaptés dans l'eau, un travail de mobilité pour soulager les douleurs, un renforcement du dos en décharge et un suivi personnalisé selon le cas de chaque patient. L'eau offre un environnement idéal pour récupérer en douceur.
-                </p>
-            </div>
+                <div class="card">
+                    <span class="badge badge-paid">PAYANT</span>
+                    <img src="https://monchiro.ca/wp-content/uploads/2018/11/monchiro-maux-de-dos-douleur-lombaire.jpg?q=80&w=2069&auto=format&fit=crop" alt="Aquathérapie" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Atelier du Dos</h3>
+                        <div class="card-subtitle">Rééducation en Piscine</div>
+                        <p class="card-description">
+                            Spécialement conçu pour soulager les douleurs lombaires. Encadré par des kinésithérapeutes, cet atelier utilise les bienfaits de l'eau pour la mobilité, le renforcement en décharge et la récupération.
+                        </p>
+                    </div>
+                </div>
 
-            <!-- Programme 3 - Payant -->
-            <div class="card">
-                <span class="badge badge-paid">PAYANT</span>
-                <h3 class="card-title">Camps AQA — Transformations en 1 Semaine</h3>
-                <p class="card-subtitle">Une série de camps organisés par AQA Events, conçus pour sortir les participants de leur routine pendant une semaine complète.</p>
-                
-                <ul class="program-list">
-                    <li>1 semaine pour arrêter de fumer</li>
-                    <li>1 semaine pour manger sain à vie</li>
-                    <li>1 semaine pour perdre du poids</li>
-                    <li>1 semaine pour éliminer le stress</li>
-                    <li>1 semaine pour profiter des douches thermales et récupération totale</li>
-                </ul>
+                <div class="card">
+                    <span class="badge badge-paid">PAYANT</span>
+                    <img src="https://artfulliving.com/wp-content/uploads/2022/05/ADULT-SUMMER-CAMP-FEATURE-1.jpg?q=80&w=1974&auto=format&fit=crop" alt="Training Camp" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Camps AQA</h3>
+                        <div class="card-subtitle">Transformations en 1 Semaine</div>
+                        <p class="card-description">Immersion totale pour casser la routine et transformer votre vie.</p>
+                        <ul class="camp-list">
+                            <li><i class="fas fa-ban-smoking"></i> Arrêter de fumer</li>
+                            <li><i class="fas fa-carrot"></i> Manger sain à vie</li>
+                            <li><i class="fas fa-weight-scale"></i> Perdre du poids</li>
+                            <li><i class="fas fa-spa"></i> Anti-stress & Thermes</li>
+                        </ul>
+                    </div>
+                </div>
 
-                <p class="card-description">
-                    Chaque camp est encadré par des experts AQA spécialisés en sport, thérapie et nutrition. L'objectif : provoquer un changement rapide et durable grâce à un environnement contrôlé, une immersion totale et un accompagnement professionnel. Une semaine qui peut transformer votre vie.
-                </p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: PROGRAMMES À VENIR -->
     <section id="upcoming">
         <div class="container">
-            <h2>Programmes à Venir</h2>
-            <p>De nouveaux programmes de santé AQA seront ajoutés prochainement. Restez connectés pour découvrir nos prochaines innovations en matière de bien-être et de prévention.</p>
+            <i class="fas fa-dna"></i>
+            <h2>Innovation en cours...</h2>
+            <p style="max-width: 600px; margin: 0 auto; font-size: 1.2rem;">
+                De nouveaux protocoles de santé AQA sont en développement. Restez connectés pour découvrir nos prochaines avancées en matière de longévité et de performance.
+            </p>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
     </footer>
