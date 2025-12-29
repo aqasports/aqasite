@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>AQA WEAR Banner</title>
+<style>
+    /* --- BANNER CSS --- */
+    :root {
+        --neon-blue: #00ffff;
+        --deep-blue: #0099ff;
+        --neon-green: #0f0; /* WhatsApp accent */
+        --bg-dark: #050505;
+        --font-tech: 'Courier New', Courier, monospace;
+        --font-strong: 'Segoe UI', sans-serif;
+    }
+
+    /* The 1:1 Container */
+    .aqa-banner-square {
+        position: relative;
+        width: 100%;
+        max-width: 600px; /* Adjustable maximum size */
+        aspect-ratio: 1 / 1;
+        background-color: var(--bg-dark);
+        overflow: hidden;
+        font-family: var(--font-tech);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 2px solid var(--neon-blue);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+
+    /* Background Effects (Grid & Overlay) */
+    .banner-grid {
+        position: absolute; inset: -50%;
+        background-image: 
+            linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+        background-size: 40px 40px;
+        transform: perspective(500px) rotateX(60deg);
+        animation: bannerGridMove 10s linear infinite;
+        z-index: 1;
+        opacity: 0.3;
+    }
+    .banner-crt {
+        position: absolute; inset: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+        background-size: 100% 4px;
+        z-index: 10; pointer-events: none;
+    }
+    @keyframes bannerGridMove {
+        0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+        100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
+    }
+
+    /* Content Layer */
+    .banner-content {
+        position: relative;
+        z-index: 5;
+        padding: 2rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: radial-gradient(circle at center, rgba(0,20,30,0.4) 0%, rgba(5,5,5,0.9) 100%);
+    }
+
+    /* Header Section */
+    .banner-header { margin-bottom: 1rem; }
+    .banner-glitch-title {
+        font-family: var(--font-strong);
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-weight: 900;
+        color: #fff;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        display: inline-block;
+    }
+    /* Reusing the glitch effect from your site */
+    .banner-glitch-title::before, .banner-glitch-title::after {
+        content: 'AQA WEAR'; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
+    }
+    .banner-glitch-title::before { 
+        color: var(--neon-blue); z-index: -1; animation: glitch 3s infinite; 
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(-2px); 
+    }
+    .banner-glitch-title::after { 
+        color: var(--deep-blue); z-index: -2; animation: glitch 2.5s infinite reverse; 
+        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); transform: translate(2px); 
+    }
+    .banner-subtitle {
+        color: var(--neon-blue);
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+        text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    /* Middle "Locked" Visual */
+    .locked-visual {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        margin: 1rem 0;
+        background: rgba(0,0,0,0.5);
+        overflow: hidden;
+    }
+    /* Placeholder image masked to look obscured */
+    .locked-img-bg {
+        position: absolute; inset: 0;
+        /* Using one of your images blurred heavily */
+        background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800');
+        background-size: cover;
+        background-position: center;
+        filter: blur(15px) grayscale(100%) brightness(0.3);
+        opacity: 0.6;
+    }
+    .locked-overlay-text {
+        position: relative; z-index: 2;
+        color: #fff;
+        border: 2px solid #fff;
+        padding: 1rem 2rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        background: rgba(0,0,0,0.8);
+        display: flex; align-items: center; gap: 10px;
+    }
+
+    /* Footer / CTA Section */
+    .banner-footer p {
+        color: #ccc; font-size: 0.9rem; margin-bottom: 1.5rem; letter-spacing: 1px;
+    }
+    .wa-cta-btn {
+        position: relative;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        width: 100%;
+        padding: 1.2rem;
+        background: rgba(0, 20, 0, 0.9);
+        border: 2px solid var(--neon-green);
+        color: var(--neon-green);
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        overflow: hidden;
+        transition: all 0.3s;
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        font-family: var(--font-strong);
+    }
+    /* Green scanner line for the button */
+    .wa-cta-btn::after {
+        content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.4), transparent);
+        animation: btnScan 3s infinite ease-in-out;
+    }
+    .wa-cta-btn:hover {
+        background: var(--neon-green);
+        color: #000;
+        box-shadow: 0 0 30px var(--neon-green);
+    }
+    @keyframes btnScan {
+        0% { left: -100%; } 100% { left: 200%; }
+    }
+
+    /* Resetting body margins just for this demo preview */
+    body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #111; padding: 20px; }
+</style>
+</head>
+<body>
+
+<div class="aqa-banner-square">
+    <div class="banner-grid"></div>
+    <div class="banner-crt"></div>
+    
+    <div class="banner-content">
+        <div class="banner-header">
+            <div class="banner-glitch-title">AQA WEAR</div>
+            <div class="banner-subtitle">/// CLASSIFIED GEAR ///</div>
+        </div>
+
+        <div class="locked-visual">
+            <div class="locked-img-bg"></div>
+            <div class="locked-overlay-text">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                LANCEMENT IMMINENT
+            </div>
+        </div>
+
+        <div class="banner-footer">
+            <p>> SOYEZ LE PREMIER AVERTI. ACCÈS EXCLUSIF.</p>
+            <a href="https://chat.whatsapp.com/DcJm9dgx6WMLqsQmpreOZp" class="wa-cta-btn" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                REJOINDRE LA WAITLIST
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

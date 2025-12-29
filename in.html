@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AQA Sports Academy</title>
+  <meta name="description" content="AQA Sports Academy – Du zéro au pro. Entraînement structuré, coachs certifiés, progression mesurable." />
+  <link rel="icon" href="favicon.ico" />
+
+  <!-- SEO / Social -->
+  <meta property="og:title" content="AQA Sports Academy" />
+  <meta property="og:description" content="Du zéro au pro – Entraînement sportif encadré" />
+  <meta property="og:image" content="https://aqasports.com/preview.jpg" />
+
+  <style>
+    :root {
+      --c1:#00ffff;
+      --c2:#0099ff;
+      --bg:#000;
+      --card:rgba(0,153,255,.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{background:#000;color:#fff;font-family:system-ui,Segoe UI,Roboto}
+    a{text-decoration:none;color:inherit}
+    img,video{max-width:100%;display:block}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(0,0,0,.9);
+      border-bottom:1px solid rgba(0,255,255,.2)
+    }
+    .nav{
+      max-width:1200px;margin:auto;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1rem
+    }
+    .nav a{font-weight:600;margin-left:1.2rem}
+    .cta{
+      padding:.6rem 1.4rem;border-radius:30px;
+      background:linear-gradient(135deg,var(--c1),var(--c2));
+      color:#000;font-weight:800
+    }
+
+    /* HERO */
+    .hero{
+      max-width:1200px;margin:auto;
+      padding:4rem 1rem;text-align:center
+    }
+    .hero h1{
+      font-size:clamp(2rem,6vw,3.5rem);
+      background:linear-gradient(135deg,var(--c1),#fff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:1rem
+    }
+    .hero p{opacity:.9;max-width:800px;margin:0 auto 2rem}
+    .hero video{
+      border-radius:18px;
+      max-height:380px;
+      margin:2rem auto;
+      box-shadow:0 0 40px rgba(0,255,255,.3)
+    }
+
+    /* SECTIONS */
+    section{padding:3rem 1rem}
+    .wrap{max-width:1200px;margin:auto}
+    h2{
+      text-align:center;
+      font-size:clamp(1.6rem,4vw,2.4rem);
+      margin-bottom:2rem;
+      background:linear-gradient(135deg,var(--c1),var(--c2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent
+    }
+
+    /* STATS */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.5rem
+    }
+    .stat{
+      background:var(--card);
+      border:1px solid rgba(0,255,255,.25);
+      border-radius:18px;
+      padding:2rem;
+      text-align:center
+    }
+    .stat strong{
+      font-size:2.6rem;
+      display:block;
+      background:linear-gradient(135deg,var(--c1),var(--c2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent
+    }
+    .stat span{opacity:.8;font-size:.95rem}
+
+    /* GRID BUTTONS */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:1.2rem
+    }
+    .card{
+      background:var(--card);
+      border:1px solid rgba(0,255,255,.25);
+      border-radius:18px;
+      padding:1.6rem 1rem;
+      text-align:center;
+      font-weight:700;
+      transition:.25s
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 0 25px rgba(0,255,255,.35)
+    }
+    .card small{
+      display:block;
+      margin-top:.4rem;
+      font-size:.75rem;
+      opacity:.7
+    }
+
+    /* REVIEWS */
+    .reviews{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:1.5rem
+    }
+    .review{
+      background:#0a0a0a;
+      border:1px solid rgba(0,255,255,.25);
+      border-radius:16px;
+      padding:1.4rem
+    }
+    .review b{color:var(--c1)}
+    .review p{opacity:.9;font-style:italic}
+
+    /* GALLERY */
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1rem
+    }
+    .gallery img{
+      border-radius:14px;
+      aspect-ratio:1/1;
+      object-fit:cover
+    }
+
+    /* FLOATING CTA */
+    .float{
+      position:fixed;right:18px;bottom:18px;
+      padding:.8rem 1.3rem;
+      background:linear-gradient(135deg,var(--c1),var(--c2));
+      color:#000;font-weight:800;
+      border-radius:40px;
+      box-shadow:0 0 30px rgba(0,255,255,.6)
+    }
+
+    @media(max-width:768px){
+      .hero{padding:2.5rem 1rem}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <strong>AQA</strong>
+    <div>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="groupes.html">Programmes</a>
+      <a href="store.html">Boutique</a>
+      <a href="infos.html">Infos</a>
+      <a href="inscription.html" class="cta">S’inscrire</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <h1>From Zero to Hero</h1>
+  <p>AQA Sports Academy transforme les débutants en athlètes confiants grâce à un encadrement professionnel et une progression mesurable.</p>
+  <video autoplay muted loop playsinline preload="metadata">
+    <source src="zero.mp4" type="video/mp4">
+  </video>
+  <a href="inscription.html" class="cta">Rejoindre AQA</a>
+</section>
+
+<section>
+  <div class="wrap stats">
+    <div class="stat"><strong>500+</strong><span>Athlètes formés</span></div>
+    <div class="stat"><strong>8</strong><span>Coachs certifiés</span></div>
+    <div class="stat"><strong>3</strong><span>Piscines partenaires</span></div>
+    <div class="stat"><strong>98%</strong><span>Satisfaction clients</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Programmes & Services</h2>
+  <div class="wrap grid">
+    <a class="card" href="groupes.html">Groupes<small>Niveaux progressifs</small></a>
+    <a class="card" href="formation.html">Formations<small>Certifiantes</small></a>
+    <a class="card" href="kids.html">AQA Kids<small>Enfants & jeunes</small></a>
+    <a class="card" href="well.html">Wellness<small>Santé & bien-être</small></a>
+    <a class="card" href="events.html">Events<small>Stages & camps</small></a>
+    <a class="card" href="activities.html">Sports<small>Multi-disciplines</small></a>
+  </div>
+</section>
+
+<section>
+  <h2>Témoignages</h2>
+  <div class="wrap reviews">
+    <div class="review"><b>★★★★★</b><p>“أفضل نادي سباحة، مدربين محترفين.”</p><small>Samir – 26 ans</small></div>
+    <div class="review"><b>★★★★★</b><p>“Progression réelle et encadrement sérieux.”</p><small>Hakim – 34 ans</small></div>
+    <div class="review"><b>★★★★★</b><p>“Excellente expérience pour débutants.”</p><small>Amir – 22 ans</small></div>
+  </div>
+</section>
+
+<section>
+  <h2>Galerie</h2>
+  <div class="wrap gallery">
+    <img src="https://i.ibb.co/ksrvQyDK/IMG20240224224823.jpg" loading="lazy">
+    <img src="https://i.ibb.co/9mz245Tp/IMG20240120224811.jpg" loading="lazy">
+    <img src="https://i.ibb.co/9JzqTWS/images-1-1-1.jpg" loading="lazy">
+    <img src="https://i.ibb.co/tMZ0R873/IMG20250705080230.jpg" loading="lazy">
+  </div>
+</section>
+
+</main>
+
+<a href="cards.html" class="float">Nouvelles formules</a>
+
+<!-- Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P540VBDLT5"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());gtag('config','G-P540VBDLT5');
+</script>
+
+</body>
+</html>

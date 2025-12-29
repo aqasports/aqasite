@@ -3,1160 +3,527 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>AQA Anti-Aquaphobie - Formation Accélérée</title>
-    <meta content="Formation accélérée AQA pour vaincre la peur de l'eau. Encadrement professionnel, méthode scientifique, progression garantie en 4 à 6 séances." name="description"/>
-    <meta content="AQA, aquaphobie, peur de l'eau, formation natation, confiance, Algérie" name="keywords"/>
+    <title>AQA Anti-Aquaphobie | Formation Accélérée</title>
+    <meta content="Vaincre la peur de l'eau avec la méthode AQA. Formation accélérée en 4 à 6 séances, encadrement psychologique et technique." name="description"/>
+    <meta content="aquaphobie, peur eau, apprendre nager, formation adulte, AQA algérie" name="keywords"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/navbar.css">
+
 <style>
-    /* ==================== RESET & BASE ==================== */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    /* ==================== 1. CORE & RESET ==================== */
+    :root {
+        --primary: #00ffff;
+        --secondary: #0099ff;
+        --accent: #ffffff;
+        --bg-glass: rgba(0, 20, 40, 0.7);
+        --border-glass: rgba(0, 153, 255, 0.3);
     }
 
-    html {
-        background: #000;
-        scroll-behavior: smooth;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { 
+        background: #000; 
+        scroll-behavior: smooth; 
+        scroll-padding-top: 100px; /* Offset for fixed header */
     }
 
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: transparent !important;
+        background: transparent;
         color: #ffffff;
         line-height: 1.6;
         overflow-x: hidden;
-        position: relative;
         min-height: 100vh;
-        overscroll-behavior: none;
     }
 
-    /* ==================== BACKGROUND EFFECTS ==================== */
+    /* ==================== 2. BACKGROUNDS ==================== */
     .bg-logo {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80vw;
-        height: 80vh;
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 80vw; height: 80vh;
         background-image: url('https://i.imgur.com/3dcksCn.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        opacity: 0.1;
-        z-index: -2;
-        pointer-events: none;
+        background-size: contain; background-repeat: no-repeat; background-position: center;
+        opacity: 0.1; z-index: -2; pointer-events: none;
     }
 
     .bg-frame {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        border: none;
-        z-index: -1;
-        pointer-events: none;
-        background: transparent;
+        position: fixed; inset: 0; width: 100vw; height: 100vh;
+        border: none; z-index: -1; pointer-events: none;
     }
 
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border: 0px solid transparent;
-        background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
-        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        z-index: -1;
-        animation: neonGlow 4s ease-in-out infinite alternate;
-    }
-
-    /* ==================== ANIMATIONS ==================== */
-    @keyframes neonGlow {
-        0%, 100% {
-            filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff);
-        }
-        50% {
-            filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff);
-        }
-    }
-
-    @keyframes slideIn {
-        from { 
-            opacity: 0; 
-            transform: translateY(30px); 
-        }
-        to { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    @keyframes shimmer {
-        0% { left: -100%; }
-        100% { left: 100%; }
-    }
-
-    @keyframes pulse {
-        0%, 100% { 
-            transform: scale(1);
-            opacity: 1;
-        }
-        50% { 
-            transform: scale(1.05);
-            opacity: 0.9;
-        }
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-    }
-
-    /* ==================== LAYOUT ==================== */
+    /* ==================== 3. LAYOUT ==================== */
     .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: 6rem 1.5rem 2rem; /* Added top padding for fixed nav */
     }
 
-    /* ==================== HERO SECTION ==================== */
+    /* ==================== 4. HERO SECTION ==================== */
     .hero {
         text-align: center;
-        padding: 3rem 0;
-        margin-bottom: 3rem;
+        padding: 2rem 0 4rem;
         animation: slideIn 1s ease-out;
     }
 
     .hero h1 {
         font-size: clamp(2.5rem, 8vw, 4.5rem);
         font-weight: 800;
-        background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+        background: linear-gradient(135deg, var(--primary), var(--secondary), #fff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1rem;
         text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-        line-height: 1.2;
-        letter-spacing: -1px;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
     }
 
     .hero-subtitle {
-        font-size: clamp(1.2rem, 4vw, 2rem);
-        font-weight: 600;
-        color: #00ffff;
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        color: var(--primary);
+        letter-spacing: 2px;
+        text-transform: uppercase;
         margin-bottom: 2rem;
-        text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-        letter-spacing: 0.5px;
+    }
+
+    .hero-image-wrapper {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
     }
 
     .hero-image {
-        max-width: 650px;
         width: 100%;
-        height: auto;
-        border-radius: 25px;
-        margin: 2rem auto;
-        display: block;
-        border: 4px solid rgba(0, 255, 255, 0.5);
-        box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
-        transition: all 0.4s ease;
+        border-radius: 20px;
+        border: 2px solid var(--border-glass);
+        box-shadow: 0 0 50px rgba(0, 153, 255, 0.2);
     }
 
-    .hero-image:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 70px rgba(0, 255, 255, 0.6);
-        border-color: #00ffff;
-    }
-
-    /* ==================== CONTENT SECTIONS ==================== */
-    .content-section {
+    /* ==================== 5. CARDS & SECTIONS ==================== */
+    .glass-card {
         background: rgba(0, 153, 255, 0.05);
-        border: 2px solid rgba(0, 153, 255, 0.3);
-        border-radius: 25px;
-        padding: 3rem 2rem;
-        margin-bottom: 2.5rem;
+        border: 1px solid var(--border-glass);
+        border-radius: 20px;
+        padding: 2.5rem;
         backdrop-filter: blur(10px);
-        animation: slideIn 1s ease-out;
+        margin-bottom: 3rem;
         position: relative;
         overflow: hidden;
-        transition: all 0.4s ease;
-    }
-
-    .content-section::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 153, 255, 0.1));
-        border-radius: 25px;
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .content-section:hover::before {
-        opacity: 1;
-    }
-
-    .content-section:hover {
-        border-color: rgba(0, 255, 255, 0.5);
-        box-shadow: 0 0 30px rgba(0, 153, 255, 0.2);
     }
 
     .section-title {
-        font-size: clamp(1.8rem, 5vw, 2.8rem);
-        font-weight: 700;
-        color: #00ffff;
-        margin-bottom: 1.5rem;
-        text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        color: var(--primary);
+        margin-bottom: 2rem;
         display: flex;
         align-items: center;
         gap: 1rem;
-        letter-spacing: 0.5px;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
     }
 
-    .section-icon {
-        font-size: clamp(2rem, 6vw, 3.2rem);
-        filter: drop-shadow(0 0 15px currentColor);
-        animation: float 3s ease-in-out infinite;
-    }
-
-    .section-content {
-        font-size: clamp(1rem, 3vw, 1.2rem);
-        color: #ffffff;
-        opacity: 0.95;
-        line-height: 1.8;
-    }
-
-    .section-content p {
-        margin-bottom: 1rem;
-    }
-
-    /* ==================== FEATURE LIST ==================== */
-    .feature-list {
-        list-style: none;
-        padding: 0;
-        margin: 1.5rem 0;
-    }
-
-    .feature-list li {
-        padding: 1.2rem 1.5rem;
-        margin-bottom: 1rem;
-        background: rgba(0, 153, 255, 0.1);
-        border-left: 4px solid #00ffff;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .feature-list li::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 4px;
-        background: linear-gradient(to bottom, #00ffff, #0099ff);
-        box-shadow: 0 0 10px #00ffff;
-    }
-
-    .feature-list li:hover {
-        background: rgba(0, 153, 255, 0.2);
-        transform: translateX(10px);
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-        border-left-width: 6px;
-    }
-
-    .feature-list li strong {
-        color: #00ffff;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-    }
-
-    /* ==================== PHASES GRID ==================== */
-    .phases-grid {
+    /* Feature Grid (Method) */
+    .method-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(0,0,0,0.3);
+        border-radius: 12px;
+        border-left: 3px solid var(--primary);
+        transition: transform 0.3s;
+    }
+    
+    .feature-item:hover { transform: translateX(5px); background: rgba(0, 153, 255, 0.1); }
+    .feature-icon { font-size: 1.5rem; }
+
+    /* ==================== 6. PHASES (TIMELINE) ==================== */
+    .phases-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1.5rem;
-        margin-top: 2rem;
+        position: relative;
     }
 
     .phase-card {
-        background: rgba(0, 153, 255, 0.1);
-        border: 2px solid rgba(0, 153, 255, 0.3);
-        border-radius: 20px;
-        padding: 2.5rem 2rem;
+        background: linear-gradient(180deg, rgba(0,20,40,0.8), rgba(0,0,0,0.5));
+        border: 1px solid var(--border-glass);
+        border-radius: 15px;
+        padding: 2rem 1.5rem;
         text-align: center;
-        transition: all 0.4s ease;
+        transition: 0.3s;
         position: relative;
-        overflow: hidden;
-    }
-
-    .phase-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
-        transition: left 0.6s ease;
-    }
-
-    .phase-card:hover::before {
-        left: 100%;
+        z-index: 2;
     }
 
     .phase-card:hover {
-        background: rgba(0, 153, 255, 0.2);
-        border-color: #00ffff;
-        transform: translateY(-12px);
-        box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+        transform: translateY(-10px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 30px rgba(0, 255, 255, 0.15);
     }
 
     .phase-number {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: 900;
-        color: #00ffff;
-        margin-bottom: 1rem;
-        text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        display: inline-block;
-        position: relative;
-    }
-
-    .phase-number::after {
-        content: '';
+        color: rgba(255,255,255,0.1);
         position: absolute;
-        bottom: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50px;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, #00ffff, transparent);
-        box-shadow: 0 0 10px #00ffff;
+        top: 10px;
+        right: 15px;
+        line-height: 1;
     }
 
-    .phase-title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #00ffff;
-        margin-bottom: 0.8rem;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    }
+    .phase-card:hover .phase-number { color: var(--primary); opacity: 0.5; }
 
-    .phase-description {
-        font-size: 1.05rem;
-        color: #ffffff;
-        opacity: 0.9;
-        line-height: 1.6;
-    }
+    .phase-title { color: var(--primary); font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700; }
+    .phase-desc { font-size: 0.95rem; color: #ccc; }
 
-    /* ==================== PRICING SECTION ==================== */
+    /* ==================== 7. PRICING ==================== */
     .pricing-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2.5rem;
-        margin-top: 2.5rem;
-        padding: 1rem 0;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        align-items: center; /* Center vertically */
     }
 
     .pricing-card {
-        background: rgba(0, 153, 255, 0.08);
-        border: 3px solid rgba(0, 153, 255, 0.4);
-        border-radius: 30px;
+        background: rgba(10, 20, 30, 0.8);
+        border: 1px solid var(--border-glass);
+        border-radius: 25px;
         padding: 3rem 2rem;
         text-align: center;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: 0.4s;
         position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .pricing-card::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        pointer-events: none;
-    }
-
-    .pricing-card::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 30px;
-        padding: 3px;
-        background: linear-gradient(135deg, #00ffff, #0099ff, #00ffff);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-
-    .pricing-card:hover::before {
-        opacity: 1;
-        animation: pulse 2s ease-in-out infinite;
-    }
-
-    .pricing-card:hover::after {
-        opacity: 0.6;
-    }
-
-    .pricing-card:hover {
-        background: rgba(0, 153, 255, 0.15);
-        transform: translateY(-15px) scale(1.02);
-        box-shadow: 0 20px 60px rgba(0, 255, 255, 0.5);
     }
 
     .pricing-featured {
-        border-color: #00ffff;
-        background: rgba(0, 153, 255, 0.12);
-        box-shadow: 0 10px 40px rgba(0, 255, 255, 0.35);
+        background: linear-gradient(145deg, rgba(0, 40, 80, 0.9), rgba(0, 10, 20, 0.9));
+        border: 2px solid var(--primary);
         transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(0, 153, 255, 0.2);
+        z-index: 2;
     }
 
-    .pricing-featured::after {
-        opacity: 0.3;
+    .ribbon {
+        position: absolute; top: 20px; right: -35px;
+        background: var(--primary); color: #000;
+        padding: 5px 40px; transform: rotate(45deg);
+        font-weight: bold; font-size: 0.9rem;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
     }
 
-    .pricing-featured:hover {
-        transform: translateY(-15px) scale(1.08);
-        box-shadow: 0 25px 70px rgba(0, 255, 255, 0.6);
-    }
-
-    .pricing-ribbon {
-        position: absolute;
-        top: 25px;
-        right: -40px;
-        background: linear-gradient(135deg, #00ffff, #0099ff);
-        color: #000;
-        padding: 0.6rem 3.5rem;
-        font-weight: 900;
-        font-size: 1rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        transform: rotate(45deg);
-        box-shadow: 0 4px 20px rgba(0, 255, 255, 0.7);
-        z-index: 10;
-    }
-
-    .pricing-badge {
-        font-size: 1.7rem;
+    .price-tag {
+        font-size: 3rem;
         font-weight: 800;
-        color: #00ffff;
-        margin-bottom: 0.5rem;
-        text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
-
-    .pricing-sessions {
-        font-size: 2.2rem;
-        font-weight: 900;
-        color: #ffffff;
-        margin: 0.5rem 0;
-        line-height: 1.2;
-    }
-
-    .pricing-duration {
-        font-size: 1.1rem;
-        color: #00ffff;
-        opacity: 0.9;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-    }
-
-    .pricing-amount {
-        font-size: 3.5rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #00ffff 0%, #0099ff 50%, #00ffff 100%);
-        background-size: 200% 200%;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-clip: text;
         margin: 1.5rem 0;
-        filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6));
-        letter-spacing: -2px;
     }
 
-    @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+    .price-details ul { list-style: none; text-align: left; margin: 1.5rem 0; }
+    .price-details li { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; color: #ddd; }
+    .price-details li svg { width: 18px; stroke: var(--primary); }
 
-    .pricing-bonus {
-        background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(0, 153, 255, 0.15));
-        border: 2px solid rgba(0, 255, 255, 0.4);
-        border-radius: 20px;
-        padding: 1.3rem 1.5rem;
-        font-size: 1.1rem;
-        color: #ffffff;
-        line-height: 1.6;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .pricing-bonus::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-        animation: shimmer 3s infinite;
-    }
-
-    .pricing-bonus strong {
-        color: #00ffff;
-        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-        font-weight: 800;
-    }
-
-    .pricing-description {
-        font-size: 1.05rem;
-        color: #ffffff;
-        opacity: 0.85;
-        line-height: 1.7;
-        margin-top: 0.5rem;
-        font-style: italic;
-    }
-
-    /* ==================== CTA SECTION ==================== */
-    .cta-section {
-        background: linear-gradient(135deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.15));
-        border: 3px solid rgba(0, 255, 255, 0.5);
+    /* ==================== 8. FORM ==================== */
+    .cta-wrapper {
+        background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 0, 0, 0.8));
         border-radius: 30px;
-        padding: 4rem 2rem;
+        border: 1px solid var(--border-glass);
+        padding: 3rem 1.5rem;
+        max-width: 700px;
+        margin: 4rem auto 0;
         text-align: center;
-        margin: 3rem 0;
-        animation: slideIn 1s ease-out;
-        box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
-        position: relative;
-        overflow: hidden;
+        box-shadow: 0 0 60px rgba(0,0,0,0.5);
     }
 
-    .cta-section::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 60%);
-        animation: pulse 4s ease-in-out infinite;
-    }
-
-    .cta-title {
-        font-size: clamp(2rem, 6vw, 3.5rem);
-        font-weight: 900;
-        background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1rem;
-        position: relative;
-        z-index: 1;
-    }
-
-    .cta-subtitle {
-        font-size: clamp(1.2rem, 4vw, 1.7rem);
-        color: #ffffff;
-        opacity: 0.95;
-        margin-bottom: 2.5rem;
-        position: relative;
-        z-index: 1;
-    }
-
-    /* ==================== FORM STYLES ==================== */
-    .form-container {
-        background: rgba(0, 153, 255, 0.08);
-        border: 2px solid rgba(0, 153, 255, 0.4);
-        border-radius: 25px;
-        padding: 3rem 2rem;
-        max-width: 600px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-        backdrop-filter: blur(10px);
-    }
-
-    .form-group {
-        margin-bottom: 1.8rem;
+    .form-grid {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 2rem;
         text-align: left;
     }
 
-    .form-group label {
-        display: block;
-        color: #00ffff;
-        font-weight: 600;
-        margin-bottom: 0.7rem;
-        font-size: 1.1rem;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="tel"],
-    .form-group input[type="number"] {
+    input[type="text"], input[type="tel"], input[type="number"] {
         width: 100%;
-        padding: 1.1rem 1.2rem;
-        background: rgba(0, 0, 0, 0.4);
-        border: 2px solid rgba(0, 153, 255, 0.4);
-        border-radius: 12px;
-        color: #ffffff;
-        font-size: 1.05rem;
-        transition: all 0.3s ease;
-        font-family: inherit;
+        padding: 1rem;
+        background: rgba(0,0,0,0.4);
+        border: 1px solid var(--border-glass);
+        border-radius: 10px;
+        color: #fff;
+        font-size: 1rem;
+        transition: 0.3s;
     }
 
-    .form-group input:focus {
+    input:focus {
+        border-color: var(--primary);
         outline: none;
-        border-color: #00ffff;
-        background: rgba(0, 0, 0, 0.5);
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
-        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
     }
 
-    .form-group input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
+    .radio-group { display: flex; gap: 2rem; padding: 0.5rem 0; }
+    .radio-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+    input[type="radio"] { accent-color: var(--primary); transform: scale(1.2); }
 
-    .radio-group {
-        display: flex;
-        gap: 2.5rem;
-        margin-top: 0.7rem;
-    }
-
-    .radio-option {
-        display: flex;
-        align-items: center;
-        gap: 0.7rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .radio-option:hover {
-        transform: translateX(5px);
-    }
-
-    .radio-option input[type="radio"] {
-        width: 22px;
-        height: 22px;
-        cursor: pointer;
-        accent-color: #00ffff;
-    }
-
-    .radio-option label {
-        color: #ffffff;
-        font-size: 1.05rem;
-        cursor: pointer;
-        margin: 0;
-        font-weight: 500;
-    }
-
-    .submit-btn {
-        background: linear-gradient(135deg, #0099ff, #00ffff);
-        color: #000000;
-        padding: 1.3rem 3rem;
-        border: 3px solid #00ffff;
-        border-radius: 50px;
+    .btn-submit {
+        background: linear-gradient(90deg, var(--secondary), var(--primary));
+        color: #000;
         font-weight: 800;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        padding: 1.2rem;
+        border: none;
+        border-radius: 50px;
         cursor: pointer;
-        width: 100%;
-        transition: all 0.4s ease;
-        box-shadow: 0 0 30px rgba(0, 153, 255, 0.5);
+        transition: 0.3s;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        width: 100%;
         margin-top: 1rem;
-        position: relative;
-        overflow: hidden;
     }
 
-    .submit-btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
     }
 
-    .submit-btn:hover::before {
-        width: 300px;
-        height: 300px;
-    }
-
-    .submit-btn:hover {
-        background: linear-gradient(135deg, #00ffff, #0099ff);
-        transform: translateY(-5px);
-        box-shadow: 0 10px 60px rgba(0, 255, 255, 0.8);
-        border-color: #ffffff;
-    }
-
-    .submit-btn:active {
-        transform: translateY(-2px);
-    }
-
- /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.95);
-            border-top: 2px solid #0099ff;
-            box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
-            padding: 2rem 1rem;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .footer-section h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .footer-section p, .footer-section a {
-            color: #ffffff;
-            opacity: 0.8;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a:hover {
-            opacity: 1;
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-    /* ==================== RESPONSIVE DESIGN ==================== */
+    /* ==================== 9. RESPONSIVE ==================== */
     @media (max-width: 768px) {
-        .container {
-            padding: 1rem 0.5rem;
-        }
-
-        .hero {
-            padding: 2rem 0;
-        }
-
-        .content-section {
-            padding: 2rem 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            flex-direction: column;
-            text-align: center;
-            gap: 0.5rem;
-        }
-
-        .phases-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .pricing-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .pricing-card {
-            padding: 2.5rem 1.5rem;
-        }
-
-        .pricing-featured {
-            transform: scale(1);
-        }
-
-        .pricing-featured:hover {
-            transform: translateY(-15px) scale(1.02);
-        }
-
-        .pricing-ribbon {
-            font-size: 0.85rem;
-            padding: 0.5rem 3rem;
-            top: 20px;
-            right: -35px;
-        }
-
-        .pricing-amount {
-            font-size: 2.8rem;
-        }
-
-        .cta-section {
-            padding: 3rem 1.5rem;
-        }
-
-        .radio-group {
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-container {
-            padding: 2rem 1.5rem;
-        }
-
-        .feature-list li {
-            padding: 1rem;
-        }
+        .pricing-featured { transform: scale(1); margin: 2rem 0; }
+        .hero-subtitle { font-size: 1rem; }
+        .phase-number { font-size: 2rem; }
     }
 
-    @media (max-width: 480px) {
-        .pricing-ribbon {
-            font-size: 0.75rem;
-            padding: 0.4rem 2.5rem;
-        }
-
-        .pricing-amount {
-            font-size: 2.5rem;
-        }
-
-        .submit-btn {
-            font-size: 1.1rem;
-            padding: 1.2rem 2rem;
-        }
-    }
-
-    /* Accessibility - Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-            scroll-behavior: auto !important;
-        }
-    }
-
-    /* Print Styles */
-    @media print {
-        body::before,
-        .bg-logo,
-        .bg-frame {
-            display: none;
-        }
-
-        .pricing-card {
-            break-inside: avoid;
-        }
-    }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 </style>
-    <!-- Navbar CSS -->
-    <link rel="stylesheet" href="css/navbar.css">
 </head>
 
 <body>
-<iframe src="scroll.html" class="bg-frame"></iframe>
-
-  <!-- ===== NAVBAR ===== -->
-  <header id="header">
-    <div class="header-content">
-      <div class="logo-section">
-        <a href="index.html">
-          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" 
-               alt="AQA Logo" class="logo">
-        </a>
-      </div>
-
-      <!-- Desktop Navigation -->
-      <nav class="nav-menu" id="navMenu">
-        <a href="tarifs.html" class="nav-link">Tarifs</a>
-        <a href="groupes.html" class="nav-link">Groupes</a>
-        <a href="piscines.html" class="nav-link">Piscines</a>
-        <a href="infos.html" class="nav-link">Infos</a>
-        <a href="events.html" class="nav-link">Events</a>
-        <a href="webtv.html" class="nav-link">WebTV</a>
-        <a href="store.html" class="nav-link">Store</a>
-      </nav>
-
-      <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
-        <div class="menu-toggle" onclick="toggleMobileMenu()">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Menu Overlay -->
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-    <div class="menu-close" onclick="toggleMobileMenu()">
-      <span></span><span></span>
-    </div>
-    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
-    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
-    <a href="infos.html" class="mobile-nav-link">Infos</a>
-    <a href="events.html" class="mobile-nav-link">Events</a>
-    <a href="webtv.html" class="mobile-nav-link">WebTV</a>
-    <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
-  </div>
-  <!-- ===== /NAVBAR ===== -->
-
+    <iframe src="scroll.html" class="bg-frame"></iframe>
     <div class="bg-logo"></div>
-  
+
+    <header id="header">
+        <div class="header-content">
+          <div class="logo-section">
+            <a href="index.html">
+              <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+            </a>
+          </div>
+          <nav class="nav-menu" id="navMenu">
+            <a href="tarifs.html" class="nav-link">Tarifs</a>
+            <a href="groupes.html" class="nav-link">Groupes</a>
+            <a href="piscines.html" class="nav-link">Piscines</a>
+            <a href="infos.html" class="nav-link">Infos</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="phobie.html" class="nav-link active">Formations</a>
+            <a href="store.html" class="nav-link">Store</a>
+          </nav>
+          <div class="right-actions">
+            <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+            <div class="menu-toggle" onclick="toggleMobileMenu()">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
+        <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+        <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+        <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+        <a href="infos.html" class="mobile-nav-link">Infos</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="phobie.html" class="mobile-nav-link">Formations</a>
+        <a href="store.html" class="mobile-nav-link">Store</a>
+        <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+    </div>
+
     <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>AQA Anti-Aquaphobie</h1>
-            <p class="hero-subtitle">Formation Accélérée</p>
-            <img src="https://i.ibb.co/ndXbsZj/AQUAPHOBE-Instagram-Post-20240710-131657-0000-Copy.jpg" 
-                 alt="Formation Anti-Aquaphobie AQA" 
-                 class="hero-image">
-        </section>
-
-        <!-- Objectif Section -->
-        <section class="content-section">
-            <h2 class="section-title">
-                <span class="section-icon">🧠</span>
-                Objectif
-            </h2>
-            <div class="section-content">
-                <p>Aider chaque participant à vaincre sa peur de l'eau et à retrouver confiance, aisance et autonomie dans le milieu aquatique, quel que soit son niveau de départ.</p>
-            </div>
-        </section>
-
-        <!-- Méthode Section -->
-        <section class="content-section">
-            <h2 class="section-title">
-                <span class="section-icon">⚙️</span>
-                Méthode
-            </h2>
-            <div class="section-content">
-                <ul class="feature-list">
-                    <li><strong>Formation accélérée</strong> composée de 4 à 6 séances de deux heures</li>
-                    <li><strong>Encadrement professionnel</strong> par des moniteurs expérimentés, spécialisés dans la gestion de l'aquaphobie</li>
-                    <li><strong>Environnement sécurisé</strong> : séances organisées dans une piscine entièrement sécurisée</li>
-                    <li><strong>Suivi technique AQA</strong> : traçabilité et analyses personnalisées pour chaque participant</li>
-                    <li><strong>Approche scientifique</strong> fondée sur la psychologie comportementale et la progression de la confiance</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Phases du programme Section -->
-        <section class="content-section">
-            <h2 class="section-title">
-                <span class="section-icon">🧭</span>
-                Phases du programme
-            </h2>
-            <div class="phases-grid">
-                <div class="phase-card">
-                    <div class="phase-number">1</div>
-                    <h3 class="phase-title">Contact & Respiration</h3>
-                    <p class="phase-description">Apprivoisement de l'eau, gestion du stress et du souffle</p>
-                </div>
-                <div class="phase-card">
-                    <div class="phase-number">2</div>
-                    <h3 class="phase-title">Contrôle du corps</h3>
-                    <p class="phase-description">Immersion progressive, équilibre et flottabilité</p>
-                </div>
-                <div class="phase-card">
-                    <div class="phase-number">3</div>
-                    <h3 class="phase-title">Autonomie de base</h3>
-                    <p class="phase-description">Déplacements simples, gestion du corps dans l'eau</p>
-                </div>
-                <div class="phase-card">
-                    <div class="phase-number">4</div>
-                    <h3 class="phase-title">Suppression de la phobie</h3>
-                    <p class="phase-description">Confort total dans l'eau, confiance et libération de la peur</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Valeurs AQA Section -->
-        <!--section class="content-section">
-            <h2 class="section-title">
-                <span class="section-icon">🧩</span>
-                Valeurs AQA
-            </h2>
-            <div class="values-container">
-                <div class="value-badge">Science</div>
-                <div class="value-badge">Sécurité</div>
-                <div class="value-badge">Confiance</div>
-                <div class="value-badge">Transformation</div>
-            </div>
-        </section>
         
-        <!-- Tarifs Section -->
-        <section class="content-section">
-            <h2 class="section-title">
-                <span class="section-icon">💰</span>
-                Tarifs
-            </h2>
+        <section class="hero">
+            <h1>Anti-Aquaphobie</h1>
+            <p class="hero-subtitle">Reprenez le contrôle. Redécouvrez l'eau.</p>
+            <div class="hero-image-wrapper">
+                <img src="https://i.ibb.co/ndXbsZj/AQUAPHOBE-Instagram-Post-20240710-131657-0000-Copy.jpg" alt="AQA Formation" class="hero-image">
+            </div>
+        </section>
+
+        <section class="glass-card">
+            <h2 class="section-title">Pourquoi cette formation ?</h2>
+            <div class="method-grid">
+                <div>
+                    <h3 style="color:#fff; margin-bottom:1rem;">L'Objectif</h3>
+                    <p style="color:#ddd; line-height:1.7;">
+                        Notre mission est d'aider chaque participant à vaincre sa peur de l'eau et à retrouver une autonomie totale.
+                        Que vous ayez une appréhension légère ou une phobie profonde, notre méthode progressive vous réconcilie avec le milieu aquatique.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color:#fff; margin-bottom:1rem;">La Méthode AQA</h3>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <div class="feature-item">
+                            <span class="feature-icon">⏱️</span>
+                            <span><strong>Rapide :</strong> Formation accélérée en 4 à 6 séances de 2H.</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🧠</span>
+                            <span><strong>Psychologie :</strong> Approche comportementale et gestion du stress.</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🛡️</span>
+                            <span><strong>Sécurité :</strong> Piscine sécurisée et coachs spécialisés.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-card">
+            <h2 class="section-title">Votre Progression</h2>
+            <div class="phases-container">
+                <div class="phase-card">
+                    <div class="phase-number">01</div>
+                    <h3 class="phase-title">Contact</h3>
+                    <p class="phase-desc">Apprivoisement de l'eau, gestion du stress et exercices de respiration.</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">02</div>
+                    <h3 class="phase-title">Contrôle</h3>
+                    <p class="phase-desc">Immersion progressive, recherche d'équilibre et de flottabilité.</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">03</div>
+                    <h3 class="phase-title">Autonomie</h3>
+                    <p class="phase-desc">Déplacements simples et gestion autonome du corps dans l'eau.</p>
+                </div>
+                <div class="phase-card">
+                    <div class="phase-number">04</div>
+                    <h3 class="phase-title">Libération</h3>
+                    <p class="phase-desc">Suppression de la phobie, confort total et confiance acquise.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title" style="justify-content:center;">Nos Formules</h2>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <div class="pricing-badge">Programme Standard</div>
-                    <div class="pricing-sessions">4 séances</div>
-                    <div class="pricing-duration">2 heures par séance</div>
-                    <div class="pricing-amount">10,500 DA</div>
-                    <div class="pricing-bonus">
-                        🎁 <strong>Lunettes de natation offertes</strong>
-                    </div>
-                    <div class="pricing-description">
-                        Idéal pour surmonter l'aquaphobie légère à modérée
+                    <h3>Programme Standard</h3>
+                    <div class="price-tag">10,500 DA</div>
+                    <div class="price-details">
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 4 Séances de 2 Heures</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Aquaphobie légère / modérée</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 🎁 Lunettes offertes</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="pricing-card pricing-featured">
-                    <div class="pricing-ribbon">Recommandé</div>
-                    <div class="pricing-badge">Programme Intensif</div>
-                    <div class="pricing-sessions">6 séances</div>
-                    <div class="pricing-duration">2 heures par séance</div>
-                    <div class="pricing-amount">15,500 DA</div>
-                    <div class="pricing-bonus">
-                        🎁 <strong>Lunettes de natation + Bonnet offerts</strong>
-                    </div>
-                    <div class="pricing-description">
-                        Pour les phobies plus persistantes nécessitant un accompagnement renforcé
+                    <div class="ribbon">Recommandé</div>
+                    <h3 style="color:var(--primary);">Programme Intensif</h3>
+                    <div class="price-tag">15,500 DA</div>
+                    <div class="price-details">
+                        <ul>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 6 Séances de 2 Heures</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Phobies persistantes</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Accompagnement renforcé</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 🎁 Lunettes + Bonnet offerts</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
-<!-- CTA Section with Form -->
-<section class="cta-section">
-    <h2 class="cta-title">Prêt à commencer ?</h2>
-    <p class="cta-subtitle">Reprenez le contrôle et découvrez le plaisir de l'eau</p>
-    
-    <div class="form-container">
-       <form name="phobie" method="POST" data-netlify="true" id="inscriptionForm" action="/phobie.html">
-  <input type="hidden" name="form-name" value="phobie">
 
-  <div class="form-group">
-    <label for="nomPrenom">Nom et Prénom *</label>
-    <input type="text" id="nomPrenom" name="nomPrenom" required placeholder="Entrez votre nom complet">
-  </div>
+        <section class="cta-wrapper" id="inscription">
+            <h2 class="section-title" style="justify-content:center; margin-bottom:0.5rem;">Inscription Rapide</h2>
+            <p style="color:#aaa;">Places limitées pour garantir la qualité de l'encadrement.</p>
+            
+            <form name="phobie" method="POST" data-netlify="true" id="inscriptionForm" action="/phobie.html">
+                <input type="hidden" name="form-name" value="phobie">
+                
+                <div class="form-grid">
+                    <div>
+                        <label style="display:block; color:var(--primary); margin-bottom:0.5rem;">Nom et Prénom *</label>
+                        <input type="text" name="nomPrenom" required placeholder="Votre nom complet">
+                    </div>
+                    
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                        <div>
+                            <label style="display:block; color:var(--primary); margin-bottom:0.5rem;">Âge *</label>
+                            <input type="number" name="age" min="16" max="90" required placeholder="Ans">
+                        </div>
+                        <div>
+                            <label style="display:block; color:var(--primary); margin-bottom:0.5rem;">Téléphone *</label>
+                            <input type="tel" name="telephone" required placeholder="05/06/07...">
+                        </div>
+                    </div>
 
-  <div class="form-group">
-    <label for="age">Âge *</label>
-    <input type="number" id="age" name="age" min="1" max="120" required placeholder="Entrez votre âge">
-  </div>
+                    <div>
+                        <label style="display:block; color:var(--primary); margin-bottom:0.5rem;">Genre *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="genre" value="femme" required> Femme
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="genre" value="homme" required> Homme
+                            </label>
+                        </div>
+                    </div>
 
-  <div class="form-group">
-    <label>Genre *</label>
-    <div class="radio-group">
-      <div class="radio-option">
-        <input type="radio" id="homme" name="genre" value="homme" required>
-        <label for="homme">Homme</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" id="femme" name="genre" value="femme" required>
-        <label for="femme">Femme</label>
-      </div>
+                    <button type="submit" class="btn-submit">Valider mon Inscription</button>
+                </div>
+            </form>
+
+            <div id="merciMessage" style="display:none; margin-top:2rem; padding:1rem; border:1px solid var(--primary); border-radius:10px; background:rgba(0,255,255,0.1);">
+                <h3 style="color:var(--primary);">✅ Demande Envoyée !</h3>
+                <p>Notre équipe vous contactera très prochainement pour confirmer votre créneau.</p>
+            </div>
+        </section>
+
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="telephone">Téléphone *</label>
-    <input type="tel" id="telephone" name="telephone" placeholder="+213 XX XX XX XX" required>
-  </div>
+    <footer>
+        <iframe src="footer.html" style="width:100%; border:none; min-height:400px; overflow:hidden;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    </footer>
 
-  <button type="submit" class="submit-btn">👉 Envoyer la demande</button>
-</form>
+    <script src="js/navbar.js"></script>
+    <script>
+        // Form Handling
+        const form = document.getElementById('inscriptionForm');
+        const merci = document.getElementById('merciMessage');
+        const submitBtn = form.querySelector('button[type="submit"]');
 
-<div id="merciMessage" style="display:none; text-align:center; margin-top:20px; color:#007BFF; font-weight:600;">
-  ✅ Merci ! Votre demande a été envoyée avec succès.
-</div>
-</section>
-<footer>
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.style.opacity = '0.7';
 
-<!-- Add this div where you want the footer to appear -->
-<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
-</footer>
+            const formData = new FormData(form);
+            const body = new URLSearchParams(formData).toString();
 
-
-<script src="/js/navbar.js"></script>
-<script>
-(function () {
-  const form = document.getElementById('inscriptionForm');
-  const merci = document.getElementById('merciMessage');
-  const submitBtn = form.querySelector('button[type="submit"]');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    // disable button to prevent double submit
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
-
-    // Build payload
-    const formData = new FormData(form);
-    const body = new URLSearchParams();
-    for (const pair of formData.entries()) body.append(pair[0], pair[1]);
-
-    // Post to the form action (must match deployed page or '/')
-    const postUrl = form.getAttribute('action') || '/';
-
-    fetch(postUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString()
-    })
-    .then(response => {
-      // Netlify returns a 200/204 on success — treat any ok as success
-      if (!response.ok) throw new Error('Network response was not ok');
-      form.style.display = 'none';
-      merci.style.display = 'block';
-    })
-    .catch(err => {
-      console.error('Form submit error:', err);
-      // Fallback: try a normal submit so Netlify still receives it
-      form.removeEventListener('submit', arguments.callee);
-      form.submit();
-    });
-  });
-})();
-
-async function loadFooter() {
-    try {
-        const response = await fetch('footer.html');
-        const footerHTML = await response.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
-    } catch (error) {
-        console.error('Error loading footer:', error);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', loadFooter);
-</script>
+            fetch(form.getAttribute('action'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: body
+            })
+            .then(response => {
+                if (response.ok) {
+                    form.style.display = 'none';
+                    merci.style.display = 'block';
+                    merci.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Une erreur est survenue. Veuillez nous contacter directement.");
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Réessayer';
+            });
+        });
+    </script>
 </body>
 </html>
