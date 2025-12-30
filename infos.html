@@ -126,6 +126,31 @@
     .card-item h3 { -webkit-text-fill-color: #00ffff; text-align: left; font-size: 1.3rem; margin-bottom: 1rem; }
     .card-item p { text-align: left; margin: 0; font-size: 0.95rem; opacity: 0.85; }
 
+    /* Card Button Styling */
+    .card-button {
+      display: block;
+      background: linear-gradient(135deg, #0099ff, #00ffff);
+      color: #000000;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1.5px solid #00ffff;
+      box-shadow: 0 0 12px rgba(0, 153, 255, 0.3);
+      margin-top: 1rem;
+      margin-left: auto;
+      width: max-content;
+    }
+
+    .card-button:hover {
+      background: linear-gradient(135deg, #00ffff, #0099ff);
+      transform: translateY(-1px);
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.5);
+    }
+
     /* Team Specific Styling */
     .coach-avatar {
       width: 50px; height: 50px; background: #00ffff; color: #000;
@@ -245,27 +270,31 @@
         <div class="card-item">
           <h3>Natation Adulte (Zero to Hero)</h3>
           <p>Programme intensif et progressif pour adultes débutants afin de vaincre l'aquaphobie, apprendre à nager et atteindre un niveau avancé avec confiance.</p>
+          <a href="formation.html" class="card-button" style="margin-top: auto;">Plus d'Infos</a>
         </div>
         <div class="card-item">
           <h3>AQA Kids</h3>
           <p>Apprentissage en groupes de 10 avec suivi attentif et détection précoce d'éventuels troubles comme la scoliose.</p>
+          <a href="kids.html" class="card-button" style="margin-top: auto;">En Savoir Plus</a>
         </div>
         <div class="card-item">
           <h3>AQA Event</h3>
           <p>Nage en mer, kayak, équitation, cyclisme, camping et randonnée. Un groupe WhatsApp est disponible pour le suivi en temps réel.</p>
+         
         </div>
         <div class="card-item">
           <h3>AQA Apnea</h3>
           <p>Objectif d'atteindre 4 minutes d'apnée statique. Idéal pour les chasseurs sous-marins et athlètes.</p>
+          <a href="apnea_page.html" class="card-button" style="margin-top: auto;">En Savoir Plus</a>
         </div>
         <div class="card-item">
           <h3>AQA Wellness</h3>
           <p>Renforcement musculaire, correction posturale et relaxation pour un corps équilibré.</p>
-        </div>
+        <a href="well.html" class="card-button" style="margin-top: auto;">Découvrir</a> </div>
         <div class="card-item">
           <h3>Other Sports</h3>
           <p>Le concept AQA s'élargit pour intégrer de nouvelles disciplines sportives régulièrement.</p>
-        </div>
+        <a href="activities.html" class="card-button" style="margin-top: auto;">Découvrir</a> </div>
         <div class="card-item">
           <h3>AQA Store</h3>
           <p>Boutique dédiée à l'équipement sportif et aux produits AQA.</p>
@@ -280,12 +309,12 @@
       </div>
       <p>Ce qui distingue AQA, c'est son approche scientifique et structurée soutenue par la technologie numérique.</p>
       <div class="method-grid">
-        <div class="card-item"><h3>Suivi Technique</h3><p>Vidéos d'analyse détaillées et rapports réguliers pour ajuster l'entraînement.</p></div>
-        <div class="card-item"><h3>Suivi Physique</h3><p>Inspection des obstacles physiques et adaptation de l'entraînement.</p></div>
-        <div class="card-item"><h3>Groupes Restreints</h3><p>Pédagogie personnalisée favorisant l'apprentissage collectif.</p></div>
-        <div class="card-item"><h3>AQA App</h3><p>Suivi en temps réel de votre progression et assiduité sur smartphone.</p></div>
+        <div class="card-item"><h3>Suivi Technique</h3><p>Vidéos d'analyse détaillées et rapports réguliers pour ajuster l'entraînement.</p><a href="" class="card-button" style="margin-top: auto;">En Savoir Plus</a></div>
+        <div class="card-item"><h3>Suivi Physique</h3><p>Inspection des obstacles physiques et adaptation de l'entraînement.</p><a href="" class="card-button" style="margin-top: auto;">Détails</a></div>
+        <div class="card-item"><h3>Groupes Restreints</h3><p>Pédagogie personnalisée favorisant l'apprentissage collectif.</p><a href="groupes.html" class="card-button" style="margin-top: auto;">En Savoir Plus</a></div>
+        <div class="card-item"><h3>AQA App</h3><p>Suivi en temps réel de votre progression et assiduité sur smartphone.</p><a href="app.html" class="card-button" style="margin-top: auto;">Découvrir</a></div>
         <div class="card-item"><h3>Video Analysis</h3><p>Montage au ralenti avec schémas des erreurs et narration du coach.</p></div>
-        <div class="card-item"><h3>Accompagnement Évolutif</h3><p>Un parcours adaptatif du débutant complet jusqu'au niveau professionnel.</p></div>
+        <div class="card-item"><h3>Accompagnement Évolutif</h3><p>Un parcours adaptatif du débutant complet jusqu'au niveau professionnel.</p><a href="team.html" class="card-button" style="margin-top: auto;">Parcours</a></div>
       </div>
     </section>
 
@@ -331,7 +360,7 @@
   </main>
 
   <footer>
-    <iframe src="footer.html" style="width:100%; border:none; min-height:500px;"></iframe>
+    <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
   </footer>
 
   <script src="js/navbar.js"></script>

@@ -79,7 +79,7 @@
       --glow-color: rgba(255,255,0,0.3);
     }
 
-    .theme-babies {
+    .theme-apnea {
       --primary-color: #00ff0d;
       --secondary-color: #08a100;
       --shadow-color: rgba(159, 255, 186, 0.6);
@@ -537,7 +537,7 @@ body {
               <strong>Enfants</strong><br>
               <small>5-12 ans</small>
             </div>
-            <div class="category-option" data-category="babies">
+            <div class="category-option" data-category="apnea">
               <strong>AQA apnea</strong><br>
               <small>atteindre 4min en apnéé</small>
             </div>
@@ -685,8 +685,7 @@ body {
     </div>
   </div>
 <footer>
-<!-- Add this div where you want the footer to appear -->
-<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
 </footer>
 
   <!-- Enhanced JavaScript with Configuration -->
@@ -815,7 +814,7 @@ const AQA_CATEGORIES = {
     function applyTheme(category) {
       const body = document.body;
       // Remove all theme classes
-      body.classList.remove('theme-women', 'theme-teens', 'theme-kids', 'theme-babies');
+      body.classList.remove('theme-women', 'theme-teens', 'theme-kids', 'theme-apnea');
       
       // Apply specific theme
       switch(category) {
@@ -828,8 +827,8 @@ const AQA_CATEGORIES = {
         case 'kids':
           body.classList.add('theme-kids');
           break;
-        case 'babies':
-          body.classList.add('theme-babies');
+        case 'apnea':
+          body.classList.add('theme-apnea');
           break;
         // men keeps default blue theme
       }
@@ -915,14 +914,15 @@ const AQA_CATEGORIES = {
       document.getElementById('inscriptionForm').addEventListener('submit', handleSubmit);
     }
 
-    function updateGroupeOptions() {
+function updateGroupeOptions() {
       const groupeSelect = document.getElementById('groupeSelect');
       const noGroupsMessage = document.getElementById('noGroupsMessage');
       
       // Clear previous options
       groupeSelect.innerHTML = '<option value="">-- Sélectionnez vos groupes --</option>';
       
-      // Check if category, piscine, and frequency are selected
+      // Check if category, piscine are selected. 
+      // Note: For kids, we might force frequency, so we check that too.
       if (!selectedData.category || !selectedData.piscine || !selectedData.frequency) {
         groupeSelect.disabled = true;
         groupeSelect.innerHTML = '<option value="">-- Complétez d\'abord les étapes précédentes --</option>';
@@ -967,8 +967,42 @@ const AQA_CATEGORIES = {
       // Hide current step
       currentStep.classList.remove('active');
 
-      // Update step number
-      currentStepNum += direction;
+      // Calculate next step
+      let nextStepNum = currentStepNum + direction;
+      const isKids = selectedData.category === 'kids';
+
+      // --- LOGIC FOR KIDS: REMOVE STARTER & SKIP FREQUENCY ---
+
+      // 1. Handle Formula Step (Step 3) display for Kids
+      if (nextStepNum === 3) {
+        const starterCard = document.querySelector('.formule-card[data-formule="starter"]');
+        if (starterCard) {
+          // Hide Starter if Kids, Show otherwise
+          starterCard.style.display = isKids ? 'none' : 'block';
+        }
+      }
+
+      // 2. Handle Skipping Frequency Step (Step 4) for Kids
+      if (isKids && nextStepNum === 4) {
+        if (direction > 0) {
+          // Moving Forward: Skip 4, Go to 5
+          nextStepNum = 5;
+          
+          // Force Frequency to 1 for Kids (They select 1 group package)
+          selectedData.frequency = 1;
+          document.getElementById('maxGroups').textContent = "1";
+          
+          // Trigger group update immediately since we skipped the frequency click
+          updateGroupeOptions(); 
+        } else {
+          // Moving Backward: Skip 4, Go to 3
+          nextStepNum = 3;
+        }
+      }
+
+      // --- END KIDS LOGIC ---
+
+      currentStepNum = nextStepNum;
 
       // Show new step
       const newStep = document.getElementById(`step${currentStepNum}`);
@@ -983,7 +1017,6 @@ const AQA_CATEGORIES = {
         updateSummary();
       }
     }
-
     function validateCurrentStep() {
       switch (currentStepNum) {
         case 1:

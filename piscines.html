@@ -562,10 +562,6 @@
       <button class="cta-button" onclick="location.href='https://wa.me/213540454907'">Contactez nous</button>
     </div>
   </div>
-<footer>
-<!-- Add this div where you want the footer to appear -->
-<iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
-</footer>
 
   <!-- Load navbar logic, then inject and init -->
   <script src="/js/navbar.js"></script>
@@ -600,15 +596,10 @@
       }
       lastTouchEnd = now;
     }, false);
-    async function loadFooter() {
-    try {
-        const response = await fetch('footer.html');
-        const footerHTML = await response.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
-    } catch (error) {
-        console.error('Error loading footer:', error);
-    }
-}
   </script>
+
+  <footer>
+    <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+  </footer>
 </body>
 </html>
