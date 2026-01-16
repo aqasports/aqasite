@@ -841,7 +841,7 @@
             return;
         }
 
-        // Calculate availability stats for injection
+        // Calculate availability stats
         let totalCapacity = 0;
         let totalTaken = 0;
         docGroupes.querySelectorAll('.schedule-card').forEach(card => {
@@ -857,15 +857,11 @@
         // Clean expanded classes
         docGroupes.querySelectorAll('.expanded').forEach(e => e.classList.remove('expanded'));
         
-        // Inject availability dashboard into the container
-        const container = docGroupes.querySelector('.container');
-        if(container) {
-            // Remove any existing dashboard first
-            const existingDash = container.querySelector('.avail-dashboard-section');
-            if(existingDash) existingDash.remove();
-            
-            let dashboardHTML = `
-        <section class="avail-dashboard-section" style="background: #1a1a1a; border: 2px solid #00ffff; border-radius: 6px; padding: 15px; margin-bottom: 20px;">
+        let outG = "<!DOCTYPE html>\n" + docGroupes.documentElement.outerHTML;
+        outG = outG.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, "");
+        
+        // Inject dashboard after the legend div using string replacement
+        const dashboardHTML = `<section class="avail-dashboard-section" style="background: #1a1a1a; border: 2px solid #00ffff; border-radius: 6px; padding: 15px; margin-bottom: 20px; margin-top: 20px;">
             <div style="color: #00ffff; font-weight: bold; font-size: 12px; text-transform: uppercase; margin-bottom: 10px;">Disponibilité Globale</div>
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
                 <div style="background: #0f0f0f; border: 1px solid #333; padding: 10px; border-radius: 4px; text-align: center;">
@@ -889,12 +885,11 @@
                 <div style="font-size:10px; color:#aaa; margin-top:5px; text-align:right;">${occupancy.toFixed(1)}%</div>
             </div>
         </section>`;
-            
-            container.insertAdjacentHTML('afterbegin', dashboardHTML);
-        }
         
-        let outG = "<!DOCTYPE html>\n" + docGroupes.documentElement.outerHTML;
-        outG = outG.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, "");
+        // Find the legend closing div and insert after it
+        const legendRegex = /(<div class="legend">[\s\S]*?<\/div>\s*)/;
+        outG = outG.replace(legendRegex, '$1\n' + dashboardHTML);
+        
         document.getElementById('outGroupes').value = outG;
         markAsChanged();
 
