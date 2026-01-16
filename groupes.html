@@ -237,13 +237,18 @@
         <section class="coach-section">
             <h3 class="coach-title">Coach Youcef</h3>
             <div class="schedule-grid">
-                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="9">
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
                     <div class="day-time"><span class="day">Samedi</span><span class="time">21h - 23h</span></div>
-                    <div class="group-type type-g10">Groupe de 10</div>
+                    <div class="group-type type-complet">Complet</div>
                     <div class="card-details">
-                        <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
-                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
-                    </div>
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">10</span>/10</span>
+                    <span style="color:#ff3333">COMPLET</span>
+                </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar danger" style="width:100%"></div>
+                </div>
+            </div>
                 </div>
                 <div class="schedule-card" onclick="toggleAvailability(this)" data-total="5" data-taken="5">
                     <div class="day-time"><span class="day">Mardi</span><span class="time">21h - 23h</span></div>
@@ -299,15 +304,27 @@
         <section class="coach-section">
             <h3 class="coach-title">Coach Nouga</h3>
             <div class="schedule-grid">
-                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="3">
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="4">
                     <div class="day-time"><span class="day">Mercredi</span><span class="time">21h30-23h30</span></div>
                     <div class="group-type type-apnea">Apnée</div>
                     <div class="card-details">
-                        <div class="details-row"><span>Inscrits: <span class="val-taken">3</span>/10</span><span>Restant: <span class="highlight-val val-left">7</span></span></div>
-                        <div class="mini-progress-wrap"><div class="mini-progress-bar" style="width: 30%;"></div></div>
-                    </div>
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">4</span>/10</span>
+                    <span>Restant: <span class="highlight-val val-left">6</span></span>
+                </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar " style="width:40%"></div>
                 </div>
             </div>
+                </div>
+            <div class="schedule-card" onclick="toggleAvailability(this)" data-taken="0" data-total="10" data-base-type="type-g10">
+            <div class="day-time"><span class="day">Samedi</span><span class="time">10h - 12h</span></div>
+            <div class="group-type type-g10">Groupe de 10</div>
+            <div class="card-details">
+                <div class="details-row"><span>Inscrits: <span class="val-taken">0</span>/10</span><span class="val-left">10 restantes</span></div>
+                <div class="mini-progress-wrap"><div class="mini-progress-bar"></div></div>
+            </div>
+        </div></div>
         </section>
 
         <section class="coach-section">
@@ -334,13 +351,18 @@
                 </div>
             </div>
                 </div>
-                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="9">
                     <div class="day-time"><span class="day">Mardi</span><span class="time">21h - 23h</span></div>
-                    <div class="group-type type-complet">Complet</div>
+                    <div class="group-type type-g10">Groupe de 10</div>
                     <div class="card-details">
-                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
-                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
-                    </div>
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">9</span>/10</span>
+                    <span>Restant: <span class="highlight-val val-left">1</span></span>
+                </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar " style="width:90%"></div>
+                </div>
+            </div>
                 </div>
                 <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="6">
                     <div class="day-time"><span class="day">Jeudi</span><span class="time">7h - 9h</span></div>
@@ -384,13 +406,18 @@
                         <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
                     </div>
                 </div>
-                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="10">
+                <div class="schedule-card" onclick="toggleAvailability(this)" data-total="10" data-taken="9">
                     <div class="day-time"><span class="day">Samedi</span><span class="time">21h - 23h</span></div>
-                    <div class="group-type type-complet">Complet</div>
+                    <div class="group-type type-g10">Groupe de 10</div>
                      <div class="card-details">
-                         <div class="details-row"><span>Inscrits: <span class="val-taken">10</span>/10</span><span style="color:#ff3333">COMPLET</span></div>
-                        <div class="mini-progress-wrap"><div class="mini-progress-bar danger" style="width:100%"></div></div>
-                    </div>
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">9</span>/10</span>
+                    <span>Restant: <span class="highlight-val val-left">1</span></span>
+                </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar " style="width:90%"></div>
+                </div>
+            </div>
                 </div>
             </div>
         </section>
