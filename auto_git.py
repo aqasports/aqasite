@@ -1,6 +1,11 @@
 import subprocess
 import random
 import sys
+import os
+
+# Ensure UTF-8 output encoding on Windows
+if sys.platform == 'win32':
+    os.environ['PYTHONIOENCODING'] = 'utf-8'
 
 def get_random_commit_message():
     """Generates a random commit message from a predefined list."""
@@ -21,7 +26,7 @@ def get_random_commit_message():
 def run_git_automation():
     # 1. Generate the random message
     commit_msg = get_random_commit_message()
-    print(f"🚀 Preparing to commit with message: '{commit_msg}'")
+    print(f"Preparing to commit with message: '{commit_msg}'")
 
     try:
         # 2. git add .
@@ -36,10 +41,10 @@ def run_git_automation():
         print("--- Pushing to origin main ---")
         subprocess.run(["git", "push", "origin", "main"], check=True)
         
-        print("\n✅ Success! Changes pushed to main.")
+        print("\nSuccess: Changes pushed to main.")
 
     except subprocess.CalledProcessError as e:
-        print(f"\n❌ Error occurred: {e}")
+        print(f"\nError occurred: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>AQA SYSTEM ADMIN v3</title>
+    <style>
+        :root { --cyan: #00ffff; --bg: #0f0f0f; --card: #1e1e1e; --border: #333; --green: #28a745; }
+        body { font-family: 'Segoe UI', monospace; background: var(--bg); color: #ccc; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        
+        /* HEADER */
+        .header { background: #111; padding: 10px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; height: 50px; }
+        .h-title { font-weight: 800; color: var(--cyan); margin: 0; letter-spacing: 1px; }
+        .badge { background: #333; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 10px; }
+
+        /* MAIN LAYOUT */
+        .main { display: flex; flex: 1; overflow: hidden; }
+        
+        /* COLUMNS */
+        .col { display: flex; flex-direction: column; border-right: 1px solid var(--border); padding: 15px; }
+        .col-inputs { display: none; } /* Hidden - no source code view needed */
+        .col-editor { flex: 1; background: #0f0f0f; overflow-y: auto; }
+        .col-outputs { display: none; } /* Hidden - no output code view needed */
+
+        /* TITLES */
+        h4 { color: #fff; border-bottom: 1px solid #444; padding-bottom: 8px; margin: 0 0 15px 0; font-size: 12px; text-transform: uppercase; }
+
+        /* INPUTS */
+        .input-group { margin-bottom: 20px; display: flex; flex-direction: column; flex: 1; }
+        label { font-size: 11px; font-weight: bold; color: var(--cyan); margin-bottom: 5px; display: block; }
+        textarea { background: #000; color: #0f0; border: 1px solid #333; font-family: monospace; font-size: 10px; padding: 8px; resize: none; flex: 1; border-radius: 4px; }
+        textarea:focus { outline: none; border-color: var(--cyan); }
+
+        /* VISUAL EDITOR CARDS */
+        .coach-wrap { background: var(--card); border: 1px solid #333; margin-bottom: 20px; border-radius: 6px; overflow: hidden; }
+        .coach-header { background: #252525; padding: 10px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .coach-name { background: transparent; border: none; color: white; font-weight: bold; font-size: 14px; width: 200px; }
+        
+        .group-list { padding: 10px; }
+        .group-item { 
+            display: grid; grid-template-columns: 1fr 1fr 50px 50px 90px 30px; gap: 5px; 
+            background: #000; padding: 8px; margin-bottom: 5px; border-radius: 4px; align-items: center; 
+            border-left: 3px solid #555; transition: 0.2s;
+        }
+        .group-item.full { border-left-color: #ff4444; opacity: 0.7; }
+        .group-item.avail { border-left-color: var(--green); }
+
+        /* CONTROLS */
+        input.edit-field { background: #222; border: 1px solid #444; color: #fff; padding: 4px; border-radius: 3px; width: 100%; font-size: 11px; }
+        select.edit-field { background: #222; border: 1px solid #444; color: #fff; padding: 4px; border-radius: 3px; width: 100%; font-size: 11px; }
+        
+        /* BUTTONS */
+        .btn { border: none; padding: 8px; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 11px; text-transform: uppercase; transition: 0.2s; width: 100%; margin-top: 5px; }
+        .btn-load { background: #333; color: #fff; border: 1px solid #555; }
+        .btn-load:hover { background: #444; }
+        .btn-gen { background: var(--cyan); color: #000; height: 40px; font-size: 13px; box-shadow: 0 0 15px rgba(0,255,255,0.2); }
+        .btn-gen:hover { background: #fff; }
+        .btn-add { background: transparent; border: 1px dashed #555; color: #888; margin-top: 10px; }
+        .btn-add:hover { border-color: var(--cyan); color: var(--cyan); }
+        .btn-del { background: #ff4444; color: #fff; width: auto; padding: 4px 8px; }
+        .btn-copy { background: #222; color: var(--green); border: 1px solid var(--green); margin-top: 5px; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div style="display:flex; align-items:center">
+            <h2 class="h-title">AQA MANAGER</h2>
+            <span class="badge">V3.1 LIVE EDITOR</span>
+            <span id="statusBadge" class="badge" style="background:#ff6b6b; margin-left:5px; display:none;">CHANGES UNSAVED</span>
+            <span id="syncBadge" class="badge" style="background:#51cf66; margin-left:5px;">READY</span>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <button onclick="document.getElementById('fileGroupes').click()" style="padding:5px 10px; background:#333; border:1px solid #555; color:#fff; cursor:pointer; border-radius:3px; font-size:11px;">📁 Charger groupes.html</button>
+            <button onclick="document.getElementById('fileInscrip').click()" style="padding:5px 10px; background:#333; border:1px solid #555; color:#fff; cursor:pointer; border-radius:3px; font-size:11px;">📁 Charger inscription.html</button>
+            <button id="deployBtn" onclick="deployAll()" style="padding:5px 10px; background:#28a745; border:none; color:#fff; cursor:pointer; border-radius:3px; font-weight:bold; font-size:11px; display:none;">✓ DEPLOY</button>
+            <div id="deployActions" style="display:none; margin-left:10px;">
+                <button class="btn" style="background:#444;color:#fff;padding:6px 8px;font-size:11px;" onclick="copyDeployCmd()">Copy run command</button>
+                <a id="openFolderLink" href="#" onclick="openProjectFolder();return false;" style="margin-left:6px; color:#fff; background:#555; padding:6px 8px; border-radius:4px; text-decoration:none; font-size:11px;">Open folder</a>
+                <a id="downloadBatch" href="deploy-now.bat" download style="margin-left:6px; color:#fff; background:#333; padding:6px 8px; border-radius:4px; text-decoration:none; font-size:11px;">Download batch</a>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="fileGroupes" accept=".html" style="display:none;" onchange="loadFileGroupes(this)">
+    <input type="file" id="fileInscrip" accept=".html" style="display:none;" onchange="loadFileInscrip(this)">
+
+    <div class="main">
+        <div class="col col-inputs">
+            <h4>1. Fichiers Sources (Auto-Chargés)</h4>
+            
+            <div class="input-group">
+                <label>Groupes.html <span id="groupesMod" style="color:#ff9999; font-weight:bold;"></span></label>
+                <textarea id="inGroupes" placeholder="Chargement..."></textarea>
+                <button class="btn btn-load" onclick="refreshGroupes()">🔄 RECHARGER</button>
+            </div>
+            
+            <div class="input-group">
+                <label>Inscription.html <span id="inscripMod" style="color:#ff9999; font-weight:bold;"></span></label>
+                <textarea id="inInscrip" placeholder="Chargement..."></textarea>
+                <button class="btn btn-load" onclick="refreshInscrip()">🔄 RECHARGER</button>
+            </div>
+
+            <button class="btn btn-load" onclick="loadFiles()" style="background:#555; display:none;" id="legacyLoadBtn">CHARGER LES DONNÉES (Manuel)</button>
+        </div>
+
+        <div class="col col-editor">
+            <h4>2. Éditeur Visuel (Hommes - Reghaia)</h4>
+            <div id="editorContainer">
+                <p style="text-align:center; margin-top:50px; color:#444;">En attente des fichiers...</p>
+            </div>
+            <button class="btn btn-add" onclick="addCoach()" id="btnAddCoach" style="display:none; padding:15px;">+ AJOUTER UN NOUVEAU COACH</button>
+        </div>
+
+        <div class="col col-outputs">
+            <h4>3. Code Généré & Déploiement</h4>
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <button class="btn btn-gen" onclick="generateAll()" style="flex:1;">GÉNÉRER</button>
+                <button class="btn btn-gen" id="deployBtn2" onclick="deployAll()" style="flex:1; background:#28a745; display:none;">DÉPLOYER TOUT</button>
+            </div>
+
+            <div class="input-group">
+                <label>Nouveau 'groupes.html'</label>
+                <textarea id="outGroupes" readonly></textarea>
+                <button class="btn btn-copy" onclick="copyTo('outGroupes')">📋 COPIER</button>
+                <button class="btn btn-copy" onclick="downloadFile('outGroupes', 'groupes.html')" style="background:#28a745;">💾 TÉLÉCHARGER</button>
+            </div>
+
+            <div class="input-group">
+                <label>Nouveau 'inscription.html'</label>
+                <textarea id="outInscrip" readonly></textarea>
+                <button class="btn btn-copy" onclick="copyTo('outInscrip')">📋 COPIER</button>
+                <button class="btn btn-copy" onclick="downloadFile('outInscrip', 'inscription.html')" style="background:#28a745;">💾 TÉLÉCHARGER</button>
+            </div>
+
+            <div style="background:#1a1a1a; padding:10px; border-radius:4px; margin-top:15px; border:1px solid #333;">
+                <p style="margin:0; font-size:10px; color:#888; line-height:1.5;">
+                    <strong>🚀 Workflow:</strong><br>
+                    ✓ Fichiers auto-chargés au démarrage<br>
+                    ✓ Modifiez via l'éditeur visuel<br>
+                    ✓ Générez le code mis à jour<br>
+                    ✓ Déployez avec un clic
+                </p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // --- FILE MANAGEMENT ---
+    const FILE_PATHS = {
+        groupes: 'groupes.html',
+        inscrip: 'inscription.html'
+    };
+
+    let fileTimestamps = {
+        groupes: null,
+        inscrip: null
+    };
+
+    let hasUnsavedChanges = false;
+
+    // --- STATE MANAGEMENT ---
+    let docGroupes = null;  // DOM Parser for groupes.html
+    let txtInscrip = "";    // Raw text for inscription.html
+    let originalGroupes = "";  // Store original for comparison
+    let originalInscrip = "";  // Store original for comparison
+
+    // --- INITIALIZATION ---
+    window.addEventListener('load', () => {
+        autoLoadFiles();
+    });
+
+    // --- FILE UPLOAD HANDLERS ---
+    function loadFileGroupes(input) {
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('inGroupes').value = e.target.result;
+                originalGroupes = e.target.result;
+                loadFiles();
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    function loadFileInscrip(input) {
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('inInscrip').value = e.target.result;
+                originalInscrip = e.target.result;
+                loadFiles();
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    // --- AUTO-LOAD FILES FROM FOLDER ---
+    async function autoLoadFiles() {
+        console.log("🔄 Attempting to auto-load files...");
+        
+        try {
+            // Try to load groupes.html
+            const groupesResp = await fetch(FILE_PATHS.groupes);
+            if (groupesResp.ok) {
+                const groupesText = await groupesResp.text();
+                document.getElementById('inGroupes').value = groupesText;
+                originalGroupes = groupesText;
+                fileTimestamps.groupes = new Date().toLocaleTimeString();
+                updateGroupesStatus(true);
+                console.log("✓ groupes.html loaded");
+            } else {
+                throw new Error(`HTTP ${groupesResp.status}`);
+            }
+        } catch (err) {
+            console.warn("⚠ Could not load groupes.html:", err.message);
+            updateGroupesStatus(false);
+        }
+
+        try {
+            // Try to load inscription.html
+            const inscripResp = await fetch(FILE_PATHS.inscrip);
+            if (inscripResp.ok) {
+                const inscripText = await inscripResp.text();
+                document.getElementById('inInscrip').value = inscripText;
+                originalInscrip = inscripText;
+                fileTimestamps.inscrip = new Date().toLocaleTimeString();
+                updateInscripStatus(true);
+                console.log("✓ inscription.html loaded");
+            } else {
+                throw new Error(`HTTP ${inscripResp.status}`);
+            }
+        } catch (err) {
+            console.warn("⚠ Could not load inscription.html:", err.message);
+            updateInscripStatus(false);
+        }
+
+        // Try to parse after loading
+        if (document.getElementById('inGroupes').value && document.getElementById('inInscrip').value) {
+            loadFiles();
+        }
+    }
+
+    // --- REFRESH INDIVIDUAL FILES ---
+    async function refreshGroupes() {
+        try {
+            const resp = await fetch(FILE_PATHS.groupes + '?t=' + Date.now());
+            if (resp.ok) {
+                const text = await resp.text();
+                document.getElementById('inGroupes').value = text;
+                originalGroupes = text;
+                updateGroupesStatus(true);
+                loadFiles();
+            }
+        } catch (err) {
+            console.warn("Refresh error:", err.message);
+        }
+    }
+
+    async function refreshInscrip() {
+        try {
+            const resp = await fetch(FILE_PATHS.inscrip + '?t=' + Date.now());
+            if (resp.ok) {
+                const text = await resp.text();
+                document.getElementById('inInscrip').value = text;
+                originalInscrip = text;
+                updateInscripStatus(true);
+                loadFiles();
+            }
+        } catch (err) {
+            console.warn("Refresh error:", err.message);
+        }
+    }
+
+    async function refreshFiles() {
+        try {
+            await Promise.all([refreshGroupes(), refreshInscrip()]);
+        } catch (err) {
+            console.warn("Files refresh error:", err);
+        }
+    }
+
+    // --- STATUS UPDATES ---
+    function updateGroupesStatus(loaded) {
+        const el = document.getElementById('groupesStatus');
+        if (loaded) {
+            el.textContent = '✓ Chargé';
+            el.style.color = '#51cf66';
+        } else {
+            el.textContent = '⚠ Manuel';
+            el.style.color = '#ffa94d';
+        }
+    }
+
+    function updateInscripStatus(loaded) {
+        const el = document.getElementById('inscripStatus');
+        if (loaded) {
+            el.textContent = '✓ Chargé';
+            el.style.color = '#51cf66';
+        } else {
+            el.textContent = '⚠ Manuel';
+            el.style.color = '#ffa94d';
+        }
+    }
+
+    // --- CHANGE TRACKING ---
+    function markAsChanged() {
+        if (!hasUnsavedChanges) {
+            hasUnsavedChanges = true;
+            document.getElementById('statusBadge').style.display = 'inline-block';
+            document.getElementById('deployBtn').style.display = 'inline-block';
+            document.getElementById('deployBtn2').style.display = 'inline-block';
+        }
+    }
+
+    function markAsDeployed() {
+        hasUnsavedChanges = false;
+        document.getElementById('statusBadge').style.display = 'none';
+        document.getElementById('deployBtn').style.display = 'none';
+        document.getElementById('deployBtn2').style.display = 'none';
+        alert("✓ Fichiers déployés avec succès!\n\nTéléchargez et remplacez les fichiers originaux.");
+        // Reveal quick deploy actions
+        const actions = document.getElementById('deployActions');
+        if (actions) actions.style.display = 'inline-block';
+    }
+
+    // --- DEPLOY / EXPORT ---
+    async function deployAll() {
+        if (!docGroupes || !txtInscrip) {
+            alert("⚠ Fichiers non chargés");
+            return;
+        }
+
+        // Generate contents and keep in localStorage
+        saveFiles();
+
+        // Preferred flow: write files into selected project directory and create a trigger file
+        const ok = await saveFilesToFolder();
+        if (ok) {
+            alert("✓ Fichiers enregistrés et déclencheur créé. Assurez-vous que 'deploy-watcher.ps1' est en cours d'exécution sur la machine.\n\nLe push s'exécutera automatiquement.");
+            markAsDeployed();
+            return;
+        }
+
+        // Fallback: try File System Access per-file, then downloads
+        const written = await saveFilesToDisk();
+        if (written) {
+            alert("✓ Fichiers enregistrés sur le disque.\n\nExécutez deploy-now.bat dans le dossier du projet pour pousser les changements (double-cliquez).");
+            markAsDeployed();
+            return;
+        }
+
+        alert("Les fichiers ont été téléchargés en local. Remplacez manuellement les originaux ou exécutez deploy-now.bat après avoir placé les fichiers dans le dossier du projet.");
+    }
+
+    function saveFiles() {
+        // Generate groupes.html
+        docGroupes.querySelectorAll('.expanded').forEach(e => e.classList.remove('expanded'));
+        let groupesContent = "<!DOCTYPE html>\n" + docGroupes.documentElement.outerHTML;
+        groupesContent = groupesContent.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, "");
+
+        // Generate inscription.html
+        let jsArray = [];
+        const sections = docGroupes.querySelectorAll('.coach-section');
+        sections.forEach(sec => {
+            const coach = sec.querySelector('.coach-title').innerText.replace('Coach ', '').trim();
+            const cards = sec.querySelectorAll('.schedule-card');
+            
+            cards.forEach(card => {
+                const taken = parseInt(card.getAttribute('data-taken'));
+                const total = parseInt(card.getAttribute('data-total'));
+                
+                if(taken < total) {
+                    const day = card.querySelector('.day').innerText;
+                    const time = card.querySelector('.time').innerText;
+                    
+                    const cleanDay = day.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const cleanTime = time.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const cleanCoach = coach.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const id = `men_reg_${cleanCoach}_${cleanDay}_${cleanTime}`;
+                    
+                    const label = `${day} - ${time} - ${coach}`;
+                    jsArray.push(`      { id: "${id}", label: "${label}" }`);
+                }
+            });
+        });
+
+        const arrString = "[\n" + jsArray.join(",\n") + "\n    ]";
+        let inscripContent = txtInscrip;
+        const regex = /(men\s*:\s*\{\s*reghaia\s*:\s*)\[[\s\S]*?\](?=\s*,|\s*\})/;
+        
+        if(regex.test(inscripContent)) {
+            inscripContent = inscripContent.replace(regex, `$1${arrString}`);
+        }
+
+        // Save to localStorage temporarily
+        localStorage.setItem('groupesContent', groupesContent);
+        localStorage.setItem('inscripContent', inscripContent);
+    }
+
+    async function saveFilesToDisk() {
+        // Use File System Access API when available to overwrite originals
+        const groupesContent = localStorage.getItem('groupesContent');
+        const inscripContent = localStorage.getItem('inscripContent');
+
+        if (!groupesContent || !inscripContent) {
+            alert('No generated files found. Please generate first.');
+            return false;
+        }
+
+        if (window.showOpenFilePicker) {
+            try {
+                // Ask user to pick the existing groupes.html to overwrite
+                const [gHandle] = await window.showOpenFilePicker({
+                    multiple: false,
+                    types: [{ description: 'HTML files', accept: { 'text/html': ['.html'] } }],
+                    excludeAcceptAllOption: false
+                });
+                const gw = await gHandle.createWritable();
+                await gw.write(groupesContent);
+                await gw.close();
+
+                // Ask user to pick inscription.html
+                const [iHandle] = await window.showOpenFilePicker({
+                    multiple: false,
+                    types: [{ description: 'HTML files', accept: { 'text/html': ['.html'] } }],
+                    excludeAcceptAllOption: false
+                });
+                const iw = await iHandle.createWritable();
+                await iw.write(inscripContent);
+                await iw.close();
+
+                return true;
+            } catch (e) {
+                console.error('FS API write failed:', e);
+                return false;
+            }
+        } else {
+            // Fallback: trigger downloads for both files
+            downloadString(groupesContent, 'groupes.html');
+            downloadString(inscripContent, 'inscription.html');
+            return false;
+        }
+    }
+
+    async function saveFilesToFolder() {
+        const groupesContent = localStorage.getItem('groupesContent');
+        const inscripContent = localStorage.getItem('inscripContent');
+
+        if (!groupesContent || !inscripContent) {
+            alert('No generated files found. Please generate first.');
+            return false;
+        }
+
+        if (!window.showDirectoryPicker) {
+            return false;
+        }
+
+        try {
+            const dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+
+            // write groupes.html
+            const gHandle = await dirHandle.getFileHandle('groupes.html', { create: true });
+            const gw = await gHandle.createWritable();
+            await gw.write(groupesContent);
+            await gw.close();
+
+            // write inscription.html
+            const iHandle = await dirHandle.getFileHandle('inscription.html', { create: true });
+            const iw = await iHandle.createWritable();
+            await iw.write(inscripContent);
+            await iw.close();
+
+            // create deploy trigger
+            const tHandle = await dirHandle.getFileHandle('deploy.trigger', { create: true });
+            const tw = await tHandle.createWritable();
+            await tw.write(new Date().toISOString());
+            await tw.close();
+
+            return true;
+        } catch (e) {
+            console.error('saveFilesToFolder failed:', e);
+            return false;
+        }
+    }
+
+    function runGitDeploy() {
+        fetch('http://localhost:3001/deploy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                groupes: localStorage.getItem('groupesContent'),
+                inscrip: localStorage.getItem('inscripContent')
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                alert("✅ Déployé avec succès!\n\nGit push effectué automatiquement.");
+                markAsDeployed();
+            } else {
+                alert("❌ Erreur: " + data.message);
+            }
+        })
+        .catch(e => {
+            alert("❌ Serveur non accessible\n\nVeuillez d'abord lancer: node deploy-server.js\n\nErreur: " + e.message);
+        });
+    }
+
+    // --- FILE DOWNLOAD ---
+    function downloadFile(textareaId, filename) {
+        const content = document.getElementById(textareaId).value;
+        const blob = new Blob([content], { type: 'text/html;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // --- 1. LOAD & PARSE ---
+    function loadFiles() {
+        const t1 = document.getElementById('inGroupes').value;
+        const t2 = document.getElementById('inInscrip').value;
+
+        if(!t1 || !t2) {
+            alert("⚠ Fichiers manquants. Vérifiez le chargement automatique ou chargez manuellement.");
+            return;
+        }
+
+        // Parse HTML
+        const parser = new DOMParser();
+        docGroupes = parser.parseFromString(t1, 'text/html');
+        txtInscrip = t2;
+
+        // Track changes
+        txtInscrip = t2;
+        renderEditor();
+        document.getElementById('btnAddCoach').style.display = 'block';
+        
+        // Set modification indicators
+        const groupesMod = document.getElementById('groupesMod');
+        const inscripMod = document.getElementById('inscripMod');
+        
+        if (t1 !== originalGroupes) {
+            groupesMod.textContent = ' ⚠ MODIFIÉ';
+            markAsChanged();
+        } else {
+            groupesMod.textContent = '';
+        }
+        
+        if (t2 !== originalInscrip) {
+            inscripMod.textContent = ' ⚠ MODIFIÉ';
+            markAsChanged();
+        } else {
+            inscripMod.textContent = '';
+        }
+    }
+
+    // --- 2. RENDER UI ---
+    function renderEditor() {
+        const container = document.getElementById('editorContainer');
+        container.innerHTML = '';
+
+        const sections = docGroupes.querySelectorAll('.coach-section');
+        
+        sections.forEach((section, cIdx) => {
+            const coachName = section.querySelector('.coach-title').innerText;
+            
+            // Wrapper
+            const wrap = document.createElement('div');
+            wrap.className = 'coach-wrap';
+            
+            // Header
+            wrap.innerHTML = `
+                <div class="coach-header">
+                    <input type="text" class="coach-name" value="${coachName}" onchange="updateCoachName(${cIdx}, this.value)">
+                    <button class="btn btn-del" onclick="delCoach(${cIdx})">SUPPR</button>
+                </div>
+                <div class="group-list" id="list-${cIdx}"></div>
+                <button class="btn btn-add" style="margin:0 10px 10px; width:auto" onclick="addGroup(${cIdx})">+ CRÉNEAU</button>
+            `;
+
+            // Groups
+            const list = wrap.querySelector(`#list-${cIdx}`);
+            const cards = section.querySelectorAll('.schedule-card');
+
+            cards.forEach((card, gIdx) => {
+                const day = card.querySelector('.day').innerText;
+                const time = card.querySelector('.time').innerText;
+                const taken = parseInt(card.getAttribute('data-taken') || 0);
+                const total = parseInt(card.getAttribute('data-total') || 10);
+                
+                // Detect type logic
+                let type = 'type-g10';
+                const cl = card.querySelector('.group-type').classList;
+                if(cl.contains('type-max5')) type = 'type-max5';
+                if(cl.contains('type-apnea')) type = 'type-apnea';
+                if(cl.contains('type-elite')) type = 'type-elite';
+
+                const isFull = taken >= total;
+
+                const row = document.createElement('div');
+                row.className = `group-item ${isFull ? 'full' : 'avail'}`;
+                row.innerHTML = `
+                    <input type="text" class="edit-field" value="${day}" onchange="updateData(${cIdx},${gIdx},'.day',this.value)">
+                    <input type="text" class="edit-field" value="${time}" onchange="updateData(${cIdx},${gIdx},'.time',this.value)">
+                    <input type="number" class="edit-field" value="${taken}" onchange="updateAttr(${cIdx},${gIdx},'data-taken',this.value)">
+                    <input type="number" class="edit-field" value="${total}" onchange="updateAttr(${cIdx},${gIdx},'data-total',this.value)">
+                    <select class="edit-field" onchange="updateType(${cIdx},${gIdx},this.value)">
+                        <option value="type-g10" ${type=='type-g10'?'selected':''}>G10</option>
+                        <option value="type-max5" ${type=='type-max5'?'selected':''}>Max5</option>
+                        <option value="type-apnea" ${type=='type-apnea'?'selected':''}>Apnée</option>
+                        <option value="type-elite" ${type=='type-elite'?'selected':''}>Elite</option>
+                    </select>
+                    <button class="btn btn-del" onclick="delGroup(${cIdx},${gIdx})">X</button>
+                `;
+                list.appendChild(row);
+            });
+
+            container.appendChild(wrap);
+        });
+    }
+
+    // --- 3. UPDATES (DOM MANIPULATION) ---
+
+    function updateCoachName(cIdx, val) {
+        docGroupes.querySelectorAll('.coach-section')[cIdx].querySelector('.coach-title').innerText = val;
+        markAsChanged();
+    }
+
+    function updateData(cIdx, gIdx, selector, val) {
+        docGroupes.querySelectorAll('.coach-section')[cIdx].querySelectorAll('.schedule-card')[gIdx].querySelector(selector).innerText = val;
+        markAsChanged();
+        renderEditor(); // Re-render to update visuals if needed
+    }
+
+    function updateAttr(cIdx, gIdx, attr, val) {
+        const card = docGroupes.querySelectorAll('.coach-section')[cIdx].querySelectorAll('.schedule-card')[gIdx];
+        card.setAttribute(attr, val);
+        markAsChanged();
+        refreshCardVisuals(card); // Update the "Complet" badge logic in the hidden DOM
+        renderEditor(); // Refresh Admin UI colors
+    }
+
+    function updateType(cIdx, gIdx, val) {
+        const card = docGroupes.querySelectorAll('.coach-section')[cIdx].querySelectorAll('.schedule-card')[gIdx];
+        card.setAttribute('data-base-type', val); // Save intent
+        markAsChanged();
+        refreshCardVisuals(card);
+    }
+
+    function addCoach() {
+        const name = "Nouveau Coach";
+        const newSec = docGroupes.createElement('section');
+        newSec.className = 'coach-section';
+        newSec.innerHTML = `<h3 class="coach-title">${name}</h3><div class="schedule-grid"></div>`;
+        
+        // Append to container
+        const cont = docGroupes.querySelector('.container');
+        // Try to insert before floating button if exists
+        const btn = cont.querySelector('.floating-btn');
+        if(btn) cont.insertBefore(newSec, btn);
+        else cont.appendChild(newSec);
+
+        markAsChanged();
+        renderEditor();
+    }
+
+    function delCoach(cIdx) {
+        if(confirm("Supprimer ce coach ?")) {
+            docGroupes.querySelectorAll('.coach-section')[cIdx].remove();
+            markAsChanged();
+            renderEditor();
+        }
+    }
+
+    function addGroup(cIdx) {
+        const grid = docGroupes.querySelectorAll('.coach-section')[cIdx].querySelector('.schedule-grid');
+        const card = docGroupes.createElement('div');
+        card.className = "schedule-card";
+        card.setAttribute('onclick', 'toggleAvailability(this)');
+        card.setAttribute('data-taken', 0);
+        card.setAttribute('data-total', 10);
+        card.setAttribute('data-base-type', 'type-g10');
+        
+        card.innerHTML = `
+            <div class="day-time"><span class="day">Samedi</span><span class="time">10h - 12h</span></div>
+            <div class="group-type type-g10">Groupe de 10</div>
+            <div class="card-details">
+                <div class="details-row"><span>Inscrits: <span class="val-taken">0</span>/10</span><span class="val-left">10 restantes</span></div>
+                <div class="mini-progress-wrap"><div class="mini-progress-bar"></div></div>
+            </div>
+        `;
+        grid.appendChild(card);
+        markAsChanged();
+        renderEditor();
+    }
+
+    function delGroup(cIdx, gIdx) {
+        if(confirm("Supprimer ?")) {
+            docGroupes.querySelectorAll('.coach-section')[cIdx].querySelectorAll('.schedule-card')[gIdx].remove();
+            markAsChanged();
+            renderEditor();
+        }
+    }
+
+    // Logic to sync CSS classes in groupes.html based on data
+    function refreshCardVisuals(card) {
+        const taken = parseInt(card.getAttribute('data-taken'));
+        const total = parseInt(card.getAttribute('data-total'));
+        
+        // Determine type
+        let base = card.getAttribute('data-base-type');
+        if(!base) {
+            const cl = card.querySelector('.group-type').classList;
+            if(cl.contains('type-max5')) base = 'type-max5';
+            else if(cl.contains('type-apnea')) base = 'type-apnea';
+            else if(cl.contains('type-elite')) base = 'type-elite';
+            else base = 'type-g10';
+        }
+
+        const typeEl = card.querySelector('.group-type');
+        const isFull = taken >= total;
+
+        // Update Badge
+        if(isFull) {
+            typeEl.className = "group-type type-complet";
+            typeEl.innerText = "Complet";
+        } else {
+            typeEl.className = `group-type ${base}`;
+            const map = {'type-g10': 'Groupe de 10', 'type-max5': 'Groupe de 5', 'type-apnea': 'Apnée', 'type-elite': 'Elite'};
+            typeEl.innerText = map[base] || 'Groupe';
+        }
+
+        // Update Details
+        const details = card.querySelector('.card-details');
+        if(details) {
+            details.innerHTML = `
+                <div class="details-row">
+                    <span>Inscrits: <span class="val-taken">${taken}</span>/${total}</span>
+                    ${isFull ? '<span style="color:#ff3333">COMPLET</span>' : `<span>Restant: <span class="highlight-val val-left">${total-taken}</span></span>`}
+                </div>
+                <div class="mini-progress-wrap">
+                    <div class="mini-progress-bar ${isFull?'danger':''}" style="width:${(taken/total)*100}%"></div>
+                </div>
+            `;
+        }
+    }
+
+    // --- 4. GENERATION LOGIC ---
+    function generateAll() {
+        if (!docGroupes || !txtInscrip) {
+            alert("⚠ Les fichiers ne sont pas chargés. Veuillez les charger d'abord.");
+            return;
+        }
+
+        // A. Generate Groupes.html
+        // Clean expanded classes
+        docGroupes.querySelectorAll('.expanded').forEach(e => e.classList.remove('expanded'));
+        let outG = "<!DOCTYPE html>\n" + docGroupes.documentElement.outerHTML;
+        outG = outG.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, "");
+        document.getElementById('outGroupes').value = outG;
+        markAsChanged();
+
+        // B. Generate Inscription.html
+        // 1. Extract ONLY available groups from docGroupes (Men / Reghaia context)
+        let jsArray = [];
+        const sections = docGroupes.querySelectorAll('.coach-section');
+        sections.forEach(sec => {
+            const coach = sec.querySelector('.coach-title').innerText.replace('Coach ', '').trim();
+            const cards = sec.querySelectorAll('.schedule-card');
+            
+            cards.forEach(card => {
+                const taken = parseInt(card.getAttribute('data-taken'));
+                const total = parseInt(card.getAttribute('data-total'));
+                
+                // FILTER: Only add if not full
+                if(taken < total) {
+                    const day = card.querySelector('.day').innerText;
+                    const time = card.querySelector('.time').innerText;
+                    
+                    // ID Generation (normalize text)
+                    const cleanDay = day.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const cleanTime = time.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const cleanCoach = coach.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const id = `men_reg_${cleanCoach}_${cleanDay}_${cleanTime}`;
+                    
+                    // Label Generation
+                    const label = `${day} - ${time} - ${coach}`;
+                    
+                    jsArray.push(`      { id: "${id}", label: "${label}" }`);
+                }
+            });
+        });
+
+        // 2. Inject into text
+        // Look for the AQA_GROUPS object structure
+        // Specifically targeting: men: { reghaia: [ ... ] }
+        const arrString = "[\n" + jsArray.join(",\n") + "\n    ]";
+        
+        let newInscrip = txtInscrip;
+        
+        // Improved regex: More flexible to handle various whitespace and formatting
+        // Matches: men: { reghaia: [ ... until ] followed by , or }
+        const regex = /(men\s*:\s*\{\s*reghaia\s*:\s*)\[[\s\S]*?\](?=\s*,|\s*\})/;
+        
+        if(regex.test(newInscrip)) {
+            newInscrip = newInscrip.replace(regex, `$1${arrString}`);
+            document.getElementById('outInscrip').value = newInscrip;
+            markAsChanged();
+            markAsChanged();
+        } else {
+            alert("✗ Erreur: Impossible de trouver la structure 'men: { reghaia: [] }' dans inscription.html.\n\nVérifiez le format du fichier.");
+            console.warn("Regex failed. Pattern: men: { reghaia: [ ... ] }");
+            document.getElementById('outInscrip').value = "Erreur de formatage. Vérifiez la console.";
+        }
+    }
+
+    function copyTo(id) {
+        const el = document.getElementById(id);
+        el.select();
+        navigator.clipboard.writeText(el.value);
+        alert("✓ Copié dans le presse-papiers!");
+    }
+
+    // --- DEPLOY ACTION HELPERS ---
+    function copyDeployCmd() {
+        const cmd = `cd "C:\\Users\\dell\\Desktop\\aqasportsdotpro" && .\\deploy-now.bat`;
+        navigator.clipboard.writeText(cmd).then(() => {
+            alert('Command copied to clipboard:\n' + cmd);
+        }).catch(() => {
+            prompt('Copy this command and run it in PowerShell:', cmd);
+        });
+    }
+
+    function openProjectFolder() {
+        const folderUrl = 'file:///C:/Users/dell/Desktop/aqasportsdotpro/';
+        try {
+            window.open(folderUrl);
+        } catch (e) {
+            alert('Cannot open folder automatically. Path:\n' + folderUrl);
+        }
+    }
+
+</script>
+</body>
+</html>
