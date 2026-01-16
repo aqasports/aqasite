@@ -59,6 +59,16 @@
         .btn-del { background: #ff4444; color: #fff; width: auto; padding: 4px 8px; }
         .btn-copy { background: #222; color: var(--green); border: 1px solid var(--green); margin-top: 5px; }
 
+        /* AVAILABILITY DASHBOARD */
+        .avail-dashboard { background: #1a1a1a; border: 2px solid #00ffff; border-radius: 6px; padding: 15px; margin-bottom: 20px; }
+        .avail-title { color: var(--cyan); font-weight: bold; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; }
+        .avail-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        .avail-stat { background: #0f0f0f; border: 1px solid #333; padding: 10px; border-radius: 4px; text-align: center; }
+        .avail-label { font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; }
+        .avail-value { font-size: 20px; font-weight: bold; color: var(--cyan); }
+        .avail-bar { background: #333; border-radius: 4px; height: 8px; margin-top: 10px; overflow: hidden; }
+        .avail-bar-fill { background: linear-gradient(90deg, #28a745, #00ffff); height: 100%; transition: width 0.3s ease; }
+
         /* SCROLLBAR */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #111; }
@@ -110,6 +120,30 @@
 
         <div class="col col-editor">
             <h4>2. Éditeur Visuel (Hommes - Reghaia)</h4>
+            <div id="availDashboard" class="avail-dashboard">
+                <div class="avail-title">Disponibilité Globale</div>
+                <div class="avail-row">
+                    <div class="avail-stat">
+                        <div class="avail-label">Capacité Totale</div>
+                        <div class="avail-value" id="totalCapacity">0</div>
+                    </div>
+                    <div class="avail-stat">
+                        <div class="avail-label">Inscrits</div>
+                        <div class="avail-value" id="totalTaken">0</div>
+                    </div>
+                    <div class="avail-stat">
+                        <div class="avail-label">Disponibles</div>
+                        <div class="avail-value" id="totalAvail">0</div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div class="avail-label" style="margin-bottom: 8px;">Taux d'occupation</div>
+                    <div class="avail-bar">
+                        <div class="avail-bar-fill" id="occupancyBar" style="width: 0%"></div>
+                    </div>
+                    <div style="font-size:10px; color:#aaa; margin-top:5px; text-align:right;" id="occupancyPercent">0%</div>
+                </div>
+            </div>
             <div id="editorContainer">
                 <p style="text-align:center; margin-top:50px; color:#444;">En attente des fichiers...</p>
             </div>
@@ -634,6 +668,7 @@
 
             container.appendChild(wrap);
         });
+        updateAvailabilityDashboard(); // Update dashboard after rendering
     }
 
     // --- 3. UPDATES (DOM MANIPULATION) ---
@@ -654,6 +689,7 @@
         card.setAttribute(attr, val);
         markAsChanged();
         refreshCardVisuals(card); // Update the "Complet" badge logic in the hidden DOM
+        updateAvailabilityDashboard(); // Update availability stats
         renderEditor(); // Refresh Admin UI colors
     }
 
@@ -662,6 +698,7 @@
         card.setAttribute('data-base-type', val); // Save intent
         markAsChanged();
         refreshCardVisuals(card);
+        updateAvailabilityDashboard(); // Update availability stats
     }
 
     function addCoach() {
@@ -678,6 +715,7 @@
         else cont.appendChild(newSec);
 
         markAsChanged();
+        updateAvailabilityDashboard(); // Update availability stats
         renderEditor();
     }
 
@@ -685,6 +723,7 @@
         if(confirm("Supprimer ce coach ?")) {
             docGroupes.querySelectorAll('.coach-section')[cIdx].remove();
             markAsChanged();
+            updateAvailabilityDashboard(); // Update availability stats
             renderEditor();
         }
     }
@@ -708,6 +747,7 @@
         `;
         grid.appendChild(card);
         markAsChanged();
+        updateAvailabilityDashboard(); // Update availability stats
         renderEditor();
     }
 
@@ -715,6 +755,7 @@
         if(confirm("Supprimer ?")) {
             docGroupes.querySelectorAll('.coach-section')[cIdx].querySelectorAll('.schedule-card')[gIdx].remove();
             markAsChanged();
+            updateAvailabilityDashboard(); // Update availability stats
             renderEditor();
         }
     }
@@ -766,6 +807,31 @@
                 </div>
             `;
         }
+    }
+
+    // --- UPDATE AVAILABILITY DASHBOARD ---
+    function updateAvailabilityDashboard() {
+        if (!docGroupes) return;
+        
+        let totalCapacity = 0;
+        let totalTaken = 0;
+        
+        // Sum all groups' capacity and taken
+        docGroupes.querySelectorAll('.schedule-card').forEach(card => {
+            const total = parseInt(card.getAttribute('data-total')) || 0;
+            const taken = parseInt(card.getAttribute('data-taken')) || 0;
+            totalCapacity += total;
+            totalTaken += taken;
+        });
+        
+        const totalAvail = totalCapacity - totalTaken;
+        const occupancy = totalCapacity > 0 ? (totalTaken / totalCapacity) * 100 : 0;
+        
+        document.getElementById('totalCapacity').innerText = totalCapacity;
+        document.getElementById('totalTaken').innerText = totalTaken;
+        document.getElementById('totalAvail').innerText = totalAvail;
+        document.getElementById('occupancyBar').style.width = occupancy.toFixed(1) + '%';
+        document.getElementById('occupancyPercent').innerText = occupancy.toFixed(1) + '%';
     }
 
     // --- 4. GENERATION LOGIC ---
