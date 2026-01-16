@@ -841,9 +841,54 @@
             return;
         }
 
+        // Calculate availability stats for injection
+        let totalCapacity = 0;
+        let totalTaken = 0;
+        docGroupes.querySelectorAll('.schedule-card').forEach(card => {
+            const total = parseInt(card.getAttribute('data-total')) || 0;
+            const taken = parseInt(card.getAttribute('data-taken')) || 0;
+            totalCapacity += total;
+            totalTaken += taken;
+        });
+        const totalAvail = totalCapacity - totalTaken;
+        const occupancy = totalCapacity > 0 ? (totalTaken / totalCapacity) * 100 : 0;
+
         // A. Generate Groupes.html
         // Clean expanded classes
         docGroupes.querySelectorAll('.expanded').forEach(e => e.classList.remove('expanded'));
+        
+        // Inject availability dashboard into the container
+        const container = docGroupes.querySelector('.container');
+        let dashboardHTML = `
+        <section class="avail-dashboard-section" style="background: #1a1a1a; border: 2px solid #00ffff; border-radius: 6px; padding: 15px; margin-bottom: 20px;">
+            <div style="color: #00ffff; font-weight: bold; font-size: 12px; text-transform: uppercase; margin-bottom: 10px;">Disponibilité Globale</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                <div style="background: #0f0f0f; border: 1px solid #333; padding: 10px; border-radius: 4px; text-align: center;">
+                    <div style="font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px;">Capacité Totale</div>
+                    <div style="font-size: 20px; font-weight: bold; color: #00ffff;">${totalCapacity}</div>
+                </div>
+                <div style="background: #0f0f0f; border: 1px solid #333; padding: 10px; border-radius: 4px; text-align: center;">
+                    <div style="font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px;">Inscrits</div>
+                    <div style="font-size: 20px; font-weight: bold; color: #00ffff;">${totalTaken}</div>
+                </div>
+                <div style="background: #0f0f0f; border: 1px solid #333; padding: 10px; border-radius: 4px; text-align: center;">
+                    <div style="font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px;">Disponibles</div>
+                    <div style="font-size: 20px; font-weight: bold; color: #00ffff;">${totalAvail}</div>
+                </div>
+            </div>
+            <div style="margin-top: 10px;">
+                <div style="font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 8px;">Taux d'occupation</div>
+                <div style="background: #333; border-radius: 4px; height: 8px; margin-top: 10px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, #28a745, #00ffff); height: 100%; width: ${occupancy.toFixed(1)}%; transition: width 0.3s ease;"></div>
+                </div>
+                <div style="font-size:10px; color:#aaa; margin-top:5px; text-align:right;">${occupancy.toFixed(1)}%</div>
+            </div>
+        </section>`;
+        
+        if(container) {
+            container.insertAdjacentHTML('afterbegin', dashboardHTML);
+        }
+        
         let outG = "<!DOCTYPE html>\n" + docGroupes.documentElement.outerHTML;
         outG = outG.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, "");
         document.getElementById('outGroupes').value = outG;
