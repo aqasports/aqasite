@@ -859,7 +859,12 @@
         
         // Inject availability dashboard into the container
         const container = docGroupes.querySelector('.container');
-        let dashboardHTML = `
+        if(container) {
+            // Remove any existing dashboard first
+            const existingDash = container.querySelector('.avail-dashboard-section');
+            if(existingDash) existingDash.remove();
+            
+            let dashboardHTML = `
         <section class="avail-dashboard-section" style="background: #1a1a1a; border: 2px solid #00ffff; border-radius: 6px; padding: 15px; margin-bottom: 20px;">
             <div style="color: #00ffff; font-weight: bold; font-size: 12px; text-transform: uppercase; margin-bottom: 10px;">Disponibilité Globale</div>
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
@@ -884,8 +889,7 @@
                 <div style="font-size:10px; color:#aaa; margin-top:5px; text-align:right;">${occupancy.toFixed(1)}%</div>
             </div>
         </section>`;
-        
-        if(container) {
+            
             container.insertAdjacentHTML('afterbegin', dashboardHTML);
         }
         
