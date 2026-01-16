@@ -542,6 +542,11 @@
         docGroupes = parser.parseFromString(t1, 'text/html');
         txtInscrip = t2;
 
+        // Sync all card visuals to match their data-taken/data-total attributes
+        docGroupes.querySelectorAll('.schedule-card').forEach(card => {
+            refreshCardVisuals(card);
+        });
+
         // Track changes
         txtInscrip = t2;
         renderEditor();
@@ -719,30 +724,36 @@
         const taken = parseInt(card.getAttribute('data-taken'));
         const total = parseInt(card.getAttribute('data-total'));
         
-        // Determine type
+        // Determine type from data attribute or CSS classes
         let base = card.getAttribute('data-base-type');
         if(!base) {
-            const cl = card.querySelector('.group-type').classList;
-            if(cl.contains('type-max5')) base = 'type-max5';
-            else if(cl.contains('type-apnea')) base = 'type-apnea';
-            else if(cl.contains('type-elite')) base = 'type-elite';
-            else base = 'type-g10';
+            const cl = card.querySelector('.group-type');
+            if(cl) {
+                if(cl.classList.contains('type-max5')) base = 'type-max5';
+                else if(cl.classList.contains('type-apnea')) base = 'type-apnea';
+                else if(cl.classList.contains('type-elite')) base = 'type-elite';
+                else base = 'type-g10';
+            } else {
+                base = 'type-g10';
+            }
         }
 
-        const typeEl = card.querySelector('.group-type');
+        // Core logic: if taken >= total, show "Complet", else show the type
         const isFull = taken >= total;
 
-        // Update Badge
-        if(isFull) {
-            typeEl.className = "group-type type-complet";
-            typeEl.innerText = "Complet";
-        } else {
-            typeEl.className = `group-type ${base}`;
-            const map = {'type-g10': 'Groupe de 10', 'type-max5': 'Groupe de 5', 'type-apnea': 'Apnée', 'type-elite': 'Elite'};
-            typeEl.innerText = map[base] || 'Groupe';
+        const typeEl = card.querySelector('.group-type');
+        if(typeEl) {
+            if(isFull) {
+                typeEl.className = "group-type type-complet";
+                typeEl.innerText = "Complet";
+            } else {
+                typeEl.className = `group-type ${base}`;
+                const map = {'type-g10': 'Groupe de 10', 'type-max5': 'Groupe de 5', 'type-apnea': 'Apnée', 'type-elite': 'Elite'};
+                typeEl.innerText = map[base] || 'Groupe';
+            }
         }
 
-        // Update Details
+        // Update Details row if it exists
         const details = card.querySelector('.card-details');
         if(details) {
             details.innerHTML = `
