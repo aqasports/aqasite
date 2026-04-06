@@ -1,51 +1,57 @@
 import subprocess
-import random
 import sys
 import os
+import datetime
 
 # Ensure UTF-8 output encoding on Windows
 if sys.platform == 'win32':
     os.environ['PYTHONIOENCODING'] = 'utf-8'
 
-def get_random_commit_message():
-    """Generates a random commit message from a predefined list."""
-    messages = [
-        "Fixed a bug that I created",
-        "Updated the code logic",
-        "Minor refactoring",
-        "WIP: Making progress",
-        "Cleaned up some messy code",
-        "Optimized performance",
-        "Updates for the main branch",
-        "Squashing bugs",
-        "Another day, another commit",
-        "Code compilation magic"
-    ]
-    return random.choice(messages)
 
 def run_git_automation():
-    # 1. Generate the random message
-    commit_msg = get_random_commit_message()
-    print(f"Preparing to commit with message: '{commit_msg}'")
+    # Accept an optional commit message as the first argument
+    if len(sys.argv) > 1:
+        commit_msg = " ".join(sys.argv[1:])
+    else:
+        # Default: timestamp-based message so history is always traceable
+        ts = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+        commit_msg = f"update: site content [{ts}]"
+
+    print(f"Commit message: '{commit_msg}'")
 
     try:
-        # 2. git add .
-        print("--- Adding files ---")
-        subprocess.run(["git", "add", "."], check=True)
+        # Stage only tracked changes (safer than 'git add .')
+        # Use 'git add -u' to stage modifications/deletions of tracked files only
+        print("--- Staging tracked changes ---")
+        subprocess.run(["git", "add", "-u"], check=True)
 
-        # 3. git commit -m "..."
+        # Also stage new HTML/CSS/JS/JSON files intentionally (not .env, not .bak)
+        subprocess.run(
+            ["git", "add", "*.html", "css/", "js/", "lang/", "sitemap.xml", "robots.txt"],
+            check=True
+        )
+
+        # Check if there's anything to commit
+        result = subprocess.run(
+            ["git", "diff", "--cached", "--quiet"],
+            capture_output=True
+        )
+        if result.returncode == 0:
+            print("Nothing to commit — working tree clean.")
+            sys.exit(0)
+
         print("--- Committing ---")
         subprocess.run(["git", "commit", "-m", commit_msg], check=True)
 
-        # 4. git push origin main
         print("--- Pushing to origin main ---")
         subprocess.run(["git", "push", "origin", "main"], check=True)
-        
+
         print("\nSuccess: Changes pushed to main.")
 
     except subprocess.CalledProcessError as e:
-        print(f"\nError occurred: {e}")
+        print(f"\nError: {e}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     run_git_automation()

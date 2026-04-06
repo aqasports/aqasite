@@ -1105,7 +1105,7 @@
 </head>
 <body>
     <!-- Floating CTA Button (fixed position, visible on all sections) -->
-    <a href="cards.html" class="floating-btn" aria-label="Voir les nouvelles formules AQA">✨ Nouvelles formules</a>
+    <a href="cards.html" class="floating-btn" aria-label="Voir les nouvelles formules AQA" data-i18n="floating_btn">✨ Nouvelles formules</a>
 
         <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
@@ -1113,7 +1113,7 @@
         <div class="loading-bar-container">
             <div class="loading-bar"></div>
         </div>
-        <div class="loading-text">CHARGEMENT...</div>
+        <div class="loading-text" data-i18n="loading_text">CHARGEMENT...</div>
     </div>
 
 <iframe src="scroll.html" class="bg-frame"></iframe>
@@ -1127,16 +1127,20 @@
         </a>
       </div>
       <nav class="nav-menu" id="navMenu">
-        <a href="tarifs.html" class="nav-link">Tarifs</a>
-        <a href="groupes.html" class="nav-link">Groupes</a>
-        <a href="piscines.html" class="nav-link">Piscines</a>
-        <a href="infos.html" class="nav-link">Infos</a>
-        <a href="events.html" class="nav-link">Events</a>
-        <a href="formation.html" class="nav-link">Formations</a>
-        <a href="store.html" class="nav-link">Store</a>
+        <a href="tarifs.html" class="nav-link" data-i18n="nav_tarifs">Tarifs</a>
+        <a href="groupes.html" class="nav-link" data-i18n="nav_groupes">Groupes</a>
+        <a href="piscines.html" class="nav-link" data-i18n="nav_piscines">Piscines</a>
+        <a href="infos.html" class="nav-link" data-i18n="nav_infos">Infos</a>
+        <a href="events.html" class="nav-link" data-i18n="nav_events">Events</a>
+        <a href="formation.html" class="nav-link" data-i18n="nav_formations">Formations</a>
+        <a href="store.html" class="nav-link" data-i18n="nav_store">Store</a>
       </nav>
       <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="lang-switcher" role="group" aria-label="Language switcher">
+          <button class="lang-btn lang-active" data-lang-btn="fr" aria-label="Français">FR</button>
+          <button class="lang-btn" data-lang-btn="ar" aria-label="العربية">AR</button>
+          <button class="lang-btn" data-lang-btn="en" aria-label="English">EN</button>
+        </div>
         <div class="menu-toggle" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
         </div>
@@ -1148,14 +1152,19 @@
     <div class="menu-close" onclick="toggleMobileMenu()">
       <span></span><span></span>
     </div>
-    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-    <a href="groupes.html" class="mobile-nav-link">Groupes</a>
-    <a href="piscines.html" class="mobile-nav-link">Piscines</a>
-    <a href="infos.html" class="mobile-nav-link">Infos</a>
-    <a href="events.html" class="mobile-nav-link">Events</a>
-    <a href="formation.html" class="mobile-nav-link">Formations</a>
-    <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+    <a href="tarifs.html" class="mobile-nav-link" data-i18n="nav_tarifs">Tarifs</a>
+    <a href="groupes.html" class="mobile-nav-link" data-i18n="nav_groupes">Groupes</a>
+    <a href="piscines.html" class="mobile-nav-link" data-i18n="nav_piscines">Piscines</a>
+    <a href="infos.html" class="mobile-nav-link" data-i18n="nav_infos">Infos</a>
+    <a href="events.html" class="mobile-nav-link" data-i18n="nav_events">Events</a>
+    <a href="formation.html" class="mobile-nav-link" data-i18n="nav_formations">Formations</a>
+    <a href="store.html" class="mobile-nav-link" data-i18n="nav_store">Store</a>
+    <!-- In-menu language switcher -->
+    <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
+      <button class="lang-btn" data-lang-btn="fr">FR</button>
+      <button class="lang-btn" data-lang-btn="ar">AR</button>
+      <button class="lang-btn" data-lang-btn="en">EN</button>
+    </div>
   </div>
 
     <div class="bg-logo"></div>
@@ -1163,7 +1172,7 @@
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <h1>From Zero to Hero</h1>
+            <h1 data-i18n="hero_title">From Zero to Hero</h1>
             
             <div class="hero-video">
                 <video autoplay muted loop playsinline class="transformation-video">
@@ -1172,7 +1181,7 @@
                 </video>
             </div>
             
-            <p>AQA est un établissement sportif dédié à transformer les débutants en athlètes confiants. Avec des coachs d'élite, un suivi personnalisé et des groupes restreints, nous combinons science et technologie pour garantir une progression réelle – du zéro au pro.</p>
+            <p data-i18n="hero_desc">AQA est un établissement sportif dédié à transformer les débutants en athlètes confiants. Avec des coachs d'élite, un suivi personnalisé et des groupes restreints, nous combinons science et technologie pour garantir une progression réelle – du zéro au pro.</p>
         </section>
 
        <!-- Stats Section -->
@@ -1180,19 +1189,19 @@
     <div class="stats-grid">
         <div class="stat-card" data-delay="0">
             <div class="stat-number" data-target="500" data-suffix="+">0+</div>
-            <div class="stat-label">Athlètes formés</div>
+            <div class="stat-label" data-i18n="stats_athletes">Athlètes formés</div>
         </div>
         <div class="stat-card" data-delay="100">
             <div class="stat-number" data-target="8" data-suffix="+">0+</div>
-            <div class="stat-label">Coachs d'élite</div>
+            <div class="stat-label" data-i18n="stats_coaches">Coachs d'élite</div>
         </div>
         <div class="stat-card" data-delay="200">
             <div class="stat-number" data-target="3" data-suffix="">0</div>
-            <div class="stat-label">Piscines partenaires</div>
+            <div class="stat-label" data-i18n="stats_pools">Piscines partenaires</div>
         </div>
         <div class="stat-card" data-delay="300">
             <div class="stat-number" data-target="98" data-suffix="%">0%</div>
-            <div class="stat-label">Satisfaction client</div>
+            <div class="stat-label" data-i18n="stats_satisfaction">Satisfaction client</div>
         </div>
     </div>
 </section>
@@ -1477,16 +1486,16 @@
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/ksrvQyDK/IMG20240224224823.jpg?w=400" alt="Training session">
+                    <img src="https://i.ibb.co/ksrvQyDK/IMG20240224224823.jpg?w=400" alt="Training session" loading="lazy" width="400" height="400">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/9mz245Tp/IMG20240120224811.jpg?w=400" alt="Swimming pool">
+                    <img src="https://i.ibb.co/9mz245Tp/IMG20240120224811.jpg?w=400" alt="Swimming pool" loading="lazy" width="400" height="400">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/9JzqTWS/images-1-1-1.jpg?w=400" alt="Competition">
+                    <img src="https://i.ibb.co/9JzqTWS/images-1-1-1.jpg?w=400" alt="Competition" loading="lazy" width="400" height="400">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://i.ibb.co/tMZ0R873/IMG20250705080230.jpg?w=400" alt="Kids training">
+                    <img src="https://i.ibb.co/tMZ0R873/IMG20250705080230.jpg?w=400" alt="Kids training" loading="lazy" width="400" height="400">
                 </div>
             </div>
         </section>
@@ -1545,8 +1554,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <script src="js/navbar.js"></script>
-
-<script src="/auto-translate.js"></script>
+<script src="js/i18n.js"></script>
 <script>
        // Loading Screen
     window.addEventListener('load', () => {
