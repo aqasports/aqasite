@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AQA Store — Équipements & Accessoires Aquatiques Algérie</title>
+    <meta name="description" content="Boutique officielle AQA Sports : lunettes, combinaisons, accessoires d'entraînement et guides techniques pour nageurs et plongeurs en Algérie."/>
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="AQA Store — Boutique Officielle"/>
+    <meta property="og:url" content="https://aqasports.pro/store.html"/>
+    <link rel="canonical" href="https://aqasports.pro/store.html"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/navbar.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { background: #000; scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .bg-frame { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; border: none; z-index: -1; pointer-events: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+
+        .page-hero {
+            text-align: center;
+            padding: 5rem 1rem 3rem;
+        }
+        .page-hero h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .page-hero p { font-size: clamp(1rem, 3vw, 1.2rem); color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0,255,255,0.1);
+            border: 1px solid rgba(0,255,255,0.4);
+            color: #00ffff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .section-divider { width: 80px; height: 3px; background: linear-gradient(90deg, #00ffff, #0099ff); margin: 1.5rem auto; border-radius: 2px; }
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        /* Category tabs */
+        .category-tabs {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .category-tab {
+            padding: 0.6rem 1.4rem;
+            border: 1px solid rgba(0,153,255,0.4);
+            border-radius: 25px;
+            background: rgba(0,153,255,0.1);
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .category-tab.active, .category-tab:hover {
+            background: rgba(0,255,255,0.2);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        /* Products grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .product-card {
+            background: rgba(0,153,255,0.05);
+            border: 1px solid rgba(0,153,255,0.25);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,255,255,0.6);
+            box-shadow: 0 0 25px rgba(0,255,255,0.15);
+        }
+        .product-badge {
+            position: absolute;
+            top: 0.8rem; left: 0.8rem;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .product-img {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(0,153,255,0.1), rgba(0,255,255,0.05));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-img svg { width: 70px; height: 70px; stroke: rgba(0,255,255,0.4); }
+        .product-body { padding: 1.2rem; }
+        .product-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+        .product-desc { font-size: 0.83rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
+        .product-footer { display: flex; align-items: center; justify-content: space-between; }
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .product-btn {
+            padding: 0.5rem 1.1rem;
+            background: linear-gradient(135deg, rgba(0,153,255,0.3), rgba(0,255,255,0.3));
+            border: 1px solid rgba(0,255,255,0.5);
+            border-radius: 20px;
+            color: #00ffff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .product-btn:hover {
+            background: linear-gradient(135deg, rgba(0,153,255,0.5), rgba(0,255,255,0.5));
+            transform: scale(1.05);
+        }
+
+        /* CTA section */
+        .store-cta {
+            background: linear-gradient(135deg, rgba(0,153,255,0.1), rgba(0,255,255,0.05));
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        .store-cta h2 { font-size: 1.8rem; font-weight: 700; color: #00ffff; margin-bottom: 1rem; }
+        .store-cta p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; max-width: 500px; margin: 0 auto 1.5rem; }
+        .cta-btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0,255,255,0.5); }
+
+        /* AQA Wear link section */
+        .wear-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: rgba(0,153,255,0.05);
+            border: 1px solid rgba(0,153,255,0.25);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .wear-section svg { width: 60px; height: 60px; stroke: #00ffff; flex-shrink: 0; }
+        .wear-section a {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0,153,255,0.3), rgba(0,255,255,0.3));
+            border: 1px solid rgba(0,255,255,0.4);
+            border-radius: 25px;
+            color: #00ffff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .wear-section a:hover { background: rgba(0,255,255,0.3); }
+
+        @media (max-width: 768px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .wear-section { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <iframe src="scroll.html" class="bg-frame"></iframe>
+
+    <header id="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+                </a>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="tarifs.html" class="nav-link">Tarifs</a>
+                <a href="groupes.html" class="nav-link">Groupes</a>
+                <a href="piscines.html" class="nav-link">Piscines</a>
+                <a href="infos.html" class="nav-link">Infos</a>
+                <a href="events.html" class="nav-link">Events</a>
+                <a href="formation.html" class="nav-link">Formations</a>
+                <a href="store.html" class="nav-link" aria-current="page">Store</a>
+            </nav>
+            <div class="right-actions">
+                <a class="lang-btn" href="ar.html">العربية</a>
+                <div class="menu-toggle" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
+        <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+        <a href="groupes.html" class="mobile-nav-link">Groupes</a>
+        <a href="piscines.html" class="mobile-nav-link">Piscines</a>
+        <a href="infos.html" class="mobile-nav-link">Infos</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="formation.html" class="mobile-nav-link">Formations</a>
+        <a href="store.html" class="mobile-nav-link">Store</a>
+        <a class="mobile-nav-link lang-btn" href="ar.html">العربية</a>
+    </div>
+
+    <div class="page-hero">
+        <span class="hero-badge">🛍️ Boutique Officielle</span>
+        <h1>AQA Store</h1>
+        <div class="section-divider"></div>
+        <p>Équipez-vous avec les accessoires, guides et équipements sélectionnés par nos coachs d'élite.</p>
+    </div>
+
+    <div class="container">
+        <!-- Category tabs -->
+        <div class="category-tabs">
+            <button class="category-tab active">Tout</button>
+            <button class="category-tab">Équipement</button>
+            <button class="category-tab">Guides & Programmes</button>
+            <button class="category-tab">Accessoires</button>
+        </div>
+
+        <!-- Products -->
+        <div class="products-grid">
+            <div class="product-card">
+                <span class="product-badge">⭐ Bestseller</span>
+                <div class="product-img">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M10 9a2 2 0 11-4 0 2 2 0 014 0zM14 14a2 2 0 114 0 2 2 0 01-4 0z"/></svg>
+                </div>
+                <div class="product-body">
+                    <div class="product-name">Lunettes de Natation Pro</div>
+                    <div class="product-desc">Anti-buée, UV400, ajustables — validées par les coachs AQA.</div>
+                    <div class="product-footer">
+                        <span class="product-price">Sur commande</span>
+                        <a href="infos.html" class="product-btn">Commander</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="product-badge">📘 Guide</span>
+                <div class="product-img">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                </div>
+                <div class="product-body">
+                    <div class="product-name">Guide Technique AQA — Natation</div>
+                    <div class="product-desc">Programme PDF complet : drills, exercices, plans d'entraînement débutant → expert.</div>
+                    <div class="product-footer">
+                        <span class="product-price">Bientôt</span>
+                        <a href="infos.html" class="product-btn">Notifier</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="product-badge">🌊 Apnée</span>
+                <div class="product-img">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2s10 4.48 10 10z"/><path d="M12 8v8M8 12h8"/></svg>
+                </div>
+                <div class="product-body">
+                    <div class="product-name">Kit Initiation Apnée</div>
+                    <div class="product-desc">Masque, tuba et palmes sélectionnés par nos instructeurs d'apnée certifiés.</div>
+                    <div class="product-footer">
+                        <span class="product-price">Sur commande</span>
+                        <a href="infos.html" class="product-btn">Commander</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="product-badge">📱 App</span>
+                <div class="product-img">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                </div>
+                <div class="product-body">
+                    <div class="product-name">AQA App — Suivi Personnalisé</div>
+                    <div class="product-desc">Téléchargez l'application mobile AQA pour suivre votre progression et vos séances.</div>
+                    <div class="product-footer">
+                        <span class="product-price">Gratuit</span>
+                        <a href="app.html" class="product-btn">Télécharger</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AQA Wear Link -->
+        <div class="wear-section">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 7l4-3h8l4 3v4l-2 2v8H6v-8l-2-2V7z"/><path d="M9 4l1.5 2h3L15 4"/></svg>
+            <div>
+                <div class="section-title" style="text-align:left; font-size:1.3rem;">AQA Wear 👕</div>
+                <p style="color: rgba(255,255,255,0.7); margin: 0.5rem 0;">Découvrez notre ligne de vêtements techniques AQA : maillots, t-shirts, bonnets et équipement de marque.</p>
+                <a href="wear.html">Voir la collection →</a>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="store-cta">
+            <h2>📦 Commander par WhatsApp</h2>
+            <p>Pour toute commande ou question sur nos produits, contactez-nous directement sur WhatsApp pour un service rapide et personnalisé.</p>
+            <a href="https://wa.me/213540454907?text=Bonjour%2C%20je%20souhaite%20commander%20un%20produit%20AQA%20Store" class="cta-btn" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+        </div>
+    </div>
+
+    <footer>
+        <iframe src="footer.html" style="width:100%; border:none; min-height:700px;" onload="this.style.height=this.contentDocument.body.scrollHeight+'px'"></iframe>
+    </footer>
+
+    <script src="js/navbar.js"></script>
+    <script src="/auto-translate.js"></script>
+</body>
+</html>

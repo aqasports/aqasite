@@ -14,7 +14,15 @@ exports.handler = async function(event, context) {
   try {
     // Parse JSON body (frontend must send JSON, not multipart/form-data)
     const data = JSON.parse(event.body);
-    const { name, email, message, timestamp, audioBase64, audioFilename } = data;
+    const { name, email, message, timestamp, audioBase64, audioFilename, honeypot } = data;
+
+    // Anti-spam: honeypot field must be empty (bots fill it, humans don't)
+    if (honeypot) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ success: true, message: "OK" }) // Silently reject
+      };
+    }
 
     const hasTextContent = !!(name || email || message);
     const hasAudioContent = !!audioBase64;
