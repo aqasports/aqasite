@@ -453,7 +453,12 @@ body {
       </nav>
 
       <div class="right-actions">
-        <a class="lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+                <div class="lang-switcher" role="group" aria-label="Language switcher">
+          <button class="lang-btn" data-lang-btn="fr" aria-label="Français">FR</button>
+          <button class="lang-btn" data-lang-btn="ar" aria-label="العربية">AR</button>
+          <button class="lang-btn" data-lang-btn="en" aria-label="English">EN</button>
+        </div>
+
         <div class="menu-toggle" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
         </div>
@@ -473,7 +478,11 @@ body {
     <a href="events.html" class="mobile-nav-link">Events</a>
     <a href="formation.html" class="mobile-nav-link">Formations</a>
     <a href="store.html" class="mobile-nav-link">Store</a>
-    <a class="mobile-nav-link lang-btn" href="#" onclick="toggleLanguage()">العربية</a>
+        <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
+      <button class="lang-btn" data-lang-btn="fr">FR</button>
+      <button class="lang-btn" data-lang-btn="ar">AR</button>
+      <button class="lang-btn" data-lang-btn="en">EN</button>
+    </div>
   </div>
   <!-- ===== /NAVBAR ===== -->
    
@@ -690,6 +699,7 @@ body {
 
   <!-- Enhanced JavaScript with Configuration -->
    <script src="js/navbar.js"></script>
+<script src="/js/i18n.js"></script>
   <script>
     
 // Configuration-driven data
