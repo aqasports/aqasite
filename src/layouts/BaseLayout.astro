@@ -3,12 +3,16 @@
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string;
+  ogImage?: string;
   currentPage?: string;
 }
 
 const {
   title,
   description = "AQA Sports Academy — Coaching d'élite, natation, apnée en Algérie. Du débutant au professionnel.",
+  keywords = 'natation algérie, apnée, coaching sport, académie natation alger, aqa sports',
+  ogImage = 'https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png',
   currentPage = '',
 } = Astro.props;
 
@@ -25,6 +29,7 @@ const siteUrl = 'https://aqasports.com';
 
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="AQA Sports Academy" />
   <link rel="canonical" href={`${siteUrl}${currentPage}`} />
@@ -34,7 +39,7 @@ const siteUrl = 'https://aqasports.com';
   <meta property="og:url" content={`${siteUrl}${currentPage}`} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" />
+  <meta property="og:image" content={ogImage} />
   <meta property="og:site_name" content="AQA Sports Academy" />
   <meta property="og:locale" content="fr_DZ" />
 
@@ -42,7 +47,7 @@ const siteUrl = 'https://aqasports.com';
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" />
+  <meta name="twitter:image" content={ogImage} />
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
