@@ -1,6 +1,106 @@
 [build]
+  command   = "npm run build"
+  publish   = "dist"
   functions = "netlify/functions"
-  publish = "."
 
 [functions]
   node_bundler = "esbuild"
+
+# ── Redirect old .html URLs → clean URLs (301 permanent) ──────────────────────
+# Protects Google-indexed pages, shared links, and bookmarks from 404ing.
+
+[[redirects]]
+  from   = "/index.html"
+  to     = "/"
+  status = 301
+
+[[redirects]]
+  from   = "/tarifs.html"
+  to     = "/tarifs"
+  status = 301
+
+[[redirects]]
+  from   = "/groupes.html"
+  to     = "/groupes"
+  status = 301
+
+[[redirects]]
+  from   = "/piscines.html"
+  to     = "/piscines"
+  status = 301
+
+[[redirects]]
+  from   = "/infos.html"
+  to     = "/infos"
+  status = 301
+
+[[redirects]]
+  from   = "/inscription.html"
+  to     = "/inscription"
+  status = 301
+
+[[redirects]]
+  from   = "/formation.html"
+  to     = "/formation"
+  status = 301
+
+[[redirects]]
+  from   = "/events.html"
+  to     = "/events"
+  status = 301
+
+[[redirects]]
+  from   = "/store.html"
+  to     = "/store"
+  status = 301
+
+[[redirects]]
+  from   = "/clients.html"
+  to     = "/clients"
+  status = 301
+
+[[redirects]]
+  from   = "/team.html"
+  to     = "/team"
+  status = 301
+
+[[redirects]]
+  from   = "/kids.html"
+  to     = "/kids"
+  status = 301
+
+[[redirects]]
+  from   = "/well.html"
+  to     = "/well"
+  status = 301
+
+[[redirects]]
+  from   = "/cards.html"
+  to     = "/cards"
+  status = 301
+
+[[redirects]]
+  from   = "/wear.html"
+  to     = "/wear"
+  status = 301
+
+[[redirects]]
+  from   = "/activities.html"
+  to     = "/activities"
+  status = 301
+
+[[redirects]]
+  from   = "/app.html"
+  to     = "/app"
+  status = 301
+
+[[redirects]]
+  from   = "/webtv.html"
+  to     = "/webtv"
+  status = 301
+
+# ── Fallback SPA-style: unknown routes → 404 ──────────────────────────────────
+[[redirects]]
+  from   = "/*"
+  to     = "/404.html"
+  status = 404
