@@ -179,6 +179,12 @@ header {
     box-shadow: 0 0 15px rgba(0, 153, 255, 0.5);
     border-color: #0099ff;
 }
+.nav-link.active {
+    background: rgba(0, 255, 255, 0.2);
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    color: #00ffff;
+}
 .right-actions {
     display: flex;
     align-items: center;
@@ -317,6 +323,13 @@ header {
     box-shadow: 
         0 5px 15px rgba(0, 255, 255, 0.4),
         0 0 15px rgba(0, 153, 255, 0.5);
+}
+.mobile-nav-link.active {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 153, 255, 0.3));
+    border-color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
 }
 .menu-close {
     position: absolute;

@@ -137,4 +137,11 @@
     init();
   }
 
+  // Handle Astro view transitions
+  document.addEventListener('astro:page-load', () => {
+    if (Object.keys(_dict).length > 0) {
+      applyToDOM(_dict);
+      applyPageAttrs(_dict);
+    }
+  });
 })();

@@ -41,13 +41,13 @@ const { currentPage = '' } = Astro.props;
 
 <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
-    <a href="/tarifs" class="mobile-nav-link" data-i18n="nav_tarifs">Tarifs</a>
-    <a href="/groupes" class="mobile-nav-link" data-i18n="nav_groupes">Groupes</a>
-    <a href="/piscines" class="mobile-nav-link" data-i18n="nav_piscines">Piscines</a>
-    <a href="/infos" class="mobile-nav-link" data-i18n="nav_infos">Infos</a>
-    <a href="/events" class="mobile-nav-link" data-i18n="nav_events">Events</a>
-    <a href="/formation" class="mobile-nav-link" data-i18n="nav_formation">Formations</a>
-    <a href="/store" class="mobile-nav-link" data-i18n="nav_store">Store</a>
+    <a href="/tarifs" class={`mobile-nav-link${currentPage === '/tarifs' ? ' active' : ''}`} data-i18n="nav_tarifs">Tarifs</a>
+    <a href="/groupes" class={`mobile-nav-link${currentPage === '/groupes' ? ' active' : ''}`} data-i18n="nav_groupes">Groupes</a>
+    <a href="/piscines" class={`mobile-nav-link${currentPage === '/piscines' ? ' active' : ''}`} data-i18n="nav_piscines">Piscines</a>
+    <a href="/infos" class={`mobile-nav-link${currentPage === '/infos' ? ' active' : ''}`} data-i18n="nav_infos">Infos</a>
+    <a href="/events" class={`mobile-nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">Events</a>
+    <a href="/formation" class={`mobile-nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">Formations</a>
+    <a href="/store" class={`mobile-nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">Store</a>
     <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
       <button class="lang-btn" data-lang-btn="fr">FR</button>
       <button class="lang-btn" data-lang-btn="ar">AR</button>

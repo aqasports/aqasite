@@ -1,4 +1,6 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+
 // BaseLayout.astro — manages <head> only. Zero visual changes to pages.
 export interface Props {
   title: string;
@@ -22,6 +24,7 @@ const siteUrl = 'https://aqasports.com';
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <ViewTransitions />
   <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />

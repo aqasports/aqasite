@@ -95,7 +95,10 @@ function injectWhatsAppWidget() {
 }
 
 // ─── DOM Ready ────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('astro:page-load', function () {
+    // Also reset mobile state just in case of transition
+    mobileMenuActive = false;
+    document.body.style.overflow = 'auto';
 
     // Close mobile menu on nav link click
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
