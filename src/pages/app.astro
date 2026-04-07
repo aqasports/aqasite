@@ -409,7 +409,7 @@ import Footer from '../components/Footer.astro';
 
         // Enhanced mobile experience - Add to homescreen
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
+            document.addEventListener('astro:page-load', function() {
                 const addToHomeScreen = document.createElement('div');
                 addToHomeScreen.style.cssText = `
                     position: fixed;

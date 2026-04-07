@@ -149,9 +149,10 @@ import Footer from '../components/Footer.astro';
 
     <script>
         // Loading Screen
-        window.addEventListener('load', () => {
+        document.addEventListener('astro:page-load', () => {
             setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
+                const loader = document.getElementById('loadingScreen');
+                if (loader) loader.classList.add('hidden');
             }, 1200);
         });
 
