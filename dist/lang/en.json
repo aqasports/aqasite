@@ -1,0 +1,67 @@
+{
+  "lang_code": "en",
+  "lang_name": "English",
+  "dir": "ltr",
+  "html_lang": "en",
+
+  "nav_tarifs": "Pricing",
+  "nav_groupes": "Groups",
+  "nav_piscines": "Pools",
+  "nav_infos": "Info",
+  "nav_events": "Events",
+  "nav_formations": "Training",
+  "nav_store": "Store",
+  "nav_home": "Home",
+
+  "hero_title": "From Zero to Hero",
+  "hero_desc": "AQA Sports Academy is dedicated to transforming beginners into confident athletes. With elite coaches, personalised tracking and small groups, we combine science and technology to guarantee real progress – from zero to pro.",
+
+  "stats_athletes": "Athletes trained",
+  "stats_coaches": "Elite coaches",
+  "stats_pools": "Partner pools",
+  "stats_satisfaction": "Client satisfaction",
+
+  "section_services_title": "Our Core Services",
+  "section_services_sub": "Everything you need to begin your transformation",
+
+  "section_formations_title": "Services & Training",
+  "section_formations_sub": "Specialised programmes for all levels",
+
+  "section_media_title": "Structure & Media",
+  "section_media_sub": "Visual coordination and communication for AQA activities.",
+
+  "section_boutique_title": "Store & Technical Support",
+  "section_boutique_sub": "Gear up with AQA accessories and guides",
+
+  "section_reviews_title": "What Our Athletes Say",
+  "section_reviews_sub": "Testimonials of successful transformations",
+
+  "section_gallery_title": "Our Best Moments",
+  "section_gallery_sub": "Discover the AQA spirit in pictures",
+
+  "floating_btn": "✨ New Packages",
+
+  "listen_trigger": "We Listen — Your opinion matters",
+
+  "btn_tarifs": "Pricing",
+  "btn_groupes": "Groups",
+  "btn_inscription": "Register",
+  "btn_infos": "Info",
+  "btn_formules": "AQA Packages",
+  "btn_formations": "Training",
+  "btn_kids": "AQA Kids",
+  "btn_wellness": "AQA Wellness",
+  "btn_events": "AQA Events",
+  "btn_sports": "Sports",
+  "btn_piscines": "Pools",
+  "btn_team": "Team",
+  "btn_adherents": "Members",
+  "btn_webtv": "WebTV",
+  "btn_wear": "AQA Wear",
+  "btn_store": "AQA Store",
+  "btn_app": "AQA App",
+
+  "loading_text": "LOADING...",
+
+  "wa_tooltip": "Contact us on WhatsApp"
+}

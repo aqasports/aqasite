@@ -1,0 +1,67 @@
+{
+  "lang_code": "ar",
+  "lang_name": "العربية",
+  "dir": "rtl",
+  "html_lang": "ar",
+
+  "nav_tarifs": "الأسعار",
+  "nav_groupes": "المجموعات",
+  "nav_piscines": "المسابح",
+  "nav_infos": "معلومات",
+  "nav_events": "الفعاليات",
+  "nav_formations": "التكوين",
+  "nav_store": "المتجر",
+  "nav_home": "الرئيسية",
+
+  "hero_title": "من الصفر إلى المحترف",
+  "hero_desc": "أكا هي مؤسسة رياضية مخصصة لتحويل المبتدئين إلى رياضيين واثقين. بفضل مدربين نخبة، متابعة فنية وبدنية شخصية، ومجموعات محدودة، نجمع بين العلم والتكنولوجيا لضمان تقدم حقيقي – من الصفر إلى المحترف.",
+
+  "stats_athletes": "رياضي مُؤهَّل",
+  "stats_coaches": "مدرب نخبة",
+  "stats_pools": "مسبح شريك",
+  "stats_satisfaction": "رضا العملاء",
+
+  "section_services_title": "خدماتنا الأساسية",
+  "section_services_sub": "كل ما تحتاجه لبدء تحولك الرياضي",
+
+  "section_formations_title": "الخدمات والتكوين",
+  "section_formations_sub": "برامج متخصصة لجميع المستويات",
+
+  "section_media_title": "الهيكل والإعلام",
+  "section_media_sub": "التنسيق المرئي والتواصل لأنشطة أكا.",
+
+  "section_boutique_title": "المتجر والدعم التقني",
+  "section_boutique_sub": "تجهز بالأدوات والمعدات الرياضية من أكا",
+
+  "section_reviews_title": "ماذا يقول رياضيونا",
+  "section_reviews_sub": "شهادات تحول ناجح",
+
+  "section_gallery_title": "أبرز لحظاتنا",
+  "section_gallery_sub": "اكتشف روح أكا بالصور",
+
+  "floating_btn": "✨ عروض جديدة",
+
+  "listen_trigger": "نحن نستمع — رأيك يهمنا",
+
+  "btn_tarifs": "الأسعار",
+  "btn_groupes": "المجموعات",
+  "btn_inscription": "التسجيل",
+  "btn_infos": "معلومات",
+  "btn_formules": "باقات أكا",
+  "btn_formations": "التكوين",
+  "btn_kids": "أكا للأطفال",
+  "btn_wellness": "أكا ويلنس",
+  "btn_events": "فعاليات أكا",
+  "btn_sports": "الرياضات",
+  "btn_piscines": "المسابح",
+  "btn_team": "الفريق",
+  "btn_adherents": "المنخرطون",
+  "btn_webtv": "قناة الويب",
+  "btn_wear": "ملابس أكا",
+  "btn_store": "متجر أكا",
+  "btn_app": "تطبيق أكا",
+
+  "loading_text": "جار التحميل...",
+
+  "wa_tooltip": "تواصل معنا على واتساب"
+}

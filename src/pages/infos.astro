@@ -1,0 +1,358 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Infos et Reglement | AQA Sports Academy" currentPage="/infos">
+  <Navbar currentPage="/infos" />
+
+<div class="particles"></div>
+
+  
+
+  <div class="floating-nav">
+    <div class="nav-dot" data-tooltip="Accueil" onclick="scrollToSection('hero')"></div>
+    <div class="nav-dot" data-tooltip="Vision" onclick="scrollToSection('vision')"></div>
+    <div class="nav-dot" data-tooltip="Disciplines" onclick="scrollToSection('disciplines')"></div>
+    <div class="nav-dot" data-tooltip="Méthode" onclick="scrollToSection('method')"></div>
+    <div class="nav-dot" data-tooltip="Équipe" onclick="scrollToSection('team')"></div>
+    <div class="nav-dot" data-tooltip="Avantages" onclick="scrollToSection('advantages')"></div>
+    <div class="nav-dot" data-tooltip="Rejoindre" onclick="scrollToSection('cta')"></div>
+  </div>
+
+  <main class="container">
+    
+    <section id="hero">
+      <h1>AQA : Du Zéro au Pro</h1>
+      <div class="video">
+        <video autoplay muted loop playsinline>
+          <source src="https://files.catbox.moe/hvtmq3.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p>Dans un monde où la santé, la performance et le bien-être prennent une place de plus en plus importante, AQA s'impose comme une académie sportive unique en son genre. Plus qu'un centre d'entraînement, AQA est une véritable école de transformation qui accompagne chaque individu, du novice absolu à l'athlète confirmé.</p>
+    </section>
+
+    <section id="vision">
+      <h2>Notre Vision</h2>
+      <div class="section-image">
+        <img src="https://i.ibb.co/DPr2FhgQ/GET-TRANSFORMED.png" alt="Vision">
+      </div>
+      <p>AQA n'est pas simplement un espace d'entraînement. C'est une vision : permettre à chacun de découvrir son plein potentiel.</p>
+      <p>Nous croyons que le sport est une passerelle vers la confiance en soi, la résilience et l'épanouissement. Chez AQA, il ne s'agit pas seulement de nager, de monter à cheval ou de pratiquer une activité : il s'agit de bâtir une identité sportive et personnelle solide.</p>
+    </section>
+
+    <section id="disciplines">
+      <h2>Les Disciplines AQA</h2>
+      <div class="section-image">
+        <img src="https://i.ibb.co/q3Tb0Yh9/Untitled-design-47.png" alt="Disciplines">
+      </div>
+      <p>AQA regroupe plusieurs domaines qui se complètent, permettant une approche holistique du sport et du bien-être.</p>
+      <div class="disciplines-grid">
+        <div class="card-item">
+          <h3>Natation Adulte (Zero to Hero)</h3>
+          <p>Programme intensif et progressif pour adultes débutants afin de vaincre l'aquaphobie, apprendre à nager et atteindre un niveau avancé avec confiance.</p>
+          <a href="/formation" class="card-button" style="margin-top: auto;">Plus d'Infos</a>
+        </div>
+        <div class="card-item">
+          <h3>AQA Kids</h3>
+          <p>Apprentissage en groupes de 10 avec suivi attentif et détection précoce d'éventuels troubles comme la scoliose.</p>
+          <a href="/kids" class="card-button" style="margin-top: auto;">En Savoir Plus</a>
+        </div>
+        <div class="card-item">
+          <h3>AQA Event</h3>
+          <p>Nage en mer, kayak, équitation, cyclisme, camping et randonnée. Un groupe WhatsApp est disponible pour le suivi en temps réel.</p>
+         
+        </div>
+        <div class="card-item">
+          <h3>AQA Apnea</h3>
+          <p>Objectif d'atteindre 4 minutes d'apnée statique. Idéal pour les chasseurs sous-marins et athlètes.</p>
+          <a href="/apnea_page" class="card-button" style="margin-top: auto;">En Savoir Plus</a>
+        </div>
+        <div class="card-item">
+          <h3>AQA Wellness</h3>
+          <p>Renforcement musculaire, correction posturale et relaxation pour un corps équilibré.</p>
+        <a href="/well" class="card-button" style="margin-top: auto;">Découvrir</a> </div>
+        <div class="card-item">
+          <h3>Other Sports</h3>
+          <p>Le concept AQA s'élargit pour intégrer de nouvelles disciplines sportives régulièrement.</p>
+        <a href="/activities" class="card-button" style="margin-top: auto;">Découvrir</a> </div>
+        <div class="card-item">
+          <h3>AQA Store</h3>
+          <p>Boutique dédiée à l'équipement sportif et aux produits AQA.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="method">
+      <h2>Une Méthode Unique</h2>
+      <div class="section-image">
+        <img src="https://i.ibb.co/k6xr5NVN/app-1.jpg" alt="Method">
+      </div>
+      <p>Ce qui distingue AQA, c'est son approche scientifique et structurée soutenue par la technologie numérique.</p>
+      <div class="method-grid">
+        <div class="card-item"><h3>Suivi Technique</h3><p>Vidéos d'analyse détaillées et rapports réguliers pour ajuster l'entraînement.</p><a href="" class="card-button" style="margin-top: auto;">En Savoir Plus</a></div>
+        <div class="card-item"><h3>Suivi Physique</h3><p>Inspection des obstacles physiques et adaptation de l'entraînement.</p><a href="" class="card-button" style="margin-top: auto;">Détails</a></div>
+        <div class="card-item"><h3>Groupes Restreints</h3><p>Pédagogie personnalisée favorisant l'apprentissage collectif.</p><a href="/groupes" class="card-button" style="margin-top: auto;">En Savoir Plus</a></div>
+        <div class="card-item"><h3>AQA App</h3><p>Suivi en temps réel de votre progression et assiduité sur smartphone.</p><a href="/app" class="card-button" style="margin-top: auto;">Découvrir</a></div>
+        <div class="card-item"><h3>Video Analysis</h3><p>Montage au ralenti avec schémas des erreurs et narration du coach.</p></div>
+        <div class="card-item"><h3>Accompagnement Évolutif</h3><p>Un parcours adaptatif du débutant complet jusqu'au niveau professionnel.</p><a href="/team" class="card-button" style="margin-top: auto;">Parcours</a></div>
+      </div>
+    </section>
+
+    <section id="team">
+      <h2>L'Équipe AQA</h2>
+      <div class="section-image">
+        <img src="https://i.ibb.co/x8Szx43Q/IMG20241119220338.jpg" alt="Team">
+      </div>
+      <div class="team-grid">
+        <div class="card-item"><div class="coach-avatar">A</div><h3>Abdelghani</h3><p>Head Coach</p></div>
+        <div class="card-item"><div class="coach-avatar">Y</div><h3>Youcef</h3><p>Coach expérimenté</p></div>
+        <div class="card-item"><div class="coach-avatar">R</div><h3>Riad</h3><p>Expert Aquaphobie</p></div>
+        <div class="card-item"><div class="coach-avatar">S</div><h3>Bilal</h3><p>Coach professionnelle</p></div>
+        <div class="card-item"><div class="coach-avatar">S</div><h3>Sabrina</h3><p>Coach professionnelle</p></div>
+        <div class="card-item"><div class="coach-avatar">N</div><h3>Nouga Mohamed</h3><p>Maître Apnéiste</p></div>
+        <div class="card-item"><div class="coach-avatar">Y</div><h3>Younes</h3><p>Coach for kids</p></div>
+        <div class="card-item"><div class="coach-avatar">A</div><h3>Abdelmounaim</h3><p>Kinésithérapeute</p></div>
+      </div>
+    </section>
+
+    <section id="advantages">
+      <h2>Pourquoi Choisir AQA ?</h2>
+      <div class="section-image">
+        <img src="https://i.ibb.co/qYZPp1Mz/app-2.jpg" alt="Advantages">
+      </div>
+      <div class="advantages-grid">
+        <div class="card-item"><h3>Coachs d'Élite</h3><p>Expertise internationale et pédagogie d'anciens champions.</p></div>
+        <div class="card-item"><h3>Suivi Scientifique</h3><p>Traçabilité complète et bilans réguliers.</p></div>
+        <div class="card-item"><h3>Groupes Restreints</h3><p>Qualité garantie avec attention personnalisée.</p></div>
+        <div class="card-item"><h3>Programmes Variés</h3><p>De la natation à l'apnée, une approche complète.</p></div>
+        <div class="card-item"><h3>Transformation Garantie</h3><p>Parcours suivi pas à pas vers l'excellence.</p></div>
+        <div class="card-item"><h3>Académie de Vie</h3><p>Discipline, passion et dépassement de soi.</p></div>
+      </div>
+    </section>
+
+    <section id="cta" class="cta-box">
+      <h2>Prêt à Transformer Votre Vie ?</h2>
+      <img src="https://i.ibb.co/Jwtfs859/CARDS.png" alt="Cards" style="max-width: 300px; margin-bottom: 2rem;">
+      <p>AQA n'est pas un simple club, mais une académie de vie sportive. Avec AQA, vous entrez dans un parcours de transformation du zéro au pro.</p>
+      <a href="/inscription" class="cta-button">Rejoignez l'Académie AQA</a>
+    </section>
+
+  </main>
+
+  
+
+  
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+    }
+    // Simple active dot update
+    window.addEventListener('scroll', () => {
+      const dots = document.querySelectorAll('.nav-dot');
+      const sections = ['hero', 'vision', 'disciplines', 'method', 'team', 'advantages', 'cta'];
+      sections.forEach((id, i) => {
+        const rect = document.getElementById(id).getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) dots[i].classList.add('active');
+        else dots[i].classList.remove('active');
+      });
+    });
+  </script>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+
+    /* 1. CORE RESET & BASE */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    
+    html { scroll-behavior: smooth; background: #000; }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: transparent !important;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* 2. BACKGROUND LAYERS (Z-Index Fixes) */
+    .bg-frame {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      border: none; z-index: -10; pointer-events: none;
+    }
+
+    .bg-logo {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 80vw; height: 80vh;
+      background: url('https://i.imgur.com/3dcksCn.png') center/contain no-repeat;
+      opacity: 0.06; z-index: -9; pointer-events: none;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .particles {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -8; pointer-events: none;
+      background: radial-gradient(circle at 20% 30%, rgba(0,255,255,0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(0,153,255,0.08) 0%, transparent 50%);
+    }
+
+    /* The Neon Frame - Set to pointer-events: none so it doesn't block clicks */
+    body::before {
+      content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(45deg, #00ffff, #0099ff, #6600ff, #ff0099) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      z-index: 9999; pointer-events: none;
+      opacity: 0.5;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    /* 3. TYPOGRAPHY & HEADERS */
+    h1, h2, h3 {
+      background: linear-gradient(135deg, #00ffff, #0099ff, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; padding-top: 2rem; }
+    h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-top: 4rem; position: relative; }
+    h2::after {
+      content: ''; position: absolute; bottom: -10px; left: 50%;
+      transform: translateX(-50%); width: 80px; height: 3px;
+      background: #00ffff; border-radius: 5px;
+    }
+
+    p { max-width: 850px; margin: 0 auto 1.5rem; text-align: center; opacity: 0.9; }
+
+    /* 4. LAYOUT CONTAINERS */
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; padding-bottom: 5rem; }
+
+    .section-image {
+      width: 100%; max-width: 800px; height: 350px;
+      margin: 2.5rem auto; border-radius: 20px;
+      overflow: hidden; border: 2px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+    }
+    .section-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Hero Video Box */
+    .video {
+      width: 100%; max-width: 900px; margin: 2rem auto;
+      aspect-ratio: 16/9; border-radius: 20px;
+      overflow: hidden; box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .video video { width: 100%; height: 100%; object-fit: cover; }
+
+    /* 5. GRID SYSTEMS (3 columns on desktop, 1 on mobile) */
+    .disciplines-grid, .method-grid, .team-grid, .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    /* Card Item Styling */
+    .card-item {
+      background: rgba(0, 20, 40, 0.6);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-item:hover {
+      transform: translateY(-10px);
+      border-color: #00ffff;
+      box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2);
+    }
+
+    .card-item h3 { -webkit-text-fill-color: #00ffff; text-align: left; font-size: 1.3rem; margin-bottom: 1rem; }
+    .card-item p { text-align: left; margin: 0; font-size: 0.95rem; opacity: 0.85; }
+
+    /* Card Button Styling */
+    .card-button {
+      display: block;
+      background: linear-gradient(135deg, #0099ff, #00ffff);
+      color: #000000;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1.5px solid #00ffff;
+      box-shadow: 0 0 12px rgba(0, 153, 255, 0.3);
+      margin-top: 1rem;
+      margin-left: auto;
+      width: max-content;
+    }
+
+    .card-button:hover {
+      background: linear-gradient(135deg, #00ffff, #0099ff);
+      transform: translateY(-1px);
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.5);
+    }
+
+    /* Team Specific Styling */
+    .coach-avatar {
+      width: 50px; height: 50px; background: #00ffff; color: #000;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: bold; margin-bottom: 1rem;
+    }
+
+    /* 6. FLOATING NAV DOTS */
+    .floating-nav {
+      position: fixed; right: 25px; top: 50%; transform: translateY(-50%);
+      z-index: 1001; display: flex; flex-direction: column; gap: 15px;
+    }
+    .nav-dot {
+      width: 12px; height: 12px; border-radius: 50%; background: rgba(0,255,255,0.3);
+      border: 2px solid #00ffff; cursor: pointer; position: relative; transition: 0.3s;
+    }
+    .nav-dot.active, .nav-dot:hover { background: #00ffff; transform: scale(1.3); }
+    .nav-dot::after {
+      content: attr(data-tooltip); position: absolute; right: 30px; top: 50%;
+      transform: translateY(-50%); background: #00ffff; color: #000;
+      padding: 4px 10px; border-radius: 5px; font-size: 0.7rem; font-weight: bold;
+      opacity: 0; pointer-events: none; transition: 0.3s;
+    }
+    .nav-dot:hover::after { opacity: 1; }
+
+    /* 7. CTA SECTION */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(0, 153, 255, 0.15), rgba(0, 255, 255, 0.08));
+      border: 2px solid #00ffff; border-radius: 30px; padding: 4rem 2rem;
+      text-align: center; margin-top: 4rem;
+    }
+    .cta-button {
+      display: inline-block; background: #00ffff; color: #000;
+      padding: 1.2rem 3rem; border-radius: 50px; font-weight: bold;
+      text-decoration: none; margin-top: 2rem; transition: 0.3s;
+    }
+    .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 40px #00ffff; }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .floating-nav { display: none; }
+      .container { padding-top: 80px; }
+      .section-image { height: 200px; }
+    }
+  
+</style>

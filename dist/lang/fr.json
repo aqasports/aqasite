@@ -1,0 +1,67 @@
+{
+  "lang_code": "fr",
+  "lang_name": "Français",
+  "dir": "ltr",
+  "html_lang": "fr",
+
+  "nav_tarifs": "Tarifs",
+  "nav_groupes": "Groupes",
+  "nav_piscines": "Piscines",
+  "nav_infos": "Infos",
+  "nav_events": "Events",
+  "nav_formations": "Formations",
+  "nav_store": "Store",
+  "nav_home": "Accueil",
+
+  "hero_title": "From Zero to Hero",
+  "hero_desc": "AQA est un établissement sportif dédié à transformer les débutants en athlètes confiants. Avec des coachs d'élite, un suivi personnalisé et des groupes restreints, nous combinons science et technologie pour garantir une progression réelle – du zéro au pro.",
+
+  "stats_athletes": "Athlètes formés",
+  "stats_coaches": "Coachs d'élite",
+  "stats_pools": "Piscines partenaires",
+  "stats_satisfaction": "Satisfaction client",
+
+  "section_services_title": "Nos Services Essentiels",
+  "section_services_sub": "Tout ce dont vous avez besoin pour commencer votre transformation",
+
+  "section_formations_title": "Services & Formations",
+  "section_formations_sub": "Programmes spécialisés pour tous les niveaux",
+
+  "section_media_title": "Structure et Média",
+  "section_media_sub": "Coordination visuelle et communication des activités AQA.",
+
+  "section_boutique_title": "Boutique et supports technique",
+  "section_boutique_sub": "Équipez-vous avec les accessoires et guides AQA",
+
+  "section_reviews_title": "Ce que disent nos athlètes",
+  "section_reviews_sub": "Témoignages de transformation réussie",
+
+  "section_gallery_title": "Nos Moments Forts",
+  "section_gallery_sub": "Découvrez l'esprit AQA en images",
+
+  "floating_btn": "✨ Nouvelles formules",
+
+  "listen_trigger": "We Listen — Votre avis compte",
+
+  "btn_tarifs": "Tarifs",
+  "btn_groupes": "Groupes",
+  "btn_inscription": "Inscription",
+  "btn_infos": "Infos",
+  "btn_formules": "Formules AQA",
+  "btn_formations": "Formations",
+  "btn_kids": "AQA Kids",
+  "btn_wellness": "AQA Wellness",
+  "btn_events": "AQA events",
+  "btn_sports": "Sports",
+  "btn_piscines": "Piscines",
+  "btn_team": "Team",
+  "btn_adherents": "Adhérents",
+  "btn_webtv": "WebTV",
+  "btn_wear": "AQA Wear",
+  "btn_store": "AQA Store",
+  "btn_app": "AQA App",
+
+  "loading_text": "CHARGEMENT...",
+
+  "wa_tooltip": "Contactez-nous sur WhatsApp"
+}

@@ -1,0 +1,58 @@
+---
+// Navbar.astro — Exact copy of <header> + mobile overlay from original HTML pages.
+// Links updated to clean URLs (no .html). Zero visual changes.
+export interface Props {
+  currentPage?: string;
+}
+const { currentPage = '' } = Astro.props;
+---
+
+<header id="header">
+    <div class="header-content">
+        <div class="logo-section">
+            <a href="/">
+                <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+            </a>
+        </div>
+
+        <nav class="nav-menu" id="navMenu">
+            <a href="/tarifs" class={`nav-link${currentPage === '/tarifs' ? ' active' : ''}`} data-i18n="nav_tarifs">Tarifs</a>
+            <a href="/groupes" class={`nav-link${currentPage === '/groupes' ? ' active' : ''}`} data-i18n="nav_groupes">Groupes</a>
+            <a href="/piscines" class={`nav-link${currentPage === '/piscines' ? ' active' : ''}`} data-i18n="nav_piscines">Piscines</a>
+            <a href="/infos" class={`nav-link${currentPage === '/infos' ? ' active' : ''}`} data-i18n="nav_infos">Infos</a>
+            <a href="/events" class={`nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">Events</a>
+            <a href="/formation" class={`nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">Formations</a>
+            <a href="/store" class={`nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">Store</a>
+        </nav>
+
+        <div class="right-actions">
+            <div class="lang-switcher" role="group" aria-label="Language switcher">
+              <button class="lang-btn" data-lang-btn="fr" aria-label="Français">FR</button>
+              <button class="lang-btn" data-lang-btn="ar" aria-label="العربية">AR</button>
+              <button class="lang-btn" data-lang-btn="en" aria-label="English">EN</button>
+            </div>
+
+            <div class="menu-toggle" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
+    <a href="/tarifs" class="mobile-nav-link" data-i18n="nav_tarifs">Tarifs</a>
+    <a href="/groupes" class="mobile-nav-link" data-i18n="nav_groupes">Groupes</a>
+    <a href="/piscines" class="mobile-nav-link" data-i18n="nav_piscines">Piscines</a>
+    <a href="/infos" class="mobile-nav-link" data-i18n="nav_infos">Infos</a>
+    <a href="/events" class="mobile-nav-link" data-i18n="nav_events">Events</a>
+    <a href="/formation" class="mobile-nav-link" data-i18n="nav_formation">Formations</a>
+    <a href="/store" class="mobile-nav-link" data-i18n="nav_store">Store</a>
+    <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
+      <button class="lang-btn" data-lang-btn="fr">FR</button>
+      <button class="lang-btn" data-lang-btn="ar">AR</button>
+      <button class="lang-btn" data-lang-btn="en">EN</button>
+    </div>
+</div>
+
+<script src="/js/navbar.js" is:inline></script>

@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Notre Equipe | AQA Sports Academy" currentPage="/team">
+  <Navbar currentPage="/team" />
+
+<div class="page-hero">
+        <span class="hero-badge">👥 Notre Équipe</span>
+        <h1>Coachs & Staff AQA</h1>
+        <div class="section-divider"></div>
+        <p>Des professionnels certifiés, passionnés et dédiés à votre progression dans un esprit d'excellence.</p>
+    </div>
+
+    <div class="container">
+        <div class="team-grid">
+            <article class="coach-card">
+                <div class="coach-avatar"><div class="coach-initials">DT</div></div>
+                <div class="coach-body">
+                    <div class="coach-name">Directeur Technique</div>
+                    <div class="coach-role">Fondateur & Coach Chef</div>
+                    <p class="coach-bio">Fondateur d'AQA Sports Academy. Expert en natation compétitive avec plus de 10 ans d'expérience en coaching d'élite.</p>
+                    <div class="coach-tags"><span class="coach-tag">Natation</span><span class="coach-tag">Compétition</span><span class="coach-tag">Leadership</span></div>
+                </div>
+            </article>
+            <article class="coach-card">
+                <div class="coach-avatar"><div class="coach-initials">CA</div></div>
+                <div class="coach-body">
+                    <div class="coach-name">Coach Apnée</div>
+                    <div class="coach-role">Instructeur Certifié</div>
+                    <p class="coach-bio">Spécialiste de la gestion respiratoire et des techniques de relaxation sous l'eau. Certifié en apnée et plongée libre.</p>
+                    <div class="coach-tags"><span class="coach-tag">Apnée</span><span class="coach-tag">Freediving</span><span class="coach-tag">Sécurité</span></div>
+                </div>
+            </article>
+            <article class="coach-card">
+                <div class="coach-avatar"><div class="coach-initials">CK</div></div>
+                <div class="coach-body">
+                    <div class="coach-name">Coach Kids</div>
+                    <div class="coach-role">Spécialiste Enfants</div>
+                    <p class="coach-bio">Spécialiste dans l'enseignement de la natation aux enfants de 4 à 14 ans. Pédagogie ludique axée sur la confiance en soi.</p>
+                    <div class="coach-tags"><span class="coach-tag">Enfants</span><span class="coach-tag">Pédagogie</span><span class="coach-tag">AQA Kids</span></div>
+                </div>
+            </article>
+            <article class="coach-card">
+                <div class="coach-avatar"><div class="coach-initials">CW</div></div>
+                <div class="coach-body">
+                    <div class="coach-name">Coach Wellness</div>
+                    <div class="coach-role">Bien-être & Forme</div>
+                    <p class="coach-bio">Coach en aqua-fitness et wellness. Programmes personnalisés pour adultes axés sur la santé et la mobilité.</p>
+                    <div class="coach-tags"><span class="coach-tag">Aqua-fitness</span><span class="coach-tag">Wellness</span><span class="coach-tag">Adultes</span></div>
+                </div>
+            </article>
+        </div>
+
+        <h2 class="section-title" style="margin-top:2rem">Nos Valeurs</h2>
+        <div class="section-divider"></div>
+        <div class="values-grid">
+            <div class="value-card"><div class="value-icon">🎯</div><div class="value-title">Excellence</div><div class="value-desc">Méthodes scientifiquement prouvées pour maximiser votre progression à chaque séance.</div></div>
+            <div class="value-card"><div class="value-icon">❤️</div><div class="value-title">Passion</div><div class="value-desc">Une passion sincère pour les sports aquatiques et la transformation de chaque athlète.</div></div>
+            <div class="value-card"><div class="value-icon">🔬</div><div class="value-title">Science</div><div class="value-desc">Biomécanique, physiologie et science du sport appliquées pour des résultats concrets.</div></div>
+            <div class="value-card"><div class="value-icon">🤝</div><div class="value-title">Collectif</div><div class="value-desc">Une communauté soudée où chacun pousse l'autre dans un esprit de respect mutuel.</div></div>
+        </div>
+
+        <div class="join-banner">
+            <h2>🚀 Rejoignez l'équipe AQA</h2>
+            <p>Vous êtes coach certifié ? Contactez-nous pour rejoindre notre équipe d'élite.</p>
+            <a href="mailto:aqa.sports.academy@gmail.com?subject=Candidature%20Coach%20AQA" class="join-btn">Postuler →</a>
+        </div>
+    </div>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{background:#000;scroll-behavior:smooth}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:transparent;color:#fff;overflow-x:hidden}
+        .bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none}
+        .container{max-width:1200px;margin:0 auto;padding:2rem 1rem}
+        .page-hero{text-align:center;padding:5rem 1rem 3rem}
+        .page-hero h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:800;background:linear-gradient(135deg,#00ffff,#0099ff,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+        .page-hero p{color:rgba(255,255,255,.8);max-width:700px;margin:0 auto}
+        .hero-badge{display:inline-block;background:rgba(0,255,255,.1);border:1px solid rgba(0,255,255,.4);color:#00ffff;padding:.4rem 1.2rem;border-radius:50px;font-size:.85rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
+        .section-divider{width:80px;height:3px;background:linear-gradient(90deg,#00ffff,#0099ff);margin:1.5rem auto;border-radius:2px}
+        .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem;margin:3rem 0}
+        .coach-card{background:rgba(0,153,255,.05);border:1px solid rgba(0,153,255,.25);border-radius:20px;overflow:hidden;transition:all .4s ease;text-align:center}
+        .coach-card:hover{transform:translateY(-8px);border-color:rgba(0,255,255,.6);box-shadow:0 0 30px rgba(0,255,255,.15)}
+        .coach-avatar{width:100%;height:200px;background:linear-gradient(135deg,rgba(0,153,255,.15),rgba(0,255,255,.05));display:flex;align-items:center;justify-content:center}
+        .coach-initials{width:100px;height:100px;background:linear-gradient(135deg,rgba(0,153,255,.3),rgba(0,255,255,.2));border:2px solid rgba(0,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:#00ffff}
+        .coach-body{padding:1.5rem}
+        .coach-name{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+        .coach-role{font-size:.85rem;color:#00ffff;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
+        .coach-bio{font-size:.85rem;color:rgba(255,255,255,.65);margin-bottom:1rem;line-height:1.5}
+        .coach-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+        .coach-tag{padding:.25rem .7rem;background:rgba(0,153,255,.15);border:1px solid rgba(0,153,255,.3);border-radius:12px;font-size:.72rem;color:rgba(255,255,255,.75)}
+        .values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin:3rem 0}
+        .value-card{background:rgba(0,153,255,.05);border:1px solid rgba(0,153,255,.2);border-radius:16px;padding:2rem 1.5rem;text-align:center;transition:all .3s ease}
+        .value-card:hover{border-color:rgba(0,255,255,.5);transform:translateY(-3px)}
+        .value-icon{font-size:2.5rem;margin-bottom:1rem}
+        .value-title{font-size:1rem;font-weight:700;color:#00ffff;margin-bottom:.5rem}
+        .value-desc{font-size:.85rem;color:rgba(255,255,255,.65)}
+        .section-title{font-size:clamp(1.5rem,4vw,2rem);font-weight:700;background:linear-gradient(135deg,#00ffff,#0099ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center}
+        .join-banner{background:linear-gradient(135deg,rgba(0,153,255,.1),rgba(0,255,255,.05));border:1px solid rgba(0,255,255,.3);border-radius:20px;padding:3rem;text-align:center;margin:3rem 0}
+        .join-banner h2{font-size:1.8rem;font-weight:700;color:#00ffff;margin-bottom:1rem}
+        .join-banner p{color:rgba(255,255,255,.7);max-width:500px;margin:0 auto 1.5rem}
+        .join-btn{display:inline-block;padding:.9rem 2rem;background:linear-gradient(135deg,#0099ff,#00ffff);color:#000;font-weight:700;border-radius:50px;text-decoration:none;transition:all .3s ease}
+        .join-btn:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(0,255,255,.5)}
+        @media(max-width:768px){.team-grid{grid-template-columns:repeat(2,1fr);gap:1rem}}
+        @media(max-width:480px){.team-grid{grid-template-columns:1fr}}
+    
+</style>

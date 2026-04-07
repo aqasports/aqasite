@@ -1,0 +1,88 @@
+---
+// BaseLayout.astro — manages <head> only. Zero visual changes to pages.
+export interface Props {
+  title: string;
+  description?: string;
+  currentPage?: string;
+}
+
+const {
+  title,
+  description = "AQA Sports Academy — Coaching d'élite, natation, apnée en Algérie. Du débutant au professionnel.",
+  currentPage = '',
+} = Astro.props;
+
+const siteUrl = 'https://aqasports.com';
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="AQA Sports Academy" />
+  <link rel="canonical" href={`${siteUrl}${currentPage}`} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`${siteUrl}${currentPage}`} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" />
+  <meta property="og:site_name" content="AQA Sports Academy" />
+  <meta property="og:locale" content="fr_DZ" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Navbar CSS (same file the original pages use) -->
+  <link rel="stylesheet" href="/css/navbar.css" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P540VBDLT5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P540VBDLT5');
+  </script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsActivityLocation",
+      "name": "AQA Sports Academy",
+      "url": "https://aqasports.com",
+      "description": "Académie de natation et d'apnée en Algérie — du débutant au professionnel",
+      "address": { "@type": "PostalAddress", "addressCountry": "DZ", "addressLocality": "Alger" },
+      "telephone": "+213540454907",
+      "sameAs": ["https://www.instagram.com/aqa.sports", "https://web.facebook.com/p/AQA-sports-academy-100063686885387"]
+    }
+  </script>
+
+  <!-- i18n engine — must load before page renders -->
+  <script src="/js/i18n.js" is:inline></script>
+
+  <!-- Slot for page-specific <style> or <link> tags -->
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+
+  <!-- WhatsApp floating widget -->
+  <script src="/js/navbar-wa.js" is:inline></script>
+</body>
+</html>

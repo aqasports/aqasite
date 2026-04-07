@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Espace Membres | AQA Sports Academy" currentPage="/clients">
+  <Navbar currentPage="/clients" />
+
+<div class="page-hero">
+        <span class="hero-badge">🏅 Espace Adhérents</span>
+        <h1>Bienvenue, Athlète AQA</h1>
+        <div class="section-divider"></div>
+        <p>Tout ce dont vous avez besoin pour suivre votre progression, gérer votre inscription et rester connecté à votre académie.</p>
+    </div>
+
+    <div class="container">
+        <!-- Quick access -->
+        <div class="access-grid">
+            <a href="/groupes" class="access-card">
+                <div class="access-icon">📅</div>
+                <div class="access-title">Mon Groupe & Horaires</div>
+                <div class="access-desc">Consultez votre groupe, vos horaires de séances et les piscines assignées.</div>
+            </a>
+            <a href="/inscription" class="access-card">
+                <div class="access-icon">📝</div>
+                <div class="access-title">Inscription & Renouvellement</div>
+                <div class="access-desc">Inscrivez-vous ou renouvelez votre abonnement en quelques clics.</div>
+            </a>
+            <a href="/tarifs" class="access-card">
+                <div class="access-icon">💳</div>
+                <div class="access-title">Tarifs & Paiements</div>
+                <div class="access-desc">Consultez nos formules, tarifs et modalités de paiement.</div>
+            </a>
+            <a href="/app" class="access-card">
+                <div class="access-icon">📱</div>
+                <div class="access-title">Application AQA</div>
+                <div class="access-desc">Téléchargez l'app pour suivre vos séances, votre progression et recevoir des notifications.</div>
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-item"><div class="stat-num">500+</div><div class="stat-lbl">Athlètes actifs</div></div>
+            <div class="stat-item"><div class="stat-num">8+</div><div class="stat-lbl">Coachs d'élite</div></div>
+            <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Piscines</div></div>
+            <div class="stat-item"><div class="stat-num">98%</div><div class="stat-lbl">Satisfaction</div></div>
+        </div>
+
+        <!-- Member portal -->
+        <div class="portal-section">
+            <h2>📱 Portail Membre — Application AQA</h2>
+            <div class="portal-features">
+                <div class="portal-feature"><span>📊</span><div class="portal-feature-text"><strong>Suivi de progression</strong><span>Graphiques et historique de vos séances</span></div></div>
+                <div class="portal-feature"><span>🗓️</span><div class="portal-feature-text"><strong>Planning interactif</strong><span>Vos horaires toujours à jour</span></div></div>
+                <div class="portal-feature"><span>🔔</span><div class="portal-feature-text"><strong>Notifications</strong><span>Rappels de séances et actualités</span></div></div>
+                <div class="portal-feature"><span>🎯</span><div class="portal-feature-text"><strong>Objectifs personnels</strong><span>Fixez et suivez vos buts</span></div></div>
+            </div>
+            <div class="app-cta-row">
+                <a href="/app" class="app-btn primary">📲 Télécharger l'App</a>
+                <a href="https://wa.me/213540454907?text=Bonjour%2C%20j%27ai%20besoin%20d%27aide%20sur%20mon%20espace%20membre." class="app-btn secondary" target="_blank" rel="noopener">💬 Support WhatsApp</a>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <h3 class="section-title-left">Questions fréquentes</h3>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Comment connaître mon groupe et mes horaires ? <span class="arrow">▼</span></div>
+                <div class="faq-a">Consultez la page <a href="/groupes" style="color:#00ffff">Groupes</a> pour voir tous les créneaux disponibles. Votre coach vous communique également votre groupe lors de l'inscription.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Comment renouveler mon abonnement ? <span class="arrow">▼</span></div>
+                <div class="faq-a">Rendez-vous sur la page <a href="/inscription" style="color:#00ffff">Inscription</a> ou contactez-nous directement par WhatsApp pour un renouvellement rapide.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Comment accéder à l'application AQA ? <span class="arrow">▼</span></div>
+                <div class="faq-a">Téléchargez l'application AQA sur la page <a href="/app" style="color:#00ffff">AQA App</a>. Elle est disponible pour Android et vous permet de suivre votre progression en temps réel.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Comment contacter mon coach ? <span class="arrow">▼</span></div>
+                <div class="faq-a">Vous pouvez contacter l'équipe AQA par WhatsApp au +213 540 45 49 07 ou par email à aqa.sports.academy@gmail.com. Votre coach est également disponible lors des séances.</div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+    
+    <script>
+        function toggleFaq(el) {
+            const item = el.parentElement;
+            item.classList.toggle('open');
+        }
+    </script>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{background:#000;scroll-behavior:smooth}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:transparent;color:#fff;overflow-x:hidden}
+        .bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none}
+        .container{max-width:1100px;margin:0 auto;padding:2rem 1rem}
+        .page-hero{text-align:center;padding:5rem 1rem 3rem}
+        .page-hero h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:800;background:linear-gradient(135deg,#00ffff,#0099ff,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+        .page-hero p{color:rgba(255,255,255,.8);max-width:650px;margin:0 auto}
+        .hero-badge{display:inline-block;background:rgba(0,255,255,.1);border:1px solid rgba(0,255,255,.4);color:#00ffff;padding:.4rem 1.2rem;border-radius:50px;font-size:.85rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
+        .section-divider{width:80px;height:3px;background:linear-gradient(90deg,#00ffff,#0099ff);margin:1.5rem auto;border-radius:2px}
+
+        /* Access Cards */
+        .access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:3rem 0}
+        .access-card{background:rgba(0,153,255,.05);border:1px solid rgba(0,153,255,.25);border-radius:20px;padding:2rem;text-align:center;transition:all .3s ease;text-decoration:none;color:inherit;display:block}
+        .access-card:hover{transform:translateY(-6px);border-color:rgba(0,255,255,.6);box-shadow:0 0 25px rgba(0,255,255,.15)}
+        .access-icon{font-size:3rem;margin-bottom:1rem}
+        .access-title{font-size:1.1rem;font-weight:700;color:#00ffff;margin-bottom:.5rem}
+        .access-desc{font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.5}
+
+        /* Member portal CTA */
+        .portal-section{background:linear-gradient(135deg,rgba(0,153,255,.1),rgba(0,255,255,.05));border:1px solid rgba(0,255,255,.3);border-radius:20px;padding:3rem;margin:3rem 0}
+        .portal-section h2{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#00ffff,#0099ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;text-align:center}
+        .portal-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:2rem 0}
+        .portal-feature{display:flex;align-items:flex-start;gap:0.8rem;padding:1rem;background:rgba(0,0,0,.3);border-radius:12px;border:1px solid rgba(0,153,255,.2)}
+        .portal-feature span:first-child{font-size:1.5rem;flex-shrink:0}
+        .portal-feature-text strong{display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem}
+        .portal-feature-text span{color:rgba(255,255,255,.6);font-size:.8rem}
+        .app-cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+        .app-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.8rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s ease}
+        .app-btn.primary{background:linear-gradient(135deg,#0099ff,#00ffff);color:#000}
+        .app-btn.secondary{background:rgba(0,255,255,.1);border:2px solid rgba(0,255,255,.4);color:#00ffff}
+        .app-btn:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(0,255,255,.4)}
+
+        /* Stats loyalty */
+        .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin:3rem 0}
+        .stat-item{background:rgba(0,153,255,.07);border:1px solid rgba(0,153,255,.2);border-radius:16px;padding:1.5rem;text-align:center}
+        .stat-num{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#00ffff,#0099ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .stat-lbl{font-size:.85rem;color:rgba(255,255,255,.65);margin-top:.3rem}
+
+        /* FAQ */
+        .faq-list{margin:2rem 0}
+        .faq-item{border:1px solid rgba(0,153,255,.2);border-radius:12px;margin-bottom:.8rem;overflow:hidden}
+        .faq-q{padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#fff;background:rgba(0,153,255,.05);transition:background .2s}
+        .faq-q:hover{background:rgba(0,153,255,.12)}
+        .faq-q .arrow{color:#00ffff;transition:transform .3s;font-size:1.2rem}
+        .faq-a{padding:0 1.5rem;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;color:rgba(255,255,255,.7);font-size:.9rem;line-height:1.6}
+        .faq-item.open .faq-a{max-height:200px;padding:1rem 1.5rem}
+        .faq-item.open .arrow{transform:rotate(180deg)}
+
+        .section-title-left{font-size:1.4rem;font-weight:700;background:linear-gradient(135deg,#00ffff,#0099ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.5rem}
+
+        @media(max-width:768px){.page-hero{padding:4rem 1rem 2rem}.app-cta-row{flex-direction:column;align-items:center}}
+    
+</style>

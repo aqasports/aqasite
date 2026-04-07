@@ -1,0 +1,510 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Formules et Cartes | AQA Sports" currentPage="/cards">
+  <Navbar currentPage="/cards" />
+
+<!-- Navbar CSS -->
+  <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+
+  
+  <!-- ===== NAVBAR ===== -->
+  
+  
+  <!-- Mobile Menu Overlay -->
+  
+  <!-- ===== /NAVBAR ===== -->
+  
+  <div class="container">
+    <h1 class="section-title">Nos Formules & Avantages</h1>
+    
+    <div class="pricing-cards" id="cards">
+      <!-- Starter -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="images/1.webp" alt="Starter">
+        <div class="features">
+          <h3>Starter (1 mois)</h3>
+          <ul>
+            <li>Séances encadrées par coachs</li>
+            <li>Suivi technique de base</li>
+            <li>Pas d'analyse vidéo</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Silver -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="images/2.webp" alt="Silver">
+        <div class="features">
+          <h3>Silver (3 mois)</h3>
+          <ul>
+            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
+            <li>Plan d'entraînement trimestriel</li>
+            <li>Suivi technique détaillé</li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
+            <li>Séance Tester pour un ami gratuite</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Gold -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="images/3.webp" alt="Gold">
+        <div class="features">
+          <h3>Gold (6 mois)</h3>
+          <ul>
+            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
+            <li>Planification sur 6 mois</li>
+            <li>Suivi technique + physique</li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
+            <li>Équipement Arena offert</li>
+            <li>1 événement AQA gratuit</li>
+            <li>1 Séances Test pour amis gratuites</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Diamond -->
+      <div class="card" role="button" aria-expanded="false">
+        <img src="images/4.webp" alt="Diamond">
+        <div class="features">
+          <h3>Diamond (9 mois)</h3>
+          <ul>
+            <li><span class="video-link">Analyse vidéo personnalisée</span></li>
+            <li>Planification avancée sur 9 mois</li>
+            <li>Suivi technique + physique</li>
+            <li><span class="app-link">Accès complet à l'app AQA</span></li>
+            <li>Équipement Arena offert</li>
+            <li>1 événements AQA inclus</li>
+            <li>1 mois apnée offert</li>
+            <li>2 Séances Test pour amis gratuites</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div style="text-align:center; margin:2rem 0;">
+    <a href="/tarifs" class="tarif-btn">Voir les Tarifs</a>
+  </div>
+
+<!-- Video Analysis Popup -->
+  <div class="popup-overlay" id="videoPopup">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closeVideoPopup()" aria-label="Close"></button>
+      
+      <div class="popup-header">
+        <h2>Analyse Vidéo Personnalisée</h2>
+      </div>
+      
+      <div class="popup-body">
+        <p class="popup-description">
+          Optimisez votre technique de nage grâce à notre système d'analyse vidéo avancé.
+          Nos coachs experts décortiquent chaque mouvement pour identifier vos points forts
+          et axes d'amélioration, vous permettant de progresser rapidement et efficacement.
+        </p>
+        
+        <div class="popup-features">
+          <div class="feature-item">
+            <h4>🎥 Capture Multi-Angles</h4>
+            <p>Filmage sous et hors de l'eau pour une analyse complète de votre technique</p>
+          </div>
+          <div class="feature-item">
+            <h4>🔍 Analyse Détaillée</h4>
+            <p>Décorticage de chaque phase de nage avec ralenti et annotations</p>
+          </div>
+          <div class="feature-item">
+            <h4>📊 Rapports Personnalisés</h4>
+            <p>Recommandations précises basées sur votre niveau et objectifs</p>
+          </div>
+          <div class="feature-item">
+            <h4>📈 Suivi d'Évolution</h4>
+            <p>Comparaison de vos progrès entre les sessions d'entraînement</p>
+          </div>
+        </div>
+        
+        <div class="video-container">
+          <video controls width="640" height="360" poster="https://i.ibb.co/LXk3Fgfh/Untitled-design-images/3.webp">
+            <source src="https://files.catbox.moe/w4iirq.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+          </video>
+        </div>
+        
+        <a href="/video-analysis" class="popup-btn">En savoir plus sur l'Analyse Vidéo</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- AQA App Popup -->
+  <div class="popup-overlay" id="appPopup">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closeAppPopup()"></button>
+      
+      <div class="popup-header">
+        <h2>Application AQA - Votre Coach Digital</h2>
+      </div>
+      
+      <div class="popup-body">
+        <p class="popup-description">
+          Suivez votre progression en temps réel avec l'application AQA.
+          Votre coach personnel dans votre poche : statistiques détaillées,
+          programmes d'entraînement, suivi technique et bien plus encore.
+        </p>
+        
+        <div class="popup-features">
+          <div class="feature-item">
+            <h4>📊 Dashboard Personnel</h4>
+            <p>Vue d'ensemble complète de vos performances et statistiques en temps réel</p>
+          </div>
+          <div class="feature-item">
+            <h4>📈 Suivi de Progression</h4>
+            <p>Analyse détaillée de votre évolution avec graphiques interactifs</p>
+          </div>
+          <div class="feature-item">
+            <h4>🛒 Boutique AQA</h4>
+            <p>Achetez vos équipements et accessoires directement depuis l'app</p>
+          </div>
+          <div class="feature-item">
+            <h4>🔔 Notifications</h4>
+            <p>Alertes motivantes et conseils quotidiens pour rester sur la voie du succès</p>
+          </div>
+          <div class="feature-item">
+            <h4>🏆 Classement</h4>
+            <p>Suivez votre position et mesurez vos performances face aux autres athlètes</p>
+          </div>
+          <div class="feature-item">
+            <h4>🏅️ Badges & Récompenses</h4>
+            <p>Débloquez des badges exclusifs et gagnez des XP en atteignant vos objectifs</p>
+          </div>
+        </div>
+        
+        <div class="app-mockups-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin: 2rem 0; justify-items: center;">
+          <div class="phone-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <img src="https://i.ibb.co/fG4Qnh63/5900099821690276916.jpg" alt="Dashboard" class="phone-screen">
+            </div>
+            <p style="margin-top: 1rem; color: #00ffff; font-size: 1rem; text-align: center; font-weight: 600;">Dashboard</p>
+          </div>
+          
+          <div class="phone-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <img src="https://i.ibb.co/RkJ57tK8/590009982169027691images/4.webp" alt="Classement" class="phone-screen">
+            </div>
+            <p style="margin-top: 1rem; color: #00ffff; font-size: 1rem; text-align: center; font-weight: 600;">Classement</p>
+          </div>
+          
+          <div class="phone-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <img src="https://i.ibb.co/dw54j4c0/5900099821690276915.jpg" alt="Suivi Technique" class="phone-screen">
+            </div>
+            <p style="margin-top: 1rem; color: #00ffff; font-size: 1rem; text-align: center; font-weight: 600;">Suivi technique</p>
+          </div>
+        </div>
+        
+        <div style="background: rgba(0,153,255,.1); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #00ffff; margin: 2rem 0;">
+          <h4 style="margin: 0 0 1rem; color: #00ffff; font-size: 1.2rem;">🔍 Suivi Technique </h4>
+          <p style="margin: 0; color: #ccc; line-height: 1.7;">
+            L'application AQA analyse en continu votre progression technique.
+            Grâce aux données collectées lors de vos entraînements et analyses vidéo,
+            vous recevez des recommandations personnalisées pour améliorer chaque aspect
+            de votre nage : respiration, battements, amplitude, rythme et bien plus.
+          </p>
+        </div>
+        
+        <a href="/app" class="popup-btn" style="text-decoration: none; margin-bottom: 1rem;">Découvrir l'Application AQA</a>
+      </div>
+    </div>
+  </div>
+
+<footer>
+    
+  
+
+<!-- Add this script before closing </body> tag -->
+<script>
+async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-container').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadFooter);
+
+// ===== Cards toggle =====
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const isActive = card.classList.contains('active');
+      cards.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-expanded','false');
+      });
+      if (!isActive) {
+        card.classList.add('active');
+        card.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+});
+
+// ===== Video analysis popup =====
+const videoLinks = document.querySelectorAll('.video-link');
+videoLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card toggle
+        openVideoPopup();
+    });
+});
+
+function openVideoPopup() {
+    closeAppPopup(); // ✅ ensure only video popup is open
+    const popup = document.getElementById('videoPopup');
+    if (popup) {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeVideoPopup() {
+    const popup = document.getElementById('videoPopup');
+    if (popup) {
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
+        // Pause video when closing
+        const video = popup.querySelector('video');
+        if (video) {
+            video.pause();
+        }
+    }
+}
+
+// ===== App popup =====
+const appLinks = document.querySelectorAll('.app-link');
+appLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openAppPopup();
+  });
+});
+
+function openAppPopup() {
+    closeVideoPopup(); // ✅ ensure only app popup is open
+    const popup = document.getElementById('appPopup');
+    if (popup) {
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeAppPopup() {
+    const popup = document.getElementById('appPopup');
+    if (popup) {
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// ===== Overlay click to close =====
+document.querySelectorAll('.popup-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+        if (e.target.classList.contains('popup-overlay')) {
+            closeAllPopups();
+        }
+    });
+});
+
+// ===== Close all popups (ESC key support) =====
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeAllPopups();
+    }
+});
+
+function closeAllPopups() {
+    closeVideoPopup();
+    closeAppPopup();
+}
+</script>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+
+    .section-title{
+      font-size:2rem;text-align:center;margin-bottom:2rem;
+      background:linear-gradient(135deg,#00ffff,#0099ff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .pricing-cards{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;padding:20px;justify-items:center;align-items:start;
+    }
+    .card{
+      background:#111;border-radius:20px;overflow:hidden;cursor:pointer;
+      box-shadow:0 5px 15px rgba(0,0,0,.4);
+      transition:transform .35s ease,box-shadow .35s ease;
+      animation:float 4s ease-in-out infinite;position:relative
+    }
+    .card img{width:100%;display:block}
+    .card:hover{ transform:translateY(-12px) scale(1.06); box-shadow:0 12px 25px rgba(0,153,255,.35); }
+    .card.active{animation:none}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .features{ display:none; padding:1rem; background:rgba(0,153,255,.08); border-top:2px solid #0099ff; text-align:left; animation:fadeIn .4s ease; }
+    .card.active .features{display:block}
+    .features h3{margin:0 0 .5rem}
+    .features ul{margin:0 0 1rem 1.2rem;padding:0}
+    .features li{margin:.4rem 0}
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+    .tarif-btn{ display:inline-block; padding:12px 28px; border-radius:30px; font-size:1.1rem; font-weight:600; text-decoration:none; color:#000;
+      background:linear-gradient(135deg,#00ffff,#0099ff); box-shadow:0 4px 15px rgba(0,153,255,.4); transition:all .3s ease; }
+    .tarif-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,153,255,.6); }
+    
+    .bg-frame {   position: fixed;   top: 0;   left: 0;   width: 100vw;   height: 100vh;   border: none;   z-index: -1;   pointer-events: none;   background: transparent; }
+/* Video Analysis Popup */
+    .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);
+      backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;animation:fadeIn .3s ease}
+    .popup-overlay.active{display:flex}
+    .popup-content{background:linear-gradient(145deg,#0a0a0a,#1a1a1a);border-radius:25px;max-width:700px;width:90%;
+      max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,153,255,.4);
+      border:2px solid rgba(0,153,255,.3);animation:popupSlide .4s ease}
+    @keyframes popupSlide{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .popup-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border:none;background:rgba(255,255,255,.1);
+      border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;z-index:1}
+    .popup-close:hover{background:rgba(255,0,0,.2);transform:rotate(90deg)}
+    .popup-close::before,.popup-close::after{content:'';position:absolute;width:20px;height:2px;background:#fff}
+    .popup-close::before{transform:rotate(45deg)}
+    .popup-close::after{transform:rotate(-45deg)}
+    .popup-header{padding:2rem 2rem 1rem;text-align:center}
+    .popup-header h2{font-size:2rem;margin:0 0 1rem;background:linear-gradient(135deg,#00ffff,#0099ff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .popup-body{padding:0 2rem 2rem}
+    .popup-description{font-size:1.1rem;line-height:1.8;color:#ccc;margin-bottom:2rem;text-align:center}
+    .video-container{position:relative;width:100%;padding-bottom:56.25%;background:#000;border-radius:15px;overflow:hidden;margin-bottom:2rem;
+      box-shadow:0 8px 25px rgba(0,153,255,.2)}
+    .video-container video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+    .video-container::before{content:'▶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      font-size:4rem;color:rgba(0,255,255,.8);pointer-events:none;opacity:0;transition:.3s;z-index:1}
+    .video-container:hover::before{opacity:1}
+    .popup-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+    .feature-item{background:rgba(0,153,255,.1);padding:1rem;border-radius:12px;border-left:3px solid #00ffff;transition:.3s}
+    .feature-item:hover{background:rgba(0,153,255,.2);transform:translateX(5px)}
+    .feature-item h4{margin:0 0 .5rem;color:#00ffff;font-size:1rem}
+    .feature-item p{margin:0;color:#aaa;font-size:.9rem;line-height:1.5}
+    .popup-btn{display:block;width:100%;padding:15px;background:linear-gradient(135deg,#00ffff,#0099ff);
+      color:#000;text-decoration:none;text-align:center;border-radius:30px;font-size:1.2rem;font-weight:600;
+      box-shadow:0 4px 15px rgba(0,153,255,.4);transition:.3s;border:none;cursor:pointer}
+    .popup-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,153,255,.6)}
+    .video-link {   cursor: pointer;   color: #00e5ff;   font-weight: 600;   font-size: 1.1rem;   text-decoration: none;   position: relative;   display: inline-flex;   align-items: center;   gap: 6px;   transition: color 0.3s ease; }
+    .video-link::after {     font-size: 1rem;   transition: transform 0.3s ease; }
+    .video-link::before {   content: "";   position: absolute;   bottom: -3px;   left: 0;   width: 100%;   height: 2px;   background: currentColor;   transform: scaleX(0);   transform-origin: left;   transition: transform 0.3s ease; }
+    .video-link:hover {   color: #0099ff; }
+    .video-link:hover::before {   transform: scaleX(1); }
+    .video-link:hover::after {   transform: translateX(4px); }
+    .app-link {   cursor: pointer;   color: #00e5ff;   font-weight: 600;   font-size: 1.1rem;   text-decoration: none;   position: relative;   display: inline-flex;   align-items: center;   gap: 6px;   transition: color 0.3s ease; }
+    .app-link::after {     font-size: 1rem;   transition: transform 0.3s ease; }
+    .app-link::before {   content: "";   position: absolute;   bottom: -3px;   left: 0;   width: 100%;   height: 2px;   background: currentColor;   transform: scaleX(0);   transform-origin: left;   transition: transform 0.3s ease; }
+    .app-link:hover {   color: #0099ff; }
+    .app-link:hover::before {   transform: scaleX(1); }
+    .app-link:hover::after {   transform: translateX(4px); }
+    
+    @media(max-width:768px){
+      .popup-content{width:95%;max-height:95vh}
+      .popup-header h2{font-size:1.5rem}
+      .popup-features{grid-template-columns:1fr}
+    }
+    
+    /* Phone Mockup Styles */
+    .phone-mockup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: floatPhone 3s ease-in-out infinite;
+    }
+    
+    .phone-mockup:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    
+    .phone-mockup:nth-child(3) {
+      animation-delay: 1s;
+    }
+    
+    @keyframes floatPhone {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .phone-frame {
+      position: relative;
+      width: 180px;
+      height: 360px;
+      background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+      border-radius: 30px;
+      padding: 12px;
+      box-shadow:
+        0 10px 40px rgba(0,0,0,.6),
+        inset 0 0 0 2px rgba(0,153,255,.3),
+        0 0 20px rgba(0,153,255,.2);
+      overflow: hidden;
+      transition: transform .3s ease;
+    }
+    
+    .phone-frame:hover {
+      transform: scale(1.05);
+      box-shadow:
+        0 15px 50px rgba(0,0,0,.8),
+        inset 0 0 0 2px rgba(0,153,255,.5),
+        0 0 30px rgba(0,153,255,.4);
+    }
+    
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 20px;
+      background: #000;
+      border-radius: 0 0 15px 15px;
+      z-index: 2;
+    }
+    
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    @media(max-width: 768px) {
+      .popup-content { width: 95%; max-height: 95vh; }
+      .popup-header h2 { font-size: 1.5rem; }
+      .popup-features { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.8rem; }
+      .phone-frame { width: 140px; height: 280px; }
+      .phone-notch { width: 80px; height: 16px; }
+    }
+html {
+  background: #000; /* solid fallback */
+}
+body {
+  background: transparent !important;
+  overscroll-behavior: none; /* prevent pull-to-refresh glow */
+}
+  
+</style>
