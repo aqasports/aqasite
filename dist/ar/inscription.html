@@ -769,7 +769,8 @@
       const parts    = group.shortLabel.split('||');
       const dayFull  = parts[0] || '';
       const time     = parts[1] || '';
-      const coach    = parts[2] || '';
+      const coachRaw = parts[2] || '';
+      const coach    = coachRaw.replace(/^[Cc]oach\s+/, '');
       const dayAbbr  = { 
         'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim',
         'Sam Merc': 'Sam/Mer', 'Dim Jeu': 'Dim/Jeu', 'Dim Merc': 'Dim/Mer', 'Samedi ELITE': 'Sam (Elite)'

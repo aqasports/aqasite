@@ -34,7 +34,7 @@ Object.keys(scheduleData).forEach(locKey => {
       coach.slots.forEach(slot => {
         if (slot.taken >= slot.total) return;
         kidsGroups.push({
-          coach: coach.name,
+          coach: coach.name.replace(/^[Cc]oach\s+/, ''),
           pool: poolLabel,
           day: slot.day,
           time: slot.time,
