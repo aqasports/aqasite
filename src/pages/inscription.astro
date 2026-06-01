@@ -479,59 +479,92 @@ const getRelativePath = (path, targetLang) => {
     selectedData.groupes = [];
 
     if (!groups || groups.length === 0) {
-      container.innerHTML = '<div class="group-placeholder">Aucun groupe disponible</div>';
+      container.innerHTML = '<div style="text-align:center;padding:2rem 1rem;opacity:0.5;font-style:italic;font-size:0.9rem;">Aucun groupe disponible</div>';
       noGroupsMessage.classList.add('show');
       return;
     }
     noGroupsMessage.classList.remove('show');
 
     const sorted = [...groups].sort((a, b) => b.remaining - a.remaining);
-    const typeColors = { g10: '#00b4d8', max5: '#7b2ff7', apnea: '#00c896', elite: '#ffd60a' };
-    const typeIcons  = { g10: '🏄', max5: '⭐', apnea: '🤿', elite: '🏆' };
+    const typeColors = { g10: '#00b4d8', max5: '#9b5de5', apnea: '#00c896', elite: '#f9c74f' };
 
     sorted.forEach(group => {
       const card = document.createElement('div');
-      card.className = 'group-card';
       card.dataset.id = group.id;
+      card.dataset.selected = '0';
 
-      // Short day abbreviation
-      const dayAbbr = { 'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim' };
-      const dayShort = dayAbbr[group.shortLabel.split(' - ')[0]] || group.shortLabel.split(' - ')[0];
-      const time     = group.shortLabel.split(' - ')[1] || '';
-      const coach    = group.shortLabel.split(' - ').slice(2).join(' ') || '';
+      const parts    = group.shortLabel.split(' - ');
+      const dayFull  = parts[0] || '';
+      const time     = parts[1] || '';
+      const coach    = parts.slice(2).join(' ') || '';
+      const dayAbbr  = { 'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim' };
+      const dayShort = dayAbbr[dayFull] || dayFull.slice(0,3);
       const color    = typeColors[group.type] || '#00f2ff';
-      const icon     = typeIcons[group.type]  || '🏘️';
-      const remTxt   = group.remaining === 1 ? '1 place' : `${group.remaining} places`;
+      const remTxt   = `${group.remaining} pl.`;
+      const typeTxt  = group.type.toUpperCase();
+
+      // Inline all styles — bypasses Astro CSS scoping on dynamic elements
+      card.style.cssText = `
+        display:grid;
+        grid-template-columns:58px 1fr 68px;
+        align-items:center;
+        gap:0.6rem;
+        background:rgba(255,255,255,0.04);
+        border:1.5px solid rgba(255,255,255,0.10);
+        border-radius:10px;
+        padding:0.6rem 0.8rem;
+        cursor:pointer;
+        transition:background 0.18s,border-color 0.18s;
+        user-select:none;
+        margin-bottom:0.5rem;
+      `;
 
       card.innerHTML = `
-        <div class="gc-left">
-          <span class="gc-day">${dayShort}</span>
-          <span class="gc-time">${time}</span>
+        <div style="display:flex;flex-direction:column;align-items:center;border-right:1px solid rgba(255,255,255,0.1);padding-right:0.6rem;">
+          <span style="font-weight:700;font-size:1rem;color:#00f2ff;line-height:1.1;">${dayShort}</span>
+          <span style="font-size:0.72rem;color:rgba(255,255,255,0.55);white-space:nowrap;margin-top:2px;">${time}</span>
         </div>
-        <div class="gc-mid">
-          <span class="gc-coach">${coach}</span>
-          <span class="gc-badge" style="background:${color}20;color:${color};border-color:${color}40">${icon} ${group.type.toUpperCase()}</span>
+        <div style="overflow:hidden;">
+          <div style="font-weight:600;font-size:0.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${coach}</div>
         </div>
-        <div class="gc-right">
-          <span class="gc-rem">${remTxt}</span>
-          <span class="gc-rem-label">disponibles</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+          <span style="font-size:0.72rem;font-weight:700;padding:2px 6px;border-radius:6px;background:${color}22;color:${color};border:1px solid ${color}44;letter-spacing:0.4px;">${typeTxt}</span>
+          <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);">${remTxt}</span>
         </div>
       `;
 
       card.addEventListener('click', () => {
         const max = selectedData.frequency || 1;
-        const already = container.querySelectorAll('.group-card.selected');
-        if (card.classList.contains('selected')) {
-          card.classList.remove('selected');
+        const isSelected = card.dataset.selected === '1';
+
+        if (isSelected) {
+          // Deselect this card
+          card.dataset.selected = '0';
+          card.style.background = 'rgba(255,255,255,0.04)';
+          card.style.borderColor = 'rgba(255,255,255,0.10)';
+          card.style.boxShadow = '';
           selectedData.groupes = selectedData.groupes.filter(id => id !== group.id);
-        } else if (already.length < max) {
-          card.classList.add('selected');
-          selectedData.groupes.push(group.id);
-        } else if (max === 1) {
-          // Single select mode: deselect previous
-          already.forEach(c => c.classList.remove('selected'));
-          selectedData.groupes = [];
-          card.classList.add('selected');
+        } else {
+          const currentSelected = container.querySelectorAll('[data-selected="1"]');
+          if (currentSelected.length >= max) {
+            if (max === 1) {
+              // Swap: deselect previous, select this
+              currentSelected.forEach(c => {
+                c.dataset.selected = '0';
+                c.style.background = 'rgba(255,255,255,0.04)';
+                c.style.borderColor = 'rgba(255,255,255,0.10)';
+                c.style.boxShadow = '';
+              });
+              selectedData.groupes = [];
+            } else {
+              return; // max reached, ignore tap
+            }
+          }
+          // Select this card
+          card.dataset.selected = '1';
+          card.style.background = 'rgba(0,242,255,0.10)';
+          card.style.borderColor = '#00f2ff';
+          card.style.boxShadow = '0 0 12px rgba(0,242,255,0.18)';
           selectedData.groupes.push(group.id);
         }
         hideError('groupeError');
