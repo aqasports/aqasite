@@ -18,7 +18,7 @@ function toggleMobileMenu() {
     } else {
         overlay.classList.remove('active');
         toggle.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = '';
     }
 }
 
@@ -131,13 +131,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Prevent double-tap zoom on iOS
+    // Prevent double-tap zoom on iOS — passive listener so it does NOT block scroll
     let lastTouchEnd = 0;
     document.addEventListener('touchend', e => {
         const now = Date.now();
-        if (now - lastTouchEnd <= 300) e.preventDefault();
+        if (now - lastTouchEnd <= 300 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
+            // do NOT call preventDefault here — it blocks scroll on touch/trackpad
+        }
         lastTouchEnd = now;
-    }, false);
+    }, { passive: true });
 
     // Inject WhatsApp widget
     injectWhatsAppWidget();

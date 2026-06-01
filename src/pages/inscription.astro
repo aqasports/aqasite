@@ -490,6 +490,7 @@ const getRelativePath = (path, targetLang) => {
 
     sorted.forEach(group => {
       const card = document.createElement('div');
+      card.className = 'group-card';
       card.dataset.id = group.id;
       card.dataset.selected = '0';
 
@@ -497,63 +498,46 @@ const getRelativePath = (path, targetLang) => {
       const dayFull  = parts[0] || '';
       const time     = parts[1] || '';
       const coach    = parts[2] || '';
-      const dayAbbr  = { 'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim' };
-      const dayShort = dayAbbr[dayFull] || dayFull.slice(0,3);
+      const dayAbbr  = { 
+        'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim',
+        'Sam Merc': 'Sam/Mer', 'Dim Jeu': 'Dim/Jeu', 'Dim Merc': 'Dim/Mer', 'Samedi ELITE': 'Sam (Elite)'
+      };
+      const dayShort = dayAbbr[dayFull] || dayFull;
       const color    = typeColors[group.type] || '#00f2ff';
       const remTxt   = `${group.remaining} pl.`;
       const typeTxt  = group.type.toUpperCase();
 
-      // Inline all styles — bypasses Astro CSS scoping on dynamic elements
-      card.style.cssText = `
-        display:grid;
-        grid-template-columns:58px 1fr 68px;
-        align-items:center;
-        gap:0.6rem;
-        background:rgba(255,255,255,0.04);
-        border:1.5px solid rgba(255,255,255,0.10);
-        border-radius:10px;
-        padding:0.6rem 0.8rem;
-        cursor:pointer;
-        transition:background 0.18s,border-color 0.18s;
-        user-select:none;
-        margin-bottom:0.5rem;
-      `;
-
       card.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:center;border-right:1px solid rgba(255,255,255,0.1);padding-right:0.6rem;">
-          <span style="font-weight:700;font-size:1rem;color:#00f2ff;line-height:1.1;">${dayShort}</span>
-          <span style="font-size:0.72rem;color:rgba(255,255,255,0.55);white-space:nowrap;margin-top:2px;">${time}</span>
+        <div class="gc-left">
+          <span class="gc-day">${dayShort}</span>
+          <span class="gc-time">${time}</span>
         </div>
-        <div style="overflow:hidden;">
-          <div style="font-weight:600;font-size:0.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${coach}</div>
+        <div class="gc-mid">
+          <div class="gc-coach">${coach}</div>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
-          <span style="font-size:0.72rem;font-weight:700;padding:2px 6px;border-radius:6px;background:${color}22;color:${color};border:1px solid ${color}44;letter-spacing:0.4px;">${typeTxt}</span>
-          <span style="font-size:0.72rem;color:rgba(255,255,255,0.5);">${remTxt}</span>
+        <div class="gc-right">
+          <span class="gc-badge" style="background:${color}22;color:${color};border-color:${color}44;">${typeTxt}</span>
+          <span class="gc-rem">${remTxt}</span>
         </div>
       `;
 
       card.addEventListener('click', () => {
         const max = selectedData.frequency || 1;
-        const isSelected = card.dataset.selected === '1';
+        const isSelected = card.classList.contains('selected');
 
         if (isSelected) {
           // Deselect this card
           card.dataset.selected = '0';
-          card.style.background = 'rgba(255,255,255,0.04)';
-          card.style.borderColor = 'rgba(255,255,255,0.10)';
-          card.style.boxShadow = '';
+          card.classList.remove('selected');
           selectedData.groupes = selectedData.groupes.filter(id => id !== group.id);
         } else {
-          const currentSelected = container.querySelectorAll('[data-selected="1"]');
+          const currentSelected = container.querySelectorAll('.group-card.selected');
           if (currentSelected.length >= max) {
             if (max === 1) {
               // Swap: deselect previous, select this
               currentSelected.forEach(c => {
                 c.dataset.selected = '0';
-                c.style.background = 'rgba(255,255,255,0.04)';
-                c.style.borderColor = 'rgba(255,255,255,0.10)';
-                c.style.boxShadow = '';
+                c.classList.remove('selected');
               });
               selectedData.groupes = [];
             } else {
@@ -562,9 +546,7 @@ const getRelativePath = (path, targetLang) => {
           }
           // Select this card
           card.dataset.selected = '1';
-          card.style.background = 'rgba(0,242,255,0.10)';
-          card.style.borderColor = '#00f2ff';
-          card.style.boxShadow = '0 0 12px rgba(0,242,255,0.18)';
+          card.classList.add('selected');
           selectedData.groupes.push(group.id);
         }
         hideError('groupeError');
@@ -1159,30 +1141,31 @@ const getRelativePath = (path, targetLang) => {
     }
 
     /* Individual group card */
-    .group-card {
+    :global(.group-card) {
       display: grid;
-      grid-template-columns: 70px 1fr auto;
+      grid-template-columns: 80px 1fr auto;
       align-items: center;
       gap: 0.75rem;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1.5px solid rgba(255,255,255,0.10);
       border-radius: 12px;
       padding: 0.75rem 1rem;
       cursor: pointer;
       transition: all 0.2s ease;
       user-select: none;
+      margin-bottom: 0.5rem;
     }
-    .group-card:hover {
-      background: rgba(0,242,255,0.08);
-      border-color: rgba(0,242,255,0.3);
+    :global(.group-card:hover) {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--primary-color);
     }
-    .group-card.selected {
-      background: rgba(0,242,255,0.12);
-      border-color: #00f2ff;
-      box-shadow: 0 0 14px rgba(0,242,255,0.2);
+    :global(.group-card.selected) {
+      background: var(--glow-color);
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 14px var(--glow-color);
     }
     /* Left: day + time */
-    .gc-left {
+    :global(.gc-left) {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1190,32 +1173,34 @@ const getRelativePath = (path, targetLang) => {
       border-right: 1px solid rgba(255,255,255,0.1);
       padding-right: 0.75rem;
     }
-    .gc-day {
+    :global(.gc-day) {
       font-weight: 700;
-      font-size: 1rem;
-      color: #00f2ff;
+      font-size: 0.95rem;
+      color: var(--secondary-color);
       letter-spacing: 0.5px;
     }
-    .gc-time {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.6);
+    :global(.gc-time) {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.65);
       white-space: nowrap;
+      margin-top: 2px;
     }
     /* Mid: coach + badge */
-    .gc-mid {
+    :global(.gc-mid) {
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
       overflow: hidden;
+      padding-left: 0.25rem;
     }
-    .gc-coach {
+    :global(.gc-coach) {
       font-weight: 600;
       font-size: 0.95rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .gc-badge {
+    :global(.gc-badge) {
       font-size: 0.7rem;
       font-weight: 700;
       padding: 2px 8px;
@@ -1225,32 +1210,32 @@ const getRelativePath = (path, targetLang) => {
       letter-spacing: 0.5px;
     }
     /* Right: remaining places */
-    .gc-right {
+    :global(.gc-right) {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       text-align: right;
       flex-shrink: 0;
     }
-    .gc-rem {
+    :global(.gc-rem) {
       font-weight: 700;
       font-size: 0.95rem;
       color: #00f2ff;
     }
-    .gc-rem-label {
+    :global(.gc-rem-label) {
       font-size: 0.68rem;
       opacity: 0.55;
     }
 
     @media (max-width: 400px) {
-      .group-card {
-        grid-template-columns: 58px 1fr auto;
+      :global(.group-card) {
+        grid-template-columns: 75px 1fr auto;
         gap: 0.5rem;
         padding: 0.65rem 0.75rem;
       }
-      .gc-day { font-size: 0.9rem; }
-      .gc-time { font-size: 0.72rem; }
-      .gc-coach { font-size: 0.88rem; }
+      :global(.gc-day) { font-size: 0.88rem; }
+      :global(.gc-time) { font-size: 0.72rem; }
+      :global(.gc-coach) { font-size: 0.88rem; }
     }
 
     /* Category Selection */

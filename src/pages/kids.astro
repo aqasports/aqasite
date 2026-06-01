@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import scheduleData from '../data/schedule.json';
 
 export interface Props {
   lang?: string;
@@ -13,6 +14,29 @@ const getRelativePath = (path, targetLang) => {
   if (targetLang === 'fr') return path;
   return `/${targetLang}${path === '/' ? '' : path}`;
 };
+
+// Build kids groups dynamically from schedule.json
+const kidsGroups = [];
+const POOL_LABELS = { reghaia: 'ADM AZAL — Reghaïa', cheraga: 'BK Sport — Chéraga' };
+
+Object.keys(scheduleData).forEach(locKey => {
+  const loc = scheduleData[locKey];
+  if (!loc || !loc.categories) return;
+  const poolLabel = POOL_LABELS[locKey] || locKey;
+
+  Object.keys(loc.categories).forEach(catKey => {
+    if (catKey !== 'enfants' && catKey !== 'kids') return;
+    const cat = loc.categories[catKey];
+    if (!cat || !cat.coaches) return;
+
+    cat.coaches.forEach(coach => {
+      if (!coach.slots || coach.slots.length === 0) return;
+      const availableSlots = coach.slots.filter(s => s.taken < s.total);
+      if (availableSlots.length === 0) return;
+      kidsGroups.push({ coach: coach.name, pool: poolLabel, slots: availableSlots, locKey });
+    });
+  });
+});
 ---
 
 <BaseLayout title="Natation Enfants | AQA Sports Academy — Dès 4 Ans, Algérie"
@@ -122,41 +146,24 @@ const getRelativePath = (path, targetLang) => {
             </p>
 
             <div class="kids-groups__wrapper">
+              {kidsGroups.length > 0 ? kidsGroups.map((g, i) => (
                 <div class="kids-groups__card">
-                    <div class="kids-groups__icon">A</div>
-                    <h3 class="kids-groups__title">Groupe A</h3>
-                    <div class="kids-groups__age">Coach Abdelghani</div>
-                    <ul class="kids-groups__features">
-                        <li class="kids-groups__feature">Samedi 18h15</li>
-                        <li class="kids-groups__feature">Mercredi 18h</li>
-                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
-                        <li class="kids-groups__feature">Reghaia</li>
-                    </ul>
+                  <div class="kids-groups__icon">{String.fromCharCode(65 + i)}</div>
+                  <h3 class="kids-groups__title">Groupe {String.fromCharCode(65 + i)}</h3>
+                  <div class="kids-groups__age">{g.coach}</div>
+                  <ul class="kids-groups__features">
+                    {g.slots.map(s => (
+                      <li class="kids-groups__feature">{s.day} — {s.time}</li>
+                    ))}
+                    <li class="kids-groups__feature">Piscine {g.pool}</li>
+                    <li class="kids-groups__feature" style="color:#00ffff;font-weight:700">{g.slots[0].total - g.slots[0].taken} place(s) disponible(s)</li>
+                  </ul>
                 </div>
-
-                <div class="kids-groups__card">
-                    <div class="kids-groups__icon">B</div>
-                    <h3 class="kids-groups__title">Groupe B</h3>
-                    <div class="kids-groups__age">Coach Younes</div>
-                    <ul class="kids-groups__features">
-                        <li class="kids-groups__feature">Dimanche 18h</li>
-                        <li class="kids-groups__feature">Jeudi 18h</li>
-                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
-                        <li class="kids-groups__feature">Reghaia</li>
-                    </ul>
+              )) : (
+                <div style="grid-column:1/-1;text-align:center;padding:2rem;opacity:0.6;">
+                  Aucun groupe disponible pour le moment. Contactez-nous via WhatsApp.
                 </div>
-
-                <div class="kids-groups__card">
-                    <div class="kids-groups__icon">C</div>
-                    <h3 class="kids-groups__title">Groupe C</h3>
-                    <div class="kids-groups__age">Coach Abdelghani et Coach Younes</div>
-                    <ul class="kids-groups__features">
-                        <li class="kids-groups__feature">Dimanche 19h30</li>
-                        <li class="kids-groups__feature">Mercredi 19h30</li>
-                        <li class="kids-groups__feature">Piscine ADM AZAL</li>
-                        <li class="kids-groups__feature">Reghaia</li>
-                    </ul>
-                </div>
+              )}
             </div>
         </section>
 
@@ -567,62 +574,11 @@ const getRelativePath = (path, targetLang) => {
  
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
-        }
-
-        .bg-frame {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            border: none; z-index: -1; pointer-events: none;
-            background: transparent;
-        }
-
-        .container {
-            padding: 2rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* =========================================
-           BACKGROUND EFFECTS
-           ========================================= */
-        .bg-logo {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw; height: 80vh;
-            background-image: url('https://i.imgur.com/3dcksCn.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.1;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff);
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            z-index: -1;
-            opacity: 0.3;
-            animation: neonGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonGlow {
-            0%, 100% { opacity: 0.3; filter: blur(2px); }
-            50% { opacity: 0.6; filter: blur(0px); }
         }
 
         /* =========================================
