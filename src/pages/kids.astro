@@ -32,7 +32,6 @@ Object.keys(scheduleData).forEach(locKey => {
     cat.coaches.forEach(coach => {
       if (!coach.slots) return;
       coach.slots.forEach(slot => {
-        if (slot.taken >= slot.total) return;
         kidsGroups.push({
           coach: coach.name.replace(/^[Cc]oach\s+/, ''),
           pool: poolLabel,
@@ -164,7 +163,9 @@ Object.keys(scheduleData).forEach(locKey => {
                   <ul class="kids-groups__features">
                     <li class="kids-groups__feature">{g.day} — {g.time}</li>
                     <li class="kids-groups__feature">Piscine {g.pool}</li>
-                    <li class="kids-groups__feature" style="color:#00ffff;font-weight:700">{g.total - g.taken} place(s) disponible(s)</li>
+                    <li class="kids-groups__feature" style={g.taken >= g.total ? "color:#ff3333;font-weight:700" : "color:#00ffff;font-weight:700"}>
+                      {g.taken >= g.total ? "Groupe Complet" : `${g.total - g.taken} place(s) disponible(s)`}
+                    </li>
                   </ul>
                 </div>
               )) : (
@@ -586,7 +587,6 @@ Object.keys(scheduleData).forEach(locKey => {
                         cat.coaches.forEach(coach => {
                           if (!coach.slots) return;
                           coach.slots.forEach(slot => {
-                            if (slot.taken >= slot.total) return;
                             kidsGroups.push({
                               coach: coach.name.replace(/^[Cc]oach\s+/, ''),
                               pool: poolLabel,
@@ -614,7 +614,9 @@ Object.keys(scheduleData).forEach(locKey => {
                               <ul class="kids-groups__features">
                                 <li class="kids-groups__feature">${g.day} — ${g.time}</li>
                                 <li class="kids-groups__feature">Piscine ${g.pool}</li>
-                                <li class="kids-groups__feature" style="color:#00ffff;font-weight:700">${g.total - g.taken} place(s) disponible(s)</li>
+                                <li class="kids-groups__feature" style="${g.taken >= g.total ? 'color:#ff3333;font-weight:700' : 'color:#00ffff;font-weight:700'}">
+                                  ${g.taken >= g.total ? 'Groupe Complet' : `${g.total - g.taken} place(s) disponible(s)`}
+                                </li>
                               </ul>
                             </div>
                         `).join('');
