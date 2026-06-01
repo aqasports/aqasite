@@ -562,6 +562,75 @@ Object.keys(scheduleData).forEach(locKey => {
                 steps.forEach((s, i) => s.classList.toggle("active", i === currentStep));
                 dots.forEach((d, i) => d.classList.toggle("active", i === currentStep));
             }
+
+            // --- 7. Dynamic Schedule Fetch & Render ---
+            async function updateGroupsDynamically() {
+                try {
+                    const response = await fetch('/api/schedule');
+                    if (!response.ok) return;
+                    const scheduleData = await response.json();
+                    
+                    const kidsGroups = [];
+                    const POOL_LABELS = { reghaia: 'ADM AZAL — Reghaïa', cheraga: 'BK Sport — Chéraga' };
+
+                    Object.keys(scheduleData).forEach(locKey => {
+                      const loc = scheduleData[locKey];
+                      if (!loc || !loc.categories) return;
+                      const poolLabel = POOL_LABELS[locKey] || locKey;
+
+                      Object.keys(loc.categories).forEach(catKey => {
+                        if (catKey !== 'enfants' && catKey !== 'kids') return;
+                        const cat = loc.categories[catKey];
+                        if (!cat || !cat.coaches) return;
+
+                        cat.coaches.forEach(coach => {
+                          if (!coach.slots) return;
+                          coach.slots.forEach(slot => {
+                            if (slot.taken >= slot.total) return;
+                            kidsGroups.push({
+                              coach: coach.name.replace(/^[Cc]oach\s+/, ''),
+                              pool: poolLabel,
+                              day: slot.day,
+                              time: slot.time,
+                              total: slot.total,
+                              taken: slot.taken,
+                              type: slot.type,
+                              locKey
+                            });
+                          });
+                        });
+                      });
+                    });
+
+                    const wrapper = document.querySelector('.kids-groups__wrapper');
+                    if (!wrapper) return;
+
+                    if (kidsGroups.length > 0) {
+                        wrapper.innerHTML = kidsGroups.map((g, i) => `
+                            <div class="kids-groups__card">
+                              <div class="kids-groups__icon">${String.fromCharCode(65 + i)}</div>
+                              <h3 class="kids-groups__title">Groupe ${String.fromCharCode(65 + i)}</h3>
+                              <div class="kids-groups__age">${g.coach}</div>
+                              <ul class="kids-groups__features">
+                                <li class="kids-groups__feature">${g.day} — ${g.time}</li>
+                                <li class="kids-groups__feature">Piscine ${g.pool}</li>
+                                <li class="kids-groups__feature" style="color:#00ffff;font-weight:700">${g.total - g.taken} place(s) disponible(s)</li>
+                              </ul>
+                            </div>
+                        `).join('');
+                    } else {
+                        wrapper.innerHTML = `
+                            <div style="grid-column:1/-1;text-align:center;padding:2rem;opacity:0.6;">
+                              Aucun groupe disponible pour le moment. Contactez-nous via WhatsApp.
+                            </div>
+                        `;
+                    }
+                } catch (err) {
+                    console.error('Error fetching schedule dynamically:', err);
+                }
+            }
+
+            updateGroupsDynamically();
         });
     </script>
 

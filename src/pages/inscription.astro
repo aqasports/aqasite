@@ -224,7 +224,7 @@ const getRelativePath = (path, targetLang) => {
 <script is:inline define:vars={{ lang }}>
   // Load dynamic schedule data
   const appEl = document.getElementById('registrationApp');
-  const scheduleData = JSON.parse(appEl?.dataset?.schedule || '{}');
+  let scheduleData = JSON.parse(appEl?.dataset?.schedule || '{}');
 
   const AQA_GROUPS = {
     men: { reghaia: [], cheraga: [] },
@@ -234,74 +234,11 @@ const getRelativePath = (path, targetLang) => {
     apnea: { reghaia: [], cheraga: [] }
   };
 
-  // Map dynamically from scheduleData
-  Object.keys(scheduleData).forEach(locKey => {
-    const loc = scheduleData[locKey];
-    if (!loc || !loc.categories) return;
-    
-    Object.keys(loc.categories).forEach(catKey => {
-      const cat = loc.categories[catKey];
-      if (!cat || !cat.coaches) return;
-      
-      // Map category key to form category
-      let formCat = 'men';
-      if (catKey === 'homme' || catKey === 'men') formCat = 'men';
-      else if (catKey === 'femme' || catKey === 'women') formCat = 'women';
-      else if (catKey === 'ados' || catKey === 'teens') formCat = 'teens';
-      else if (catKey === 'enfants' || catKey === 'kids') formCat = 'kids';
-      else if (catKey === 'apnea') formCat = 'apnea';
-      
-      if (!AQA_GROUPS[formCat]) {
-        AQA_GROUPS[formCat] = {};
-      }
-      if (!AQA_GROUPS[formCat][locKey]) {
-        AQA_GROUPS[formCat][locKey] = [];
-      }
-      
-      cat.coaches.forEach(coach => {
-        if (!coach.slots) return;
-        coach.slots.forEach(slot => {
-          // Only show available (non-full) slots
-          if (slot.taken >= slot.total) return;
-          
-          const cleanCoach = coach.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-          const cleanDay = slot.day.toLowerCase().replace(/[^a-z0-9]/g, '');
-          const cleanTime = slot.time.toLowerCase().replace(/[^a-z0-9]/g, '');
-          
-          // Apnea slots go into the apnea category regardless of which category they're in
-          let slotFormCat = formCat;
-          if (slot.type === 'apnea') slotFormCat = 'apnea';
-
-          const id = `${slotFormCat}_reg_${cleanCoach}_${cleanDay}_${cleanTime}`;
-          const remaining = slot.total - slot.taken;
-          
-          // Slot type label
-          const typeLabels = { g10: 'G10', max5: 'MAX5', apnea: 'Apnée', elite: 'Elite' };
-          const typeLabel = typeLabels[slot.type] || slot.type.toUpperCase();
-          
-          // Rich label with remaining places
-          const label = `${slot.day} • ${slot.time} — ${coach.name} [${typeLabel} — ${remaining} place${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}]`;
-          // Short label for form submission — use || separator, never appears in day/time/coach
-          const shortLabel = `${slot.day}||${slot.time}||${coach.name}`;
-          
-          if (!AQA_GROUPS[slotFormCat][locKey]) {
-            AQA_GROUPS[slotFormCat][locKey] = [];
-          }
-          AQA_GROUPS[slotFormCat][locKey].push({ id, label, shortLabel, remaining, type: slot.type });
-        });
-      });
-    });
-  });
-
-  // Build pool names dynamically from scheduleData so new pools added in admin appear here automatically
   const AQA_POOLS = {};
   const POOL_LABELS = {
     reghaia: 'Reghaïa - ADM AZAL',
     cheraga: 'Chéraga - BK Sport'
   };
-  Object.keys(scheduleData).forEach(locKey => {
-    AQA_POOLS[locKey] = POOL_LABELS[locKey] || (scheduleData[locKey].name || locKey);
-  });
 
   const AQA_CATEGORIES = {
     men: "Hommes",
@@ -322,13 +259,110 @@ const getRelativePath = (path, targetLang) => {
     personalInfo: {}
   };
 
-  // Initialize wizard
-  populatePiscineOptions();
+  function parseAndSetup(data) {
+    scheduleData = data;
+    
+    // Clear mappings
+    Object.keys(AQA_GROUPS).forEach(k => {
+      AQA_GROUPS[k] = { reghaia: [], cheraga: [] };
+    });
+    Object.keys(AQA_POOLS).forEach(k => {
+      delete AQA_POOLS[k];
+    });
+
+    // Map dynamically from scheduleData
+    Object.keys(scheduleData).forEach(locKey => {
+      const loc = scheduleData[locKey];
+      if (!loc || !loc.categories) return;
+      
+      Object.keys(loc.categories).forEach(catKey => {
+        const cat = loc.categories[catKey];
+        if (!cat || !cat.coaches) return;
+        
+        // Map category key to form category
+        let formCat = 'men';
+        if (catKey === 'homme' || catKey === 'men') formCat = 'men';
+        else if (catKey === 'femme' || catKey === 'women') formCat = 'women';
+        else if (catKey === 'ados' || catKey === 'teens') formCat = 'teens';
+        else if (catKey === 'enfants' || catKey === 'kids') formCat = 'kids';
+        else if (catKey === 'apnea') formCat = 'apnea';
+        
+        if (!AQA_GROUPS[formCat]) {
+          AQA_GROUPS[formCat] = {};
+        }
+        if (!AQA_GROUPS[formCat][locKey]) {
+          AQA_GROUPS[formCat][locKey] = [];
+        }
+        
+        cat.coaches.forEach(coach => {
+          if (!coach.slots) return;
+          coach.slots.forEach(slot => {
+            // Only show available (non-full) slots
+            if (slot.taken >= slot.total) return;
+            
+            const cleanCoach = coach.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const cleanDay = slot.day.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const cleanTime = slot.time.toLowerCase().replace(/[^a-z0-9]/g, '');
+            
+            // Apnea slots go into the apnea category regardless of which category they're in
+            let slotFormCat = formCat;
+            if (slot.type === 'apnea') slotFormCat = 'apnea';
+
+            const id = `${slotFormCat}_reg_${cleanCoach}_${cleanDay}_${cleanTime}`;
+            const remaining = slot.total - slot.taken;
+            
+            // Slot type label
+            const typeLabels = { g10: 'G10', max5: 'MAX5', apnea: 'Apnée', elite: 'Elite' };
+            const typeLabel = typeLabels[slot.type] || slot.type.toUpperCase();
+            
+            // Rich label with remaining places
+            const label = `${slot.day} • ${slot.time} — ${coach.name} [${typeLabel} — ${remaining} place${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}]`;
+            // Short label for form submission
+            const shortLabel = `${slot.day}||${slot.time}||${coach.name}`;
+            
+            if (!AQA_GROUPS[slotFormCat][locKey]) {
+              AQA_GROUPS[slotFormCat][locKey] = [];
+            }
+            AQA_GROUPS[slotFormCat][locKey].push({ id, label, shortLabel, remaining, type: slot.type });
+          });
+        });
+      });
+    });
+
+    // Build pool names
+    Object.keys(scheduleData).forEach(locKey => {
+      AQA_POOLS[locKey] = POOL_LABELS[locKey] || (scheduleData[locKey].name || locKey);
+    });
+
+    populatePiscineOptions();
+  }
+
+  // Parse static initial data
+  parseAndSetup(scheduleData);
+
+  // Initialize wizard actions
   setupCategorySelection();
   setupFormuleSelection();
   setupFrequencySelection();
   setupEventListeners();
   updateProgress();
+
+  // Load live data from the backend
+  async function loadLiveSchedule() {
+    try {
+      const response = await fetch('/api/schedule');
+      if (response.ok) {
+        const liveData = await response.json();
+        parseAndSetup(liveData);
+        if (typeof updateGroupeOptions === 'function') {
+          updateGroupeOptions();
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to load live schedule, using static data instead:", e);
+    }
+  }
+  loadLiveSchedule();
 
   function populatePiscineOptions() {
     const piscineSelect = document.getElementById('piscineSelect');

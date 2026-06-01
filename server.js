@@ -42,6 +42,24 @@ app.use(express.static(path.join(__dirname)));
 // API routes
 app.use('/api', messageRouter);
 
+// Get schedule endpoint
+app.get('/api/schedule', (req, res) => {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(__dirname, 'src', 'data', 'schedule.json');
+    if (fs.existsSync(filePath)) {
+      const data = fs.readFileSync(filePath, 'utf8');
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).send(data);
+    } else {
+      res.status(404).json({ success: false, message: 'Planning introuvable' });
+    }
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // Save schedule endpoint
 app.post('/api/save-schedule', (req, res) => {
   try {
