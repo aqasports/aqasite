@@ -153,22 +153,16 @@ const getRelativePath = (path, targetLang) => {
         <!-- Step 5: Groupes -->
         <div class="step" id="step5">
           <h3>Choisissez vos groupes</h3>
-          <div class="form-group">
-            <label for="groupeSelect">Groupes disponibles :</label>
-            <select id="groupeSelect" multiple size="5" required disabled>
-              <option value="">-- Complétez d'abord les étapes précédentes --</option>
-            </select>
-            <p style="font-size:0.9rem; opacity:0.8; margin-top:0.5rem;">
-              Sélectionnez <span id="maxGroups">1</span> groupe(s) selon votre fréquence
-            </p>
-            <div class="error-message" id="groupeError">Veuillez sélectionner le bon nombre de groupes</div>
-            <div class="no-groups-message" id="noGroupsMessage">
-              Aucun groupe disponible pour cette combinaison. Essayez un autre emplacement.
-            </div>
-            <div class="no-groups-message" id="womenMessage" style="display: none; color: #ff69b4;">
-              Les groupes de femmes seront bientôt disponibles.
-            </div>
+          <p class="step5-hint">Sélectionnez <span id="maxGroups">1</span> groupe(s) selon votre fréquence</p>
+          <div id="groupCardsContainer" class="group-cards-container">
+            <div class="group-placeholder">Complétez d'abord les étapes précédentes</div>
           </div>
+          <div class="error-message" id="groupeError">Veuillez sélectionner le bon nombre de groupes</div>
+          <div class="no-groups-message" id="noGroupsMessage">
+            Aucun groupe disponible pour cette combinaison. Essayez un autre emplacement.
+          </div>
+          <!-- hidden select kept for form validation compat -->
+          <select id="groupeSelect" style="display:none" multiple></select>
         </div>
 
         <!-- Step 6: Informations personnelles -->
@@ -478,46 +472,88 @@ const getRelativePath = (path, targetLang) => {
     document.getElementById('inscriptionForm').addEventListener('submit', handleSubmit);
   }
 
+  function renderGroupCards(groups) {
+    const container = document.getElementById('groupCardsContainer');
+    const noGroupsMessage = document.getElementById('noGroupsMessage');
+    container.innerHTML = '';
+    selectedData.groupes = [];
+
+    if (!groups || groups.length === 0) {
+      container.innerHTML = '<div class="group-placeholder">Aucun groupe disponible</div>';
+      noGroupsMessage.classList.add('show');
+      return;
+    }
+    noGroupsMessage.classList.remove('show');
+
+    const sorted = [...groups].sort((a, b) => b.remaining - a.remaining);
+    const typeColors = { g10: '#00b4d8', max5: '#7b2ff7', apnea: '#00c896', elite: '#ffd60a' };
+    const typeIcons  = { g10: '🏄', max5: '⭐', apnea: '🤿', elite: '🏆' };
+
+    sorted.forEach(group => {
+      const card = document.createElement('div');
+      card.className = 'group-card';
+      card.dataset.id = group.id;
+
+      // Short day abbreviation
+      const dayAbbr = { 'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim' };
+      const dayShort = dayAbbr[group.shortLabel.split(' - ')[0]] || group.shortLabel.split(' - ')[0];
+      const time     = group.shortLabel.split(' - ')[1] || '';
+      const coach    = group.shortLabel.split(' - ').slice(2).join(' ') || '';
+      const color    = typeColors[group.type] || '#00f2ff';
+      const icon     = typeIcons[group.type]  || '🏘️';
+      const remTxt   = group.remaining === 1 ? '1 place' : `${group.remaining} places`;
+
+      card.innerHTML = `
+        <div class="gc-left">
+          <span class="gc-day">${dayShort}</span>
+          <span class="gc-time">${time}</span>
+        </div>
+        <div class="gc-mid">
+          <span class="gc-coach">${coach}</span>
+          <span class="gc-badge" style="background:${color}20;color:${color};border-color:${color}40">${icon} ${group.type.toUpperCase()}</span>
+        </div>
+        <div class="gc-right">
+          <span class="gc-rem">${remTxt}</span>
+          <span class="gc-rem-label">disponibles</span>
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        const max = selectedData.frequency || 1;
+        const already = container.querySelectorAll('.group-card.selected');
+        if (card.classList.contains('selected')) {
+          card.classList.remove('selected');
+          selectedData.groupes = selectedData.groupes.filter(id => id !== group.id);
+        } else if (already.length < max) {
+          card.classList.add('selected');
+          selectedData.groupes.push(group.id);
+        } else if (max === 1) {
+          // Single select mode: deselect previous
+          already.forEach(c => c.classList.remove('selected'));
+          selectedData.groupes = [];
+          card.classList.add('selected');
+          selectedData.groupes.push(group.id);
+        }
+        hideError('groupeError');
+      });
+
+      container.appendChild(card);
+    });
+  }
+
   function updateGroupeOptions() {
-    const groupeSelect = document.getElementById('groupeSelect');
     const noGroupsMessage = document.getElementById('noGroupsMessage');
     
-    // Clear previous options
-    groupeSelect.innerHTML = '<option value="">-- Sélectionnez vos groupes --</option>';
-    
     if (!selectedData.category || !selectedData.piscine || !selectedData.frequency) {
-      groupeSelect.disabled = true;
-      groupeSelect.innerHTML = '<option value="">-- Complétez d\'abord les étapes précédentes --</option>';
+      renderGroupCards([]);
       noGroupsMessage.classList.remove('show');
+      document.getElementById('groupCardsContainer').innerHTML = '<div class="group-placeholder">Complétez d\'abord les étapes précédentes</div>';
       return;
     }
 
-    // Get available groups for this combination
     const categoryGroups = AQA_GROUPS[selectedData.category];
     const availableGroups = categoryGroups && categoryGroups[selectedData.piscine] ? categoryGroups[selectedData.piscine] : [];
-
-    if (availableGroups.length === 0) {
-      // No groups available
-      groupeSelect.disabled = true;
-      groupeSelect.innerHTML = '<option value="">Aucun groupe disponible</option>';
-      noGroupsMessage.classList.add('show');
-    } else {
-      // Populate available groups
-      groupeSelect.disabled = false;
-      noGroupsMessage.classList.remove('show');
-      
-      // Sort by remaining places descending (most available first)
-      const sorted = [...availableGroups].sort((a, b) => b.remaining - a.remaining);
-      sorted.forEach(group => {
-        const option = document.createElement('option');
-        option.value = group.id;
-        option.textContent = group.label;
-        option.dataset.shortLabel = group.shortLabel;
-        groupeSelect.appendChild(option);
-      });
-    }
-
-    // Clear previous group selection
+    renderGroupCards(availableGroups);
     selectedData.groupes = [];
   }
 
@@ -703,9 +739,10 @@ const getRelativePath = (path, targetLang) => {
     }
 
     if (currentStepNum === 5) {
-      const groupeSelect = document.getElementById('groupeSelect');
       const noGroupsVisible = document.getElementById('noGroupsMessage').classList.contains('show');
-      nextBtn.disabled = noGroupsVisible || groupeSelect.disabled;
+      const container = document.getElementById('groupCardsContainer');
+      const hasPlaceholder = container.querySelector('.group-placeholder') !== null && container.querySelectorAll('.group-card').length === 0;
+      nextBtn.disabled = noGroupsVisible || hasPlaceholder;
     } else {
       nextBtn.disabled = false;
     }
@@ -1061,6 +1098,126 @@ const getRelativePath = (path, targetLang) => {
     }
     .no-groups-message.show {
       display: block;
+    }
+
+    /* Step 5 hint */
+    .step5-hint {
+      font-size: 0.9rem;
+      opacity: 0.75;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    /* Group Cards Container */
+    .group-cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+    .group-placeholder {
+      text-align: center;
+      padding: 2rem 1rem;
+      opacity: 0.5;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    /* Individual group card */
+    .group-card {
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .group-card:hover {
+      background: rgba(0,242,255,0.08);
+      border-color: rgba(0,242,255,0.3);
+    }
+    .group-card.selected {
+      background: rgba(0,242,255,0.12);
+      border-color: #00f2ff;
+      box-shadow: 0 0 14px rgba(0,242,255,0.2);
+    }
+    /* Left: day + time */
+    .gc-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      padding-right: 0.75rem;
+    }
+    .gc-day {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #00f2ff;
+      letter-spacing: 0.5px;
+    }
+    .gc-time {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+    }
+    /* Mid: coach + badge */
+    .gc-mid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      overflow: hidden;
+    }
+    .gc-coach {
+      font-weight: 600;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .gc-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid;
+      width: fit-content;
+      letter-spacing: 0.5px;
+    }
+    /* Right: remaining places */
+    .gc-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .gc-rem {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #00f2ff;
+    }
+    .gc-rem-label {
+      font-size: 0.68rem;
+      opacity: 0.55;
+    }
+
+    @media (max-width: 400px) {
+      .group-card {
+        grid-template-columns: 58px 1fr auto;
+        gap: 0.5rem;
+        padding: 0.65rem 0.75rem;
+      }
+      .gc-day { font-size: 0.9rem; }
+      .gc-time { font-size: 0.72rem; }
+      .gc-coach { font-size: 0.88rem; }
     }
 
     /* Category Selection */
