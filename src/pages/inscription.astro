@@ -281,8 +281,8 @@ const getRelativePath = (path, targetLang) => {
           
           // Rich label with remaining places
           const label = `${slot.day} • ${slot.time} — ${coach.name} [${typeLabel} — ${remaining} place${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}]`;
-          // Short label for form submission (clean)
-          const shortLabel = `${slot.day} - ${slot.time} - ${coach.name}`;
+          // Short label for form submission — use || separator, never appears in day/time/coach
+          const shortLabel = `${slot.day}||${slot.time}||${coach.name}`;
           
           if (!AQA_GROUPS[slotFormCat][locKey]) {
             AQA_GROUPS[slotFormCat][locKey] = [];
@@ -493,10 +493,10 @@ const getRelativePath = (path, targetLang) => {
       card.dataset.id = group.id;
       card.dataset.selected = '0';
 
-      const parts    = group.shortLabel.split(' - ');
+      const parts    = group.shortLabel.split('||');
       const dayFull  = parts[0] || '';
       const time     = parts[1] || '';
-      const coach    = parts.slice(2).join(' ') || '';
+      const coach    = parts[2] || '';
       const dayAbbr  = { 'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim' };
       const dayShort = dayAbbr[dayFull] || dayFull.slice(0,3);
       const color    = typeColors[group.type] || '#00f2ff';
@@ -841,7 +841,7 @@ const getRelativePath = (path, targetLang) => {
   }
 
   function getSelectedGroupsShortLabels() {
-    return getSelectedGroupsDetails().map(g => g.shortLabel || g.label);
+    return getSelectedGroupsDetails().map(g => (g.shortLabel || g.label).replace(/\|\|/g, ' - '));
   }
 
   function handleSubmit(e) {
@@ -864,7 +864,7 @@ const getRelativePath = (path, targetLang) => {
       piscine: AQA_POOLS[selectedData.piscine],
       formule: selectedData.formule,
       frequency: selectedData.frequency,
-      groupes: selectedGroups.map(group => group.shortLabel || group.label),
+      groupes: selectedGroups.map(group => (group.shortLabel || group.label).replace(/\|\|/g, ' - ')),
       personalInfo: selectedData.personalInfo,
       timestamp: new Date().toISOString()
     };
