@@ -31,18 +31,19 @@ Object.keys(scheduleData).forEach(locKey => {
 
     cat.coaches.forEach(coach => {
       if (!coach.slots) return;
-      coach.slots.forEach(slot => {
-        kidsGroups.push({
-          coach: coach.name.replace(/^[Cc]oach\s+/, ''),
-          pool: poolLabel,
-          day: slot.day,
-          time: slot.time,
-          total: slot.total,
-          taken: slot.taken,
-          type: slot.type,
-          locKey
+        coach.slots.forEach(slot => {
+          kidsGroups.push({
+            coach: coach.name.replace(/^[Cc]oach\s+/, ''),
+            pool: poolLabel,
+            day: slot.day,
+            time: slot.time,
+            total: slot.total,
+            taken: slot.taken,
+            type: slot.type,
+            group: slot.group || '',
+            locKey
+          });
         });
-      });
     });
   });
 });
@@ -157,8 +158,8 @@ Object.keys(scheduleData).forEach(locKey => {
             <div class="kids-groups__wrapper">
               {kidsGroups.length > 0 ? kidsGroups.map((g, i) => (
                 <div class="kids-groups__card">
-                  <div class="kids-groups__icon">{String.fromCharCode(65 + i)}</div>
-                  <h3 class="kids-groups__title">Groupe {String.fromCharCode(65 + i)}</h3>
+                  <div class="kids-groups__icon">{g.group ? g.group : String.fromCharCode(65 + i)}</div>
+                  <h3 class="kids-groups__title">Groupe {g.group ? g.group : String.fromCharCode(65 + i)}</h3>
                   <div class="kids-groups__age">{g.coach}</div>
                   <ul class="kids-groups__features">
                     <li class="kids-groups__feature">{g.day} — {g.time}</li>
@@ -595,6 +596,7 @@ Object.keys(scheduleData).forEach(locKey => {
                               total: slot.total,
                               taken: slot.taken,
                               type: slot.type,
+                              group: slot.group || '',
                               locKey
                             });
                           });
@@ -608,8 +610,8 @@ Object.keys(scheduleData).forEach(locKey => {
                     if (kidsGroups.length > 0) {
                         wrapper.innerHTML = kidsGroups.map((g, i) => `
                             <div class="kids-groups__card">
-                              <div class="kids-groups__icon">${String.fromCharCode(65 + i)}</div>
-                              <h3 class="kids-groups__title">Groupe ${String.fromCharCode(65 + i)}</h3>
+                              <div class="kids-groups__icon">${g.group ? g.group : String.fromCharCode(65 + i)}</div>
+                              <h3 class="kids-groups__title">Groupe ${g.group ? g.group : String.fromCharCode(65 + i)}</h3>
                               <div class="kids-groups__age">${g.coach}</div>
                               <ul class="kids-groups__features">
                                 <li class="kids-groups__feature">${g.day} — ${g.time}</li>

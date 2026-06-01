@@ -316,9 +316,10 @@ const getRelativePath = (path, targetLang) => {
             const typeLabel = typeLabels[slot.type] || slot.type.toUpperCase();
             
             // Rich label with remaining places
-            const label = `${slot.day} • ${slot.time} — ${coach.name} [${typeLabel} — ${remaining} place${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}]`;
+            const groupPrefix = slot.group ? `Groupe ${slot.group} • ` : '';
+            const label = `${groupPrefix}${slot.day} • ${slot.time} — ${coach.name} [${typeLabel} — ${remaining} place${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}]`;
             // Short label for form submission
-            const shortLabel = `${slot.day}||${slot.time}||${coach.name}`;
+            const shortLabel = slot.group ? `${slot.day}||${slot.time}||${coach.name} (Groupe ${slot.group})` : `${slot.day}||${slot.time}||${coach.name}`;
             
             if (!AQA_GROUPS[slotFormCat][locKey]) {
               AQA_GROUPS[slotFormCat][locKey] = [];

@@ -278,6 +278,7 @@ const isProd = import.meta.env.PROD;
         slotsHeader.innerHTML = `
           <span>Jour</span>
           <span>Horaire</span>
+          <span>Groupe</span>
           <span>Inscrits</span>
           <span>Total</span>
           <span>Formule</span>
@@ -297,6 +298,10 @@ const isProd = import.meta.env.PROD;
           <div class="slot-field">
             <label class="mobile-label">Horaire</label>
             <input type="text" class="form-control slot-time" value="${slot.time}" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}">
+          </div>
+          <div class="slot-field size-small">
+            <label class="mobile-label">Groupe</label>
+            <input type="text" class="form-control slot-group" placeholder="A/B/C..." value="${slot.group || ''}" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}">
           </div>
           <div class="slot-field size-small">
             <label class="mobile-label">Inscrits</label>
@@ -391,6 +396,14 @@ const isProd = import.meta.env.PROD;
       });
     });
 
+    document.querySelectorAll('.slot-group').forEach(input => {
+      input.addEventListener('input', () => {
+        const cIdx = parseInt(input.dataset.coachIdx);
+        const sIdx = parseInt(input.dataset.slotIdx);
+        currentSchedule[currentLocation].categories[currentCategory].coaches[cIdx].slots[sIdx].group = input.value;
+      });
+    });
+
     document.querySelectorAll('.slot-taken').forEach(input => {
       input.addEventListener('input', () => {
         const cIdx = parseInt(input.dataset.coachIdx);
@@ -446,7 +459,8 @@ const isProd = import.meta.env.PROD;
           time: '21h30-23h30',
           type: 'g10',
           total: 10,
-          taken: 0
+          taken: 0,
+          group: ''
         });
         renderEditor();
       });
@@ -886,7 +900,7 @@ const isProd = import.meta.env.PROD;
   }
   .slots-header {
     display: grid;
-    grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1.5fr auto;
+    grid-template-columns: 1.5fr 1.5fr 0.8fr 1fr 1fr 1.5fr auto;
     gap: 1.25rem;
     padding: 0 1.25rem;
     margin-bottom: 0.25rem;
@@ -898,7 +912,7 @@ const isProd = import.meta.env.PROD;
   }
   .slot-row {
     display: grid;
-    grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1.5fr auto;
+    grid-template-columns: 1.5fr 1.5fr 0.8fr 1fr 1fr 1.5fr auto;
     gap: 1.25rem;
     align-items: center;
     background: rgba(255, 255, 255, 0.015);

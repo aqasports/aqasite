@@ -152,37 +152,30 @@
             "name": "Coach Younes",
             "slots": [
               {
-                "day": "Sam Merc",
-                "time": "18h",
-                "type": "g10",
-                "total": 10,
-                "taken": 5
-              },
-              {
                 "day": "Dim Jeu",
                 "time": "18h",
                 "type": "g10",
                 "total": 10,
-                "taken": 4
+                "taken": 10
               },
               {
                 "day": "Dim Merc",
                 "time": "19h20",
                 "type": "g10",
                 "total": 10,
-                "taken": 3
+                "taken": 0
               }
             ]
           },
           {
-            "name": "Younes",
+            "name": "Abdelghani",
             "slots": [
               {
-                "day": "Dim + Jeu",
+                "day": "Sam Merc",
                 "time": "18h",
                 "type": "g10",
                 "total": 10,
-                "taken": 10
+                "taken": 9
               }
             ]
           }
