@@ -129,6 +129,44 @@ const isProd = import.meta.env.PROD;
 <script is:inline define:vars={{ scheduleData }}>
   // Initialize state and clean up legacy complet type references
   let currentSchedule = JSON.parse(JSON.stringify(scheduleData));
+
+  // Load live schedule data in the background
+  async function loadLiveSchedule() {
+    try {
+      const response = await fetch('/api/schedule');
+      if (response.ok) {
+        const liveData = await response.json();
+        
+        // Clean up legacy complet references in the fetched data
+        Object.keys(liveData).forEach(locKey => {
+          const loc = liveData[locKey];
+          if (loc && loc.categories) {
+            Object.keys(loc.categories).forEach(catKey => {
+              const cat = loc.categories[catKey];
+              if (cat && cat.coaches) {
+                cat.coaches.forEach(coach => {
+                  if (coach.slots) {
+                    coach.slots.forEach(slot => {
+                      if (slot.type === 'complet') {
+                        slot.type = slot.total <= 5 ? 'max5' : 'g10';
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+
+        currentSchedule = liveData;
+        initSelectors();
+        renderEditor();
+      }
+    } catch (e) {
+      console.warn("Failed to load live schedule, using static data instead:", e);
+    }
+  }
+  loadLiveSchedule();
   Object.keys(currentSchedule).forEach(locKey => {
     const loc = currentSchedule[locKey];
     if (loc && loc.categories) {

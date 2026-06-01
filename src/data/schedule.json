@@ -173,6 +173,18 @@
                 "taken": 3
               }
             ]
+          },
+          {
+            "name": "Younes",
+            "slots": [
+              {
+                "day": "Dim + Jeu",
+                "time": "18h",
+                "type": "g10",
+                "total": 10,
+                "taken": 10
+              }
+            ]
           }
         ]
       },

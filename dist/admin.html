@@ -314,10 +314,48 @@
 </body>
 </html>
 
-<script>(function(){const scheduleData = {"reghaia":{"name":"Piscine Réghaia","categories":{"homme":{"name":"Homme","coaches":[{"name":"Coach Youcef","slots":[{"day":"Samedi","time":"21h - 23h","type":"g10","total":10,"taken":10},{"day":"Mardi","time":"21h - 23h","type":"max5","total":5,"taken":5},{"day":"Mercredi","time":"21h30-23h30","type":"g10","total":10,"taken":9},{"day":"Jeudi","time":"21h30-23h30","type":"g10","total":10,"taken":7},{"day":"Vendredi","time":"20h - 22h","type":"max5","total":5,"taken":5}]},{"name":"Coach Bilal","slots":[{"day":"Dimanche","time":"21h30-23h30","type":"max5","total":5,"taken":4}]},{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":4}]},{"name":"Coach Abdelghani","slots":[{"day":"Mardi","time":"7h - 9h","type":"g10","total":10,"taken":5},{"day":"Mardi","time":"21h - 23h","type":"g10","total":10,"taken":9},{"day":"Jeudi","time":"7h - 9h","type":"g10","total":10,"taken":8},{"day":"Jeudi","time":"21h30-23h30","type":"max5","total":5,"taken":4},{"day":"Vendredi","time":"20h-22h","type":"g10","total":10,"taken":10},{"day":"Samedi","time":"6h-8h","type":"g10","total":10,"taken":8},{"day":"Samedi ELITE","time":"21h - 23h","type":"g10","total":10,"taken":7}]},{"name":"Riyad","slots":[{"day":"Lundi","time":"21h30-23h30","type":"g10","total":10,"taken":4}]}]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[{"name":"Coach Younes","slots":[{"day":"Sam Merc","time":"18h","type":"g10","total":10,"taken":5},{"day":"Dim Jeu","time":"18h","type":"g10","total":10,"taken":4},{"day":"Dim Merc","time":"19h20","type":"g10","total":10,"taken":3}]}]},"apnea":{"name":"Apnée","coaches":[{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":4}]}]}}},"cheraga":{"name":"Piscine Chéraga","categories":{"homme":{"name":"Homme","coaches":[]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[]},"apnea":{"name":"Apnée","coaches":[]}}}};
+<script>(function(){const scheduleData = {"reghaia":{"name":"Piscine Réghaia","categories":{"homme":{"name":"Homme","coaches":[{"name":"Coach Youcef","slots":[{"day":"Samedi","time":"21h - 23h","type":"g10","total":10,"taken":10},{"day":"Mardi","time":"21h - 23h","type":"max5","total":5,"taken":5},{"day":"Mercredi","time":"21h30-23h30","type":"g10","total":10,"taken":9},{"day":"Jeudi","time":"21h30-23h30","type":"g10","total":10,"taken":7},{"day":"Vendredi","time":"20h - 22h","type":"max5","total":5,"taken":5}]},{"name":"Coach Bilal","slots":[{"day":"Dimanche","time":"21h30-23h30","type":"max5","total":5,"taken":4}]},{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":4}]},{"name":"Coach Abdelghani","slots":[{"day":"Mardi","time":"7h - 9h","type":"g10","total":10,"taken":5},{"day":"Mardi","time":"21h - 23h","type":"g10","total":10,"taken":9},{"day":"Jeudi","time":"7h - 9h","type":"g10","total":10,"taken":8},{"day":"Jeudi","time":"21h30-23h30","type":"max5","total":5,"taken":4},{"day":"Vendredi","time":"20h-22h","type":"g10","total":10,"taken":10},{"day":"Samedi","time":"6h-8h","type":"g10","total":10,"taken":8},{"day":"Samedi ELITE","time":"21h - 23h","type":"g10","total":10,"taken":7}]},{"name":"Riyad","slots":[{"day":"Lundi","time":"21h30-23h30","type":"g10","total":10,"taken":4}]}]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[{"name":"Coach Younes","slots":[{"day":"Sam Merc","time":"18h","type":"g10","total":10,"taken":5},{"day":"Dim Jeu","time":"18h","type":"g10","total":10,"taken":4},{"day":"Dim Merc","time":"19h20","type":"g10","total":10,"taken":3}]},{"name":"Younes","slots":[{"day":"Dim + Jeu","time":"18h","type":"g10","total":10,"taken":10}]}]},"apnea":{"name":"Apnée","coaches":[{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":4}]}]}}},"cheraga":{"name":"Piscine Chéraga","categories":{"homme":{"name":"Homme","coaches":[]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[]},"apnea":{"name":"Apnée","coaches":[]}}}};
 
   // Initialize state and clean up legacy complet type references
   let currentSchedule = JSON.parse(JSON.stringify(scheduleData));
+
+  // Load live schedule data in the background
+  async function loadLiveSchedule() {
+    try {
+      const response = await fetch('/api/schedule');
+      if (response.ok) {
+        const liveData = await response.json();
+        
+        // Clean up legacy complet references in the fetched data
+        Object.keys(liveData).forEach(locKey => {
+          const loc = liveData[locKey];
+          if (loc && loc.categories) {
+            Object.keys(loc.categories).forEach(catKey => {
+              const cat = loc.categories[catKey];
+              if (cat && cat.coaches) {
+                cat.coaches.forEach(coach => {
+                  if (coach.slots) {
+                    coach.slots.forEach(slot => {
+                      if (slot.type === 'complet') {
+                        slot.type = slot.total <= 5 ? 'max5' : 'g10';
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+
+        currentSchedule = liveData;
+        initSelectors();
+        renderEditor();
+      }
+    } catch (e) {
+      console.warn("Failed to load live schedule, using static data instead:", e);
+    }
+  }
+  loadLiveSchedule();
   Object.keys(currentSchedule).forEach(locKey => {
     const loc = currentSchedule[locKey];
     if (loc && loc.categories) {
