@@ -1,0 +1,463 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path: string, targetLang: string) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
+---
+
+<BaseLayout
+  title="Piscine ADM AZAL Reghaia | AQA Sports Academy"
+  description="Découvrez la Piscine ADM AZAL à Reghaia, Alger. Bassin semi-olympique d'excellence, propreté irréprochable et sécurité pour votre transformation sportive."
+  currentPage="/azal"
+  lang={lang}
+>
+  <Navbar currentPage="/piscines" lang={lang} />
+
+  <a href={getRelativePath('/piscines', lang)} class="back-btn">← {lang === 'ar' ? 'العودة للمسابح' : (lang === 'en' ? 'Back to Pools' : 'Retour aux Piscines')}</a>
+
+  <div class="container">
+    <section class="hero">
+      <h1>Piscine ADM AZAL</h1>
+      <div class="location-badge">📍 {lang === 'ar' ? 'الرغاية، الجزائر' : 'Reghaia, Alger'}</div>
+      <p>{lang === 'ar' ? 'منشأة نصف أولمبية متميزة، مصممة لتحولك الرياضي مع كافة التجهيزات الحديثة والخدمات الراقية.' : (lang === 'en' ? 'An excellent semi-olympic facility designed for your athletic transformation with modern equipment and premium services.' : 'Une installation semi-olympique d\'excellence, conçue pour votre transformation sportive avec tous les équipements modernes et services premium.')}</p>
+    </section>
+
+    <div class="main-image">
+      <span>{lang === 'ar' ? 'مسبح نصف أولمبي - أدم أزال' : 'Piscine Semi-Olympique ADM AZAL'}</span>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" class="icon-svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">{lang === 'ar' ? 'مسبح نصف أولمبي' : (lang === 'en' ? 'Semi-Olympic Pool' : 'Piscine Semi-Olympique')}</h3>
+        <p class="feature-description">{lang === 'ar' ? 'منشأة مطابقة للمعايير نصف الأولمبية، مناسبة تمامًا للتدريب الاحترافي والتطوير الفني لرياضيينا.' : (lang === 'en' ? 'A facility meeting semi-olympic standards, perfectly adapted to professional training and technical progression.' : 'Installation aux normes semi-olympiques, parfaitement adaptée à l\'entraînement professionnel et à la progression technique de nos athlètes.')}</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" class="icon-svg">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">{lang === 'ar' ? 'النظافة والتجهيزات' : (lang === 'en' ? 'Cleanliness & Equipment' : 'Propreté & Équipement')}</h3>
+        <p class="feature-description">{lang === 'ar' ? 'منشآت تحافظ على أعلى معايير النظافة مع معدات حديثة ونظام تنقية متطور.' : (lang === 'en' ? 'Facilities maintained to the highest standards of cleanliness with modern equipment and advanced filtration.' : 'Installations maintenues aux plus hauts standards de propreté avec équipements modernes et système de filtration avancé.')}</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" class="icon-svg">
+            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">{lang === 'ar' ? 'استقبال متميز' : (lang === 'en' ? 'Excellent Reception' : 'Réception Excellence')}</h3>
+        <p class="feature-description">{lang === 'ar' ? 'خدمة عملاء متميزة مع استقبال شخصي وتوجيه احترافي لجميع أعضائنا.' : (lang === 'en' ? 'Premium customer service with personalized welcome and professional guidance for all members.' : 'Service clientèle de qualité premium avec accueil personnalisé et accompagnement professionnel pour tous nos membres.')}</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" class="icon-svg">
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">{lang === 'ar' ? 'حراسة وأمان' : (lang === 'en' ? 'Surveillance & Security' : 'Surveillance & Sécurité')}</h3>
+        <p class="feature-description">{lang === 'ar' ? 'نظام مراقبة بالكاميرات على مدار 24 ساعة لسلامتكم وسلامة ممتلكاتكم. موقف سيارات محروس.' : (lang === 'en' ? '24/7 video surveillance for your safety and security. Secured parking area.' : 'Système de surveillance par caméras 24h/24 pour votre sécurité et celle de vos biens. Parking surveillé et sécurisé.')}</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" class="icon-svg">
+            <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">{lang === 'ar' ? 'مفتوح 7/7 أيام' : (lang === 'en' ? 'Open 7 days/week' : 'Ouvert 7j/7')}</h3>
+        <p class="feature-description">{lang === 'ar' ? 'توفر تام مع فتح المسبح طيلة أيام الأسبوع ليتناسب مع جدول أعمالكم ويضمن تطوركم المستمر.' : (lang === 'en' ? 'Maximum availability with 7/7 opening to fit your schedule and ensure continuous progress.' : 'Disponibilité maximale avec ouverture 7 jours sur 7 pour s\'adapter à votre emploi du temps et assurer une progression continue.')}</p>
+      </div>
+
+      <div class="feature-card position-relative">
+        <div class="coming-soon">{lang === 'ar' ? 'قريبًا' : (lang === 'en' ? 'Soon' : 'Prochainement')}</div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" class="icon-svg">
+            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">{lang === 'ar' ? 'قاعة رياضة' : (lang === 'en' ? 'Gym / Fitness' : 'Salle de Sport')}</h3>
+        <p class="feature-description">{lang === 'ar' ? 'قريبًا: قاعة رياضة متكاملة مع أجهزة بناء الأجسام والكارديو لتدريب متكامل وتحضير بدني مثالي.' : (lang === 'en' ? 'Soon: fully equipped gym for strength and cardio training to optimize physical preparation.' : 'Prochainement : salle de sport complète avec équipements de musculation et cardio pour un entraînement complet et une préparation physique optimale.')}</p>
+      </div>
+    </div>
+
+    <div class="transport-section">
+      <h2 class="transport-title">🚌 {lang === 'ar' ? 'النقل والوصول' : (lang === 'en' ? 'Transport & Accessibility' : 'Transport & Accessibilité')}</h2>
+      <div class="transport-grid">
+        <div class="transport-item">
+          <svg viewBox="0 0 24 24" class="transport-icon">
+            <path d="M4 15.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V5c0-3.5-3.58-4-8-4s-8 .5-8 4v10.5zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          </svg>
+          <div>
+            <strong>{lang === 'ar' ? 'حافلة' : 'Bus'}</strong><br>
+            <span>{lang === 'ar' ? '5 دقائق مشياً' : '5 minutes à pied'}</span>
+          </div>
+        </div>
+        <div class="transport-item">
+          <svg viewBox="0 0 24 24" class="transport-icon">
+            <path d="M4 15.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V5c0-3.5-3.58-4-8-4s-8 .5-8 4v10.5zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          </svg>
+          <div>
+            <strong>{lang === 'ar' ? 'قطار' : 'Train'}</strong><br>
+            <span>{lang === 'ar' ? '12 دقيقة مشياً' : '12 minutes à pied'}</span>
+          </div>
+        </div>
+        <div class="transport-item">
+          <svg viewBox="0 0 24 24" class="transport-icon">
+            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+          </svg>
+          <div>
+            <strong>{lang === 'ar' ? 'حظيرة سيارات' : 'Parking'}</strong><br>
+            <span>{lang === 'ar' ? 'محروسة بالكاميرات' : 'Surveillé par caméras'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2 class="cta-title">{lang === 'ar' ? 'ابدأ تحولك الآن' : (lang === 'en' ? 'Start Your Transformation' : 'Commencez Votre Transformation')}</h2>
+      <p style="margin-bottom: 2rem; color: #ffffff; opacity: 0.9;">{lang === 'ar' ? 'انضم إلى أكا سبورتس بمسبح أدم أزال واكتشف تميز منشآتنا.' : (lang === 'en' ? 'Join AQA Sports at ADM AZAL pool and discover our excellent facilities.' : 'Rejoignez AQA Sports à la piscine ADM AZAL et découvrez l\'excellence de nos installations.')}</p>
+      <a href={getRelativePath('/inscription', lang)} class="cta-button">{lang === 'ar' ? 'احجز الآن' : (lang === 'en' ? 'Book Now' : 'Réserver Maintenant')}</a>
+      <a href="https://wa.me/213540454907" class="cta-button">{lang === 'ar' ? 'اتصل بنا' : (lang === 'en' ? 'Contact Us' : 'Contacter')}</a>
+    </div>
+  </div>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .transport-section, .cta-section').forEach(el => {
+      observer.observe(el);
+    });
+  });
+</script>
+
+<style>
+  .back-btn {
+    position: fixed;
+    top: 90px;
+    left: 20px;
+    background: rgba(0, 153, 255, 0.1);
+    color: var(--color-teal);
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+    z-index: 99;
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-teal);
+    backdrop-filter: blur(10px);
+  }
+  :global([dir="rtl"]) .back-btn {
+    left: auto;
+    right: 20px;
+  }
+  .back-btn:hover {
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-active);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue), #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+  }
+
+  .location-badge {
+    display: inline-block;
+    background: rgba(0, 242, 255, 0.08);
+    border: 1px solid var(--color-teal);
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--color-teal);
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .main-image {
+    background: linear-gradient(135deg, rgba(0, 153, 255, 0.1), rgba(0, 242, 255, 0.05));
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 20px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .main-image::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, var(--color-blue), #004488);
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  .main-image span {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    z-index: 1;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .feature-card {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 2.2rem;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .feature-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .feature-card:hover {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: var(--color-teal);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-glow-active);
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+  }
+
+  .icon-svg {
+    width: 30px;
+    height: 30px;
+    fill: #030712;
+  }
+
+  .feature-title {
+    font-size: 1.3rem;
+    color: var(--color-teal);
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+  }
+
+  .feature-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .transport-section {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .transport-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .transport-title {
+    font-size: 1.8rem;
+    color: var(--color-teal);
+    margin-bottom: 1.8rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .transport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .transport-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .transport-icon {
+    width: 28px;
+    height: 28px;
+    fill: var(--color-teal);
+    flex-shrink: 0;
+  }
+
+  .cta-section {
+    text-align: center;
+    background: rgba(0, 136, 255, 0.08);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .cta-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cta-title {
+    font-size: 2.2rem;
+    color: var(--color-teal);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #030712;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-teal);
+    margin: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.15);
+  }
+
+  .cta-button:hover {
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow-active);
+  }
+
+  .coming-soon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  :global([dir="rtl"]) .coming-soon {
+    right: auto;
+    left: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 10px;
+    }
+    :global([dir="rtl"]) .back-btn {
+      right: 10px;
+      left: auto;
+    }
+    .hero {
+      padding-top: 5rem;
+    }
+    .main-image {
+      height: 250px;
+    }
+    .cta-button {
+      display: block;
+      margin: 0.8rem auto;
+      max-width: 280px;
+    }
+  }
+</style>

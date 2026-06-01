@@ -1,0 +1,185 @@
+/* AQA Sports 2.0 Design System & Global Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Obsidian & Neon-Teal Palette */
+  --bg-primary: #030712;
+  --bg-secondary: #0b0f19;
+  --bg-card: rgba(15, 23, 42, 0.65);
+  
+  --color-teal: #00f2ff;
+  --color-blue: #0088ff;
+  --color-blue-dark: #0055cc;
+  
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  
+  /* Glassmorphism & Borders */
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --border-active: 1px solid rgba(0, 242, 255, 0.4);
+  --shadow-glow: 0 0 25px rgba(0, 242, 255, 0.15);
+  --shadow-glow-active: 0 0 35px rgba(0, 242, 255, 0.35);
+  
+  /* Fonts */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Layout */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Reset & Scroll */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  background: transparent;
+  min-height: 100vh;
+  line-height: 1.6;
+  position: relative;
+  overscroll-behavior: none;
+}
+
+/* Base Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+p {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--border-glass);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  transition: var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 242, 255, 0.25);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Glowing Neon Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 50% -20%, rgba(0, 242, 255, 0.08) 0%, transparent 60%),
+              radial-gradient(circle at 10% 80%, rgba(0, 136, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Layout Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Neon Glow Animations */
+@keyframes neonGlow {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.3)) drop-shadow(0 0 20px rgba(0, 136, 255, 0.2)); }
+  50% { filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5)) drop-shadow(0 0 35px rgba(0, 136, 255, 0.3)); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Utility Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-teal);
+  color: #000;
+  padding: 8px 16px;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Background scroll iframe styling */
+.bg-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Background watermark logo styling */
+.bg-logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 80vh;
+  background: url('https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.02;
+  z-index: -1;
+  pointer-events: none;
+}
+
+

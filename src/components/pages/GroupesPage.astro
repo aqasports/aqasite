@@ -1,0 +1,592 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../Navbar.astro';
+import Footer from '../Footer.astro';
+
+import scheduleData from '../../data/schedule.json';
+import frDict from '../../../lang/fr.json';
+import arDict from '../../../lang/ar.json';
+import enDict from '../../../lang/en.json';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const dicts = { fr: frDict, ar: arDict, en: enDict };
+const dict = dicts[lang] || frDict;
+
+function t(key, fallbackText) {
+  return dict[key] !== undefined ? dict[key] : fallbackText;
+}
+
+// Local translation helpers for schedule page
+const pageTranslations = {
+  fr: {
+    title: "Nos Créneaux d'Entraînement",
+    subtitle: "Piscine: Réghaia (HOMME)",
+    slotsLeft: "Il ne reste que {percent}% des places disponibles",
+    hurryText: "Dépêchez-vous — <b>95%</b> sont déjà réservées.",
+    ctaText: "📋 S'inscrire maintenant",
+    completBadge: "Complet",
+    inscrits: "Inscrits",
+    restant: "Restant",
+    legendG10: "G10 - Groupe de 10 personnes",
+    legendMax5: "Max5 - Maximum 5 participants",
+    legendApnea: "Apnée - Entraînement spécialisé",
+    legendElite: "Elite - Groupe niveau avancé",
+  },
+  ar: {
+    title: "مواعيد الحصص التدريبية",
+    subtitle: "المسبح: رغاية (رجال)",
+    slotsLeft: "لم يتبقى سوى {percent}% من الأماكن المتاحة",
+    hurryText: "سارعوا — <b>95%</b> من المقاعد محجوزة بالفعل.",
+    ctaText: "📋 سجل الآن",
+    completBadge: "مكتمل",
+    inscrits: "المسجلين",
+    restant: "المتبقي",
+    legendG10: "G10 - مجموعة من 10 أشخاص",
+    legendMax5: "Max5 - 5 مشاركين كحد أقصى",
+    legendApnea: "غوص حر - تدريب متخصص",
+    legendElite: "نخبة - فئة متقدمة",
+  },
+  en: {
+    title: "Our Training Schedules",
+    subtitle: "Pool: Reghaia (MEN)",
+    slotsLeft: "Only {percent}% of slots remaining",
+    hurryText: "Hurry up — <b>95%</b> of spots are already booked.",
+    ctaText: "📋 Register now",
+    completBadge: "Full",
+    inscrits: "Enrolled",
+    restant: "Remaining",
+    legendG10: "G10 - Group of 10 people",
+    legendMax5: "Max5 - 5 participants maximum",
+    legendApnea: "Apnea - Specialized training",
+    legendElite: "Elite - Advanced level",
+  }
+};
+
+const localT = pageTranslations[lang] || pageTranslations.fr;
+
+const dayTranslations = {
+  fr: {
+    "Samedi": "Samedi", "Dimanche": "Dimanche", "Lundi": "Lundi", "Mardi": "Mardi",
+    "Mercredi": "Mercredi", "Jeudi": "Jeudi", "Vendredi": "Vendredi",
+    "Samedi ELITE": "Samedi ELITE"
+  },
+  ar: {
+    "Samedi": "السبت", "Dimanche": "الأحد", "Lundi": "الاثنين", "Mardi": "الثلاثاء",
+    "Mercredi": "الأربعاء", "Jeudi": "الخميس", "Vendredi": "الجمعة",
+    "Samedi ELITE": "السبت (نخبة)"
+  },
+  en: {
+    "Samedi": "Saturday", "Dimanche": "Sunday", "Lundi": "Monday", "Mardi": "Tuesday",
+    "Mercredi": "Wednesday", "Jeudi": "Thursday", "Vendredi": "Friday",
+    "Samedi ELITE": "Saturday ELITE"
+  }
+};
+
+const typeTranslations = {
+  fr: {
+    "complet": "Complet",
+    "g10": "Groupe de 10",
+    "max5": "Groupe de 5",
+    "apnea": "Apnée",
+    "elite": "Elite"
+  },
+  ar: {
+    "complet": "مكتمل",
+    "g10": "مجموعة من 10",
+    "max5": "مجموعة من 5",
+    "apnea": "غوص حر",
+    "elite": "نخبة"
+  },
+  en: {
+    "complet": "Full",
+    "g10": "Group of 10",
+    "max5": "Group of 5",
+    "apnea": "Apnea",
+    "elite": "Elite"
+  }
+};
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
+
+// Retrieve coaches data
+const coaches = scheduleData.reghaia.categories.homme.coaches;
+
+// Calculate real stats dynamically
+let totalCapacity = 0;
+let totalTaken = 0;
+coaches.forEach(coach => {
+  if (coach.slots) {
+    coach.slots.forEach(slot => {
+      totalCapacity += slot.total || 0;
+      totalTaken += slot.taken || 0;
+    });
+  }
+});
+
+const occupationPercentage = totalCapacity > 0 ? Math.round((totalTaken / totalCapacity) * 100) : 0;
+const remainingPercentage = Math.max(0, 100 - occupationPercentage);
+---
+
+<BaseLayout
+  title={`${localT.title} | AQA Sports Academy`}
+  description={t('hero_desc', "Schedules and groups info")}
+  currentPage="/groupes"
+  lang={lang}
+>
+  <Navbar currentPage="/groupes" lang={lang} />
+
+  <div class="container">
+    <section class="hero">
+      <h1>{localT.title}</h1>
+      <h2>{localT.subtitle}</h2>
+    </section>
+
+    <section class="availability-card" aria-live="polite">
+      <div class="availability-title">
+        {localT.slotsLeft.replace('{percent}', remainingPercentage.toString())}
+      </div>
+      <div class="progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={occupationPercentage}>
+        <div class="progress-bar" style={`width: ${occupationPercentage}%`}></div>
+      </div>
+      <div class="progress-legend" set:html={localT.hurryText.replace('95%', occupationPercentage.toString() + '%')}></div>
+      <div style="margin-top:1.1rem;">
+        <a href={getRelativePath('/inscription', lang)} class="cta-button">{localT.ctaText}</a>
+      </div>
+    </section>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #28a745, #20c997);"></div>
+        <span>{localT.legendG10}</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #007bff, #6610f2);"></div>
+        <span>{localT.legendMax5}</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #fd7e14, #e83e8c);"></div>
+        <span>{localT.legendApnea}</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: linear-gradient(135deg, #ffc107, #ff6b35);"></div>
+        <span>{localT.legendElite}</span>
+      </div>
+    </div>
+
+    {coaches.map((coach) => (
+      <section class="coach-section">
+        <h3 class="coach-title">{coach.name}</h3>
+        <div class="schedule-grid">
+          {coach.slots.map((slot) => {
+            const isFull = slot.taken >= slot.total || slot.type === 'complet';
+            const left = Math.max(0, slot.total - slot.taken);
+            const percentage = (slot.taken / slot.total) * 100;
+            const tDay = (dayTranslations[lang] && dayTranslations[lang][slot.day]) || slot.day;
+            
+            // Map CSS class based on slot type
+            let baseTypeClass = "type-g10";
+            if (isFull) baseTypeClass = "type-complet";
+            else if (slot.type === "max5") baseTypeClass = "type-max5";
+            else if (slot.type === "apnea") baseTypeClass = "type-apnea";
+            else if (slot.type === "elite") baseTypeClass = "type-elite";
+
+            const typeLabel = (typeTranslations[lang] && typeTranslations[lang][isFull ? "complet" : slot.type]) || slot.type;
+
+            return (
+              <div 
+                class="schedule-card glass-panel" 
+                onclick="toggleAvailability(this)" 
+                data-total={slot.total} 
+                data-taken={slot.taken}
+                data-type={slot.type}
+              >
+                <div class="day-time">
+                  <span class="day">{tDay}</span>
+                  <span class="time">{slot.time}</span>
+                </div>
+                <div class={`group-type ${baseTypeClass}`}>{typeLabel}</div>
+                <div class="card-details">
+                  <div class="details-row">
+                    <span>{localT.inscrits}: <span class="val-taken">{slot.taken}</span>/{slot.total}</span>
+                    {isFull ? (
+                      <span class="complet-tag">{localT.completBadge.toUpperCase()}</span>
+                    ) : (
+                      <span>{localT.restant}: <span class="highlight-val val-left">{left}</span></span>
+                    )}
+                  </div>
+                  <div class="mini-progress-wrap">
+                    <div class={`mini-progress-bar ${isFull || left <= 2 ? 'danger' : ''}`} style={`width:${percentage}%`}></div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    <a href={getRelativePath('/inscription', lang)} class="floating-btn">{t('btn_inscription', 'Inscription')}</a>
+  </div>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<script is:inline>
+  // Logic for the Click-to-Reveal Availability Cards
+  function toggleAvailability(card) {
+      const details = card.querySelector('.card-details');
+      
+      if (card.classList.contains('expanded')) {
+          card.classList.remove('expanded');
+          return;
+      }
+
+      const total = parseInt(card.getAttribute('data-total') || 10);
+      const taken = parseInt(card.getAttribute('data-taken') || 0);
+      const left = Math.max(0, total - taken);
+      const percentage = (taken / total) * 100;
+
+      const takenSpan = card.querySelector('.val-taken');
+      const leftSpan = card.querySelector('.val-left');
+      
+      if (takenSpan) takenSpan.innerText = taken;
+      if (leftSpan) leftSpan.innerText = left;
+      
+      const bar = card.querySelector('.mini-progress-bar');
+      if (bar) {
+          bar.style.width = percentage + '%';
+          if (left <= 2 || taken >= total) {
+              bar.classList.add('danger');
+          } else {
+              bar.classList.remove('danger');
+          }
+      }
+
+      card.classList.add('expanded');
+  }
+</script>
+
+<style>
+  /* Page specific styles matching our Obsidian-Glass theme */
+  .hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(0, 242, 255, 0.25);
+  }
+  .hero h2 {
+    color: var(--text-secondary);
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 500;
+  }
+
+  /* Availability Header Card */
+  .availability-card {
+    background: rgba(0, 136, 255, 0.08);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin: 0 auto 2.5rem;
+    max-width: 760px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .availability-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.15), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+  }
+
+  .availability-title {
+    font-weight: 800;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--color-teal);
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.35);
+    margin-bottom: 0.8rem;
+  }
+
+  .progress-wrap {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 14px;
+    overflow: hidden;
+    margin: 0 auto 1.2rem;
+    max-width: 520px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff9900, #ff0055);
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+  }
+
+  .progress-legend {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+  .progress-legend :global(b) {
+    color: var(--color-teal);
+  }
+
+  /* Legend */
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 0.8rem;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Coach sections */
+  .coach-section {
+    margin-bottom: 3.5rem;
+  }
+  
+  .coach-title {
+    font-size: clamp(1.5rem, 5vw, 1.8rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.8rem;
+    color: var(--color-teal);
+    position: relative;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+  }
+
+  .coach-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-teal), transparent);
+  }
+
+  /* Schedule Grid & Cards */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .schedule-card {
+    padding: 1.25rem;
+    cursor: pointer;
+  }
+
+  .day-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .day {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .time {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-teal);
+    background: rgba(0, 242, 255, 0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 242, 255, 0.25);
+  }
+
+  /* Group Badges */
+  .group-type {
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.6rem;
+    border-radius: 12px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .type-g10 { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
+  .type-max5 { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; }
+  .type-apnea { background: linear-gradient(135deg, #f97316, #db2777); color: #fff; }
+  .type-elite { background: linear-gradient(135deg, #fbbf24, #d97706); color: #000; text-shadow: none; }
+  .type-complet { background: rgba(55, 65, 81, 0.6); color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.05); }
+
+  /* Expanded Details Drawer */
+  .card-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .schedule-card.expanded .card-details {
+    max-height: 120px;
+    opacity: 1;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .highlight-val {
+    color: var(--color-teal);
+    font-weight: 700;
+  }
+
+  .complet-tag {
+    color: #ef4444;
+    font-weight: 700;
+  }
+
+  .mini-progress-wrap {
+    background: rgba(255, 255, 255, 0.05);
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 0.8rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  .mini-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-blue));
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+
+  .mini-progress-bar.danger {
+    background: linear-gradient(90deg, #f97316, #ef4444);
+  }
+
+  /* Buttons */
+  .cta-button {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #030712;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 20px rgba(0, 242, 255, 0.25);
+    border: 1px solid var(--color-teal);
+    display: inline-block;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 242, 255, 0.45);
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+  }
+
+  .floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #030712;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(0, 242, 255, 0.25);
+    border: 1px solid var(--color-teal);
+    z-index: 1000;
+  }
+
+  .floating-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 242, 255, 0.45);
+  }
+
+  /* RTL Support overrides */
+  :global([dir="rtl"]) .day-time {
+    flex-direction: row-reverse;
+  }
+  :global([dir="rtl"]) .details-row {
+    flex-direction: row-reverse;
+  }
+  :global([dir="rtl"]) .floating-btn {
+    right: auto;
+    left: 20px;
+  }
+
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .schedule-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    .legend {
+      grid-template-columns: 1fr 1fr;
+      padding: 1rem;
+    }
+    .container {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .schedule-grid {
+      grid-template-columns: 1fr;
+    }
+    .legend {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

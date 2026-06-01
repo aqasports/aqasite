@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path: string, targetLang: string) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
+
+const pageTranslations = {
+  fr: {
+    title: "Merci pour votre inscription 🎉",
+    subtitle: "Votre demande a bien été envoyée à notre équipe.",
+    warning: "⚠️ Merci de régler votre abonnement pendant 5 jours afin d’éviter l’annulation de votre réservation.",
+    choosePayment: "Choisissez votre mode de paiement :",
+    btnBaridimob: "💳 Payer avec Baridimob",
+    btnPiscine: "🏊 Régler à la Piscine",
+    btnNew: "📝 Nouvelle inscription",
+    btnHome: "⬅ Retour à l’accueil"
+  },
+  ar: {
+    title: "شكراً لتسجيلك 🎉",
+    subtitle: "تم إرسال طلبك بنجاح إلى فريقنا.",
+    warning: "⚠️ يرجى تسوية اشتراكك خلال 5 أيام لتجنب إلغاء حجزك.",
+    choosePayment: "اختر طريقة الدفع :",
+    btnBaridimob: "💳 الدفع عبر بريدي موب",
+    btnPiscine: "🏊 الدفع في المسبح",
+    btnNew: "📝 تسجيل جديد",
+    btnHome: "⬅ العودة للرئيسية"
+  },
+  en: {
+    title: "Thank you for registering 🎉",
+    subtitle: "Your request has been successfully sent to our team.",
+    warning: "⚠️ Please settle your subscription within 5 days to avoid cancellation of your booking.",
+    choosePayment: "Choose your payment method:",
+    btnBaridimob: "💳 Pay with Baridimob",
+    btnPiscine: "🏊 Settle at the Pool",
+    btnNew: "📝 New registration",
+    btnHome: "⬅ Back to Home"
+  }
+};
+
+const localT = pageTranslations[lang] || pageTranslations.fr;
+---
+
+<BaseLayout
+  title={lang === 'ar' ? 'شكراً لك | AQA Sports Academy' : 'Merci | AQA Sports Academy'}
+  description="Merci pour votre inscription à AQA Sports Academy."
+  currentPage="/merci"
+  lang={lang}
+>
+  <div class="merci-container">
+    <div class="box glass-panel">
+      <h1>{localT.title}</h1>
+      <p>{localT.subtitle}</p>
+      <p class="important">{localT.warning}</p>
+
+      <p class="payment-label">{localT.choosePayment}</p>
+
+      <div class="options">
+        <a href="https://wa.me/213540454907?text=Je%20souhaite%20payer%20avec%20Baridimob%2C%20merci%20de%20m%27envoyer%20le%20RIP" target="_blank" class="btn btn-primary">{localT.btnBaridimob}</a>
+
+        <a href="https://wa.me/213540454907?text=Quand%20puis-je%20venir%20à%20la%20piscine%20pour%20régler%20mon%20abonnement%20%3F" target="_blank" class="btn btn-primary">{localT.btnPiscine}</a>
+
+        <a href={getRelativePath('/inscription', lang)} class="btn btn-secondary">{localT.btnNew}</a>
+      </div>
+
+      <div style="margin-top:2.5rem;">
+        <a href={getRelativePath('/', lang)} class="btn btn-back">{localT.btnHome}</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .merci-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem 1rem;
+  }
+  
+  .box {
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    max-width: 550px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+  }
+
+  p {
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  .important {
+    color: #ff4444;
+    font-weight: 700;
+    background: rgba(255, 68, 68, 0.08);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 68, 68, 0.2);
+    margin-bottom: 2rem;
+  }
+
+  .payment-label {
+    font-weight: 600;
+    color: var(--color-teal);
+    margin-bottom: 1rem;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 1.5rem;
+  }
+
+  .btn {
+    display: block;
+    padding: 0.9rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #030712;
+    border: 1px solid var(--color-teal);
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.15);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-active);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid var(--color-teal);
+    color: var(--color-teal);
+    display: inline-block;
+    padding: 0.8rem 2rem;
+  }
+  .btn-back:hover {
+    background: rgba(0, 242, 255, 0.08);
+    transform: translateY(-2px);
+  }
+</style>

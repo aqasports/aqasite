@@ -1,0 +1,13 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'ar' } },
+    { params: { lang: 'en' } }
+  ];
+}
+
+const { lang } = Astro.params;
+import PiscinesPage from '../piscines.astro';
+---
+
+<PiscinesPage lang={lang} />

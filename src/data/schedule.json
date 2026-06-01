@@ -1,0 +1,223 @@
+{
+  "reghaia": {
+    "name": "Piscine Réghaia",
+    "categories": {
+      "homme": {
+        "name": "Homme",
+        "coaches": [
+          {
+            "name": "Coach Youcef",
+            "slots": [
+              {
+                "day": "Samedi",
+                "time": "21h - 23h",
+                "type": "g10",
+                "total": 10,
+                "taken": 10
+              },
+              {
+                "day": "Mardi",
+                "time": "21h - 23h",
+                "type": "max5",
+                "total": 5,
+                "taken": 5
+              },
+              {
+                "day": "Mercredi",
+                "time": "21h30-23h30",
+                "type": "g10",
+                "total": 10,
+                "taken": 9
+              },
+              {
+                "day": "Jeudi",
+                "time": "21h30-23h30",
+                "type": "g10",
+                "total": 10,
+                "taken": 7
+              },
+              {
+                "day": "Vendredi",
+                "time": "20h - 22h",
+                "type": "max5",
+                "total": 5,
+                "taken": 5
+              }
+            ]
+          },
+          {
+            "name": "Coach Bilal",
+            "slots": [
+              {
+                "day": "Dimanche",
+                "time": "21h30-23h30",
+                "type": "max5",
+                "total": 5,
+                "taken": 4
+              }
+            ]
+          },
+          {
+            "name": "Coach Nouga",
+            "slots": [
+              {
+                "day": "Mercredi",
+                "time": "21h30-23h30",
+                "type": "apnea",
+                "total": 10,
+                "taken": 4
+              }
+            ]
+          },
+          {
+            "name": "Coach Abdelghani",
+            "slots": [
+              {
+                "day": "Mardi",
+                "time": "7h - 9h",
+                "type": "g10",
+                "total": 10,
+                "taken": 5
+              },
+              {
+                "day": "Mardi",
+                "time": "21h - 23h",
+                "type": "g10",
+                "total": 10,
+                "taken": 9
+              },
+              {
+                "day": "Jeudi",
+                "time": "7h - 9h",
+                "type": "g10",
+                "total": 10,
+                "taken": 8
+              },
+              {
+                "day": "Jeudi",
+                "time": "21h30-23h30",
+                "type": "max5",
+                "total": 5,
+                "taken": 4
+              },
+              {
+                "day": "Vendredi",
+                "time": "20h-22h",
+                "type": "g10",
+                "total": 10,
+                "taken": 10
+              },
+              {
+                "day": "Samedi",
+                "time": "6h-8h",
+                "type": "g10",
+                "total": 10,
+                "taken": 8
+              },
+              {
+                "day": "Samedi ELITE",
+                "time": "21h - 23h",
+                "type": "g10",
+                "total": 10,
+                "taken": 7
+              }
+            ]
+          },
+          {
+            "name": "Riyad",
+            "slots": [
+              {
+                "day": "Lundi",
+                "time": "21h30-23h30",
+                "type": "g10",
+                "total": 10,
+                "taken": 4
+              }
+            ]
+          }
+        ]
+      },
+      "femme": {
+        "name": "Femme",
+        "coaches": []
+      },
+      "ados": {
+        "name": "Ados Garçon",
+        "coaches": []
+      },
+      "enfants": {
+        "name": "Enfants",
+        "coaches": [
+          {
+            "name": "Coach Younes",
+            "slots": [
+              {
+                "day": "Sam Merc",
+                "time": "18h",
+                "type": "g10",
+                "total": 10,
+                "taken": 5
+              },
+              {
+                "day": "Dim Jeu",
+                "time": "18h",
+                "type": "g10",
+                "total": 10,
+                "taken": 4
+              },
+              {
+                "day": "Dim Merc",
+                "time": "19h20",
+                "type": "g10",
+                "total": 10,
+                "taken": 3
+              }
+            ]
+          }
+        ]
+      },
+      "apnea": {
+        "name": "Apnée",
+        "coaches": [
+          {
+            "name": "Coach Nouga",
+            "slots": [
+              {
+                "day": "Mercredi",
+                "time": "21h30-23h30",
+                "type": "apnea",
+                "total": 10,
+                "taken": 4
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "cheraga": {
+    "name": "Piscine Chéraga",
+    "categories": {
+      "homme": {
+        "name": "Homme",
+        "coaches": []
+      },
+      "femme": {
+        "name": "Femme",
+        "coaches": []
+      },
+      "ados": {
+        "name": "Ados Garçon",
+        "coaches": []
+      },
+      "enfants": {
+        "name": "Enfants",
+        "coaches": []
+      },
+      "apnea": {
+        "name": "Apnée",
+        "coaches": []
+      }
+    }
+  }
+}

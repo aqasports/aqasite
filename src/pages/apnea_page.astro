@@ -1,0 +1,378 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path: string, targetLang: string) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
+---
+
+<BaseLayout
+  title={lang === 'ar' ? 'أكا الغوص الحر — سيطر على نفسك' : (lang === 'en' ? 'AQA Apnea — Master your breath' : 'AQA Apnea — Dominez votre souffle')}
+  description="AQA Apnea — entraînement de l'apnée statique avec suivi scientifique. Objectif : 4 minutes. Rejoignez notre programme encadré et sécurisé."
+  currentPage="/apnea_page"
+  lang={lang}
+>
+  <Navbar currentPage="/apnea_page" lang={lang} />
+
+  <div class="container">
+    <!-- HERO -->
+    <section class="hero" role="banner" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <h1 id="hero-title">{lang === 'ar' ? 'أكا الغوص الحر — سيطر على نفسك.' : (lang === 'en' ? 'AQA Apnea — Master your breath.' : 'AQA Apnea — Dominez votre souffle.')}</h1>
+        <p class="lead">
+          {lang === 'ar' ? 'برنامج الغوص الحر الاستاتيكي تحت إشراف مدربين نخبة ومتابعة علمية. الهدف: 4 دقائق من كتم النفس بأمان تام.' : (lang === 'en' ? 'Static apnea program guided by elite coaches and scientific tracking. Goal: 4 minutes of static apnea in complete safety.' : 'Programme d\'apnée statique guidé par des coachs d\'élite et un suivi scientifique. Objectif : 4 minutes d\'apnée statique en toute sécurité.')}
+        </p>
+        <div class="cta-row">
+          <a class="cta-button" href={getRelativePath('/inscription', lang)}>{lang === 'ar' ? 'انضم إلى أكا الغوص الحر' : (lang === 'en' ? 'Join AQA Apnea' : 'Rejoignez AQA Apnea')}</a>
+          <a class="secondary-btn" href="#suivi">{lang === 'ar' ? 'اكتشف المتابعة' : (lang === 'en' ? 'Discover AQA tracking' : 'Découvrir le suivi AQA')}</a>
+        </div>
+      </div>
+
+      <div class="hero-media" aria-hidden="true">
+        <img src="/images/apnea.webp" alt="Apnée" style="width: 100%; height: auto; object-fit: cover;" />
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title" class="glass-panel">
+      <h2 class="section-title" id="about-title">{lang === 'ar' ? 'ما هو الغوص الحر الاستاتيكي؟' : (lang === 'en' ? 'What is static apnea?' : 'Qu\'est-ce que l\'apnée statique ?')}</h2>
+      <p>
+        {lang === 'ar' ? 'الغوص الحر الاستاتيكي هو كتم النفس إراديًا تحت الماء في وضعية الثبات. ينمي هذا النظام تحمل ثاني أكسيد الكربون، القدرة الرئوية، التحكم في التوتر والتركيز.' : (lang === 'en' ? 'Static apnea consists of voluntarily holding your breath underwater in a stationary position. It develops CO₂ tolerance, lung capacity, stress control, and concentration.' : 'L\'apnée statique consiste à retenir volontairement sa respiration sous l\'eau en position immobile. C\'est une discipline qui développe la tolérance au CO₂, la capacité pulmonaire, la maîtrise du stress et la concentration.')}
+      </p>
+      <p>
+        {lang === 'ar' ? 'في أكا، نطبق طريقة تدريجية وآمنة: تقييمات أولية، تدريبات موجهة، إشراف وثيق وبروتوكول سلامة صارم (مراقب، قياس النبض، واستشفاء نشط).' : (lang === 'en' ? 'At AQA, we apply a progressive and safe method: initial evaluations, guided training, close supervision, and a strict safety protocol (observer, pulse check, active recovery).' : 'Chez AQA, nous appliquons une méthode progressive et sûre : évaluations initiales, entraînements guidés, supervision rapprochée et protocole de sécurité strict (observateur, prise de pouls, récupération active).')}
+      </p>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section aria-labelledby="gallery-title" class="glass-panel">
+      <h2 class="section-title" id="gallery-title">{lang === 'ar' ? 'معرض الصور' : (lang === 'en' ? 'Gallery' : 'Galerie')}</h2>
+      <div class="gallery-grid" role="list">
+        <div class="gallery-item" role="listitem">
+          <img src="/images/swim.webp" alt="Séance d'apnée en piscine AQA">
+          <div class="caption">{lang === 'ar' ? 'حصة تدريبية — التحكم بالنفس' : 'Séance d\'entraînement — contrôle du souffle'}</div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/scuba.webp" alt="Coach AQA guide un athlète">
+          <div class="caption">{lang === 'ar' ? 'التدريب والسلامة' : 'Coaching et sécurité'}</div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/sea.webp" alt="Respiration et relaxation">
+          <div class="caption">{lang === 'ar' ? 'تقنيات التنفس' : 'Techniques de respiration'}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESSES & TESTIMONIALS -->
+    <section aria-labelledby="success-title" class="glass-panel">
+      <h2 class="section-title" id="success-title">{lang === 'ar' ? 'النجاحات والشهادات' : (lang === 'en' ? 'Success & Testimonials' : 'Succès & Témoignages')}</h2>
+      <div class="success-grid">
+        <div class="milestone">
+          <strong>{lang === 'ar' ? 'الهدف المحقق:' : 'Objectif atteint :'}</strong>
+          <p class="muted">{lang === 'ar' ? 'تمكن العديد من المنخرطين من الوصول أو تجاوز 4 دقائق في كتم النفس الاستاتيكي تحت إشراف أكا.' : 'Plusieurs adhérents ont atteint ou dépassé les 4 minutes en apnée statique sous supervision AQA.'}</p>
+          <ul class="muted">
+            <li>{lang === 'ar' ? 'برنامج تدريجي وآمن' : 'Programme progressif et sécurisé'}</li>
+            <li>{lang === 'ar' ? 'متابعة فردية وتقارير مرئية' : 'Suivi individuel et rapports visuels'}</li>
+            <li>{lang === 'ar' ? 'حصص التحضير الذهني والاسترخاء' : 'Sessions de préparation mentale et relaxation'}</li>
+          </ul>
+        </div>
+
+        <div class="testimonials-col">
+          <div class="testimonial">
+            <strong>Abdelghani — Head Coach</strong>
+            <p class="muted">“{lang === 'ar' ? 'نبني التقدم حول السلامة والعلم: تنفس متحكم فيه، تحمل ثاني أكسيد الكربون واسترجاع مثالي.' : 'Nous construisons la progression autour de la sécurité et de la science : respiration contrôlée, tolérance CO₂ et récupération optimale.'}”</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="testimonial">
+            <strong>Sara — Adhérente AQA</strong>
+            <p class="muted">“{lang === 'ar' ? 'مع متابعة أكا، اكتسبت الهدوء وحققت 3 د و40 ثا في الاختبار — الطريق نحو 4 دقائق واضح.' : 'Avec le suivi AQA, j\'ai gagné en calme et atteint 3min40 lors d\'un test — la route vers 4min est claire.'}”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AQA SUIVI -->
+    <section id="suivi" aria-labelledby="suivi-title" class="glass-panel">
+      <h2 class="section-title" id="suivi-title">{lang === 'ar' ? 'متابعة أكا — العلم والتوثيق' : 'AQA Suivi — science & traçabilité'}</h2>
+      <p class="muted">{lang === 'ar' ? 'تجمع متابعتنا بين مقاطع الفيديو التحليلية، المقاييس التنفسية والتقارير المنتظمة لزيادة التقدم بأمان تام.' : 'Notre suivi combine vidéos analytiques, métriques respiratoires et comptes-rendus réguliers pour maximiser la progression en toute sécurité.'}</p>
+
+      <div class="suivi-list" style="margin-top:12px">
+        <div class="suivi-item">
+          <div class="suivi-icon">1</div>
+          <div>
+            <strong>{lang === 'ar' ? 'تحليل الفيديو' : 'Vidéo analyse'}</strong><br>
+            <span class="muted">{lang === 'ar' ? 'تحليل لقطات التدريب لتصحيح الوضعية والاسترخاء.' : 'Séquences d\'entraînement analysées pour corriger la posture et la relaxation.'}</span>
+          </div>
+        </div>
+        <div class="suivi-item">
+          <div class="suivi-icon">2</div>
+          <div>
+            <strong>{lang === 'ar' ? 'المقاييس التنفسية' : 'Métriques respiratoires'}</strong><br>
+            <span class="muted">{lang === 'ar' ? 'قياسات الاسترجاع، معدل ضربات القلب وتحمل ثاني أكسيد الكربون.' : 'Mesures de récupération, fréquence cardiaque et tolérance CO₂.'}</span>
+          </div>
+        </div>
+        <div class="suivi-item">
+          <div class="suivi-icon">3</div>
+          <div>
+            <strong>{lang === 'ar' ? 'تقارير دورية' : 'Rapports périodiques'}</strong><br>
+            <span class="muted">{lang === 'ar' ? 'تقارير مرئية وتوصيات مخصصة كل 45 يومًا.' : 'Bilan visuel et recommandations personnalisées tous les 45 jours.'}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="page-cta glass-panel" aria-labelledby="cta-footer-title">
+      <div>
+        <h2 id="cta-footer-title" style="margin:0">{lang === 'ar' ? 'جاهز للبدء؟' : 'Prêt à commencer ?'}</h2>
+        <p class="muted" style="margin:6px 0 0">{lang === 'ar' ? 'انضم إلى أكا الغوص الحر واعمل لتحقيق هدف 4 دقائق بتأطير علمي.' : 'Rejoignez AQA Apnea et travaillez vers l\'objectif de 4 minutes avec un encadrement scientifique.'}</p>
+      </div>
+      <div class="cta-actions">
+        <a class="cta-button" href={getRelativePath('/inscription', lang)}>{lang === 'ar' ? 'انضم الآن' : 'Rejoignez AQA Apnea'}</a>
+        <a class="secondary-btn" href="https://wa.me/213540454907">{lang === 'ar' ? 'اتصل بنا' : 'Contactez-nous'}</a>
+      </div>
+    </section>
+  </div>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .hero {
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 3rem 2rem;
+    background: radial-gradient(ellipse at center, rgba(0, 153, 255, 0.06) 0%, transparent 40%), rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2rem;
+    align-items: center;
+    backdrop-filter: blur(10px);
+  }
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 2rem 1.2rem;
+    }
+  }
+
+  .hero-left h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-teal), #bffaff 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 6px 30px rgba(0, 242, 255, 0.1);
+  }
+
+  .hero-left p.lead {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #030712;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.25);
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-teal);
+    display: inline-block;
+  }
+
+  .cta-button:hover {
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-active);
+  }
+
+  .secondary-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 242, 255, 0.25);
+    color: var(--color-teal);
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+  .secondary-btn:hover {
+    background: rgba(0, 242, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .hero-media {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  }
+
+  section {
+    margin: 2rem 0;
+    padding: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-teal);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 0.8rem;
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+  .gallery-item .caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .success-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  @media (max-width: 768px) {
+    .success-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .milestone {
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: rgba(0, 242, 255, 0.03);
+    border: 1px solid rgba(0, 242, 255, 0.1);
+  }
+  .milestone ul {
+    margin-top: 1rem;
+    padding-left: 1.2rem;
+  }
+  .milestone li {
+    margin-bottom: 0.5rem;
+  }
+
+  .testimonial {
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.01);
+    border-left: 4px solid var(--color-teal);
+  }
+  :global([dir="rtl"]) .testimonial {
+    border-left: none;
+    border-right: 4px solid var(--color-teal);
+  }
+
+  .suivi-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .suivi-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .suivi-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #030712;
+    flex-shrink: 0;
+  }
+
+  .page-cta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+  @media (max-width: 768px) {
+    .page-cta {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  .cta-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .spacer {
+    height: 1rem;
+  }
+</style>
