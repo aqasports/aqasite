@@ -21,9 +21,9 @@ const getRelativePath = (path: string, targetLang: string) => {
   currentPage="/azal"
   lang={lang}
 >
-  <Navbar currentPage="/piscines" lang={lang} />
+  <Navbar currentPage="/infrastructure" lang={lang} />
 
-  <a href={getRelativePath('/piscines', lang)} class="back-btn">← {lang === 'ar' ? 'العودة للمسابح' : (lang === 'en' ? 'Back to Pools' : 'Retour aux Piscines')}</a>
+  <a href={getRelativePath('/infrastructure', lang)} class="back-btn">← {lang === 'ar' ? 'العودة للمرافق' : (lang === 'en' ? 'Back to Infrastructures' : 'Retour aux Infrastructures')}</a>
 
   <div class="container">
     <section class="hero">

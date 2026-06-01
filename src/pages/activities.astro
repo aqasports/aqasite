@@ -185,6 +185,7 @@ const getRelativePath = (path, targetLang) => {
     
     
     <script>
+    document.addEventListener('astro:page-load', () => {
         // Performance optimized animations
         const observerOptions = {
             threshold: 0.1,
@@ -314,7 +315,8 @@ const getRelativePath = (path, targetLang) => {
             script.src = 'https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver';
             document.head.appendChild(script);
         }
-    </script>
+        });
+  </script>
 
   <Footer  lang={lang} />
 </BaseLayout>

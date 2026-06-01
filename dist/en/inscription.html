@@ -10,9 +10,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Inscription | AQA Sports Academy — Rejoignez-nous en Ligne</title>
-  <meta name="description" content="Inscrivez-vous à AQA Sports Academy en ligne. Choisissez votre formule (G10, MAX5, Individuel), votre créneau et commencez votre transformation.">
-  <meta name="keywords" content="inscription natation algérie, s'inscrire aqa sports, rejoindre académie natation alger, coaching inscription">
+  <title>Registration | AQA Sports Academy — Join Us Online</title>
+  <meta name="description" content="Register for AQA Sports Academy online. Choose your formula (G10, MAX5, Individual), your slot and start your transformation.">
+  <meta name="keywords" content="swimming registration algeria, sign up aqa sports, join swimming academy alger, coaching registration">
   <meta name="robots" content="index, follow">
   <meta name="author" content="AQA Sports Academy">
   <link rel="canonical" href="https://aqasports.com/inscription">
@@ -20,16 +20,16 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aqasports.com/inscription">
-  <meta property="og:title" content="Inscription | AQA Sports Academy — Rejoignez-nous en Ligne">
-  <meta property="og:description" content="Inscrivez-vous à AQA Sports Academy en ligne. Choisissez votre formule (G10, MAX5, Individuel), votre créneau et commencez votre transformation.">
+  <meta property="og:title" content="Registration | AQA Sports Academy — Join Us Online">
+  <meta property="og:description" content="Register for AQA Sports Academy online. Choose your formula (G10, MAX5, Individual), your slot and start your transformation.">
   <meta property="og:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
   <meta property="og:site_name" content="AQA Sports Academy">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Inscription | AQA Sports Academy — Rejoignez-nous en Ligne">
-  <meta name="twitter:description" content="Inscrivez-vous à AQA Sports Academy en ligne. Choisissez votre formule (G10, MAX5, Individuel), votre créneau et commencez votre transformation.">
+  <meta name="twitter:title" content="Registration | AQA Sports Academy — Join Us Online">
+  <meta name="twitter:description" content="Register for AQA Sports Academy online. Choose your formula (G10, MAX5, Individual), your slot and start your transformation.">
   <meta name="twitter:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
 
   <!-- Favicon -->
@@ -61,6 +61,52 @@
     }
   </script>
 
+  <!-- Language persistence & redirection script -->
+  <script>
+    (function() {
+      function checkLang() {
+        if (typeof localStorage === 'undefined') return;
+        
+        const path = window.location.pathname;
+        const currentLang = document.documentElement.lang || 'fr';
+        const isFrenchPage = !path.startsWith('/ar') && !path.startsWith('/en');
+        const supportedLangs = ['ar', 'en'];
+        
+        if (isFrenchPage) {
+          const savedLang = localStorage.getItem('aqa_lang');
+          
+          if (savedLang && supportedLangs.includes(savedLang)) {
+            const referrer = document.referrer;
+            const currentOrigin = window.location.origin;
+            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
+            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            
+            if (isExplicitFR) {
+              localStorage.setItem('aqa_lang', 'fr');
+            } else {
+              const targetPath = '/' + savedLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            }
+          } else if (!savedLang) {
+            const browserLang = (navigator.language || 'fr').split('-')[0].toLowerCase();
+            if (supportedLangs.includes(browserLang)) {
+              const targetPath = '/' + browserLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            } else {
+              localStorage.setItem('aqa_lang', 'fr');
+            }
+          }
+        } else {
+          localStorage.setItem('aqa_lang', currentLang);
+        }
+      }
+      
+      checkLang();
+      document.addEventListener('astro:after-swap', checkLang);
+      document.addEventListener('astro:page-load', checkLang);
+    })();
+  </script>
+
   <!-- Slot for page-specific <style> or <link> tags -->
   
 <style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap";.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}:root{--bg-primary: #030712;--bg-secondary: #0b0f19;--bg-card: rgba(15, 23, 42, .65);--color-teal: #00f2ff;--color-blue: #0088ff;--color-blue-dark: #0055cc;--text-primary: #f9fafb;--text-secondary: #9ca3af;--text-muted: #6b7280;--border-glass: 1px solid rgba(255, 255, 255, .08);--border-active: 1px solid rgba(0, 242, 255, .4);--shadow-glow: 0 0 25px rgba(0, 242, 255, .15);--shadow-glow-active: 0 0 35px rgba(0, 242, 255, .35);--font-display: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--transition-smooth: all .3s cubic-bezier(.4, 0, .2, 1)}*{margin:0;padding:0;box-sizing:border-box}html{background-color:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);scroll-behavior:smooth;overflow-x:hidden;height:100%}body{background:transparent;min-height:100vh;line-height:1.6;position:relative}h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-primary);font-weight:700;letter-spacing:-.025em}p{font-family:var(--font-body);color:var(--text-secondary)}a{color:inherit;text-decoration:none;transition:var(--transition-smooth)}.glass-panel{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:var(--border-glass);border-radius:20px;box-shadow:0 10px 30px -10px #000000b3;transition:var(--transition-smooth)}.glass-panel:hover{border-color:#00f2ff40;box-shadow:var(--shadow-glow)}body:before{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% -20%,rgba(0,242,255,.08) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(0,136,255,.05) 0%,transparent 50%);pointer-events:none;z-index:-2}.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}@keyframes neonGlow{0%,to{filter:drop-shadow(0 0 10px rgba(0,242,255,.3)) drop-shadow(0 0 20px rgba(0,136,255,.2))}50%{filter:drop-shadow(0 0 20px rgba(0,242,255,.5)) drop-shadow(0 0 35px rgba(0,136,255,.3))}}@keyframes shimmer{0%{transform:translate(-100%) rotate(45deg)}to{transform:translate(100%) rotate(45deg)}}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:#1f2937;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#374151}.skip-link{position:absolute;top:-40px;left:0;background:var(--color-teal);color:#000;padding:8px 16px;z-index:1000;font-weight:700}.skip-link:focus{top:0}.bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none;background:transparent}.bg-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;background:url(https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png) no-repeat center;background-size:contain;opacity:.02;z-index:-1;pointer-events:none}
@@ -83,7 +129,7 @@
         <nav class="nav-menu" id="navMenu">
             <a href="/en/tarifs" class="nav-link" data-i18n="nav_tarifs">Pricing</a>
             <a href="/en/groupes" class="nav-link" data-i18n="nav_groupes">Groups</a>
-            <a href="/en/piscines" class="nav-link" data-i18n="nav_piscines">Pools</a>
+            <a href="/en/infrastructure" class="nav-link" data-i18n="nav_infrastructure">Infrastructures</a>
             <a href="/en/infos" class="nav-link" data-i18n="nav_infos">Info</a>
             <a href="/en/events" class="nav-link" data-i18n="nav_events">Events</a>
             <a href="/en/formation" class="nav-link" data-i18n="nav_formation">Training</a>
@@ -108,7 +154,7 @@
     <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
     <a href="/en/tarifs" class="mobile-nav-link" data-i18n="nav_tarifs">Pricing</a>
     <a href="/en/groupes" class="mobile-nav-link" data-i18n="nav_groupes">Groups</a>
-    <a href="/en/piscines" class="mobile-nav-link" data-i18n="nav_piscines">Pools</a>
+    <a href="/en/infrastructure" class="mobile-nav-link" data-i18n="nav_infrastructure">Infrastructures</a>
     <a href="/en/infos" class="mobile-nav-link" data-i18n="nav_infos">Info</a>
     <a href="/en/events" class="mobile-nav-link" data-i18n="nav_events">Events</a>
     <a href="/en/formation" class="mobile-nav-link" data-i18n="nav_formation">Training</a>
@@ -123,25 +169,25 @@
 <script src="/js/navbar.js"></script>
 
   <div class="container" data-astro-cid-h6znpxjw>
-    <h1 data-astro-cid-h6znpxjw>Formulaire d'inscription</h1>
+    <h1 data-astro-cid-h6znpxjw>Registration Form</h1>
     <img src="https://i.ibb.co/5Wh3RwwC/Untitled-design-46-1.png" alt="AQA Cards" class="inscription-image" data-astro-cid-h6znpxjw>
 
     <!-- Enhanced Multi-Step Wizard Form -->
-    <div class="wizard-form" id="registrationApp" data-schedule="{&#34;reghaia&#34;:{&#34;name&#34;:&#34;Piscine Réghaia&#34;,&#34;categories&#34;:{&#34;homme&#34;:{&#34;name&#34;:&#34;Homme&#34;,&#34;coaches&#34;:[{&#34;name&#34;:&#34;Coach Youcef&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Samedi&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Mardi&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:5},{&#34;day&#34;:&#34;Mercredi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:9},{&#34;day&#34;:&#34;Jeudi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:7},{&#34;day&#34;:&#34;Vendredi&#34;,&#34;time&#34;:&#34;20h - 22h&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:5}]},{&#34;name&#34;:&#34;Coach Bilal&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Dimanche&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:4}]},{&#34;name&#34;:&#34;Coach Nouga&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Mercredi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;apnea&#34;,&#34;total&#34;:10,&#34;taken&#34;:4}]},{&#34;name&#34;:&#34;Coach Abdelghani&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Mardi&#34;,&#34;time&#34;:&#34;7h - 9h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:5},{&#34;day&#34;:&#34;Mardi&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:9},{&#34;day&#34;:&#34;Jeudi&#34;,&#34;time&#34;:&#34;7h - 9h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:8},{&#34;day&#34;:&#34;Jeudi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:4},{&#34;day&#34;:&#34;Vendredi&#34;,&#34;time&#34;:&#34;20h-22h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Samedi&#34;,&#34;time&#34;:&#34;6h-8h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:8},{&#34;day&#34;:&#34;Samedi ELITE&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:7}]},{&#34;name&#34;:&#34;Riyad&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Lundi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:4}]}]},&#34;femme&#34;:{&#34;name&#34;:&#34;Femme&#34;,&#34;coaches&#34;:[]},&#34;ados&#34;:{&#34;name&#34;:&#34;Ados Garçon&#34;,&#34;coaches&#34;:[]},&#34;enfants&#34;:{&#34;name&#34;:&#34;Enfants&#34;,&#34;coaches&#34;:[{&#34;name&#34;:&#34;Coach Younes&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Dim Jeu&#34;,&#34;time&#34;:&#34;18h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Dim Merc&#34;,&#34;time&#34;:&#34;19h20&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:0}]},{&#34;name&#34;:&#34;Abdelghani&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Sam Merc&#34;,&#34;time&#34;:&#34;18h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:9}]}]},&#34;apnea&#34;:{&#34;name&#34;:&#34;Apnée&#34;,&#34;coaches&#34;:[{&#34;name&#34;:&#34;Coach Nouga&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Mercredi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;apnea&#34;,&#34;total&#34;:10,&#34;taken&#34;:4}]}]}}},&#34;cheraga&#34;:{&#34;name&#34;:&#34;Piscine Chéraga&#34;,&#34;categories&#34;:{&#34;homme&#34;:{&#34;name&#34;:&#34;Homme&#34;,&#34;coaches&#34;:[]},&#34;femme&#34;:{&#34;name&#34;:&#34;Femme&#34;,&#34;coaches&#34;:[]},&#34;ados&#34;:{&#34;name&#34;:&#34;Ados Garçon&#34;,&#34;coaches&#34;:[]},&#34;enfants&#34;:{&#34;name&#34;:&#34;Enfants&#34;,&#34;coaches&#34;:[]},&#34;apnea&#34;:{&#34;name&#34;:&#34;Apnée&#34;,&#34;coaches&#34;:[]}}}}" data-astro-cid-h6znpxjw>
+    <div class="wizard-form" id="registrationApp" data-schedule="{&#34;reghaia&#34;:{&#34;name&#34;:&#34;Piscine Réghaia&#34;,&#34;categories&#34;:{&#34;homme&#34;:{&#34;name&#34;:&#34;Homme&#34;,&#34;coaches&#34;:[{&#34;name&#34;:&#34;Coach Youcef&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Samedi&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Mardi&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:5},{&#34;day&#34;:&#34;Mercredi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Jeudi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Vendredi&#34;,&#34;time&#34;:&#34;20h - 22h&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:5}]},{&#34;name&#34;:&#34;Coach Bilal&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Dimanche&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:4}]},{&#34;name&#34;:&#34;Coach Nouga&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Mercredi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;apnea&#34;,&#34;total&#34;:10,&#34;taken&#34;:4}]},{&#34;name&#34;:&#34;Coach Abdelghani&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Mardi&#34;,&#34;time&#34;:&#34;7h - 9h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:6,&#34;group&#34;:&#34;&#34;},{&#34;day&#34;:&#34;Mardi&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:9},{&#34;day&#34;:&#34;Jeudi&#34;,&#34;time&#34;:&#34;7h - 9h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:9},{&#34;day&#34;:&#34;Jeudi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;max5&#34;,&#34;total&#34;:5,&#34;taken&#34;:4},{&#34;day&#34;:&#34;Vendredi&#34;,&#34;time&#34;:&#34;20h-22h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Samedi&#34;,&#34;time&#34;:&#34;6h-8h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:8},{&#34;day&#34;:&#34;Samedi ELITE&#34;,&#34;time&#34;:&#34;21h - 23h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:7}]},{&#34;name&#34;:&#34;Riyad&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Lundi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:4}]}]},&#34;femme&#34;:{&#34;name&#34;:&#34;Femme&#34;,&#34;coaches&#34;:[]},&#34;ados&#34;:{&#34;name&#34;:&#34;Ados Garçon&#34;,&#34;coaches&#34;:[]},&#34;enfants&#34;:{&#34;name&#34;:&#34;Enfants&#34;,&#34;coaches&#34;:[{&#34;name&#34;:&#34;Coach Younes&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Dim Jeu&#34;,&#34;time&#34;:&#34;18h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:10},{&#34;day&#34;:&#34;Dim Merc&#34;,&#34;time&#34;:&#34;19h20&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:0}]},{&#34;name&#34;:&#34;Abdelghani&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Sam Merc&#34;,&#34;time&#34;:&#34;18h&#34;,&#34;type&#34;:&#34;g10&#34;,&#34;total&#34;:10,&#34;taken&#34;:9}]}]},&#34;apnea&#34;:{&#34;name&#34;:&#34;Apnée&#34;,&#34;coaches&#34;:[{&#34;name&#34;:&#34;Coach Nouga&#34;,&#34;slots&#34;:[{&#34;day&#34;:&#34;Mercredi&#34;,&#34;time&#34;:&#34;21h30-23h30&#34;,&#34;type&#34;:&#34;apnea&#34;,&#34;total&#34;:10,&#34;taken&#34;:4}]}]}}},&#34;cheraga&#34;:{&#34;name&#34;:&#34;Piscine Chéraga&#34;,&#34;categories&#34;:{&#34;homme&#34;:{&#34;name&#34;:&#34;Homme&#34;,&#34;coaches&#34;:[]},&#34;femme&#34;:{&#34;name&#34;:&#34;Femme&#34;,&#34;coaches&#34;:[]},&#34;ados&#34;:{&#34;name&#34;:&#34;Ados Garçon&#34;,&#34;coaches&#34;:[]},&#34;enfants&#34;:{&#34;name&#34;:&#34;Enfants&#34;,&#34;coaches&#34;:[]},&#34;apnea&#34;:{&#34;name&#34;:&#34;Apnée&#34;,&#34;coaches&#34;:[]}}}}" data-astro-cid-h6znpxjw>
       <!-- Progress Indicator -->
       <div class="step-counter" data-astro-cid-h6znpxjw>
-        Étape <span id="currentStep" data-astro-cid-h6znpxjw>1</span> / 7
+        Step <span id="currentStep" data-astro-cid-h6znpxjw>1</span> / 7
       </div>
       <div class="progress-bar" data-astro-cid-h6znpxjw>
         <div class="progress-fill" id="progressFill" data-astro-cid-h6znpxjw></div>
       </div>
 
       <div class="success-message" id="successMessage" data-astro-cid-h6znpxjw>
-        <h3 data-astro-cid-h6znpxjw>✅ Inscription envoyée avec succès!</h3>
-        <p data-astro-cid-h6znpxjw>Nous avons bien reçu votre demande d'inscription. Vous recevrez une confirmation par téléphone sous 24h.</p>
+        <h3 data-astro-cid-h6znpxjw>✅ Registration sent successfully!</h3>
+        <p data-astro-cid-h6znpxjw>We have received your registration request. You will receive a confirmation call within 24 hours.</p>
         <div class="summary-section" id="finalSummary" data-astro-cid-h6znpxjw></div>
         <button class="btn btn-primary" onclick="window.location.href=window.location.pathname" data-astro-cid-h6znpxjw>
-          Nouvelle inscription
+          New Registration
         </button>
       </div>
 
@@ -163,103 +209,91 @@
 
         <!-- Step 1: Catégorie -->
         <div class="step active" id="step1" data-astro-cid-h6znpxjw>
-          <h3 data-astro-cid-h6znpxjw>Choisissez votre catégorie</h3>
+          <h3 data-astro-cid-h6znpxjw>Choose your category</h3>
           <div class="category-grid" data-astro-cid-h6znpxjw>
             <div class="category-option" data-category="men" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>Hommes</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>Adultes</small>
+              <strong data-astro-cid-h6znpxjw>Men</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>Adults</small>
             </div>
             <div class="category-option" data-category="women" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>Femmes</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>Adultes et Ados</small>
+              <strong data-astro-cid-h6znpxjw>Women</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>Adults &amp; Teens</small>
             </div>
             <div class="category-option" data-category="teens" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>Ados Garçon</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>13-16 ans</small>
+              <strong data-astro-cid-h6znpxjw>Teen Boys</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>13-16 years</small>
             </div>
             <div class="category-option" data-category="kids" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>Enfants</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>5-12 ans</small>
+              <strong data-astro-cid-h6znpxjw>Kids</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>5-12 years</small>
             </div>
             <div class="category-option" data-category="apnea" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>AQA apnea</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>atteindre 4min en apnéé</small>
+              <strong data-astro-cid-h6znpxjw>AQA apnea</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>reach 4 min in apnea</small>
             </div>
           </div>
-          <div class="error-message" id="categoryError" data-astro-cid-h6znpxjw>Veuillez sélectionner une catégorie</div>
+          <div class="error-message" id="categoryError" data-astro-cid-h6znpxjw>Please select a category</div>
         </div>
 
         <!-- Step 2: Piscine -->
         <div class="step" id="step2" data-astro-cid-h6znpxjw>
-          <h3 data-astro-cid-h6znpxjw>Choisissez votre piscine</h3>
+          <h3 data-astro-cid-h6znpxjw>Choose your pool</h3>
           <div class="form-group" data-astro-cid-h6znpxjw>
-            <label for="piscineSelect" data-astro-cid-h6znpxjw>Emplacement :</label>
+            <label for="piscineSelect" data-astro-cid-h6znpxjw>Location :</label>
             <select id="piscineSelect" required data-astro-cid-h6znpxjw>
-              <option value="" data-astro-cid-h6znpxjw>-- Sélectionnez une piscine --</option>
+              <option value="" data-astro-cid-h6znpxjw>-- Select a pool --</option>
             </select>
-            <div class="error-message" id="piscineError" data-astro-cid-h6znpxjw>Veuillez sélectionner une piscine</div>
+            <div class="error-message" id="piscineError" data-astro-cid-h6znpxjw>Please select a pool</div>
           </div>
         </div>
 
         <!-- Step 3: Formule Selection -->
         <div class="step" id="step3" data-astro-cid-h6znpxjw>
-          <h3 data-astro-cid-h6znpxjw>Choisissez votre formule</h3>
+          <h3 data-astro-cid-h6znpxjw>Choose your formula</h3>
           <div class="formule-grid" data-astro-cid-h6znpxjw>
             <div class="formule-card" data-formule="starter" data-astro-cid-h6znpxjw>
               <div class="formule-image" data-astro-cid-h6znpxjw>🥉</div>
-              <strong data-astro-cid-h6znpxjw>Starter</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>1 mois</small>
+              <strong data-astro-cid-h6znpxjw>Starter</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>1 month</small>
             </div>
             <div class="formule-card" data-formule="silver" data-astro-cid-h6znpxjw>
               <div class="formule-image" data-astro-cid-h6znpxjw>🥈</div>
-              <strong data-astro-cid-h6znpxjw>Silver</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>3 mois</small>
+              <strong data-astro-cid-h6znpxjw>Silver</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>3 months</small>
             </div>
             <div class="formule-card" data-formule="gold" data-astro-cid-h6znpxjw>
               <div class="formule-image" data-astro-cid-h6znpxjw>🥇</div>
-              <strong data-astro-cid-h6znpxjw>Gold</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>6 mois</small>
+              <strong data-astro-cid-h6znpxjw>Gold</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>6 months</small>
             </div>
             <div class="formule-card" data-formule="diamond" data-astro-cid-h6znpxjw>
               <div class="formule-image" data-astro-cid-h6znpxjw>💎</div>
-              <strong data-astro-cid-h6znpxjw>Diamond</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>9 mois</small>
+              <strong data-astro-cid-h6znpxjw>Diamond</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>9 months</small>
             </div>
           </div>
-          <div class="error-message" id="formuleError" data-astro-cid-h6znpxjw>Veuillez sélectionner une formule</div>
+          <div class="error-message" id="formuleError" data-astro-cid-h6znpxjw>Please select a formula</div>
         </div>
 
         <!-- Step 4: Frequency Selection -->
         <div class="step" id="step4" data-astro-cid-h6znpxjw>
-          <h3 data-astro-cid-h6znpxjw>Choisissez votre fréquence</h3>
-          <h5 id="sessionDuration" data-astro-cid-h6znpxjw>Séance = 2 heures</h5>
+          <h3 data-astro-cid-h6znpxjw>Choose your frequency</h3>
+          <h5 id="sessionDuration" data-astro-cid-h6znpxjw>Session = 2 hours</h5>
           <div class="frequency-options" data-astro-cid-h6znpxjw>
             <div class="frequency-option" data-frequency="1" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>1 fois</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>par semaine</small>
+              <strong data-astro-cid-h6znpxjw>1 time</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>per week</small>
             </div>
             <div class="frequency-option" data-frequency="2" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>2 fois</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>par semaine</small>
+              <strong data-astro-cid-h6znpxjw>2 times</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>per week</small>
             </div>
             <div class="frequency-option" data-frequency="3" data-astro-cid-h6znpxjw>
-              <strong data-astro-cid-h6znpxjw>3 fois</strong><br data-astro-cid-h6znpxjw>
-              <small data-astro-cid-h6znpxjw>par semaine</small>
+              <strong data-astro-cid-h6znpxjw>3 times</strong><br data-astro-cid-h6znpxjw><small data-astro-cid-h6znpxjw>per week</small>
             </div>
           </div>
-          <div class="error-message" id="frequencyError" data-astro-cid-h6znpxjw>Veuillez sélectionner une fréquence</div>
+          <div class="error-message" id="frequencyError" data-astro-cid-h6znpxjw>Please select a frequency</div>
         </div>
 
         <!-- Step 5: Groupes -->
         <div class="step" id="step5" data-astro-cid-h6znpxjw>
-          <h3 data-astro-cid-h6znpxjw>Choisissez vos groupes</h3>
-          <p class="step5-hint" data-astro-cid-h6znpxjw>Sélectionnez <span id="maxGroups" data-astro-cid-h6znpxjw>1</span> groupe(s) selon votre fréquence</p>
+          <h3 data-astro-cid-h6znpxjw>Choose your groups</h3>
+          <p class="step5-hint" data-astro-cid-h6znpxjw>Select <span id="maxGroups" data-astro-cid-h6znpxjw>1</span> group(s) based on frequency</p>
           <div id="groupCardsContainer" class="group-cards-container" data-astro-cid-h6znpxjw>
-            <div class="group-placeholder" data-astro-cid-h6znpxjw>Complétez d'abord les étapes précédentes</div>
+            <div class="group-placeholder" data-astro-cid-h6znpxjw>Complete the previous steps first</div>
           </div>
-          <div class="error-message" id="groupeError" data-astro-cid-h6znpxjw>Veuillez sélectionner le bon nombre de groupes</div>
+          <div class="error-message" id="groupeError" data-astro-cid-h6znpxjw>Please select the correct number of groups</div>
           <div class="no-groups-message" id="noGroupsMessage" data-astro-cid-h6znpxjw>
-            Aucun groupe disponible pour cette combinaison. Essayez un autre emplacement.
+            No groups available for this combination. Try another location.
           </div>
           <!-- hidden select kept for form validation compat -->
           <select id="groupeSelect" style="display:none" multiple data-astro-cid-h6znpxjw></select>
@@ -267,51 +301,51 @@
 
         <!-- Step 6: Informations personnelles -->
         <div class="step" id="step6" data-astro-cid-h6znpxjw>
-          <h3 data-astro-cid-h6znpxjw>Vos informations personnelles</h3>
+          <h3 data-astro-cid-h6znpxjw>Your personal information</h3>
           <div class="form-group" data-astro-cid-h6znpxjw>
-            <label for="nomComplet" data-astro-cid-h6znpxjw>Nom complet :</label>
+            <label for="nomComplet" data-astro-cid-h6znpxjw>Full name :</label>
             <input type="text" id="nomComplet" required data-astro-cid-h6znpxjw>
-            <div class="error-message" id="nomError" data-astro-cid-h6znpxjw>Veuillez saisir votre nom complet</div>
+            <div class="error-message" id="nomError" data-astro-cid-h6znpxjw>Please enter your full name</div>
           </div>
           <div class="form-group" data-astro-cid-h6znpxjw>
-            <label for="telephone" data-astro-cid-h6znpxjw>Téléphone :</label>
+            <label for="telephone" data-astro-cid-h6znpxjw>Phone number :</label>
             <input type="tel" id="telephone" required pattern="[0-9 +()-]{8,}" data-astro-cid-h6znpxjw>
-            <div class="error-message" id="telephoneError" data-astro-cid-h6znpxjw>Veuillez saisir un numéro de téléphone valide</div>
+            <div class="error-message" id="telephoneError" data-astro-cid-h6znpxjw>Please enter a valid phone number</div>
           </div>
           <div class="form-group" data-astro-cid-h6znpxjw>
-            <label for="ville" data-astro-cid-h6znpxjw>Quelle est votre ville ?</label>
+            <label for="ville" data-astro-cid-h6znpxjw>What is your city of residence ?</label>
             <input type="text" id="ville" required data-astro-cid-h6znpxjw>
-            <div class="error-message" id="villeError" data-astro-cid-h6znpxjw>Veuillez saisir votre ville</div>
+            <div class="error-message" id="villeError" data-astro-cid-h6znpxjw>Please enter your city</div>
           </div>
           <div class="form-group" data-astro-cid-h6znpxjw>
             <label data-astro-cid-h6znpxjw>
               <input type="checkbox" id="equipement" style="width: auto; margin-right: 0.5rem;" data-astro-cid-h6znpxjw>
-              Avez-vous besoin d'équipement ?
+              Do you need equipment ?
             </label>
           </div>
         </div>
 
         <!-- Step 7: Récapitulatif -->
         <div class="step" id="step7" data-astro-cid-h6znpxjw>
-          <h3 data-astro-cid-h6znpxjw>Récapitulatif de votre inscription</h3>
+          <h3 data-astro-cid-h6znpxjw>Summary of your registration</h3>
           <div class="summary-section" id="summarySection" data-astro-cid-h6znpxjw>
             <!-- Summary will be populated dynamically -->
           </div>
           <p style="text-align: center; margin-top: 1rem; opacity: 0.8;" data-astro-cid-h6znpxjw>
-            Vérifiez vos informations avant de confirmer votre inscription.
+            Verify your details before confirming your registration.
           </p>
         </div>
 
         <!-- Navigation Buttons -->
         <div class="button-group" data-astro-cid-h6znpxjw>
           <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)" data-astro-cid-h6znpxjw>
-            Suivant
+            Next
           </button>
           <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;" data-astro-cid-h6znpxjw>
-            Précédent
+            Previous
           </button>
           <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;" data-astro-cid-h6znpxjw>
-            Confirmer l'inscription
+            Confirm Registration
           </button>
         </div>
       </form>
@@ -346,7 +380,7 @@
                 <li data-astro-cid-sz7xmlte><a href="/en/tarifs" data-astro-cid-sz7xmlte>Pricing</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/groupes" data-astro-cid-sz7xmlte>Groups</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/inscription" data-astro-cid-sz7xmlte>Inscription</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/piscines" data-astro-cid-sz7xmlte>Pools</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/en/infrastructure" data-astro-cid-sz7xmlte>Infrastructures</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/events" data-astro-cid-sz7xmlte>Events</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/webtv" data-astro-cid-sz7xmlte>WebTV</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/store" data-astro-cid-sz7xmlte>Store</a></li>
@@ -486,17 +520,118 @@
   });
 </script>
 
-
-  <!-- WhatsApp floating widget -->
-  <script src="/js/navbar-wa.js"></script>
-</body>
-</html>
+</body></html>
 
 <script>(function(){const lang = "en";
 
   // Load dynamic schedule data
   const appEl = document.getElementById('registrationApp');
   let scheduleData = JSON.parse(appEl?.dataset?.schedule || '{}');
+
+
+  const categoryDicts = {
+    fr: { men: "Hommes", women: "Femmes", teens: "Adolescents", kids: "Enfants", apnea: "Apnée" },
+    ar: { men: "رجال", women: "نساء", teens: "مراهقون", kids: "أطفال", apnea: "غوص حر" },
+    en: { men: "Men", women: "Women", teens: "Teenagers", kids: "Kids", apnea: "Apnea" }
+  };
+
+  const poolDicts = {
+    fr: { reghaia: 'Reghaïa - ADM AZAL', cheraga: 'Chéraga - BK Sport' },
+    ar: { reghaia: 'الرغاية - أدم أزال', cheraga: 'الشراقة - بي كا سبورت' },
+    en: { reghaia: 'Reghaia - ADM AZAL', cheraga: 'Cheraga - BK Sport' }
+  };
+
+  const poolLabelsDict = {
+    fr: 'Reghaïa - ADM AZAL',
+    cheraga: 'Chéraga - BK Sport'
+  };
+
+  const AQA_CATEGORIES = categoryDicts[lang] || categoryDicts.fr;
+  const POOL_LABELS = poolDicts[lang] || poolDicts.fr;
+
+  const errorsDict = {
+    fr: {
+      category: 'Veuillez sélectionner une catégorie',
+      piscine: 'Veuillez sélectionner une piscine',
+      formule: 'Veuillez sélectionner une formule',
+      frequency: 'Veuillez sélectionner une fréquence',
+      groups: (n) => `Veuillez sélectionner exactement ${n} groupe(s)`,
+      fullname: 'Veuillez saisir votre nom complet',
+      phone: 'Veuillez saisir un numéro de téléphone valide (au moins 8 caractères)',
+      city: 'Veuillez saisir votre ville'
+    },
+    ar: {
+      category: 'يرجى تحديد فئة',
+      piscine: 'يرجى تحديد مسبح',
+      formule: 'يرجى تحديد صيغة',
+      frequency: 'يرجى تحديد التكرار',
+      groups: (n) => `يرجى اختيار بالضبط ${n} مجموعة (مجموعات)`,
+      fullname: 'يرجى إدخال اسمك الكامل',
+      phone: 'يرجى إدخال رقم هاتف صالح (على الأقل 8 أرقام)',
+      city: 'يرجى إدخال مدينتك'
+    },
+    en: {
+      category: 'Please select a category',
+      piscine: 'Please select a pool',
+      formule: 'Please select a formula',
+      frequency: 'Please select a frequency',
+      groups: (n) => `Please select exactly ${n} group(s)`,
+      fullname: 'Please enter your full name',
+      phone: 'Please enter a valid phone number (at least 8 characters)',
+      city: 'Please enter your city'
+    }
+  };
+  const activeErrors = errorsDict[lang] || errorsDict.fr;
+
+  const summaryLabels = {
+    fr: {
+      category: 'Catégorie :',
+      piscine: 'Piscine :',
+      formule: 'Formule :',
+      frequency: 'Fréquence :',
+      groups: 'Groupes sélectionnés :',
+      fullname: 'Nom complet :',
+      phone: 'Téléphone :',
+      city: 'Ville :',
+      equipement: 'Équipement nécessaire :',
+      yes: 'Oui',
+      no: 'Non',
+      times: (n) => `${n} fois par semaine`,
+      contact: 'Contact :'
+    },
+    ar: {
+      category: 'الفئة :',
+      piscine: 'المسبح :',
+      formule: 'الصيغة :',
+      frequency: 'التكرار :',
+      groups: 'المجموعات المختارة :',
+      fullname: 'الاسم الكامل :',
+      phone: 'الهاتف :',
+      city: 'المدينة :',
+      equipement: 'المعدات المطلوبة :',
+      yes: 'نعم',
+      no: 'لا',
+      times: (n) => `${n} حصص في الأسبوع`,
+      contact: 'الاتصال :'
+    },
+    en: {
+      category: 'Category:',
+      piscine: 'Pool:',
+      formule: 'Formula:',
+      frequency: 'Frequency:',
+      groups: 'Selected Groups:',
+      fullname: 'Full name:',
+      phone: 'Phone:',
+      city: 'City:',
+      equipement: 'Equipment needed:',
+      yes: 'Yes',
+      no: 'No',
+      times: (n) => `${n} times per week`,
+      contact: 'Contact:'
+    }
+  };
+  const sl = summaryLabels[lang] || summaryLabels.fr;
+
 
   const AQA_GROUPS = {
     men: { reghaia: [], cheraga: [] },
@@ -507,18 +642,6 @@
   };
 
   const AQA_POOLS = {};
-  const POOL_LABELS = {
-    reghaia: 'Reghaïa - ADM AZAL',
-    cheraga: 'Chéraga - BK Sport'
-  };
-
-  const AQA_CATEGORIES = {
-    men: "Hommes",
-    women: "Femmes",
-    teens: "Adolescents",
-    kids: "Enfants",
-    apnea: "Apnée"
-  };
 
   // Wizard state
   let currentStepNum = 1;
@@ -584,14 +707,25 @@
             const remaining = slot.total - slot.taken;
             
             // Slot type label
-            const typeLabels = { g10: 'G10', max5: 'MAX5', apnea: 'Apnée', elite: 'Elite' };
+            const typeLabelTexts = {
+              fr: { g10: 'G10', max5: 'MAX5', apnea: 'Apnée', elite: 'Elite' },
+              ar: { g10: 'G10', max5: 'MAX5', apnea: 'غوص حر', elite: 'نخبة' },
+              en: { g10: 'G10', max5: 'MAX5', apnea: 'Apnea', elite: 'Elite' }
+            };
+            const typeLabels = typeLabelTexts[lang] || typeLabelTexts.fr;
             const typeLabel = typeLabels[slot.type] || slot.type.toUpperCase();
             
-            // Rich label with remaining places
-            const groupPrefix = slot.group ? `Groupe ${slot.group} • ` : '';
-            const label = `${groupPrefix}${slot.day} • ${slot.time} — ${coach.name} [${typeLabel} — ${remaining} place${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}]`;
+            const localTexts = {
+              fr: { group: 'Groupe', place: 'place restante', places: 'places restantes' },
+              ar: { group: 'المجموعة', place: 'مكان شاغر', places: 'أماكن شاغرة' },
+              en: { group: 'Group', place: 'place left', places: 'places left' }
+            };
+            const lt = localTexts[lang] || localTexts.fr;
+            const groupPrefix = slot.group ? `${lt.group} ${slot.group} • ` : '';
+            const placesWord = remaining > 1 ? lt.places : lt.place;
+            const label = `${groupPrefix}${slot.day} • ${slot.time} — ${coach.name} [${typeLabel} — ${remaining} ${placesWord}]`;
             // Short label for form submission
-            const shortLabel = slot.group ? `${slot.day}||${slot.time}||${coach.name} (Groupe ${slot.group})` : `${slot.day}||${slot.time}||${coach.name}`;
+            const shortLabel = slot.group ? `${slot.day}||${slot.time}||${coach.name} (${lt.group} ${slot.group})` : `${slot.day}||${slot.time}||${coach.name}`;
             
             if (!AQA_GROUPS[slotFormCat][locKey]) {
               AQA_GROUPS[slotFormCat][locKey] = [];
@@ -639,7 +773,12 @@
 
   function populatePiscineOptions() {
     const piscineSelect = document.getElementById('piscineSelect');
-    piscineSelect.innerHTML = '<option value="">-- Sélectionnez une piscine --</option>';
+    const selectLabel = {
+      fr: '-- Sélectionnez une piscine --',
+      ar: '-- اختر مسبحاً --',
+      en: '-- Select a pool --'
+    };
+    piscineSelect.innerHTML = `<option value="">${selectLabel[lang] || selectLabel.fr}</option>`;
     
     Object.keys(AQA_POOLS).forEach(key => {
       const option = document.createElement('option');
@@ -786,7 +925,12 @@
     selectedData.groupes = [];
 
     if (!groups || groups.length === 0) {
-      container.innerHTML = '<div style="text-align:center;padding:2rem 1rem;opacity:0.5;font-style:italic;font-size:0.9rem;">Aucun groupe disponible</div>';
+      const noGroupsText = {
+        fr: 'Aucun groupe disponible',
+        ar: 'لا توجد مجموعات متاحة',
+        en: 'No groups available'
+      };
+      container.innerHTML = `<div style="text-align:center;padding:2rem 1rem;opacity:0.5;font-style:italic;font-size:0.9rem;">${noGroupsText[lang] || noGroupsText.fr}</div>`;
       noGroupsMessage.classList.add('show');
       return;
     }
@@ -806,14 +950,33 @@
       const time     = parts[1] || '';
       const coachRaw = parts[2] || '';
       const coach    = coachRaw.replace(/^[Cc]oach\s+/, '');
-      const dayAbbr  = { 
-        'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim',
-        'Sam Merc': 'Sam/Mer', 'Dim Jeu': 'Dim/Jeu', 'Dim Merc': 'Dim/Mer', 'Samedi ELITE': 'Sam (Elite)'
+      const dayAbbrTexts = {
+        fr: { 
+          'Lundi':'Lun','Mardi':'Mar','Mercredi':'Mer','Jeudi':'Jeu','Vendredi':'Ven','Samedi':'Sam','Dimanche':'Dim',
+          'Sam Merc': 'Sam/Mer', 'Dim Jeu': 'Dim/Jeu', 'Dim Merc': 'Dim/Mer', 'Samedi ELITE': 'Sam (Elite)'
+        },
+        ar: {
+          'Lundi':'اثنين','Mardi':'ثلاثاء','Mercredi':'أربعاء','Jeudi':'خميس','Vendredi':'جمعة','Samedi':'سبت','Dimanche':'أحد',
+          'Sam Merc': 'السبت/الأربعاء', 'Dim Jeu': 'الأحد/الخميس', 'Dim Merc': 'الأحد/الأربعاء', 'Samedi ELITE': 'السبت (نخبة)'
+        },
+        en: {
+          'Lundi':'Mon','Mardi':'Tue','Mercredi':'Wed','Jeudi':'Thu','Vendredi':'Fri','Samedi':'Sat','Dimanche':'Sun',
+          'Sam Merc': 'Sat/Wed', 'Dim Jeu': 'Sun/Thu', 'Dim Merc': 'Sun/Wed', 'Samedi ELITE': 'Sat (Elite)'
+        }
       };
+      const dayAbbr = dayAbbrTexts[lang] || dayAbbrTexts.fr;
       const dayShort = dayAbbr[dayFull] || dayFull;
       const color    = typeColors[group.type] || '#00f2ff';
-      const remTxt   = `${group.remaining} pl.`;
-      const typeTxt  = group.type.toUpperCase();
+      
+      const remWord = { fr: 'pl.', ar: 'شواغر', en: 'left' };
+      const remTxt   = `${group.remaining} ${remWord[lang] || remWord.fr}`;
+
+      const typeLabels = {
+        fr: { g10: 'G10', max5: 'MAX5', apnea: 'Apnée', elite: 'Elite' },
+        ar: { g10: 'G10', max5: 'MAX5', apnea: 'غوص حر', elite: 'نخبة' },
+        en: { g10: 'G10', max5: 'MAX5', apnea: 'Apnea', elite: 'Elite' }
+      };
+      const typeTxt  = (typeLabels[lang] || typeLabels.fr)[group.type]?.toUpperCase() || group.type.toUpperCase();
 
       card.innerHTML = `
         <div class="gc-left">
@@ -870,7 +1033,12 @@
     if (!selectedData.category || !selectedData.piscine || !selectedData.frequency) {
       renderGroupCards([]);
       noGroupsMessage.classList.remove('show');
-      document.getElementById('groupCardsContainer').innerHTML = '<div class="group-placeholder">Complétez d\'abord les étapes précédentes</div>';
+      const placeholderText = {
+        fr: "Complétez d'abord les étapes précédentes",
+        ar: "أكمل الخطوات السابقة أولاً",
+        en: "Complete the previous steps first"
+      };
+      document.getElementById('groupCardsContainer').innerHTML = `<div class="group-placeholder">${placeholderText[lang] || placeholderText.fr}</div>`;
       return;
     }
 
@@ -936,35 +1104,35 @@
     switch (currentStepNum) {
       case 1:
         if (!selectedData.category) {
-          showError('categoryError', 'Veuillez sélectionner une catégorie');
+          showError('categoryError', activeErrors.category);
           return false;
         }
         return true;
 
       case 2:
         if (!selectedData.piscine) {
-          showError('piscineError', 'Veuillez sélectionner une piscine');
+          showError('piscineError', activeErrors.piscine);
           return false;
         }
         return true;
 
       case 3:
         if (!selectedData.formule) {
-          showError('formuleError', 'Veuillez sélectionner une formule');
+          showError('formuleError', activeErrors.formule);
           return false;
         }
         return true;
 
       case 4:
         if (!selectedData.frequency) {
-          showError('frequencyError', 'Veuillez sélectionner une fréquence');
+          showError('frequencyError', activeErrors.frequency);
           return false;
         }
         return true;
 
       case 5:
         if (!selectedData.groupes || selectedData.groupes.length !== selectedData.frequency) {
-          showError('groupeError', `Veuillez sélectionner exactement ${selectedData.frequency} groupe(s)`);
+          showError('groupeError', activeErrors.groups(selectedData.frequency));
           return false;
         }
         return true;
@@ -983,7 +1151,7 @@
     // Validate nom
     const nom = document.getElementById('nomComplet').value.trim();
     if (!nom) {
-      showError('nomError', 'Veuillez saisir votre nom complet');
+      showError('nomError', activeErrors.fullname);
       isValid = false;
     } else {
       selectedData.personalInfo.nom = nom;
@@ -1002,7 +1170,7 @@
     // Validate ville
     const ville = document.getElementById('ville').value.trim();
     if (!ville) {
-      showError('villeError', 'Veuillez saisir votre ville');
+      showError('villeError', activeErrors.city);
       isValid = false;
     } else {
       selectedData.personalInfo.ville = ville;
@@ -1077,42 +1245,42 @@
     
     summarySection.innerHTML = `
       <div class="summary-item">
-        <div class="summary-label">Catégorie :</div>
+        <div class="summary-label">${sl.category}</div>
         <div class="summary-value">${AQA_CATEGORIES[selectedData.category] || ''}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Piscine :</div>
+        <div class="summary-label">${sl.piscine}</div>
         <div class="summary-value">${AQA_POOLS[selectedData.piscine] || ''}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Formule :</div>
+        <div class="summary-label">${sl.formule}</div>
         <div class="summary-value">${selectedData.formule ? selectedData.formule.charAt(0).toUpperCase() + selectedData.formule.slice(1) : ''}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Fréquence :</div>
-        <div class="summary-value">${selectedData.frequency || 0} fois par semaine</div>
+        <div class="summary-label">${sl.frequency}</div>
+        <div class="summary-value">${sl.times(selectedData.frequency || 0)}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Groupes sélectionnés :</div>
+        <div class="summary-label">${sl.groups}</div>
         <div class="summary-value">
           ${selectedGroups.map(group => `• ${group.shortLabel || group.label}`).join('<br>')}
         </div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Nom complet :</div>
+        <div class="summary-label">${sl.fullname}</div>
         <div class="summary-value">${selectedData.personalInfo.nom || ''}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Téléphone :</div>
+        <div class="summary-label">${sl.phone}</div>
         <div class="summary-value">${selectedData.personalInfo.telephone || ''}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Ville :</div>
+        <div class="summary-label">${sl.city}</div>
         <div class="summary-value">${selectedData.personalInfo.ville || ''}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Équipement nécessaire :</div>
-        <div class="summary-value">${selectedData.personalInfo.equipement ? 'Oui' : 'Non'}</div>
+        <div class="summary-label">${sl.equipement}</div>
+        <div class="summary-value">${selectedData.personalInfo.equipement ? sl.yes : sl.no}</div>
       </div>
     `;
   }
@@ -1168,36 +1336,36 @@
     const finalSummary = document.getElementById('finalSummary');
     finalSummary.innerHTML = `
       <div class="summary-item">
-        <div class="summary-label">Catégorie :</div>
+        <div class="summary-label">${sl.category}</div>
         <div class="summary-value">${payload.category}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Piscine :</div>
+        <div class="summary-label">${sl.piscine}</div>
         <div class="summary-value">${payload.piscine}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Formule :</div>
+        <div class="summary-label">${sl.formule}</div>
         <div class="summary-value">${payload.formule.charAt(0).toUpperCase() + payload.formule.slice(1)}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Fréquence :</div>
-        <div class="summary-value">${payload.frequency} fois par semaine</div>
+        <div class="summary-label">${sl.frequency}</div>
+        <div class="summary-value">${sl.times(payload.frequency)}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Groupes :</div>
+        <div class="summary-label">${sl.groups.replace('sélectionnés', '').replace('المختارة', '').replace('Selected', '')}</div>
         <div class="summary-value">${payload.groupes.join(', ')}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Contact :</div>
+        <div class="summary-label">${sl.contact}</div>
         <div class="summary-value">${payload.personalInfo.nom} - ${payload.personalInfo.telephone}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Ville :</div>
+        <div class="summary-label">${sl.city}</div>
         <div class="summary-value">${payload.personalInfo.ville}</div>
       </div>
       <div class="summary-item">
-        <div class="summary-label">Équipement :</div>
-        <div class="summary-value">${payload.personalInfo.equipement ? 'Oui' : 'Non'}</div>
+        <div class="summary-label">${sl.equipement.replace('nécessaire', '').replace('المطلوبة', '').replace('needed', '')}</div>
+        <div class="summary-value">${payload.personalInfo.equipement ? sl.yes : sl.no}</div>
       </div>
     `;
 
@@ -1218,10 +1386,16 @@
   function updateSessionDuration() {
     const durationLabel = document.getElementById('sessionDuration');
     if (!durationLabel) return;
+    const sessionTexts = {
+      fr: { h1: 'Séance = 1 heure', h2: 'Séance = 2 heures' },
+      ar: { h1: 'الحصة = ساعة واحدة', h2: 'الحصة = ساعتان' },
+      en: { h1: 'Session = 1 hour', h2: 'Session = 2 hours' }
+    };
+    const texts = sessionTexts[lang] || sessionTexts.fr;
     if (selectedData.category === 'kids') {
-      durationLabel.textContent = 'Séance = 1 heure';
+      durationLabel.textContent = texts.h1;
     } else {
-      durationLabel.textContent = 'Séance = 2 heures';
+      durationLabel.textContent = texts.h2;
     }
   }
 })();</script>

@@ -236,6 +236,8 @@ const getRelativePath = (path, targetLang) => {
 
 <!-- Add this script before closing </body> tag -->
 <script>
+    document.addEventListener('astro:page-load', () => {
+
 
 // ===== Cards toggle =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -332,7 +334,8 @@ function closeAllPopups() {
     closeVideoPopup();
     closeAppPopup();
 }
-</script>
+    });
+  </script>
 
   <Footer  lang={lang} />
 </BaseLayout>

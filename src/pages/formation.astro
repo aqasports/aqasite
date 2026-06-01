@@ -128,6 +128,7 @@ const getRelativePath = (path, targetLang) => {
 
 
     <script>
+    document.addEventListener('astro:page-load', () => {
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px'
@@ -146,7 +147,8 @@ const getRelativePath = (path, targetLang) => {
             card.style.transitionDelay = `${index * 100}ms`;
             observer.observe(card);
         });
-    </script>
+        });
+  </script>
 
   <Footer  lang={lang} />
 </BaseLayout>

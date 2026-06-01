@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  
+<meta name="astro-view-transitions-enabled" content="true">
+<meta name="astro-view-transitions-fallback" content="animate">
+
+  <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>AQA Control Center | Admin Portal v3.0</title>
+  <meta name="description" content="Administration centrale de l'académie AQA Sports.">
+  <meta name="keywords" content="natation algérie, apnée, coaching sport, académie natation alger, aqa sports">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="AQA Sports Academy">
+  <link rel="canonical" href="https://aqasports.com/aqacontrol2026">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aqasports.com/aqacontrol2026">
+  <meta property="og:title" content="AQA Control Center | Admin Portal v3.0">
+  <meta property="og:description" content="Administration centrale de l'académie AQA Sports.">
+  <meta property="og:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
+  <meta property="og:site_name" content="AQA Sports Academy">
+  <meta property="og:locale" content="fr_DZ">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AQA Control Center | Admin Portal v3.0">
+  <meta name="twitter:description" content="Administration centrale de l'académie AQA Sports.">
+  <meta name="twitter:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Navbar CSS (same file the original pages use) -->
+  <link rel="stylesheet" href="/css/navbar.css">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P540VBDLT5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P540VBDLT5');
+  </script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsActivityLocation",
+      "name": "AQA Sports Academy",
+      "url": "https://aqasports.com",
+      "description": "Académie de natation et d'apnée en Algérie — du débutant au professionnel",
+      "address": { "@type": "PostalAddress", "addressCountry": "DZ", "addressLocality": "Alger" },
+      "telephone": "+213540454907",
+      "sameAs": ["https://www.instagram.com/aqa.sports", "https://web.facebook.com/p/AQA-sports-academy-100063686885387"]
+    }
+  </script>
+
+  <!-- Language persistence & redirection script -->
+  <script>
+    (function() {
+      function checkLang() {
+        if (typeof localStorage === 'undefined') return;
+        
+        const path = window.location.pathname;
+        const currentLang = document.documentElement.lang || 'fr';
+        const isFrenchPage = !path.startsWith('/ar') && !path.startsWith('/en');
+        const supportedLangs = ['ar', 'en'];
+        
+        if (isFrenchPage) {
+          const savedLang = localStorage.getItem('aqa_lang');
+          
+          if (savedLang && supportedLangs.includes(savedLang)) {
+            const referrer = document.referrer;
+            const currentOrigin = window.location.origin;
+            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
+            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            
+            if (isExplicitFR) {
+              localStorage.setItem('aqa_lang', 'fr');
+            } else {
+              const targetPath = '/' + savedLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            }
+          } else if (!savedLang) {
+            const browserLang = (navigator.language || 'fr').split('-')[0].toLowerCase();
+            if (supportedLangs.includes(browserLang)) {
+              const targetPath = '/' + browserLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            } else {
+              localStorage.setItem('aqa_lang', 'fr');
+            }
+          }
+        } else {
+          localStorage.setItem('aqa_lang', currentLang);
+        }
+      }
+      
+      checkLang();
+      document.addEventListener('astro:after-swap', checkLang);
+      document.addEventListener('astro:page-load', checkLang);
+    })();
+  </script>
+
+  <!-- Slot for page-specific <style> or <link> tags -->
+  
+<style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap";.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}:root{--bg-primary: #030712;--bg-secondary: #0b0f19;--bg-card: rgba(15, 23, 42, .65);--color-teal: #00f2ff;--color-blue: #0088ff;--color-blue-dark: #0055cc;--text-primary: #f9fafb;--text-secondary: #9ca3af;--text-muted: #6b7280;--border-glass: 1px solid rgba(255, 255, 255, .08);--border-active: 1px solid rgba(0, 242, 255, .4);--shadow-glow: 0 0 25px rgba(0, 242, 255, .15);--shadow-glow-active: 0 0 35px rgba(0, 242, 255, .35);--font-display: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--transition-smooth: all .3s cubic-bezier(.4, 0, .2, 1)}*{margin:0;padding:0;box-sizing:border-box}html{background-color:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);scroll-behavior:smooth;overflow-x:hidden;height:100%}body{background:transparent;min-height:100vh;line-height:1.6;position:relative}h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-primary);font-weight:700;letter-spacing:-.025em}p{font-family:var(--font-body);color:var(--text-secondary)}a{color:inherit;text-decoration:none;transition:var(--transition-smooth)}.glass-panel{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:var(--border-glass);border-radius:20px;box-shadow:0 10px 30px -10px #000000b3;transition:var(--transition-smooth)}.glass-panel:hover{border-color:#00f2ff40;box-shadow:var(--shadow-glow)}body:before{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% -20%,rgba(0,242,255,.08) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(0,136,255,.05) 0%,transparent 50%);pointer-events:none;z-index:-2}.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}@keyframes neonGlow{0%,to{filter:drop-shadow(0 0 10px rgba(0,242,255,.3)) drop-shadow(0 0 20px rgba(0,136,255,.2))}50%{filter:drop-shadow(0 0 20px rgba(0,242,255,.5)) drop-shadow(0 0 35px rgba(0,136,255,.3))}}@keyframes shimmer{0%{transform:translate(-100%) rotate(45deg)}to{transform:translate(100%) rotate(45deg)}}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:#1f2937;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#374151}.skip-link{position:absolute;top:-40px;left:0;background:var(--color-teal);color:#000;padding:8px 16px;z-index:1000;font-weight:700}.skip-link:focus{top:0}.bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none;background:transparent}.bg-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;background:url(https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png) no-repeat center;background-size:contain;opacity:.02;z-index:-1;pointer-events:none}
+</style>
+<link rel="stylesheet" href="/_astro/aqacontrol2026.VrGeRCw4.css"><script type="module" src="/_astro/hoisted.DoxYX03V.js"></script></head>
+<body>
+  <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true"></iframe>
+  <div class="bg-logo"></div>
+  
+
+  
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-card">
+      <div class="login-logo-wrap">
+        <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="login-logo">
+      </div>
+      <h1 class="login-title">AQA Control Center</h1>
+      <p class="login-sub">Accès réservé aux administrateurs AQA Sports</p>
+
+      <div class="login-meme">
+        <div class="tenor-gif-embed" data-postid="15088356" data-share-method="host" data-aspect-ratio="1.33333" data-width="100%">
+          <a href="https://tenor.com/view/irrelevant-rust-playrust-egoism-who-are-you-gif-15088356">Irrelevant Rust GIF</a>
+        </div>
+        <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+        <p class="meme-label">👁️ who are you</p>
+      </div>
+
+      <form id="loginForm" class="login-form" autocomplete="off">
+        <div class="login-field">
+          <label for="adminPassword">🔐 Mot de passe administrateur</label>
+          <input type="password" id="adminPassword" class="login-input" placeholder="••••••••••••" autofocus>
+        </div>
+        <div id="loginError" class="login-error" style="display:none;">❌ Mot de passe incorrect. Réessayez.</div>
+        <button type="submit" id="loginBtn" class="login-btn">
+          <span id="loginBtnText">Accéder au panneau</span>
+          <span id="loginBtnSpinner" style="display:none;">⏳ Vérification...</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  
+  <div id="adminPanel" class="admin-wrapper" style="display:none;">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="/">
+          <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
+        </a>
+        <div>
+          <h2 class="sidebar-title">AQA Control Center</h2>
+          <span class="version-badge">v3.0 Dynamic</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-tab-btn active" data-tab="dashboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+          Tableau de Bord
+        </button>
+
+        <button class="nav-tab-btn" data-tab="planning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Gestion Planning
+        </button>
+
+        <button class="nav-tab-btn" data-tab="formations">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>
+          Gestion Formations
+        </button>
+
+        <button class="nav-tab-btn" data-tab="infrastructures">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Infrastructures (Piscines)
+        </button>
+
+        <button class="nav-tab-btn" data-tab="counters">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          Compteurs Accueil
+        </button>
+
+        <button class="nav-tab-btn" data-tab="settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Paramètres Connexion
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="deployGitBtn" class="btn btn-primary btn-deploy">🚀 Déployer sur GitHub</button>
+        <div id="deployStatus" class="deploy-status">Système synchronisé</div>
+        <button id="logoutBtn" class="btn btn-logout">🔒 Déconnexion</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="admin-main">
+
+      <!-- DASHBOARD TAB -->
+      <section id="tab-dashboard" class="admin-section active">
+        <div class="section-title-bar">
+          <h2>📊 Tableau de Bord & Statistiques</h2>
+          <p class="section-desc">Aperçu global de l'occupation et de la capacité de l'académie en temps réel.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon icon-blue">🏢</div>
+            <div class="stat-info">
+              <span class="stat-label">Infrastructures</span>
+              <span class="stat-value" id="dashInfraCount">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-teal">🎓</div>
+            <div class="stat-info">
+              <span class="stat-label">Formations Actives</span>
+              <span class="stat-value" id="dashFormationsCount">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-cyan">👥</div>
+            <div class="stat-info">
+              <span class="stat-label">Capacité Totale</span>
+              <span class="stat-value" id="dashCapacity">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-purple">✓</div>
+            <div class="stat-info">
+              <span class="stat-label">Inscriptions</span>
+              <span class="stat-value" id="dashTaken">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-details glass-panel">
+          <h3>📊 Occupation par Infrastructure</h3>
+          <div id="dashLocationStats" class="dash-location-stats"></div>
+        </div>
+
+        <div class="dashboard-details glass-panel" style="margin-top: 1.5rem;">
+          <h3>⚠️ Alertes Capacité & Groupes Saturation</h3>
+          <div id="dashAlertsList" class="dash-alerts-list"></div>
+        </div>
+
+        <div class="dashboard-details glass-panel" style="margin-top: 1.5rem;">
+          <h3>💻 Console de Déploiement</h3>
+          <pre id="deployLogsConsole" class="terminal-logs">Console en attente d'instruction...</pre>
+        </div>
+      </section>
+
+      <!-- PLANNING TAB -->
+      <section id="tab-planning" class="admin-section">
+        <div class="section-title-bar">
+          <h2>📅 Planificateur de Séances & Horaires</h2>
+          <p class="section-desc">Gérez la capacité des coachs et des groupes par piscine partenaire.</p>
+        </div>
+
+        <div class="control-panel glass-panel">
+          <div class="selectors">
+            <div class="field-group">
+              <label for="locationSelect">📍 Emplacement :</label>
+              <select id="locationSelect" class="form-control"></select>
+            </div>
+            <div class="field-group">
+              <label for="categorySelect">👥 Catégorie :</label>
+              <select id="categorySelect" class="form-control"></select>
+            </div>
+          </div>
+          <div class="action-buttons">
+            <button id="addCoachBtn" class="btn btn-secondary btn-icon">➕ Ajouter un Coach</button>
+          </div>
+        </div>
+
+        <div id="editorContainer" class="editor-container"></div>
+
+        <div class="save-bar">
+          <button id="savePlanningBtn" class="btn btn-primary">Enregistrer le Planning</button>
+          <span id="savePlanningStatus" class="save-status"></span>
+        </div>
+      </section>
+
+      <!-- FORMATIONS TAB -->
+      <section id="tab-formations" class="admin-section">
+        <div class="section-title-bar">
+          <h2>🎓 Catalogue des Formations & Masterclasses</h2>
+          <p class="section-desc">Ajoutez, modifiez ou activez des programmes de certification de l'académie.</p>
+        </div>
+
+        <div class="control-panel glass-panel">
+          <button id="addFormationBtn" class="btn btn-secondary">➕ Créer une Formation</button>
+        </div>
+
+        <div id="formationsContainer" class="formations-editor-grid"></div>
+
+        <div class="save-bar">
+          <button id="saveFormationsBtn" class="btn btn-primary">Enregistrer les Formations</button>
+          <span id="saveFormationsStatus" class="save-status"></span>
+        </div>
+      </section>
+
+      <!-- INFRASTRUCTURES TAB -->
+      <section id="tab-infrastructures" class="admin-section">
+        <div class="section-title-bar">
+          <h2>🏢 Administration des Infrastructures</h2>
+          <p class="section-desc">Gérez les piscines partenaires et centres d'entraînement AQA.</p>
+        </div>
+
+        <div class="control-panel glass-panel">
+          <button id="addInfrastructureBtn" class="btn btn-secondary">➕ Créer une Infrastructure</button>
+        </div>
+
+        <div id="infrastructuresContainer" class="infrastructures-editor-grid"></div>
+
+        <div class="save-bar">
+          <button id="saveInfrastructuresBtn" class="btn btn-primary">Enregistrer les Infrastructures</button>
+          <span id="saveInfrastructuresStatus" class="save-status"></span>
+        </div>
+      </section>
+
+      <!-- COUNTERS TAB -->
+      <section id="tab-counters" class="admin-section">
+        <div class="section-title-bar">
+          <h2>🔟 Compteurs de Performance Accueil</h2>
+          <p class="section-desc">Modifiez en temps réel les statistiques clés affichées sur la page d'accueil.</p>
+        </div>
+
+        <div class="counters-panel glass-panel">
+          <div class="counters-editor-grid">
+            <div class="counter-field-group">
+              <label for="countAthletes">👥 Athlètes formés :</label>
+              <input type="number" id="countAthletes" class="form-control" min="0">
+            </div>
+            <div class="counter-field-group">
+              <label for="countCoaches">🏊 Coachs d'élite :</label>
+              <input type="number" id="countCoaches" class="form-control" min="0">
+            </div>
+            <div class="counter-field-group">
+              <label for="countPools">🏢 Infrastructures partenaires :</label>
+              <input type="number" id="countPools" class="form-control" min="0">
+            </div>
+            <div class="counter-field-group">
+              <label for="countSatisfaction">⭐ Satisfaction client (%) :</label>
+              <input type="number" id="countSatisfaction" class="form-control" min="0" max="100">
+            </div>
+          </div>
+        </div>
+
+        <div class="save-bar">
+          <button id="saveCountersBtn" class="btn btn-primary">Enregistrer les Compteurs</button>
+          <span id="saveCountersStatus" class="save-status"></span>
+        </div>
+      </section>
+
+      <!-- SETTINGS TAB -->
+      <section id="tab-settings" class="admin-section">
+        <div class="section-title-bar">
+          <h2>⚙️ Paramètres de Connexion</h2>
+          <p class="section-desc">Modifiez votre mot de passe et l'URL secrète d'accès au panneau d'administration.</p>
+        </div>
+
+        <!-- Current Settings Card -->
+        <div class="glass-panel settings-info-card">
+          <div class="settings-info-row">
+            <div class="settings-info-item">
+              <span class="settings-info-label">🔐 Mot de passe actuel</span>
+              <span class="settings-info-value">••••••••••••</span>
+            </div>
+            <div class="settings-info-item">
+              <span class="settings-info-label">🔗 URL d'accès actuelle</span>
+              <span class="settings-info-value" id="currentSlugDisplay">aqacontrol2026</span>
+            </div>
+          </div>
+          <div class="settings-url-preview">
+            <span class="url-prefix" id="urlOriginDisplay"></span><span class="url-slug" id="urlSlugDisplay">aqacontrol2026</span>
+            <button class="btn-copy" id="copyUrlBtn" title="Copier l'URL">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+
+          <!-- Change Password -->
+          <div class="glass-panel settings-panel">
+            <div class="settings-panel-header">
+              <span class="settings-panel-icon">🔑</span>
+              <div>
+                <h3>Changer le Mot de Passe</h3>
+                <p>Votre nouveau mot de passe sera actif immédiatement.</p>
+              </div>
+            </div>
+
+            <div class="settings-form">
+              <div class="field-group">
+                <label for="currentPassword">Mot de passe actuel :</label>
+                <input type="password" id="currentPassword" class="form-control" placeholder="••••••••">
+              </div>
+              <div class="field-group">
+                <label for="newPassword">Nouveau mot de passe :</label>
+                <input type="password" id="newPassword" class="form-control" placeholder="Minimum 8 caractères">
+              </div>
+              <div class="field-group">
+                <label for="confirmPassword">Confirmer le nouveau mot de passe :</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Répétez le mot de passe">
+              </div>
+
+              <div class="password-strength" id="passwordStrength" style="display:none;">
+                <div class="strength-bar"><div id="strengthFill" class="strength-fill"></div></div>
+                <span id="strengthLabel">Faible</span>
+              </div>
+
+              <div class="save-bar" style="border:none; padding:0; margin-top:1.5rem;">
+                <button id="savePasswordBtn" class="btn btn-primary">🔑 Mettre à jour le mot de passe</button>
+                <span id="savePasswordStatus" class="save-status"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Change Login URL -->
+          <div class="glass-panel settings-panel">
+            <div class="settings-panel-header">
+              <span class="settings-panel-icon">🔗</span>
+              <div>
+                <h3>Changer l'URL de Connexion</h3>
+                <p>L'ancienne URL ne sera plus accessible pour des raisons de sécurité. Seule la nouvelle URL secrète vous permettra de vous connecter.</p>
+              </div>
+            </div>
+
+            <div class="settings-form">
+              <div class="field-group">
+                <label for="newSlugInput">Nouvelle URL secrète :</label>
+                <div class="slug-input-wrap">
+                  <span class="slug-prefix">aqasports.com/</span>
+                  <input type="text" id="newSlugInput" class="form-control slug-input" placeholder="mon-url-secrete" maxlength="60">
+                </div>
+                <small class="slug-hint">Lettres, chiffres et tirets uniquement. Exemple : <code>monpanneauaqa</code></small>
+              </div>
+
+              <div id="slugPreviewBox" class="slug-preview" style="display:none;">
+                <span class="slug-preview-label">Aperçu :</span>
+                <span id="slugPreviewUrl" class="slug-preview-url"></span>
+              </div>
+
+              <div class="save-bar" style="border:none; padding:0; margin-top:1.5rem;">
+                <button id="saveSlugBtn" class="btn btn-primary">🔗 Appliquer la nouvelle URL</button>
+                <span id="saveSlugStatus" class="save-status"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="glass-panel danger-zone">
+          <h3>⚠️ Zone Sensible</h3>
+          <p>Après avoir changé le mot de passe ou l'URL, vous serez déconnecté automatiquement. Notez vos nouvelles informations avant de sauvegarder.</p>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+
+</body></html>
+
+<!-- BIND Astro Data into JS environment variables -->
+<script>(function(){const scheduleData = {"reghaia":{"name":"Piscine Réghaia","categories":{"homme":{"name":"Homme","coaches":[{"name":"Coach Youcef","slots":[{"day":"Samedi","time":"21h - 23h","type":"g10","total":10,"taken":10},{"day":"Mardi","time":"21h - 23h","type":"max5","total":5,"taken":5},{"day":"Mercredi","time":"21h30-23h30","type":"g10","total":10,"taken":10},{"day":"Jeudi","time":"21h30-23h30","type":"g10","total":10,"taken":10},{"day":"Vendredi","time":"20h - 22h","type":"max5","total":5,"taken":5}]},{"name":"Coach Bilal","slots":[{"day":"Dimanche","time":"21h30-23h30","type":"max5","total":5,"taken":4}]},{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":4}]},{"name":"Coach Abdelghani","slots":[{"day":"Mardi","time":"7h - 9h","type":"g10","total":10,"taken":6,"group":""},{"day":"Mardi","time":"21h - 23h","type":"g10","total":10,"taken":9},{"day":"Jeudi","time":"7h - 9h","type":"g10","total":10,"taken":9},{"day":"Jeudi","time":"21h30-23h30","type":"max5","total":5,"taken":4},{"day":"Vendredi","time":"20h-22h","type":"g10","total":10,"taken":10},{"day":"Samedi","time":"6h-8h","type":"g10","total":10,"taken":8},{"day":"Samedi ELITE","time":"21h - 23h","type":"g10","total":10,"taken":7}]},{"name":"Riyad","slots":[{"day":"Lundi","time":"21h30-23h30","type":"g10","total":10,"taken":4}]}]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[{"name":"Coach Younes","slots":[{"day":"Dim Jeu","time":"18h","type":"g10","total":10,"taken":10},{"day":"Dim Merc","time":"19h20","type":"g10","total":10,"taken":0}]},{"name":"Abdelghani","slots":[{"day":"Sam Merc","time":"18h","type":"g10","total":10,"taken":9}]}]},"apnea":{"name":"Apnée","coaches":[{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":4}]}]}}},"cheraga":{"name":"Piscine Chéraga","categories":{"homme":{"name":"Homme","coaches":[]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[]},"apnea":{"name":"Apnée","coaches":[]}}}};
+const formationsData = [{"id":"aquaphobie","title":"Anti Aquaphobie","badge":"Disponible","image":"https://i.ibb.co/ndXbsZj/AQUAPHOBE-Instagram-Post-20240710-131657-0000-Copy.jpg?q=80&w=600&auto=format&fit=crop","desc":"Vaincre la peur de l'eau. Une approche psychologique et technique pour retrouver confiance et autonomie totale.","link":"/phobie","active":true,"status":"available"},{"id":"masterclasses","title":"AQA Masterclasses","badge":"Masterclasses","image":"https://www.citescolaireparentis.fr/wp-content/uploads/2022/01/6-considerations-cles-pour-une-salle-de-formation-efficace.jpg?q=80&w=600&auto=format&fit=crop","desc":"Sessions techniques avancées (Online & Présentiel) avec des experts internationaux. Perfectionnement technique.","link":"/masterclasses","active":false,"status":"masterclasses"},{"id":"chasse","title":"Chasse Sous-marine","badge":"Disponible","image":"https://apneemotion.com/martinique/wp-content/uploads/sites/4/2020/10/apneemotion-martinique-chasse-sous-marine.jpg?q=80&w=600&auto=format&fit=crop","desc":"Maîtrisez l'apnée, la sécurité et les techniques de chasse responsable. Théorie et pratique en milieu naturel.","link":"/contact","active":true,"status":"available"},{"id":"secourisme","title":"Secourisme","badge":"Disponible","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ90APcFZ_WZ7Ge7OeJQJxfYEGCLM7p8-upWQ&s?q=80&w=600&auto=format&fit=crop","desc":"Techniques de premiers secours adaptées aux environnements aquatiques.","link":"/contact","active":true,"status":"available"},{"id":"plongee","title":"Plongée Sous-marine","badge":"Bientôt","image":"https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop","desc":"Formation certifiante PADI/CMAS. Exploration des fonds marins avec bouteille.","link":"/contact","active":false,"status":"coming-soon"},{"id":"coach-phobie","title":"Formation Coach (Aquaphobie)","badge":"Bientôt","image":"https://d1s9j44aio5gjs.cloudfront.net/2019/01/swimming_coach.jpg?q=80&w=600&auto=format&fit=crop","desc":"Certification pour devenir instructeur spécialisé dans le traitement de l'aquaphobie.","link":"/contact","active":false,"status":"coming-soon"},{"id":"surveillant","title":"Surveillant de Baignade","badge":"Bientôt","image":"https://img.centrefrance.com/5c13SJygADKDrj4CU4kr2v6V2XV0xnLJ2xMVHrkobIw/rs:auto:1200:800:1:0/g:sm/bG9jYWw6Ly8vMDAvMDAvMDcvMzAvMzgvMjAwMDAwNzMwMzg3NA.webp?q=80&w=600&auto=format&fit=crop","desc":"Brevet de sauvetage aquatique et secourisme. Devenez un professionnel de la sécurité.","link":"/contact","active":false,"status":"coming-soon"},{"id":"aquatherapie","title":"Formation Aquathérapie","badge":"Bientôt","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkN-VOCRIPtXuGd87IRm9CJX9kEGPHFlVbvg&s?q=80&w=600&auto=format&fit=crop","desc":"Techniques de rééducation et de bien-être dans l'eau pour les professionnels de santé.","link":"/contact","active":false,"status":"coming-soon"},{"id":"coach-performance","title":"Coach Performance","badge":"Bientôt","image":"https://www.guide-piscine.fr/medias/image/coach-personnel-de-natation-13840-1200-630.jpg?q=80&w=600&auto=format&fit=crop","desc":"Haut niveau : Planification d'entraînement, biomécanique et préparation mentale.","link":"/tarifs","active":false,"status":"coming-soon"}];
+const infrastructuresData = [{"id":"azal","name":"Piscine ADM AZAL","image":"https://i.ibb.co/GfR0p9P4/FB-IMG-1656784815731.jpg","location":"Reghaia, Alger","features":["Ouvert 7j/7","AQA inside","Réception comfortable","Semi olympique"],"infoLink":"/azal","mapLink":"https://maps.app.goo.gl/b1efH4S11j8ACXUs8"},{"id":"bk-sport","name":"Piscine BK Sport","image":"https://i.ibb.co/vCdX73xK/Whats-App-Image-2024-12-08-at-15-05-01-f0286594.jpg","location":"Cheraga, Alger","features":["Ouvert 7j/7","AQA inside","Salle de sport","Semi olympique"],"infoLink":"","mapLink":""}];
+const countersData = {"athletes":660,"coaches":8,"pools":2,"satisfaction":98};
+
+
+  // ==================== AUTH LAYER ====================
+  const SESSION_KEY = 'aqa_admin_token';
+  let adminToken = sessionStorage.getItem(SESSION_KEY) || '';
+
+  function authHeaders() {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${adminToken}`
+    };
+  }
+
+  // Pure JavaScript SHA-256 fallback for insecure contexts (HTTP on non-localhost)
+  function sha256_pure(ascii) {
+    function rightRotate(value, amount) {
+      return (value >>> amount) | (value << (32 - amount));
+    }
+    var mathPow = Math.pow;
+    var maxWord = mathPow(2, 32);
+    var lengthProperty = 'length';
+    var i, j;
+    var result = '';
+    var words = [];
+    var asciiLength = ascii[lengthProperty];
+    var hash = sha256_pure.h = sha256_pure.h || [];
+    var k = sha256_pure.k = sha256_pure.k || [];
+    var primeCounter = k[lengthProperty];
+    var isComposite = {};
+    for (var candidate = 2; primeCounter < 64; candidate++) {
+      if (!isComposite[candidate]) {
+        for (i = 0; i < 313; i += candidate) {
+          isComposite[i] = 1;
+        }
+        hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+        k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+      }
+    }
+    ascii += '\x80';
+    while (ascii[lengthProperty] % 64 - 56) ascii += '\x00';
+    for (i = 0; i < ascii[lengthProperty]; i++) {
+      j = ascii.charCodeAt(i);
+      if (j >> 8) return ''; // ASCII only
+      words[i >> 2] |= j << (24 - (i % 4) * 8);
+    }
+    words[words[lengthProperty]] = ((asciiLength * 8) / maxWord) | 0;
+    words[words[lengthProperty]] = (asciiLength * 8);
+    for (j = 0; j < words[lengthProperty]; ) {
+      var w = words.slice(j, j += 16);
+      var oldHash = hash.slice(0);
+      for (i = 0; i < 64; i++) {
+        var wItem = w[i];
+        if (i >= 16) {
+          w[i] = wItem = (
+            (rightRotate(w[i - 2], 17) ^ rightRotate(w[i - 2], 19) ^ (w[i - 2] >>> 10)) +
+            w[i - 7] +
+            (rightRotate(w[i - 15], 7) ^ rightRotate(w[i - 15], 18) ^ (w[i - 15] >>> 3)) +
+            w[i - 16]
+          ) | 0;
+        }
+        var temp1 = (
+          hash[7] +
+          (rightRotate(hash[4], 6) ^ rightRotate(hash[4], 11) ^ rightRotate(hash[4], 25)) +
+          ((hash[4] & hash[5]) ^ (~hash[4] & hash[6])) +
+          k[i] +
+          wItem
+        );
+        var temp2 = (
+          (rightRotate(hash[0], 2) ^ rightRotate(hash[0], 13) ^ rightRotate(hash[0], 22)) +
+          ((hash[0] & hash[1]) ^ (hash[0] & hash[2]) ^ (hash[1] & hash[2]))
+        );
+        hash = [(temp1 + temp2) | 0].concat(hash);
+        hash[4] = (hash[4] + temp1) | 0;
+        hash.pop();
+      }
+      for (i = 0; i < 8; i++) {
+        hash[i] = (hash[i] + oldHash[i]) | 0;
+      }
+    }
+    for (i = 0; i < 8; i++) {
+      var byteVal = hash[i] >>> 0;
+      result += (byteVal.toString(16).padStart(8, '0'));
+    }
+    return result;
+  }
+
+  // Hash a string with SHA-256 using the browser's built-in Web Crypto API with pure JS fallback
+  async function sha256(str) {
+    if (window.crypto && window.crypto.subtle) {
+      try {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+      } catch (e) {
+        console.warn("Web Crypto API failed, falling back to pure JS", e);
+      }
+    }
+    return sha256_pure(str);
+  }
+
+  // LOGIN FORM HANDLER — server-side verified auth
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pwd = document.getElementById('adminPassword').value;
+    const btn = document.getElementById('loginBtn');
+    const errDiv = document.getElementById('loginError');
+    const btnText = document.getElementById('loginBtnText');
+    const btnSpinner = document.getElementById('loginBtnSpinner');
+
+    errDiv.style.display = 'none';
+    btnText.style.display = 'none';
+    btnSpinner.style.display = 'inline';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/admin-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pwd })
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        adminToken = data.token; // token returned by server
+        sessionStorage.setItem(SESSION_KEY, adminToken);
+        showAdminPanel();
+      } else {
+        errDiv.style.display = 'block';
+        errDiv.textContent = '❌ ' + (data.error || 'Mot de passe incorrect. Réessayez.');
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPassword').focus();
+      }
+    } catch(err) {
+      errDiv.style.display = 'block';
+      errDiv.textContent = '❌ Erreur de connexion au serveur.';
+    } finally {
+      btnText.style.display = 'inline';
+      btnSpinner.style.display = 'none';
+      btn.disabled = false;
+    }
+  });
+
+  // LOGOUT
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    adminToken = '';
+    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('loginOverlay').style.display = 'flex';
+    document.getElementById('adminPassword').value = '';
+  });
+
+  function showAdminPanel() {
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'grid';
+    loadLiveDashboard();
+  }
+
+  // On page load: if token stored in session, verify it against the server
+  async function checkExistingSession() {
+    if (!adminToken) return; // no token → show login
+    try {
+      const res = await fetch('/api/verify-token', {
+        headers: authHeaders()
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        showAdminPanel();
+      } else {
+        sessionStorage.removeItem(SESSION_KEY);
+        adminToken = '';
+      }
+    } catch (e) {
+      console.warn("Verify session failed", e);
+      sessionStorage.removeItem(SESSION_KEY);
+      adminToken = '';
+    }
+  }
+
+  checkExistingSession();
+
+  // ==================== CORE DATA ====================
+  let currentSchedule = JSON.parse(JSON.stringify(scheduleData));
+  let currentFormations = JSON.parse(JSON.stringify(formationsData));
+  let currentInfrastructures = JSON.parse(JSON.stringify(infrastructuresData));
+  let currentCounters = JSON.parse(JSON.stringify(countersData));
+
+  let currentLocation = 'reghaia';
+  let currentCategory = 'homme';
+
+  async function loadLiveDashboard() {
+    try {
+      const schRes = await fetch('/api/schedule');
+      if (schRes.ok) currentSchedule = await schRes.json();
+
+      Object.keys(currentSchedule).forEach(locKey => {
+        const loc = currentSchedule[locKey];
+        if (loc && loc.categories) {
+          Object.keys(loc.categories).forEach(catKey => {
+            const cat = loc.categories[catKey];
+            if (cat && cat.coaches) {
+              cat.coaches.forEach(coach => {
+                if (coach.slots) {
+                  coach.slots.forEach(slot => {
+                    if (slot.type === 'complet') {
+                      slot.type = slot.total <= 5 ? 'max5' : 'g10';
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    } catch (e) {
+      console.warn("Failed to load live scheduler data.");
+    }
+
+    initSelectors();
+    renderPlanning();
+    renderFormations();
+    renderInfrastructures();
+    initCountersInput();
+    updateDashboardStats();
+  }
+
+  // ==================== TAB NAVIGATION ====================
+  document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${btn.dataset.tab}`)?.classList.add('active');
+    });
+  });
+
+  // ==================== DASHBOARD ====================
+  function updateDashboardStats() {
+    document.getElementById('dashInfraCount').textContent = currentInfrastructures.length;
+    document.getElementById('dashFormationsCount').textContent = currentFormations.filter(f => f.active).length;
+
+    let globalCapacity = 0;
+    let globalTaken = 0;
+    const locationStatsContainer = document.getElementById('dashLocationStats');
+    const alertsContainer = document.getElementById('dashAlertsList');
+
+    locationStatsContainer.innerHTML = '';
+    alertsContainer.innerHTML = '';
+
+    Object.keys(currentSchedule).forEach(locKey => {
+      const loc = currentSchedule[locKey];
+      let locCapacity = 0;
+      let locTaken = 0;
+
+      if (loc && loc.categories) {
+        Object.keys(loc.categories).forEach(catKey => {
+          const cat = loc.categories[catKey];
+          if (cat && cat.coaches) {
+            cat.coaches.forEach(coach => {
+              if (coach.slots) {
+                coach.slots.forEach(slot => {
+                  const cap = parseInt(slot.total) || 0;
+                  const taken = parseInt(slot.taken) || 0;
+                  locCapacity += cap;
+                  locTaken += taken;
+                  globalCapacity += cap;
+                  globalTaken += taken;
+
+                  const occupancy = cap > 0 ? (taken / cap) * 100 : 0;
+                  if (occupancy >= 100) {
+                    const el = document.createElement('div');
+                    el.className = 'dash-alert alert-danger';
+                    el.innerHTML = `🚨 <strong>[Complet]</strong> ${loc.name || locKey} — Coach ${coach.name} (${slot.day} à ${slot.time}) · <strong>${taken}/${cap} places</strong>`;
+                    alertsContainer.appendChild(el);
+                  } else if (occupancy >= 85) {
+                    const el = document.createElement('div');
+                    el.className = 'dash-alert alert-warning';
+                    el.innerHTML = `⚠️ <strong>[Presque Saturé]</strong> ${loc.name || locKey} — Coach ${coach.name} (${slot.day} à ${slot.time}) · <strong>${taken}/${cap} (${Math.round(occupancy)}%)</strong>`;
+                    alertsContainer.appendChild(el);
+                  } else if (taken === 0 && cap > 0) {
+                    const el = document.createElement('div');
+                    el.className = 'dash-alert alert-info';
+                    el.innerHTML = `ℹ️ <strong>[Groupe Vide]</strong> ${loc.name || locKey} — Coach ${coach.name} (${slot.day} à ${slot.time}) · <strong>0/${cap} places libres</strong>`;
+                    alertsContainer.appendChild(el);
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+
+      const locOccupancy = locCapacity > 0 ? Math.round((locTaken / locCapacity) * 100) : 0;
+      const row = document.createElement('div');
+      row.className = 'dash-location-row';
+      row.innerHTML = `
+        <div class="loc-row-header">
+          <strong>📍 ${loc.name || locKey}</strong>
+          <span>${locTaken}/${locCapacity} places (${locOccupancy}%)</span>
+        </div>
+        <div class="tel-bar-wrap">
+          <div class="tel-bar" style="width: ${locOccupancy}%; background-color: ${locOccupancy > 85 ? '#ef4444' : '#00f2ff'}"></div>
+        </div>
+      `;
+      locationStatsContainer.appendChild(row);
+    });
+
+    document.getElementById('dashCapacity').textContent = globalCapacity;
+    document.getElementById('dashTaken').textContent = globalTaken;
+
+    if (alertsContainer.children.length === 0) {
+      alertsContainer.innerHTML = '<div class="no-alerts">✓ Aucun groupe en saturation ou alerte pour le moment.</div>';
+    }
+  }
+
+  // ==================== PLANNING ====================
+  function initSelectors() {
+    const locSelect = document.getElementById('locationSelect');
+    locSelect.innerHTML = '';
+    Object.keys(currentSchedule).forEach(locKey => {
+      const opt = document.createElement('option');
+      opt.value = locKey;
+      opt.textContent = currentSchedule[locKey].name || locKey;
+      locSelect.appendChild(opt);
+    });
+    locSelect.value = currentLocation;
+    updateCategorySelect();
+  }
+
+  function updateCategorySelect() {
+    const catSelect = document.getElementById('categorySelect');
+    catSelect.innerHTML = '';
+    const locData = currentSchedule[currentLocation];
+    if (locData && locData.categories) {
+      Object.keys(locData.categories).forEach(catKey => {
+        const opt = document.createElement('option');
+        opt.value = catKey;
+        let displayName = locData.categories[catKey].name || catKey;
+        if (catKey === 'enfants' || catKey === 'kids') displayName = 'Enfants (AQA Kids)';
+        opt.textContent = displayName;
+        catSelect.appendChild(opt);
+      });
+    }
+    const availableCats = Object.keys(locData?.categories || {});
+    if (availableCats.length > 0) {
+      if (!availableCats.includes(currentCategory)) currentCategory = availableCats[0];
+      catSelect.value = currentCategory;
+    }
+  }
+
+  function renderPlanning() {
+    const editor = document.getElementById('editorContainer');
+    editor.innerHTML = '';
+    const catData = currentSchedule[currentLocation]?.categories?.[currentCategory];
+    if (!catData || !catData.coaches || catData.coaches.length === 0) {
+      editor.innerHTML = `<div class="no-coaches">Aucun coach configuré. Cliquez sur "+ Ajouter un Coach".</div>`;
+      return;
+    }
+
+    catData.coaches.forEach((coach, coachIdx) => {
+      const card = document.createElement('div');
+      card.className = 'coach-card glass-panel';
+      card.innerHTML = `
+        <div class="coach-header">
+          <div class="field-group-inline">
+            <span class="avatar">👤</span>
+            <input type="text" class="coach-name-input form-control" value="${coach.name}" data-coach-idx="${coachIdx}">
+          </div>
+          <button class="btn btn-danger btn-sm btn-delete-coach" data-coach-idx="${coachIdx}">Supprimer Coach</button>
+        </div>
+        <div class="slots-container" id="slots-container-${coachIdx}"></div>
+        <button class="btn btn-outline btn-sm btn-add-slot" data-coach-idx="${coachIdx}" style="margin-top: 1rem;">+ Ajouter un Créneau</button>
+      `;
+
+      const slotsBox = card.querySelector('.slots-container');
+      if (coach.slots && coach.slots.length > 0) {
+        const header = document.createElement('div');
+        header.className = 'slots-header';
+        header.innerHTML = `<span>Jour</span><span>Horaire</span><span>Inscrits</span><span>Total</span><span>Formule</span><span>Action</span>`;
+        slotsBox.appendChild(header);
+
+        coach.slots.forEach((slot, slotIdx) => {
+          const row = document.createElement('div');
+          row.className = 'slot-row';
+          row.innerHTML = `
+            <div class="slot-field"><input type="text" class="form-control slot-day" value="${slot.day}" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}"></div>
+            <div class="slot-field"><input type="text" class="form-control slot-time" value="${slot.time}" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}"></div>
+            <div class="slot-field size-small"><input type="number" min="0" class="form-control slot-taken" value="${slot.taken}" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}"></div>
+            <div class="slot-field size-small"><input type="number" min="1" class="form-control slot-total" value="${slot.total}" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}"></div>
+            <div class="slot-field">
+              <select class="form-control slot-type" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}">
+                <option value="g10" ${slot.type === 'g10' ? 'selected' : ''}>G10 (Groupe 10)</option>
+                <option value="max5" ${slot.type === 'max5' ? 'selected' : ''}>MAX5 (Max 5)</option>
+                <option value="apnea" ${slot.type === 'apnea' ? 'selected' : ''}>Apnée</option>
+                <option value="elite" ${slot.type === 'elite' ? 'selected' : ''}>Elite</option>
+              </select>
+            </div>
+            <button class="btn btn-danger btn-square btn-delete-slot" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}">✕</button>
+          `;
+          slotsBox.appendChild(row);
+        });
+      }
+      editor.appendChild(card);
+    });
+
+    attachPlanningListeners();
+  }
+
+  function attachPlanningListeners() {
+    document.querySelectorAll('.coach-name-input').forEach(inp => {
+      inp.addEventListener('input', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(inp.dataset.coachIdx)].name = inp.value;
+      });
+    });
+    document.querySelectorAll('.slot-day').forEach(inp => {
+      inp.addEventListener('input', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(inp.dataset.coachIdx)].slots[parseInt(inp.dataset.slotIdx)].day = inp.value;
+      });
+    });
+    document.querySelectorAll('.slot-time').forEach(inp => {
+      inp.addEventListener('input', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(inp.dataset.coachIdx)].slots[parseInt(inp.dataset.slotIdx)].time = inp.value;
+      });
+    });
+    document.querySelectorAll('.slot-taken').forEach(inp => {
+      inp.addEventListener('input', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(inp.dataset.coachIdx)].slots[parseInt(inp.dataset.slotIdx)].taken = parseInt(inp.value) || 0;
+        updateDashboardStats();
+      });
+    });
+    document.querySelectorAll('.slot-total').forEach(inp => {
+      inp.addEventListener('input', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(inp.dataset.coachIdx)].slots[parseInt(inp.dataset.slotIdx)].total = parseInt(inp.value) || 10;
+        updateDashboardStats();
+      });
+    });
+    document.querySelectorAll('.slot-type').forEach(sel => {
+      sel.addEventListener('change', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(sel.dataset.coachIdx)].slots[parseInt(sel.dataset.slotIdx)].type = sel.value;
+      });
+    });
+    document.querySelectorAll('.btn-delete-coach').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (confirm('Supprimer ce coach et tous ses créneaux ?')) {
+          currentSchedule[currentLocation].categories[currentCategory].coaches.splice(parseInt(btn.dataset.coachIdx), 1);
+          renderPlanning();
+          updateDashboardStats();
+        }
+      });
+    });
+    document.querySelectorAll('.btn-delete-slot').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(btn.dataset.coachIdx)].slots.splice(parseInt(btn.dataset.slotIdx), 1);
+        renderPlanning();
+        updateDashboardStats();
+      });
+    });
+    document.querySelectorAll('.btn-add-slot').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSchedule[currentLocation].categories[currentCategory].coaches[parseInt(btn.dataset.coachIdx)].slots.push({
+          day: 'Samedi', time: '21h00-23h00', type: 'g10', total: 10, taken: 0, group: ''
+        });
+        renderPlanning();
+        updateDashboardStats();
+      });
+    });
+  }
+
+  document.getElementById('locationSelect').addEventListener('change', e => {
+    currentLocation = e.target.value;
+    updateCategorySelect();
+    currentCategory = document.getElementById('categorySelect').value || '';
+    renderPlanning();
+  });
+  document.getElementById('categorySelect').addEventListener('change', e => {
+    currentCategory = e.target.value;
+    renderPlanning();
+  });
+  document.getElementById('addCoachBtn').addEventListener('click', () => {
+    if (!currentSchedule[currentLocation].categories[currentCategory]) {
+      currentSchedule[currentLocation].categories[currentCategory] = { name: currentCategory, coaches: [] };
+    }
+    currentSchedule[currentLocation].categories[currentCategory].coaches.push({ name: 'Nouveau Coach', slots: [] });
+    renderPlanning();
+  });
+  document.getElementById('savePlanningBtn').addEventListener('click', async () => {
+    const status = document.getElementById('savePlanningStatus');
+    status.textContent = 'Sauvegarde...'; status.className = 'save-status';
+    try {
+      const res = await fetch('/api/save-schedule', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ schedule: currentSchedule })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) { status.textContent = '✓ Planning sauvegardé !'; status.className = 'save-status success'; updateDashboardStats(); }
+      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+    } catch(e) { status.textContent = '❌ Erreur réseau: ' + e.message; status.className = 'save-status error'; }
+  });
+
+  // ==================== FORMATIONS ====================
+  function renderFormations() {
+    const box = document.getElementById('formationsContainer');
+    box.innerHTML = '';
+    currentFormations.forEach((f, idx) => {
+      const card = document.createElement('div');
+      card.className = 'glass-panel config-card';
+      card.innerHTML = `
+        <div class="card-config-header">
+          <strong>🎓 Formation #${idx + 1}</strong>
+          <button class="btn btn-danger btn-sm btn-delete-formation" data-idx="${idx}">Supprimer</button>
+        </div>
+        <div class="card-config-body">
+          <div class="field-group"><label>Titre :</label><input type="text" class="form-control form-formation-title" value="${f.title}" data-idx="${idx}"></div>
+          <div class="field-group"><label>Badge :</label><input type="text" class="form-control form-formation-badge" value="${f.badge}" data-idx="${idx}"></div>
+          <div class="field-group"><label>URL Image :</label><input type="text" class="form-control form-formation-image" value="${f.image}" data-idx="${idx}"></div>
+          <div class="field-group"><label>Lien info :</label><input type="text" class="form-control form-formation-link" value="${f.link}" data-idx="${idx}"></div>
+          <div class="field-group"><label>Description :</label><textarea class="form-control form-formation-desc" rows="3" data-idx="${idx}">${f.desc}</textarea></div>
+          <div class="toggle-group">
+            <label class="switch"><input type="checkbox" class="form-formation-active" ${f.active ? 'checked' : ''} data-idx="${idx}"><span class="slider"></span></label>
+            <span class="toggle-lbl">Statut Actif (Disponible immédiatement)</span>
+          </div>
+        </div>
+      `;
+      box.appendChild(card);
+    });
+    attachFormationsListeners();
+  }
+
+  function attachFormationsListeners() {
+    document.querySelectorAll('.form-formation-title').forEach(inp => inp.addEventListener('input', () => currentFormations[parseInt(inp.dataset.idx)].title = inp.value));
+    document.querySelectorAll('.form-formation-badge').forEach(inp => inp.addEventListener('input', () => currentFormations[parseInt(inp.dataset.idx)].badge = inp.value));
+    document.querySelectorAll('.form-formation-image').forEach(inp => inp.addEventListener('input', () => currentFormations[parseInt(inp.dataset.idx)].image = inp.value));
+    document.querySelectorAll('.form-formation-link').forEach(inp => inp.addEventListener('input', () => currentFormations[parseInt(inp.dataset.idx)].link = inp.value));
+    document.querySelectorAll('.form-formation-desc').forEach(txt => txt.addEventListener('input', () => currentFormations[parseInt(txt.dataset.idx)].desc = txt.value));
+    document.querySelectorAll('.form-formation-active').forEach(chk => chk.addEventListener('change', () => currentFormations[parseInt(chk.dataset.idx)].active = chk.checked));
+    document.querySelectorAll('.btn-delete-formation').forEach(btn => {
+      btn.addEventListener('click', () => { currentFormations.splice(parseInt(btn.dataset.idx), 1); renderFormations(); });
+    });
+  }
+
+  document.getElementById('addFormationBtn').addEventListener('click', () => {
+    currentFormations.push({ id: "nouveau-" + Date.now(), title: "Nouvelle Formation", badge: "Disponible", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600", desc: "Description du programme.", link: "/contact", active: true, status: "available" });
+    renderFormations();
+  });
+  document.getElementById('saveFormationsBtn').addEventListener('click', async () => {
+    const status = document.getElementById('saveFormationsStatus');
+    status.textContent = 'Sauvegarde...'; status.className = 'save-status';
+    try {
+      const res = await fetch('/api/save-formation', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ formations: currentFormations })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) { status.textContent = '✓ Formations sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
+      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+    } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
+  });
+
+  // ==================== INFRASTRUCTURES ====================
+  function renderInfrastructures() {
+    const box = document.getElementById('infrastructuresContainer');
+    box.innerHTML = '';
+    currentInfrastructures.forEach((inf, idx) => {
+      const card = document.createElement('div');
+      card.className = 'glass-panel config-card';
+      card.innerHTML = `
+        <div class="card-config-header">
+          <strong>🏢 Infrastructure #${idx + 1}</strong>
+          <button class="btn btn-danger btn-sm btn-delete-infra" data-idx="${idx}">Supprimer</button>
+        </div>
+        <div class="card-config-body">
+          <div class="field-group"><label>Nom :</label><input type="text" class="form-control form-infra-name" value="${inf.name}" data-idx="${idx}"></div>
+          <div class="field-group"><label>Localisation :</label><input type="text" class="form-control form-infra-loc" value="${inf.location || ''}" data-idx="${idx}"></div>
+          <div class="field-group"><label>URL Image :</label><input type="text" class="form-control form-infra-image" value="${inf.image || ''}" data-idx="${idx}"></div>
+          <div class="field-group"><label>Lien info :</label><input type="text" class="form-control form-infra-infolink" value="${inf.infoLink || ''}" data-idx="${idx}"></div>
+          <div class="field-group"><label>Google Maps URL :</label><input type="text" class="form-control form-infra-maplink" value="${inf.mapLink || ''}" data-idx="${idx}"></div>
+          <div class="field-group"><label>Caractéristiques (virgule) :</label><input type="text" class="form-control form-infra-features" value="${inf.features ? inf.features.join(', ') : ''}" data-idx="${idx}" placeholder="Ouvert 7j/7, AQA inside"></div>
+        </div>
+      `;
+      box.appendChild(card);
+    });
+    attachInfrastructuresListeners();
+  }
+
+  function attachInfrastructuresListeners() {
+    document.querySelectorAll('.form-infra-name').forEach(inp => inp.addEventListener('input', () => currentInfrastructures[parseInt(inp.dataset.idx)].name = inp.value));
+    document.querySelectorAll('.form-infra-loc').forEach(inp => inp.addEventListener('input', () => currentInfrastructures[parseInt(inp.dataset.idx)].location = inp.value));
+    document.querySelectorAll('.form-infra-image').forEach(inp => inp.addEventListener('input', () => currentInfrastructures[parseInt(inp.dataset.idx)].image = inp.value));
+    document.querySelectorAll('.form-infra-infolink').forEach(inp => inp.addEventListener('input', () => currentInfrastructures[parseInt(inp.dataset.idx)].infoLink = inp.value));
+    document.querySelectorAll('.form-infra-maplink').forEach(inp => inp.addEventListener('input', () => currentInfrastructures[parseInt(inp.dataset.idx)].mapLink = inp.value));
+    document.querySelectorAll('.form-infra-features').forEach(inp => {
+      inp.addEventListener('input', () => {
+        currentInfrastructures[parseInt(inp.dataset.idx)].features = inp.value.split(',').map(s => s.trim()).filter(s => s.length > 0);
+      });
+    });
+    document.querySelectorAll('.btn-delete-infra').forEach(btn => {
+      btn.addEventListener('click', () => { currentInfrastructures.splice(parseInt(btn.dataset.idx), 1); renderInfrastructures(); });
+    });
+  }
+
+  document.getElementById('addInfrastructureBtn').addEventListener('click', () => {
+    currentInfrastructures.push({ id: "infra-" + Date.now(), name: "Nouvelle Piscine Partner", image: "https://i.ibb.co/GfR0p9P4/FB-IMG-1656784815731.jpg", location: "Alger, Algérie", features: ["Ouvert 7j/7", "AQA inside"], infoLink: "", mapLink: "" });
+    renderInfrastructures();
+  });
+  document.getElementById('saveInfrastructuresBtn').addEventListener('click', async () => {
+    const status = document.getElementById('saveInfrastructuresStatus');
+    status.textContent = 'Sauvegarde...'; status.className = 'save-status';
+    try {
+      const res = await fetch('/api/save-infrastructure', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ infrastructures: currentInfrastructures })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) { status.textContent = '✓ Infrastructures sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
+      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+    } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
+  });
+
+  // ==================== COUNTERS ====================
+  function initCountersInput() {
+    document.getElementById('countAthletes').value = currentCounters.athletes || 500;
+    document.getElementById('countCoaches').value = currentCounters.coaches || 8;
+    document.getElementById('countPools').value = currentCounters.pools || 3;
+    document.getElementById('countSatisfaction').value = currentCounters.satisfaction || 98;
+  }
+
+  document.getElementById('saveCountersBtn').addEventListener('click', async () => {
+    const status = document.getElementById('saveCountersStatus');
+    status.textContent = 'Sauvegarde...'; status.className = 'save-status';
+    currentCounters.athletes = parseInt(document.getElementById('countAthletes').value) || 500;
+    currentCounters.coaches = parseInt(document.getElementById('countCoaches').value) || 8;
+    currentCounters.pools = parseInt(document.getElementById('countPools').value) || 3;
+    currentCounters.satisfaction = parseInt(document.getElementById('countSatisfaction').value) || 98;
+    try {
+      const res = await fetch('/api/save-counters', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ counters: currentCounters })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) { status.textContent = '✓ Compteurs sauvegardés !'; status.className = 'save-status success'; }
+      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+    } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
+  });
+
+  // ==================== DEPLOY ====================
+  document.getElementById('deployGitBtn').addEventListener('click', async () => {
+    const statusEl = document.getElementById('deployStatus');
+    const consoleLogs = document.getElementById('deployLogsConsole');
+    statusEl.textContent = 'Déploiement en cours... 🚀';
+    statusEl.className = 'deploy-status active';
+    consoleLogs.textContent = '>>> Lancement de deploy-now.bat...\n>>> Connexion au serveur Git...\n';
+    try {
+      const res = await fetch('/api/deploy', {
+        method: 'POST',
+        headers: authHeaders()
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        statusEl.textContent = '✓ Site Déployé avec succès !';
+        statusEl.className = 'deploy-status success';
+        consoleLogs.textContent += '\n[STDOUT]\n' + data.stdout;
+      } else {
+        statusEl.textContent = '❌ Échec de déploiement';
+        statusEl.className = 'deploy-status error';
+        consoleLogs.textContent += '\n[ERROR]\n' + (data.message || 'Erreur inconnue') + '\n' + (data.stderr || '');
+      }
+    } catch(e) {
+      statusEl.textContent = '❌ Échec réseau';
+      statusEl.className = 'deploy-status error';
+      consoleLogs.textContent += '\n[NET_ERROR]\n' + e.message;
+    }
+  });
+
+  // ==================== SETTINGS TAB ====================
+
+  // Load current config from server (slug display)
+  async function loadSettingsConfig() {
+    try {
+      const res = await fetch('/api/admin-config');
+      if (res.ok) {
+        const cfg = await res.json();
+        const slug = cfg.loginSlug || 'aqacontrol2026';
+        document.getElementById('currentSlugDisplay').textContent = slug;
+        document.getElementById('urlSlugDisplay').textContent = slug;
+        document.getElementById('urlOriginDisplay').textContent = window.location.origin + '/';
+      }
+    } catch(e) {
+      document.getElementById('urlOriginDisplay').textContent = window.location.origin + '/';
+    }
+  }
+  loadSettingsConfig();
+
+  // Copy URL button
+  document.getElementById('copyUrlBtn').addEventListener('click', () => {
+    const url = document.getElementById('urlOriginDisplay').textContent + document.getElementById('urlSlugDisplay').textContent;
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('copyUrlBtn');
+      btn.style.color = 'var(--color-success)';
+      setTimeout(() => btn.style.color = '', 1500);
+    });
+  });
+
+  // Password strength meter
+  document.getElementById('newPassword').addEventListener('input', (e) => {
+    const pwd = e.target.value;
+    const strengthBox = document.getElementById('passwordStrength');
+    const fill = document.getElementById('strengthFill');
+    const label = document.getElementById('strengthLabel');
+    if (!pwd) { strengthBox.style.display = 'none'; return; }
+    strengthBox.style.display = 'flex';
+    let score = 0;
+    if (pwd.length >= 8) score++;
+    if (pwd.length >= 12) score++;
+    if (/[A-Z]/.test(pwd)) score++;
+    if (/[0-9]/.test(pwd)) score++;
+    if (/[^A-Za-z0-9]/.test(pwd)) score++;
+    const levels = ['Très faible', 'Faible', 'Moyen', 'Fort', 'Très fort', 'Excellent'];
+    const colors = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#10b981', '#00f2ff'];
+    fill.style.width = ((score / 5) * 100) + '%';
+    fill.style.background = colors[score] || colors[0];
+    label.textContent = levels[score] || levels[0];
+    label.style.color = colors[score] || colors[0];
+  });
+
+  // Password change handler
+  document.getElementById('savePasswordBtn').addEventListener('click', async () => {
+    const status = document.getElementById('savePasswordStatus');
+    const currentPwd = document.getElementById('currentPassword').value;
+    const newPwd = document.getElementById('newPassword').value;
+    const confirmPwd = document.getElementById('confirmPassword').value;
+
+    status.textContent = ''; status.className = 'save-status';
+
+    if (!currentPwd || !newPwd || !confirmPwd) {
+      status.textContent = '❌ Tous les champs sont requis.'; status.className = 'save-status error'; return;
+    }
+    if (newPwd.length < 8) {
+      status.textContent = '❌ Minimum 8 caractères.'; status.className = 'save-status error'; return;
+    }
+    if (newPwd !== confirmPwd) {
+      status.textContent = '❌ Les mots de passe ne correspondent pas.'; status.className = 'save-status error'; return;
+    }
+
+    // Verify current password
+    const currentHash = await sha256(currentPwd);
+    if (currentHash !== adminToken) {
+      status.textContent = '❌ Mot de passe actuel incorrect.'; status.className = 'save-status error'; return;
+    }
+
+    status.textContent = 'Mise à jour...'; 
+    const newHash = await sha256(newPwd);
+
+    // Try to save to server
+    try {
+      const res = await fetch('/api/save-admin-config', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ passwordHash: newHash })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        status.textContent = '✓ Mot de passe mis à jour ! Déconnexion dans 3s...';
+        status.className = 'save-status success';
+      } else {
+        status.textContent = '❌ Erreur serveur: ' + (data.message || 'erreur');
+        status.className = 'save-status error';
+      }
+    } catch(e) {
+      status.textContent = '❌ Impossible de contacter le serveur.';
+      status.className = 'save-status error';
+    }
+
+    // Auto logout after 3s so user re-authenticates with new password
+    setTimeout(() => {
+      sessionStorage.removeItem(SESSION_KEY);
+      adminToken = newHash; // update in-memory token
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('loginOverlay').style.display = 'flex';
+      document.getElementById('currentPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('confirmPassword').value = '';
+      document.getElementById('passwordStrength').style.display = 'none';
+    }, 3000);
+  });
+
+  // URL slug change - live preview
+  document.getElementById('newSlugInput').addEventListener('input', (e) => {
+    const raw = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
+    e.target.value = raw;
+    const preview = document.getElementById('slugPreviewBox');
+    const previewUrl = document.getElementById('slugPreviewUrl');
+    if (raw.length > 2) {
+      preview.style.display = 'flex';
+      previewUrl.textContent = window.location.origin + '/' + raw;
+    } else {
+      preview.style.display = 'none';
+    }
+  });
+
+  // URL slug save handler
+  document.getElementById('saveSlugBtn').addEventListener('click', async () => {
+    const status = document.getElementById('saveSlugStatus');
+    const slug = document.getElementById('newSlugInput').value.trim();
+
+    status.textContent = ''; status.className = 'save-status';
+
+    if (!slug || slug.length < 3) {
+      status.textContent = '❌ URL trop courte (min 3 caractères).'; status.className = 'save-status error'; return;
+    }
+    if (!/^[a-z0-9-]+$/.test(slug)) {
+      status.textContent = '❌ Lettres minuscules, chiffres et tirets uniquement.'; status.className = 'save-status error'; return;
+    }
+
+    status.textContent = 'Application en cours...';
+
+    try {
+      const res = await fetch('/api/save-admin-config', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ loginSlug: slug })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        document.getElementById('currentSlugDisplay').textContent = slug;
+        document.getElementById('urlSlugDisplay').textContent = slug;
+        status.textContent = '✓ URL mise à jour ! Accessible sur : ' + window.location.origin + '/' + slug;
+        status.className = 'save-status success';
+        document.getElementById('newSlugInput').value = '';
+        document.getElementById('slugPreviewBox').style.display = 'none';
+      } else {
+        status.textContent = '❌ Erreur serveur: ' + (data.message || 'Serveur non disponible'); 
+        status.className = 'save-status error';
+      }
+    } catch(e) {
+      status.textContent = '❌ Serveur non joignable. Redémarrez le serveur.'; 
+      status.className = 'save-status error';
+    }
+  });
+
+})();</script>

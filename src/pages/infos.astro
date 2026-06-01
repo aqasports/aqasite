@@ -160,6 +160,7 @@ const getRelativePath = (path, targetLang) => {
   
 
   <script>
+    document.addEventListener('astro:page-load', () => {
     function scrollToSection(id) {
       const el = document.getElementById(id);
       if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
@@ -174,6 +175,7 @@ const getRelativePath = (path, targetLang) => {
         else dots[i].classList.remove('active');
       });
     });
+      });
   </script>
 
   <Footer  lang={lang} />

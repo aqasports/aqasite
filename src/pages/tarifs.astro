@@ -312,6 +312,8 @@ const { lang = 'fr' } = Astro.props;
 
 
     <script>
+    document.addEventListener('astro:page-load', () => {
+
     (function(){
         // 1. Tab Switching Logic
         const buttons = document.querySelectorAll('.category-btn');
@@ -374,12 +376,12 @@ const { lang = 'fr' } = Astro.props;
         };
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
+        
             highlightBestValue();
-        });
 
     })();
-    </script>
+        });
+  </script>
 
   <Footer lang={lang} />
 </BaseLayout>

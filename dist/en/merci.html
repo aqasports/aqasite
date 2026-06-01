@@ -61,6 +61,52 @@
     }
   </script>
 
+  <!-- Language persistence & redirection script -->
+  <script>
+    (function() {
+      function checkLang() {
+        if (typeof localStorage === 'undefined') return;
+        
+        const path = window.location.pathname;
+        const currentLang = document.documentElement.lang || 'fr';
+        const isFrenchPage = !path.startsWith('/ar') && !path.startsWith('/en');
+        const supportedLangs = ['ar', 'en'];
+        
+        if (isFrenchPage) {
+          const savedLang = localStorage.getItem('aqa_lang');
+          
+          if (savedLang && supportedLangs.includes(savedLang)) {
+            const referrer = document.referrer;
+            const currentOrigin = window.location.origin;
+            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
+            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            
+            if (isExplicitFR) {
+              localStorage.setItem('aqa_lang', 'fr');
+            } else {
+              const targetPath = '/' + savedLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            }
+          } else if (!savedLang) {
+            const browserLang = (navigator.language || 'fr').split('-')[0].toLowerCase();
+            if (supportedLangs.includes(browserLang)) {
+              const targetPath = '/' + browserLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            } else {
+              localStorage.setItem('aqa_lang', 'fr');
+            }
+          }
+        } else {
+          localStorage.setItem('aqa_lang', currentLang);
+        }
+      }
+      
+      checkLang();
+      document.addEventListener('astro:after-swap', checkLang);
+      document.addEventListener('astro:page-load', checkLang);
+    })();
+  </script>
+
   <!-- Slot for page-specific <style> or <link> tags -->
   
 <style>.merci-container[data-astro-cid-zq3yo2ar]{display:flex;justify-content:center;align-items:center;min-height:80vh;padding:2rem 1rem}.box[data-astro-cid-zq3yo2ar]{border-radius:20px;padding:3rem 2rem;max-width:550px;width:100%;text-align:center;border:1px solid rgba(0,242,255,.2);box-shadow:0 10px 40px #00000080}h1[data-astro-cid-zq3yo2ar]{font-size:2rem;background:linear-gradient(135deg,var(--color-teal),var(--color-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1.5rem;font-weight:800}p[data-astro-cid-zq3yo2ar]{opacity:.9;margin-bottom:1.5rem;line-height:1.6;color:var(--text-primary)}.important[data-astro-cid-zq3yo2ar]{color:#f44;font-weight:700;background:#ff444414;padding:1rem;border-radius:12px;border:1px solid rgba(255,68,68,.2);margin-bottom:2rem}.payment-label[data-astro-cid-zq3yo2ar]{font-weight:600;color:var(--color-teal);margin-bottom:1rem}.options[data-astro-cid-zq3yo2ar]{display:flex;flex-direction:column;gap:15px;margin-top:1.5rem}.btn[data-astro-cid-zq3yo2ar]{display:block;padding:.9rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:700;transition:all .3s ease;text-align:center}.btn-primary[data-astro-cid-zq3yo2ar]{background:linear-gradient(135deg,var(--color-blue),var(--color-teal));color:#030712;border:1px solid var(--color-teal);box-shadow:0 4px 15px #00f2ff26}.btn-primary[data-astro-cid-zq3yo2ar]:hover{background:linear-gradient(135deg,var(--color-teal),var(--color-blue));transform:translateY(-2px);box-shadow:var(--shadow-glow-active)}.btn-secondary[data-astro-cid-zq3yo2ar]{background:#ffffff08;border:1px solid rgba(255,255,255,.1);color:var(--text-primary)}.btn-secondary[data-astro-cid-zq3yo2ar]:hover{background:#ffffff14;transform:translateY(-2px)}.btn-back[data-astro-cid-zq3yo2ar]{background:transparent;border:1px solid var(--color-teal);color:var(--color-teal);display:inline-block;padding:.8rem 2rem}.btn-back[data-astro-cid-zq3yo2ar]:hover{background:#00f2ff14;transform:translateY(-2px)}
@@ -92,8 +138,4 @@
     </div>
   </div>
 
-
-  <!-- WhatsApp floating widget -->
-  <script src="/js/navbar-wa.js"></script>
-</body>
-</html>
+</body></html>

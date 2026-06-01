@@ -6,6 +6,7 @@ import Footer from '../Footer.astro';
 import frDict from '../../../lang/fr.json';
 import arDict from '../../../lang/ar.json';
 import enDict from '../../../lang/en.json';
+import countersData from '../../data/counters.json';
 
 export interface Props {
   lang?: string;
@@ -67,19 +68,19 @@ const getRelativePath = (path, targetLang) => {
     <section class="section" id="statsSection">
       <div class="stats-grid">
         <div class="stat-card glass-panel" data-delay="0">
-          <div class="stat-number" data-target="500" data-suffix="+">0+</div>
+          <div class="stat-number" data-target={countersData.athletes} data-suffix="+">0+</div>
           <div class="stat-label">{t('stats_athletes', 'Athlètes formés')}</div>
         </div>
         <div class="stat-card glass-panel" data-delay="100">
-          <div class="stat-number" data-target="8" data-suffix="+">0+</div>
+          <div class="stat-number" data-target={countersData.coaches} data-suffix="+">0+</div>
           <div class="stat-label">{t('stats_coaches', "Coachs d'élite")}</div>
         </div>
         <div class="stat-card glass-panel" data-delay="200">
-          <div class="stat-number" data-target="3" data-suffix="">0</div>
-          <div class="stat-label">{t('stats_pools', 'Piscines partenaires')}</div>
+          <div class="stat-number" data-target={countersData.pools} data-suffix="">0</div>
+          <div class="stat-label">{t('stats_infrastructure', 'Infrastructures partenaires')}</div>
         </div>
         <div class="stat-card glass-panel" data-delay="300">
-          <div class="stat-number" data-target="98" data-suffix="%">0%</div>
+          <div class="stat-number" data-target={countersData.satisfaction} data-suffix="%">0%</div>
           <div class="stat-label">{t('stats_satisfaction', 'Satisfaction client')}</div>
         </div>
       </div>
@@ -222,14 +223,14 @@ const getRelativePath = (path, targetLang) => {
       </div>
       
       <div class="nav-buttons">
-        <a href={getRelativePath('/piscines', lang)} class="nav-btn glass-panel">
+        <a href={getRelativePath('/infrastructure', lang)} class="nav-btn glass-panel">
           <div class="nav-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
           </div>
-          <div>{t('btn_piscines', 'Piscines')}</div>
+          <div>{t('btn_infrastructure', 'Infrastructures')}</div>
         </a>
 
         <a href={getRelativePath('/team', lang)} class="nav-btn glass-panel">

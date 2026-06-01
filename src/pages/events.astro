@@ -3,333 +3,1481 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
-export interface Props {
-  lang?: string;
-}
-
+export interface Props { lang?: string; }
 const { lang = 'fr' } = Astro.props;
 
-const getRelativePath = (path, targetLang) => {
-  if (targetLang === 'fr') return path;
-  return `/${targetLang}${path === '/' ? '' : path}`;
-};
+const T = {
+  fr: {
+    metaTitle: "AQA Events — Expéditions Sauvages & Activités Extrêmes Algérie",
+    metaDesc: "Découvrez AQA Events : randonnée, kayak, apnée et plongée sous-marine en Algérie. Une aventure sportive souveraine de la forêt aux abysses.",
+    metaKw: "randonnée algérie, kayak alger, plongée algérie, aqa events, apnée algérie, sports extrêmes",
+    badge: "AQA SPORTS ACADEMY · EVENTS Sauvages",
+    h1a: "L'aventure",
+    h1b: "athlétique",
+    h1c: "sauvage",
+    sub: "De la forêt dense aux abysses silencieuses — vivez l'Algérie sauvage dans sa forme la plus pure et prestigieuse.",
+    scroll: "Explorez les zones d'aventure",
+    stat1n: "14", stat1l: "Voies d'Exploration",
+    stat2n: "100+", stat2l: "Expéditions Bivouacs",
+    stat3n: "1000+", stat3l: "Aventuriers Elite",
+    soundOn: "AMBIANCE NATURE : ACTIVE",
+    soundOff: "COUPER LE SON",
+    soundToggle: "SOUNDSCAPE NATURE",
+    dragHint: "Survolez les images pour explorer les détails",
+    zones: [
+      { 
+        icon:"🌿", 
+        tag: "ZONE 01 · CANOPÉE FORESTIÈRE", 
+        h2: "Trekking d'Altitude & Balades Équestres", 
+        body: "Traversez les forêts denses du Djurdjura et de Kabylie. Sentiers secrets de montagne, franchissements sauvages à cheval et bivouacs d'altitude sous la voûte céleste.", 
+        pills: ["Bivouac Sommets", "Raid Équestre", "High Trekking", "Trails Sauvages"], 
+        imgs: [1, 2, 3], 
+        accent: "#39ff14",
+        bg: "#03170b" // Deep Emerald Jade
+      },
+      { 
+        icon:"💧", 
+        tag: "ZONE 02 · RIVIÈRES & CANYONS", 
+        h2: "Kayak d'Eau Vive & Canyoning PMT", 
+        body: "Domptez les rivières claires et faufilez-vous à travers des canyons rocheux millénaires. Initiez-vous au snorkeling en eau douce dans des cascades secrètes.", 
+        pills: ["Kayak Extrême", "Canyoning Sauvage", "PMT Eau Douce", "Cascades"], 
+        imgs: [4, 5, 6], 
+        accent: "#00ffff",
+        bg: "#021a1d" // Glacial Mineral Teal
+      },
+      { 
+        icon:"☀️", 
+        tag: "ZONE 03 · LITTORAL & CÔTES CORNICHES", 
+        h2: "Downhill VTT & Multi-Challenges", 
+        body: "Le littoral algérien comme terrain de jeu extrême. Runs techniques sur les falaises, descentes VTT abruptes face à la mer et bivouacs dorés au coucher du soleil.", 
+        pills: ["VTT Enduro", "Run & Bike", "Triathlon Côte", "Bivouac Falaises"], 
+        imgs: [7, 8, 9], 
+        accent: "#ffb703",
+        bg: "#1c1503" // Golden Coastal Dusk
+      },
+      { 
+        icon:"🌊", 
+        tag: "ZONE 04 · HYDRO-SPACE BLEU OUVERT", 
+        h2: "Nage en Eau Libre & Traversées de Caps", 
+        body: "Affrontez la houle de la Méditerranée. Traversées de caps rocheux légendaires et entraînement d'élite à la nage d'endurance en pleine mer.", 
+        pills: ["Eau Libre Pro", "Traversées Caps", "Nage Endurance", "Raid Maritime"], 
+        imgs: [10, 11, 12], 
+        accent: "#00b4d8",
+        bg: "#021422" // Nautical Navy Blue
+      },
+      { 
+        icon:"🤿", 
+        tag: "ZONE 05 · LES ABYSSES SILENCIEUSES", 
+        h2: "Plongée Scuba & Apnée d'Exploration", 
+        body: "Oubliez la gravité. Entrez dans le silence absolu des profondeurs océaniques. Exploration encadrée d'épaves mythiques et de récifs coralliens vertigineux.", 
+        pills: ["Scuba Pro", "Apnée Profonde", "Épaves Secrètes", "Corail Géant"], 
+        imgs: [13, 14, 5], 
+        accent: "#9d4edd",
+        bg: "#090317" // Silent Abyss Purple
+      },
+    ],
+    ctaTitle: "REJOIGNEZ L'APPEL\nDE LA SAUVAGERIE",
+    ctaBody: "Nos expéditions s'organisent en escouades de tailles limitées pour préserver l'authenticité de l'aventure. Connectez-vous à notre réseau WhatsApp VIP. Nos guides tactiques planifient votre prochaine aventure avec vous.",
+    ctaBtn: "💬 REJOINDRE L'ESCOUADE WHATSAPP",
+    ctaHint: "Réseau privé. Rejoignez l'escouade et attendez les directives d'exploration.",
+  },
+  ar: {
+    metaTitle: "فعاليات أكا — مغامرات رياضية برية وبحرية في الجزائر",
+    metaDesc: "اكتشف فعاليات أكا: مشي، كاياك، غوص حر وأعماق في الجزائر. تجربة رياضية فاخرة ومنظمة.",
+    metaKw: "مشي الجزائر، كاياك الجزائر، غوص الجزائر، فعاليات أكا",
+    badge: "أكاديمية أكا الرياضية · مغامرات برية",
+    h1a: "المغامرة",
+    h1b: "الرياضية",
+    h1c: "البرية",
+    sub: "من الغابات الكثيفة إلى الأعماق الصامتة — عِش مغامرات الجزائر البرية بأسلوب رياضي راقٍ ومنظم.",
+    scroll: "استكشف مناطق المغامرة",
+    stat1n: "14", stat1l: "مساراً استكشافياً",
+    stat2n: "100+", stat2l: "مخيمات برية",
+    stat3n: "1000+", stat3l: "مغامرين نخبة",
+    soundOn: "الصوت الطبيعي: نشط",
+    soundOff: "كتم الصوت",
+    soundToggle: "المحيط الطبيعي",
+    dragHint: "مرر مؤشر الفأرة على الصور لاستكشاف التفاصيل",
+    zones: [
+      { 
+        icon:"🌿", 
+        tag: "المنطقة 01 · الغابات الجبلية", 
+        h2: "المشي البري وركوب الخيل الجبلي", 
+        body: "اعبر الغابات الكثيفة في جرجرة وقبايل. مسارات سرية ومبيت في المرتفعات تحت قبة النجوم والسماء البرية الباهرة.", 
+        pills: ["مخيمات المرتفعات", "ركوب خيل", "مشي رياضي", "جري جبلي"], 
+        imgs: [1, 2, 3], 
+        accent: "#39ff14",
+        bg: "#03170b"
+      },
+      { 
+        icon:"💧", 
+        tag: "المنطقة 02 · الأنهار والوديان", 
+        h2: "الكاياك والاستكشاف المائي PMT", 
+        body: "روّض المياه الجارية وانزلق بين الوديان الصخرية العتيقة. استكشف الغوص السطحي في البحيرات المائية والخلجان المخفية.", 
+        pills: ["كاياك متطرف", "كانونينج بري", "غوص سطحي", "شلالات"], 
+        imgs: [4, 5, 6], 
+        accent: "#00ffff",
+        bg: "#021a1d"
+      },
+      { 
+        icon:"☀️", 
+        tag: "المنطقة 03 · الساحل والمنحدرات", 
+        h2: "دراجات جبلية وتحديات جري ساحلية", 
+        body: "الساحل الجزائري كملعب رياضي متكامل. سباقات جري على الجرف الصخري، هبوط الدراجات الجبلية وتخييم ساحر عند الغروب.", 
+        pills: ["دراجات VTT", "سباقات ثنائية", "ثلاثي الساحل", "تخييم جرف"], 
+        imgs: [7, 8, 9], 
+        accent: "#ffb703",
+        bg: "#1c1503"
+      },
+      { 
+        icon:"🌊", 
+        tag: "المنطقة 04 · المياه البحرية المفتوحة", 
+        h2: "السباحة في البحر الحر وعبور الرؤوس", 
+        body: "تحدَّ أمواج البحر الأبيض المتوسط. عبور الرؤوس البحرية الصخرية التاريخية والتدريب على السباحة لمسافات طويلة.", 
+        pills: ["سباحة حرة نخبة", "عبور الرؤوس", "سباحة مسافات", "إبحار تكتيكي"], 
+        imgs: [10, 11, 12], 
+        accent: "#00b4d8",
+        bg: "#021422"
+      },
+      { 
+        icon:"🤿", 
+        tag: "المنطقة 05 · الأعماق الصامتة", 
+        h2: "غوص سكوبا وغوص حر استكشافي", 
+        body: "تخلص تماماً من الجاذبية الأرضية. ادخل الصمت المطلق لأعماق البحار، واستكشف السفن الغارقة والشعاب المرجانية المهيبة.", 
+        pills: ["غوص سكوبا", "غوص حر عميق", "سفن غارقة", "مرجان عملاق"], 
+        imgs: [13, 14, 5], 
+        accent: "#9d4edd",
+        bg: "#090317"
+      },
+    ],
+    ctaTitle: "استعد لتلبية نداء\nالبرية المطلقة",
+    ctaBody: "تُنظم رحلاتنا الرياضية في مجموعات محدودة للغاية للحفاظ على الخصوصية وحماية البيئة. انضم الآن لشبكة الواتساب VIP وسيتواصل معك مرشدونا الرياضيون فوراً.",
+    ctaBtn: "💬 انضم فوراً لفرقة واتساب VIP",
+    ctaHint: "اتصال خاص. انضم للفرقة وانتظر إشارة البدء والتنسيق التكتيكي.",
+  },
+  en: {
+    metaTitle: "AQA Events — Sovereign Wild Journeys & Extreme Sports Algeria",
+    metaDesc: "Discover AQA Events: hiking, kayaking, apnea & scuba diving in Algeria. A high-end, majestic athletic showcase from forest to abyss.",
+    metaKw: "hiking algeria, kayak alger, scuba diving algeria, aqa events, extreme sports, outdoor events",
+    badge: "AQA SPORTS ACADEMY · WILD EVENTS",
+    h1a: "The ultimate",
+    h1b: "athletic",
+    h1c: "wild",
+    sub: "From deep mountain canopies to silent abyssal waters — experience raw Algeria with premium athletic precision.",
+    scroll: "Explore adventure zones",
+    stat1n: "14", stat1l: "Exploration Routes",
+    stat2n: "100+", stat2l: "Bivouac Expeditions",
+    stat3n: "1000+", stat3l: "Elite Adventurers",
+    soundOn: "AMBIENT SOUNDSCAPE: ENGAGED",
+    soundOff: "MUTE SOUND CONSOLE",
+    soundToggle: "NATURE SOUNDS",
+    dragHint: "Hover over images to explore structural details",
+    zones: [
+      { 
+        icon:"🌿", 
+        tag: "ZONE 01 · DENSE FOREST CANOPY", 
+        h2: "High-Altitude Trekking & Mountain Rides", 
+        body: "Cross dense mountain forests of Djurdjura and Kabylie. Walk secret tracks, conquer high passes on horseback, and bivouac under a vast starlit sky.", 
+        pills: ["Peak Bivouacs", "Horse Back Raids", "High Trekking", "Wild Trails"], 
+        imgs: [1, 2, 3], 
+        accent: "#39ff14",
+        bg: "#03170b"
+      },
+      { 
+        icon:"💧", 
+        tag: "ZONE 02 · RIVERS & WATER CANYONS", 
+        h2: "White-Water Kayaking & River Snorkeling", 
+        body: "Domptez rushing river rapids and drift between carved narrow stone canyons. Learn freshwater snorkeling in hidden crystal clear mountain rockpools.", 
+        pills: ["Extreme Kayak", "Wild Canyoning", "Freshwater PMT", "Cataracts"], 
+        imgs: [4, 5, 6], 
+        accent: "#00ffff",
+        bg: "#021a1d"
+      },
+      { 
+        icon:"☀️", 
+        tag: "ZONE 03 · COASTLINE & CLIFF ENDUROS", 
+        h2: "Downhill MTB & High-Speed Challenges", 
+        body: "The rocky Algerian coastline is your training ground. High-speed cliff runs, technical MTB descents, and golden bivouacs facing spectacular maritime horizons.", 
+        pills: ["Downhill MTB", "Run & Bike", "Coastal Triathlon", "Cliff Camping"], 
+        imgs: [7, 8, 9], 
+        accent: "#ffb703",
+        bg: "#1c1503"
+      },
+      { 
+        icon:"🌊", 
+        tag: "ZONE 04 · HYDRO-SPACE OPEN BLUE", 
+        h2: "Open Water Swims & Cape Crossings", 
+        body: "Conquer the wild Mediterranean swell. Challenge legendary stone capes and train in elite open water endurance swimming with our pro guides.", 
+        pills: ["Pro Open Water", "Cape Crossings", "Endurance Swim", "Maritime Raids"], 
+        imgs: [10, 11, 12], 
+        accent: "#00b4d8",
+        bg: "#021422"
+      },
+      { 
+        icon:"🤿", 
+        tag: "ZONE 05: THE SILENT ABYSS", 
+        h2: "Deep Scuba & Exploratory Apnea", 
+        body: "Leave Earth's gravity behind. Slip into the total, calming silence of marine trenches. Explore historic shipwrecks and majestic vertical black coral walls.", 
+        pills: ["Scuba Pro", "Deep Apnea", "Wreck Explorations", "Coral Walls"], 
+        imgs: [13, 14, 5], 
+        accent: "#9d4edd",
+        bg: "#090317"
+      },
+    ],
+    ctaTitle: "REJOIN THE CALL\nOF THE UNTAMED",
+    ctaBody: "Our expeditions operate in small, highly disciplined squads to protect pristine natural balances. Connect to our VIP WhatsApp node. Our athletic guides coordinate your next challenge.",
+    ctaBtn: "💬 JOIN THE VIP WHATSAPP SQUAD",
+    ctaHint: "Private secure terminal link. Join & wait for the launch transmission.",
+  }
+}[lang] || T.fr;
 ---
 
-<BaseLayout title="Événements & Compétitions | AQA Sports Academy — Algérie"
-  description="Suivez les événements, compétitions et stages AQA Sports Academy. Championnats, galas de natation et rencontres aquatiques en Algérie."
-  keywords="compétitions natation algérie, événements aquatiques alger, gala natation, stages natation algérie"
-  currentPage="/events" lang={lang}>
+<BaseLayout title={T.metaTitle} description={T.metaDesc} keywords={T.metaKw} currentPage="/events" lang={lang}>
   <Navbar currentPage="/events" lang={lang} />
 
-<!-- NAVBAR -->
+  <!-- ═══════════════════════════════════════
+       LUXURY SENSORY CONTROL (MINIMAL PILL)
+       ═══════════════════════════════════════ -->
+  <div class="aq-sensory-console" aria-hidden="true">
+    <button class="aq-sensory-btn" id="btnSensorySound">
+      <span class="wave-spectrometer">
+        <span></span><span></span><span></span><span></span><span></span>
+      </span>
+      <span class="btn-lbl" id="sensoryLabel">{T.soundToggle} [OFF]</span>
+    </button>
     
+    <!-- Ultra-minimal hidden frequency visualizer canvas -->
+    <canvas id="sensoryCanvas" width="90" height="24"></canvas>
+  </div>
 
+  <!-- ═══════════════════════════════════════
+       SOVEREIGN KINETIC CONTAINER
+       ═══════════════════════════════════════ -->
+  <div class="aq-luxury-scroller" id="luxuryScroller">
     
+    <!-- ─── ATHLETIC HERO HEADER ─── -->
+    <section class="aq-hero" id="aqHero">
+      <!-- Full-bleed cinematic backdrop -->
+      <div class="hero-video-wrap">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+          <source src="/events/Fav%20main%20vid.mov" type="video/quicktime">
+          <source src="/zero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-mask"></div>
+      </div>
 
-    <!-- Page Content -->
-    <div class="page-hero">
-        <span class="hero-badge">📅 Agenda AQA</span>
-        <h1>Événements & Activités</h1>
-        <div class="section-divider"></div>
-        <p>Compétitions, stages, journées portes ouvertes et challenges — restez connecté à la vie d'AQA Sports Academy.</p>
-    </div>
+      <div class="hero-inner">
+        <span class="hero-badge">{T.badge}</span>
+        <h1 class="hero-title">
+          <span class="title-line title-line--1">{T.h1a}</span>
+          <span class="title-line title-line--2">{T.h1b}</span>
+          <span class="title-line title-line--3">{T.h1c}</span>
+        </h1>
+        <p class="hero-sub">{T.sub}</p>
 
-    <div class="container">
-        <div class="events-grid">
-            <!-- Event Card 1 -->
-            <article class="event-card">
-                <span class="event-tag">🏆 Compétition</span>
-                <div class="event-img-placeholder">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M8 21h8M12 17v4M17 4H7l-2 9h14L17 4zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3"/></svg>
-                </div>
-                <div class="event-body">
-                    <div class="event-date">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        Prochain événement
-                    </div>
-                    <h2 class="event-title">Challenge Inter-Groupes AQA</h2>
-                    <p class="event-desc">Compétition interne entre tous les groupes de natation. Un moment de performance, de dépassement et de fierté collective pour nos athlètes.</p>
-                    <div class="event-meta">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            Piscine Réghaia
-                        </span>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            Tous niveaux
-                        </span>
-                    </div>
-                    <a href={getRelativePath('/inscription', lang)} class="event-cta">S'inscrire →</a>
-                </div>
-            </article>
-
-            <!-- Event Card 2 -->
-            <article class="event-card">
-                <span class="event-tag">🌊 Stage</span>
-                <div class="event-img-placeholder">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-                </div>
-                <div class="event-body">
-                    <div class="event-date">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        Stage intensif
-                    </div>
-                    <h2 class="event-title">Stage Vacances — Natation & Apnée</h2>
-                    <p class="event-desc">Stage de 5 jours pendant les vacances scolaires. Programme intensif adapté aux enfants et adultes pour progresser rapidement.</p>
-                    <div class="event-meta">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            Multi-piscines AQA
-                        </span>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            5 jours
-                        </span>
-                    </div>
-                    <a href={getRelativePath('/inscription', lang)} class="event-cta">S'inscrire →</a>
-                </div>
-            </article>
-
-            <!-- Event Card 3 -->
-            <article class="event-card">
-                <span class="event-tag">🎯 Portes Ouvertes</span>
-                <div class="event-img-placeholder">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </div>
-                <div class="event-body">
-                    <div class="event-date">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        Bientôt
-                    </div>
-                    <h2 class="event-title">Journée Portes Ouvertes AQA</h2>
-                    <p class="event-desc">Venez découvrir nos installations, rencontrer nos coachs et essayer une séance gratuite d'initiation. Idéal pour les nouvelles recrues.</p>
-                    <div class="event-meta">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            Gratuit
-                        </span>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            Toutes piscines
-                        </span>
-                    </div>
-                    <a href={getRelativePath('/infos', lang)} class="event-cta">En savoir plus →</a>
-                </div>
-            </article>
+        <!-- Symmetric Stats Grid -->
+        <div class="hero-stats">
+          <div class="stat-box"><span class="stat-number font-display">{T.stat1n}</span><span class="stat-lbl">{T.stat1l}</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat-box"><span class="stat-number font-display">{T.stat2n}</span><span class="stat-lbl">{T.stat2l}</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat-box"><span class="stat-number font-display">{T.stat3n}</span><span class="stat-lbl">{T.stat3l}</span></div>
         </div>
 
-        <!-- Coming Soon -->
-        <div class="coming-soon-banner">
-            <h2>🔔 Restez informé</h2>
-            <p>De nouveaux événements et compétitions sont régulièrement planifiés. Abonnez-vous pour ne rien manquer.</p>
-            <a href={getRelativePath('/', lang)} + '#footer' class="notify-btn">Me notifier par email</a>
-        </div>
+        <a href="#zone-0" class="hero-scroll-btn">
+          <span>{T.scroll}</span>
+          <div class="scroll-chevron">↓</div>
+        </a>
+      </div>
+      
+      <!-- Fades smoothly into deep dark page background -->
+      <div class="hero-fade-out"></div>
+    </section>
+
+    <!-- ─── ADVENTURE ZONES DECK (1 to 5) ─── -->
+    <div class="aq-deck" id="aqDeck">
+      {T.zones.map((z, idx) => (
+        <section 
+          class="aq-deck-slide" 
+          id={`zone-${idx}`} 
+          data-zone-idx={idx}
+          style={`--zone-accent: ${z.accent}; --zone-theme-bg: ${z.bg};`}
+        >
+          <div class="slide-bg-glow"></div>
+          
+          <div class="slide-grid">
+            
+            <!-- LEFT COLUMN: Narrative & Structured Details -->
+            <div class="slide-narrative">
+              <div class="watermark-index font-display">{String(idx + 1).padStart(2, '0')}</div>
+              
+              <div class="slide-meta">
+                <span class="slide-icon">{z.icon}</span>
+                <span class="slide-badge" style={`color: ${z.accent}; border-color: ${z.accent}30`}>{z.tag}</span>
+              </div>
+              
+              <h2 class="slide-h2 font-display">{z.h2}</h2>
+              <p class="slide-body">{z.body}</p>
+              
+              <!-- Structured Service Pills -->
+              <div class="slide-pills">
+                {z.pills.map(pill => (
+                  <span class="slide-pill" style={`--accent-hover: ${z.accent}`}>
+                    {pill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Perfectly Symmetrical 3D Hover Collage -->
+            <div class="slide-gallery">
+              <div class="collage-container" id={`collage-${idx}`}>
+                <!-- Center Primary Card -->
+                <div class="collage-card card--primary">
+                  <div class="card-glass-glow"></div>
+                  <img src={`/events/Fav%20img%20(${z.imgs[0]}).jpg`} alt={`AQA ${z.tag} Core`} loading="lazy" />
+                </div>
+                <!-- Overlapping Secondary Card -->
+                <div class="collage-card card--secondary">
+                  <div class="card-glass-glow"></div>
+                  <img src={`/events/Fav%20img%20(${z.imgs[1]}).jpg`} alt={`AQA ${z.tag} Secondary`} loading="lazy" />
+                </div>
+                <!-- Overlapping Tertiary Card -->
+                <div class="collage-card card--tertiary">
+                  <div class="card-glass-glow"></div>
+                  <img src={`/events/Fav%20img%20(${z.imgs[2]}).jpg`} alt={`AQA ${z.tag} Tertiary`} loading="lazy" />
+                </div>
+              </div>
+              <p class="gallery-hint">{T.dragHint}</p>
+            </div>
+            
+          </div>
+        </section>
+      ))}
     </div>
 
-    <!-- Footer -->
+    <!-- ─── PLATINUM VIP FINALE ─── -->
+    <section class="aq-finale" id="aqFinale">
+      <div class="finale-waves" aria-hidden="true">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.02)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,218.7C672,203,768,149,864,138.7C960,128,1056,160,1152,176C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/></svg>
+      </div>
 
-  <Footer  lang={lang} />
+      <div class="finale-card">
+        <div class="finale-card-outline"></div>
+        <span class="finale-badge">AQA ATHLETIC CLUB · ELITE</span>
+        <h2 class="finale-h2 font-display" set:html={T.ctaTitle.replace('\n', '<br/>')}></h2>
+        <p class="finale-body">{T.ctaBody}</p>
+
+        <a 
+          href="https://chat.whatsapp.com/DcJm9dgx6WMLqsQmpreOZp" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="aq-whatsapp-btn"
+          id="btnWaVIP"
+        >
+          <span class="btn-ripple-glow"></span>
+          <span class="btn-wa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </span>
+          <span>{T.ctaBtn}</span>
+        </a>
+
+        <p class="finale-hint">{T.ctaHint}</p>
+      </div>
+    </section>
+
+    <Footer lang={lang} />
+  </div>
 </BaseLayout>
 
-<style>
+<!-- ═══════════════════════════════════════════
+     HIGH-END LUXURY CORE SCRIPT
+     ═══════════════════════════════════════════ -->
+<script>
+document.addEventListener('astro:page-load', () => {
+  const scroller = document.getElementById('luxuryScroller');
+  if (!scroller) return;
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { background: #000; scroll-behavior: smooth; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: transparent;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        .bg-frame { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; border: none; z-index: -1; pointer-events: none; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  const btnSensorySound = document.getElementById('btnSensorySound');
+  const sensoryLabel = document.getElementById('sensoryLabel');
+  const sensoryCanvas = document.getElementById('sensoryCanvas') as HTMLCanvasElement;
+  const slideSections = document.querySelectorAll('.aq-deck-slide');
+  const body = document.body;
 
-        /* Page Hero */
-        .page-hero {
-            text-align: center;
-            padding: 5rem 1rem 3rem;
-            position: relative;
-        }
-        .page-hero h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #0099ff, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-        .page-hero p {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: rgba(255,255,255,0.8);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: rgba(0,255,255,0.1);
-            border: 1px solid rgba(0,255,255,0.4);
-            color: #00ffff;
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-        }
-        .section-divider {
-            width: 80px; height: 3px;
-            background: linear-gradient(90deg, #00ffff, #0099ff);
-            margin: 1.5rem auto;
-            border-radius: 2px;
-            box-shadow: 0 0 10px rgba(0,255,255,0.5);
-        }
+  // Real-time variables
+  let activeZoneIdx = 0;
+  let audioCtx: AudioContext | null = null;
+  let audioActive = false;
+  let masterGain: GainNode | null = null;
+  let analyser: AnalyserNode | null = null;
 
-        /* Events Grid */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        .event-card {
-            background: rgba(0,153,255,0.05);
-            border: 1px solid rgba(0,153,255,0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .event-card:hover {
-            transform: translateY(-5px);
-            border-color: #00ffff;
-            box-shadow: 0 0 30px rgba(0,255,255,0.2);
-        }
-        .event-tag {
-            position: absolute;
-            top: 1rem; right: 1rem;
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .event-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-            background: linear-gradient(135deg, #001a33, #003366);
-        }
-        .event-img-placeholder {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, rgba(0,153,255,0.15), rgba(0,255,255,0.05));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .event-img-placeholder svg { width: 60px; height: 60px; stroke: rgba(0,255,255,0.4); }
-        .event-body { padding: 1.5rem; }
-        .event-date {
-            font-size: 0.8rem;
-            color: #00ffff;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .event-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.8rem;
-        }
-        .event-desc {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 1.2rem;
-            line-height: 1.5;
-        }
-        .event-meta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .event-meta span {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.6);
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        .event-meta svg { width: 14px; height: 14px; stroke: #00ffff; }
-        .event-cta {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.6rem 1.5rem;
-            background: linear-gradient(135deg, rgba(0,153,255,0.2), rgba(0,255,255,0.2));
-            border: 1px solid rgba(0,255,255,0.4);
-            border-radius: 25px;
-            color: #00ffff;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .event-cta:hover {
-            background: linear-gradient(135deg, rgba(0,153,255,0.4), rgba(0,255,255,0.4));
-            transform: translateY(-2px);
-        }
+  // Synth subchannels
+  let synthGains = {
+    forest: null as GainNode | null,
+    river: null as GainNode | null,
+    coast: null as GainNode | null,
+    abyss: null as GainNode | null
+  };
 
-        /* Coming Soon Banner */
-        .coming-soon-banner {
-            background: linear-gradient(135deg, rgba(0,153,255,0.1), rgba(0,255,255,0.05));
-            border: 1px solid rgba(0,255,255,0.3);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            margin: 3rem 0;
-        }
-        .coming-soon-banner h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 1rem;
-        }
-        .coming-soon-banner p {
-            color: rgba(255,255,255,0.7);
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
-        }
-        .notify-btn {
-            display: inline-block;
-            padding: 0.9rem 2rem;
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000;
-            font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .notify-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0,255,255,0.5);
-        }
+  // Sound oscs
+  let windFilter: BiquadFilterNode | null = null;
+  let windLfo: OscillatorNode | null = null;
+  let riverFilter: BiquadFilterNode | null = null;
+  let riverLfo: OscillatorNode | null = null;
+  let wavesFilter: BiquadFilterNode | null = null;
+  let wavesLfo: OscillatorNode | null = null;
+  let abyssDrone1: OscillatorNode | null = null;
+  let abyssDrone2: OscillatorNode | null = null;
 
-        @media (max-width: 768px) {
-            .events-grid { grid-template-columns: 1fr; }
-            .page-hero { padding: 4rem 1rem 2rem; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        }
+  let canvasCtx = sensoryCanvas ? sensoryCanvas.getContext('2d') : null;
+  let dataArray: Uint8Array = new Uint8Array(0);
+  let rafId: number | null = null;
+
+  // ═══════════════════════════════════════
+  // LUXURY SCROLL & BG MORPH
+  // ═══════════════════════════════════════
+  const bgColors = ['#03170b', '#021a1d', '#1c1503', '#021422', '#090317'];
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    const h = window.innerHeight;
     
+    // Intersection calculations to morph background smoothly on scroll thresholds
+    slideSections.forEach((section, idx) => {
+      const rect = section.getBoundingClientRect();
+      const overlapTop = Math.max(0, rect.top);
+      const overlapBottom = Math.min(h, rect.bottom);
+      const visibleHeight = Math.max(0, overlapBottom - overlapTop);
+      
+      // If slide dominates the screen (visible over 50%), trigger color shift
+      if (visibleHeight > h * 0.45 && activeZoneIdx !== idx) {
+        activeZoneIdx = idx;
+        body.style.backgroundColor = bgColors[idx];
+        morphSynthAudio(idx);
+      }
+    });
+
+    // Reset when scrolling back to hero
+    const heroRect = document.getElementById('aqHero')?.getBoundingClientRect();
+    if (heroRect && heroRect.bottom > h * 0.6 && activeZoneIdx !== -1) {
+      activeZoneIdx = -1;
+      body.style.backgroundColor = '#04090e';
+      morphSynthAudio(-1);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // initial fire
+
+  // ═══════════════════════════════════════
+  // PROCEDURAL WEB AUDIO NATURAL SYNTH
+  // ═══════════════════════════════════════
+  function initAudioEngine() {
+    try {
+      const AudioCtxClass = window.AudioContext || (window as any).webkitAudioContext;
+      audioCtx = new AudioCtxClass();
+
+      // Clean Master limiters
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 32;
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+      analyser.connect(audioCtx.destination);
+      masterGain.connect(analyser);
+
+      // Create individual channels
+      synthGains.forest = audioCtx.createGain();
+      synthGains.river = audioCtx.createGain();
+      synthGains.coast = audioCtx.createGain();
+      synthGains.abyss = audioCtx.createGain();
+
+      Object.values(synthGains).forEach(gn => {
+        gn.gain.setValueAtTime(0, audioCtx.currentTime);
+        gn.connect(masterGain);
+      });
+
+      // White noise buffer
+      const bufferSize = 2 * audioCtx.sampleRate;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+
+      // 1. FOREST SOUNDSCAPE
+      const forestNoise = audioCtx.createBufferSource();
+      forestNoise.buffer = noiseBuffer;
+      forestNoise.loop = true;
+
+      windFilter = audioCtx.createBiquadFilter();
+      windFilter.type = 'bandpass';
+      windFilter.Q.value = 1.2;
+      windFilter.frequency.value = 350;
+
+      windLfo = audioCtx.createOscillator();
+      windLfo.type = 'sine';
+      windLfo.frequency.value = 0.05; // 20s wind surge LFO
+      
+      const windLfoGain = audioCtx.createGain();
+      windLfoGain.gain.value = 120;
+
+      windLfo.connect(windLfoGain);
+      windLfoGain.connect(windFilter.frequency);
+      forestNoise.connect(windFilter);
+      windFilter.connect(synthGains.forest);
+
+      windLfo.start();
+      forestNoise.start();
+      triggerSoftChirp();
+
+      // 2. RIVER BUBBLES
+      const riverNoise = audioCtx.createBufferSource();
+      riverNoise.buffer = noiseBuffer;
+      riverNoise.loop = true;
+
+      riverFilter = audioCtx.createBiquadFilter();
+      riverFilter.type = 'bandpass';
+      riverFilter.Q.value = 4.0;
+      riverFilter.frequency.value = 580;
+
+      riverLfo = audioCtx.createOscillator();
+      riverLfo.frequency.value = 0.45;
+      const riverLfoGain = audioCtx.createGain();
+      riverLfoGain.gain.value = 180;
+
+      riverLfo.connect(riverLfoGain);
+      riverLfoGain.connect(riverFilter.frequency);
+      riverNoise.connect(riverFilter);
+      riverFilter.connect(synthGains.river);
+
+      riverLfo.start();
+      riverNoise.start();
+
+      // 3. OCEAN SURF
+      const surfNoise = audioCtx.createBufferSource();
+      surfNoise.buffer = noiseBuffer;
+      surfNoise.loop = true;
+
+      wavesFilter = audioCtx.createBiquadFilter();
+      wavesFilter.type = 'lowpass';
+      wavesFilter.frequency.value = 150;
+
+      wavesLfo = audioCtx.createOscillator();
+      wavesLfo.frequency.value = 0.1; // 10s period waves
+      const wavesLfoGain = audioCtx.createGain();
+      wavesLfoGain.gain.value = 0.4;
+
+      const wavesModGain = audioCtx.createGain();
+      wavesModGain.gain.value = 0;
+
+      wavesLfo.connect(wavesLfoGain);
+      wavesLfoGain.connect(wavesModGain.gain);
+      surfNoise.connect(wavesFilter);
+      wavesFilter.connect(wavesModGain);
+      wavesModGain.connect(synthGains.coast);
+
+      wavesLfo.start();
+      surfNoise.start();
+
+      // 4. ABYSSAL SUB-DRONE
+      abyssDrone1 = audioCtx.createOscillator();
+      abyssDrone1.type = 'sine';
+      abyssDrone1.frequency.value = 39.0;
+
+      abyssDrone2 = audioCtx.createOscillator();
+      abyssDrone2.type = 'sine';
+      abyssDrone2.frequency.value = 40.0;
+
+      const droneGain = audioCtx.createGain();
+      droneGain.gain.value = 0.45;
+
+      abyssDrone1.connect(droneGain);
+      abyssDrone2.connect(droneGain);
+      droneGain.connect(synthGains.abyss);
+
+      abyssDrone1.start();
+      abyssDrone2.start();
+
+      triggerCalmSonar();
+    } catch (e) {
+      console.warn("Failed to init high-end Web Audio synth:", e);
+    }
+  }
+
+  // Synthesizes occasional delicate bird pings for Forest
+  function triggerSoftChirp() {
+    if (!audioActive || !audioCtx || !synthGains.forest) return;
+    
+    const count = 1 + Math.floor(Math.random() * 2);
+    let st = audioCtx.currentTime;
+
+    for (let i = 0; i < count; i++) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      const f = 2000 + Math.random() * 600;
+      osc.frequency.setValueAtTime(f, st);
+      osc.frequency.exponentialRampToValueAtTime(f * 1.4, st + 0.07);
+
+      gain.gain.setValueAtTime(0.012, st);
+      gain.gain.exponentialRampToValueAtTime(0.0001, st + 0.07);
+
+      osc.connect(gain);
+      gain.connect(synthGains.forest);
+
+      osc.start(st);
+      osc.stop(st + 0.08);
+      st += 0.14;
+    }
+
+    setTimeout(triggerSoftChirp, 7000 + Math.random() * 7000);
+  }
+
+  // Synthesizes submarine echoing sonar ping for deep Abyss
+  function triggerCalmSonar() {
+    if (!audioActive || !audioCtx || !synthGains.abyss) {
+      setTimeout(triggerCalmSonar, 2000);
+      return;
+    }
+
+    if (activeZoneIdx === 4) {
+      const st = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(987.77, st); // B5 note
+      osc.frequency.exponentialRampToValueAtTime(980, st + 0.35);
+
+      gain.gain.setValueAtTime(0.04, st);
+      gain.gain.exponentialRampToValueAtTime(0.0001, st + 2.5);
+
+      const delay = audioCtx.createDelay();
+      delay.delayTime.setValueAtTime(0.5, st);
+      const feedback = audioCtx.createGain();
+      feedback.gain.setValueAtTime(0.4, st);
+
+      osc.connect(gain);
+      gain.connect(synthGains.abyss); // dry
+
+      gain.connect(delay);
+      delay.connect(feedback);
+      feedback.connect(delay);
+      feedback.connect(synthGains.abyss); // wet feedback delay
+
+      osc.start(st);
+      osc.stop(st + 2.8);
+    }
+
+    setTimeout(triggerCalmSonar, 10000 + Math.random() * 2000);
+  }
+
+  // Smooth environmental audio crossfades
+  function morphSynthAudio(zoneIdx: number) {
+    if (!audioCtx || !audioActive) return;
+
+    const t = audioCtx.currentTime;
+    const targets = { forest: 0, river: 0, coast: 0, abyss: 0 };
+
+    if (zoneIdx === 0) {
+      targets.forest = 0.35;
+    } else if (zoneIdx === 1) {
+      targets.forest = 0.08;
+      targets.river = 0.45;
+    } else if (zoneIdx === 2) {
+      targets.river = 0.1;
+      targets.coast = 0.55;
+    } else if (zoneIdx === 3) {
+      targets.coast = 0.25;
+      targets.abyss = 0.05;
+    } else if (zoneIdx === 4) {
+      targets.abyss = 0.5;
+    }
+
+    if (synthGains.forest) synthGains.forest.gain.setTargetAtTime(targets.forest, t, 0.5);
+    if (synthGains.river) synthGains.river.gain.setTargetAtTime(targets.river, t, 0.5);
+    if (synthGains.coast) synthGains.coast.gain.setTargetAtTime(targets.coast, t, 0.5);
+    if (synthGains.abyss) synthGains.abyss.gain.setTargetAtTime(targets.abyss, t, 0.5);
+  }
+
+  // Draw delicate micro-spectrometer waves in console pill
+  function drawVisualizer() {
+    if (!canvasCtx || !analyser || !audioActive) {
+      if (canvasCtx && sensoryCanvas) {
+        canvasCtx.clearRect(0, 0, sensoryCanvas.width, sensoryCanvas.height);
+      }
+      rafId = requestAnimationFrame(drawVisualizer);
+      return;
+    }
+
+    analyser.getByteFrequencyData(dataArray);
+    canvasCtx.clearRect(0, 0, sensoryCanvas.width, sensoryCanvas.height);
+
+    const barWidth = 3;
+    const gap = 2;
+    let x = 6;
+    
+    // Select active accent color dynamically matching zones
+    const activeColor = scroller.style.getPropertyValue('--zone-accent') || '#00ffff';
+
+    canvasCtx.fillStyle = activeColor;
+    for (let i = 0; i < analyser.frequencyBinCount; i++) {
+      const h = (dataArray[i] / 255) * sensoryCanvas.height * 0.85;
+      canvasCtx.fillRect(x, sensoryCanvas.height - h - 2, barWidth, h);
+      x += barWidth + gap;
+    }
+
+    rafId = requestAnimationFrame(drawVisualizer);
+  }
+
+  // Trigger sound engine activation on click
+  btnSensorySound?.addEventListener('click', () => {
+    if (!audioActive) {
+      audioActive = true;
+      btnSensorySound.classList.add('engaged');
+      if (sensoryLabel) sensoryLabel.innerText = "SOUNDSCAPE [ON]";
+      
+      if (!audioCtx) {
+        initAudioEngine();
+      } else if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      
+      morphSynthAudio(activeZoneIdx);
+    } else {
+      audioActive = false;
+      btnSensorySound.classList.remove('engaged');
+      if (sensoryLabel) sensoryLabel.innerText = "SOUNDSCAPE [OFF]";
+      
+      if (audioCtx) {
+        audioCtx.suspend();
+      }
+    }
+  });
+
+  // Start visualizer draw loop
+  drawVisualizer();
+
+  // ═══════════════════════════════════════
+  // LUXURY 3D CARD COLLAGE TILT PHYSICS
+  // ═══════════════════════════════════════
+  document.querySelectorAll('.collage-container').forEach(collage => {
+    collage.addEventListener('mousemove', (e: MouseEvent) => {
+      const r = (collage as HTMLElement).getBoundingClientRect();
+      // Calculate cursor offset percentage from center of collage
+      const xPct = (e.clientX - r.left) / r.width - 0.5;
+      const yPct = (e.clientY - r.top) / r.height - 0.5;
+      
+      // Tilt primary and overlapping cards satisfying premium depth physics
+      const primary = collage.querySelector('.card--primary') as HTMLElement;
+      const secondary = collage.querySelector('.card--secondary') as HTMLElement;
+      const tertiary = collage.querySelector('.card--tertiary') as HTMLElement;
+
+      if (primary) {
+        primary.style.transform = `perspective(800px) rotateY(${xPct * 25}deg) rotateX(${yPct * -25}deg) translateZ(0px)`;
+      }
+      if (secondary) {
+        secondary.style.transform = `perspective(800px) rotateY(${xPct * 35}deg) rotateX(${yPct * -35}deg) translateZ(40px) translate(${xPct * 15}px, ${yPct * 15}px)`;
+      }
+      if (tertiary) {
+        tertiary.style.transform = `perspective(800px) rotateY(${xPct * 45}deg) rotateX(${yPct * -45}deg) translateZ(80px) translate(${xPct * 30}px, ${yPct * 30}px)`;
+      }
+    });
+
+    collage.addEventListener('mouseleave', () => {
+      // Smoothly reset transformations on cursor escape
+      collage.querySelectorAll('.collage-card').forEach(c => {
+        (c as HTMLElement).style.transform = '';
+      });
+    });
+  });
+
+  // Cleanup listeners on Astro navigation transitions
+  document.addEventListener('astro:before-swap', () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    if (audioCtx) {
+      audioCtx.close();
+      audioCtx = null;
+    }
+    window.removeEventListener('scroll', onScroll);
+  });
+});
+</script>
+
+<style>
+/* ═══════════════════════════════════════════════
+   PREMIUM ATHLETIC LUXURY DESIGN SYSTEM
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --bg-dark-core: #04090e;
+  --bg-glass-card: rgba(1, 11, 20, 0.45);
+  --border-glass-card: rgba(255, 255, 255, 0.08);
+  --font-display: 'Outfit', 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark-core) !important;
+  transition: background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── ULTRA-MINIMAL SENSORY PILL TERMINAL ─── */
+.aq-sensory-console {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(1, 11, 20, 0.65);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.aq-sensory-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.aq-sensory-btn:hover, .aq-sensory-btn.engaged {
+  color: #fff;
+}
+
+.aq-sensory-console canvas {
+  width: 90px;
+  height: 24px;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.aq-sensory-btn.engaged + canvas {
+  opacity: 1;
+}
+
+/* Tiny soundwave spectrometer animation */
+.wave-spectrometer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+.wave-spectrometer span {
+  width: 1.5px;
+  height: 100%;
+  background: currentColor;
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
+.aq-sensory-btn.engaged .wave-spectrometer span:nth-child(1) { animation: luxuryWave 0.6s infinite alternate; }
+.aq-sensory-btn.engaged .wave-spectrometer span:nth-child(2) { animation: luxuryWave 0.8s infinite alternate-reverse; }
+.aq-sensory-btn.engaged .wave-spectrometer span:nth-child(3) { animation: luxuryWave 0.5s infinite alternate 0.1s; }
+.aq-sensory-btn.engaged .wave-spectrometer span:nth-child(4) { animation: luxuryWave 0.7s infinite alternate-reverse 0.2s; }
+.aq-sensory-btn.engaged .wave-spectrometer span:nth-child(5) { animation: luxuryWave 0.6s infinite alternate 0.3s; }
+
+@keyframes luxuryWave {
+  from { height: 2px; }
+  to { height: 10px; }
+}
+
+/* ─── KINETIC SCROLL WRAPPER ─── */
+.aq-luxury-scroller {
+  width: 100%;
+  position: relative;
+}
+
+/* ─── ATHLETIC SOVEREIGN HERO ─── */
+.aq-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+}
+
+.hero-video-mask {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 50% at 50% 120%, rgba(0, 255, 255, 0.15) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(4,9,14,0.3) 0%, rgba(4,9,14,0.9) 100%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 2rem;
+  max-width: 960px;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.5rem 1.8rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  border-radius: 100px;
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 11vw, 8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 1.5rem 0 2rem;
+  font-family: var(--font-display);
+}
+
+.title-line { display: block; }
+.title-line--1 { color: #fff; }
+.title-line--2 {
+  background: linear-gradient(135deg, #fff 20%, rgba(255,255,255,0.4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.title-line--3 {
+  background: linear-gradient(135deg, #00ffff, #00b4d8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(0,255,255,0.2);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: rgba(255,255,255,0.65);
+  max-width: 680px;
+  margin: 0 auto 3.5rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Symmetric stats row */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 4.5rem;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat-lbl {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  margin-top: 0.4rem;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 45px;
+  background: rgba(255,255,255,0.1);
+}
+
+.hero-scroll-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.hero-scroll-btn:hover {
+  color: #00ffff;
+}
+
+.scroll-chevron {
+  animation: bounceSlow 2s infinite;
+  font-size: 1.1rem;
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.hero-fade-out {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, transparent, var(--bg-dark-core));
+  pointer-events: none;
+}
+
+/* ─── STORY DECK SLIDES ─── */
+.aq-deck {
+  width: 100%;
+}
+
+.aq-deck-slide {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10vh 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Background ambient light burst */
+.slide-bg-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--zone-accent) 0%, transparent 60%);
+  opacity: 0.025;
+  filter: blur(100px);
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.slide-grid {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* LEFT NARRATIVE COLUMN */
+.slide-narrative {
+  position: relative;
+}
+
+.watermark-index {
+  font-size: clamp(8rem, 15vw, 12rem);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  line-height: 0.7;
+  position: absolute;
+  top: -3.5rem;
+  left: -1rem;
+  user-select: none;
+  pointer-events: none;
+}
+
+.slide-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.slide-icon {
+  font-size: 1.6rem;
+}
+
+.slide-badge {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0.3rem 1.1rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.01);
+  backdrop-filter: blur(5px);
+}
+
+.slide-h2 {
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #fff;
+  margin-bottom: 1.8rem;
+  letter-spacing: -0.01em;
+}
+
+.slide-body {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.slide-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.slide-pill {
+  padding: 0.45rem 1.2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.75);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.slide-pill:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #000;
+  box-shadow: 0 0 20px var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* RIGHT GALLERY COLUMN (SYMMETRIC COLLAGE) */
+.slide-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.collage-container {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  transform-style: preserve-3d;
+}
+
+.collage-card {
+  position: absolute;
+  background: #010b14;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-glass-card);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.1, 0.9, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.collage-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  filter: brightness(0.85) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+
+.collage-card:hover img {
+  filter: brightness(1.05) contrast(1.1);
+}
+
+.card-glass-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Structured Symmetrical Placement offsets */
+.card--primary {
+  width: 250px;
+  height: 250px;
+  top: calc(50% - 125px);
+  left: calc(50% - 125px);
+  z-index: 5;
+}
+
+.card--secondary {
+  width: 150px;
+  height: 150px;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  transform: translateZ(40px);
+}
+
+.card--tertiary {
+  width: 140px;
+  height: 140px;
+  bottom: 15px;
+  left: 15px;
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  transform: translateZ(80px);
+}
+
+.gallery-hint {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* ─── VIP CTA PLATINUM FINALE ─── */
+.aq-finale {
+  position: relative;
+  padding: 10rem 2rem 8rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.finale-waves {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.finale-waves svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+
+.finale-card {
+  position: relative;
+  z-index: 10;
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border: 1px solid var(--border-glass-card);
+  border-radius: 32px;
+  padding: 5rem 4rem;
+  max-width: 780px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 
+    0 30px 80px rgba(0,0,0,0.5), 
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.finale-card-outline {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent) border-box;
+  pointer-events: none;
+}
+
+.finale-badge {
+  display: inline-block;
+  padding: 0.35rem 1.4rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.finale-h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.finale-body {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.6);
+  max-width: 580px;
+  margin: 0 auto 3rem;
+}
+
+/* Premium luxury WhatsApp Button */
+.aq-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #fff;
+  padding: 1.1rem 2.8rem;
+  border-radius: 100px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 30px rgba(37,211,102,0.35),
+    0 0 0 0 rgba(37,211,102,0.4);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+  animation: luxuryBtnPulse 3s infinite;
+}
+
+.aq-whatsapp-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(37,211,102,0.5), 0 0 0 8px rgba(37,211,102,0.15);
+  animation: none;
+}
+
+@keyframes luxuryBtnPulse {
+  0%, 100% { box-shadow: 0 10px 30px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.2); }
+  60% { box-shadow: 0 10px 30px rgba(37,211,102,0.35), 0 0 0 12px rgba(37,211,102,0); }
+}
+
+.btn-wa-icon {
+  display: flex;
+}
+
+.finale-hint {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 1.8rem;
+}
+
+/* ─── RESPONSIVE DECK CORES ─── */
+@media (max-width: 1024px) {
+  .slide-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+  
+  .slide-narrative {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .watermark-index {
+    left: calc(50% - 4.5rem);
+  }
+  
+  .collage-container {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .card--primary {
+    width: 200px;
+    height: 200px;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+  }
+
+  .card--secondary {
+    width: 120px;
+    height: 120px;
+  }
+
+  .card--tertiary {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .slide-pills {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .finale-card {
+    padding: 3.5rem 1.5rem;
+    border-radius: 24px;
+  }
+  
+  .hero-stats {
+    gap: 1.5rem;
+  }
+  
+  .hero-title {
+    margin: 1rem 0;
+  }
+}
 </style>

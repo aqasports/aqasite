@@ -84,6 +84,52 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
     }
   </script>
 
+  <!-- Language persistence & redirection script -->
+  <script is:inline>
+    (function() {
+      function checkLang() {
+        if (typeof localStorage === 'undefined') return;
+        
+        const path = window.location.pathname;
+        const currentLang = document.documentElement.lang || 'fr';
+        const isFrenchPage = !path.startsWith('/ar') && !path.startsWith('/en');
+        const supportedLangs = ['ar', 'en'];
+        
+        if (isFrenchPage) {
+          const savedLang = localStorage.getItem('aqa_lang');
+          
+          if (savedLang && supportedLangs.includes(savedLang)) {
+            const referrer = document.referrer;
+            const currentOrigin = window.location.origin;
+            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
+            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            
+            if (isExplicitFR) {
+              localStorage.setItem('aqa_lang', 'fr');
+            } else {
+              const targetPath = '/' + savedLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            }
+          } else if (!savedLang) {
+            const browserLang = (navigator.language || 'fr').split('-')[0].toLowerCase();
+            if (supportedLangs.includes(browserLang)) {
+              const targetPath = '/' + browserLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            } else {
+              localStorage.setItem('aqa_lang', 'fr');
+            }
+          }
+        } else {
+          localStorage.setItem('aqa_lang', currentLang);
+        }
+      }
+      
+      checkLang();
+      document.addEventListener('astro:after-swap', checkLang);
+      document.addEventListener('astro:page-load', checkLang);
+    })();
+  </script>
+
   <!-- Slot for page-specific <style> or <link> tags -->
   <slot name="head" />
 </head>
@@ -91,8 +137,5 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
   <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true"></iframe>
   <div class="bg-logo"></div>
   <slot />
-
-  <!-- WhatsApp floating widget -->
-  <script src="/js/navbar-wa.js" is:inline></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 
   "nav_tarifs": "الأسعار",
   "nav_groupes": "المجموعات",
-  "nav_piscines": "المسابح",
+  "nav_infrastructure": "المرافق",
   "nav_infos": "معلومات",
   "nav_events": "الفعاليات",
   "nav_formations": "التكوين",
@@ -18,7 +18,7 @@
 
   "stats_athletes": "رياضي مُؤهَّل",
   "stats_coaches": "مدرب نخبة",
-  "stats_pools": "مسبح شريك",
+  "stats_infrastructure": "مرافق شريكة",
   "stats_satisfaction": "رضا العملاء",
 
   "section_services_title": "خدماتنا الأساسية",
@@ -53,7 +53,7 @@
   "btn_wellness": "أكا ويلنس",
   "btn_events": "فعاليات أكا",
   "btn_sports": "الرياضات",
-  "btn_piscines": "المسابح",
+  "btn_infrastructure": "المرافق",
   "btn_team": "الفريق",
   "btn_adherents": "المنخرطون",
   "btn_webtv": "قناة الويب",

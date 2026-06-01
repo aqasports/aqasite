@@ -61,6 +61,52 @@
     }
   </script>
 
+  <!-- Language persistence & redirection script -->
+  <script>
+    (function() {
+      function checkLang() {
+        if (typeof localStorage === 'undefined') return;
+        
+        const path = window.location.pathname;
+        const currentLang = document.documentElement.lang || 'fr';
+        const isFrenchPage = !path.startsWith('/ar') && !path.startsWith('/en');
+        const supportedLangs = ['ar', 'en'];
+        
+        if (isFrenchPage) {
+          const savedLang = localStorage.getItem('aqa_lang');
+          
+          if (savedLang && supportedLangs.includes(savedLang)) {
+            const referrer = document.referrer;
+            const currentOrigin = window.location.origin;
+            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
+            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            
+            if (isExplicitFR) {
+              localStorage.setItem('aqa_lang', 'fr');
+            } else {
+              const targetPath = '/' + savedLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            }
+          } else if (!savedLang) {
+            const browserLang = (navigator.language || 'fr').split('-')[0].toLowerCase();
+            if (supportedLangs.includes(browserLang)) {
+              const targetPath = '/' + browserLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            } else {
+              localStorage.setItem('aqa_lang', 'fr');
+            }
+          }
+        } else {
+          localStorage.setItem('aqa_lang', currentLang);
+        }
+      }
+      
+      checkLang();
+      document.addEventListener('astro:after-swap', checkLang);
+      document.addEventListener('astro:page-load', checkLang);
+    })();
+  </script>
+
   <!-- Slot for page-specific <style> or <link> tags -->
   
 <style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap";.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}:root{--bg-primary: #030712;--bg-secondary: #0b0f19;--bg-card: rgba(15, 23, 42, .65);--color-teal: #00f2ff;--color-blue: #0088ff;--color-blue-dark: #0055cc;--text-primary: #f9fafb;--text-secondary: #9ca3af;--text-muted: #6b7280;--border-glass: 1px solid rgba(255, 255, 255, .08);--border-active: 1px solid rgba(0, 242, 255, .4);--shadow-glow: 0 0 25px rgba(0, 242, 255, .15);--shadow-glow-active: 0 0 35px rgba(0, 242, 255, .35);--font-display: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--transition-smooth: all .3s cubic-bezier(.4, 0, .2, 1)}*{margin:0;padding:0;box-sizing:border-box}html{background-color:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);scroll-behavior:smooth;overflow-x:hidden;height:100%}body{background:transparent;min-height:100vh;line-height:1.6;position:relative}h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-primary);font-weight:700;letter-spacing:-.025em}p{font-family:var(--font-body);color:var(--text-secondary)}a{color:inherit;text-decoration:none;transition:var(--transition-smooth)}.glass-panel{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:var(--border-glass);border-radius:20px;box-shadow:0 10px 30px -10px #000000b3;transition:var(--transition-smooth)}.glass-panel:hover{border-color:#00f2ff40;box-shadow:var(--shadow-glow)}body:before{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% -20%,rgba(0,242,255,.08) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(0,136,255,.05) 0%,transparent 50%);pointer-events:none;z-index:-2}.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}@keyframes neonGlow{0%,to{filter:drop-shadow(0 0 10px rgba(0,242,255,.3)) drop-shadow(0 0 20px rgba(0,136,255,.2))}50%{filter:drop-shadow(0 0 20px rgba(0,242,255,.5)) drop-shadow(0 0 35px rgba(0,136,255,.3))}}@keyframes shimmer{0%{transform:translate(-100%) rotate(45deg)}to{transform:translate(100%) rotate(45deg)}}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:#1f2937;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#374151}.skip-link{position:absolute;top:-40px;left:0;background:var(--color-teal);color:#000;padding:8px 16px;z-index:1000;font-weight:700}.skip-link:focus{top:0}.bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none;background:transparent}.bg-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;background:url(https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png) no-repeat center;background-size:contain;opacity:.02;z-index:-1;pointer-events:none}
@@ -83,7 +129,7 @@
         <nav class="nav-menu" id="navMenu">
             <a href="/en/tarifs" class="nav-link" data-i18n="nav_tarifs">Pricing</a>
             <a href="/en/groupes" class="nav-link" data-i18n="nav_groupes">Groups</a>
-            <a href="/en/piscines" class="nav-link" data-i18n="nav_piscines">Pools</a>
+            <a href="/en/infrastructure" class="nav-link" data-i18n="nav_infrastructure">Infrastructures</a>
             <a href="/en/infos" class="nav-link" data-i18n="nav_infos">Info</a>
             <a href="/en/events" class="nav-link" data-i18n="nav_events">Events</a>
             <a href="/en/formation" class="nav-link" data-i18n="nav_formation">Training</a>
@@ -108,7 +154,7 @@
     <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
     <a href="/en/tarifs" class="mobile-nav-link" data-i18n="nav_tarifs">Pricing</a>
     <a href="/en/groupes" class="mobile-nav-link" data-i18n="nav_groupes">Groups</a>
-    <a href="/en/piscines" class="mobile-nav-link" data-i18n="nav_piscines">Pools</a>
+    <a href="/en/infrastructure" class="mobile-nav-link" data-i18n="nav_infrastructure">Infrastructures</a>
     <a href="/en/infos" class="mobile-nav-link" data-i18n="nav_infos">Info</a>
     <a href="/en/events" class="mobile-nav-link" data-i18n="nav_events">Events</a>
     <a href="/en/formation" class="mobile-nav-link" data-i18n="nav_formation">Training</a>
@@ -270,7 +316,7 @@
                 <li data-astro-cid-sz7xmlte><a href="/en/tarifs" data-astro-cid-sz7xmlte>Pricing</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/groupes" data-astro-cid-sz7xmlte>Groups</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/inscription" data-astro-cid-sz7xmlte>Inscription</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/piscines" data-astro-cid-sz7xmlte>Pools</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/en/infrastructure" data-astro-cid-sz7xmlte>Infrastructures</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/events" data-astro-cid-sz7xmlte>Events</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/webtv" data-astro-cid-sz7xmlte>WebTV</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/store" data-astro-cid-sz7xmlte>Store</a></li>
@@ -410,8 +456,4 @@
   });
 </script>
 
-
-  <!-- WhatsApp floating widget -->
-  <script src="/js/navbar-wa.js"></script>
-</body>
-</html>
+</body></html>

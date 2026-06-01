@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   
 <meta name="astro-view-transitions-enabled" content="true">
@@ -10,26 +10,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Nos Piscines | AQA Sports Academy — Réghaia &amp; Cheraga Algérie</title>
-  <meta name="description" content="AQA Sports Academy s'entraîne dans des piscines partenaires à Réghaia et Cheraga, Alger. Infrastructures modernes, eau traitée, conditions optimales.">
-  <meta name="keywords" content="piscines algérie, piscine réghaia, piscine cheraga, infrastructure natation alger, aqa piscine">
+  <title>Infrastructures d&#39;Excellence | AQA Sports Academy — Réghaia &amp; Cheraga Algérie</title>
+  <meta name="description" content="AQA Sports Academy s'entraîne dans des infrastructures partenaires à Réghaia et Cheraga, Alger. Infrastructures modernes, eau traitée, conditions optimales.">
+  <meta name="keywords" content="infrastructures algérie, piscine réghaia, piscine cheraga, infrastructure natation alger, aqa piscine">
   <meta name="robots" content="index, follow">
   <meta name="author" content="AQA Sports Academy">
-  <link rel="canonical" href="https://aqasports.com/piscines">
+  <link rel="canonical" href="https://aqasports.com/infrastructure">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aqasports.com/piscines">
-  <meta property="og:title" content="Nos Piscines | AQA Sports Academy — Réghaia &#38; Cheraga Algérie">
-  <meta property="og:description" content="AQA Sports Academy s'entraîne dans des piscines partenaires à Réghaia et Cheraga, Alger. Infrastructures modernes, eau traitée, conditions optimales.">
+  <meta property="og:url" content="https://aqasports.com/infrastructure">
+  <meta property="og:title" content="Infrastructures d'Excellence | AQA Sports Academy — Réghaia &#38; Cheraga Algérie">
+  <meta property="og:description" content="AQA Sports Academy s'entraîne dans des infrastructures partenaires à Réghaia et Cheraga, Alger. Infrastructures modernes, eau traitée, conditions optimales.">
   <meta property="og:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
   <meta property="og:site_name" content="AQA Sports Academy">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="ar_DZ">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nos Piscines | AQA Sports Academy — Réghaia &#38; Cheraga Algérie">
-  <meta name="twitter:description" content="AQA Sports Academy s'entraîne dans des piscines partenaires à Réghaia et Cheraga, Alger. Infrastructures modernes, eau traitée, conditions optimales.">
+  <meta name="twitter:title" content="Infrastructures d'Excellence | AQA Sports Academy — Réghaia &#38; Cheraga Algérie">
+  <meta name="twitter:description" content="AQA Sports Academy s'entraîne dans des infrastructures partenaires à Réghaia et Cheraga, Alger. Infrastructures modernes, eau traitée, conditions optimales.">
   <meta name="twitter:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
 
   <!-- Favicon -->
@@ -61,13 +61,59 @@
     }
   </script>
 
+  <!-- Language persistence & redirection script -->
+  <script>
+    (function() {
+      function checkLang() {
+        if (typeof localStorage === 'undefined') return;
+        
+        const path = window.location.pathname;
+        const currentLang = document.documentElement.lang || 'fr';
+        const isFrenchPage = !path.startsWith('/ar') && !path.startsWith('/en');
+        const supportedLangs = ['ar', 'en'];
+        
+        if (isFrenchPage) {
+          const savedLang = localStorage.getItem('aqa_lang');
+          
+          if (savedLang && supportedLangs.includes(savedLang)) {
+            const referrer = document.referrer;
+            const currentOrigin = window.location.origin;
+            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
+            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            
+            if (isExplicitFR) {
+              localStorage.setItem('aqa_lang', 'fr');
+            } else {
+              const targetPath = '/' + savedLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            }
+          } else if (!savedLang) {
+            const browserLang = (navigator.language || 'fr').split('-')[0].toLowerCase();
+            if (supportedLangs.includes(browserLang)) {
+              const targetPath = '/' + browserLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            } else {
+              localStorage.setItem('aqa_lang', 'fr');
+            }
+          }
+        } else {
+          localStorage.setItem('aqa_lang', currentLang);
+        }
+      }
+      
+      checkLang();
+      document.addEventListener('astro:after-swap', checkLang);
+      document.addEventListener('astro:page-load', checkLang);
+    })();
+  </script>
+
   <!-- Slot for page-specific <style> or <link> tags -->
   
 <style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap";.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}:root{--bg-primary: #030712;--bg-secondary: #0b0f19;--bg-card: rgba(15, 23, 42, .65);--color-teal: #00f2ff;--color-blue: #0088ff;--color-blue-dark: #0055cc;--text-primary: #f9fafb;--text-secondary: #9ca3af;--text-muted: #6b7280;--border-glass: 1px solid rgba(255, 255, 255, .08);--border-active: 1px solid rgba(0, 242, 255, .4);--shadow-glow: 0 0 25px rgba(0, 242, 255, .15);--shadow-glow-active: 0 0 35px rgba(0, 242, 255, .35);--font-display: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--transition-smooth: all .3s cubic-bezier(.4, 0, .2, 1)}*{margin:0;padding:0;box-sizing:border-box}html{background-color:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);scroll-behavior:smooth;overflow-x:hidden;height:100%}body{background:transparent;min-height:100vh;line-height:1.6;position:relative}h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-primary);font-weight:700;letter-spacing:-.025em}p{font-family:var(--font-body);color:var(--text-secondary)}a{color:inherit;text-decoration:none;transition:var(--transition-smooth)}.glass-panel{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:var(--border-glass);border-radius:20px;box-shadow:0 10px 30px -10px #000000b3;transition:var(--transition-smooth)}.glass-panel:hover{border-color:#00f2ff40;box-shadow:var(--shadow-glow)}body:before{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% -20%,rgba(0,242,255,.08) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(0,136,255,.05) 0%,transparent 50%);pointer-events:none;z-index:-2}.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}@keyframes neonGlow{0%,to{filter:drop-shadow(0 0 10px rgba(0,242,255,.3)) drop-shadow(0 0 20px rgba(0,136,255,.2))}50%{filter:drop-shadow(0 0 20px rgba(0,242,255,.5)) drop-shadow(0 0 35px rgba(0,136,255,.3))}}@keyframes shimmer{0%{transform:translate(-100%) rotate(45deg)}to{transform:translate(100%) rotate(45deg)}}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:#1f2937;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#374151}.skip-link{position:absolute;top:-40px;left:0;background:var(--color-teal);color:#000;padding:8px 16px;z-index:1000;font-weight:700}.skip-link:focus{top:0}.bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none;background:transparent}.bg-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;background:url(https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png) no-repeat center;background-size:contain;opacity:.02;z-index:-1;pointer-events:none}
 </style>
-<link rel="stylesheet" href="/_astro/piscines.z_wJyeBb.css">
+<link rel="stylesheet" href="/_astro/infrastructure.BDBHI3Iw.css">
 <style>.aqa-footer[data-astro-cid-sz7xmlte]{background:#030712f2;border-top:1px solid rgba(255,255,255,.08);padding:4rem 1rem 3rem;width:100%;color:var(--text-primary);margin-top:4rem;box-shadow:0 -10px 30px #00000080}.footer-content[data-astro-cid-sz7xmlte]{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.5rem}.footer-section[data-astro-cid-sz7xmlte] h4[data-astro-cid-sz7xmlte]{font-size:1.15rem;font-weight:700;color:var(--color-teal);margin-bottom:1.5rem;text-shadow:0 0 10px rgba(0,242,255,.3);display:flex;align-items:center;gap:.5rem}.footer-section[data-astro-cid-sz7xmlte] h4[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:20px;height:20px;stroke:var(--color-teal)}.footer-section[data-astro-cid-sz7xmlte] p[data-astro-cid-sz7xmlte]{font-size:.95rem;line-height:1.6;color:var(--text-secondary)}.footer-section[data-astro-cid-sz7xmlte] ul[data-astro-cid-sz7xmlte]{list-style:none}.footer-section[data-astro-cid-sz7xmlte] li[data-astro-cid-sz7xmlte]{margin-bottom:.6rem}.footer-section[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{color:var(--text-secondary);font-size:.95rem}.footer-section[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:var(--color-teal);text-shadow:0 0 8px rgba(0,242,255,.4)}.contact-info[data-astro-cid-sz7xmlte]{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}.contact-info[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{display:flex;align-items:center;gap:.5rem}.contact-info[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:18px;height:18px;stroke:var(--color-teal);flex-shrink:0}.socials[data-astro-cid-sz7xmlte]{display:flex;gap:.75rem;margin-top:1.25rem}.socials[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:#ffffff08;border:1px solid rgba(255,255,255,.08);border-radius:50%;transition:var(--transition-smooth)}.socials[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{background:var(--color-teal);color:#030712;box-shadow:var(--shadow-glow-active);transform:translateY(-2px)}.socials[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:20px;height:20px;stroke:currentColor}.newsletter-form[data-astro-cid-sz7xmlte]{display:flex;gap:.5rem;margin-top:1rem}.newsletter-input[data-astro-cid-sz7xmlte]{flex:1;padding:.75rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:30px;background:#0006;color:var(--text-primary);font-size:.9rem}.newsletter-input[data-astro-cid-sz7xmlte]:focus{outline:none;border-color:var(--color-teal);box-shadow:var(--shadow-glow)}.newsletter-btn[data-astro-cid-sz7xmlte]{background:linear-gradient(135deg,var(--color-blue),var(--color-teal));color:#030712;padding:.75rem 1.5rem;border:none;border-radius:30px;font-weight:700;font-size:.9rem;cursor:pointer;transition:var(--transition-smooth)}.newsletter-btn[data-astro-cid-sz7xmlte]:hover{box-shadow:var(--shadow-glow-active);transform:translateY(-1px)}.status-message[data-astro-cid-sz7xmlte]{font-size:.85rem;margin-top:.5rem;font-weight:600}.status-message[data-astro-cid-sz7xmlte].success{color:#10b981}.status-message[data-astro-cid-sz7xmlte].error{color:#ef4444}.footer-bottom[data-astro-cid-sz7xmlte]{border-top:1px solid rgba(255,255,255,.08);margin-top:3rem;padding-top:2rem;text-align:center;display:flex;flex-direction:column;gap:1rem;align-items:center}.footer-logo[data-astro-cid-sz7xmlte]{width:50px;height:auto;opacity:.8;transition:var(--transition-smooth)}.footer-logo[data-astro-cid-sz7xmlte]:hover{opacity:1;transform:scale(1.05);filter:drop-shadow(0 0 10px var(--color-teal))}.copyright[data-astro-cid-sz7xmlte]{font-size:.85rem;color:var(--text-muted)}@media (max-width: 768px){.footer-content[data-astro-cid-sz7xmlte]{grid-template-columns:1fr;text-align:center}.contact-info[data-astro-cid-sz7xmlte],.socials[data-astro-cid-sz7xmlte]{justify-content:center}}
-</style><script type="module" src="/_astro/hoisted.DPzQ-f1l.js"></script></head>
+</style><script type="module" src="/_astro/hoisted.BCuKZeRz.js"></script></head>
 <body>
   <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true"></iframe>
   <div class="bg-logo"></div>
@@ -75,26 +121,26 @@
   <header id="header">
     <div class="header-content">
         <div class="logo-section">
-            <a href="/en">
+            <a href="/ar">
                 <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
             </a>
         </div>
 
         <nav class="nav-menu" id="navMenu">
-            <a href="/en/tarifs" class="nav-link" data-i18n="nav_tarifs">Pricing</a>
-            <a href="/en/groupes" class="nav-link" data-i18n="nav_groupes">Groups</a>
-            <a href="/en/piscines" class="nav-link active" data-i18n="nav_piscines">Pools</a>
-            <a href="/en/infos" class="nav-link" data-i18n="nav_infos">Info</a>
-            <a href="/en/events" class="nav-link" data-i18n="nav_events">Events</a>
-            <a href="/en/formation" class="nav-link" data-i18n="nav_formation">Training</a>
-            <a href="/en/store" class="nav-link" data-i18n="nav_store">Store</a>
+            <a href="/ar/tarifs" class="nav-link" data-i18n="nav_tarifs">الأسعار</a>
+            <a href="/ar/groupes" class="nav-link" data-i18n="nav_groupes">المجموعات</a>
+            <a href="/ar/infrastructure" class="nav-link active" data-i18n="nav_infrastructure">المرافق</a>
+            <a href="/ar/infos" class="nav-link" data-i18n="nav_infos">معلومات</a>
+            <a href="/ar/events" class="nav-link" data-i18n="nav_events">الفعاليات</a>
+            <a href="/ar/formation" class="nav-link" data-i18n="nav_formation">التكوين</a>
+            <a href="/ar/store" class="nav-link" data-i18n="nav_store">المتجر</a>
         </nav>
 
         <div class="right-actions">
             <div class="lang-switcher" role="group" aria-label="Language switcher">
-              <a href="/piscines" class="lang-btn" data-lang-btn="fr" aria-label="Français">FR</a>
-              <a href="/ar/piscines" class="lang-btn" data-lang-btn="ar" aria-label="العربية">AR</a>
-              <a href="/en/piscines" class="lang-btn lang-active" data-lang-btn="en" aria-label="English">EN</a>
+              <a href="/infrastructure" class="lang-btn" data-lang-btn="fr" aria-label="Français">FR</a>
+              <a href="/ar/infrastructure" class="lang-btn lang-active" data-lang-btn="ar" aria-label="العربية">AR</a>
+              <a href="/en/infrastructure" class="lang-btn" data-lang-btn="en" aria-label="English">EN</a>
             </div>
 
             <div class="menu-toggle" onclick="toggleMobileMenu()">
@@ -106,143 +152,118 @@
 
 <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
-    <a href="/en/tarifs" class="mobile-nav-link" data-i18n="nav_tarifs">Pricing</a>
-    <a href="/en/groupes" class="mobile-nav-link" data-i18n="nav_groupes">Groups</a>
-    <a href="/en/piscines" class="mobile-nav-link active" data-i18n="nav_piscines">Pools</a>
-    <a href="/en/infos" class="mobile-nav-link" data-i18n="nav_infos">Info</a>
-    <a href="/en/events" class="mobile-nav-link" data-i18n="nav_events">Events</a>
-    <a href="/en/formation" class="mobile-nav-link" data-i18n="nav_formation">Training</a>
-    <a href="/en/store" class="mobile-nav-link" data-i18n="nav_store">Store</a>
+    <a href="/ar/tarifs" class="mobile-nav-link" data-i18n="nav_tarifs">الأسعار</a>
+    <a href="/ar/groupes" class="mobile-nav-link" data-i18n="nav_groupes">المجموعات</a>
+    <a href="/ar/infrastructure" class="mobile-nav-link active" data-i18n="nav_infrastructure">المرافق</a>
+    <a href="/ar/infos" class="mobile-nav-link" data-i18n="nav_infos">معلومات</a>
+    <a href="/ar/events" class="mobile-nav-link" data-i18n="nav_events">الفعاليات</a>
+    <a href="/ar/formation" class="mobile-nav-link" data-i18n="nav_formation">التكوين</a>
+    <a href="/ar/store" class="mobile-nav-link" data-i18n="nav_store">المتجر</a>
     <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
-      <a href="/piscines" class="lang-btn" data-lang-btn="fr">FR</a>
-      <a href="/ar/piscines" class="lang-btn" data-lang-btn="ar">AR</a>
-      <a href="/en/piscines" class="lang-btn lang-active" data-lang-btn="en">EN</a>
+      <a href="/infrastructure" class="lang-btn" data-lang-btn="fr">FR</a>
+      <a href="/ar/infrastructure" class="lang-btn lang-active" data-lang-btn="ar">AR</a>
+      <a href="/en/infrastructure" class="lang-btn" data-lang-btn="en">EN</a>
     </div>
 </div>
 
 <script src="/js/navbar.js"></script>
 
-
-  
-
-  
-  
-  
-
-  
-    
-  <div class="container" data-astro-cid-tvbssjxb>
-    <section class="hero" data-astro-cid-tvbssjxb>
-      <h1 data-astro-cid-tvbssjxb>Nos Piscines d'Excellence</h1>
-      <p data-astro-cid-tvbssjxb>Découvrez nos installations premium équipées des dernières technologies pour votre transformation sportive. Chaque piscine offre un environnement optimal pour votre progression du zéro au pro.</p>
+  <div class="container" data-astro-cid-tjyrzri7>
+    <section class="hero" data-astro-cid-tjyrzri7>
+      <h1 data-astro-cid-tjyrzri7>Nos Infrastructures d'Excellence</h1>
+      <p data-astro-cid-tjyrzri7>Découvrez nos installations premium équipées des dernières technologies pour votre transformation sportive. Chaque infrastructure offre un environnement optimal pour votre progression du zéro au pro.</p>
     </section>
 
-    <div class="pools-grid" data-astro-cid-tvbssjxb>
-      <!-- Piscine ADM AZAL -->
-      <div class="pool-card" data-astro-cid-tvbssjxb>
-        <div class="pool-image" data-astro-cid-tvbssjxb>
-          <img src="https://i.ibb.co/GfR0p9P4/FB-IMG-1656784815731.jpg" alt="Piscine ADM AZAL" data-astro-cid-tvbssjxb>
-          <span data-astro-cid-tvbssjxb>Piscine ADM AZAL</span>
-        </div>
-        <div class="pool-content" data-astro-cid-tvbssjxb>
-          <h2 class="pool-title" data-astro-cid-tvbssjxb>Piscine ADM AZAL</h2>
-          <div class="pool-location" data-astro-cid-tvbssjxb>
-            <svg class="location-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" data-astro-cid-tvbssjxb></path>
-            </svg>
-            Reghaia, Alger
+    <div class="pools-grid" data-astro-cid-tjyrzri7>
+      <div class="pool-card" data-astro-cid-tjyrzri7>
+          <div class="pool-image" data-astro-cid-tjyrzri7>
+            <img src="https://i.ibb.co/GfR0p9P4/FB-IMG-1656784815731.jpg" alt="Piscine ADM AZAL" data-astro-cid-tjyrzri7>
+            <span data-astro-cid-tjyrzri7>Piscine ADM AZAL</span>
           </div>
-          <ul class="pool-features" data-astro-cid-tvbssjxb>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tvbssjxb></path>
+          <div class="pool-content" data-astro-cid-tjyrzri7>
+            <h2 class="pool-title" data-astro-cid-tjyrzri7>Piscine ADM AZAL</h2>
+            <div class="pool-location" data-astro-cid-tjyrzri7>
+              <svg class="location-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" data-astro-cid-tjyrzri7></path>
               </svg>
-              Ouvert 7j/7
-            </li>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" data-astro-cid-tvbssjxb></path>
-              </svg>
-              AQA inside
-            </li>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" data-astro-cid-tvbssjxb></path>
-              </svg>
-              Réception comfortable
-            </li>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" data-astro-cid-tvbssjxb></path>
-              </svg>
-              Semi olympique
-            </li>
-          </ul>
-          <button class="cta-button" onclick="location.href={getRelativePath('/azal', lang)}" data-astro-cid-tvbssjxb>Plus d'infos</button>
-          <button class="cta-button" onclick="location.href='https://maps.app.goo.gl/b1efH4S11j8ACXUs8'" data-astro-cid-tvbssjxb>Localisation</button>
-        </div>
-      </div>
-
-      <!-- Piscine BK Sport -->
-      <div class="pool-card" data-astro-cid-tvbssjxb>
-        <div class="pool-image" data-astro-cid-tvbssjxb>
-          <img src="https://i.ibb.co/vCdX73xK/Whats-App-Image-2024-12-08-at-15-05-01-f0286594.jpg" alt="Piscine BK Sport" data-astro-cid-tvbssjxb>
-          <span data-astro-cid-tvbssjxb>Piscine BK Sport</span>
-        </div>
-        <div class="pool-content" data-astro-cid-tvbssjxb>
-          <h2 class="pool-title" data-astro-cid-tvbssjxb>Piscine BK Sport</h2>
-          <div class="pool-location" data-astro-cid-tvbssjxb>
-            <svg class="location-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" data-astro-cid-tvbssjxb></path>
-            </svg>
-            Cheraga, Alger
+              Reghaia, Alger
+            </div>
+            <ul class="pool-features" data-astro-cid-tjyrzri7>
+              <li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  Ouvert 7j/7
+                </li><li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  AQA inside
+                </li><li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  Réception comfortable
+                </li><li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  Semi olympique
+                </li>
+            </ul>
+            <button class="cta-button" onclick="location.href='/ar/azal'" data-astro-cid-tjyrzri7>Plus d'infos</button>
+            <button class="cta-button" onclick="location.href='https://maps.app.goo.gl/b1efH4S11j8ACXUs8'" data-astro-cid-tjyrzri7>Localisation</button>
           </div>
-          <ul class="pool-features" data-astro-cid-tvbssjxb>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tvbssjxb></path>
+        </div><div class="pool-card" data-astro-cid-tjyrzri7>
+          <div class="pool-image" data-astro-cid-tjyrzri7>
+            <img src="https://i.ibb.co/vCdX73xK/Whats-App-Image-2024-12-08-at-15-05-01-f0286594.jpg" alt="Piscine BK Sport" data-astro-cid-tjyrzri7>
+            <span data-astro-cid-tjyrzri7>Piscine BK Sport</span>
+          </div>
+          <div class="pool-content" data-astro-cid-tjyrzri7>
+            <h2 class="pool-title" data-astro-cid-tjyrzri7>Piscine BK Sport</h2>
+            <div class="pool-location" data-astro-cid-tjyrzri7>
+              <svg class="location-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" data-astro-cid-tjyrzri7></path>
               </svg>
-              Ouvert 7j/7
-            </li>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" data-astro-cid-tvbssjxb></path>
-              </svg>
-              AQA inside
-            </li>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" data-astro-cid-tvbssjxb></path>
-              </svg>
-              Salle de sport
-            </li>
-            <li data-astro-cid-tvbssjxb>
-              <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tvbssjxb>
-                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" data-astro-cid-tvbssjxb></path>
-              </svg>
-              Semi olympique
-            </li>
-          </ul>
-          <button class="cta-button" data-astro-cid-tvbssjxb>Plus d'infos</button>
-          <button class="cta-button" data-astro-cid-tvbssjxb>Localisation</button>
+              Cheraga, Alger
+            </div>
+            <ul class="pool-features" data-astro-cid-tjyrzri7>
+              <li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  Ouvert 7j/7
+                </li><li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  AQA inside
+                </li><li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  Salle de sport
+                </li><li data-astro-cid-tjyrzri7>
+                  <svg class="feature-icon" viewBox="0 0 24 24" data-astro-cid-tjyrzri7>
+                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" data-astro-cid-tjyrzri7></path>
+                  </svg>
+                  Semi olympique
+                </li>
+            </ul>
+            
+            
+          </div>
         </div>
-      </div>
     </div>
 
-    <div class="contact-section" data-astro-cid-tvbssjxb>
-      <h2 class="contact-title" data-astro-cid-tvbssjxb>Prêt à Commencer Votre Transformation ?</h2>
-      <p class="contact-text" data-astro-cid-tvbssjxb>
-        Rejoignez AQA Sports et découvrez comment nos coachs d'élite peuvent vous transformer du débutant à l'athlète confirmé dans nos piscines d'exception. Science, technologie et progression garantie.
+    <div class="contact-section" data-astro-cid-tjyrzri7>
+      <h2 class="contact-title" data-astro-cid-tjyrzri7>Prêt à Commencer Votre Transformation ?</h2>
+      <p class="contact-text" data-astro-cid-tjyrzri7>
+        Rejoignez AQA Sports et découvrez comment nos coachs d'élite peuvent vous transformer du débutant à l'athlète confirmé dans nos infrastructures d'exception. Science, technologie et progression garantie.
       </p>
-      <button class="cta-button" onclick="location.href='https://wa.me/213540454907'" data-astro-cid-tvbssjxb>Contactez nous</button>
+      <button class="cta-button" onclick="location.href='https://wa.me/213540454907'" data-astro-cid-tjyrzri7>Contactez nous</button>
     </div>
   </div>
-
-  
-  
-
-
-
 
   
 
@@ -256,10 +277,10 @@
                     <line x1="12" y1="16" x2="12" y2="12" data-astro-cid-sz7xmlte></line>
                     <line x1="12" y1="8" x2="12" y2="8" data-astro-cid-sz7xmlte></line>
                 </svg>
-                About AQA
+                حول أكا
             </h4>
-            <p data-astro-cid-sz7xmlte>AQA Sports Academy is a premier sports facility dedicated to transforming beginners into confident athletes through elite coaching and personalized guidance.</p>
-            <p style="margin-top:0.8rem;" data-astro-cid-sz7xmlte>Our mission: From zero to pro with science and technology.</p>
+            <p data-astro-cid-sz7xmlte>أكاديمية أكا الرياضية هي مؤسسة مخصصة لتحويل المبتدئين إلى رياضيين واثقين من خلال التدريب النخبوي والمتابعة الشخصية.</p>
+            <p style="margin-top:0.8rem;" data-astro-cid-sz7xmlte>مهمتنا: من الصفر إلى الاحتراف بالعلم والتكنولوجيا.</p>
         </div>
 
         <!-- Quick Links -->
@@ -268,16 +289,16 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-sz7xmlte>
                     <path d="M9 11H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h4l-3-7zM22 9c0-3.87-3.13-7-7-7l-3 7h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-4l3 7c3.87 0 7-3.13 7-7V9z" data-astro-cid-sz7xmlte></path>
                 </svg>
-                Quick Links
+                روابط سريعة
             </h4>
             <ul data-astro-cid-sz7xmlte>
-                <li data-astro-cid-sz7xmlte><a href="/en/tarifs" data-astro-cid-sz7xmlte>Pricing</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/groupes" data-astro-cid-sz7xmlte>Groups</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/inscription" data-astro-cid-sz7xmlte>Inscription</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/piscines" data-astro-cid-sz7xmlte>Pools</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/events" data-astro-cid-sz7xmlte>Events</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/webtv" data-astro-cid-sz7xmlte>WebTV</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/store" data-astro-cid-sz7xmlte>Store</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/ar/tarifs" data-astro-cid-sz7xmlte>الأسعار</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/ar/groupes" data-astro-cid-sz7xmlte>المجموعات</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/ar/inscription" data-astro-cid-sz7xmlte>Inscription</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/ar/infrastructure" data-astro-cid-sz7xmlte>المرافق</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/ar/events" data-astro-cid-sz7xmlte>الفعاليات</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/ar/webtv" data-astro-cid-sz7xmlte>قناة الويب</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/ar/store" data-astro-cid-sz7xmlte>المتجر</a></li>
             </ul>
         </div>
 
@@ -287,7 +308,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-sz7xmlte>
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" data-astro-cid-sz7xmlte></path>
                 </svg>
-                Contact Us
+                اتصل بنا
             </h4>
             <div class="contact-info" data-astro-cid-sz7xmlte>
                 <a href="https://maps.app.goo.gl/AJVe5WiLeSntrovE7" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>
@@ -324,12 +345,12 @@
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path>
                     <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline>
                 </svg>
-                Newsletter
+                النشرة الإخبارية
             </h4>
-            <p data-astro-cid-sz7xmlte>Stay informed about our latest news and offers.</p>
-            <form id="newsletterForm" class="newsletter-form" data-success="Thank you, you are subscribed!" data-error="Error: unable to submit." data-network="Network error, please try again." data-validation="Please enter a valid email address." data-astro-cid-sz7xmlte>
-                <input type="email" name="email" placeholder="Your email" required class="newsletter-input" data-astro-cid-sz7xmlte>
-                <button type="submit" class="newsletter-btn" data-astro-cid-sz7xmlte>Subscribe</button>
+            <p data-astro-cid-sz7xmlte>اشترك معنا ليصلك كل جديد من الأخبار والعروض.</p>
+            <form id="newsletterForm" class="newsletter-form" data-success="شكرًا لك، لقد تم الاشتراك بنجاح!" data-error="خطأ: لم نتمكن من الإرسال." data-network="خطأ في الشبكة، يرجى المحاولة مرة أخرى." data-validation="يرجى إدخال عنوان بريد إلكتروني صالح." data-astro-cid-sz7xmlte>
+                <input type="email" name="email" placeholder="بريدك الإلكتروني" required class="newsletter-input" data-astro-cid-sz7xmlte>
+                <button type="submit" class="newsletter-btn" data-astro-cid-sz7xmlte>اشتراك</button>
             </form>
             <p id="newsletterMessage" class="hidden" data-astro-cid-sz7xmlte></p>
             <div class="socials" data-astro-cid-sz7xmlte>
@@ -353,7 +374,7 @@
     <div class="footer-bottom" data-astro-cid-sz7xmlte>
         <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="footer-logo" data-astro-cid-sz7xmlte>
         <div class="copyright" data-astro-cid-sz7xmlte>
-            <p data-astro-cid-sz7xmlte>&copy; AQA Sports Academy. All rights reserved.</p>
+            <p data-astro-cid-sz7xmlte>&copy; أكاديمية أكا الرياضية. جميع الحقوق محفوظة.</p>
         </div>
     </div>
 </footer>
@@ -414,8 +435,4 @@
   });
 </script>
 
-
-  <!-- WhatsApp floating widget -->
-  <script src="/js/navbar-wa.js"></script>
-</body>
-</html>
+</body></html>

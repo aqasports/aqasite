@@ -10,9 +10,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Événements &amp; Compétitions | AQA Sports Academy — Algérie</title>
-  <meta name="description" content="Suivez les événements, compétitions et stages AQA Sports Academy. Championnats, galas de natation et rencontres aquatiques en Algérie.">
-  <meta name="keywords" content="compétitions natation algérie, événements aquatiques alger, gala natation, stages natation algérie">
+  <title>AQA Events — Sovereign Wild Journeys &amp; Extreme Sports Algeria</title>
+  <meta name="description" content="Discover AQA Events: hiking, kayaking, apnea &#38; scuba diving in Algeria. A high-end, majestic athletic showcase from forest to abyss.">
+  <meta name="keywords" content="hiking algeria, kayak alger, scuba diving algeria, aqa events, extreme sports, outdoor events">
   <meta name="robots" content="index, follow">
   <meta name="author" content="AQA Sports Academy">
   <link rel="canonical" href="https://aqasports.com/events">
@@ -20,16 +20,16 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aqasports.com/events">
-  <meta property="og:title" content="Événements &#38; Compétitions | AQA Sports Academy — Algérie">
-  <meta property="og:description" content="Suivez les événements, compétitions et stages AQA Sports Academy. Championnats, galas de natation et rencontres aquatiques en Algérie.">
+  <meta property="og:title" content="AQA Events — Sovereign Wild Journeys &#38; Extreme Sports Algeria">
+  <meta property="og:description" content="Discover AQA Events: hiking, kayaking, apnea &#38; scuba diving in Algeria. A high-end, majestic athletic showcase from forest to abyss.">
   <meta property="og:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
   <meta property="og:site_name" content="AQA Sports Academy">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Événements &#38; Compétitions | AQA Sports Academy — Algérie">
-  <meta name="twitter:description" content="Suivez les événements, compétitions et stages AQA Sports Academy. Championnats, galas de natation et rencontres aquatiques en Algérie.">
+  <meta name="twitter:title" content="AQA Events — Sovereign Wild Journeys &#38; Extreme Sports Algeria">
+  <meta name="twitter:description" content="Discover AQA Events: hiking, kayaking, apnea &#38; scuba diving in Algeria. A high-end, majestic athletic showcase from forest to abyss.">
   <meta name="twitter:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
 
   <!-- Favicon -->
@@ -61,13 +61,59 @@
     }
   </script>
 
+  <!-- Language persistence & redirection script -->
+  <script>
+    (function() {
+      function checkLang() {
+        if (typeof localStorage === 'undefined') return;
+        
+        const path = window.location.pathname;
+        const currentLang = document.documentElement.lang || 'fr';
+        const isFrenchPage = !path.startsWith('/ar') && !path.startsWith('/en');
+        const supportedLangs = ['ar', 'en'];
+        
+        if (isFrenchPage) {
+          const savedLang = localStorage.getItem('aqa_lang');
+          
+          if (savedLang && supportedLangs.includes(savedLang)) {
+            const referrer = document.referrer;
+            const currentOrigin = window.location.origin;
+            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
+            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            
+            if (isExplicitFR) {
+              localStorage.setItem('aqa_lang', 'fr');
+            } else {
+              const targetPath = '/' + savedLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            }
+          } else if (!savedLang) {
+            const browserLang = (navigator.language || 'fr').split('-')[0].toLowerCase();
+            if (supportedLangs.includes(browserLang)) {
+              const targetPath = '/' + browserLang + (path === '/' ? '' : path);
+              window.location.href = targetPath;
+            } else {
+              localStorage.setItem('aqa_lang', 'fr');
+            }
+          }
+        } else {
+          localStorage.setItem('aqa_lang', currentLang);
+        }
+      }
+      
+      checkLang();
+      document.addEventListener('astro:after-swap', checkLang);
+      document.addEventListener('astro:page-load', checkLang);
+    })();
+  </script>
+
   <!-- Slot for page-specific <style> or <link> tags -->
   
 <style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap";.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}:root{--bg-primary: #030712;--bg-secondary: #0b0f19;--bg-card: rgba(15, 23, 42, .65);--color-teal: #00f2ff;--color-blue: #0088ff;--color-blue-dark: #0055cc;--text-primary: #f9fafb;--text-secondary: #9ca3af;--text-muted: #6b7280;--border-glass: 1px solid rgba(255, 255, 255, .08);--border-active: 1px solid rgba(0, 242, 255, .4);--shadow-glow: 0 0 25px rgba(0, 242, 255, .15);--shadow-glow-active: 0 0 35px rgba(0, 242, 255, .35);--font-display: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--transition-smooth: all .3s cubic-bezier(.4, 0, .2, 1)}*{margin:0;padding:0;box-sizing:border-box}html{background-color:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);scroll-behavior:smooth;overflow-x:hidden;height:100%}body{background:transparent;min-height:100vh;line-height:1.6;position:relative}h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-primary);font-weight:700;letter-spacing:-.025em}p{font-family:var(--font-body);color:var(--text-secondary)}a{color:inherit;text-decoration:none;transition:var(--transition-smooth)}.glass-panel{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:var(--border-glass);border-radius:20px;box-shadow:0 10px 30px -10px #000000b3;transition:var(--transition-smooth)}.glass-panel:hover{border-color:#00f2ff40;box-shadow:var(--shadow-glow)}body:before{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% -20%,rgba(0,242,255,.08) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(0,136,255,.05) 0%,transparent 50%);pointer-events:none;z-index:-2}.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}@keyframes neonGlow{0%,to{filter:drop-shadow(0 0 10px rgba(0,242,255,.3)) drop-shadow(0 0 20px rgba(0,136,255,.2))}50%{filter:drop-shadow(0 0 20px rgba(0,242,255,.5)) drop-shadow(0 0 35px rgba(0,136,255,.3))}}@keyframes shimmer{0%{transform:translate(-100%) rotate(45deg)}to{transform:translate(100%) rotate(45deg)}}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:#1f2937;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#374151}.skip-link{position:absolute;top:-40px;left:0;background:var(--color-teal);color:#000;padding:8px 16px;z-index:1000;font-weight:700}.skip-link:focus{top:0}.bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none;background:transparent}.bg-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;background:url(https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png) no-repeat center;background-size:contain;opacity:.02;z-index:-1;pointer-events:none}
 </style>
-<link rel="stylesheet" href="/_astro/events.DDPCrGyN.css">
+<link rel="stylesheet" href="/_astro/events.bLP_k2MP.css">
 <style>.aqa-footer[data-astro-cid-sz7xmlte]{background:#030712f2;border-top:1px solid rgba(255,255,255,.08);padding:4rem 1rem 3rem;width:100%;color:var(--text-primary);margin-top:4rem;box-shadow:0 -10px 30px #00000080}.footer-content[data-astro-cid-sz7xmlte]{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.5rem}.footer-section[data-astro-cid-sz7xmlte] h4[data-astro-cid-sz7xmlte]{font-size:1.15rem;font-weight:700;color:var(--color-teal);margin-bottom:1.5rem;text-shadow:0 0 10px rgba(0,242,255,.3);display:flex;align-items:center;gap:.5rem}.footer-section[data-astro-cid-sz7xmlte] h4[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:20px;height:20px;stroke:var(--color-teal)}.footer-section[data-astro-cid-sz7xmlte] p[data-astro-cid-sz7xmlte]{font-size:.95rem;line-height:1.6;color:var(--text-secondary)}.footer-section[data-astro-cid-sz7xmlte] ul[data-astro-cid-sz7xmlte]{list-style:none}.footer-section[data-astro-cid-sz7xmlte] li[data-astro-cid-sz7xmlte]{margin-bottom:.6rem}.footer-section[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{color:var(--text-secondary);font-size:.95rem}.footer-section[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:var(--color-teal);text-shadow:0 0 8px rgba(0,242,255,.4)}.contact-info[data-astro-cid-sz7xmlte]{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}.contact-info[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{display:flex;align-items:center;gap:.5rem}.contact-info[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:18px;height:18px;stroke:var(--color-teal);flex-shrink:0}.socials[data-astro-cid-sz7xmlte]{display:flex;gap:.75rem;margin-top:1.25rem}.socials[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:#ffffff08;border:1px solid rgba(255,255,255,.08);border-radius:50%;transition:var(--transition-smooth)}.socials[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{background:var(--color-teal);color:#030712;box-shadow:var(--shadow-glow-active);transform:translateY(-2px)}.socials[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:20px;height:20px;stroke:currentColor}.newsletter-form[data-astro-cid-sz7xmlte]{display:flex;gap:.5rem;margin-top:1rem}.newsletter-input[data-astro-cid-sz7xmlte]{flex:1;padding:.75rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:30px;background:#0006;color:var(--text-primary);font-size:.9rem}.newsletter-input[data-astro-cid-sz7xmlte]:focus{outline:none;border-color:var(--color-teal);box-shadow:var(--shadow-glow)}.newsletter-btn[data-astro-cid-sz7xmlte]{background:linear-gradient(135deg,var(--color-blue),var(--color-teal));color:#030712;padding:.75rem 1.5rem;border:none;border-radius:30px;font-weight:700;font-size:.9rem;cursor:pointer;transition:var(--transition-smooth)}.newsletter-btn[data-astro-cid-sz7xmlte]:hover{box-shadow:var(--shadow-glow-active);transform:translateY(-1px)}.status-message[data-astro-cid-sz7xmlte]{font-size:.85rem;margin-top:.5rem;font-weight:600}.status-message[data-astro-cid-sz7xmlte].success{color:#10b981}.status-message[data-astro-cid-sz7xmlte].error{color:#ef4444}.footer-bottom[data-astro-cid-sz7xmlte]{border-top:1px solid rgba(255,255,255,.08);margin-top:3rem;padding-top:2rem;text-align:center;display:flex;flex-direction:column;gap:1rem;align-items:center}.footer-logo[data-astro-cid-sz7xmlte]{width:50px;height:auto;opacity:.8;transition:var(--transition-smooth)}.footer-logo[data-astro-cid-sz7xmlte]:hover{opacity:1;transform:scale(1.05);filter:drop-shadow(0 0 10px var(--color-teal))}.copyright[data-astro-cid-sz7xmlte]{font-size:.85rem;color:var(--text-muted)}@media (max-width: 768px){.footer-content[data-astro-cid-sz7xmlte]{grid-template-columns:1fr;text-align:center}.contact-info[data-astro-cid-sz7xmlte],.socials[data-astro-cid-sz7xmlte]{justify-content:center}}
-</style><script type="module" src="/_astro/hoisted.DoxYX03V.js"></script></head>
+</style><script type="module" src="/_astro/hoisted.CKnZ4FB4.js"></script></head>
 <body>
   <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true"></iframe>
   <div class="bg-logo"></div>
@@ -83,7 +129,7 @@
         <nav class="nav-menu" id="navMenu">
             <a href="/en/tarifs" class="nav-link" data-i18n="nav_tarifs">Pricing</a>
             <a href="/en/groupes" class="nav-link" data-i18n="nav_groupes">Groups</a>
-            <a href="/en/piscines" class="nav-link" data-i18n="nav_piscines">Pools</a>
+            <a href="/en/infrastructure" class="nav-link" data-i18n="nav_infrastructure">Infrastructures</a>
             <a href="/en/infos" class="nav-link" data-i18n="nav_infos">Info</a>
             <a href="/en/events" class="nav-link active" data-i18n="nav_events">Events</a>
             <a href="/en/formation" class="nav-link" data-i18n="nav_formation">Training</a>
@@ -108,7 +154,7 @@
     <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
     <a href="/en/tarifs" class="mobile-nav-link" data-i18n="nav_tarifs">Pricing</a>
     <a href="/en/groupes" class="mobile-nav-link" data-i18n="nav_groupes">Groups</a>
-    <a href="/en/piscines" class="mobile-nav-link" data-i18n="nav_piscines">Pools</a>
+    <a href="/en/infrastructure" class="mobile-nav-link" data-i18n="nav_infrastructure">Infrastructures</a>
     <a href="/en/infos" class="mobile-nav-link" data-i18n="nav_infos">Info</a>
     <a href="/en/events" class="mobile-nav-link active" data-i18n="nav_events">Events</a>
     <a href="/en/formation" class="mobile-nav-link" data-i18n="nav_formation">Training</a>
@@ -122,114 +168,361 @@
 
 <script src="/js/navbar.js"></script>
 
-
+  
+  <div class="aq-sensory-console" aria-hidden="true" data-astro-cid-ro7pgs3h>
+    <button class="aq-sensory-btn" id="btnSensorySound" data-astro-cid-ro7pgs3h>
+      <span class="wave-spectrometer" data-astro-cid-ro7pgs3h>
+        <span data-astro-cid-ro7pgs3h></span><span data-astro-cid-ro7pgs3h></span><span data-astro-cid-ro7pgs3h></span><span data-astro-cid-ro7pgs3h></span><span data-astro-cid-ro7pgs3h></span>
+      </span>
+      <span class="btn-lbl" id="sensoryLabel" data-astro-cid-ro7pgs3h>NATURE SOUNDS [OFF]</span>
+    </button>
     
+    <!-- Ultra-minimal hidden frequency visualizer canvas -->
+    <canvas id="sensoryCanvas" width="90" height="24" data-astro-cid-ro7pgs3h></canvas>
+  </div>
 
+  
+  <div class="aq-luxury-scroller" id="luxuryScroller" data-astro-cid-ro7pgs3h>
     
+    <!-- ─── ATHLETIC HERO HEADER ─── -->
+    <section class="aq-hero" id="aqHero" data-astro-cid-ro7pgs3h>
+      <!-- Full-bleed cinematic backdrop -->
+      <div class="hero-video-wrap" data-astro-cid-ro7pgs3h>
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" data-astro-cid-ro7pgs3h>
+          <source src="/events/Fav%20main%20vid.mov" type="video/quicktime" data-astro-cid-ro7pgs3h>
+          <source src="/zero.mp4" type="video/mp4" data-astro-cid-ro7pgs3h>
+        </video>
+        <div class="hero-video-mask" data-astro-cid-ro7pgs3h></div>
+      </div>
 
-    
-    <div class="page-hero" data-astro-cid-ro7pgs3h>
-        <span class="hero-badge" data-astro-cid-ro7pgs3h>📅 Agenda AQA</span>
-        <h1 data-astro-cid-ro7pgs3h>Événements & Activités</h1>
-        <div class="section-divider" data-astro-cid-ro7pgs3h></div>
-        <p data-astro-cid-ro7pgs3h>Compétitions, stages, journées portes ouvertes et challenges — restez connecté à la vie d'AQA Sports Academy.</p>
-    </div>
+      <div class="hero-inner" data-astro-cid-ro7pgs3h>
+        <span class="hero-badge" data-astro-cid-ro7pgs3h>AQA SPORTS ACADEMY · WILD EVENTS</span>
+        <h1 class="hero-title" data-astro-cid-ro7pgs3h>
+          <span class="title-line title-line--1" data-astro-cid-ro7pgs3h>The ultimate</span>
+          <span class="title-line title-line--2" data-astro-cid-ro7pgs3h>athletic</span>
+          <span class="title-line title-line--3" data-astro-cid-ro7pgs3h>wild</span>
+        </h1>
+        <p class="hero-sub" data-astro-cid-ro7pgs3h>From deep mountain canopies to silent abyssal waters — experience raw Algeria with premium athletic precision.</p>
 
-    <div class="container" data-astro-cid-ro7pgs3h>
-        <div class="events-grid" data-astro-cid-ro7pgs3h>
-            <!-- Event Card 1 -->
-            <article class="event-card" data-astro-cid-ro7pgs3h>
-                <span class="event-tag" data-astro-cid-ro7pgs3h>🏆 Compétition</span>
-                <div class="event-img-placeholder" data-astro-cid-ro7pgs3h>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" data-astro-cid-ro7pgs3h><path d="M8 21h8M12 17v4M17 4H7l-2 9h14L17 4zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3" data-astro-cid-ro7pgs3h></path></svg>
-                </div>
-                <div class="event-body" data-astro-cid-ro7pgs3h>
-                    <div class="event-date" data-astro-cid-ro7pgs3h>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ro7pgs3h><rect x="3" y="4" width="18" height="18" rx="2" data-astro-cid-ro7pgs3h></rect><line x1="16" y1="2" x2="16" y2="6" data-astro-cid-ro7pgs3h></line><line x1="8" y1="2" x2="8" y2="6" data-astro-cid-ro7pgs3h></line><line x1="3" y1="10" x2="21" y2="10" data-astro-cid-ro7pgs3h></line></svg>
-                        Prochain événement
-                    </div>
-                    <h2 class="event-title" data-astro-cid-ro7pgs3h>Challenge Inter-Groupes AQA</h2>
-                    <p class="event-desc" data-astro-cid-ro7pgs3h>Compétition interne entre tous les groupes de natation. Un moment de performance, de dépassement et de fierté collective pour nos athlètes.</p>
-                    <div class="event-meta" data-astro-cid-ro7pgs3h>
-                        <span data-astro-cid-ro7pgs3h>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" data-astro-cid-ro7pgs3h><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" data-astro-cid-ro7pgs3h></path><circle cx="12" cy="10" r="3" data-astro-cid-ro7pgs3h></circle></svg>
-                            Piscine Réghaia
-                        </span>
-                        <span data-astro-cid-ro7pgs3h>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" data-astro-cid-ro7pgs3h><circle cx="12" cy="12" r="10" data-astro-cid-ro7pgs3h></circle><polyline points="12 6 12 12 16 14" data-astro-cid-ro7pgs3h></polyline></svg>
-                            Tous niveaux
-                        </span>
-                    </div>
-                    <a href="/en/inscription" class="event-cta" data-astro-cid-ro7pgs3h>S'inscrire →</a>
-                </div>
-            </article>
-
-            <!-- Event Card 2 -->
-            <article class="event-card" data-astro-cid-ro7pgs3h>
-                <span class="event-tag" data-astro-cid-ro7pgs3h>🌊 Stage</span>
-                <div class="event-img-placeholder" data-astro-cid-ro7pgs3h>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" data-astro-cid-ro7pgs3h><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" data-astro-cid-ro7pgs3h></path></svg>
-                </div>
-                <div class="event-body" data-astro-cid-ro7pgs3h>
-                    <div class="event-date" data-astro-cid-ro7pgs3h>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ro7pgs3h><rect x="3" y="4" width="18" height="18" rx="2" data-astro-cid-ro7pgs3h></rect><line x1="16" y1="2" x2="16" y2="6" data-astro-cid-ro7pgs3h></line><line x1="8" y1="2" x2="8" y2="6" data-astro-cid-ro7pgs3h></line><line x1="3" y1="10" x2="21" y2="10" data-astro-cid-ro7pgs3h></line></svg>
-                        Stage intensif
-                    </div>
-                    <h2 class="event-title" data-astro-cid-ro7pgs3h>Stage Vacances — Natation & Apnée</h2>
-                    <p class="event-desc" data-astro-cid-ro7pgs3h>Stage de 5 jours pendant les vacances scolaires. Programme intensif adapté aux enfants et adultes pour progresser rapidement.</p>
-                    <div class="event-meta" data-astro-cid-ro7pgs3h>
-                        <span data-astro-cid-ro7pgs3h>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" data-astro-cid-ro7pgs3h><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" data-astro-cid-ro7pgs3h></path><circle cx="12" cy="10" r="3" data-astro-cid-ro7pgs3h></circle></svg>
-                            Multi-piscines AQA
-                        </span>
-                        <span data-astro-cid-ro7pgs3h>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" data-astro-cid-ro7pgs3h><circle cx="12" cy="12" r="10" data-astro-cid-ro7pgs3h></circle><polyline points="12 6 12 12 16 14" data-astro-cid-ro7pgs3h></polyline></svg>
-                            5 jours
-                        </span>
-                    </div>
-                    <a href="/en/inscription" class="event-cta" data-astro-cid-ro7pgs3h>S'inscrire →</a>
-                </div>
-            </article>
-
-            <!-- Event Card 3 -->
-            <article class="event-card" data-astro-cid-ro7pgs3h>
-                <span class="event-tag" data-astro-cid-ro7pgs3h>🎯 Portes Ouvertes</span>
-                <div class="event-img-placeholder" data-astro-cid-ro7pgs3h>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" data-astro-cid-ro7pgs3h><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" data-astro-cid-ro7pgs3h></path><polyline points="9 22 9 12 15 12 15 22" data-astro-cid-ro7pgs3h></polyline></svg>
-                </div>
-                <div class="event-body" data-astro-cid-ro7pgs3h>
-                    <div class="event-date" data-astro-cid-ro7pgs3h>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-ro7pgs3h><rect x="3" y="4" width="18" height="18" rx="2" data-astro-cid-ro7pgs3h></rect><line x1="16" y1="2" x2="16" y2="6" data-astro-cid-ro7pgs3h></line><line x1="8" y1="2" x2="8" y2="6" data-astro-cid-ro7pgs3h></line><line x1="3" y1="10" x2="21" y2="10" data-astro-cid-ro7pgs3h></line></svg>
-                        Bientôt
-                    </div>
-                    <h2 class="event-title" data-astro-cid-ro7pgs3h>Journée Portes Ouvertes AQA</h2>
-                    <p class="event-desc" data-astro-cid-ro7pgs3h>Venez découvrir nos installations, rencontrer nos coachs et essayer une séance gratuite d'initiation. Idéal pour les nouvelles recrues.</p>
-                    <div class="event-meta" data-astro-cid-ro7pgs3h>
-                        <span data-astro-cid-ro7pgs3h>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" data-astro-cid-ro7pgs3h><circle cx="12" cy="12" r="10" data-astro-cid-ro7pgs3h></circle><polyline points="12 6 12 12 16 14" data-astro-cid-ro7pgs3h></polyline></svg>
-                            Gratuit
-                        </span>
-                        <span data-astro-cid-ro7pgs3h>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" data-astro-cid-ro7pgs3h><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" data-astro-cid-ro7pgs3h></path><circle cx="12" cy="10" r="3" data-astro-cid-ro7pgs3h></circle></svg>
-                            Toutes piscines
-                        </span>
-                    </div>
-                    <a href="/en/infos" class="event-cta" data-astro-cid-ro7pgs3h>En savoir plus →</a>
-                </div>
-            </article>
+        <!-- Symmetric Stats Grid -->
+        <div class="hero-stats" data-astro-cid-ro7pgs3h>
+          <div class="stat-box" data-astro-cid-ro7pgs3h><span class="stat-number font-display" data-astro-cid-ro7pgs3h>14</span><span class="stat-lbl" data-astro-cid-ro7pgs3h>Exploration Routes</span></div>
+          <div class="stat-divider" data-astro-cid-ro7pgs3h></div>
+          <div class="stat-box" data-astro-cid-ro7pgs3h><span class="stat-number font-display" data-astro-cid-ro7pgs3h>100+</span><span class="stat-lbl" data-astro-cid-ro7pgs3h>Bivouac Expeditions</span></div>
+          <div class="stat-divider" data-astro-cid-ro7pgs3h></div>
+          <div class="stat-box" data-astro-cid-ro7pgs3h><span class="stat-number font-display" data-astro-cid-ro7pgs3h>1000+</span><span class="stat-lbl" data-astro-cid-ro7pgs3h>Elite Adventurers</span></div>
         </div>
 
-        <!-- Coming Soon -->
-        <div class="coming-soon-banner" data-astro-cid-ro7pgs3h>
-            <h2 data-astro-cid-ro7pgs3h>🔔 Restez informé</h2>
-            <p data-astro-cid-ro7pgs3h>De nouveaux événements et compétitions sont régulièrement planifiés. Abonnez-vous pour ne rien manquer.</p>
-            <a href="/en" + '#footer' class="notify-btn" data-astro-cid-ro7pgs3h>Me notifier par email</a>
-        </div>
+        <a href="#zone-0" class="hero-scroll-btn" data-astro-cid-ro7pgs3h>
+          <span data-astro-cid-ro7pgs3h>Explore adventure zones</span>
+          <div class="scroll-chevron" data-astro-cid-ro7pgs3h>↓</div>
+        </a>
+      </div>
+      
+      <!-- Fades smoothly into deep dark page background -->
+      <div class="hero-fade-out" data-astro-cid-ro7pgs3h></div>
+    </section>
+
+    <!-- ─── ADVENTURE ZONES DECK (1 to 5) ─── -->
+    <div class="aq-deck" id="aqDeck" data-astro-cid-ro7pgs3h>
+      <section class="aq-deck-slide" id="zone-0" data-zone-idx="0" style="--zone-accent: #39ff14; --zone-theme-bg: #03170b;" data-astro-cid-ro7pgs3h>
+          <div class="slide-bg-glow" data-astro-cid-ro7pgs3h></div>
+          
+          <div class="slide-grid" data-astro-cid-ro7pgs3h>
+            
+            <!-- LEFT COLUMN: Narrative & Structured Details -->
+            <div class="slide-narrative" data-astro-cid-ro7pgs3h>
+              <div class="watermark-index font-display" data-astro-cid-ro7pgs3h>01</div>
+              
+              <div class="slide-meta" data-astro-cid-ro7pgs3h>
+                <span class="slide-icon" data-astro-cid-ro7pgs3h>🌿</span>
+                <span class="slide-badge" style="color: #39ff14; border-color: #39ff1430" data-astro-cid-ro7pgs3h>ZONE 01 · DENSE FOREST CANOPY</span>
+              </div>
+              
+              <h2 class="slide-h2 font-display" data-astro-cid-ro7pgs3h>High-Altitude Trekking &amp; Mountain Rides</h2>
+              <p class="slide-body" data-astro-cid-ro7pgs3h>Cross dense mountain forests of Djurdjura and Kabylie. Walk secret tracks, conquer high passes on horseback, and bivouac under a vast starlit sky.</p>
+              
+              <!-- Structured Service Pills -->
+              <div class="slide-pills" data-astro-cid-ro7pgs3h>
+                <span class="slide-pill" style="--accent-hover: #39ff14" data-astro-cid-ro7pgs3h>
+                    Peak Bivouacs
+                  </span><span class="slide-pill" style="--accent-hover: #39ff14" data-astro-cid-ro7pgs3h>
+                    Horse Back Raids
+                  </span><span class="slide-pill" style="--accent-hover: #39ff14" data-astro-cid-ro7pgs3h>
+                    High Trekking
+                  </span><span class="slide-pill" style="--accent-hover: #39ff14" data-astro-cid-ro7pgs3h>
+                    Wild Trails
+                  </span>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Perfectly Symmetrical 3D Hover Collage -->
+            <div class="slide-gallery" data-astro-cid-ro7pgs3h>
+              <div class="collage-container" id="collage-0" data-astro-cid-ro7pgs3h>
+                <!-- Center Primary Card -->
+                <div class="collage-card card--primary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(1).jpg" alt="AQA ZONE 01 · DENSE FOREST CANOPY Core" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Secondary Card -->
+                <div class="collage-card card--secondary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(2).jpg" alt="AQA ZONE 01 · DENSE FOREST CANOPY Secondary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Tertiary Card -->
+                <div class="collage-card card--tertiary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(3).jpg" alt="AQA ZONE 01 · DENSE FOREST CANOPY Tertiary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+              </div>
+              <p class="gallery-hint" data-astro-cid-ro7pgs3h>Hover over images to explore structural details</p>
+            </div>
+            
+          </div>
+        </section><section class="aq-deck-slide" id="zone-1" data-zone-idx="1" style="--zone-accent: #00ffff; --zone-theme-bg: #021a1d;" data-astro-cid-ro7pgs3h>
+          <div class="slide-bg-glow" data-astro-cid-ro7pgs3h></div>
+          
+          <div class="slide-grid" data-astro-cid-ro7pgs3h>
+            
+            <!-- LEFT COLUMN: Narrative & Structured Details -->
+            <div class="slide-narrative" data-astro-cid-ro7pgs3h>
+              <div class="watermark-index font-display" data-astro-cid-ro7pgs3h>02</div>
+              
+              <div class="slide-meta" data-astro-cid-ro7pgs3h>
+                <span class="slide-icon" data-astro-cid-ro7pgs3h>💧</span>
+                <span class="slide-badge" style="color: #00ffff; border-color: #00ffff30" data-astro-cid-ro7pgs3h>ZONE 02 · RIVERS &amp; WATER CANYONS</span>
+              </div>
+              
+              <h2 class="slide-h2 font-display" data-astro-cid-ro7pgs3h>White-Water Kayaking &amp; River Snorkeling</h2>
+              <p class="slide-body" data-astro-cid-ro7pgs3h>Domptez rushing river rapids and drift between carved narrow stone canyons. Learn freshwater snorkeling in hidden crystal clear mountain rockpools.</p>
+              
+              <!-- Structured Service Pills -->
+              <div class="slide-pills" data-astro-cid-ro7pgs3h>
+                <span class="slide-pill" style="--accent-hover: #00ffff" data-astro-cid-ro7pgs3h>
+                    Extreme Kayak
+                  </span><span class="slide-pill" style="--accent-hover: #00ffff" data-astro-cid-ro7pgs3h>
+                    Wild Canyoning
+                  </span><span class="slide-pill" style="--accent-hover: #00ffff" data-astro-cid-ro7pgs3h>
+                    Freshwater PMT
+                  </span><span class="slide-pill" style="--accent-hover: #00ffff" data-astro-cid-ro7pgs3h>
+                    Cataracts
+                  </span>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Perfectly Symmetrical 3D Hover Collage -->
+            <div class="slide-gallery" data-astro-cid-ro7pgs3h>
+              <div class="collage-container" id="collage-1" data-astro-cid-ro7pgs3h>
+                <!-- Center Primary Card -->
+                <div class="collage-card card--primary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(4).jpg" alt="AQA ZONE 02 · RIVERS &#38; WATER CANYONS Core" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Secondary Card -->
+                <div class="collage-card card--secondary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(5).jpg" alt="AQA ZONE 02 · RIVERS &#38; WATER CANYONS Secondary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Tertiary Card -->
+                <div class="collage-card card--tertiary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(6).jpg" alt="AQA ZONE 02 · RIVERS &#38; WATER CANYONS Tertiary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+              </div>
+              <p class="gallery-hint" data-astro-cid-ro7pgs3h>Hover over images to explore structural details</p>
+            </div>
+            
+          </div>
+        </section><section class="aq-deck-slide" id="zone-2" data-zone-idx="2" style="--zone-accent: #ffb703; --zone-theme-bg: #1c1503;" data-astro-cid-ro7pgs3h>
+          <div class="slide-bg-glow" data-astro-cid-ro7pgs3h></div>
+          
+          <div class="slide-grid" data-astro-cid-ro7pgs3h>
+            
+            <!-- LEFT COLUMN: Narrative & Structured Details -->
+            <div class="slide-narrative" data-astro-cid-ro7pgs3h>
+              <div class="watermark-index font-display" data-astro-cid-ro7pgs3h>03</div>
+              
+              <div class="slide-meta" data-astro-cid-ro7pgs3h>
+                <span class="slide-icon" data-astro-cid-ro7pgs3h>☀️</span>
+                <span class="slide-badge" style="color: #ffb703; border-color: #ffb70330" data-astro-cid-ro7pgs3h>ZONE 03 · COASTLINE &amp; CLIFF ENDUROS</span>
+              </div>
+              
+              <h2 class="slide-h2 font-display" data-astro-cid-ro7pgs3h>Downhill MTB &amp; High-Speed Challenges</h2>
+              <p class="slide-body" data-astro-cid-ro7pgs3h>The rocky Algerian coastline is your training ground. High-speed cliff runs, technical MTB descents, and golden bivouacs facing spectacular maritime horizons.</p>
+              
+              <!-- Structured Service Pills -->
+              <div class="slide-pills" data-astro-cid-ro7pgs3h>
+                <span class="slide-pill" style="--accent-hover: #ffb703" data-astro-cid-ro7pgs3h>
+                    Downhill MTB
+                  </span><span class="slide-pill" style="--accent-hover: #ffb703" data-astro-cid-ro7pgs3h>
+                    Run &amp; Bike
+                  </span><span class="slide-pill" style="--accent-hover: #ffb703" data-astro-cid-ro7pgs3h>
+                    Coastal Triathlon
+                  </span><span class="slide-pill" style="--accent-hover: #ffb703" data-astro-cid-ro7pgs3h>
+                    Cliff Camping
+                  </span>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Perfectly Symmetrical 3D Hover Collage -->
+            <div class="slide-gallery" data-astro-cid-ro7pgs3h>
+              <div class="collage-container" id="collage-2" data-astro-cid-ro7pgs3h>
+                <!-- Center Primary Card -->
+                <div class="collage-card card--primary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(7).jpg" alt="AQA ZONE 03 · COASTLINE &#38; CLIFF ENDUROS Core" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Secondary Card -->
+                <div class="collage-card card--secondary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(8).jpg" alt="AQA ZONE 03 · COASTLINE &#38; CLIFF ENDUROS Secondary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Tertiary Card -->
+                <div class="collage-card card--tertiary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(9).jpg" alt="AQA ZONE 03 · COASTLINE &#38; CLIFF ENDUROS Tertiary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+              </div>
+              <p class="gallery-hint" data-astro-cid-ro7pgs3h>Hover over images to explore structural details</p>
+            </div>
+            
+          </div>
+        </section><section class="aq-deck-slide" id="zone-3" data-zone-idx="3" style="--zone-accent: #00b4d8; --zone-theme-bg: #021422;" data-astro-cid-ro7pgs3h>
+          <div class="slide-bg-glow" data-astro-cid-ro7pgs3h></div>
+          
+          <div class="slide-grid" data-astro-cid-ro7pgs3h>
+            
+            <!-- LEFT COLUMN: Narrative & Structured Details -->
+            <div class="slide-narrative" data-astro-cid-ro7pgs3h>
+              <div class="watermark-index font-display" data-astro-cid-ro7pgs3h>04</div>
+              
+              <div class="slide-meta" data-astro-cid-ro7pgs3h>
+                <span class="slide-icon" data-astro-cid-ro7pgs3h>🌊</span>
+                <span class="slide-badge" style="color: #00b4d8; border-color: #00b4d830" data-astro-cid-ro7pgs3h>ZONE 04 · HYDRO-SPACE OPEN BLUE</span>
+              </div>
+              
+              <h2 class="slide-h2 font-display" data-astro-cid-ro7pgs3h>Open Water Swims &amp; Cape Crossings</h2>
+              <p class="slide-body" data-astro-cid-ro7pgs3h>Conquer the wild Mediterranean swell. Challenge legendary stone capes and train in elite open water endurance swimming with our pro guides.</p>
+              
+              <!-- Structured Service Pills -->
+              <div class="slide-pills" data-astro-cid-ro7pgs3h>
+                <span class="slide-pill" style="--accent-hover: #00b4d8" data-astro-cid-ro7pgs3h>
+                    Pro Open Water
+                  </span><span class="slide-pill" style="--accent-hover: #00b4d8" data-astro-cid-ro7pgs3h>
+                    Cape Crossings
+                  </span><span class="slide-pill" style="--accent-hover: #00b4d8" data-astro-cid-ro7pgs3h>
+                    Endurance Swim
+                  </span><span class="slide-pill" style="--accent-hover: #00b4d8" data-astro-cid-ro7pgs3h>
+                    Maritime Raids
+                  </span>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Perfectly Symmetrical 3D Hover Collage -->
+            <div class="slide-gallery" data-astro-cid-ro7pgs3h>
+              <div class="collage-container" id="collage-3" data-astro-cid-ro7pgs3h>
+                <!-- Center Primary Card -->
+                <div class="collage-card card--primary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(10).jpg" alt="AQA ZONE 04 · HYDRO-SPACE OPEN BLUE Core" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Secondary Card -->
+                <div class="collage-card card--secondary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(11).jpg" alt="AQA ZONE 04 · HYDRO-SPACE OPEN BLUE Secondary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Tertiary Card -->
+                <div class="collage-card card--tertiary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(12).jpg" alt="AQA ZONE 04 · HYDRO-SPACE OPEN BLUE Tertiary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+              </div>
+              <p class="gallery-hint" data-astro-cid-ro7pgs3h>Hover over images to explore structural details</p>
+            </div>
+            
+          </div>
+        </section><section class="aq-deck-slide" id="zone-4" data-zone-idx="4" style="--zone-accent: #9d4edd; --zone-theme-bg: #090317;" data-astro-cid-ro7pgs3h>
+          <div class="slide-bg-glow" data-astro-cid-ro7pgs3h></div>
+          
+          <div class="slide-grid" data-astro-cid-ro7pgs3h>
+            
+            <!-- LEFT COLUMN: Narrative & Structured Details -->
+            <div class="slide-narrative" data-astro-cid-ro7pgs3h>
+              <div class="watermark-index font-display" data-astro-cid-ro7pgs3h>05</div>
+              
+              <div class="slide-meta" data-astro-cid-ro7pgs3h>
+                <span class="slide-icon" data-astro-cid-ro7pgs3h>🤿</span>
+                <span class="slide-badge" style="color: #9d4edd; border-color: #9d4edd30" data-astro-cid-ro7pgs3h>ZONE 05: THE SILENT ABYSS</span>
+              </div>
+              
+              <h2 class="slide-h2 font-display" data-astro-cid-ro7pgs3h>Deep Scuba &amp; Exploratory Apnea</h2>
+              <p class="slide-body" data-astro-cid-ro7pgs3h>Leave Earth&#39;s gravity behind. Slip into the total, calming silence of marine trenches. Explore historic shipwrecks and majestic vertical black coral walls.</p>
+              
+              <!-- Structured Service Pills -->
+              <div class="slide-pills" data-astro-cid-ro7pgs3h>
+                <span class="slide-pill" style="--accent-hover: #9d4edd" data-astro-cid-ro7pgs3h>
+                    Scuba Pro
+                  </span><span class="slide-pill" style="--accent-hover: #9d4edd" data-astro-cid-ro7pgs3h>
+                    Deep Apnea
+                  </span><span class="slide-pill" style="--accent-hover: #9d4edd" data-astro-cid-ro7pgs3h>
+                    Wreck Explorations
+                  </span><span class="slide-pill" style="--accent-hover: #9d4edd" data-astro-cid-ro7pgs3h>
+                    Coral Walls
+                  </span>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Perfectly Symmetrical 3D Hover Collage -->
+            <div class="slide-gallery" data-astro-cid-ro7pgs3h>
+              <div class="collage-container" id="collage-4" data-astro-cid-ro7pgs3h>
+                <!-- Center Primary Card -->
+                <div class="collage-card card--primary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(13).jpg" alt="AQA ZONE 05: THE SILENT ABYSS Core" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Secondary Card -->
+                <div class="collage-card card--secondary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(14).jpg" alt="AQA ZONE 05: THE SILENT ABYSS Secondary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+                <!-- Overlapping Tertiary Card -->
+                <div class="collage-card card--tertiary" data-astro-cid-ro7pgs3h>
+                  <div class="card-glass-glow" data-astro-cid-ro7pgs3h></div>
+                  <img src="/events/Fav%20img%20(5).jpg" alt="AQA ZONE 05: THE SILENT ABYSS Tertiary" loading="lazy" data-astro-cid-ro7pgs3h>
+                </div>
+              </div>
+              <p class="gallery-hint" data-astro-cid-ro7pgs3h>Hover over images to explore structural details</p>
+            </div>
+            
+          </div>
+        </section>
     </div>
 
-    
+    <!-- ─── PLATINUM VIP FINALE ─── -->
+    <section class="aq-finale" id="aqFinale" data-astro-cid-ro7pgs3h>
+      <div class="finale-waves" aria-hidden="true" data-astro-cid-ro7pgs3h>
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" data-astro-cid-ro7pgs3h><path fill="rgba(255,255,255,0.02)" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,218.7C672,203,768,149,864,138.7C960,128,1056,160,1152,176C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" data-astro-cid-ro7pgs3h></path></svg>
+      </div>
 
-  <footer class="aqa-footer" data-astro-cid-sz7xmlte>
+      <div class="finale-card" data-astro-cid-ro7pgs3h>
+        <div class="finale-card-outline" data-astro-cid-ro7pgs3h></div>
+        <span class="finale-badge" data-astro-cid-ro7pgs3h>AQA ATHLETIC CLUB · ELITE</span>
+        <h2 class="finale-h2 font-display" data-astro-cid-ro7pgs3h>REJOIN THE CALL<br/>OF THE UNTAMED</h2>
+        <p class="finale-body" data-astro-cid-ro7pgs3h>Our expeditions operate in small, highly disciplined squads to protect pristine natural balances. Connect to our VIP WhatsApp node. Our athletic guides coordinate your next challenge.</p>
+
+        <a href="https://chat.whatsapp.com/DcJm9dgx6WMLqsQmpreOZp" target="_blank" rel="noopener noreferrer" class="aq-whatsapp-btn" id="btnWaVIP" data-astro-cid-ro7pgs3h>
+          <span class="btn-ripple-glow" data-astro-cid-ro7pgs3h></span>
+          <span class="btn-wa-icon" data-astro-cid-ro7pgs3h>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" data-astro-cid-ro7pgs3h><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" data-astro-cid-ro7pgs3h></path></svg>
+          </span>
+          <span data-astro-cid-ro7pgs3h>💬 JOIN THE VIP WHATSAPP SQUAD</span>
+        </a>
+
+        <p class="finale-hint" data-astro-cid-ro7pgs3h>Private secure terminal link. Join &amp; wait for the launch transmission.</p>
+      </div>
+    </section>
+
+    <footer class="aqa-footer" data-astro-cid-sz7xmlte>
     <div class="footer-content" data-astro-cid-sz7xmlte>
         <!-- About Section -->
         <div class="footer-section" data-astro-cid-sz7xmlte>
@@ -257,7 +550,7 @@
                 <li data-astro-cid-sz7xmlte><a href="/en/tarifs" data-astro-cid-sz7xmlte>Pricing</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/groupes" data-astro-cid-sz7xmlte>Groups</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/inscription" data-astro-cid-sz7xmlte>Inscription</a></li>
-                <li data-astro-cid-sz7xmlte><a href="/en/piscines" data-astro-cid-sz7xmlte>Pools</a></li>
+                <li data-astro-cid-sz7xmlte><a href="/en/infrastructure" data-astro-cid-sz7xmlte>Infrastructures</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/events" data-astro-cid-sz7xmlte>Events</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/webtv" data-astro-cid-sz7xmlte>WebTV</a></li>
                 <li data-astro-cid-sz7xmlte><a href="/en/store" data-astro-cid-sz7xmlte>Store</a></li>
@@ -396,9 +689,10 @@
     });
   });
 </script>
+  </div>
 
+</body></html>
 
-  <!-- WhatsApp floating widget -->
-  <script src="/js/navbar-wa.js"></script>
-</body>
-</html>
+<!-- ═══════════════════════════════════════════
+     HIGH-END LUXURY CORE SCRIPT
+     ═══════════════════════════════════════════ -->

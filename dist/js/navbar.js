@@ -22,16 +22,6 @@ function toggleMobileMenu() {
     }
 }
 
-// ─── Language Switcher (now real — delegates to i18n.js) ──────────────
-function setLanguage(lang) {
-    if (window.i18n) {
-        window.i18n.setLang(lang);
-    } else {
-        // i18n.js not yet loaded — store and let it pick up on init
-        localStorage.setItem('aqa_lang', lang);
-        location.reload();
-    }
-}
 
 // ─── WhatsApp Floating Widget ─────────────────────────────────────────
 function injectWhatsAppWidget() {

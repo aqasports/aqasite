@@ -6,7 +6,7 @@
 
   "nav_tarifs": "Pricing",
   "nav_groupes": "Groups",
-  "nav_piscines": "Pools",
+  "nav_infrastructure": "Infrastructures",
   "nav_infos": "Info",
   "nav_events": "Events",
   "nav_formations": "Training",
@@ -18,7 +18,7 @@
 
   "stats_athletes": "Athletes trained",
   "stats_coaches": "Elite coaches",
-  "stats_pools": "Partner pools",
+  "stats_infrastructure": "Partner infrastructures",
   "stats_satisfaction": "Client satisfaction",
 
   "section_services_title": "Our Core Services",
@@ -53,7 +53,7 @@
   "btn_wellness": "AQA Wellness",
   "btn_events": "AQA Events",
   "btn_sports": "Sports",
-  "btn_piscines": "Pools",
+  "btn_infrastructure": "Infrastructures",
   "btn_team": "Team",
   "btn_adherents": "Members",
   "btn_webtv": "WebTV",
