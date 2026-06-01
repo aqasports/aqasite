@@ -30,10 +30,20 @@ Object.keys(scheduleData).forEach(locKey => {
     if (!cat || !cat.coaches) return;
 
     cat.coaches.forEach(coach => {
-      if (!coach.slots || coach.slots.length === 0) return;
-      const availableSlots = coach.slots.filter(s => s.taken < s.total);
-      if (availableSlots.length === 0) return;
-      kidsGroups.push({ coach: coach.name, pool: poolLabel, slots: availableSlots, locKey });
+      if (!coach.slots) return;
+      coach.slots.forEach(slot => {
+        if (slot.taken >= slot.total) return;
+        kidsGroups.push({
+          coach: coach.name,
+          pool: poolLabel,
+          day: slot.day,
+          time: slot.time,
+          total: slot.total,
+          taken: slot.taken,
+          type: slot.type,
+          locKey
+        });
+      });
     });
   });
 });
@@ -152,11 +162,9 @@ Object.keys(scheduleData).forEach(locKey => {
                   <h3 class="kids-groups__title">Groupe {String.fromCharCode(65 + i)}</h3>
                   <div class="kids-groups__age">{g.coach}</div>
                   <ul class="kids-groups__features">
-                    {g.slots.map(s => (
-                      <li class="kids-groups__feature">{s.day} — {s.time}</li>
-                    ))}
+                    <li class="kids-groups__feature">{g.day} — {g.time}</li>
                     <li class="kids-groups__feature">Piscine {g.pool}</li>
-                    <li class="kids-groups__feature" style="color:#00ffff;font-weight:700">{g.slots[0].total - g.slots[0].taken} place(s) disponible(s)</li>
+                    <li class="kids-groups__feature" style="color:#00ffff;font-weight:700">{g.total - g.taken} place(s) disponible(s)</li>
                   </ul>
                 </div>
               )) : (
