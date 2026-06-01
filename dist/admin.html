@@ -370,7 +370,11 @@
       Object.keys(locData.categories).forEach(catKey => {
         const opt = document.createElement('option');
         opt.value = catKey;
-        opt.textContent = locData.categories[catKey].name || catKey;
+        let displayName = locData.categories[catKey].name || catKey;
+        if (catKey === 'enfants' || catKey === 'kids') {
+          displayName = 'Enfants (AQA Kids)';
+        }
+        opt.textContent = displayName;
         categorySelect.appendChild(opt);
       });
     }
