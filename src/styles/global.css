@@ -50,7 +50,6 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   position: relative;
-  overscroll-behavior: none;
 }
 
 /* Base Typography */
