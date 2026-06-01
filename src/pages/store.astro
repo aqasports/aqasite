@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="AQA Store — Équipements & Accessoires Natation Officiel Algérie"
+<BaseLayout title="AQA Store — Équipements & Accessoires Natation Officiel Algérie"
   description="Boutique officielle AQA Sports : lunettes, bonnets, combinaisons et accessoires de natation et d'apnée. Matériel de qualité professionnelle livré en Algérie."
   keywords="équipements natation algérie, boutique natation, lunettes natation, bonnet piscine, matériel apnée algérie"
-  currentPage="/store"
->
-  <Navbar currentPage="/store" />
+  currentPage="/store" lang={lang}>
+  <Navbar currentPage="/store" lang={lang} />
 
 <div class="page-hero">
         <span class="hero-badge">🛍️ Boutique Officielle</span>
@@ -40,7 +49,7 @@ import Footer from '../components/Footer.astro';
                     <div class="product-desc">Anti-buée, UV400, ajustables — validées par les coachs AQA.</div>
                     <div class="product-footer">
                         <span class="product-price">Sur commande</span>
-                        <a href="/infos" class="product-btn">Commander</a>
+                        <a href={getRelativePath('/infos', lang)} class="product-btn">Commander</a>
                     </div>
                 </div>
             </div>
@@ -55,7 +64,7 @@ import Footer from '../components/Footer.astro';
                     <div class="product-desc">Programme PDF complet : drills, exercices, plans d'entraînement débutant → expert.</div>
                     <div class="product-footer">
                         <span class="product-price">Bientôt</span>
-                        <a href="/infos" class="product-btn">Notifier</a>
+                        <a href={getRelativePath('/infos', lang)} class="product-btn">Notifier</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +79,7 @@ import Footer from '../components/Footer.astro';
                     <div class="product-desc">Masque, tuba et palmes sélectionnés par nos instructeurs d'apnée certifiés.</div>
                     <div class="product-footer">
                         <span class="product-price">Sur commande</span>
-                        <a href="/infos" class="product-btn">Commander</a>
+                        <a href={getRelativePath('/infos', lang)} class="product-btn">Commander</a>
                     </div>
                 </div>
             </div>
@@ -85,7 +94,7 @@ import Footer from '../components/Footer.astro';
                     <div class="product-desc">Téléchargez l'application mobile AQA pour suivre votre progression et vos séances.</div>
                     <div class="product-footer">
                         <span class="product-price">Gratuit</span>
-                        <a href="/app" class="product-btn">Télécharger</a>
+                        <a href={getRelativePath('/app', lang)} class="product-btn">Télécharger</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +106,7 @@ import Footer from '../components/Footer.astro';
             <div>
                 <div class="section-title" style="text-align:left; font-size:1.3rem;">AQA Wear 👕</div>
                 <p style="color: rgba(255,255,255,0.7); margin: 0.5rem 0;">Découvrez notre ligne de vêtements techniques AQA : maillots, t-shirts, bonnets et équipement de marque.</p>
-                <a href="/wear">Voir la collection →</a>
+                <a href={getRelativePath('/wear', lang)}>Voir la collection →</a>
             </div>
         </div>
 
@@ -109,7 +118,7 @@ import Footer from '../components/Footer.astro';
         </div>
     </div>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

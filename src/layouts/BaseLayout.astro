@@ -1,13 +1,14 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import '../styles/global.css';
 
-// BaseLayout.astro — manages <head> only. Zero visual changes to pages.
 export interface Props {
   title: string;
   description?: string;
   keywords?: string;
   ogImage?: string;
   currentPage?: string;
+  lang?: string;
 }
 
 const {
@@ -16,13 +17,15 @@ const {
   keywords = 'natation algérie, apnée, coaching sport, académie natation alger, aqa sports',
   ogImage = 'https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png',
   currentPage = '',
+  lang = 'fr',
 } = Astro.props;
 
 const siteUrl = 'https://aqasports.com';
+const dir = lang === 'ar' ? 'rtl' : 'ltr';
 ---
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang={lang} dir={dir}>
 <head>
   <ViewTransitions />
   <meta name="google-site-verification" content="inKPL762nSBpYj4IE7DSnI3Q6TGbirWbyLJxMRjpymg" />
@@ -44,7 +47,7 @@ const siteUrl = 'https://aqasports.com';
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:site_name" content="AQA Sports Academy" />
-  <meta property="og:locale" content="fr_DZ" />
+  <meta property="og:locale" content={lang === 'ar' ? 'ar_DZ' : (lang === 'en' ? 'en_US' : 'fr_DZ')} />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -60,7 +63,7 @@ const siteUrl = 'https://aqasports.com';
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P540VBDLT5"></script>
-  <script>
+  <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -68,7 +71,7 @@ const siteUrl = 'https://aqasports.com';
   </script>
 
   <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
+  <script type="application/ld+json" is:inline>
     {
       "@context": "https://schema.org",
       "@type": "SportsActivityLocation",
@@ -81,64 +84,8 @@ const siteUrl = 'https://aqasports.com';
     }
   </script>
 
-  <!-- i18n engine — must load before page renders -->
-  <script src="/js/i18n.js" is:inline></script>
-
   <!-- Slot for page-specific <style> or <link> tags -->
   <slot name="head" />
-  <style is:global>
-    .bg-logo {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80vw;
-      height: 80vh;
-      background-image: url('https://i.imgur.com/3dcksCn.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      opacity: 0.1;
-      z-index: -2;
-      pointer-events: none;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 0px solid transparent;
-      background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff, #3333ff, #6600ff, #9900ff, #cc00ff, #ff0099, #ff0066, #ff3333) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      z-index: -1;
-      animation: neonGlow 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes neonGlow {
-      0%, 100% { filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #0099ff) drop-shadow(0 0 30px #0066ff); }
-      50% { filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0099ff) drop-shadow(0 0 60px #0066ff); }
-    }
-
-    .bg-frame {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      z-index: -3;
-      pointer-events: none;
-    }
-
-    html {
-      background: #000;
-    }
-  </style>
 </head>
 <body>
   <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true"></iframe>

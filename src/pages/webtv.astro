@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="AQA WebTV — Vidéos Natation, Tutoriels & Compétitions Algérie"
+<BaseLayout title="AQA WebTV — Vidéos Natation, Tutoriels & Compétitions Algérie"
   description="Regardez les vidéos AQA : tutoriels de nage, démonstrations d'apnée, résumés de compétitions et conseils de nos coachs professionnels."
   keywords="vidéos natation algérie, tutoriels nage, chaîne natation youtube, apnée video, coaching video natation"
-  currentPage="/webtv"
->
-  <Navbar currentPage="/webtv" />
+  currentPage="/webtv" lang={lang}>
+  <Navbar currentPage="/webtv" lang={lang} />
 
 <!-- Header -->
     
@@ -819,7 +828,7 @@ import Footer from '../components/Footer.astro';
         });
     </script>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

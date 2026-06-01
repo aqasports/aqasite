@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="Espace Membres | AQA Sports Academy — Suivi & Plannings"
+<BaseLayout title="Espace Membres | AQA Sports Academy — Suivi & Plannings"
   description="Accédez à votre espace membre AQA : planning de séances, suivi de progression, historique de paiements et informations de groupe."
   keywords="espace membre aqa, suivi natation, planning piscine membre, portail aqa sports"
-  currentPage="/clients"
->
-  <Navbar currentPage="/clients" />
+  currentPage="/clients" lang={lang}>
+  <Navbar currentPage="/clients" lang={lang} />
 
 <div class="page-hero">
         <span class="hero-badge">🏅 Espace Adhérents</span>
@@ -22,22 +31,22 @@ import Footer from '../components/Footer.astro';
     <div class="container">
         <!-- Quick access -->
         <div class="access-grid">
-            <a href="/groupes" class="access-card">
+            <a href={getRelativePath('/groupes', lang)} class="access-card">
                 <div class="access-icon">📅</div>
                 <div class="access-title">Mon Groupe & Horaires</div>
                 <div class="access-desc">Consultez votre groupe, vos horaires de séances et les piscines assignées.</div>
             </a>
-            <a href="/inscription" class="access-card">
+            <a href={getRelativePath('/inscription', lang)} class="access-card">
                 <div class="access-icon">📝</div>
                 <div class="access-title">Inscription & Renouvellement</div>
                 <div class="access-desc">Inscrivez-vous ou renouvelez votre abonnement en quelques clics.</div>
             </a>
-            <a href="/tarifs" class="access-card">
+            <a href={getRelativePath('/tarifs', lang)} class="access-card">
                 <div class="access-icon">💳</div>
                 <div class="access-title">Tarifs & Paiements</div>
                 <div class="access-desc">Consultez nos formules, tarifs et modalités de paiement.</div>
             </a>
-            <a href="/app" class="access-card">
+            <a href={getRelativePath('/app', lang)} class="access-card">
                 <div class="access-icon">📱</div>
                 <div class="access-title">Application AQA</div>
                 <div class="access-desc">Téléchargez l'app pour suivre vos séances, votre progression et recevoir des notifications.</div>
@@ -62,7 +71,7 @@ import Footer from '../components/Footer.astro';
                 <div class="portal-feature"><span>🎯</span><div class="portal-feature-text"><strong>Objectifs personnels</strong><span>Fixez et suivez vos buts</span></div></div>
             </div>
             <div class="app-cta-row">
-                <a href="/app" class="app-btn primary">📲 Télécharger l'App</a>
+                <a href={getRelativePath('/app', lang)} class="app-btn primary">📲 Télécharger l'App</a>
                 <a href="https://wa.me/213540454907?text=Bonjour%2C%20j%27ai%20besoin%20d%27aide%20sur%20mon%20espace%20membre." class="app-btn secondary" target="_blank" rel="noopener">💬 Support WhatsApp</a>
             </div>
         </div>
@@ -72,15 +81,15 @@ import Footer from '../components/Footer.astro';
         <div class="faq-list">
             <div class="faq-item">
                 <div class="faq-q" onclick="toggleFaq(this)">Comment connaître mon groupe et mes horaires ? <span class="arrow">▼</span></div>
-                <div class="faq-a">Consultez la page <a href="/groupes" style="color:#00ffff">Groupes</a> pour voir tous les créneaux disponibles. Votre coach vous communique également votre groupe lors de l'inscription.</div>
+                <div class="faq-a">Consultez la page <a href={getRelativePath('/groupes', lang)} style="color:#00ffff">Groupes</a> pour voir tous les créneaux disponibles. Votre coach vous communique également votre groupe lors de l'inscription.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q" onclick="toggleFaq(this)">Comment renouveler mon abonnement ? <span class="arrow">▼</span></div>
-                <div class="faq-a">Rendez-vous sur la page <a href="/inscription" style="color:#00ffff">Inscription</a> ou contactez-nous directement par WhatsApp pour un renouvellement rapide.</div>
+                <div class="faq-a">Rendez-vous sur la page <a href={getRelativePath('/inscription', lang)} style="color:#00ffff">Inscription</a> ou contactez-nous directement par WhatsApp pour un renouvellement rapide.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q" onclick="toggleFaq(this)">Comment accéder à l'application AQA ? <span class="arrow">▼</span></div>
-                <div class="faq-a">Téléchargez l'application AQA sur la page <a href="/app" style="color:#00ffff">AQA App</a>. Elle est disponible pour Android et vous permet de suivre votre progression en temps réel.</div>
+                <div class="faq-a">Téléchargez l'application AQA sur la page <a href={getRelativePath('/app', lang)} style="color:#00ffff">AQA App</a>. Elle est disponible pour Android et vous permet de suivre votre progression en temps réel.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q" onclick="toggleFaq(this)">Comment contacter mon coach ? <span class="arrow">▼</span></div>
@@ -100,7 +109,7 @@ import Footer from '../components/Footer.astro';
         }
     </script>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

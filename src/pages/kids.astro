@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="Natation Enfants | AQA Sports Academy — Dès 4 Ans, Algérie"
+<BaseLayout title="Natation Enfants | AQA Sports Academy — Dès 4 Ans, Algérie"
   description="Programme natation enfants AQA : apprentissage progressif, jeux aquatiques et sécurité en piscine dès 4 ans. Coachs spécialisés pédiatrie sportive."
   keywords="natation enfants algérie, cours natation enfants alger, apprentissage piscine enfants, aqa kids"
-  currentPage="/kids"
->
-  <Navbar currentPage="/kids" />
+  currentPage="/kids" lang={lang}>
+  <Navbar currentPage="/kids" lang={lang} />
 
 <div class="container">
         <section class="kids-hero">
@@ -165,7 +174,7 @@ import Footer from '../components/Footer.astro';
                         <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique & Physique</li>
                     </ul>
-                    <a href="/inscription" class="kids-pricing__button">Réserver</a>
+                    <a href={getRelativePath('/inscription', lang)} class="kids-pricing__button">Réserver</a>
                 </div>
 
                 <div class="kids-pricing__card" style="border-color: #00ffff; box-shadow: 0 0 15px rgba(0,255,255,0.3);">
@@ -179,7 +188,7 @@ import Footer from '../components/Footer.astro';
                         <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique & Physique</li>
                     </ul>
-                    <a href="/inscription" class="kids-pricing__button">Réserver</a>
+                    <a href={getRelativePath('/inscription', lang)} class="kids-pricing__button">Réserver</a>
                 </div>
 
                 <div class="kids-pricing__card">
@@ -193,7 +202,7 @@ import Footer from '../components/Footer.astro';
                         <li class="kids-pricing__feature">Pack de matériel offert</li>
                         <li class="kids-pricing__feature">Suivi Technique & Physique</li>
                     </ul>
-                    <a href="/inscription" class="kids-pricing__button">Réserver</a>
+                    <a href={getRelativePath('/inscription', lang)} class="kids-pricing__button">Réserver</a>
                 </div>
             </div>
         </section>
@@ -429,7 +438,7 @@ import Footer from '../components/Footer.astro';
                 Offrez à votre enfant la chance de découvrir les joies de la natation dans un environnement 
                 sécurisé et professionnel.
             </p>
-            <a href="/inscription" class="kids-cta__button">Réserver maintenant</a>
+            <a href={getRelativePath('/inscription', lang)} class="kids-cta__button">Réserver maintenant</a>
         </section>
     </div>
 
@@ -541,7 +550,7 @@ import Footer from '../components/Footer.astro';
         });
     </script>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

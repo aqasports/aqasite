@@ -2,10 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout title="Page introuvable | AQA Sports Academy" currentPage="/404">
-  <Navbar />
+<BaseLayout title="Page introuvable | AQA Sports Academy" currentPage="/404" lang={lang}>
+  <Navbar  lang={lang} />
 
   <style>
     .error-page {
@@ -116,12 +127,12 @@ import Footer from '../components/Footer.astro';
       Retournez à l'accueil et continuez votre progression.
     </p>
     <div class="error-links">
-      <a href="/" class="btn-primary" data-i18n="error_home">← Retour à l'accueil</a>
-      <a href="/tarifs" class="btn-secondary" data-i18n="nav_tarifs">Tarifs</a>
-      <a href="/groupes" class="btn-secondary" data-i18n="nav_groupes">Groupes</a>
-      <a href="/inscription" class="btn-secondary" data-i18n="nav_inscription">Inscription</a>
+      <a href={getRelativePath('/', lang)} class="btn-primary" data-i18n="error_home">← Retour à l'accueil</a>
+      <a href={getRelativePath('/tarifs', lang)} class="btn-secondary" data-i18n="nav_tarifs">Tarifs</a>
+      <a href={getRelativePath('/groupes', lang)} class="btn-secondary" data-i18n="nav_groupes">Groupes</a>
+      <a href={getRelativePath('/inscription', lang)} class="btn-secondary" data-i18n="nav_inscription">Inscription</a>
     </div>
   </div>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>

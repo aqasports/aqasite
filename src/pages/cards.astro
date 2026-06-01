@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="Formules AQA — Cartes & Abonnements Natation Algérie 2025"
+<BaseLayout title="Formules AQA — Cartes & Abonnements Natation Algérie 2025"
   description="Formules d'abonnement AQA 2025 : cartes 1 mois, 3 mois, 6 mois et 9 mois. Tarifs compétitifs pour tous les niveaux et toutes les disciplines."
   keywords="abonnement natation algérie, carte piscine algérie, formules mensuel natation, tarif piscine 2025"
-  currentPage="/cards"
->
-  <Navbar currentPage="/cards" />
+  currentPage="/cards" lang={lang}>
+  <Navbar currentPage="/cards" lang={lang} />
 
 <!-- Navbar CSS -->
   <link rel="stylesheet" href="css/navbar.css">
@@ -95,7 +104,7 @@ import Footer from '../components/Footer.astro';
   </div>
   
   <div style="text-align:center; margin:2rem 0;">
-    <a href="/tarifs" class="tarif-btn">Voir les Tarifs</a>
+    <a href={getRelativePath('/tarifs', lang)} class="tarif-btn">Voir les Tarifs</a>
   </div>
 
 <!-- Video Analysis Popup -->
@@ -140,7 +149,7 @@ import Footer from '../components/Footer.astro';
           </video>
         </div>
         
-        <a href="/video-analysis" class="popup-btn">En savoir plus sur l'Analyse Vidéo</a>
+        <a href={getRelativePath('/video-analysis', lang)} class="popup-btn">En savoir plus sur l'Analyse Vidéo</a>
       </div>
     </div>
   </div>
@@ -224,28 +233,13 @@ import Footer from '../components/Footer.astro';
           </p>
         </div>
         
-        <a href="/app" class="popup-btn" style="text-decoration: none; margin-bottom: 1rem;">Découvrir l'Application AQA</a>
+        <a href={getRelativePath('/app', lang)} class="popup-btn" style="text-decoration: none; margin-bottom: 1rem;">Découvrir l'Application AQA</a>
       </div>
     </div>
   </div>
 
-<footer>
-    
-  
-
 <!-- Add this script before closing </body> tag -->
 <script>
-async function loadFooter() {
-    try {
-        const response = await fetch('footer.html');
-        const footerHTML = await response.text();
-        document.getElementById('footer-container').innerHTML = footerHTML;
-    } catch (error) {
-        console.error('Error loading footer:', error);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', loadFooter);
 
 // ===== Cards toggle =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -344,7 +338,7 @@ function closeAllPopups() {
 }
 </script>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

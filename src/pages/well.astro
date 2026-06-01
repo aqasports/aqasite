@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="Bien-être & Fitness Aquatique | AQA Sports — Remise en Forme Algérie"
+<BaseLayout title="Bien-être & Fitness Aquatique | AQA Sports — Remise en Forme Algérie"
   description="Programmes bien-être et remise en forme aquatique AQA : aquagym, relaxation, récupération active. Accessible à tous les niveaux. Réghaia & Cheraga."
   keywords="bien-être aquatique algérie, aquagym alger, fitness piscine, remise en forme natation algérie"
-  currentPage="/well"
->
-  <Navbar currentPage="/well" />
+  currentPage="/well" lang={lang}>
+  <Navbar currentPage="/well" lang={lang} />
 
 <div class="bg-fixed"></div>
 
@@ -120,7 +129,7 @@ import Footer from '../components/Footer.astro';
         </div>
     </section>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

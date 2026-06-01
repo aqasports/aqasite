@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="Activités Sportives | AQA Sports Academy — Natation, Apnée & Plus"
+<BaseLayout title="Activités Sportives | AQA Sports Academy — Natation, Apnée & Plus"
   description="Découvrez toutes les activités AQA Sports Academy : natation technique, apnée, water-polo, aquagym, stages intensifs et formations aquatiques."
   keywords="activités sportives algérie, natation apnée algérie, sports aquatiques alger, water-polo algérie, aquagym"
-  currentPage="/activities"
->
-  <Navbar currentPage="/activities" />
+  currentPage="/activities" lang={lang}>
+  <Navbar currentPage="/activities" lang={lang} />
 
 <!-- Animated Background Particles -->
     <div class="bg-particles">
@@ -47,7 +56,7 @@ import Footer from '../components/Footer.astro';
             <h2 class="section-title">Activités Disponibles</h2>
             <div class="activities-grid">
                 <!-- Swimming for Adults -->
-                <a href="/infos" class="activity-card available swimming-adults">
+                <a href={getRelativePath('/infos', lang)} class="activity-card available swimming-adults">
                     <div class="activity-icon">
                         <img src="images/swim.webp" alt="Natation Adultes" loading="lazy">
                     </div>
@@ -56,7 +65,7 @@ import Footer from '../components/Footer.astro';
                 </a>
 
                 <!-- Swimming for Kids -->
-                <a href="/kids" class="activity-card available swimming-kids">
+                <a href={getRelativePath('/kids', lang)} class="activity-card available swimming-kids">
                     <div class="activity-icon">
                         <img src="images/swim.webp" alt="Natation Enfants" loading="lazy">
                     </div>
@@ -307,7 +316,7 @@ import Footer from '../components/Footer.astro';
         }
     </script>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

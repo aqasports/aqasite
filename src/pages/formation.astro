@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="Formations & Certifications | AQA Sports Academy — Algérie"
+<BaseLayout title="Formations & Certifications | AQA Sports Academy — Algérie"
   description="AQA propose des formations et certifications sportives pour moniteurs et coachs aquatiques. Programmes reconnus, encadrement professionnel en Algérie."
   keywords="formation natation algérie, certification coach natation, moniteur piscine algérie, formation apnée"
-  currentPage="/formation"
->
-  <Navbar currentPage="/formation" />
+  currentPage="/formation" lang={lang}>
+  <Navbar currentPage="/formation" lang={lang} />
 
 <div class="container">
         
@@ -27,7 +36,7 @@ import Footer from '../components/Footer.astro';
                 <div class="card-content">
                     <h3 class="card-title">Anti Aquaphobie</h3>
                     <p class="card-desc">Vaincre la peur de l'eau. Une approche psychologique et technique pour retrouver confiance et autonomie totale.</p>
-                    <a href="/phobie" class="card-btn btn-active">Découvrir le programme</a>
+                    <a href={getRelativePath('/phobie', lang)} class="card-btn btn-active">Découvrir le programme</a>
                 </div>
             </div>
 
@@ -37,7 +46,7 @@ import Footer from '../components/Footer.astro';
                 <div class="card-content">
                     <h3 class="card-title">AQA Masterclasses</h3>
                     <p class="card-desc">Sessions techniques avancées (Online & Présentiel) avec des experts internationaux. Perfectionnement technique.</p>
-                    <a href="/masterclasses" class="card-btn btn-active" style="background: linear-gradient(135deg, rgba(255, 0, 153, 0.2), rgba(255, 100, 0, 0.2)); border-color: #ff0099;">Voir le Planning</a>
+                    <a href={getRelativePath('/masterclasses', lang)} class="card-btn btn-active" style="background: linear-gradient(135deg, rgba(255, 0, 153, 0.2), rgba(255, 100, 0, 0.2)); border-color: #ff0099;">Voir le Planning</a>
                 </div>
             </div>
 
@@ -47,7 +56,7 @@ import Footer from '../components/Footer.astro';
                 <div class="card-content">
                     <h3 class="card-title">Chasse Sous-marine</h3>
                     <p class="card-desc">Maîtrisez l'apnée, la sécurité et les techniques de chasse responsable. Théorie et pratique en milieu naturel.</p>
-                    <a href="/contact" class="card-btn btn-active">S'inscrire</a>
+                    <a href={getRelativePath('/contact', lang)} class="card-btn btn-active">S'inscrire</a>
                 </div>
             </div>
               <div class="card">
@@ -56,7 +65,7 @@ import Footer from '../components/Footer.astro';
                 <div class="card-content">
                     <h3 class="card-title"> Secourisme</h3>
                     <p class="card-desc">Techniques de premiers secours adaptées aux environnements aquatiques.</p>
-                    <a href="/contact" class="card-btn btn-active">S'inscrire</a>
+                    <a href={getRelativePath('/contact', lang)} class="card-btn btn-active">S'inscrire</a>
                 </div>
             </div>
 
@@ -139,7 +148,7 @@ import Footer from '../components/Footer.astro';
         });
     </script>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

@@ -2,15 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
 ---
 
-<BaseLayout
-  title="Nos Piscines | AQA Sports Academy — Réghaia & Cheraga Algérie"
+<BaseLayout title="Nos Piscines | AQA Sports Academy — Réghaia & Cheraga Algérie"
   description="AQA Sports Academy s'entraîne dans des piscines partenaires à Réghaia et Cheraga, Alger. Infrastructures modernes, eau traitée, conditions optimales."
   keywords="piscines algérie, piscine réghaia, piscine cheraga, infrastructure natation alger, aqa piscine"
-  currentPage="/piscines"
->
-  <Navbar currentPage="/piscines" />
+  currentPage="/piscines" lang={lang}>
+  <Navbar currentPage="/piscines" lang={lang} />
 
 <!-- ===== NAVBAR ===== -->
   
@@ -68,7 +77,7 @@ import Footer from '../components/Footer.astro';
               Semi olympique
             </li>
           </ul>
-          <button class="cta-button" onclick="location.href='azal.html'">Plus d'infos</button>
+          <button class="cta-button" onclick="location.href={getRelativePath('/azal', lang)}">Plus d'infos</button>
           <button class="cta-button" onclick="location.href='https://maps.app.goo.gl/b1efH4S11j8ACXUs8'">Localisation</button>
         </div>
       </div>
@@ -164,7 +173,7 @@ import Footer from '../components/Footer.astro';
     }, false);
   </script>
 
-  <Footer />
+  <Footer  lang={lang} />
 </BaseLayout>
 
 <style>

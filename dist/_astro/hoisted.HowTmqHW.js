@@ -1,1 +1,0 @@
-import"./hoisted.CY-5tZQz.js";window.addEventListener("load",()=>{setTimeout(()=>{document.getElementById("loadingScreen").classList.add("hidden")},1200)});setInterval(()=>{const t=document.querySelectorAll(".hud-card"),e=t[Math.floor(Math.random()*t.length)];e.style.transform=`translateX(${Math.random()*4-2}px)`,setTimeout(()=>{e.style.transform="translateX(0)"},100)},2e3);

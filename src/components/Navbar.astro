@@ -1,35 +1,51 @@
 ---
-// Navbar.astro — Exact copy of <header> + mobile overlay from original HTML pages.
-// Links updated to clean URLs (no .html). Zero visual changes.
+// Navbar.astro — Dynamic server-side pre-translated layout component
 export interface Props {
   currentPage?: string;
+  lang?: string;
 }
-const { currentPage = '' } = Astro.props;
+const { currentPage = '', lang = 'fr' } = Astro.props;
+
+import frDict from '../../lang/fr.json';
+import arDict from '../../lang/ar.json';
+import enDict from '../../lang/en.json';
+
+const dicts = { fr: frDict, ar: arDict, en: enDict };
+const dict = dicts[lang] || frDict;
+
+function t(key, fallbackText) {
+  return dict[key] !== undefined ? dict[key] : fallbackText;
+}
+
+function getRelativePath(path, targetLang) {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+}
 ---
 
 <header id="header">
     <div class="header-content">
         <div class="logo-section">
-            <a href="/">
+            <a href={getRelativePath('/', lang)}>
                 <img src="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png" alt="AQA Logo" class="logo">
             </a>
         </div>
 
         <nav class="nav-menu" id="navMenu">
-            <a href="/tarifs" class={`nav-link${currentPage === '/tarifs' ? ' active' : ''}`} data-i18n="nav_tarifs">Tarifs</a>
-            <a href="/groupes" class={`nav-link${currentPage === '/groupes' ? ' active' : ''}`} data-i18n="nav_groupes">Groupes</a>
-            <a href="/piscines" class={`nav-link${currentPage === '/piscines' ? ' active' : ''}`} data-i18n="nav_piscines">Piscines</a>
-            <a href="/infos" class={`nav-link${currentPage === '/infos' ? ' active' : ''}`} data-i18n="nav_infos">Infos</a>
-            <a href="/events" class={`nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">Events</a>
-            <a href="/formation" class={`nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">Formations</a>
-            <a href="/store" class={`nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">Store</a>
+            <a href={getRelativePath('/tarifs', lang)} class={`nav-link${currentPage === '/tarifs' ? ' active' : ''}`} data-i18n="nav_tarifs">{t('nav_tarifs', 'Tarifs')}</a>
+            <a href={getRelativePath('/groupes', lang)} class={`nav-link${currentPage === '/groupes' ? ' active' : ''}`} data-i18n="nav_groupes">{t('nav_groupes', 'Groupes')}</a>
+            <a href={getRelativePath('/piscines', lang)} class={`nav-link${currentPage === '/piscines' ? ' active' : ''}`} data-i18n="nav_piscines">{t('nav_piscines', 'Piscines')}</a>
+            <a href={getRelativePath('/infos', lang)} class={`nav-link${currentPage === '/infos' ? ' active' : ''}`} data-i18n="nav_infos">{t('nav_infos', 'Infos')}</a>
+            <a href={getRelativePath('/events', lang)} class={`nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">{t('nav_events', 'Events')}</a>
+            <a href={getRelativePath('/formation', lang)} class={`nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">{t('nav_formations', 'Formations')}</a>
+            <a href={getRelativePath('/store', lang)} class={`nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">{t('nav_store', 'Store')}</a>
         </nav>
 
         <div class="right-actions">
             <div class="lang-switcher" role="group" aria-label="Language switcher">
-              <button class="lang-btn" data-lang-btn="fr" aria-label="Français">FR</button>
-              <button class="lang-btn" data-lang-btn="ar" aria-label="العربية">AR</button>
-              <button class="lang-btn" data-lang-btn="en" aria-label="English">EN</button>
+              <a href={getRelativePath(currentPage, 'fr')} class={`lang-btn${lang === 'fr' ? ' lang-active' : ''}`} data-lang-btn="fr" aria-label="Français">FR</a>
+              <a href={getRelativePath(currentPage, 'ar')} class={`lang-btn${lang === 'ar' ? ' lang-active' : ''}`} data-lang-btn="ar" aria-label="العربية">AR</a>
+              <a href={getRelativePath(currentPage, 'en')} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`} data-lang-btn="en" aria-label="English">EN</a>
             </div>
 
             <div class="menu-toggle" onclick="toggleMobileMenu()">
@@ -41,17 +57,17 @@ const { currentPage = '' } = Astro.props;
 
 <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <div class="menu-close" onclick="toggleMobileMenu()"><span></span><span></span></div>
-    <a href="/tarifs" class={`mobile-nav-link${currentPage === '/tarifs' ? ' active' : ''}`} data-i18n="nav_tarifs">Tarifs</a>
-    <a href="/groupes" class={`mobile-nav-link${currentPage === '/groupes' ? ' active' : ''}`} data-i18n="nav_groupes">Groupes</a>
-    <a href="/piscines" class={`mobile-nav-link${currentPage === '/piscines' ? ' active' : ''}`} data-i18n="nav_piscines">Piscines</a>
-    <a href="/infos" class={`mobile-nav-link${currentPage === '/infos' ? ' active' : ''}`} data-i18n="nav_infos">Infos</a>
-    <a href="/events" class={`mobile-nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">Events</a>
-    <a href="/formation" class={`mobile-nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">Formations</a>
-    <a href="/store" class={`mobile-nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">Store</a>
+    <a href={getRelativePath('/tarifs', lang)} class={`mobile-nav-link${currentPage === '/tarifs' ? ' active' : ''}`} data-i18n="nav_tarifs">{t('nav_tarifs', 'Tarifs')}</a>
+    <a href={getRelativePath('/groupes', lang)} class={`mobile-nav-link${currentPage === '/groupes' ? ' active' : ''}`} data-i18n="nav_groupes">{t('nav_groupes', 'Groupes')}</a>
+    <a href={getRelativePath('/piscines', lang)} class={`mobile-nav-link${currentPage === '/piscines' ? ' active' : ''}`} data-i18n="nav_piscines">{t('nav_piscines', 'Piscines')}</a>
+    <a href={getRelativePath('/infos', lang)} class={`mobile-nav-link${currentPage === '/infos' ? ' active' : ''}`} data-i18n="nav_infos">{t('nav_infos', 'Infos')}</a>
+    <a href={getRelativePath('/events', lang)} class={`mobile-nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">{t('nav_events', 'Events')}</a>
+    <a href={getRelativePath('/formation', lang)} class={`mobile-nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">{t('nav_formations', 'Formations')}</a>
+    <a href={getRelativePath('/store', lang)} class={`mobile-nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">{t('nav_store', 'Store')}</a>
     <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
-      <button class="lang-btn" data-lang-btn="fr">FR</button>
-      <button class="lang-btn" data-lang-btn="ar">AR</button>
-      <button class="lang-btn" data-lang-btn="en">EN</button>
+      <a href={getRelativePath(currentPage, 'fr')} class={`lang-btn${lang === 'fr' ? ' lang-active' : ''}`} data-lang-btn="fr">FR</a>
+      <a href={getRelativePath(currentPage, 'ar')} class={`lang-btn${lang === 'ar' ? ' lang-active' : ''}`} data-lang-btn="ar">AR</a>
+      <a href={getRelativePath(currentPage, 'en')} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`} data-lang-btn="en">EN</a>
     </div>
 </div>
 

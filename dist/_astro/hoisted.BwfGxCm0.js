@@ -1,1 +1,0 @@
-import"./hoisted.CY-5tZQz.js";window.addEventListener("scroll",()=>{const t=document.querySelectorAll(".nav-dot");["hero","vision","disciplines","method","team","advantages","cta"].forEach((s,e)=>{const o=document.getElementById(s).getBoundingClientRect();o.top<=150&&o.bottom>=150?t[e].classList.add("active"):t[e].classList.remove("active")})});
