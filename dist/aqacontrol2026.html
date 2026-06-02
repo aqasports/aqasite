@@ -1246,7 +1246,7 @@ const countersData = {"athletes":660,"coaches":8,"pools":2,"satisfaction":98};
         status.textContent = '✓ Mot de passe mis à jour ! Déconnexion dans 3s...';
         status.className = 'save-status success';
       } else {
-        status.textContent = '❌ Erreur serveur: ' + (data.message || 'erreur');
+        status.textContent = '❌ Erreur serveur: ' + (data.message || data.error || 'erreur');
         status.className = 'save-status error';
       }
     } catch(e) {
@@ -1312,7 +1312,7 @@ const countersData = {"athletes":660,"coaches":8,"pools":2,"satisfaction":98};
         document.getElementById('newSlugInput').value = '';
         document.getElementById('slugPreviewBox').style.display = 'none';
       } else {
-        status.textContent = '❌ Erreur serveur: ' + (data.message || 'Serveur non disponible'); 
+        status.textContent = '❌ Erreur serveur: ' + (data.message || data.error || 'Serveur non disponible'); 
         status.className = 'save-status error';
       }
     } catch(e) {
