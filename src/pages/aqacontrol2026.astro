@@ -4,6 +4,8 @@ import scheduleData from '../data/schedule.json';
 import formationsData from '../data/formation.json';
 import infrastructuresData from '../data/infrastructure.json';
 import countersData from '../data/counters.json';
+import adminConfig from '../../admin-config.json';
+const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5a1a6985aa89dbe66286f85bbdd4be34fd5';
 ---
 
 <BaseLayout
@@ -370,7 +372,7 @@ import countersData from '../data/counters.json';
 </BaseLayout>
 
 <!-- BIND Astro Data into JS environment variables -->
-<script is:inline define:vars={{ scheduleData, formationsData, infrastructuresData, countersData }}>
+<script is:inline define:vars={{ scheduleData, formationsData, infrastructuresData, countersData, passwordHash }}>
 
   // ==================== AUTH LAYER ====================
   const SESSION_KEY = 'aqa_admin_token';
@@ -546,7 +548,7 @@ import countersData from '../data/counters.json';
     btnSpinner.style.display = 'inline';
     btn.disabled = true;
 
-    const KNOWN_HASH = '65cdacaf34486fbb5c32641665f6f5a1a6985aa89dbe66286f85bbdd4be34fd5';
+    const KNOWN_HASH = passwordHash;
     let token = '';
     let authenticated = false;
     let isServerError = false;
