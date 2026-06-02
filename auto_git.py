@@ -33,7 +33,7 @@ def run_git_automation():
         subprocess.run(
             [
                 "git", "add", 
-                "src/", "public/", "lang/", 
+                "src/", "public/", "lang/", "netlify/",
                 "astro.config.mjs", "package.json", "package-lock.json", 
                 "server.js", "netlify.toml", "sitemap.xml", "robots.txt", "*.html"
             ],
