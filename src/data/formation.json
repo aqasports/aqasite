@@ -6,7 +6,7 @@
     "image": "https://i.ibb.co/ndXbsZj/AQUAPHOBE-Instagram-Post-20240710-131657-0000-Copy.jpg?q=80&w=600&auto=format&fit=crop",
     "desc": "Vaincre la peur de l'eau. Une approche psychologique et technique pour retrouver confiance et autonomie totale.",
     "link": "/phobie",
-    "active": true,
+    "active": false,
     "status": "available"
   },
   {
@@ -26,7 +26,7 @@
     "image": "https://apneemotion.com/martinique/wp-content/uploads/sites/4/2020/10/apneemotion-martinique-chasse-sous-marine.jpg?q=80&w=600&auto=format&fit=crop",
     "desc": "Maîtrisez l'apnée, la sécurité et les techniques de chasse responsable. Théorie et pratique en milieu naturel.",
     "link": "/contact",
-    "active": true,
+    "active": false,
     "status": "available"
   },
   {
@@ -36,7 +36,7 @@
     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ90APcFZ_WZ7Ge7OeJQJxfYEGCLM7p8-upWQ&s?q=80&w=600&auto=format&fit=crop",
     "desc": "Techniques de premiers secours adaptées aux environnements aquatiques.",
     "link": "/contact",
-    "active": true,
+    "active": false,
     "status": "available"
   },
   {
