@@ -35,7 +35,8 @@ def run_git_automation():
                 "git", "add", 
                 "src/", "public/", "lang/", "netlify/",
                 "astro.config.mjs", "package.json", "package-lock.json", 
-                "server.js", "netlify.toml", "sitemap.xml", "robots.txt", "*.html"
+                "server.js", "netlify.toml", "sitemap.xml", "robots.txt", "*.html",
+                "admin-config.json"
             ],
             check=True
         )
