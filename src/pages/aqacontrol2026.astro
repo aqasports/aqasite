@@ -383,6 +383,21 @@ import countersData from '../data/counters.json';
     };
   }
 
+  async function safeFetchJson(url, options = {}) {
+    const res = await fetch(url, options);
+    const contentType = res.headers.get('content-type') || '';
+    if (contentType.includes('text/html')) {
+      throw new Error("L'environnement actuel est en lecture seule (site statique public). Veuillez exécuter l'application localement à l'adresse http://localhost:3000/aqacontrol2026 pour modifier les données, puis cliquez sur 'Déployer sur GitHub' pour publier vos modifications.");
+    }
+    let data;
+    try {
+      data = await res.json();
+    } catch (e) {
+      throw new Error("Réponse du serveur invalide (impossible de décoder le JSON).");
+    }
+    return { ok: res.ok, status: res.status, data };
+  }
+
   // Pure JavaScript SHA-256 fallback for insecure contexts (HTTP on non-localhost)
   function sha256_pure(ascii) {
     function rightRotate(value, amount) {
@@ -498,19 +513,24 @@ import countersData from '../data/counters.json';
       if (res.status === 404 || res.status === 405) {
         isServerError = true;
       } else {
-        const data = await res.json();
-        if (res.ok && data.success) {
-          token = data.token;
-          authenticated = true;
+        const contentType = res.headers.get('content-type') || '';
+        if (contentType.includes('text/html')) {
+          isServerError = true;
         } else {
-          errDiv.style.display = 'block';
-          errDiv.textContent = '❌ ' + (data.error || 'Mot de passe incorrect. Réessayez.');
-          document.getElementById('adminPassword').value = '';
-          document.getElementById('adminPassword').focus();
-          btnText.style.display = 'inline';
-          btnSpinner.style.display = 'none';
-          btn.disabled = false;
-          return;
+          const data = await res.json();
+          if (res.ok && data.success) {
+            token = data.token;
+            authenticated = true;
+          } else {
+            errDiv.style.display = 'block';
+            errDiv.textContent = '❌ ' + (data.error || 'Mot de passe incorrect. Réessayez.');
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminPassword').focus();
+            btnText.style.display = 'inline';
+            btnSpinner.style.display = 'none';
+            btn.disabled = false;
+            return;
+          }
         }
       }
     } catch(err) {
@@ -574,9 +594,14 @@ import countersData from '../data/counters.json';
       if (res.status === 404 || res.status === 405) {
         isServerError = true;
       } else {
-        const data = await res.json();
-        if (res.ok && data.success) {
-          valid = true;
+        const contentType = res.headers.get('content-type') || '';
+        if (contentType.includes('text/html')) {
+          isServerError = true;
+        } else {
+          const data = await res.json();
+          if (res.ok && data.success) {
+            valid = true;
+          }
         }
       }
     } catch (e) {
@@ -611,7 +636,12 @@ import countersData from '../data/counters.json';
   async function loadLiveDashboard() {
     try {
       const schRes = await fetch('/api/schedule');
-      if (schRes.ok) currentSchedule = await schRes.json();
+      if (schRes.ok) {
+        const contentType = schRes.headers.get('content-type') || '';
+        if (!contentType.includes('text/html')) {
+          currentSchedule = await schRes.json();
+        }
+      }
 
       Object.keys(currentSchedule).forEach(locKey => {
         const loc = currentSchedule[locKey];
@@ -907,13 +937,12 @@ import countersData from '../data/counters.json';
     const status = document.getElementById('savePlanningStatus');
     status.textContent = 'Sauvegarde...'; status.className = 'save-status';
     try {
-      const res = await fetch('/api/save-schedule', {
+      const { ok, data } = await safeFetchJson('/api/save-schedule', {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify({ schedule: currentSchedule })
       });
-      const data = await res.json();
-      if (res.ok && data.success) { status.textContent = '✓ Planning sauvegardé !'; status.className = 'save-status success'; updateDashboardStats(); }
+      if (ok && data.success) { status.textContent = '✓ Planning sauvegardé !'; status.className = 'save-status success'; updateDashboardStats(); }
       else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
     } catch(e) { status.textContent = '❌ Erreur réseau: ' + e.message; status.className = 'save-status error'; }
   });
@@ -967,13 +996,12 @@ import countersData from '../data/counters.json';
     const status = document.getElementById('saveFormationsStatus');
     status.textContent = 'Sauvegarde...'; status.className = 'save-status';
     try {
-      const res = await fetch('/api/save-formation', {
+      const { ok, data } = await safeFetchJson('/api/save-formation', {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify({ formations: currentFormations })
       });
-      const data = await res.json();
-      if (res.ok && data.success) { status.textContent = '✓ Formations sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
+      if (ok && data.success) { status.textContent = '✓ Formations sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
       else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
     } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
   });
@@ -1028,13 +1056,12 @@ import countersData from '../data/counters.json';
     const status = document.getElementById('saveInfrastructuresStatus');
     status.textContent = 'Sauvegarde...'; status.className = 'save-status';
     try {
-      const res = await fetch('/api/save-infrastructure', {
+      const { ok, data } = await safeFetchJson('/api/save-infrastructure', {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify({ infrastructures: currentInfrastructures })
       });
-      const data = await res.json();
-      if (res.ok && data.success) { status.textContent = '✓ Infrastructures sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
+      if (ok && data.success) { status.textContent = '✓ Infrastructures sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
       else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
     } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
   });
@@ -1055,13 +1082,12 @@ import countersData from '../data/counters.json';
     currentCounters.pools = parseInt(document.getElementById('countPools').value) || 3;
     currentCounters.satisfaction = parseInt(document.getElementById('countSatisfaction').value) || 98;
     try {
-      const res = await fetch('/api/save-counters', {
+      const { ok, data } = await safeFetchJson('/api/save-counters', {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify({ counters: currentCounters })
       });
-      const data = await res.json();
-      if (res.ok && data.success) { status.textContent = '✓ Compteurs sauvegardés !'; status.className = 'save-status success'; }
+      if (ok && data.success) { status.textContent = '✓ Compteurs sauvegardés !'; status.className = 'save-status success'; }
       else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
     } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
   });
@@ -1074,12 +1100,11 @@ import countersData from '../data/counters.json';
     statusEl.className = 'deploy-status active';
     consoleLogs.textContent = '>>> Lancement de deploy-now.bat...\n>>> Connexion au serveur Git...\n';
     try {
-      const res = await fetch('/api/deploy', {
+      const { ok, data } = await safeFetchJson('/api/deploy', {
         method: 'POST',
         headers: authHeaders()
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
+      if (ok && data.success) {
         statusEl.textContent = '✓ Site Déployé avec succès !';
         statusEl.className = 'deploy-status success';
         consoleLogs.textContent += '\n[STDOUT]\n' + data.stdout;
@@ -1089,7 +1114,7 @@ import countersData from '../data/counters.json';
         consoleLogs.textContent += '\n[ERROR]\n' + (data.message || 'Erreur inconnue') + '\n' + (data.stderr || '');
       }
     } catch(e) {
-      statusEl.textContent = '❌ Échec réseau';
+      statusEl.textContent = '❌ Échec réseau: ' + e.message;
       statusEl.className = 'deploy-status error';
       consoleLogs.textContent += '\n[NET_ERROR]\n' + e.message;
     }
@@ -1100,10 +1125,9 @@ import countersData from '../data/counters.json';
   // Load current config from server (slug display)
   async function loadSettingsConfig() {
     try {
-      const res = await fetch('/api/admin-config');
-      if (res.ok) {
-        const cfg = await res.json();
-        const slug = cfg.loginSlug || 'aqacontrol2026';
+      const { ok, data } = await safeFetchJson('/api/admin-config');
+      if (ok) {
+        const slug = data.loginSlug || 'aqacontrol2026';
         document.getElementById('currentSlugDisplay').textContent = slug;
         document.getElementById('urlSlugDisplay').textContent = slug;
         document.getElementById('urlOriginDisplay').textContent = window.location.origin + '/';
@@ -1176,13 +1200,12 @@ import countersData from '../data/counters.json';
 
     // Try to save to server
     try {
-      const res = await fetch('/api/save-admin-config', {
+      const { ok, data } = await safeFetchJson('/api/save-admin-config', {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify({ passwordHash: newHash })
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
+      if (ok && data.success) {
         status.textContent = '✓ Mot de passe mis à jour ! Déconnexion dans 3s...';
         status.className = 'save-status success';
       } else {
@@ -1190,7 +1213,7 @@ import countersData from '../data/counters.json';
         status.className = 'save-status error';
       }
     } catch(e) {
-      status.textContent = '❌ Impossible de contacter le serveur.';
+      status.textContent = '❌ ' + e.message;
       status.className = 'save-status error';
     }
 
@@ -1238,13 +1261,12 @@ import countersData from '../data/counters.json';
     status.textContent = 'Application en cours...';
 
     try {
-      const res = await fetch('/api/save-admin-config', {
+      const { ok, data } = await safeFetchJson('/api/save-admin-config', {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify({ loginSlug: slug })
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
+      if (ok && data.success) {
         document.getElementById('currentSlugDisplay').textContent = slug;
         document.getElementById('urlSlugDisplay').textContent = slug;
         status.textContent = '✓ URL mise à jour ! Accessible sur : ' + window.location.origin + '/' + slug;
@@ -1256,7 +1278,7 @@ import countersData from '../data/counters.json';
         status.className = 'save-status error';
       }
     } catch(e) {
-      status.textContent = '❌ Serveur non joignable. Redémarrez le serveur.'; 
+      status.textContent = '❌ ' + e.message; 
       status.className = 'save-status error';
     }
   });
