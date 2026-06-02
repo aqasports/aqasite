@@ -25,9 +25,14 @@ def run_git_automation():
         print("--- Staging tracked changes ---")
         subprocess.run(["git", "add", "-u"], check=True)
 
-        # Also stage new HTML/CSS/JS/JSON files intentionally (not .env, not .bak)
+        # Also stage new source files and configuration intentionally (ignoring .env/backups via .gitignore)
         subprocess.run(
-            ["git", "add", "*.html", "css/", "js/", "lang/", "sitemap.xml", "robots.txt"],
+            [
+                "git", "add", 
+                "src/", "public/", "lang/", 
+                "astro.config.mjs", "package.json", "package-lock.json", 
+                "server.js", "netlify.toml", "sitemap.xml", "robots.txt", "*.html"
+            ],
             check=True
         )
 

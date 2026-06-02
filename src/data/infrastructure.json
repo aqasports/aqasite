@@ -1,0 +1,30 @@
+[
+  {
+    "id": "azal",
+    "name": "Piscine ADM AZAL",
+    "image": "https://i.ibb.co/GfR0p9P4/FB-IMG-1656784815731.jpg",
+    "location": "Reghaia, Alger",
+    "features": [
+      "Ouvert 7j/7",
+      "AQA inside",
+      "Réception comfortable",
+      "Semi olympique"
+    ],
+    "infoLink": "/azal",
+    "mapLink": "https://maps.app.goo.gl/b1efH4S11j8ACXUs8"
+  },
+  {
+    "id": "bk-sport",
+    "name": "Piscine BK Sport",
+    "image": "https://i.ibb.co/vCdX73xK/Whats-App-Image-2024-12-08-at-15-05-01-f0286594.jpg",
+    "location": "Cheraga, Alger",
+    "features": [
+      "Ouvert 7j/7",
+      "AQA inside",
+      "Salle de sport",
+      "Semi olympique"
+    ],
+    "infoLink": "",
+    "mapLink": ""
+  }
+]
