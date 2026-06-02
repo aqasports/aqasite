@@ -1,377 +1,335 @@
----
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-
-export interface Props {
-  lang?: string;
-}
-
-const { lang = 'fr' } = Astro.props;
-
-const getRelativePath = (path, targetLang) => {
-  if (targetLang === 'fr') return path;
-  return `/${targetLang}${path === '/' ? '' : path}`;
-};
----
-
-<BaseLayout title="Formations & Certifications | AQA Sports Academy — Algérie"
-  description="AQA propose des formations et certifications sportives pour moniteurs et coachs aquatiques. Programmes reconnus, encadrement professionnel en Algérie."
-  keywords="formation natation algérie, certification coach natation, moniteur piscine algérie, formation apnée"
-  currentPage="/formation" lang={lang}>
-  <Navbar currentPage="/formation" lang={lang} />
-
-<div class="container">
-        
-        <div class="page-header">
-            <h1 class="page-title">Nos Formations</h1>
-            <p class="page-subtitle">Des programmes d'élite pour amateurs et professionnels.</p>
-        </div>
-
-        <div class="formation-grid">
-
-            <div class="card">
-                <div class="badge badge-available">Disponible</div>
-                <div class="card-image" style="background-image: url('https://i.ibb.co/ndXbsZj/AQUAPHOBE-Instagram-Post-20240710-131657-0000-Copy.jpg?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">Anti Aquaphobie</h3>
-                    <p class="card-desc">Vaincre la peur de l'eau. Une approche psychologique et technique pour retrouver confiance et autonomie totale.</p>
-                    <a href={getRelativePath('/phobie', lang)} class="card-btn btn-active">Découvrir le programme</a>
-                </div>
-            </div>
-
-            <div class="card" style="border-color: #ff0099;">
-                <div class="badge badge-available" style="border-color:#ff0099; color:#ff0099; box-shadow: 0 0 10px #ff0099;">Masterclasses</div>
-                <div class="card-image" style="background-image: url('https://www.citescolaireparentis.fr/wp-content/uploads/2022/01/6-considerations-cles-pour-une-salle-de-formation-efficace.jpg?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">AQA Masterclasses</h3>
-                    <p class="card-desc">Sessions techniques avancées (Online & Présentiel) avec des experts internationaux. Perfectionnement technique.</p>
-                    <a href={getRelativePath('/masterclasses', lang)} class="card-btn btn-active" style="background: linear-gradient(135deg, rgba(255, 0, 153, 0.2), rgba(255, 100, 0, 0.2)); border-color: #ff0099;">Voir le Planning</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="badge badge-available">Disponible</div>
-                <div class="card-image" style="background-image: url('https://apneemotion.com/martinique/wp-content/uploads/sites/4/2020/10/apneemotion-martinique-chasse-sous-marine.jpg?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">Chasse Sous-marine</h3>
-                    <p class="card-desc">Maîtrisez l'apnée, la sécurité et les techniques de chasse responsable. Théorie et pratique en milieu naturel.</p>
-                    <a href={getRelativePath('/contact', lang)} class="card-btn btn-active">S'inscrire</a>
-                </div>
-            </div>
-              <div class="card">
-                <div class="badge badge-available">Disponible</div>
-                <div class="card-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ90APcFZ_WZ7Ge7OeJQJxfYEGCLM7p8-upWQ&s?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title"> Secourisme</h3>
-                    <p class="card-desc">Techniques de premiers secours adaptées aux environnements aquatiques.</p>
-                    <a href={getRelativePath('/contact', lang)} class="card-btn btn-active">S'inscrire</a>
-                </div>
-            </div>
-
-            <div class="card coming-soon">
-                <div class="badge badge-soon">Bientôt</div>
-                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">Plongée Sous-marine</h3>
-                    <p class="card-desc">Formation certifiante PADI/CMAS. Exploration des fonds marins avec bouteille.</p>
-                    <span class="card-btn btn-disabled">Indisponible</span>
-                </div>
-            </div>
-
-            <div class="card coming-soon">
-                <div class="badge badge-soon">Bientôt</div>
-                <div class="card-image" style="background-image: url('https://d1s9j44aio5gjs.cloudfront.net/2019/01/swimming_coach.jpg?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">Formation Coach (Aquaphobie)</h3>
-                    <p class="card-desc">Certification pour devenir instructeur spécialisé dans le traitement de l'aquaphobie.</p>
-                    <span class="card-btn btn-disabled">Indisponible</span>
-                </div>
-            </div>
-
-            <div class="card coming-soon">
-                <div class="badge badge-soon">Bientôt</div>
-                <div class="card-image" style="background-image: url('https://img.centrefrance.com/5c13SJygADKDrj4CU4kr2v6V2XV0xnLJ2xMVHrkobIw/rs:auto:1200:800:1:0/g:sm/bG9jYWw6Ly8vMDAvMDAvMDcvMzAvMzgvMjAwMDAwNzMwMzg3NA.webp?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">Surveillant de Baignade</h3>
-                    <p class="card-desc">Brevet de sauvetage aquatique et secourisme. Devenez un professionnel de la sécurité.</p>
-                    <span class="card-btn btn-disabled">Indisponible</span>
-                </div>
-            </div>
-
-            <div class="card coming-soon">
-                <div class="badge badge-soon">Bientôt</div>
-                <div class="card-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkN-VOCRIPtXuGd87IRm9CJX9kEGPHFlVbvg&s?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">Formation Aquathérapie</h3>
-                    <p class="card-desc">Techniques de rééducation et de bien-être dans l'eau pour les professionnels de santé.</p>
-                    <span class="card-btn btn-disabled">Indisponible</span>
-                </div>
-            </div>
-
-            <div class="card coming-soon">
-                <div class="badge badge-soon">Bientôt</div>
-                <div class="card-image" style="background-image: url('https://www.guide-piscine.fr/medias/image/coach-personnel-de-natation-13840-1200-630.jpg?q=80&w=600&auto=format&fit=crop');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">Coach Performance</h3>
-                    <p class="card-desc">Haut niveau : Planification d'entraînement, biomécanique et préparation mentale.</p>
-                    <span class="card-btn btn-disabled">Indisponible</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    
-
-    
-
-
-    <script>
-    document.addEventListener('astro:page-load', () => {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.card').forEach((card, index) => {
-            // Add a slight delay for a staggered effect
-            card.style.transitionDelay = `${index * 100}ms`;
-            observer.observe(card);
-        });
-        });
-  </script>
-
-  <Footer  lang={lang} />
-</BaseLayout>
-
-<style>
-
-        /* --- CORE STYLES (Matching index.html) --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000;
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        /* Background Effects */
-        .bg-logo {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 80vw; height: 80vh;
-            background-image: url('https://i.imgur.com/3dcksCn.png');
-            background-size: contain; background-repeat: no-repeat; background-position: center;
-            opacity: 0.1; z-index: -2; pointer-events: none;
-        }
-
-        body::before {
-            content: ''; position: fixed; inset: 0;
-            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff);
-            z-index: -1; opacity: 0.05; pointer-events: none;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-        }
-
-        /* Floating background frame from index */
-        .bg-frame {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            border: none; z-index: -1; pointer-events: none;
-        }
-
-        /* --- PAGE SPECIFIC STYLES --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 1rem 4rem; /* Top padding to account for fixed navbar */
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: slideDown 0.8s ease-out;
-        }
-
-        .page-title {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-        }
-
-        .page-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- GRID & CARDS --- */
-        .formation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: rgba(10, 20, 30, 0.6);
-            border: 1px solid rgba(0, 153, 255, 0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            opacity: 0; /* Hidden initially for animation */
-            transform: translateY(20px);
-        }
-
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-        }
-
-        /* Image Section */
-        .card-image {
-            height: 220px;
-            width: 100%;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .card-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(10,20,30,1), transparent);
-        }
-
-        /* Content Section */
-        .card-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            color: #fff;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
-            color: #ccc;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        /* Badges */
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 6px 12px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 2;
-        }
-
-        .badge-available {
-            background: rgba(0, 255, 255, 0.2);
-            border: 1px solid #00ffff;
-            color: #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-        }
-
-        .badge-soon {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Buttons */
-        .card-btn {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            text-align: center;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: 0.3s;
-            margin-top: auto;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .btn-active {
-            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
-            border: 1px solid #00ffff;
-            color: #fff;
-        }
-
-        .btn-active:hover {
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-        }
-
-        .btn-disabled {
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: not-allowed;
-        }
-
-        /* Coming Soon State */
-        .card.coming-soon {
-            filter: grayscale(0.9);
-            opacity: 0.8;
-        }
-        
-        .card.coming-soon:hover {
-            filter: grayscale(0.5);
-            opacity: 1;
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: none;
-        }
-
-        /* Footer margin */
-        footer { margin-top: 5rem; }
-
-    
-</style>
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import formationsData from '../data/formation.json';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
+
+const getButtonText = (id) => {
+  if (id === 'aquaphobie') return 'Découvrir le programme';
+  if (id === 'masterclasses') return 'Voir le Planning';
+  return "S'inscrire";
+};
+---
+
+<BaseLayout title="Formations & Certifications | AQA Sports Academy — Algérie"
+  description="AQA propose des formations et certifications sportives pour moniteurs et coachs aquatiques. Programmes reconnus, encadrement professionnel en Algérie."
+  keywords="formation natation algérie, certification coach natation, moniteur piscine algérie, formation apnée"
+  currentPage="/formation" lang={lang}>
+  <Navbar currentPage="/formation" lang={lang} />
+
+<div class="container">
+        
+        <div class="page-header">
+            <h1 class="page-title">Nos Formations</h1>
+            <p class="page-subtitle">Des programmes d'élite pour amateurs et professionnels.</p>
+        </div>
+
+        <div class="formation-grid">
+            {formationsData.map((formation) => {
+                const isActive = formation.active;
+                const isMasterclass = formation.id === 'masterclasses';
+                
+                return (
+                    <div class={`card ${!isActive ? 'coming-soon' : ''}`} style={isMasterclass ? 'border-color: #ff0099;' : undefined}>
+                        {isActive ? (
+                            isMasterclass ? (
+                                <div class="badge badge-available" style="border-color:#ff0099; color:#ff0099; box-shadow: 0 0 10px #ff0099;">
+                                    {formation.badge || 'Masterclasses'}
+                                </div>
+                            ) : (
+                                <div class="badge badge-available">{formation.badge || 'Disponible'}</div>
+                            )
+                        ) : (
+                            <div class="badge badge-soon">{formation.badge || 'Bientôt'}</div>
+                        )}
+                        
+                        <div class="card-image" style={`background-image: url('${formation.image}');`}></div>
+                        
+                        <div class="card-content">
+                            <h3 class="card-title">{formation.title}</h3>
+                            <p class="card-desc">{formation.desc}</p>
+                            
+                            {isActive ? (
+                                isMasterclass ? (
+                                    <a href={getRelativePath(formation.link, lang)} class="card-btn btn-active" style="background: linear-gradient(135deg, rgba(255, 0, 153, 0.2), rgba(255, 100, 0, 0.2)); border-color: #ff0099;">
+                                        {getButtonText(formation.id)}
+                                    </a>
+                                ) : (
+                                    <a href={getRelativePath(formation.link, lang)} class="card-btn btn-active">
+                                        {getButtonText(formation.id)}
+                                    </a>
+                                )
+                            ) : (
+                                <span class="card-btn btn-disabled">Indisponible</span>
+                            )}
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    </div>
+
+    
+
+    
+
+
+    <script>
+    document.addEventListener('astro:page-load', () => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach((card, index) => {
+            // Add a slight delay for a staggered effect
+            card.style.transitionDelay = `${index * 100}ms`;
+            observer.observe(card);
+        });
+        });
+  </script>
+
+  <Footer  lang={lang} />
+</BaseLayout>
+
+<style>
+
+        /* --- CORE STYLES (Matching index.html) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background Effects */
+        .bg-logo {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80vw; height: 80vh;
+            background-image: url('https://i.imgur.com/3dcksCn.png');
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+            opacity: 0.1; z-index: -2; pointer-events: none;
+        }
+
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background: linear-gradient(45deg, #00ffff, #0099ff, #0066ff);
+            z-index: -1; opacity: 0.05; pointer-events: none;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        }
+
+        /* Floating background frame from index */
+        .bg-frame {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            border: none; z-index: -1; pointer-events: none;
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 1rem 4rem; /* Top padding to account for fixed navbar */
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- GRID & CARDS --- */
+        .formation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(10, 20, 30, 0.6);
+            border: 1px solid rgba(0, 153, 255, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            opacity: 0; /* Hidden initially for animation */
+            transform: translateY(20px);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Image Section */
+        .card-image {
+            height: 220px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .card-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,20,30,1), transparent);
+        }
+
+        /* Content Section */
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* Badges */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .badge-available {
+            background: rgba(0, 255, 255, 0.2);
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .badge-soon {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Buttons */
+        .card-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            margin-top: auto;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn-active {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border: 1px solid #00ffff;
+            color: #fff;
+        }
+
+        .btn-active:hover {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .btn-disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+        }
+
+        /* Coming Soon State */
+        .card.coming-soon {
+            filter: grayscale(0.9);
+            opacity: 0.8;
+        }
+        
+        .card.coming-soon:hover {
+            filter: grayscale(0.5);
+            opacity: 1;
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+        }
+
+        /* Footer margin */
+        footer { margin-top: 5rem; }
+
+    
+</style>
