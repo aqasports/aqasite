@@ -24,8 +24,8 @@ yarn-error.log*
 # Deploy trigger — must never be committed (would cause phantom deploys on pull)
 deploy.trigger
 
-# Admin panel secret configuration
-admin-config.json
+# Admin panel secret configuration (now tracked for serverless token validation)
+# admin-config.json is allowed to be tracked
 
 # Large media assets — must be hosted separately or served locally
 public/events/Fav main vid.mov
