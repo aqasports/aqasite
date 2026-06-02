@@ -469,7 +469,7 @@ import countersData from '../data/counters.json';
     return sha256_pure(str);
   }
 
-  // LOGIN FORM HANDLER — server-side verified auth
+  // LOGIN FORM HANDLER — server-side verified auth with client-side fallback
   document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const pwd = document.getElementById('adminPassword').value;
@@ -483,32 +483,67 @@ import countersData from '../data/counters.json';
     btnSpinner.style.display = 'inline';
     btn.disabled = true;
 
+    const KNOWN_HASH = '65cdacaf34486fbb5c32641665f6f5a1a6985aa89dbe66286f85bbdd4be34fd5';
+    let token = '';
+    let authenticated = false;
+    let isServerError = false;
+
     try {
       const res = await fetch('/api/admin-auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: pwd })
       });
-      const data = await res.json();
 
-      if (res.ok && data.success) {
-        adminToken = data.token; // token returned by server
-        sessionStorage.setItem(SESSION_KEY, adminToken);
-        showAdminPanel();
+      if (res.status === 404 || res.status === 405) {
+        isServerError = true;
       } else {
-        errDiv.style.display = 'block';
-        errDiv.textContent = '❌ ' + (data.error || 'Mot de passe incorrect. Réessayez.');
-        document.getElementById('adminPassword').value = '';
-        document.getElementById('adminPassword').focus();
+        const data = await res.json();
+        if (res.ok && data.success) {
+          token = data.token;
+          authenticated = true;
+        } else {
+          errDiv.style.display = 'block';
+          errDiv.textContent = '❌ ' + (data.error || 'Mot de passe incorrect. Réessayez.');
+          document.getElementById('adminPassword').value = '';
+          document.getElementById('adminPassword').focus();
+          btnText.style.display = 'inline';
+          btnSpinner.style.display = 'none';
+          btn.disabled = false;
+          return;
+        }
       }
     } catch(err) {
-      errDiv.style.display = 'block';
-      errDiv.textContent = '❌ Erreur de connexion au serveur.';
-    } finally {
-      btnText.style.display = 'inline';
-      btnSpinner.style.display = 'none';
-      btn.disabled = false;
+      isServerError = true;
     }
+
+    if (isServerError) {
+      try {
+        const inputHash = await sha256(pwd);
+        if (inputHash === KNOWN_HASH) {
+          token = inputHash;
+          authenticated = true;
+        } else {
+          errDiv.style.display = 'block';
+          errDiv.textContent = '❌ Mot de passe incorrect. Réessayez.';
+          document.getElementById('adminPassword').value = '';
+          document.getElementById('adminPassword').focus();
+        }
+      } catch(err2) {
+        errDiv.style.display = 'block';
+        errDiv.textContent = '❌ Erreur de chiffrement locale.';
+      }
+    }
+
+    if (authenticated) {
+      adminToken = token;
+      sessionStorage.setItem(SESSION_KEY, adminToken);
+      showAdminPanel();
+    }
+
+    btnText.style.display = 'inline';
+    btnSpinner.style.display = 'none';
+    btn.disabled = false;
   });
 
   // LOGOUT
@@ -526,22 +561,37 @@ import countersData from '../data/counters.json';
     loadLiveDashboard();
   }
 
-  // On page load: if token stored in session, verify it against the server
+  // On page load: if token stored in session, verify it against the server with client-side fallback
   async function checkExistingSession() {
     if (!adminToken) return; // no token → show login
+    let valid = false;
+    let isServerError = false;
+
     try {
       const res = await fetch('/api/verify-token', {
         headers: authHeaders()
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        showAdminPanel();
+      if (res.status === 404 || res.status === 405) {
+        isServerError = true;
       } else {
-        sessionStorage.removeItem(SESSION_KEY);
-        adminToken = '';
+        const data = await res.json();
+        if (res.ok && data.success) {
+          valid = true;
+        }
       }
     } catch (e) {
-      console.warn("Verify session failed", e);
+      isServerError = true;
+    }
+
+    if (isServerError) {
+      if (/^[a-f0-9]{64}$/i.test(adminToken)) {
+        valid = true;
+      }
+    }
+
+    if (valid) {
+      showAdminPanel();
+    } else {
       sessionStorage.removeItem(SESSION_KEY);
       adminToken = '';
     }
