@@ -384,10 +384,58 @@ import countersData from '../data/counters.json';
   }
 
   async function safeFetchJson(url, options = {}) {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+    if (!isLocal && url === '/api/deploy') {
+      return {
+        ok: true,
+        status: 200,
+        data: {
+          success: true,
+          stdout: "Le site est configuré en mode automatique. Chaque enregistrement de modification déclenche automatiquement une reconstruction et une publication sur Netlify. Aucun déploiement manuel n'est nécessaire."
+        }
+      };
+    }
+
+    if (!isLocal && url.startsWith('/api/save-')) {
+      let fileType = '';
+      if (url === '/api/save-schedule') fileType = 'schedule';
+      else if (url === '/api/save-formation') fileType = 'formation';
+      else if (url === '/api/save-infrastructure') fileType = 'infrastructure';
+      else if (url === '/api/save-counters') fileType = 'counters';
+      else if (url === '/api/save-admin-config') fileType = 'admin-config';
+
+      if (fileType) {
+        try {
+          const originalBody = JSON.parse(options.body || '{}');
+          // Map to payload key wrapper matching what the Express route had
+          // but wrapped inside the fileType container for netlify serverless functions
+          let payload = {};
+          if (fileType === 'schedule') payload = originalBody.schedule;
+          else if (fileType === 'formation') payload = originalBody.formations;
+          else if (fileType === 'infrastructure') payload = originalBody.infrastructures;
+          else if (fileType === 'counters') payload = originalBody.counters;
+          else if (fileType === 'admin-config') payload = originalBody;
+
+          options = {
+            method: 'POST',
+            headers: options.headers || {},
+            body: JSON.stringify({
+              fileType,
+              payload
+            })
+          };
+          url = '/.netlify/functions/save-data';
+        } catch(e) {
+          console.error("Failed to map payload for Netlify Functions", e);
+        }
+      }
+    }
+
     const res = await fetch(url, options);
     const contentType = res.headers.get('content-type') || '';
     if (contentType.includes('text/html')) {
-      throw new Error("L'environnement actuel est en lecture seule (site statique public). Veuillez exécuter l'application localement à l'adresse http://localhost:3000/aqacontrol2026 pour modifier les données, puis cliquez sur 'Déployer sur GitHub' pour publier vos modifications.");
+      throw new Error("L'environnement actuel est en lecture seule (site statique public). Veuillez exécuter l'application localement à l'adresse http://localhost:3000/aqacontrol2026 pour modifier les données, ou configurez votre jeton GITHUB_TOKEN dans Netlify.");
     }
     let data;
     try {
