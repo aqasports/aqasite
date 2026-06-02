@@ -74,10 +74,11 @@ app.use((req, res, next) => {
   // Strip language prefix if present (e.g. en/aqacontrol2026 -> aqacontrol2026)
   slug = slug.replace(/^(en|ar|fr)\//, '');
 
-  const allSlugs = [adminConfig.loginSlug, ...(adminConfig.extraSlugs || [])].filter(Boolean);
+  const cfg = loadAdminConfig();
+  const allSlugs = [cfg.loginSlug, ...(cfg.extraSlugs || [])].filter(Boolean);
   
   // If the default aqacontrol2026 is accessed but the configured slug has changed, return 404
-  if (slug === 'aqacontrol2026' && adminConfig.loginSlug !== 'aqacontrol2026') {
+  if (slug === 'aqacontrol2026' && cfg.loginSlug !== 'aqacontrol2026') {
     const errorPage = path.join(__dirname, 'dist', '404.html');
     if (fs2.existsSync(errorPage)) {
       return res.status(404).sendFile(errorPage);
@@ -98,7 +99,8 @@ app.use(express.static(path.join(__dirname)));
 // ==================== ADMIN AUTH ====================
 // Token is the SHA-256 hash of the password (from admin-config.json or env)
 function getAdminToken() {
-  return adminConfig.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'changeme').digest('hex');
+  const cfg = loadAdminConfig();
+  return cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'changeme').digest('hex');
 }
 
 // Middleware: verify admin bearer token (only enforced in production)
@@ -128,17 +130,19 @@ app.post('/api/admin-auth', (req, res) => {
 
 // GET /api/admin-config — returns public config (slug only, no hash)
 app.get('/api/admin-config', (req, res) => {
-  res.json({ loginSlug: adminConfig.loginSlug, extraSlugs: adminConfig.extraSlugs || [] });
+  const cfg = loadAdminConfig();
+  res.json({ loginSlug: cfg.loginSlug, extraSlugs: cfg.extraSlugs || [] });
 });
 
 // POST /api/save-admin-config — update password hash and/or login slug
 app.post('/api/save-admin-config', verifyAdminToken, (req, res) => {
   try {
     const { passwordHash, loginSlug, extraSlugs } = req.body;
-    if (passwordHash) adminConfig.passwordHash = passwordHash;
-    if (loginSlug) adminConfig.loginSlug = loginSlug;
-    if (extraSlugs !== undefined) adminConfig.extraSlugs = extraSlugs;
-    saveAdminConfig(adminConfig);
+    const cfg = loadAdminConfig();
+    if (passwordHash) cfg.passwordHash = passwordHash;
+    if (loginSlug) cfg.loginSlug = loginSlug;
+    if (extraSlugs !== undefined) cfg.extraSlugs = extraSlugs;
+    saveAdminConfig(cfg);
     res.json({ success: true, message: 'Configuration mise à jour' });
   } catch(err) {
     res.status(500).json({ success: false, message: err.message });
