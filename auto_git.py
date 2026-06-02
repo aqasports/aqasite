@@ -20,6 +20,10 @@ def run_git_automation():
     print(f"Commit message: '{commit_msg}'")
 
     try:
+        # Pull latest changes from origin main to prevent conflicts and sync online edits
+        print("--- Pulling latest changes from GitHub ---")
+        subprocess.run(["git", "pull", "origin", "main"], check=True)
+
         # Stage only tracked changes (safer than 'git add .')
         # Use 'git add -u' to stage modifications/deletions of tracked files only
         print("--- Staging tracked changes ---")
