@@ -2,9 +2,22 @@
   command   = "npm run build"
   publish   = "dist"
   functions = "netlify/functions"
+  edge_functions = "netlify/edge-functions"
 
 [functions]
   node_bundler = "esbuild"
+
+# ── Edge Function: server-side auth gate for the admin panel ──────────────────
+# Runs BEFORE the static file is served — no credentials = no HTML.
+# Update this path if the admin slug is ever changed in admin-config.json.
+[[edge_functions]]
+  path = "/digger"
+  function = "admin-gate"
+
+[[edge_functions]]
+  path = "/aqacontrol2026"
+  function = "admin-gate"
+
 
 # ── Redirect old .html URLs → clean URLs (301 permanent) ──────────────────────
 # Protects Google-indexed pages, shared links, and bookmarks from 404ing.

@@ -13,13 +13,9 @@
   <title>AQA Control Center | Admin Portal v3.0</title>
   <meta name="description" content="Administration centrale de l'académie AQA Sports.">
   <meta name="keywords" content="natation algérie, apnée, coaching sport, académie natation alger, aqa sports">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="author" content="AQA Sports Academy">
-  <link rel="canonical" href="https://aqasports.com/digger">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aqasports.com/digger">
+  
   <meta property="og:title" content="AQA Control Center | Admin Portal v3.0">
   <meta property="og:description" content="Administration centrale de l'académie AQA Sports.">
   <meta property="og:image" content="https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png">
@@ -641,7 +637,7 @@
 
               <span class="settings-info-label">🔗 URL d'accès actuelle</span>
 
-              <span class="settings-info-value" id="currentSlugDisplay">digger</span>
+              <span class="settings-info-value" id="currentSlugDisplay">••••••••••••</span>
 
             </div>
 
@@ -649,7 +645,7 @@
 
           <div class="settings-url-preview">
 
-            <span class="url-prefix" id="urlOriginDisplay"></span><span class="url-slug" id="urlSlugDisplay">digger</span>
+            <span class="url-prefix" id="urlOriginDisplay"></span><span class="url-slug" id="urlSlugDisplay">••••••••••••</span>
 
             <button class="btn-copy" id="copyUrlBtn" title="Copier l'URL">
 
@@ -836,12 +832,7 @@
 
 <!-- BIND Astro Data into JS environment variables -->
 
-<script>(function(){const scheduleData = {"reghaia":{"name":"Piscine Réghaia","categories":{"homme":{"name":"Homme","coaches":[{"name":"Coach Youcef","slots":[{"day":"Samedi","time":"21h - 23h","type":"g10","total":10,"taken":10},{"day":"Mardi","time":"21h - 23h","type":"max5","total":5,"taken":5},{"day":"Mercredi","time":"21h30-23h30","type":"g10","total":10,"taken":10},{"day":"Jeudi","time":"21h30-23h30","type":"g10","total":10,"taken":10},{"day":"Vendredi","time":"20h - 22h","type":"max5","total":5,"taken":5}]},{"name":"Coach Bilal","slots":[{"day":"Dimanche","time":"21h30-23h30","type":"max5","total":5,"taken":4}]},{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":6}]},{"name":"Coach Abdelghani","slots":[{"day":"Mardi","time":"7h - 9h","type":"g10","total":10,"taken":6,"group":""},{"day":"Mardi","time":"21h - 23h","type":"g10","total":10,"taken":9},{"day":"Jeudi","time":"7h - 9h","type":"g10","total":10,"taken":8},{"day":"Jeudi","time":"21h30-23h30","type":"max5","total":5,"taken":4},{"day":"Vendredi","time":"20h-22h","type":"g10","total":10,"taken":10},{"day":"Samedi","time":"6h-8h","type":"g10","total":10,"taken":8},{"day":"Samedi ELITE","time":"21h - 23h","type":"g10","total":10,"taken":7}]},{"name":"Riyad","slots":[{"day":"Lundi","time":"21h30-23h30","type":"g10","total":10,"taken":4}]}]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[{"name":"Coach Younes","slots":[{"day":"Dim Jeu","time":"18h","type":"g10","total":10,"taken":10},{"day":"Dim Merc","time":"19h20","type":"g10","total":10,"taken":0}]},{"name":"Abdelghani","slots":[{"day":"Sam Merc","time":"18h","type":"g10","total":10,"taken":9}]}]},"apnea":{"name":"Apnée","coaches":[{"name":"Coach Nouga","slots":[{"day":"Mercredi","time":"21h30-23h30","type":"apnea","total":10,"taken":4}]}]}}},"cheraga":{"name":"Piscine Chéraga","categories":{"homme":{"name":"Homme","coaches":[]},"femme":{"name":"Femme","coaches":[]},"ados":{"name":"Ados Garçon","coaches":[]},"enfants":{"name":"Enfants","coaches":[]},"apnea":{"name":"Apnée","coaches":[]}}}};
-const formationsData = [{"id":"aquaphobie","title":"Anti Aquaphobie","badge":"Disponible","image":"https://i.ibb.co/ndXbsZj/AQUAPHOBE-Instagram-Post-20240710-131657-0000-Copy.jpg?q=80&w=600&auto=format&fit=crop","desc":"Vaincre la peur de l'eau. Une approche psychologique et technique pour retrouver confiance et autonomie totale.","link":"/phobie","active":false,"status":"available"},{"id":"masterclasses","title":"AQA Masterclasses","badge":"Masterclasses","image":"https://www.citescolaireparentis.fr/wp-content/uploads/2022/01/6-considerations-cles-pour-une-salle-de-formation-efficace.jpg?q=80&w=600&auto=format&fit=crop","desc":"Sessions techniques avancées (Online & Présentiel) avec des experts internationaux. Perfectionnement technique.","link":"/masterclasses","active":false,"status":"masterclasses"},{"id":"chasse","title":"Chasse Sous-marine","badge":"Disponible","image":"https://apneemotion.com/martinique/wp-content/uploads/sites/4/2020/10/apneemotion-martinique-chasse-sous-marine.jpg?q=80&w=600&auto=format&fit=crop","desc":"Maîtrisez l'apnée, la sécurité et les techniques de chasse responsable. Théorie et pratique en milieu naturel.","link":"/contact","active":false,"status":"available"},{"id":"secourisme","title":"Souc","badge":"Disponible","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ90APcFZ_WZ7Ge7OeJQJxfYEGCLM7p8-upWQ&s?q=80&w=600&auto=format&fit=crop","desc":"Techniques de premiers secours adaptées aux environnements aquatiques.","link":"/contact","active":false,"status":"available"},{"id":"plongee","title":"Plongée Sous-marine","badge":"Bientôt","image":"https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop","desc":"Formation certifiante PADI/CMAS. Exploration des fonds marins avec bouteille.","link":"/contact","active":false,"status":"coming-soon"},{"id":"coach-phobie","title":"Formation Coach (Aquaphobie)","badge":"Bientôt","image":"https://d1s9j44aio5gjs.cloudfront.net/2019/01/swimming_coach.jpg?q=80&w=600&auto=format&fit=crop","desc":"Certification pour devenir instructeur spécialisé dans le traitement de l'aquaphobie.","link":"/contact","active":false,"status":"coming-soon"},{"id":"surveillant","title":"Surveillant de Baignade","badge":"Bientôt","image":"https://img.centrefrance.com/5c13SJygADKDrj4CU4kr2v6V2XV0xnLJ2xMVHrkobIw/rs:auto:1200:800:1:0/g:sm/bG9jYWw6Ly8vMDAvMDAvMDcvMzAvMzgvMjAwMDAwNzMwMzg3NA.webp?q=80&w=600&auto=format&fit=crop","desc":"Brevet de sauvetage aquatique et secourisme. Devenez un professionnel de la sécurité.","link":"/contact","active":false,"status":"coming-soon"},{"id":"aquatherapie","title":"Formation Aquathérapie","badge":"Bientôt","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkN-VOCRIPtXuGd87IRm9CJX9kEGPHFlVbvg&s?q=80&w=600&auto=format&fit=crop","desc":"Techniques de rééducation et de bien-être dans l'eau pour les professionnels de santé.","link":"/contact","active":false,"status":"coming-soon"},{"id":"coach-performance","title":"Coach Performance","badge":"Bientôt","image":"https://www.guide-piscine.fr/medias/image/coach-personnel-de-natation-13840-1200-630.jpg?q=80&w=600&auto=format&fit=crop","desc":"Haut niveau : Planification d'entraînement, biomécanique et préparation mentale.","link":"/tarifs","active":false,"status":"coming-soon"}];
-const infrastructuresData = [{"id":"azal","name":"Piscine ADM AZAL","image":"https://i.ibb.co/GfR0p9P4/FB-IMG-1656784815731.jpg","location":"Reghaia, Alger","features":["Ouvert 7j/7","AQA inside","Réception comfortable","Semi olympique"],"infoLink":"/azal","mapLink":"https://maps.app.goo.gl/b1efH4S11j8ACXUs8"},{"id":"bk-sport","name":"Piscine BK Sport","image":"https://i.ibb.co/vCdX73xK/Whats-App-Image-2024-12-08-at-15-05-01-f0286594.jpg","location":"Cheraga, Alger","features":["Ouvert 7j/7","AQA inside","Salle de sport","Semi olympique"],"infoLink":"","mapLink":""}];
-const countersData = {"athletes":660,"coaches":8,"pools":2,"satisfaction":98};
-const passwordHash = "d93860621d656aeb91a92e4951b6dff1df89d5b97920b6327fde03c2a2e5f04e";
-
+<script>
 
 
 
@@ -894,6 +885,16 @@ const passwordHash = "d93860621d656aeb91a92e4951b6dff1df89d5b97920b6327fde03c2a2
     }
 
 
+
+    if (!isLocal && url === '/api/admin-auth') {
+      url = '/.netlify/functions/admin-auth';
+    }
+    if (!isLocal && url === '/api/verify-token') {
+      url = '/.netlify/functions/verify-token';
+    }
+    if (!isLocal && url === '/api/admin-data') {
+      url = '/.netlify/functions/admin-data';
+    }
 
     if (!isLocal && url.startsWith('/api/save-')) {
 
@@ -1165,295 +1166,120 @@ const passwordHash = "d93860621d656aeb91a92e4951b6dff1df89d5b97920b6327fde03c2a2
 
 
 
-  // LOGIN FORM HANDLER — server-side verified auth with client-side fallback
-
+  // LOGIN FORM HANDLER — server-side verified auth
   document.getElementById('loginForm').addEventListener('submit', async (e) => {
-
     e.preventDefault();
-
     const pwd = document.getElementById('adminPassword').value;
-
     const btn = document.getElementById('loginBtn');
-
     const errDiv = document.getElementById('loginError');
-
     const btnText = document.getElementById('loginBtnText');
-
     const btnSpinner = document.getElementById('loginBtnSpinner');
 
-
-
     errDiv.style.display = 'none';
-
     btnText.style.display = 'none';
-
     btnSpinner.style.display = 'inline';
-
     btn.disabled = true;
 
-
-
-    const KNOWN_HASH = passwordHash;
-
     let token = '';
-
     let authenticated = false;
 
-    let isServerError = false;
-
-
-
     try {
-
       const res = await fetch('/api/admin-auth', {
-
         method: 'POST',
-
         headers: { 'Content-Type': 'application/json' },
-
         body: JSON.stringify({ password: pwd })
-
       });
 
-
-
-      if (res.status === 404 || res.status === 405) {
-
-        isServerError = true;
-
-      } else {
-
-        const contentType = res.headers.get('content-type') || '';
-
-        if (contentType.includes('text/html')) {
-
-          isServerError = true;
-
-        } else {
-
+      const contentType = res.headers.get('content-type') || '';
+      if (!res.ok || contentType.includes('text/html')) {
+        let errText = 'Mot de passe incorrect ou erreur serveur.';
+        try {
           const data = await res.json();
-
-          if (res.ok && data.success) {
-
-            token = data.token;
-
-            authenticated = true;
-
-          } else {
-
-            errDiv.style.display = 'block';
-
-            errDiv.textContent = '❌ ' + (data.error || 'Mot de passe incorrect. Réessayez.');
-
-            document.getElementById('adminPassword').value = '';
-
-            document.getElementById('adminPassword').focus();
-
-            btnText.style.display = 'inline';
-
-            btnSpinner.style.display = 'none';
-
-            btn.disabled = false;
-
-            return;
-
-          }
-
-        }
-
-      }
-
-    } catch(err) {
-
-      isServerError = true;
-
-    }
-
-
-
-    if (isServerError) {
-
-      try {
-
-        const inputHash = await sha256(pwd);
-
-        if (inputHash === KNOWN_HASH) {
-
-          token = inputHash;
-
-          authenticated = true;
-
-        } else {
-
-          errDiv.style.display = 'block';
-
-          errDiv.textContent = '❌ Mot de passe incorrect. Réessayez.';
-
-          document.getElementById('adminPassword').value = '';
-
-          document.getElementById('adminPassword').focus();
-
-        }
-
-      } catch(err2) {
-
+          errText = data.error || errText;
+        } catch(e) {}
         errDiv.style.display = 'block';
-
-        errDiv.textContent = '❌ Erreur de chiffrement locale.';
-
+        errDiv.textContent = '❌ ' + errText;
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPassword').focus();
+        btnText.style.display = 'inline';
+        btnSpinner.style.display = 'none';
+        btn.disabled = false;
+        return;
       }
 
+      const data = await res.json();
+      if (data.success && data.token) {
+        token = data.token;
+        authenticated = true;
+      }
+    } catch(err) {
+      errDiv.style.display = 'block';
+      errDiv.textContent = '❌ Erreur réseau: ' + err.message;
     }
-
-
 
     if (authenticated) {
-
       adminToken = token;
-
       sessionStorage.setItem(SESSION_KEY, adminToken);
-
       showAdminPanel();
-
     }
-
-
 
     btnText.style.display = 'inline';
-
     btnSpinner.style.display = 'none';
-
     btn.disabled = false;
-
   });
 
-
-
-  // LOGOUT
-
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-
+  // LOGOUT HELPER
+  function logout() {
     sessionStorage.removeItem(SESSION_KEY);
-
     adminToken = '';
-
     document.getElementById('adminPanel').style.display = 'none';
-
     document.getElementById('loginOverlay').style.display = 'flex';
-
     document.getElementById('adminPassword').value = '';
+  }
 
-  });
-
-
+  // LOGOUT EVENT
+  document.getElementById('logoutBtn').addEventListener('click', logout);
 
   function showAdminPanel() {
-
     document.getElementById('loginOverlay').style.display = 'none';
-
     document.getElementById('adminPanel').style.display = 'grid';
-
     loadLiveDashboard();
-
   }
 
-
-
-  // On page load: if token stored in session, verify it against the server with client-side fallback
-
+  // On page load: if token stored in session, verify it against the server
   async function checkExistingSession() {
-
     if (!adminToken) return; // no token → show login
-
     let valid = false;
 
-    let isServerError = false;
-
-
-
     try {
-
       const res = await fetch('/api/verify-token', {
-
         headers: authHeaders()
-
       });
-
-      if (res.status === 404 || res.status === 405) {
-
-        isServerError = true;
-
-      } else {
-
-        const contentType = res.headers.get('content-type') || '';
-
-        if (contentType.includes('text/html')) {
-
-          isServerError = true;
-
-        } else {
-
-          const data = await res.json();
-
-          if (res.ok && data.success) {
-
-            valid = true;
-
-          }
-
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && !contentType.includes('text/html')) {
+        const data = await res.json();
+        if (data.success) {
+          valid = true;
         }
-
       }
-
     } catch (e) {
-
-      isServerError = true;
-
+      console.warn("Session check failed:", e);
     }
-
-
-
-    if (isServerError) {
-
-      if (/^[a-f0-9]{64}$/i.test(adminToken)) {
-
-        valid = true;
-
-      }
-
-    }
-
-
 
     if (valid) {
-
       showAdminPanel();
-
     } else {
-
-      sessionStorage.removeItem(SESSION_KEY);
-
-      adminToken = '';
-
+      logout();
     }
-
   }
-
-
 
   checkExistingSession();
 
-
-
   // ==================== CORE DATA ====================
-
-  let currentSchedule = JSON.parse(JSON.stringify(scheduleData));
-
-  let currentFormations = JSON.parse(JSON.stringify(formationsData));
-
-  let currentInfrastructures = JSON.parse(JSON.stringify(infrastructuresData));
-
-  let currentCounters = JSON.parse(JSON.stringify(countersData));
+  let currentSchedule = {};
+  let currentFormations = [];
+  let currentInfrastructures = [];
+  let currentCounters = {};
 
 
 
@@ -1464,83 +1290,67 @@ const passwordHash = "d93860621d656aeb91a92e4951b6dff1df89d5b97920b6327fde03c2a2
 
 
   async function loadLiveDashboard() {
-
     try {
-
-      const schRes = await fetch('/api/schedule');
-
-      if (schRes.ok) {
-
-        const contentType = schRes.headers.get('content-type') || '';
-
-        if (!contentType.includes('text/html')) {
-
-          currentSchedule = await schRes.json();
-
-        }
-
-      }
-
-
-
-      Object.keys(currentSchedule).forEach(locKey => {
-
-        const loc = currentSchedule[locKey];
-
-        if (loc && loc.categories) {
-
-          Object.keys(loc.categories).forEach(catKey => {
-
-            const cat = loc.categories[catKey];
-
-            if (cat && cat.coaches) {
-
-              cat.coaches.forEach(coach => {
-
-                if (coach.slots) {
-
-                  coach.slots.forEach(slot => {
-
-                    if (slot.type === 'complet') {
-
-                      slot.type = slot.total <= 5 ? 'max5' : 'g10';
-
-                    }
-
-                  });
-
-                }
-
-              });
-
-            }
-
-          });
-
-        }
-
+      const res = await safeFetchJson('/api/admin-data', {
+        headers: authHeaders()
       });
+      if (res.ok && res.data.success) {
+        currentSchedule = res.data.schedule || {};
+        currentFormations = res.data.formations || [];
+        currentInfrastructures = res.data.infrastructures || [];
+        currentCounters = res.data.counters || {};
 
+        // Populate settings slug displays dynamically
+        const config = res.data.config || {};
+        if (config.loginSlug) {
+          const displays = ['currentSlugDisplay', 'urlSlugDisplay'];
+          displays.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = config.loginSlug;
+          });
+        }
+      } else {
+        alert("Session expirée ou non autorisée. Veuillez vous reconnecter.");
+        logout();
+        return;
+      }
     } catch (e) {
-
-      console.warn("Failed to load live scheduler data.");
-
+      console.error(e);
+      alert("Erreur lors du chargement des données d'administration : " + e.message);
+      logout();
+      return;
     }
 
-
+    try {
+      Object.keys(currentSchedule).forEach(locKey => {
+        const loc = currentSchedule[locKey];
+        if (loc && loc.categories) {
+          Object.keys(loc.categories).forEach(catKey => {
+            const cat = loc.categories[catKey];
+            if (cat && cat.coaches) {
+              cat.coaches.forEach(coach => {
+                if (coach.slots) {
+                  coach.slots.forEach(slot => {
+                    if (slot.type === 'complet') {
+                      slot.type = slot.total <= 5 ? 'max5' : 'g10';
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    } catch (e) {
+      console.warn("Failed to load live scheduler occupancy data.");
+    }
 
     initSelectors();
-
     renderPlanning();
-
     renderFormations();
-
     renderInfrastructures();
-
     initCountersInput();
-
     updateDashboardStats();
-
   }
 
 
@@ -2382,93 +2192,62 @@ const passwordHash = "d93860621d656aeb91a92e4951b6dff1df89d5b97920b6327fde03c2a2
 
 
   // ==================== DEPLOY ====================
-
   document.getElementById('deployGitBtn').addEventListener('click', async () => {
+    const confirmed = confirm("Êtes-vous sûr de vouloir déclencher un déploiement de production sur GitHub ?");
+    if (!confirmed) return;
 
-    const statusEl = document.getElementById('deployStatus');
-
-    const consoleLogs = document.getElementById('deployLogsConsole');
-
-    statusEl.textContent = 'Déploiement en cours... 🚀';
-
-    statusEl.className = 'deploy-status active';
-
-    consoleLogs.textContent = '>>> Lancement de deploy-now.bat...\n>>> Connexion au serveur Git...\n';
-
-    try {
-
-      const { ok, data } = await safeFetchJson('/api/deploy', {
-
-        method: 'POST',
-
-        headers: authHeaders()
-
-      });
-
-      if (ok && data.success) {
-
-        statusEl.textContent = '✓ Site Déployé avec succès !';
-
-        statusEl.className = 'deploy-status success';
-
-        consoleLogs.textContent += '\n[STDOUT]\n' + data.stdout;
-
-      } else {
-
-        statusEl.textContent = '❌ Échec de déploiement';
-
-        statusEl.className = 'deploy-status error';
-
-        consoleLogs.textContent += '\n[ERROR]\n' + (data.message || 'Erreur inconnue') + '\n' + (data.stderr || '');
-
-      }
-
-    } catch(e) {
-
-      statusEl.textContent = '❌ Échec réseau: ' + e.message;
-
-      statusEl.className = 'deploy-status error';
-
-      consoleLogs.textContent += '\n[NET_ERROR]\n' + e.message;
-
+    const pwd = prompt("Veuillez saisir votre mot de passe administrateur pour valider le déploiement :");
+    if (pwd === null) return; // user cancelled
+    if (!pwd) {
+      alert("Le mot de passe est requis pour le déploiement.");
+      return;
     }
 
+    const statusEl = document.getElementById('deployStatus');
+    const consoleLogs = document.getElementById('deployLogsConsole');
+    statusEl.textContent = 'Déploiement en cours... 🚀';
+    statusEl.className = 'deploy-status active';
+    consoleLogs.textContent = '>>> Lancement de deploy-now.bat...\n>>> Connexion au serveur Git...\n';
+    try {
+      const { ok, data } = await safeFetchJson('/api/deploy', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ password: pwd })
+      });
+      if (ok && data.success) {
+        statusEl.textContent = '✓ Site Déployé avec succès !';
+        statusEl.className = 'deploy-status success';
+        consoleLogs.textContent += '\n[STDOUT]\n' + data.stdout;
+      } else {
+        statusEl.textContent = '❌ Échec de déploiement';
+        statusEl.className = 'deploy-status error';
+        consoleLogs.textContent += '\n[ERROR]\n' + (data.message || 'Erreur inconnue') + '\n' + (data.stderr || '');
+      }
+    } catch(e) {
+      statusEl.textContent = '❌ Échec réseau: ' + e.message;
+      statusEl.className = 'deploy-status error';
+      consoleLogs.textContent += '\n[NET_ERROR]\n' + e.message;
+    }
   });
-
-
 
   // ==================== SETTINGS TAB ====================
 
-
-
   // Load current config from server (slug display)
-
   async function loadSettingsConfig() {
-
     try {
-
-      const { ok, data } = await safeFetchJson('/api/admin-config');
-
+      const { ok, data } = await safeFetchJson('/api/admin-config', {
+        headers: authHeaders()
+      });
       if (ok) {
-
         const slug = data.loginSlug || 'aqacontrol2026';
-
         document.getElementById('currentSlugDisplay').textContent = slug;
-
         document.getElementById('urlSlugDisplay').textContent = slug;
-
         document.getElementById('urlOriginDisplay').textContent = window.location.origin + '/';
-
       }
-
     } catch(e) {
-
       document.getElementById('urlOriginDisplay').textContent = window.location.origin + '/';
-
     }
-
   }
-
   loadSettingsConfig();
 
 
@@ -2538,124 +2317,53 @@ const passwordHash = "d93860621d656aeb91a92e4951b6dff1df89d5b97920b6327fde03c2a2
 
 
   // Password change handler
-
   document.getElementById('savePasswordBtn').addEventListener('click', async () => {
-
     const status = document.getElementById('savePasswordStatus');
-
     const currentPwd = document.getElementById('currentPassword').value;
-
     const newPwd = document.getElementById('newPassword').value;
-
     const confirmPwd = document.getElementById('confirmPassword').value;
-
-
 
     status.textContent = ''; status.className = 'save-status';
 
-
-
     if (!currentPwd || !newPwd || !confirmPwd) {
-
       status.textContent = '❌ Tous les champs sont requis.'; status.className = 'save-status error'; return;
-
     }
-
     if (newPwd.length < 8) {
-
       status.textContent = '❌ Minimum 8 caractères.'; status.className = 'save-status error'; return;
-
     }
-
     if (newPwd !== confirmPwd) {
-
       status.textContent = '❌ Les mots de passe ne correspondent pas.'; status.className = 'save-status error'; return;
-
     }
 
-
-
-    // Verify current password
-
-    const currentHash = await sha256(currentPwd);
-
-    if (currentHash !== adminToken) {
-
-      status.textContent = '❌ Mot de passe actuel incorrect.'; status.className = 'save-status error'; return;
-
-    }
-
-
-
-    status.textContent = 'Mise à jour...'; 
-
+    status.textContent = 'Mise à jour...';
+    // SHA-256 hash of the new password (server still accepts sha-256 passwordHash, which it then hashes with bcrypt)
+    // We can compute the newHash using our sha256 function
     const newHash = await sha256(newPwd);
 
-
-
     // Try to save to server
-
     try {
-
       const { ok, data } = await safeFetchJson('/api/save-admin-config', {
-
         method: 'POST',
-
         headers: authHeaders(),
-
-        body: JSON.stringify({ passwordHash: newHash })
-
+        body: JSON.stringify({ currentPassword: currentPwd, passwordHash: newHash })
       });
-
       if (ok && data.success) {
-
         status.textContent = '✓ Mot de passe mis à jour ! Déconnexion dans 3s...';
-
         status.className = 'save-status success';
-
       } else {
-
         status.textContent = '❌ Erreur serveur: ' + (data.message || data.error || 'erreur');
-
         status.className = 'save-status error';
-
       }
-
     } catch(e) {
-
       status.textContent = '❌ ' + e.message;
-
       status.className = 'save-status error';
-
     }
 
-
-
     // Auto logout after 3s so user re-authenticates with new password
-
     setTimeout(() => {
-
-      sessionStorage.removeItem(SESSION_KEY);
-
-      adminToken = newHash; // update in-memory token
-
-      document.getElementById('adminPanel').style.display = 'none';
-
-      document.getElementById('loginOverlay').style.display = 'flex';
-
-      document.getElementById('currentPassword').value = '';
-
-      document.getElementById('newPassword').value = '';
-
-      document.getElementById('confirmPassword').value = '';
-
-      document.getElementById('passwordStrength').style.display = 'none';
-
+      logout();
     }, 3000);
-
   });
-
-
 
   // URL slug change - live preview
 
@@ -2763,4 +2471,4 @@ const passwordHash = "d93860621d656aeb91a92e4951b6dff1df89d5b97920b6327fde03c2a2
 
 
 
-})();</script>
+</script>

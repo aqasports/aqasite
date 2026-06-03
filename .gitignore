@@ -27,8 +27,11 @@ deploy.trigger
 # Admin panel secret configuration (now tracked for serverless token validation)
 # admin-config.json is allowed to be tracked
 
-# Large media assets — must be hosted separately or served locally
-public/events/Fav main vid.mov
+# Large media files — too big for GitHub (>100MB), must be hosted separately
+*.mov
+*.mp4
+dist/events/
+
 
 # Old translation system — deleted
 auto-translate.js

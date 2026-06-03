@@ -8,5 +8,8 @@ Disallow: /*.bak
 Disallow: /deploy.trigger
 Disallow: /messages.json
 Disallow: /package-lock.json
+Disallow: /digger
+Disallow: /aqacontrol2026
+
 
 Sitemap: https://aqasports.pro/sitemap.xml

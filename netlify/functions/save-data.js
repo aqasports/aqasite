@@ -51,8 +51,9 @@ exports.handler = async (event, context) => {
   }
   const token = authHeader.slice(7);
 
-  // 1. Verify password hash using admin-config.json in the repo
-  let isAuthorized = false;
+  // Load config passwordHash from GitHub or environment for signing key fallback
+  let expectedHash = '65cdacaf34486fbb5c32641665f6f5a1a6985aa89dbe66286f85bbdd4be34fd5';
+  let cfg = { passwordHash: expectedHash, loginSlug: 'aqacontrol2026', extraSlugs: [] };
   try {
     const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/admin-config.json`, {
       headers: {
@@ -64,30 +65,42 @@ exports.handler = async (event, context) => {
 
     if (res.ok) {
       const data = await res.json();
-      const content = Buffer.from(data.content, 'base64').toString('utf8');
-      const cfg = JSON.parse(content);
-      const expectedHash = cfg.passwordHash || '65cdacaf34486fbb5c32641665f6f5a1a6985aa89dbe66286f85bbdd4be34fd5';
-      if (token === expectedHash) {
-        isAuthorized = true;
-      }
-    } else if (res.status === 404) {
-      // Fallback if config doesn't exist yet
-      if (token === '65cdacaf34486fbb5c32641665f6f5a1a6985aa89dbe66286f85bbdd4be34fd5') {
-        isAuthorized = true;
-      }
+      const contentBase64 = Buffer.from(data.content, 'base64').toString('utf8');
+      cfg = JSON.parse(contentBase64);
+      if (cfg.passwordHash) expectedHash = cfg.passwordHash;
     }
   } catch (err) {
-    // Fallback in case of networking issues fetching admin config
-    if (token === '65cdacaf34486fbb5c32641665f6f5a1a6985aa89dbe66286f85bbdd4be34fd5') {
-      isAuthorized = true;
+    console.warn("Failed to fetch admin config from GitHub API", err);
+  }
+
+  const crypto = require('crypto');
+  function verifyToken(token, secret) {
+    try {
+      const [header, body, signature] = token.split('.');
+      if (!header || !body || !signature) return null;
+      const expectedSig = crypto.createHmac('sha256', secret)
+        .update(`${header}.${body}`)
+        .digest('base64url');
+      if (signature !== expectedSig) return null;
+      const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
+      if (payload.exp && Date.now() > payload.exp) return null;
+      return payload;
+    } catch (e) {
+      return null;
     }
   }
 
-  if (!isAuthorized) {
+  const secret = process.env.JWT_SECRET || expectedHash;
+  const decoded = verifyToken(token, secret);
+
+  if (!decoded || !decoded.isAdmin) {
     return {
       statusCode: 403,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ success: false, error: 'Jeton de connexion invalide' })
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ success: false, error: 'Jeton de connexion invalide ou expiré' })
     };
   }
 
@@ -139,6 +152,45 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Special handling for admin-config updates (merging, validation, bcrypting new password)
+  let finalPayload = payload;
+  if (fileType === 'admin-config') {
+    const { currentPassword, passwordHash, loginSlug, extraSlugs } = payload;
+    const requiresVerification = passwordHash || currentPassword;
+    if (requiresVerification) {
+      const bcrypt = require('bcryptjs');
+      const crypto = require('crypto');
+      const verifyPassword = (password, storedHash) => {
+        const inputHash = crypto.createHash('sha256').update(password).digest('hex');
+        if (storedHash.startsWith('$2a$') || storedHash.startsWith('$2b$')) {
+          return bcrypt.compareSync(inputHash, storedHash);
+        }
+        return inputHash === storedHash;
+      };
+      const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+      if (!currentPassword || !verifyPassword(currentPassword, storedHash)) {
+        return {
+          statusCode: 401,
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          body: JSON.stringify({ success: false, error: 'Mot de passe actuel incorrect' })
+        };
+      }
+    }
+
+    // Merge new updates into current configuration object
+    const bcrypt = require('bcryptjs');
+    if (passwordHash) {
+      cfg.passwordHash = bcrypt.hashSync(passwordHash, 12);
+    }
+    if (loginSlug) cfg.loginSlug = loginSlug;
+    if (extraSlugs !== undefined) cfg.extraSlugs = extraSlugs;
+
+    finalPayload = cfg;
+  }
+
   try {
     // Get the current file SHA from GitHub to update it
     let sha = '';
@@ -156,7 +208,7 @@ exports.handler = async (event, context) => {
     }
 
     // Convert payload to formatted JSON and Base64 encode it
-    const jsonString = JSON.stringify(payload, null, 2);
+    const jsonString = JSON.stringify(finalPayload, null, 2);
     const contentBase64 = Buffer.from(jsonString).toString('base64');
 
     // Update the file in the repository
