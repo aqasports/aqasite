@@ -34,7 +34,7 @@
                 "time": "21h30-23h30",
                 "type": "g10",
                 "total": 10,
-                "taken": 10
+                "taken": 9
               },
               {
                 "day": "Vendredi",
@@ -65,7 +65,7 @@
                 "time": "21h30-23h30",
                 "type": "apnea",
                 "total": 10,
-                "taken": 6
+                "taken": 5
               }
             ]
           },
@@ -77,7 +77,7 @@
                 "time": "7h - 9h",
                 "type": "g10",
                 "total": 10,
-                "taken": 6,
+                "taken": 9,
                 "group": ""
               },
               {
@@ -85,35 +85,35 @@
                 "time": "21h - 23h",
                 "type": "g10",
                 "total": 10,
-                "taken": 9
+                "taken": 10
               },
               {
                 "day": "Jeudi",
                 "time": "7h - 9h",
                 "type": "g10",
                 "total": 10,
-                "taken": 8
+                "taken": 9
               },
               {
                 "day": "Jeudi",
                 "time": "21h30-23h30",
                 "type": "max5",
                 "total": 5,
-                "taken": 4
+                "taken": 2
               },
               {
                 "day": "Vendredi",
                 "time": "20h-22h",
                 "type": "g10",
                 "total": 10,
-                "taken": 10
+                "taken": 8
               },
               {
                 "day": "Samedi",
                 "time": "6h-8h",
                 "type": "g10",
                 "total": 10,
-                "taken": 8
+                "taken": 10
               },
               {
                 "day": "Samedi ELITE",
@@ -132,7 +132,7 @@
                 "time": "21h30-23h30",
                 "type": "g10",
                 "total": 10,
-                "taken": 4
+                "taken": 6
               }
             ]
           }
