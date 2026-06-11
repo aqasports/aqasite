@@ -342,6 +342,32 @@ router.post('/member/change-subscription', verifyMemberToken, (req, res) => {
     const safeSlotDay = sanitize(slotDay, 30);
     const safeSlotTime = sanitize(slotTime, 30);
 
+    // Read schedule.json to check slot availability
+    if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
+      return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
+    }
+    const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
+    const pool = schedule[safePoolKey];
+    if (!pool) {
+      return res.status(400).json({ success: false, error: 'Piscine introuvable' });
+    }
+    const category = user.gender || 'homme';
+    const cat = pool.categories[category];
+    if (!cat) {
+      return res.status(400).json({ success: false, error: 'Catégorie introuvable pour cette piscine' });
+    }
+    const coach = cat.coaches.find(c => c.name === safeCoachName);
+    if (!coach) {
+      return res.status(400).json({ success: false, error: 'Entraîneur introuvable' });
+    }
+    const slot = coach.slots.find(s => s.day === safeSlotDay && s.time === safeSlotTime);
+    if (!slot) {
+      return res.status(400).json({ success: false, error: 'Créneau introuvable dans le planning' });
+    }
+    if ((slot.taken || 0) >= slot.total) {
+      return res.status(400).json({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' });
+    }
+
     user.subscriptionChangeRequest = {
       tier: safeTier,
       poolKey: safePoolKey,
@@ -444,6 +470,32 @@ router.post('/admin/members/approve', verifyAdminToken, (req, res) => {
     const safeEndDate = sanitize(endDate, 30);
 
     // Update member profile
+    // Read schedule.json to check slot availability
+    if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
+      return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
+    }
+    const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
+    const pool = schedule[safePoolKey];
+    if (!pool) {
+      return res.status(400).json({ success: false, error: 'Piscine introuvable' });
+    }
+    const category = user.gender || 'homme';
+    const cat = pool.categories[category];
+    if (!cat) {
+      return res.status(400).json({ success: false, error: 'Catégorie introuvable pour cette piscine' });
+    }
+    const coach = cat.coaches.find(c => c.name === safeCoachName);
+    if (!coach) {
+      return res.status(400).json({ success: false, error: 'Entraîneur introuvable' });
+    }
+    const slot = coach.slots.find(s => s.day === safeSlotDay && s.time === safeSlotTime);
+    if (!slot) {
+      return res.status(400).json({ success: false, error: 'Créneau introuvable dans le planning' });
+    }
+    if ((slot.taken || 0) >= slot.total) {
+      return res.status(400).json({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' });
+    }
+
     user.status = 'active';
     user.membershipTier = safeMembershipTier;
     user.subscription = {
@@ -655,6 +707,32 @@ router.post('/api/admin/members/approve-change', verifyAdminToken, (req, res) =>
     }
 
     if (action === 'approve') {
+      // Read schedule.json to check slot availability for the new requested slot
+      if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
+        return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
+      }
+      const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
+      const pool = schedule[changeReq.poolKey];
+      if (!pool) {
+        return res.status(400).json({ success: false, error: 'Nouveau planning introuvable pour cette piscine' });
+      }
+      const category = user.gender || 'homme';
+      const cat = pool.categories[category];
+      if (!cat) {
+        return res.status(400).json({ success: false, error: 'Catégorie introuvable pour ce nouveau créneau' });
+      }
+      const coach = cat.coaches.find(c => c.name === changeReq.coachName);
+      if (!coach) {
+        return res.status(400).json({ success: false, error: 'Entraîneur introuvable pour ce nouveau créneau' });
+      }
+      const slot = coach.slots.find(s => s.day === changeReq.slotDay && s.time === changeReq.slotTime);
+      if (!slot) {
+        return res.status(400).json({ success: false, error: 'Nouveau créneau introuvable dans le planning' });
+      }
+      if ((slot.taken || 0) >= slot.total) {
+        return res.status(400).json({ success: false, error: 'Le nouveau créneau demandé est complet (plus de places disponibles)' });
+      }
+
       const oldSub = user.subscription;
 
       // Decrement slot count of the old sub if it was active

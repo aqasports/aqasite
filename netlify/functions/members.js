@@ -512,6 +512,36 @@ exports.handler = async (event, context) => {
       const safeSlotDay = sanitize(slotDay, 30);
       const safeSlotTime = sanitize(slotTime, 30);
 
+      const users = await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`);
+      if (!users || users.length === 0) {
+        return {
+          statusCode: 404,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Compte introuvable' })
+        };
+      }
+      const user = users[0];
+      const category = user.gender || 'homme';
+
+      // Real-time capacity check
+      const queryParams = `pool_key=eq.${encodeURIComponent(safePoolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(safeCoachName)}&day=eq.${encodeURIComponent(safeSlotDay)}&time=eq.${encodeURIComponent(safeSlotTime)}`;
+      const rows = await supabaseFetch(`schedule?${queryParams}`);
+      if (!rows || rows.length === 0) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Créneau introuvable dans le planning' })
+        };
+      }
+      const slot = rows[0];
+      if (slot.taken >= slot.total) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' })
+        };
+      }
+
       const changeReq = {
         tier: safeTier,
         poolKey: safePoolKey,
@@ -661,6 +691,26 @@ exports.handler = async (event, context) => {
       const safeEndDate = sanitize(endDate, 30);
 
       const user = users[0];
+
+      // Real-time capacity check
+      const queryParams = `pool_key=eq.${encodeURIComponent(safePoolKey)}&category=eq.${encodeURIComponent(user.gender || 'homme')}&coach_name=eq.${encodeURIComponent(safeCoachName)}&day=eq.${encodeURIComponent(safeSlotDay)}&time=eq.${encodeURIComponent(safeSlotTime)}`;
+      const rows = await supabaseFetch(`schedule?${queryParams}`);
+      if (!rows || rows.length === 0) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Créneau introuvable dans le planning' })
+        };
+      }
+      const slot = rows[0];
+      if (slot.taken >= slot.total) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' })
+        };
+      }
+
       const updatedSub = {
         category: user.gender || 'homme',
         poolKey: safePoolKey,
@@ -936,6 +986,25 @@ exports.handler = async (event, context) => {
       }
 
       if (action === 'approve') {
+        // Real-time capacity check for the new requested slot
+        const queryParams = `pool_key=eq.${encodeURIComponent(changeReq.poolKey)}&category=eq.${encodeURIComponent(user.gender || 'homme')}&coach_name=eq.${encodeURIComponent(changeReq.coachName)}&day=eq.${encodeURIComponent(changeReq.slotDay)}&time=eq.${encodeURIComponent(changeReq.slotTime)}`;
+        const rows = await supabaseFetch(`schedule?${queryParams}`);
+        if (!rows || rows.length === 0) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: 'Nouveau créneau introuvable dans le planning' })
+          };
+        }
+        const slot = rows[0];
+        if (slot.taken >= slot.total) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: 'Le nouveau créneau demandé est complet (plus de places disponibles)' })
+          };
+        }
+
         const oldSub = user.subscription;
         if (user.status === 'active' && oldSub && oldSub.poolKey && oldSub.coachName && oldSub.slotDay && oldSub.slotTime) {
           await adjustSlotTaken(oldSub.poolKey, oldSub.category || 'homme', oldSub.coachName, oldSub.slotDay, oldSub.slotTime, -1);
