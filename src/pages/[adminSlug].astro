@@ -781,13 +781,10 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
                     <select id="editTier" class="form-control" required>
 
                       <option value="Starter">Starter</option>
-
                       <option value="Silver">Silver</option>
-
                       <option value="Gold">Gold</option>
-
                       <option value="Diamond">Diamond</option>
-
+                      <option value="Emerald">Emerald</option>
                       <option value="Non-Membre">Non-Membre (Communaute)</option>
 
                     </select>
@@ -2995,6 +2992,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
                 <option value="Silver" ${(!m.membershipTier || m.membershipTier === 'Silver') ? 'selected' : ''}>Silver</option>
                 <option value="Gold" ${m.membershipTier === 'Gold' ? 'selected' : ''}>Gold</option>
                 <option value="Diamond" ${m.membershipTier === 'Diamond' ? 'selected' : ''}>Diamond</option>
+                <option value="Emerald" ${m.membershipTier === 'Emerald' ? 'selected' : ''}>Emerald</option>
               </select>
             </div>
             <div class="field-group">

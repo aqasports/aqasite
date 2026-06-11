@@ -1751,7 +1751,9 @@ const badgeDefinitions = {
 
   /* Virtual Membership Card styling with shine */
   .virtual-card {
-    height: 220px;
+    width: 100%;
+    max-width: 370px;
+    aspect-ratio: 5 / 3;
     border-radius: 20px;
     padding: 1.5rem;
     position: relative;
@@ -1784,64 +1786,73 @@ const badgeDefinitions = {
     z-index: 3;
   }
   .card-chip {
-    width: 45px;
-    height: 35px;
-    background: linear-gradient(135deg, #e5c060, #ba9539);
-    border-radius: 6px;
-    border: 1px solid rgba(0,0,0,0.1);
+    display: none;
   }
   .card-logo {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    opacity: 0.8;
+    display: none;
   }
   .card-tier-label {
     position: absolute;
-    top: 50%;
-    left: 1.5rem;
-    transform: translateY(-50%);
+    left: 36%;
+    top: 22%;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 2.2rem;
-    opacity: 0.12;
+    font-size: 0.75rem;
     letter-spacing: 2px;
+    color: var(--color-teal);
+    text-transform: uppercase;
+    opacity: 0.95;
   }
   .card-number {
+    position: absolute;
+    left: 36%;
+    top: 54%;
     font-family: monospace;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    margin-top: 1rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    margin: 0;
   }
   .card-holder {
+    position: absolute;
+    left: 36%;
+    top: 38%;
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1rem;
     text-transform: uppercase;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%;
   }
   .card-expiry {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: -0.5rem;
+    position: absolute;
+    left: 36%;
+    top: 68%;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
   }
   .card-qr-box {
     position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 80px;
-    height: 80px;
+    left: 7%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 17%;
+    height: 17%;
     background: #fff;
-    padding: 4px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     cursor: pointer;
     transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .card-qr-box img {
     width: 100%;
@@ -1850,9 +1861,9 @@ const badgeDefinitions = {
   }
   .qr-tooltip {
     position: absolute;
-    bottom: 90px;
-    right: 50%;
-    transform: translateX(50%);
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
     background: #000;
     color: var(--color-teal);
     font-size: 0.7rem;
@@ -1866,28 +1877,33 @@ const badgeDefinitions = {
   }
   .card-qr-box:hover .qr-tooltip {
     opacity: 1;
-    bottom: 85px;
+    bottom: 115%;
   }
 
   /* Holographic Tier Colors */
   .card-tier-starter {
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/1.webp') no-repeat center center / cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_starter.png') no-repeat center center / cover;
     box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
   }
   .card-tier-silver {
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/2.webp') no-repeat center center / cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_silver.png') no-repeat center center / cover;
     border-color: rgba(255, 255, 255, 0.25);
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
   }
   .card-tier-gold {
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/3.webp') no-repeat center center / cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_gold.png') no-repeat center center / cover;
     border-color: rgba(245, 158, 11, 0.4);
     box-shadow: 0 0 30px rgba(245, 158, 11, 0.25);
   }
   .card-tier-diamond {
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/4.webp') no-repeat center center / cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_diamond.png') no-repeat center center / cover;
     border-color: rgba(168, 85, 247, 0.5);
     box-shadow: 0 0 35px rgba(168, 85, 247, 0.4);
+  }
+  .card-tier-emerald {
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_emerald.png') no-repeat center center / cover;
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 35px rgba(16, 185, 129, 0.4);
   }
 
   /* Subscription Widget details */
