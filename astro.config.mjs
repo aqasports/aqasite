@@ -22,6 +22,46 @@ export default defineConfig({
         configureServer(server) {
           server.middlewares.use((req, res, next) => {
             const pathname = req.url ? new URL(req.url, 'http://localhost').pathname : '';
+
+            // Delegate Member Area and Member Admin ERP APIs to the Netlify Serverless Function
+            if (pathname.startsWith('/api/member/') || pathname.startsWith('/api/admin/members')) {
+              const urlObj = new URL(req.url, 'http://localhost');
+              req.query = Object.fromEntries(urlObj.searchParams.entries());
+
+              let body = '';
+              req.on('data', chunk => { body += chunk; });
+              req.on('end', () => {
+                const event = {
+                  path: req.url,
+                  httpMethod: req.method,
+                  headers: req.headers,
+                  queryStringParameters: req.query,
+                  body: body || '{}'
+                };
+
+                import('./netlify/functions/members.js').then(m => {
+                  const membersHandler = m.handler || m.default?.handler;
+                  if (!membersHandler) {
+                    throw new Error("Handler not found in members function");
+                  }
+                  membersHandler(event, {}).then(result => {
+                    res.writeHead(result.statusCode || 200, {
+                      ...(result.headers || {}),
+                      'Content-Type': 'application/json'
+                    });
+                    res.end(result.body || '');
+                  }).catch(err => {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: false, error: err.message }));
+                  });
+                }).catch(err => {
+                  res.writeHead(500, { 'Content-Type': 'application/json' });
+                  res.end(JSON.stringify({ success: false, error: `Failed to load serverless function: ${err.message}` }));
+                });
+              });
+              return;
+            }
+
             const apiRoutes = [
               '/api/save-schedule',
               '/api/save-formation',

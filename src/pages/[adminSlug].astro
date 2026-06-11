@@ -76,7 +76,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
-        <p class="meme-label">👁️ who are you</p>
+        <p class="meme-label">who are you</p>
 
       </div>
 
@@ -86,13 +86,13 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="login-field">
 
-          <label for="adminPassword">🔐 Mot de passe administrateur</label>
+          <label for="adminPassword">Mot de passe administrateur</label>
 
           <input type="password" id="adminPassword" class="login-input" placeholder="••••••••••••" autofocus>
 
         </div>
 
-        <div id="loginError" class="login-error" style="display:none;">❌ Mot de passe incorrect. Réessayez.</div>
+        <div id="loginError" class="login-error" style="display:none;">Mot de passe incorrect. Réessayez.</div>
 
         <button type="submit" id="loginBtn" class="login-btn">
 
@@ -192,6 +192,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
 
+        <button class="nav-tab-btn" data-tab="members">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Gestion Membres
+        </button>
+
         <button class="nav-tab-btn" data-tab="settings">
 
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
@@ -206,11 +211,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
       <div class="sidebar-footer">
 
-        <button id="deployGitBtn" class="btn btn-primary btn-deploy">🚀 Déployer sur GitHub</button>
+        <button id="deployGitBtn" class="btn btn-primary btn-deploy">Déployer sur GitHub</button>
 
         <div id="deployStatus" class="deploy-status">Système synchronisé</div>
 
-        <button id="logoutBtn" class="btn btn-logout">🔒 Déconnexion</button>
+        <button id="logoutBtn" class="btn btn-logout">Déconnexion</button>
 
       </div>
 
@@ -230,7 +235,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="section-title-bar">
 
-          <h2>📊 Tableau de Bord & Statistiques</h2>
+          <h2>Tableau de Bord & Statistiques</h2>
 
           <p class="section-desc">Aperçu global de l'occupation et de la capacité de l'académie en temps réel.</p>
 
@@ -242,7 +247,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
           <div class="stat-card">
 
-            <div class="stat-icon icon-blue">🏢</div>
+            <div class="stat-icon icon-blue">INF</div>
 
             <div class="stat-info">
 
@@ -256,7 +261,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
           <div class="stat-card">
 
-            <div class="stat-icon icon-teal">🎓</div>
+            <div class="stat-icon icon-teal">FOR</div>
 
             <div class="stat-info">
 
@@ -270,7 +275,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
           <div class="stat-card">
 
-            <div class="stat-icon icon-cyan">👥</div>
+            <div class="stat-icon icon-cyan">MEM</div>
 
             <div class="stat-info">
 
@@ -284,7 +289,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
           <div class="stat-card">
 
-            <div class="stat-icon icon-purple">✓</div>
+            <div class="stat-icon icon-purple">OK</div>
 
             <div class="stat-info">
 
@@ -302,7 +307,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="dashboard-details glass-panel">
 
-          <h3>📊 Occupation par Infrastructure</h3>
+          <h3>Occupation par Infrastructure</h3>
 
           <div id="dashLocationStats" class="dash-location-stats"></div>
 
@@ -312,7 +317,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="dashboard-details glass-panel" style="margin-top: 1.5rem;">
 
-          <h3>⚠️ Alertes Capacité & Groupes Saturation</h3>
+          <h3>Alertes Capacité & Groupes Saturation</h3>
 
           <div id="dashAlertsList" class="dash-alerts-list"></div>
 
@@ -322,7 +327,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="dashboard-details glass-panel" style="margin-top: 1.5rem;">
 
-          <h3>💻 Console de Déploiement</h3>
+          <h3>Console de Déploiement</h3>
 
           <pre id="deployLogsConsole" class="terminal-logs">Console en attente d'instruction...</pre>
 
@@ -338,7 +343,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="section-title-bar">
 
-          <h2>📅 Planificateur de Séances & Horaires</h2>
+          <h2>Planificateur de Séances & Horaires</h2>
 
           <p class="section-desc">Gérez la capacité des coachs et des groupes par piscine partenaire.</p>
 
@@ -352,7 +357,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="field-group">
 
-              <label for="locationSelect">📍 Emplacement :</label>
+              <label for="locationSelect">Emplacement :</label>
 
               <select id="locationSelect" class="form-control"></select>
 
@@ -360,7 +365,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="field-group">
 
-              <label for="categorySelect">👥 Catégorie :</label>
+              <label for="categorySelect">Catégorie :</label>
 
               <select id="categorySelect" class="form-control"></select>
 
@@ -370,7 +375,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
           <div class="action-buttons">
 
-            <button id="addCoachBtn" class="btn btn-secondary btn-icon">➕ Ajouter un Coach</button>
+            <button id="addCoachBtn" class="btn btn-secondary btn-icon">Ajouter un Coach</button>
 
           </div>
 
@@ -400,7 +405,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="section-title-bar">
 
-          <h2>🎓 Catalogue des Formations & Masterclasses</h2>
+          <h2>Catalogue des Formations & Masterclasses</h2>
 
           <p class="section-desc">Ajoutez, modifiez ou activez des programmes de certification de l'académie.</p>
 
@@ -410,7 +415,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="control-panel glass-panel">
 
-          <button id="addFormationBtn" class="btn btn-secondary">➕ Créer une Formation</button>
+          <button id="addFormationBtn" class="btn btn-secondary">Créer une Formation</button>
 
         </div>
 
@@ -438,7 +443,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="section-title-bar">
 
-          <h2>🏢 Administration des Infrastructures</h2>
+          <h2>Administration des Infrastructures</h2>
 
           <p class="section-desc">Gérez les piscines partenaires et centres d'entraînement AQA.</p>
 
@@ -448,7 +453,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="control-panel glass-panel">
 
-          <button id="addInfrastructureBtn" class="btn btn-secondary">➕ Créer une Infrastructure</button>
+          <button id="addInfrastructureBtn" class="btn btn-secondary">Créer une Infrastructure</button>
 
         </div>
 
@@ -476,7 +481,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="section-title-bar">
 
-          <h2>🔟 Compteurs de Performance Accueil</h2>
+          <h2>Compteurs de Performance Accueil</h2>
 
           <p class="section-desc">Modifiez en temps réel les statistiques clés affichées sur la page d'accueil.</p>
 
@@ -490,7 +495,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="counter-field-group">
 
-              <label for="countAthletes">👥 Athlètes formés :</label>
+              <label for="countAthletes">Athlètes formés :</label>
 
               <input type="number" id="countAthletes" class="form-control" min="0">
 
@@ -498,7 +503,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="counter-field-group">
 
-              <label for="countCoaches">🏊 Coachs d'élite :</label>
+              <label for="countCoaches">Coachs d'élite :</label>
 
               <input type="number" id="countCoaches" class="form-control" min="0">
 
@@ -506,7 +511,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="counter-field-group">
 
-              <label for="countPools">🏢 Infrastructures partenaires :</label>
+              <label for="countPools">Infrastructures partenaires :</label>
 
               <input type="number" id="countPools" class="form-control" min="0">
 
@@ -538,13 +543,557 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
 
+      <!-- MEMBERS TAB -->
+
+      <section id="tab-members" class="admin-section">
+
+        <div class="section-title-bar">
+
+          <h2>Gestion des Membres & Inscriptions</h2>
+
+          <p class="section-desc">Validez les inscriptions en attente, gerez les abonnements, suivez les presences et mettez a jour le suivi technique.</p>
+
+        </div>
+
+
+
+        <!-- Pending approvals -->
+
+        <div class="dashboard-details glass-panel" style="margin-bottom: 2rem;">
+
+          <h3>Demandes d'adhesion en attente (Verification requise)</h3>
+
+          <div id="pendingMembersContainer" class="pending-members-grid" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+
+            <!-- Rendered dynamically -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Sub Change Requests -->
+
+        <div class="dashboard-details glass-panel" style="margin-bottom: 2rem;">
+
+          <h3>Demandes de modification d'abonnement / Formule</h3>
+
+          <div id="pendingChangesContainer" class="pending-members-grid" style="margin-top: 1rem; display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+
+            <!-- Rendered dynamically -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Search & Full Members Grid -->
+
+        <div class="dashboard-details glass-panel">
+
+          <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+
+            <div class="field-group" style="flex: 1; min-width: 250px;">
+
+              <label for="memberSearch">Recherche :</label>
+
+              <input type="text" id="memberSearch" class="form-control" placeholder="Rechercher par nom, email, telephone...">
+
+            </div>
+
+            <div class="field-group" style="width: 180px;">
+
+              <label for="memberFilterStatus">Filtrer par statut :</label>
+
+              <select id="memberFilterStatus" class="form-control">
+
+                <option value="all">Tous les statuts</option>
+
+                <option value="active">Actif</option>
+
+                <option value="pending">En attente</option>
+
+                <option value="suspended">Suspendu</option>
+
+                <option value="non-member">Communaute</option>
+
+              </select>
+
+            </div>
+
+            <div class="field-group" style="width: 180px;">
+
+              <label for="memberFilterPool">Piscine :</label>
+
+              <select id="memberFilterPool" class="form-control">
+
+                <option value="all">Toutes les piscines</option>
+
+                <option value="reghaia">Reghaia</option>
+
+                <option value="cheraga">Cheraga</option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+
+          <h3>Annuaire des Utilisateurs</h3>
+
+          <div class="table-responsive" style="margin-top: 1rem; overflow-x: auto;">
+
+            <table class="admin-members-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+
+              <thead>
+
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); color: var(--color-primary);">
+
+                  <th style="padding: 1rem 0.5rem;">Nom</th>
+
+                  <th style="padding: 1rem 0.5rem;">Statut</th>
+
+                  <th style="padding: 1rem 0.5rem;">Formule</th>
+
+                  <th style="padding: 1rem 0.5rem;">Creneau</th>
+
+                  <th style="padding: 1rem 0.5rem;">XP</th>
+
+                  <th style="padding: 1rem 0.5rem; text-align: right;">Actions</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="membersTableBody">
+
+                <!-- Rendered dynamically -->
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Edit Modal Overlay -->
+
+        <div id="memberEditModal" class="login-overlay" style="display: none; z-index: 1000; align-items: center; justify-content: center;">
+
+          <div class="login-card" style="max-width: 750px; width: 90%; max-height: 90vh; overflow-y: auto; padding: 2.5rem; display: block; background: linear-gradient(145deg, #0a0a0a, #161a24); border: 2px solid rgba(0, 242, 255, 0.25); box-shadow: var(--shadow-glow-active);">
+
+            
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+
+              <h2 id="editModalTitle" style="font-family: var(--font-display); font-size: 1.4rem; color: var(--color-teal); margin: 0;">Gérer l'Athlète</h2>
+
+              <button id="closeEditModalBtn" style="background: none; border: none; color: #ff4d4d; font-size: 2rem; cursor: pointer; line-height: 1;">&times;</button>
+
+            </div>
+
+
+
+            <!-- Tabs in modal -->
+
+            <div style="display: flex; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 1.5rem; overflow-x: auto; padding-bottom: 0.5rem;">
+
+              <button class="modal-tab-btn active" data-modaltab="profile">Profil & Formule</button>
+
+              <button class="modal-tab-btn" data-modaltab="presence">Presences</button>
+
+              <button class="modal-tab-btn" data-modaltab="suivi">Suivi Technique</button>
+
+              <button class="modal-tab-btn" data-modaltab="gamification">Recompenses & XP</button>
+
+              <button class="modal-tab-btn" data-modaltab="gallery">Galerie</button>
+
+            </div>
+
+
+
+            <div id="modalAlert" class="auth-alert" style="display: none; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.5rem;"></div>
+
+
+
+            <!-- Tab Content: Profile -->
+
+            <div id="modal-tab-profile" class="modal-tab-content active">
+
+              <form id="modalProfileForm" style="display: flex; flex-direction: column; gap: 1.25rem;">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+
+                  <div class="field-group">
+
+                    <label>Nom complet :</label>
+
+                    <input type="text" id="editFullName" class="form-control" required>
+
+                  </div>
+
+                  <div class="field-group">
+
+                    <label>Telephone :</label>
+
+                    <input type="text" id="editPhone" class="form-control">
+
+                  </div>
+
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+
+                  <div class="field-group">
+
+                    <label>Date de naissance :</label>
+
+                    <input type="date" id="editBirthDate" class="form-control">
+
+                  </div>
+
+                  <div class="field-group">
+
+                    <label>Categorie d'entrainement :</label>
+
+                    <select id="editGender" class="form-control" required>
+
+                      <option value="homme">Homme</option>
+
+                      <option value="femme">Femme</option>
+
+                      <option value="ados">Ados Garcon</option>
+
+                      <option value="enfants">Enfant</option>
+
+                      <option value="apnea">Apnee</option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+
+                  <div class="field-group">
+
+                    <label>Formule / Tier :</label>
+
+                    <select id="editTier" class="form-control" required>
+
+                      <option value="Starter">Starter</option>
+
+                      <option value="Silver">Silver</option>
+
+                      <option value="Gold">Gold</option>
+
+                      <option value="Diamond">Diamond</option>
+
+                      <option value="Non-Membre">Non-Membre (Communaute)</option>
+
+                    </select>
+
+                  </div>
+
+                  <div class="field-group">
+
+                    <label>Statut du compte :</label>
+
+                    <select id="editStatus" class="form-control" required>
+
+                      <option value="active">Actif</option>
+
+                      <option value="pending">En attente</option>
+
+                      <option value="suspended">Suspendu</option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;">
+
+                  <div class="field-group">
+
+                    <label>Piscine :</label>
+
+                    <select id="editPool" class="form-control">
+
+                      <option value="">Non assigne</option>
+
+                      <option value="reghaia">Reghaia</option>
+
+                      <option value="cheraga">Cheraga</option>
+
+                    </select>
+
+                  </div>
+
+                  <div class="field-group">
+
+                    <label>Coach :</label>
+
+                    <input type="text" id="editCoach" class="form-control">
+
+                  </div>
+
+                  <div class="field-group">
+
+                    <label>Creneau (Jour Heure) :</label>
+
+                    <input type="text" id="editSlot" class="form-control" placeholder="Ex: Samedi 21h">
+
+                  </div>
+
+                </div>
+
+                <div class="field-group">
+
+                  <label>Date de fin d'abonnement :</label>
+
+                  <input type="date" id="editEndDate" class="form-control">
+
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Enregistrer les modifications</button>
+
+              </form>
+
+            </div>
+
+
+
+            <!-- Tab Content: Presence -->
+
+            <div id="modal-tab-presence" class="modal-tab-content" style="display: none;">
+
+              <form id="modalPresenceForm" style="display: flex; gap: 0.5rem; align-items: flex-end; margin-bottom: 1.5rem;">
+
+                <div class="field-group" style="flex: 1.5;">
+
+                  <label>Date :</label>
+
+                  <input type="date" id="presenceDateInput" class="form-control" required>
+
+                </div>
+
+                <div class="field-group" style="flex: 1;">
+
+                  <label>Presence :</label>
+
+                  <select id="presenceStatusInput" class="form-control" required>
+
+                    <option value="true">Present</option>
+
+                    <option value="false">Absent</option>
+
+                  </select>
+
+                </div>
+
+                <div class="field-group" style="flex: 2;">
+
+                  <label>Raison / Note :</label>
+
+                  <input type="text" id="presenceReasonInput" class="form-control" placeholder="Ex: Absence justifiee">
+
+                </div>
+
+                <button type="submit" class="btn btn-secondary" style="padding: 0.75rem 1.25rem;">Ajouter</button>
+
+              </form>
+
+              <div id="modalPresenceSummary" style="font-weight: bold; margin-bottom: 1rem;">Total : 0 seance</div>
+
+              <div id="modalPresenceList" style="max-height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem;">
+
+                <!-- Rendered dynamically -->
+
+              </div>
+
+            </div>
+
+
+
+            <!-- Tab Content: Suivi Technique -->
+
+            <div id="modal-tab-suivi" class="modal-tab-content" style="display: none;">
+
+              <form id="modalSuiviForm" style="display: flex; flex-direction: column; gap: 1.25rem;">
+
+                <div class="field-group">
+
+                  <label id="lblRespiration">Respiration / Appuis (0/5) :</label>
+
+                  <input type="range" id="suiviRespiration" min="0" max="5" class="form-control" style="padding: 0; height: auto;">
+
+                </div>
+
+                <div class="field-group">
+
+                  <label id="lblKick">Battement de jambes (0/5) :</label>
+
+                  <input type="range" id="suiviKick" min="0" max="5" class="form-control" style="padding: 0; height: auto;">
+
+                </div>
+
+                <div class="field-group">
+
+                  <label id="lblBras">Mouvement de bras (0/5) :</label>
+
+                  <input type="range" id="suiviBras" min="0" max="5" class="form-control" style="padding: 0; height: auto;">
+
+                </div>
+
+                <div class="field-group">
+
+                  <label id="lblEndurance">Endurance / Souffle (0/5) :</label>
+
+                  <input type="range" id="suiviEndurance" min="0" max="5" class="form-control" style="padding: 0; height: auto;">
+
+                </div>
+
+                <div class="field-group">
+
+                  <label>Commentaire de l'entraineur :</label>
+
+                  <textarea id="suiviComments" class="form-control" style="height: 100px; resize: none;" placeholder="Saisir les observations sur la progression technique..."></textarea>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Enregistrer l'evaluation technique</button>
+
+              </form>
+
+            </div>
+
+
+
+            <!-- Tab Content: Gamification -->
+
+            <div id="modal-tab-gamification" class="modal-tab-content" style="display: none;">
+
+              <form id="modalRewardsForm" style="display: flex; flex-direction: column; gap: 1.25rem;">
+
+                <div class="field-group">
+
+                  <label for="rewardsXP">Points d'experience (XP) :</label>
+
+                  <input type="number" id="rewardsXP" class="form-control" min="0" required>
+
+                </div>
+
+                <div class="field-group">
+
+                  <label style="margin-bottom: 0.5rem;">Badges d'excellence attribues :</label>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; background: rgba(0,0,0,0.15); padding: 1rem; border-radius: 10px; border: var(--border-glass);">
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+
+                      <input type="checkbox" id="badgeCheck_first_dive" value="first_dive" style="width: auto;">
+
+                      <span>Premier Plongeon</span>
+
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+
+                      <input type="checkbox" id="badgeCheck_crawling_king" value="crawling_king" style="width: auto;">
+
+                      <span>Maitre du Crawl</span>
+
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+
+                      <input type="checkbox" id="badgeCheck_apnea_master" value="apnea_master" style="width: auto;">
+
+                      <span>⏱️ Maitre Apneiste</span>
+
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+
+                      <input type="checkbox" id="badgeCheck_butterfly_king" value="butterfly_king" style="width: auto;">
+
+                      <span>Maitre Papillon</span>
+
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+
+                      <input type="checkbox" id="badgeCheck_endurance_pro" value="endurance_pro" style="width: auto;">
+
+                      <span>Endurant Pro</span>
+
+                    </label>
+
+                  </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Attribuer XP & Badges</button>
+
+              </form>
+
+            </div>
+
+
+
+            <!-- Tab Content: Gallery -->
+
+            <div id="modal-tab-gallery" class="modal-tab-content" style="display: none;">
+
+              <form id="modalGalleryForm" style="display: flex; gap: 0.5rem; align-items: flex-end; margin-bottom: 1.5rem;">
+
+                <div class="field-group" style="flex: 1;">
+
+                  <label>Uploader une photo d'action :</label>
+
+                  <input type="file" id="galleryPhotoFile" class="form-control" accept="image/*" required style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+
+                </div>
+
+                <button type="submit" class="btn btn-secondary" style="padding: 0.75rem 1.25rem;" id="galleryUploadBtn">Uploader</button>
+
+              </form>
+
+              <div id="modalGalleryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1rem; max-height: 250px; overflow-y: auto;">
+
+                <!-- Rendered dynamically -->
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
       <!-- SETTINGS TAB -->
 
       <section id="tab-settings" class="admin-section">
 
         <div class="section-title-bar">
 
-          <h2>⚙️ Paramètres de Connexion</h2>
+          <h2>Paramètres de Connexion</h2>
 
           <p class="section-desc">Modifiez votre mot de passe et l'URL secrète d'accès au panneau d'administration.</p>
 
@@ -560,7 +1109,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="settings-info-item">
 
-              <span class="settings-info-label">🔐 Mot de passe actuel</span>
+              <span class="settings-info-label">Mot de passe actuel</span>
 
               <span class="settings-info-value">••••••••••••</span>
 
@@ -568,7 +1117,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="settings-info-item">
 
-              <span class="settings-info-label">🔗 URL d'accès actuelle</span>
+              <span class="settings-info-label">URL d'accès actuelle</span>
 
               <span class="settings-info-value" id="currentSlugDisplay">••••••••••••</span>
 
@@ -602,7 +1151,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="settings-panel-header">
 
-              <span class="settings-panel-icon">🔑</span>
+              <span class="settings-panel-icon">KEY</span>
 
               <div>
 
@@ -656,7 +1205,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
               <div class="save-bar" style="border:none; padding:0; margin-top:1.5rem;">
 
-                <button id="savePasswordBtn" class="btn btn-primary">🔑 Mettre à jour le mot de passe</button>
+                <button id="savePasswordBtn" class="btn btn-primary">Mettre à jour le mot de passe</button>
 
                 <span id="savePasswordStatus" class="save-status"></span>
 
@@ -674,7 +1223,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             <div class="settings-panel-header">
 
-              <span class="settings-panel-icon">🔗</span>
+              <span class="settings-panel-icon">URL</span>
 
               <div>
 
@@ -720,7 +1269,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
               <div class="save-bar" style="border:none; padding:0; margin-top:1.5rem;">
 
-                <button id="saveSlugBtn" class="btn btn-primary">🔗 Appliquer la nouvelle URL</button>
+                <button id="saveSlugBtn" class="btn btn-primary">Appliquer la nouvelle URL</button>
 
                 <span id="saveSlugStatus" class="save-status"></span>
 
@@ -740,7 +1289,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="glass-panel danger-zone">
 
-          <h3>⚠️ Zone Sensible</h3>
+          <h3>Zone Sensible</h3>
 
           <p>Après avoir changé le mot de passe ou l'URL, vous serez déconnecté automatiquement. Notez vos nouvelles informations avant de sauvegarder.</p>
 
@@ -1130,7 +1679,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
           errText = data.error || errText;
         } catch(e) {}
         errDiv.style.display = 'block';
-        errDiv.textContent = '❌ ' + errText;
+        errDiv.textContent = 'Erreur: ' + errText;
         document.getElementById('adminPassword').value = '';
         document.getElementById('adminPassword').focus();
         btnText.style.display = 'inline';
@@ -1146,7 +1695,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
       }
     } catch(err) {
       errDiv.style.display = 'block';
-      errDiv.textContent = '❌ Erreur réseau: ' + err.message;
+      errDiv.textContent = 'Erreur réseau: ' + err.message;
     }
 
     if (authenticated) {
@@ -1301,6 +1850,10 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
       document.getElementById(`tab-${btn.dataset.tab}`)?.classList.add('active');
 
+      if (btn.dataset.tab === 'members') {
+        loadAdminMembers();
+      }
+
     });
 
   });
@@ -1379,7 +1932,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
                     el.className = 'dash-alert alert-danger';
 
-                    el.innerHTML = `🚨 <strong>[Complet]</strong> ${loc.name || locKey} — Coach ${coach.name} (${slot.day} à ${slot.time}) · <strong>${taken}/${cap} places</strong>`;
+                    el.innerHTML = `<strong>[Complet]</strong> ${loc.name || locKey} — Coach ${coach.name} (${slot.day} à ${slot.time}) · <strong>${taken}/${cap} places</strong>`;
 
                     alertsContainer.appendChild(el);
 
@@ -1389,7 +1942,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
                     el.className = 'dash-alert alert-warning';
 
-                    el.innerHTML = `⚠️ <strong>[Presque Saturé]</strong> ${loc.name || locKey} — Coach ${coach.name} (${slot.day} à ${slot.time}) · <strong>${taken}/${cap} (${Math.round(occupancy)}%)</strong>`;
+                    el.innerHTML = `<strong>[Presque Saturé]</strong> ${loc.name || locKey} — Coach ${coach.name} (${slot.day} à ${slot.time}) · <strong>${taken}/${cap} (${Math.round(occupancy)}%)</strong>`;
 
                     alertsContainer.appendChild(el);
 
@@ -1429,7 +1982,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="loc-row-header">
 
-          <strong>📍 ${loc.name || locKey}</strong>
+          <strong>${loc.name || locKey}</strong>
 
           <span>${locTaken}/${locCapacity} places (${locOccupancy}%)</span>
 
@@ -1457,7 +2010,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     if (alertsContainer.children.length === 0) {
 
-      alertsContainer.innerHTML = '<div class="no-alerts">✓ Aucun groupe en saturation ou alerte pour le moment.</div>';
+      alertsContainer.innerHTML = '<div class="no-alerts">Aucun groupe en saturation ou alerte pour le moment.</div>';
 
     }
 
@@ -1565,7 +2118,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
           <div class="field-group-inline">
 
-            <span class="avatar">👤</span>
+            <span class="avatar">USER</span>
 
             <input type="text" class="coach-name-input form-control" value="${coach.name}" data-coach-idx="${coachIdx}">
 
@@ -1629,7 +2182,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
             </div>
 
-            <button class="btn btn-danger btn-square btn-delete-slot" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}">✕</button>
+            <button class="btn btn-danger btn-square btn-delete-slot" data-coach-idx="${coachIdx}" data-slot-idx="${slotIdx}">X</button>
 
           `;
 
@@ -1823,11 +2376,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
       });
 
-      if (ok && data.success) { status.textContent = '✓ Planning sauvegardé !'; status.className = 'save-status success'; updateDashboardStats(); }
+      if (ok && data.success) { status.textContent = 'Planning sauvegardé !'; status.className = 'save-status success'; updateDashboardStats(); }
 
-      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+      else { status.textContent = 'Erreur: ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
 
-    } catch(e) { status.textContent = '❌ Erreur réseau: ' + e.message; status.className = 'save-status error'; }
+    } catch(e) { status.textContent = 'Erreur réseau: ' + e.message; status.className = 'save-status error'; }
 
   });
 
@@ -1851,7 +2404,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="card-config-header">
 
-          <strong>🎓 Formation #${idx + 1}</strong>
+          <strong>Formation #${idx + 1}</strong>
 
           <button class="btn btn-danger btn-sm btn-delete-formation" data-idx="${idx}">Supprimer</button>
 
@@ -1941,11 +2494,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
       });
 
-      if (ok && data.success) { status.textContent = '✓ Formations sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
+      if (ok && data.success) { status.textContent = 'Formations sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
 
-      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+      else { status.textContent = 'Erreur: ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
 
-    } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
+    } catch(e) { status.textContent = 'Erreur réseau: ' + e.message; status.className = 'save-status error'; }
 
   });
 
@@ -1969,7 +2522,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         <div class="card-config-header">
 
-          <strong>🏢 Infrastructure #${idx + 1}</strong>
+          <strong>Infrastructure #${idx + 1}</strong>
 
           <button class="btn btn-danger btn-sm btn-delete-infra" data-idx="${idx}">Supprimer</button>
 
@@ -2061,11 +2614,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
       });
 
-      if (ok && data.success) { status.textContent = '✓ Infrastructures sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
+      if (ok && data.success) { status.textContent = 'Infrastructures sauvegardées !'; status.className = 'save-status success'; updateDashboardStats(); }
 
-      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+      else { status.textContent = 'Erreur: ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
 
-    } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
+    } catch(e) { status.textContent = 'Erreur réseau: ' + e.message; status.className = 'save-status error'; }
 
   });
 
@@ -2113,11 +2666,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
       });
 
-      if (ok && data.success) { status.textContent = '✓ Compteurs sauvegardés !'; status.className = 'save-status success'; }
+      if (ok && data.success) { status.textContent = 'Compteurs sauvegardés !'; status.className = 'save-status success'; }
 
-      else { status.textContent = '❌ ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
+      else { status.textContent = 'Erreur: ' + (data.message || data.error || 'Erreur'); status.className = 'save-status error'; }
 
-    } catch(e) { status.textContent = '❌ Réseau: ' + e.message; status.className = 'save-status error'; }
+    } catch(e) { status.textContent = 'Erreur réseau: ' + e.message; status.className = 'save-status error'; }
 
   });
 
@@ -2137,7 +2690,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     const statusEl = document.getElementById('deployStatus');
     const consoleLogs = document.getElementById('deployLogsConsole');
-    statusEl.textContent = 'Déploiement en cours... 🚀';
+    statusEl.textContent = 'Déploiement en cours...';
     statusEl.className = 'deploy-status active';
     consoleLogs.textContent = '>>> Lancement de deploy-now.bat...\n>>> Connexion au serveur Git...\n';
     try {
@@ -2147,16 +2700,16 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
         body: JSON.stringify({ password: pwd })
       });
       if (ok && data.success) {
-        statusEl.textContent = '✓ Site Déployé avec succès !';
+        statusEl.textContent = 'Site Déployé avec succès !';
         statusEl.className = 'deploy-status success';
         consoleLogs.textContent += '\n[STDOUT]\n' + data.stdout;
       } else {
-        statusEl.textContent = '❌ Échec de déploiement';
+        statusEl.textContent = 'Échec de déploiement';
         statusEl.className = 'deploy-status error';
         consoleLogs.textContent += '\n[ERROR]\n' + (data.message || 'Erreur inconnue') + '\n' + (data.stderr || '');
       }
     } catch(e) {
-      statusEl.textContent = '❌ Échec réseau: ' + e.message;
+      statusEl.textContent = 'Échec réseau: ' + e.message;
       statusEl.className = 'deploy-status error';
       consoleLogs.textContent += '\n[NET_ERROR]\n' + e.message;
     }
@@ -2258,13 +2811,13 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
     status.textContent = ''; status.className = 'save-status';
 
     if (!currentPwd || !newPwd || !confirmPwd) {
-      status.textContent = '❌ Tous les champs sont requis.'; status.className = 'save-status error'; return;
+      status.textContent = 'Tous les champs sont requis.'; status.className = 'save-status error'; return;
     }
     if (newPwd.length < 8) {
-      status.textContent = '❌ Minimum 8 caractères.'; status.className = 'save-status error'; return;
+      status.textContent = 'Minimum 8 caractères.'; status.className = 'save-status error'; return;
     }
     if (newPwd !== confirmPwd) {
-      status.textContent = '❌ Les mots de passe ne correspondent pas.'; status.className = 'save-status error'; return;
+      status.textContent = 'Les mots de passe ne correspondent pas.'; status.className = 'save-status error'; return;
     }
 
     status.textContent = 'Mise à jour...';
@@ -2280,14 +2833,14 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
         body: JSON.stringify({ currentPassword: currentPwd, passwordHash: newHash })
       });
       if (ok && data.success) {
-        status.textContent = '✓ Mot de passe mis à jour ! Déconnexion dans 3s...';
+        status.textContent = 'Mot de passe mis à jour ! Déconnexion dans 3s...';
         status.className = 'save-status success';
       } else {
-        status.textContent = '❌ Erreur serveur: ' + (data.message || data.error || 'erreur');
+        status.textContent = 'Erreur serveur: ' + (data.message || data.error || 'erreur');
         status.className = 'save-status error';
       }
     } catch(e) {
-      status.textContent = '❌ ' + e.message;
+      status.textContent = 'Erreur: ' + e.message;
       status.className = 'save-status error';
     }
 
@@ -2341,13 +2894,13 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     if (!slug || slug.length < 3) {
 
-      status.textContent = '❌ URL trop courte (min 3 caractères).'; status.className = 'save-status error'; return;
+      status.textContent = 'URL trop courte (min 3 caractères).'; status.className = 'save-status error'; return;
 
     }
 
     if (!/^[a-z0-9-]+$/.test(slug)) {
 
-      status.textContent = '❌ Lettres minuscules, chiffres et tirets uniquement.'; status.className = 'save-status error'; return;
+      status.textContent = 'Lettres minuscules, chiffres et tirets uniquement.'; status.className = 'save-status error'; return;
 
     }
 
@@ -2375,7 +2928,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
         document.getElementById('urlSlugDisplay').textContent = slug;
 
-        status.textContent = '✓ URL mise à jour ! Accessible sur : ' + window.location.origin + '/' + slug;
+        status.textContent = 'URL mise à jour ! Accessible sur : ' + window.location.origin + '/' + slug;
 
         status.className = 'save-status success';
 
@@ -2385,7 +2938,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
       } else {
 
-        status.textContent = '❌ Erreur serveur: ' + (data.message || data.error || 'Serveur non disponible'); 
+        status.textContent = 'Erreur serveur: ' + (data.message || data.error || 'Serveur non disponible'); 
 
         status.className = 'save-status error';
 
@@ -2393,7 +2946,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     } catch(e) {
 
-      status.textContent = '❌ ' + e.message; 
+      status.textContent = 'Erreur: ' + e.message; 
 
       status.className = 'save-status error';
 
@@ -2402,6 +2955,826 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
   });
 
 
+
+  // ==================== MEMBER ERP SYSTEM ====================
+
+  let currentMembers = [];
+  let selectedMember = null;
+
+  async function loadAdminMembers() {
+    try {
+      const response = await fetch('/api/admin/members', {
+        headers: authHeaders()
+      });
+      const data = await response.json();
+      if (data.success) {
+        currentMembers = data.members;
+        renderAdminMembers();
+      } else {
+        console.error("Failed to load members:", data.error);
+      }
+    } catch (e) {
+      console.error("Network error loading members:", e);
+    }
+  }
+
+  function renderAdminMembers() {
+    // Render Pending approvals
+    const pendingContainer = document.getElementById('pendingMembersContainer');
+    const pendingMembers = currentMembers.filter(m => m.status === 'pending');
+    pendingContainer.innerHTML = '';
+
+    if (pendingMembers.length === 0) {
+      pendingContainer.innerHTML = '<div style="color: var(--text-muted); font-style: italic; padding: 1rem 0;">Aucune demande d\'adhesion en attente.</div>';
+    } else {
+      pendingMembers.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'glass-panel';
+        card.style.padding = '1.5rem';
+        card.style.borderLeft = '4px solid var(--color-teal)';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.style.gap = '1rem';
+
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h4 style="font-size: 1.1rem; color: #fff; margin: 0;">${m.fullName}</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0.25rem 0 0 0;">Email: ${m.email} | Tel: ${m.phone || 'Non renseigne'}</p>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Categorie demandee: ${m.gender || 'Homme'}</p>
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Inscrit le ${new Date(m.createdAt).toLocaleDateString('fr-FR')}</div>
+          </div>
+          
+          <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; align-items: end;">
+            <div class="field-group">
+              <label style="font-size: 0.75rem; color: var(--text-secondary);">Formule / Tier</label>
+              <select class="form-control inline-tier-${m.id}" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                <option value="Starter">Starter</option>
+                <option value="Silver" selected>Silver</option>
+                <option value="Gold">Gold</option>
+                <option value="Diamond">Diamond</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label style="font-size: 0.75rem; color: var(--text-secondary);">Piscine</label>
+              <select class="form-control inline-pool-${m.id}" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                <option value="reghaia">Reghaia</option>
+                <option value="cheraga">Cheraga</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label style="font-size: 0.75rem; color: var(--text-secondary);">Coach</label>
+              <input type="text" class="form-control inline-coach-${m.id}" placeholder="Ex: Coach Youcef" value="Coach Youcef" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+            </div>
+            <div class="field-group">
+              <label style="font-size: 0.75rem; color: var(--text-secondary);">Creneau (Jour Heure)</label>
+              <input type="text" class="form-control inline-slot-${m.id}" placeholder="Ex: Samedi 21h - 23h" value="Samedi 21h - 23h" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+            </div>
+            <div class="field-group">
+              <label style="font-size: 0.75rem; color: var(--text-secondary);">Fin Abonnement</label>
+              <input type="date" class="form-control inline-enddate-${m.id}" value="${new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0]}" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+            </div>
+            <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+              <button class="btn btn-primary approve-btn" data-id="${m.id}" style="padding: 0.45rem 1rem; font-size: 0.85rem;">Approuver</button>
+              <button class="btn btn-secondary reject-btn" data-id="${m.id}" style="padding: 0.45rem 1rem; font-size: 0.85rem; border-color: #ff4d4d; color: #ff4d4d; background: transparent;">Rejeter</button>
+            </div>
+          </div>
+        `;
+        pendingContainer.appendChild(card);
+      });
+
+      // Bind approve/reject button events
+      pendingContainer.querySelectorAll('.approve-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          const tier = pendingContainer.querySelector(`.inline-tier-${id}`).value;
+          const pool = pendingContainer.querySelector(`.inline-pool-${id}`).value;
+          const coach = pendingContainer.querySelector(`.inline-coach-${id}`).value;
+          const slot = pendingContainer.querySelector(`.inline-slot-${id}`).value;
+          const enddate = pendingContainer.querySelector(`.inline-enddate-${id}`).value;
+
+          btn.disabled = true;
+          try {
+            const res = await fetch('/api/admin/members/approve', {
+              method: 'POST',
+              headers: authHeaders(),
+              body: JSON.stringify({
+                memberId: id,
+                membershipTier: tier,
+                poolKey: pool,
+                coachName: coach,
+                slotDay: slot.split(' ')[0] || 'Samedi',
+                slotTime: slot,
+                endDate: enddate
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              loadAdminMembers();
+            } else {
+              alert(data.error);
+            }
+          } catch (e) {
+            console.error(e);
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+
+      pendingContainer.querySelectorAll('.reject-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          if (!confirm("Voulez-vous rejeter cette inscription ?")) return;
+          btn.disabled = true;
+          try {
+            const res = await fetch('/api/admin/members/update', {
+              method: 'POST',
+              headers: authHeaders(),
+              body: JSON.stringify({
+                memberId: id,
+                status: 'suspended'
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              loadAdminMembers();
+            }
+          } catch(e) {
+            console.error(e);
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+    }
+
+    // Render Subscription Change Requests
+    const changesContainer = document.getElementById('pendingChangesContainer');
+    const changeRequests = currentMembers.filter(m => m.subscriptionChangeRequest && m.subscriptionChangeRequest.status === 'pending');
+    changesContainer.innerHTML = '';
+
+    if (changeRequests.length === 0) {
+      changesContainer.innerHTML = '<div style="color: var(--text-muted); font-style: italic; padding: 1rem 0;">Aucune demande de modification d\'abonnement en attente.</div>';
+    } else {
+      changeRequests.forEach(m => {
+        const req = m.subscriptionChangeRequest;
+        const card = document.createElement('div');
+        card.className = 'glass-panel';
+        card.style.padding = '1.5rem';
+        card.style.borderLeft = '4px solid var(--color-secondary)';
+        card.style.display = 'flex';
+        card.style.flexDirection = 'column';
+        card.style.gap = '1rem';
+
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h4 style="font-size: 1.1rem; color: #fff; margin: 0;">${m.fullName}</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0.25rem 0 0 0;">Demande de changement soumise le ${new Date(req.requestedAt).toLocaleDateString('fr-FR')}</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-primary approve-change-btn" data-id="${m.id}" style="padding: 0.45rem 1rem; font-size: 0.85rem;">Approuver</button>
+              <button class="btn btn-secondary reject-change-btn" data-id="${m.id}" style="padding: 0.45rem 1rem; font-size: 0.85rem; border-color: #ff4d4d; color: #ff4d4d; background: transparent;">Rejeter</button>
+            </div>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 10px;">
+            <div>
+              <strong style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-bottom: 0.25rem;">CRENEAU ACTUEL :</strong>
+              <span style="font-size: 0.9rem;">Formule: ${m.membershipTier || 'Starter'}</span><br>
+              <span style="font-size: 0.9rem;">Creneau: ${m.subscription?.poolKey === 'reghaia' ? 'Reghaia' : (m.subscription?.poolKey === 'cheraga' ? 'Cheraga' : '-')} - ${m.subscription?.coachName || '-'} [${m.subscription?.slotDay || ''} ${m.subscription?.slotTime || ''}]</span>
+            </div>
+            <div style="border-left: 1px solid rgba(255,255,255,0.05); padding-left: 1rem;">
+              <strong style="color: var(--color-teal); font-size: 0.8rem; display: block; margin-bottom: 0.25rem;">CRENEAU DEMANDE :</strong>
+              <span style="font-size: 0.9rem; font-weight: bold; color: #fff;">Formule: ${req.tier}</span><br>
+              <span style="font-size: 0.9rem; font-weight: bold; color: #fff;">Creneau: ${req.poolKey === 'reghaia' ? 'Reghaia' : (req.poolKey === 'cheraga' ? 'Cheraga' : '-')} - ${req.coachName} [${req.slotDay} ${req.slotTime}]</span>
+            </div>
+          </div>
+        `;
+        changesContainer.appendChild(card);
+      });
+
+      changesContainer.querySelectorAll('.approve-change-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          btn.disabled = true;
+          try {
+            const res = await fetch('/api/admin/members/approve-change', {
+              method: 'POST',
+              headers: authHeaders(),
+              body: JSON.stringify({
+                memberId: id,
+                action: 'approve'
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              loadAdminMembers();
+            }
+          } catch(e) {
+            console.error(e);
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+
+      changesContainer.querySelectorAll('.reject-change-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          btn.disabled = true;
+          try {
+            const res = await fetch('/api/admin/members/approve-change', {
+              method: 'POST',
+              headers: authHeaders(),
+              body: JSON.stringify({
+                memberId: id,
+                action: 'reject'
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              loadAdminMembers();
+            }
+          } catch(e) {
+            console.error(e);
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+    }
+
+    // Render Active Members Table
+    const tableBody = document.getElementById('membersTableBody');
+    tableBody.innerHTML = '';
+
+    const search = document.getElementById('memberSearch').value.toLowerCase();
+    const filterStatus = document.getElementById('memberFilterStatus').value;
+    const filterPool = document.getElementById('memberFilterPool').value;
+
+    const filtered = currentMembers.filter(m => {
+      // Search
+      const matchSearch = m.fullName.toLowerCase().includes(search) || 
+                          m.email.toLowerCase().includes(search) || 
+                          (m.phone && m.phone.toLowerCase().includes(search));
+      if (!matchSearch) return false;
+
+      // Status filter
+      if (filterStatus !== 'all') {
+        if (filterStatus === 'non-member') {
+          if (m.isAqaMember) return false;
+        } else {
+          if (m.status !== filterStatus || !m.isAqaMember) return false;
+        }
+      }
+
+      // Pool filter
+      if (filterPool !== 'all') {
+        if (!m.subscription || m.subscription.poolKey !== filterPool) return false;
+      }
+
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="6" style="padding: 1.5rem 0.5rem; text-align: center; color: var(--text-muted); font-style: italic;">Aucun membre trouve matching les filtres.</td></tr>`;
+      return;
+    }
+
+    filtered.forEach(m => {
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+      
+      let statusBadge = '';
+      if (!m.isAqaMember) {
+        statusBadge = `<span style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--text-secondary); padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.75rem;">Communaute</span>`;
+      } else if (m.status === 'active') {
+        statusBadge = `<span style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.75rem;">Actif</span>`;
+      } else if (m.status === 'pending') {
+        statusBadge = `<span style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: #fbbf24; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.75rem;">Attente</span>`;
+      } else {
+        statusBadge = `<span style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.75rem;">Suspendu</span>`;
+      }
+
+      const poolStr = m.subscription?.poolKey === 'reghaia' ? 'Reghaia' : (m.subscription?.poolKey === 'cheraga' ? 'Cheraga' : '-');
+      const creneauStr = m.subscription?.slotDay && m.subscription?.slotTime ? `${m.subscription.slotDay} ${m.subscription.slotTime}` : '-';
+
+      tr.innerHTML = `
+        <td style="padding: 1rem 0.5rem;">
+          <strong style="color: #fff; display: block;">${m.fullName}</strong>
+          <small style="color: var(--text-secondary);">${m.email}</small>
+        </td>
+        <td style="padding: 1rem 0.5rem;">${statusBadge}</td>
+        <td style="padding: 1rem 0.5rem;">${m.membershipTier || '-'}</td>
+        <td style="padding: 1rem 0.5rem;">${poolStr}</td>
+        <td style="padding: 1rem 0.5rem;">${creneauStr}</td>
+        <td style="padding: 1rem 0.5rem; font-weight: bold; color: var(--color-teal);">${m.xp || 0}</td>
+        <td style="padding: 1rem 0.5rem; text-align: right;">
+          <button class="btn btn-secondary manage-member-btn" data-id="${m.id}" style="padding: 0.3rem 0.75rem; font-size: 0.8rem; margin-right: 0.4rem;">Gerer</button>
+          <button class="btn btn-secondary link-member-btn" data-id="${m.id}" style="padding: 0.3rem 0.75rem; font-size: 0.8rem; border-color: rgba(0, 242, 255, 0.2); color: var(--color-teal); background: transparent;">Fiche</button>
+        </td>
+      `;
+
+      tr.querySelector('.manage-member-btn').addEventListener('click', () => openMemberEditModal(m));
+      tr.querySelector('.link-member-btn').addEventListener('click', () => {
+        window.open(`/clients/stats?id=${m.id}`, '_blank');
+      });
+
+      tableBody.appendChild(tr);
+    });
+  }
+
+  // Bind Search and Filter actions
+  document.getElementById('memberSearch').addEventListener('input', renderAdminMembers);
+  document.getElementById('memberFilterStatus').addEventListener('change', renderAdminMembers);
+  document.getElementById('memberFilterPool').addEventListener('change', renderAdminMembers);
+
+  // Modal actions
+  const editModal = document.getElementById('memberEditModal');
+  const closeEditModalBtn = document.getElementById('closeEditModalBtn');
+
+  if (closeEditModalBtn) {
+    closeEditModalBtn.addEventListener('click', () => {
+      editModal.style.display = 'none';
+      selectedMember = null;
+    });
+  }
+
+  // Handle modal sub-tabs switching
+  document.querySelectorAll('.modal-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.modal-tab-content').forEach(c => c.style.display = 'none');
+      
+      btn.classList.add('active');
+      const tabContent = document.getElementById(`modal-tab-${btn.dataset.modaltab}`);
+      if (tabContent) tabContent.style.display = 'block';
+    });
+  });
+
+  // Open Edit Modal & Populate details
+  function openMemberEditModal(member) {
+    selectedMember = member;
+    document.getElementById('editModalTitle').textContent = `Gerer : ${member.fullName}`;
+    
+    // Reset Alert
+    const modalAlert = document.getElementById('modalAlert');
+    modalAlert.style.display = 'none';
+
+    // Populate Tab 1: Profile & Sub
+    document.getElementById('editFullName').value = member.fullName || '';
+    document.getElementById('editPhone').value = member.phone || '';
+    document.getElementById('editBirthDate').value = member.birthDate || '';
+    document.getElementById('editGender').value = member.gender || 'homme';
+    document.getElementById('editTier').value = member.membershipTier || 'Starter';
+    document.getElementById('editStatus').value = member.status || 'active';
+    document.getElementById('editPool').value = member.subscription?.poolKey || '';
+    document.getElementById('editCoach').value = member.subscription?.coachName || '';
+    document.getElementById('editSlot').value = member.subscription?.slotTime ? `${member.subscription.slotDay || ''} ${member.subscription.slotTime}`.trim() : '';
+    document.getElementById('editEndDate').value = member.subscription?.endDate || '';
+
+    // Populate Tab 2: Presence Timeline
+    renderModalPresenceTab();
+
+    // Populate Tab 3: Suivi Technique
+    const tech = member.suiviTechnique || { respiration: 0, kick: 0, bras: 0, endurance: 0, comments: '' };
+    document.getElementById('suiviRespiration').value = tech.respiration || 0;
+    document.getElementById('lblRespiration').textContent = `Respiration / Appuis (${tech.respiration || 0}/5) :`;
+    
+    document.getElementById('suiviKick').value = tech.kick || 0;
+    document.getElementById('lblKick').textContent = `Battement de jambes (${tech.kick || 0}/5) :`;
+    
+    document.getElementById('suiviBras').value = tech.bras || 0;
+    document.getElementById('lblBras').textContent = `Mouvement de bras (${tech.bras || 0}/5) :`;
+    
+    document.getElementById('suiviEndurance').value = tech.endurance || 0;
+    document.getElementById('lblEndurance').textContent = `Endurance / Souffle (${tech.endurance || 0}/5) :`;
+
+    document.getElementById('suiviComments').value = tech.comments || '';
+
+    // Populate Tab 4: Gamification
+    document.getElementById('rewardsXP').value = member.xp || 0;
+    const userBadges = member.badges || [];
+    ['first_dive', 'crawling_king', 'apnea_master', 'butterfly_king', 'endurance_pro'].forEach(badgeId => {
+      document.getElementById(`badgeCheck_${badgeId}`).checked = userBadges.includes(badgeId);
+    });
+
+    // Populate Tab 5: Gallery
+    renderModalGalleryTab();
+
+    // Force activation of first tab on open
+    document.querySelector('.modal-tab-btn[data-modaltab="profile"]').click();
+
+    // Display
+    editModal.style.display = 'flex';
+  }
+
+  // Interactive label updates for sliders
+  ['Respiration', 'Kick', 'Bras', 'Endurance'].forEach(id => {
+    const slider = document.getElementById(`suivi${id}`);
+    const lbl = document.getElementById(`lbl${id}`);
+    slider.addEventListener('input', () => {
+      let titleStr = '';
+      if (id === 'Respiration') titleStr = 'Respiration / Appuis';
+      else if (id === 'Kick') titleStr = 'Battement de jambes';
+      else if (id === 'Bras') titleStr = 'Mouvement de bras';
+      else if (id === 'Endurance') titleStr = 'Endurance / Souffle';
+      lbl.textContent = `${titleStr} (${slider.value}/5) :`;
+    });
+  });
+
+  // Modal Form Submissions handlers
+  
+  // Submit Profile & Subscription Edit
+  document.getElementById('modalProfileForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!selectedMember) return;
+    
+    const alertBox = document.getElementById('modalAlert');
+    alertBox.style.display = 'none';
+
+    const sub = {
+      category: document.getElementById('editGender').value,
+      poolKey: document.getElementById('editPool').value,
+      coachName: document.getElementById('editCoach').value,
+      slotDay: document.getElementById('editSlot').value.split(' ')[0] || 'Samedi',
+      slotTime: document.getElementById('editSlot').value,
+      startDate: selectedMember.subscription?.startDate || new Date().toISOString().split('T')[0],
+      endDate: document.getElementById('editEndDate').value,
+      status: document.getElementById('editStatus').value === 'active' ? 'active' : 'inactive'
+    };
+
+    const payload = {
+      memberId: selectedMember.id,
+      fullName: document.getElementById('editFullName').value,
+      phone: document.getElementById('editPhone').value,
+      birthDate: document.getElementById('editBirthDate').value,
+      gender: document.getElementById('editGender').value,
+      isAqaMember: document.getElementById('editTier').value !== 'Non-Membre',
+      status: document.getElementById('editStatus').value,
+      membershipTier: document.getElementById('editTier').value,
+      subscription: sub
+    };
+
+    try {
+      const res = await fetch('/api/admin/members/update', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        showAlertInModal('Fiche membre enregistree avec succes', 'success');
+        
+        // Refresh local memory and table
+        const idx = currentMembers.findIndex(m => m.id === selectedMember.id);
+        if (idx !== -1) {
+          // Update properties locally
+          Object.assign(currentMembers[idx], payload);
+          selectedMember = currentMembers[idx];
+        }
+        renderAdminMembers();
+      } else {
+        showAlertInModal(data.error || 'Erreur lors de la sauvegarde', 'error');
+      }
+    } catch(err) {
+      showAlertInModal('Erreur reseau', 'error');
+    }
+  });
+
+  // Submit Presence
+  document.getElementById('modalPresenceForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!selectedMember) return;
+
+    const date = document.getElementById('presenceDateInput').value;
+    const present = document.getElementById('presenceStatusInput').value === 'true';
+    const reason = document.getElementById('presenceReasonInput').value;
+
+    try {
+      const res = await fetch('/api/admin/members/presence', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({
+          memberId: selectedMember.id,
+          date,
+          present,
+          reason
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        selectedMember.presence = data.presence;
+        
+        // Update global memory
+        const idx = currentMembers.findIndex(m => m.id === selectedMember.id);
+        if (idx !== -1) currentMembers[idx].presence = data.presence;
+
+        document.getElementById('modalPresenceForm').reset();
+        renderModalPresenceTab();
+        renderAdminMembers();
+        showAlertInModal('Presence ajoutee avec succes', 'success');
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  });
+
+  // Submit Suivi Technique
+  document.getElementById('modalSuiviForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!selectedMember) return;
+
+    const payload = {
+      memberId: selectedMember.id,
+      respiration: parseInt(document.getElementById('suiviRespiration').value),
+      battement: parseInt(document.getElementById('suiviKick').value),
+      bras: parseInt(document.getElementById('suiviBras').value),
+      endurance: parseInt(document.getElementById('suiviEndurance').value),
+      comments: document.getElementById('suiviComments').value
+    };
+
+    try {
+      const res = await fetch('/api/admin/members/suivi', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        selectedMember.suiviTechnique = payload;
+        
+        // Update global memory
+        const idx = currentMembers.findIndex(m => m.id === selectedMember.id);
+        if (idx !== -1) currentMembers[idx].suiviTechnique = payload;
+
+        showAlertInModal('Evaluation technique mise a jour', 'success');
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  });
+
+  // Submit Rewards (XP & Badges)
+  document.getElementById('modalRewardsForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!selectedMember) return;
+
+    const xp = parseInt(document.getElementById('rewardsXP').value) || 0;
+    const badges = [];
+    ['first_dive', 'crawling_king', 'apnea_master', 'butterfly_king', 'endurance_pro'].forEach(badgeId => {
+      if (document.getElementById(`badgeCheck_${badgeId}`).checked) {
+        badges.push(badgeId);
+      }
+    });
+
+    const payload = {
+      memberId: selectedMember.id,
+      xp,
+      badges
+    };
+
+    try {
+      const res = await fetch('/api/admin/members/update', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        selectedMember.xp = xp;
+        selectedMember.badges = badges;
+
+        // Update global memory
+        const idx = currentMembers.findIndex(m => m.id === selectedMember.id);
+        if (idx !== -1) {
+          currentMembers[idx].xp = xp;
+          currentMembers[idx].badges = badges;
+        }
+
+        renderAdminMembers();
+        showAlertInModal('Recompenses & XP enregistres avec succes', 'success');
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  });
+
+  // Submit Gallery Action
+  document.getElementById('modalGalleryForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!selectedMember) return;
+
+    const fileInput = document.getElementById('galleryPhotoFile');
+    if (!fileInput.files || fileInput.files.length === 0) {
+      showAlertInModal('Veuillez selectionner un fichier image', 'error');
+      return;
+    }
+
+    const file = fileInput.files[0];
+    const uploadBtn = document.getElementById('galleryUploadBtn');
+    const originalBtnText = uploadBtn.textContent;
+    uploadBtn.disabled = true;
+    uploadBtn.textContent = 'Envoi...';
+
+    // Helper: read file as Base64 Data URL
+    const readAsDataURL = (file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+      });
+    };
+
+    try {
+      const fileData = await readAsDataURL(file);
+
+      // Step 1: Upload image to Cloudinary (via Netlify serverless function)
+      const uploadRes = await fetch('/api/admin/members/upload-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminToken}`
+        },
+        body: JSON.stringify({ fileData })
+      });
+      const uploadData = await uploadRes.json();
+      if (!uploadData.success) {
+        showAlertInModal(uploadData.error || 'Erreur d\'upload de l\'image', 'error');
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = originalBtnText;
+        return;
+      }
+
+      // Step 2: Add image path to member's gallery
+      const res = await fetch('/api/admin/members/gallery', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({
+          memberId: selectedMember.id,
+          action: 'add',
+          imageUrl: uploadData.imageUrl
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        selectedMember.gallery = data.gallery;
+
+        // Update global memory
+        const idx = currentMembers.findIndex(m => m.id === selectedMember.id);
+        if (idx !== -1) currentMembers[idx].gallery = data.gallery;
+
+        fileInput.value = '';
+        renderModalGalleryTab();
+        showAlertInModal('Photo ajoutee a la galerie', 'success');
+      } else {
+        showAlertInModal(data.error || 'Erreur lors de l\'enregistrement de la photo', 'error');
+      }
+    } catch(err) {
+      console.error(err);
+      showAlertInModal('Une erreur est survenue lors de l\'upload', 'error');
+    } finally {
+      uploadBtn.disabled = false;
+      uploadBtn.textContent = originalBtnText;
+    }
+  });
+
+  // Helper functions inside Modal
+  function showAlertInModal(msg, type) {
+    const alertBox = document.getElementById('modalAlert');
+    alertBox.textContent = msg;
+    alertBox.className = `auth-alert ${type}`;
+    alertBox.style.display = 'block';
+    
+    // Auto hide success alerts after 3 seconds
+    if (type === 'success') {
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 3000);
+    }
+  }
+
+  function renderModalPresenceTab() {
+    const list = document.getElementById('modalPresenceList');
+    list.innerHTML = '';
+    
+    const presence = selectedMember.presence || [];
+    const presentCount = presence.filter(p => p.present).length;
+    document.getElementById('modalPresenceSummary').textContent = `Total : ${presentCount} / ${presence.length} seances present`;
+
+    if (presence.length === 0) {
+      list.innerHTML = '<div style="color: var(--text-muted); font-style: italic; font-size: 0.85rem; padding: 0.5rem 0;">Aucune seance enregistree.</div>';
+      return;
+    }
+
+    // Sort descending by date
+    const sorted = [...presence].sort((a,b) => new Date(b.date) - new Date(a.date));
+    sorted.forEach(p => {
+      const row = document.createElement('div');
+      row.style.display = 'flex';
+      row.style.justifyContent = 'space-between';
+      row.style.alignItems = 'center';
+      row.style.padding = '0.4rem 0.5rem';
+      row.style.background = 'rgba(255,255,255,0.02)';
+      row.style.borderRadius = '6px';
+      row.style.borderLeft = p.present ? '3px solid #10b981' : '3px solid #ef4444';
+
+      row.innerHTML = `
+        <div style="font-size: 0.85rem;">
+          <strong style="color: #fff;">${p.date}</strong> - 
+          <span style="color: ${p.present ? '#34d399' : '#f87171'}">${p.present ? 'Present' : (p.reason || 'Absent')}</span>
+        </div>
+        <button class="delete-presence-btn" data-date="${p.date}" style="background: none; border: none; color: #f87171; cursor: pointer; font-size: 0.75rem;">Supprimer</button>
+      `;
+
+      row.querySelector('.delete-presence-btn').addEventListener('click', async () => {
+        if (!confirm("Voulez-vous supprimer cette seance ?")) return;
+        
+        // Supprimer localement de la liste et renvoyer tout le tableau mis a jour
+        const updatedPresence = selectedMember.presence.filter(item => item.date !== p.date);
+        
+        try {
+          const res = await fetch('/api/admin/members/update', {
+            method: 'POST',
+            headers: authHeaders(),
+            body: JSON.stringify({
+              memberId: selectedMember.id,
+              presence: updatedPresence
+            })
+          });
+          const data = await res.json();
+          if (data.success) {
+            selectedMember.presence = updatedPresence;
+            const idx = currentMembers.findIndex(m => m.id === selectedMember.id);
+            if (idx !== -1) currentMembers[idx].presence = updatedPresence;
+            renderModalPresenceTab();
+            renderAdminMembers();
+            showAlertInModal('Seance supprimee', 'success');
+          }
+        } catch(err) {
+          console.error(err);
+        }
+      });
+
+      list.appendChild(row);
+    });
+  }
+
+  function renderModalGalleryTab() {
+    const grid = document.getElementById('modalGalleryGrid');
+    grid.innerHTML = '';
+
+    const gallery = selectedMember.gallery || [];
+    if (gallery.length === 0) {
+      grid.innerHTML = '<div style="grid-column: 1/-1; color: var(--text-muted); font-style: italic; font-size: 0.85rem; padding: 0.5rem 0;">Aucune photo dans la galerie.</div>';
+      return;
+    }
+
+    gallery.forEach(url => {
+      const item = document.createElement('div');
+      item.style.position = 'relative';
+      item.style.aspectRatio = '1';
+      item.style.borderRadius = '8px';
+      item.style.overflow = 'hidden';
+      item.style.border = '1px solid rgba(255,255,255,0.08)';
+
+      item.innerHTML = `
+        <img src="${url}" style="width: 100%; height: 100%; object-fit: cover;">
+        <button class="delete-photo-btn" data-url="${url}" style="position: absolute; top: 2px; right: 2px; background: rgba(0,0,0,0.6); border: none; color: #ff4d4d; border-radius: 50%; width: 22px; height: 22px; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold;">&times;</button>
+      `;
+
+      item.querySelector('.delete-photo-btn').addEventListener('click', async () => {
+        if (!confirm("Voulez-vous supprimer cette photo ?")) return;
+        try {
+          const res = await fetch('/api/admin/members/gallery', {
+            method: 'POST',
+            headers: authHeaders(),
+            body: JSON.stringify({
+              memberId: selectedMember.id,
+              action: 'remove',
+              imageUrl: url
+            })
+          });
+          const data = await res.json();
+          if (data.success) {
+            selectedMember.gallery = data.gallery;
+            const idx = currentMembers.findIndex(m => m.id === selectedMember.id);
+            if (idx !== -1) currentMembers[idx].gallery = data.gallery;
+            renderModalGalleryTab();
+            showAlertInModal('Photo supprimee de la galerie', 'success');
+          }
+        } catch(err) {
+          console.error(err);
+        }
+      });
+
+      grid.appendChild(item);
+    });
+  }
 
 </script>
 

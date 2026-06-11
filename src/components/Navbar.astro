@@ -39,6 +39,7 @@ function getRelativePath(path, targetLang) {
             <a href={getRelativePath('/events', lang)} class={`nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">{t('nav_events', 'Events')}</a>
             <a href={getRelativePath('/formation', lang)} class={`nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">{t('nav_formations', 'Formations')}</a>
             <a href={getRelativePath('/store', lang)} class={`nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">{t('nav_store', 'Store')}</a>
+            <a href={getRelativePath('/clients', lang)} class={`nav-link${currentPage === '/clients' ? ' active' : ''}`} data-i18n="nav_member">{t('nav_member', 'Espace Membre')}</a>
         </nav>
 
         <div class="right-actions">
@@ -64,6 +65,7 @@ function getRelativePath(path, targetLang) {
     <a href={getRelativePath('/events', lang)} class={`mobile-nav-link${currentPage === '/events' ? ' active' : ''}`} data-i18n="nav_events">{t('nav_events', 'Events')}</a>
     <a href={getRelativePath('/formation', lang)} class={`mobile-nav-link${currentPage === '/formation' ? ' active' : ''}`} data-i18n="nav_formation">{t('nav_formations', 'Formations')}</a>
     <a href={getRelativePath('/store', lang)} class={`mobile-nav-link${currentPage === '/store' ? ' active' : ''}`} data-i18n="nav_store">{t('nav_store', 'Store')}</a>
+    <a href={getRelativePath('/clients', lang)} class={`mobile-nav-link${currentPage === '/clients' ? ' active' : ''}`} data-i18n="nav_member">{t('nav_member', 'Espace Membre')}</a>
     <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
       <a href={getRelativePath(currentPage, 'fr')} class={`lang-btn${lang === 'fr' ? ' lang-active' : ''}`} data-lang-btn="fr">FR</a>
       <a href={getRelativePath(currentPage, 'ar')} class={`lang-btn${lang === 'ar' ? ' lang-active' : ''}`} data-lang-btn="ar">AR</a>

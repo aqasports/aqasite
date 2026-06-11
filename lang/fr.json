@@ -11,6 +11,7 @@
   "nav_events": "Events",
   "nav_formations": "Formations",
   "nav_store": "Store",
+  "nav_member": "Espace Membre",
   "nav_home": "Accueil",
 
   "hero_title": "From Zero to Hero",
@@ -39,7 +40,7 @@
   "section_gallery_title": "Nos Moments Forts",
   "section_gallery_sub": "Découvrez l'esprit AQA en images",
 
-  "floating_btn": "✨ Nouvelles formules",
+  "floating_btn": " Nouvelles formules",
 
   "listen_trigger": "We Listen — Votre avis compte",
 

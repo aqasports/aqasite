@@ -28,6 +28,17 @@ const getRelativePath = (path, targetLang) => {
         <div class="loader-ring"></div>
         <div style="margin-top: 20px; color: var(--neon-blue); letter-spacing: 3px;">INITIALIZING...</div>
     </div>
+    <script is:inline>
+        (function() {
+            if (sessionStorage.getItem('aqa_loaded')) {
+                const loader = document.getElementById('loadingScreen');
+                if (loader) {
+                    loader.style.display = 'none';
+                    loader.classList.add('hidden');
+                }
+            }
+        })();
+    </script>
 
     
 
@@ -157,24 +168,48 @@ const getRelativePath = (path, targetLang) => {
     
 
     <script>
-        // Loading Screen
+        let glitchInterval: number | undefined;
+
         document.addEventListener('astro:page-load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loadingScreen');
-                if (loader) loader.classList.add('hidden');
-            }, 1200);
+            // Loading Screen
+            const loader = document.getElementById('loadingScreen');
+            if (loader) {
+                if (sessionStorage.getItem('aqa_loaded')) {
+                    loader.style.display = 'none';
+                    loader.classList.add('hidden');
+                } else {
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                        sessionStorage.setItem('aqa_loaded', 'true');
+                    }, 1200);
+                }
+            }
+
+            // Add random "glitch" movement to cards periodically
+            if (glitchInterval) {
+                clearInterval(glitchInterval);
+            }
+
+            glitchInterval = window.setInterval(() => {
+                const cards = document.querySelectorAll('.hud-card');
+                if (cards.length === 0) return;
+                
+                const randomCard = cards[Math.floor(Math.random() * cards.length)] as HTMLElement;
+                if (randomCard) {
+                    randomCard.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
+                    setTimeout(() => {
+                        randomCard.style.transform = 'translateX(0)';
+                    }, 100);
+                }
+            }, 2000);
         });
 
-        // Add random "glitch" movement to cards periodically
-        setInterval(() => {
-            const cards = document.querySelectorAll('.hud-card');
-            const randomCard = cards[Math.floor(Math.random() * cards.length)];
-            
-            randomCard.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
-            setTimeout(() => {
-                randomCard.style.transform = 'translateX(0)';
-            }, 100);
-        }, 2000);
+        document.addEventListener('astro:before-swap', () => {
+            if (glitchInterval) {
+                clearInterval(glitchInterval);
+                glitchInterval = undefined;
+            }
+        });
     </script>
 
   <Footer  lang={lang} />

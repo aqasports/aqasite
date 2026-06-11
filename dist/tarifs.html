@@ -63,6 +63,27 @@
   <!-- Language persistence & redirection script -->
   <script>
     (function() {
+      let astroReferrer = '';
+      
+      // Track previous page client-side when using Astro's view transitions
+      document.addEventListener('astro:before-preparation', function() {
+        astroReferrer = window.location.pathname;
+      });
+
+      // Listen to language switcher clicks to update the preference before navigation
+      if (!window.aqaLangListenerInit) {
+        document.addEventListener('click', function(e) {
+          const btn = e.target.closest('[data-lang-btn]');
+          if (btn) {
+            const targetLang = btn.getAttribute('data-lang-btn');
+            if (targetLang) {
+              localStorage.setItem('aqa_lang', targetLang);
+            }
+          }
+        });
+        window.aqaLangListenerInit = true;
+      }
+
       function checkLang() {
         if (typeof localStorage === 'undefined') return;
         
@@ -77,11 +98,15 @@
           if (savedLang && supportedLangs.includes(savedLang)) {
             const referrer = document.referrer;
             const currentOrigin = window.location.origin;
-            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
-            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            const isFromOurSite = (referrer && referrer.startsWith(currentOrigin)) || !!astroReferrer;
+            
+            // Check if the previous page (client-side or full-reload) had a language prefix
+            const prevPath = astroReferrer || (isFromOurSite ? new URL(referrer).pathname : '');
+            const isExplicitFR = prevPath.startsWith('/ar') || prevPath.startsWith('/en');
             
             if (isExplicitFR) {
               localStorage.setItem('aqa_lang', 'fr');
+              astroReferrer = ''; // reset after handling
             } else {
               const targetPath = '/' + savedLang + (path === '/' ? '' : path);
               window.location.href = targetPath;
@@ -108,14 +133,18 @@
 
   <!-- Slot for page-specific <style> or <link> tags -->
   
-<style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap";.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}:root{--bg-primary: #030712;--bg-secondary: #0b0f19;--bg-card: rgba(15, 23, 42, .65);--color-teal: #00f2ff;--color-blue: #0088ff;--color-blue-dark: #0055cc;--text-primary: #f9fafb;--text-secondary: #9ca3af;--text-muted: #6b7280;--border-glass: 1px solid rgba(255, 255, 255, .08);--border-active: 1px solid rgba(0, 242, 255, .4);--shadow-glow: 0 0 25px rgba(0, 242, 255, .15);--shadow-glow-active: 0 0 35px rgba(0, 242, 255, .35);--font-display: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--transition-smooth: all .3s cubic-bezier(.4, 0, .2, 1)}*{margin:0;padding:0;box-sizing:border-box}html{background-color:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);scroll-behavior:smooth;overflow-x:hidden;height:100%}body{background:transparent;min-height:100vh;line-height:1.6;position:relative}h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-primary);font-weight:700;letter-spacing:-.025em}p{font-family:var(--font-body);color:var(--text-secondary)}a{color:inherit;text-decoration:none;transition:var(--transition-smooth)}.glass-panel{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:var(--border-glass);border-radius:20px;box-shadow:0 10px 30px -10px #000000b3;transition:var(--transition-smooth)}.glass-panel:hover{border-color:#00f2ff40;box-shadow:var(--shadow-glow)}body:before{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% -20%,rgba(0,242,255,.08) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(0,136,255,.05) 0%,transparent 50%);pointer-events:none;z-index:-2}.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}@keyframes neonGlow{0%,to{filter:drop-shadow(0 0 10px rgba(0,242,255,.3)) drop-shadow(0 0 20px rgba(0,136,255,.2))}50%{filter:drop-shadow(0 0 20px rgba(0,242,255,.5)) drop-shadow(0 0 35px rgba(0,136,255,.3))}}@keyframes shimmer{0%{transform:translate(-100%) rotate(45deg)}to{transform:translate(100%) rotate(45deg)}}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:#1f2937;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#374151}.skip-link{position:absolute;top:-40px;left:0;background:var(--color-teal);color:#000;padding:8px 16px;z-index:1000;font-weight:700}.skip-link:focus{top:0}.bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none;background:transparent}.bg-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;background:url(https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png) no-repeat center;background-size:contain;opacity:.02;z-index:-1;pointer-events:none}
+<style>@import"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap";.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}:root{--bg-primary: #030712;--bg-secondary: #0b0f19;--bg-card: rgba(15, 23, 42, .65);--color-teal: #00f2ff;--color-blue: #0088ff;--color-blue-dark: #0055cc;--text-primary: #f9fafb;--text-secondary: #9ca3af;--text-muted: #6b7280;--border-glass: 1px solid rgba(255, 255, 255, .08);--border-active: 1px solid rgba(0, 242, 255, .4);--shadow-glow: 0 0 25px rgba(0, 242, 255, .15);--shadow-glow-active: 0 0 35px rgba(0, 242, 255, .35);--font-display: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;--transition-smooth: all .3s cubic-bezier(.4, 0, .2, 1)}*{margin:0;padding:0;box-sizing:border-box}html{background-color:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);scroll-behavior:smooth;overflow-x:hidden;height:100%}body{background:transparent;min-height:100vh;line-height:1.6;position:relative}h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--text-primary);font-weight:700;letter-spacing:-.025em}p{font-family:var(--font-body);color:var(--text-secondary)}a{color:inherit;text-decoration:none;transition:var(--transition-smooth)}.glass-panel{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:var(--border-glass);border-radius:20px;box-shadow:0 10px 30px -10px #000000b3;transition:var(--transition-smooth)}.glass-panel:hover{border-color:#00f2ff40;box-shadow:var(--shadow-glow)}body:before{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;background:radial-gradient(circle at 50% -20%,rgba(0,242,255,.08) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(0,136,255,.05) 0%,transparent 50%);pointer-events:none;z-index:-2}.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}@keyframes neonGlow{0%,to{filter:drop-shadow(0 0 10px rgba(0,242,255,.3)) drop-shadow(0 0 20px rgba(0,136,255,.2))}50%{filter:drop-shadow(0 0 20px rgba(0,242,255,.5)) drop-shadow(0 0 35px rgba(0,136,255,.3))}}@keyframes shimmer{0%{transform:translate(-100%) rotate(45deg)}to{transform:translate(100%) rotate(45deg)}}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:#1f2937;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#374151}.skip-link{position:absolute;top:-40px;left:0;background:var(--color-teal);color:#000;padding:8px 16px;z-index:1000;font-weight:700}.skip-link:focus{top:0}.bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none;background:transparent}.bg-logo{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vh;background:url(https://i.ibb.co/08WDCFj/Turquoise-Modern-Warning-with-Rays-Instagram-Post.png) no-repeat center;background-size:contain;opacity:.02;z-index:-1;pointer-events:none}@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
 </style>
-<link rel="stylesheet" href="/_astro/tarifs.BtB73Y2h.css">
+<link rel="stylesheet" href="/_astro/tarifs.BinjcNr2.css">
 <style>.aqa-footer[data-astro-cid-sz7xmlte]{background:#030712f2;border-top:1px solid rgba(255,255,255,.08);padding:4rem 1rem 3rem;width:100%;color:var(--text-primary);margin-top:4rem;box-shadow:0 -10px 30px #00000080}.footer-content[data-astro-cid-sz7xmlte]{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.5rem}.footer-section[data-astro-cid-sz7xmlte] h4[data-astro-cid-sz7xmlte]{font-size:1.15rem;font-weight:700;color:var(--color-teal);margin-bottom:1.5rem;text-shadow:0 0 10px rgba(0,242,255,.3);display:flex;align-items:center;gap:.5rem}.footer-section[data-astro-cid-sz7xmlte] h4[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:20px;height:20px;stroke:var(--color-teal)}.footer-section[data-astro-cid-sz7xmlte] p[data-astro-cid-sz7xmlte]{font-size:.95rem;line-height:1.6;color:var(--text-secondary)}.footer-section[data-astro-cid-sz7xmlte] ul[data-astro-cid-sz7xmlte]{list-style:none}.footer-section[data-astro-cid-sz7xmlte] li[data-astro-cid-sz7xmlte]{margin-bottom:.6rem}.footer-section[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{color:var(--text-secondary);font-size:.95rem}.footer-section[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:var(--color-teal);text-shadow:0 0 8px rgba(0,242,255,.4)}.contact-info[data-astro-cid-sz7xmlte]{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}.contact-info[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{display:flex;align-items:center;gap:.5rem}.contact-info[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:18px;height:18px;stroke:var(--color-teal);flex-shrink:0}.socials[data-astro-cid-sz7xmlte]{display:flex;gap:.75rem;margin-top:1.25rem}.socials[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:#ffffff08;border:1px solid rgba(255,255,255,.08);border-radius:50%;transition:var(--transition-smooth)}.socials[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{background:var(--color-teal);color:#030712;box-shadow:var(--shadow-glow-active);transform:translateY(-2px)}.socials[data-astro-cid-sz7xmlte] svg[data-astro-cid-sz7xmlte]{width:20px;height:20px;stroke:currentColor}.newsletter-form[data-astro-cid-sz7xmlte]{display:flex;gap:.5rem;margin-top:1rem}.newsletter-input[data-astro-cid-sz7xmlte]{flex:1;padding:.75rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:30px;background:#0006;color:var(--text-primary);font-size:.9rem}.newsletter-input[data-astro-cid-sz7xmlte]:focus{outline:none;border-color:var(--color-teal);box-shadow:var(--shadow-glow)}.newsletter-btn[data-astro-cid-sz7xmlte]{background:linear-gradient(135deg,var(--color-blue),var(--color-teal));color:#030712;padding:.75rem 1.5rem;border:none;border-radius:30px;font-weight:700;font-size:.9rem;cursor:pointer;transition:var(--transition-smooth)}.newsletter-btn[data-astro-cid-sz7xmlte]:hover{box-shadow:var(--shadow-glow-active);transform:translateY(-1px)}.status-message[data-astro-cid-sz7xmlte]{font-size:.85rem;margin-top:.5rem;font-weight:600}.status-message[data-astro-cid-sz7xmlte].success{color:#10b981}.status-message[data-astro-cid-sz7xmlte].error{color:#ef4444}.footer-bottom[data-astro-cid-sz7xmlte]{border-top:1px solid rgba(255,255,255,.08);margin-top:3rem;padding-top:2rem;text-align:center;display:flex;flex-direction:column;gap:1rem;align-items:center}.footer-logo[data-astro-cid-sz7xmlte]{width:50px;height:auto;opacity:.8;transition:var(--transition-smooth)}.footer-logo[data-astro-cid-sz7xmlte]:hover{opacity:1;transform:scale(1.05);filter:drop-shadow(0 0 10px var(--color-teal))}.copyright[data-astro-cid-sz7xmlte]{font-size:.85rem;color:var(--text-muted)}@media (max-width: 768px){.footer-content[data-astro-cid-sz7xmlte]{grid-template-columns:1fr;text-align:center}.contact-info[data-astro-cid-sz7xmlte],.socials[data-astro-cid-sz7xmlte]{justify-content:center}}
-</style><script type="module" src="/_astro/hoisted.j06IGdOZ.js"></script></head>
+</style><script type="module" src="/_astro/hoisted.BScVxmeO.js"></script><style>[data-astro-transition-scope="astro-nqfp2pd2-1"] { view-transition-name: astro-nqfp2pd2-1; }@layer astro { ::view-transition-old(astro-nqfp2pd2-1) { animation: none; opacity: 0; mix-blend-mode: normal; }::view-transition-new(astro-nqfp2pd2-1) { animation: none; mix-blend-mode: normal; }::view-transition-group(astro-nqfp2pd2-1) { animation: none } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-nqfp2pd2-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-nqfp2pd2-1"] { animation: none; mix-blend-mode: normal; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-nqfp2pd2-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-nqfp2pd2-1"] { animation: none; mix-blend-mode: normal; }</style><style>[data-astro-transition-scope="astro-q7qvgcmy-3"] { view-transition-name: astro-q7qvgcmy-3; }@layer astro { ::view-transition-old(astro-q7qvgcmy-3) { animation: none; opacity: 0; mix-blend-mode: normal; }::view-transition-new(astro-q7qvgcmy-3) { animation: none; mix-blend-mode: normal; }::view-transition-group(astro-q7qvgcmy-3) { animation: none } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-q7qvgcmy-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-q7qvgcmy-3"] { animation: none; mix-blend-mode: normal; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-q7qvgcmy-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-q7qvgcmy-3"] { animation: none; mix-blend-mode: normal; }</style></head>
 <body>
-  <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true"></iframe>
-  <div class="bg-logo"></div>
+  <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true" data-astro-transition-scope="astro-nqfp2pd2-1" data-astro-transition-persist="astro-nqfp2pd2-2"></iframe>
+  <div class="bg-logo" data-astro-transition-scope="astro-q7qvgcmy-3" data-astro-transition-persist="astro-q7qvgcmy-4"></div>
   
   <header id="header">
     <div class="header-content">
@@ -133,6 +162,7 @@
             <a href="/events" class="nav-link" data-i18n="nav_events">Events</a>
             <a href="/formation" class="nav-link" data-i18n="nav_formation">Formations</a>
             <a href="/store" class="nav-link" data-i18n="nav_store">Store</a>
+            <a href="/clients" class="nav-link" data-i18n="nav_member">Espace Membre</a>
         </nav>
 
         <div class="right-actions">
@@ -158,6 +188,7 @@
     <a href="/events" class="mobile-nav-link" data-i18n="nav_events">Events</a>
     <a href="/formation" class="mobile-nav-link" data-i18n="nav_formation">Formations</a>
     <a href="/store" class="mobile-nav-link" data-i18n="nav_store">Store</a>
+    <a href="/clients" class="mobile-nav-link" data-i18n="nav_member">Espace Membre</a>
     <div class="lang-switcher" style="justify-content:center; margin-top:1.5rem;">
       <a href="/tarifs" class="lang-btn lang-active" data-lang-btn="fr">FR</a>
       <a href="/ar/tarifs" class="lang-btn" data-lang-btn="ar">AR</a>
@@ -181,6 +212,123 @@
         </nav>
 
         <section class="content-section active" id="homme" data-astro-cid-asijnltu>
+            <!-- Promo Banner (Visible by default) -->
+            <div id="quizPromoBanner" class="quiz-promo-banner glass-panel" data-astro-cid-asijnltu>
+                <div class="promo-content" data-astro-cid-asijnltu>
+                    <span class="promo-badge" data-astro-cid-asijnltu>AIDE AU CHOIX</span>
+                    <h3 class="promo-title" data-astro-cid-asijnltu>Trouver votre formule idéale en 3 clics ?</h3>
+                    <p class="promo-desc" data-astro-cid-asijnltu>Notre grille tarifaire propose de nombreuses combinaisons. Répondez à 3 questions rapides pour obtenir votre recommandation personnalisée.</p>
+                </div>
+                <button type="button" class="promo-btn" id="openQuizBtn" data-astro-cid-asijnltu>Lancer le guide interactif</button>
+            </div>
+
+            <!-- Recommended For You Quiz Section (Hidden by default) -->
+            <div id="recQuizSection" class="rec-quiz-container glass-panel hidden" data-astro-cid-asijnltu>
+                <!-- Step 1: Goals -->
+                <div class="quiz-step" id="quizStep1" data-astro-cid-asijnltu>
+                    <h3 class="quiz-step-title" data-astro-cid-asijnltu>Quel est votre objectif principal ?</h3>
+                    <div class="quiz-options-grid" data-astro-cid-asijnltu>
+                        <button type="button" class="quiz-opt-btn" data-q="1" data-val="beginner" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu>Je débute ou j&#39;ai une appréhension de l&#39;eau</span>
+                        </button>
+                        <button type="button" class="quiz-opt-btn" data-q="1" data-val="progress" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu>Je veux apprendre et progresser à mon rythme</span>
+                        </button>
+                        <button type="button" class="quiz-opt-btn" data-q="1" data-val="perfect" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu>Je veux me perfectionner ou m&#39;entraîner sérieusement</span>
+                        </button>
+                        <button type="button" class="quiz-opt-btn" data-q="1" data-val="individual" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu>Je recherche un coaching sur-mesure de haute intensité</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Attention Level -->
+                <div class="quiz-step" id="quizStep2" data-astro-cid-asijnltu>
+                    <h3 class="quiz-step-title" data-astro-cid-asijnltu>Quel niveau d&#39;attention du coach souhaitez-vous ?</h3>
+                    <div class="quiz-options-grid" data-astro-cid-asijnltu>
+                        <button type="button" class="quiz-opt-btn" data-q="2" data-val="g10" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu><strong data-astro-cid-asijnltu>Standard (G10)</strong><br data-astro-cid-asijnltu><small data-astro-cid-asijnltu>Groupe convivial de 10 personnes max</small></span>
+                        </button>
+                        <button type="button" class="quiz-opt-btn" data-q="2" data-val="max5" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu><strong data-astro-cid-asijnltu>Élevé (MAX5)</strong><br data-astro-cid-asijnltu><small data-astro-cid-asijnltu>Petit groupe de 5 personnes max (Recommandé)</small></span>
+                        </button>
+                        <button type="button" class="quiz-opt-btn" data-q="2" data-val="individ" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu><strong data-astro-cid-asijnltu>Maximum (INDIVID)</strong><br data-astro-cid-asijnltu><small data-astro-cid-asijnltu>Coaching 1-on-1 privé et personnalisé</small></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Frequency -->
+                <div class="quiz-step" id="quizStep3" data-astro-cid-asijnltu>
+                    <h3 class="quiz-step-title" data-astro-cid-asijnltu>À quelle fréquence souhaitez-vous vous entraîner ?</h3>
+                    <div class="quiz-options-grid" data-astro-cid-asijnltu>
+                        <button type="button" class="quiz-opt-btn" data-q="3" data-val="1" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu><strong data-astro-cid-asijnltu>1 fois par semaine</strong><br data-astro-cid-asijnltu><small data-astro-cid-asijnltu>Idéal pour débuter ou pour un emploi du temps chargé</small></span>
+                        </button>
+                        <button type="button" class="quiz-opt-btn" data-q="3" data-val="2" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu><strong data-astro-cid-asijnltu>2 fois par semaine</strong><br data-astro-cid-asijnltu><small data-astro-cid-asijnltu>Le rythme conseillé pour une progression stable</small></span>
+                        </button>
+                        <button type="button" class="quiz-opt-btn" data-q="3" data-val="3" data-astro-cid-asijnltu>
+                            <span class="opt-text" data-astro-cid-asijnltu><strong data-astro-cid-asijnltu>3 fois par semaine</strong><br data-astro-cid-asijnltu><small data-astro-cid-asijnltu>Entraînement intensif pour des résultats rapides</small></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3.5: Calculating Screen -->
+                <div class="quiz-step" id="quizStepCalc" style="text-align:center; padding: 2rem 0;" data-astro-cid-asijnltu>
+                    <div class="quiz-spinner" data-astro-cid-asijnltu></div>
+                    <h3 class="quiz-step-title" style="margin-top:1.5rem;" data-astro-cid-asijnltu>Analyse de vos réponses...</h3>
+                </div>
+
+                <!-- Step 4: Results (Recommendation Card) -->
+                <div class="quiz-step" id="quizStep4" data-astro-cid-asijnltu>
+                    <div class="rec-badge" data-astro-cid-asijnltu>NOTRE RECOMMANDATION</div>
+                    <h3 class="rec-title" id="recTitle" data-astro-cid-asijnltu>MAX5 - 2 fois par semaine</h3>
+                    
+                    <div class="rec-price-box" data-astro-cid-asijnltu>
+                        <div class="rec-price" id="recPrice" data-astro-cid-asijnltu>48,900 DA</div>
+                        <div class="rec-price-saving" id="recSaving" data-astro-cid-asijnltu>Économisez 2,100 DA</div>
+                    </div>
+
+                    <div class="duration-selector" data-astro-cid-asijnltu>
+                        <button type="button" class="dur-btn" data-dur="1" data-astro-cid-asijnltu>1 Mois</button>
+                        <button type="button" class="dur-btn active" data-dur="3" data-astro-cid-asijnltu>3 Mois</button>
+                        <button type="button" class="dur-btn" data-dur="6" data-astro-cid-asijnltu>6 Mois</button>
+                        <button type="button" class="dur-btn" data-dur="9" data-astro-cid-asijnltu>9 Mois</button>
+                    </div>
+
+                    <div class="rec-details" data-astro-cid-asijnltu>
+                        <div class="detail-bullet" data-astro-cid-asijnltu>
+                            <span id="recGroupTypeDesc" data-astro-cid-asijnltu></span>
+                        </div>
+                        <div class="detail-bullet" data-astro-cid-asijnltu>
+                            <span id="recFrequenceDesc" data-astro-cid-asijnltu></span>
+                        </div>
+                        <div class="detail-bullet" data-astro-cid-asijnltu>
+                            <span data-astro-cid-asijnltu>Séances de 2 heures, encadrées par des coachs d&#39;élite. Suivi technique &amp; physique inclus.</span>
+                        </div>
+                    </div>
+
+                    <div class="rec-actions" data-astro-cid-asijnltu>
+                        <a href="/inscription" id="recBookLink" class="rec-book-btn" data-astro-cid-asijnltu>S&#39;inscrire avec ce plan</a>
+                        <button type="button" class="rec-reset-btn" id="restartQuizBtn2" data-astro-cid-asijnltu>Recommencer le test</button>
+                    </div>
+
+                    <button type="button" class="show-all-btn" id="showAllOptionsBtn" data-astro-cid-asijnltu>Retourner à la grille des tarifs complets ↑</button>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="quiz-progress-container" id="quizProgressContainer" data-astro-cid-asijnltu>
+                    <div class="quiz-progress-text" data-astro-cid-asijnltu><span id="quizCurrentStep" data-astro-cid-asijnltu>1</span> / 3</div>
+                    <div class="quiz-progress-bar" data-astro-cid-asijnltu>
+                        <div class="quiz-progress-fill" id="quizProgressFill" data-astro-cid-asijnltu></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Tables Container (Visible by default) -->
+            <div id="fullHommeTables" class="full-tables-container" data-astro-cid-asijnltu>
             <h3 class="section-title" data-astro-cid-asijnltu>Tarifs - Homme</h3>
             
             <div class="pricing-section" data-astro-cid-asijnltu>
@@ -347,6 +495,7 @@
                     <div class="session-duration" data-astro-cid-asijnltu>Durée de séance: Deux heures</div>
                 </div>
             </div>
+            </div> <!-- End of fullHommeTables -->
         </section>
 
         <section class="content-section" id="femme" data-astro-cid-asijnltu>
@@ -420,11 +569,11 @@
                     <div class="apnea-content" data-astro-cid-asijnltu>
                         <div class="apnea-features" data-astro-cid-asijnltu>
                             <div class="feature-item" data-astro-cid-asijnltu>
-                                <span class="feature-icon" data-astro-cid-asijnltu>🏊‍♂️</span>
+                                <span class="feature-icon" data-astro-cid-asijnltu></span>
                                 <span data-astro-cid-asijnltu>4 séances de deux heures</span>
                             </div>
                             <div class="feature-item" data-astro-cid-asijnltu>
-                                <span class="feature-icon" data-astro-cid-asijnltu>🏅</span>
+                                <span class="feature-icon" data-astro-cid-asijnltu></span>
                                 <span data-astro-cid-asijnltu>Palmes de Piscine (Conquest) offertes</span>
                             </div>
                             <div class="feature-item" data-astro-cid-asijnltu>
@@ -459,7 +608,337 @@
     
 
 
-    
+    <script>(function(){const lang = "fr";
+const quizTranslations = {"fr":{"newPromoBadge":"AIDE AU CHOIX","quizPromoTitle":"Trouver votre formule idéale en 3 clics ?","quizPromoDesc":"Notre grille tarifaire propose de nombreuses combinaisons. Répondez à 3 questions rapides pour obtenir votre recommandation personnalisée.","quizPromoBtn":"Lancer le guide interactif","q1Title":"Quel est votre objectif principal ?","q1Opt1":"Je débute ou j'ai une appréhension de l'eau","q1Opt2":"Je veux apprendre et progresser à mon rythme","q1Opt3":"Je veux me perfectionner ou m'entraîner sérieusement","q1Opt4":"Je recherche un coaching sur-mesure de haute intensité","q2Title":"Quel niveau d'attention du coach souhaitez-vous ?","q2Opt1Title":"Standard (G10)","q2Opt1Sub":"Groupe convivial de 10 personnes max","q2Opt2Title":"Élevé (MAX5)","q2Opt2Sub":"Petit groupe de 5 personnes max (Recommandé)","q2Opt3Title":"Maximum (INDIVID)","q2Opt3Sub":"Coaching 1-on-1 privé et personnalisé","q3Title":"À quelle fréquence souhaitez-vous vous entraîner ?","q3Opt1Title":"1 fois par semaine","q3Opt1Sub":"Idéal pour débuter ou pour un emploi du temps chargé","q3Opt2Title":"2 fois par semaine","q3Opt2Sub":"Le rythme conseillé pour une progression stable","q3Opt3Title":"3 fois par semaine","q3Opt3Sub":"Entraînement intensif pour des résultats rapides","calcText":"Analyse de vos réponses...","recBadge":"NOTRE RECOMMANDATION","save":"Économisez","month1":"1 Mois","month3":"3 Mois","month6":"6 Mois","month9":"9 Mois","descG10":"Formule Groupe 10 (G10) : Groupe de 10 personnes max. Ambiance de groupe stimulante et conviviale à un tarif très accessible.","descMax5":"Formule Max 5 (MAX5) : Groupe restreint de 5 personnes max. Permet une attention accrue du coach et une progression deux fois plus rapide.","descIndivid":"Formule Individuelle (INDIVID) : Coaching 1-on-1 privé. Idéal pour vaincre la peur de l'eau, apprendre très vite ou pour un suivi d'élite.","descFreq1":"1 séance de deux heures par semaine.","descFreq2":"2 séances de deux heures par semaine.","descFreq3":"3 séances de deux heures par semaine.","descGeneral":"Séances de 2 heures, encadrées par des coachs d'élite. Suivi technique & physique inclus.","bookBtn":"S'inscrire avec ce plan","resetBtn":"Recommencer le test","showAllBtn":"Retourner à la grille des tarifs complets ↑"},"ar":{"newPromoBadge":"مساعد الاختيار","quizPromoTitle":"هل تريد العثور على صيغتك المثالية في 3 نقرات؟","quizPromoDesc":"تقدم شبكة الأسعار لدينا العديد من الخيارات. أجب عن 3 أسئلة سريعة للحصول على توصية مخصصة تناسبك تماماً.","quizPromoBtn":"ابدأ الدليل التفاعلي","q1Title":"ما هو هدفك الرئيسي؟","q1Opt1":"أنا مبتدئ أو لدي خوف من الماء","q1Opt2":"أريد التعلم والتقدم بالوتيرة التي تناسبني","q1Opt3":"أريد تطوير مهاراتي أو التدريب بجدية","q1Opt4":"أبحث عن تدريب خاص وعالي الكثافة","q2Title":"ما هو مستوى اهتمام المدرب الذي تريده؟","q2Opt1Title":"عادي (G10)","q2Opt1Sub":"مجموعة ممتعة تضم 10 أشخاص كحد أقصى","q2Opt2Title":"عالٍ (MAX5)","q2Opt2Sub":"مجموعة صغيرة تضم 5 أشخاص كحد أقصى (موصى به)","q2Opt3Title":"أقصى (INDIVID)","q2Opt3Sub":"تدريب فردي (1-on-1) مخصص لك تماماً","q3Title":"كم مرة تريد التدرب في الأسبوع؟","q3Opt1Title":"مرة واحدة في الأسبوع","q3Opt1Sub":"مثالي للمبتدئين أو في حال ضيق الوقت","q3Opt2Title":"مرتان في الأسبوع","q3Opt2Sub":"الوتيرة الموصى بها لتقدم مستقر","q3Opt3Title":"3 مرات في الأسبوع","q3Opt3Sub":"تدريب مكثف ونتائج سريعة","calcText":"تحليل إجاباتك...","recBadge":"توصيتنا الخاصة","save":"وفر","month1":"شهر 1","month3":"3 أشهر","month6":"6 أشهر","month9":"9 أشهر","descG10":"صيغة المجموعة 10 (G10): مجموعة من 10 أشخاص كحد أقصى. أجواء جماعية محفزة بسعر مناسب للغاية.","descMax5":"صيغة ماكس 5 (MAX5): مجموعة صغيرة من 5 أشخاص كحد أقصى. مثالية للحصول على اهتمام أكبر والتقدم بسرعة مضاعفة.","descIndivid":"الصيغة الفردية (INDIVID): تدريب فردي خاص (1-on-1). مخصص بالكامل.","descFreq1":"حصة واحدة في الأسبوع، مدتها ساعتان.","descFreq2":"حصتان في الأسبوع، مدة كل حصة ساعتان.","descFreq3":"3 حصص في الأسبوع، مدة كل حصة ساعتان.","descGeneral":"حصص مدتها ساعتان تحت إشراف مدربي النخبة. تشمل المتابعة الفنية والبدنية.","bookBtn":"التسجيل بهذه الصيغة","resetBtn":"إعادة الاختبار","showAllBtn":"العودة إلى جدول الأسعار الكامل ↑"},"en":{"newPromoBadge":"HELP ME CHOOSE","quizPromoTitle":"Find your ideal formula in 3 clicks?","quizPromoDesc":"Our pricing table offers many combinations. Answer 3 quick questions to get a personalized recommendation.","quizPromoBtn":"Start Interactive Guide","q1Title":"What is your main goal?","q1Opt1":"I am a beginner or I have apprehension of water","q1Opt2":"I want to learn and progress at my own pace","q1Opt3":"I want to improve my skills or train seriously","q1Opt4":"I want highly intensive, custom 1-on-1 coaching","q2Title":"What level of coach attention do you want?","q2Opt1Title":"Standard (G10)","q2Opt1Sub":"Convivial group of max 10 people","q2Opt2Title":"Elevated (MAX5)","q2Opt2Sub":"Small group of max 5 people (Recommended)","q2Opt3Title":"Maximum (INDIVID)","q2Opt3Sub":"Personalized 1-on-1 private coaching","q3Title":"How often do you want to train?","q3Opt1Title":"Once a week","q3Opt1Sub":"Ideal to start or for a busy schedule","q3Opt2Title":"Twice a week","q3Opt2Sub":"The recommended frequency for steady progress","q3Opt3Title":"3 times a week","q3Opt3Sub":"Intensive training and fast results","calcText":"Analyzing your answers...","recBadge":"OUR RECOMMENDATION","save":"Save","month1":"1 Month","month3":"3 Months","month6":"6 Months","month9":"9 Months","descG10":"Group 10 (G10) Formula: Group of max 10 people. Fun and stimulating group environment at a very affordable price.","descMax5":"Small group of max 5 people (MAX5): Ideal for getting personal attention and progressing twice as fast.","descIndivid":"Individual (INDIVID) Formula: Private 1-on-1 coaching. Ideal for overcoming fear of water or for high-intensity custom training.","descFreq1":"1 session of two hours per week.","descFreq2":"2 sessions of two hours per week.","descFreq3":"3 sessions of two hours per week.","descGeneral":"2-hour sessions, supervised by elite coaches. Technical & physical follow-up included.","bookBtn":"Register with this plan","resetBtn":"Restart the test","showAllBtn":"Return to full pricing table ↑"}};
+
+    document.addEventListener('astro:page-load', () => {
+
+    (function(){
+        // 1. Tab Switching Logic
+        const buttons = document.querySelectorAll('.category-btn');
+        const sections = document.querySelectorAll('.content-section');
+
+        function setActive(category) {
+            buttons.forEach(btn => {
+                const isTarget = btn.getAttribute('data-category') === category;
+                btn.classList.toggle('active', isTarget);
+                btn.setAttribute('aria-selected', isTarget);
+            });
+
+            sections.forEach(sec => {
+                const isTarget = sec.id === category;
+                sec.classList.toggle('active', isTarget);
+            });
+        }
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cat = btn.getAttribute('data-category');
+                setActive(cat);
+            });
+        });
+
+        // 2. Highlight Best Value in Tables
+        function highlightBestValue(){
+            const tables = document.querySelectorAll('table');
+            tables.forEach(table => {
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const cells = Array.from(row.querySelectorAll('td:not(:first-child)'));
+                    let bestValue = null;
+                    let bestCell = null;
+
+                    cells.forEach(cell => {
+                        const priceText = cell.querySelector('.price-value')?.textContent || cell.textContent;
+                        if (priceText) {
+                            const price = parseInt(String(priceText).replace(/[^0-9]/g, ''));
+                            if (!isNaN(price)) {
+                                if (bestValue === null || price < bestValue) {
+                                    bestValue = price;
+                                    bestCell = cell;
+                                }
+                            }
+                        }
+                    });
+
+                    if (bestCell && cells.length > 1) {
+                        bestCell.style.borderLeft = '4px solid #00ff88';
+                    }
+                });
+            });
+        }
+        // 4. Global Info Popup
+        window.showInfo = function(type){
+            alert(`Plus d'informations sur ${type} - Contactez-nous au 0540454907 ou par email à aqa.sports.academy@gmail.com`);
+        };
+
+        // Initialize
+        highlightBestValue();
+
+        // --- 5. Interactive Quiz Logic ---
+        let currentQuizStep = 1;
+        const quizAnswers = { q1: null, q2: null, q3: null };
+        let selectedDuration = 3; // default: 3 months
+        let recommendationResult = null; // { type: 'max5', freq: 2 }
+
+        const quizSteps = document.querySelectorAll('.quiz-step');
+        const progressFill = document.getElementById('quizProgressFill');
+        const currentStepText = document.getElementById('quizCurrentStep');
+        const progressContainer = document.getElementById('quizProgressContainer');
+        const fullTables = document.getElementById('fullHommeTables');
+        const quizSection = document.getElementById('recQuizSection');
+        const promoBanner = document.getElementById('quizPromoBanner');
+
+        const PRICING_MATRIX = {
+          g10: {
+            1: { 1: 7300, 3: 19900, 6: 38800, 9: 57900 },
+            2: { 1: 12700, 3: 36900, 6: 72000, 9: 105000 },
+            3: { 1: 18700, 3: 53500, 6: 105000, 9: 153000 }
+          },
+          max5: {
+            1: { 1: 9500, 3: 26700, 6: 51900, 9: 76000 },
+            2: { 1: 17000, 3: 48900, 6: 96000, 9: 143000 },
+            3: { 1: 24500, 3: 69500, 6: 135000, 9: 199000 }
+          },
+          individ: {
+            1: { 1: 19900, 3: 58800, 6: 115000, 9: 170000 },
+            2: { 1: 35900, 3: 105000, 6: 199000, 9: 295000 },
+            3: { 1: 52000, 3: 149000, 6: 298000, 9: 454000 }
+          }
+        };
+
+        const SAVINGS_MATRIX = {
+          g10: {
+            1: { 1: 0, 3: 2000, 6: 5000, 9: 7800 },
+            2: { 1: 0, 3: 1200, 6: 4200, 9: 9300 },
+            3: { 1: 0, 3: 2600, 6: 7200, 9: 15300 }
+          },
+          max5: {
+            1: { 1: 0, 3: 1800, 6: 5100, 9: 9500 },
+            2: { 1: 0, 3: 2100, 6: 6000, 9: 10000 },
+            3: { 1: 0, 3: 4000, 6: 12000, 9: 21500 }
+          },
+          individ: {
+            1: { 1: 0, 3: 900, 6: 4400, 9: 9100 },
+            2: { 1: 0, 3: 2700, 6: 16400, 9: 28100 },
+            3: { 1: 0, 3: 7000, 6: 14000, 9: 14000 }
+          }
+        };
+
+        function showQuizStep(stepIdx) {
+          quizSteps.forEach((step, idx) => {
+            step.classList.toggle('active', idx === (stepIdx - 1));
+          });
+          currentQuizStep = stepIdx;
+
+          if (stepIdx >= 1 && stepIdx <= 3) {
+            if (progressContainer) progressContainer.style.display = 'block';
+            if (progressFill) progressFill.style.width = ((stepIdx - 1) / 2) * 100 + '%';
+            if (currentStepText) currentStepText.textContent = stepIdx;
+          } else {
+            if (progressContainer) progressContainer.style.display = 'none';
+          }
+        }
+
+        // Open Quiz / Start Guide
+        const openQuizBtn = document.getElementById('openQuizBtn');
+        if (openQuizBtn) {
+          openQuizBtn.addEventListener('click', () => {
+            if (promoBanner) promoBanner.classList.add('hidden');
+            if (fullTables) fullTables.classList.add('hidden');
+            if (quizSection) quizSection.classList.remove('hidden');
+            
+            // Reset state
+            quizAnswers.q1 = null;
+            quizAnswers.q2 = null;
+            quizAnswers.q3 = null;
+            
+            showQuizStep(1);
+          });
+        }
+
+        // Handle option clicks
+        const optionBtns = document.querySelectorAll('.quiz-opt-btn');
+        optionBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const q = btn.dataset.q;
+            const val = btn.dataset.val;
+            quizAnswers['q' + q] = val;
+
+            const nextStep = parseInt(q) + 1;
+            if (nextStep <= 3) {
+              showQuizStep(nextStep);
+            } else {
+              calculateRecommendation();
+            }
+          });
+        });
+
+        function calculateRecommendation() {
+          showQuizStep(4); // Show step 3.5 (calculating spinner)
+
+          setTimeout(() => {
+            let points = { g10: 0, max5: 0, individ: 0 };
+            
+            if (quizAnswers.q1 === 'beginner') {
+              points.individ += 2;
+              points.max5 += 1;
+            } else if (quizAnswers.q1 === 'progress') {
+              points.max5 += 2;
+              points.g10 += 1;
+            } else if (quizAnswers.q1 === 'perfect') {
+              points.g10 += 2;
+              points.max5 += 1;
+            } else if (quizAnswers.q1 === 'individual') {
+              points.individ += 3;
+            }
+
+            if (quizAnswers.q2 === 'g10') {
+              points.g10 += 4;
+            } else if (quizAnswers.q2 === 'max5') {
+              points.max5 += 4;
+            } else if (quizAnswers.q2 === 'individ') {
+              points.individ += 4;
+            }
+
+            let recommendedType = 'max5';
+            let maxPoints = -1;
+            for (let key in points) {
+              if (points[key] > maxPoints) {
+                maxPoints = points[key];
+                recommendedType = key;
+              }
+            }
+
+            const freq = parseInt(quizAnswers.q3 || '2');
+            recommendationResult = { type: recommendedType, freq };
+
+            selectedDuration = 3; // Reset to 3 months default
+            renderRecommendation();
+            showQuizStep(5); // Show result card
+          }, 800);
+        }
+
+        const typeNames = {
+          fr: { g10: 'G10', max5: 'MAX5', individ: 'INDIVIDUELLE' },
+          ar: { g10: 'G10', max5: 'MAX5', individ: 'فردية (INDIVID)' },
+          en: { g10: 'G10', max5: 'MAX5', individ: 'INDIVIDUAL' }
+        };
+
+        const typeDescs = {
+          fr: {
+            g10: quizTranslations.fr.descG10,
+            max5: quizTranslations.fr.descMax5,
+            individ: quizTranslations.fr.descIndivid
+          },
+          ar: {
+            g10: quizTranslations.ar.descG10,
+            max5: quizTranslations.ar.descMax5,
+            individ: quizTranslations.ar.descIndivid
+          },
+          en: {
+            g10: quizTranslations.en.descG10,
+            max5: quizTranslations.en.descMax5,
+            individ: quizTranslations.en.descIndivid
+          }
+        };
+
+        const freqTexts = {
+          fr: { 1: quizTranslations.fr.descFreq1, 2: quizTranslations.fr.descFreq2, 3: quizTranslations.fr.descFreq3 },
+          ar: { 1: quizTranslations.ar.descFreq1, 2: quizTranslations.ar.descFreq2, 3: quizTranslations.ar.descFreq3 },
+          en: { 1: quizTranslations.en.descFreq1, 2: quizTranslations.en.descFreq2, 3: quizTranslations.en.descFreq3 }
+        };
+
+        function renderRecommendation() {
+          if (!recommendationResult) return;
+          const { type, freq } = recommendationResult;
+          
+          const typeNameMap = typeNames[lang] || typeNames.fr;
+          const typeDescMap = typeDescs[lang] || typeDescs.fr;
+          const freqMap = freqTexts[lang] || freqTexts.fr;
+          
+          const title = `${typeNameMap[type]} - ${freqMap[freq]}`;
+          const titleEl = document.getElementById('recTitle');
+          if (titleEl) titleEl.textContent = title;
+
+          const typeDescEl = document.getElementById('recGroupTypeDesc');
+          if (typeDescEl) typeDescEl.textContent = typeDescMap[type];
+          
+          const freqDescEl = document.getElementById('recFrequenceDesc');
+          if (freqDescEl) freqDescEl.textContent = freqMap[freq];
+
+          updatePriceAndLink();
+        }
+
+        function updatePriceAndLink() {
+          if (!recommendationResult) return;
+          const { type, freq } = recommendationResult;
+          
+          const price = PRICING_MATRIX[type][freq][selectedDuration];
+          const saving = SAVINGS_MATRIX[type][freq][selectedDuration];
+          
+          const priceEl = document.getElementById('recPrice');
+          if (priceEl) priceEl.textContent = `${price.toLocaleString()} DA`;
+
+          const savingEl = document.getElementById('recSaving');
+          if (savingEl) {
+            if (saving > 0) {
+              const saveWord = quizTranslations[lang]?.save || quizTranslations.fr.save;
+              savingEl.textContent = ` ${saveWord} ${saving.toLocaleString()} DA`;
+              savingEl.style.display = 'block';
+            } else {
+              savingEl.style.display = 'none';
+            }
+          }
+
+          const bookLink = document.getElementById('recBookLink');
+          if (bookLink) {
+            const base = bookLink.getAttribute('href').split('?')[0];
+            const formuleCodes = { 1: 'starter', 3: 'silver', 6: 'gold', 9: 'diamond' };
+            const formuleCode = formuleCodes[selectedDuration];
+            bookLink.setAttribute('href', `${base}?category=men&formule=${formuleCode}&frequency=${freq}`);
+          }
+        }
+
+        // Toggles for Durations
+        const durBtns = document.querySelectorAll('.dur-btn');
+        durBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            durBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedDuration = parseInt(btn.dataset.dur);
+            updatePriceAndLink();
+          });
+        });
+
+        // Restart Quiz
+        const resetBtn2 = document.getElementById('restartQuizBtn2');
+        if (resetBtn2) {
+          resetBtn2.addEventListener('click', () => {
+            quizAnswers.q1 = null;
+            quizAnswers.q2 = null;
+            quizAnswers.q3 = null;
+            showQuizStep(1);
+          });
+        }
+
+        // Show all options / Collapse quiz
+        const showAllBtn = document.getElementById('showAllOptionsBtn');
+        if (showAllBtn) {
+          showAllBtn.addEventListener('click', () => {
+            if (quizSection) quizSection.classList.add('hidden');
+            if (fullTables) fullTables.classList.remove('hidden');
+            if (promoBanner) promoBanner.classList.remove('hidden');
+            
+            setTimeout(() => {
+              fullTables.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          });
+        }
+
+    })();
+        });
+  })();</script>
 
   <footer class="aqa-footer" data-astro-cid-sz7xmlte>
     <div class="footer-content" data-astro-cid-sz7xmlte>

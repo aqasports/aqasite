@@ -299,6 +299,9 @@ app.get('/api/admin-data', verifyAdminToken, (req, res) => {
 
 app.use('/api', messageRouter);
 
+const membersRouter = require('./api/members');
+app.use('/api', membersRouter);
+
 
 
 // Get schedule endpoint
@@ -574,7 +577,24 @@ app.use((req, res, next) => {
 
 // Static files
 
+app.use((req, res, next) => {
+  let cleanPath = req.path;
+  if (cleanPath.endsWith('/')) {
+    cleanPath = cleanPath.slice(0, -1);
+  }
+  if (!cleanPath) {
+    return next();
+  }
+  const filePath = path.join(__dirname, 'dist', cleanPath + '.html');
+  if (fs2.existsSync(filePath) && fs2.statSync(filePath).isFile()) {
+    return res.sendFile(filePath);
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'dist'), { extensions: ['html'] }));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.static(path.join(__dirname)));
 

@@ -1,0 +1,835 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'fr' } = Astro.props;
+
+const getRelativePath = (path, targetLang) => {
+  if (targetLang === 'fr') return path;
+  return `/${targetLang}${path === '/' ? '' : path}`;
+};
+
+const pageTranslations = {
+  fr: {
+    metaTitle: "Fiche Athletice Publique | AQA Sports Academy",
+    loading: "Chargement de la fiche de l'athlete...",
+    errorTitle: "Profil introuvable",
+    errorDesc: "L'athlete recherche n'existe pas ou son compte n'est pas actif.",
+    backToHome: "Retour a l'accueil",
+    memberCard: "Carte Adherent Officielle",
+    xpPoints: "XP points",
+    activeStatus: "Membre Actif",
+    
+    subInfo: "Formule & Creneau d'Entrainement",
+    subTier: "Formule :",
+    subPool: "Piscine :",
+    subCoach: "Coach assigne :",
+    subSlot: "Creneau de seance :",
+    
+    presenceSummaryTitle: "Assiduite & Presence",
+    presenceSummaryText: "Participation : {present} / {total} seances ({percent}%)",
+    presenceTimeline: "Chronologie de presence",
+    presencePresent: "Present",
+    presenceAbsent: "Absent",
+    presenceNoData: "Aucune seance enregistree pour le moment.",
+    
+    techEvaluation: "Niveau Technique de l'Athlete",
+    techRespiration: "Respiration / Appuis",
+    techKick: "Battement de jambes",
+    techBras: "Mouvements de bras",
+    techEndurance: "Endurance & Souffle",
+    coachComments: "Note technique globale :",
+    noTechData: "Aucune evaluation technique n'a encore ete validee par le coach.",
+    
+    achievements: "Recompenses & Badges",
+    badgesEarned: "Badges decernes"
+  },
+  ar: {
+    metaTitle: "ملف الرياضي العام | اكاديمية اكا الرياضية",
+    loading: "جاري تحميل ملف الرياضي...",
+    errorTitle: "الملف الشخصي غير موجود",
+    errorDesc: "الرياضي المطلوب غير موجود او حسابه غير نشط حاليا.",
+    backToHome: "العودة للرئيسية",
+    memberCard: "بطاقة عضوية رسمية",
+    xpPoints: "نقطة خبرة",
+    activeStatus: "عضو نشط",
+    
+    subInfo: "الصيغة وحصة التدريب",
+    subTier: "الصيغة :",
+    subPool: "المسبح :",
+    subCoach: "المدرب المعين :",
+    subSlot: "حصة التدريب :",
+    
+    presenceSummaryTitle: "المواظبة والحضور",
+    presenceSummaryText: "المشاركة: {present} / {total} حصص ({percent}%)",
+    presenceTimeline: "سجل الحضور",
+    presencePresent: "حاضر",
+    presenceAbsent: "غائب",
+    presenceNoData: "لا توجد حصص مسجلة حاليا.",
+    
+    techEvaluation: "المستوى التقني للرياضي",
+    techRespiration: "التنفس / الارتكاز",
+    techKick: "ضربات الارجل",
+    techBras: "حركات الذراعين",
+    techEndurance: "التحمل والنفس",
+    coachComments: "التقييم التقني العام :",
+    noTechData: "لم يتم ادخال اي تقييم تقني من طرف المدرب بعد.",
+    
+    achievements: "الجوائز والشارات المكتسبة",
+    badgesEarned: "الشارات الممنوحة"
+  },
+  en: {
+    metaTitle: "Public Athlete Profile | AQA Sports Academy",
+    loading: "Loading athlete profile...",
+    errorTitle: "Profile Not Found",
+    errorDesc: "The requested athlete profile does not exist or is currently inactive.",
+    backToHome: "Back to Home",
+    memberCard: "Official Member Card",
+    xpPoints: "XP points",
+    activeStatus: "Active Member",
+    
+    subInfo: "Subscription & Training Slot",
+    subTier: "Formula:",
+    subPool: "Pool:",
+    subCoach: "Assigned Coach:",
+    subSlot: "Training Slot:",
+    
+    presenceSummaryTitle: "Attendance & Presence",
+    presenceSummaryText: "Participation: {present} / {total} sessions ({percent}%)",
+    presenceTimeline: "Presence history timeline",
+    presencePresent: "Present",
+    presenceAbsent: "Absent",
+    presenceNoData: "No sessions recorded yet.",
+    
+    techEvaluation: "Technical Evaluation",
+    techRespiration: "Breathing / Support",
+    techKick: "Leg Kicks",
+    techBras: "Arm Strokes",
+    techEndurance: "Endurance & Stamina",
+    coachComments: "Overall technical feedback:",
+    noTechData: "No technical evaluation has been submitted by the coach yet.",
+    
+    achievements: "Rewards & Badges",
+    badgesEarned: "Earned Badges"
+  }
+};
+
+const localT = pageTranslations[lang] || pageTranslations.fr;
+
+// Badge definitions
+const badgeDefinitions = {
+  first_dive: { name: "Premier Plongeon", desc: "Premier saut reussi", symbol: "&#127946;" },
+  crawling_king: { name: "Maitre du Crawl", desc: "100m crawl non-stop", symbol: "&#9889;" },
+  apnea_master: { name: "Maitre Apneiste", desc: "2min d'apnee statique", symbol: "&#9201;" },
+  butterfly_king: { name: "Maitre Papillon", desc: "Technique papillon valide", symbol: "&#129419;" },
+  endurance_pro: { name: "Endurant Pro", desc: "1h d'entrainement continu", symbol: "&#128293;" }
+};
+---
+
+<BaseLayout title={localT.metaTitle} currentPage="/clients/stats" lang={lang}>
+  
+  <Navbar currentPage="/clients" lang={lang} />
+
+  <div class="stats-page-container">
+    <div class="container stats-main-wrapper">
+      
+      <!-- Loader -->
+      <div id="statsLoader" class="stats-loader">
+        <div class="spinner"></div>
+        <p>{localT.loading}</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="statsError" class="glass-panel error-panel" style="display: none;">
+        <div class="error-icon">&#10008;</div>
+        <h2>{localT.errorTitle}</h2>
+        <p>{localT.errorDesc}</p>
+        <a href="/" class="portal-btn-primary">{localT.backToHome}</a>
+      </div>
+
+      <!-- Public Stats Profile Container -->
+      <div id="statsContent" class="stats-grid-layout" style="display: none;">
+        
+        <!-- Left: Card & Sub Details -->
+        <div class="stats-column">
+          
+          <div class="official-card-banner">{localT.memberCard}</div>
+          
+          <!-- Member Card Mockup -->
+          <div id="memberCard" class="virtual-card">
+            <div class="card-chip"></div>
+            <div class="card-logo">AQA SPORTS</div>
+            <div class="card-tier-label" id="cardTier">Tier</div>
+            <div class="card-status-badge">{localT.activeStatus}</div>
+            <div class="card-number" id="cardId">ID: AQA-0000</div>
+            <div class="card-holder" id="cardHolder">NAME</div>
+            <div class="card-xp-sub">
+              <span class="xp-val" id="cardXP">0</span> <span class="xp-lbl">{localT.xpPoints}</span>
+            </div>
+          </div>
+
+          <!-- Subscription Info Box -->
+          <div class="glass-panel stats-widget">
+            <h3>{localT.subInfo}</h3>
+            
+            <div class="sub-details-list">
+              <div class="sub-detail-row">
+                <span>{localT.subTier}</span>
+                <strong id="subTierVal">-</strong>
+              </div>
+              <div class="sub-detail-row">
+                <span>{localT.subPool}</span>
+                <strong id="subPoolVal">-</strong>
+              </div>
+              <div class="sub-detail-row">
+                <span>{localT.subCoach}</span>
+                <strong id="subCoachVal">-</strong>
+              </div>
+              <div class="sub-detail-row">
+                <span>{localT.subSlot}</span>
+                <strong id="subSlotVal">-</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Attendance, Tech progress, Badges -->
+        <div class="stats-column">
+          
+          <!-- Presence Tracker -->
+          <div class="glass-panel stats-widget">
+            <h3>{localT.presenceSummaryTitle}</h3>
+            <div id="presenceSummaryText" class="presence-summary-text">Summary</div>
+            
+            <div class="presence-history-timeline">
+              <h4>{localT.presenceTimeline}</h4>
+              <div id="presenceTimelineBox" class="presence-timeline-grid">
+                <!-- Timeline items populate here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Evaluation -->
+          <div class="glass-panel stats-widget">
+            <h3>{localT.techEvaluation}</h3>
+            
+            <div id="techEvaluationContainer">
+              <div class="tech-progress-group">
+                <div class="tech-lbl-row">
+                  <span>{localT.techRespiration}</span>
+                  <span id="techRespirationVal">0/5</span>
+                </div>
+                <div class="tech-bar-bg"><div id="techRespirationFill" class="tech-bar-fill"></div></div>
+              </div>
+              <div class="tech-progress-group">
+                <div class="tech-lbl-row">
+                  <span>{localT.techKick}</span>
+                  <span id="techKickVal">0/5</span>
+                </div>
+                <div class="tech-bar-bg"><div id="techKickFill" class="tech-bar-fill"></div></div>
+              </div>
+              <div class="tech-progress-group">
+                <div class="tech-lbl-row">
+                  <span>{localT.techBras}</span>
+                  <span id="techBrasVal">0/5</span>
+                </div>
+                <div class="tech-bar-bg"><div id="techBrasFill" class="tech-bar-fill"></div></div>
+              </div>
+              <div class="tech-progress-group">
+                <div class="tech-lbl-row">
+                  <span>{localT.techEndurance}</span>
+                  <span id="techEnduranceVal">0/5</span>
+                </div>
+                <div class="tech-bar-bg"><div id="techEnduranceFill" class="tech-bar-fill"></div></div>
+              </div>
+
+              <div class="coach-comments-box">
+                <strong>{localT.coachComments}</strong>
+                <p id="techCommentsVal">-</p>
+              </div>
+            </div>
+            <div id="noTechDataBox" style="display: none;" class="no-data-msg">
+              {localT.noTechData}
+            </div>
+          </div>
+
+          <!-- Badges & Achievements -->
+          <div class="glass-panel stats-widget">
+            <h3>{localT.achievements}</h3>
+            <div class="badges-earned-title">{localT.badgesEarned}</div>
+            <div id="badgesGrid" class="badges-grid-container">
+              <!-- Badges populate here -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<script is:inline define:vars={{ lang, badgeDefinitions, localT }}>
+  document.addEventListener('astro:page-load', () => {
+    
+    // Get member ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const memberId = urlParams.get('id');
+
+    const loader = document.getElementById('statsLoader');
+    const errorPanel = document.getElementById('statsError');
+    const content = document.getElementById('statsContent');
+
+    if (!memberId) {
+      if (loader) loader.style.display = 'none';
+      if (errorPanel) errorPanel.style.display = 'block';
+      return;
+    }
+
+    async function fetchPublicStats() {
+      try {
+        const response = await fetch(`/api/member/public-stats?id=${encodeURIComponent(memberId)}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          renderStats(data.stats);
+          if (content) content.style.display = 'grid';
+        } else {
+          if (errorPanel) errorPanel.style.display = 'block';
+        }
+      } catch (e) {
+        console.error("Error loading stats page:", e);
+        if (errorPanel) errorPanel.style.display = 'block';
+      } finally {
+        if (loader) loader.style.display = 'none';
+      }
+    }
+
+    fetchPublicStats();
+
+    function renderStats(stats) {
+      // Basic info
+      document.getElementById('cardHolder').textContent = stats.fullName;
+      document.getElementById('cardXP').textContent = stats.xp || 0;
+
+      // Card Tier Styling
+      const card = document.getElementById('memberCard');
+      const tier = stats.membershipTier || 'Starter';
+      card.className = `virtual-card card-tier-${tier.toLowerCase()}`;
+      document.getElementById('cardTier').textContent = tier.toUpperCase();
+      document.getElementById('cardId').textContent = `ID: AQA-${memberId.slice(0,6).toUpperCase()}`;
+
+      // Subscription Info
+      document.getElementById('subTierVal').textContent = tier;
+      document.getElementById('subPoolVal').textContent = stats.subscription?.poolKey === 'reghaia' ? 'Piscine Reghaia' : (stats.subscription?.poolKey === 'cheraga' ? 'Piscine Cheraga' : '-');
+      document.getElementById('subCoachVal').textContent = stats.subscription?.coachName || '-';
+      document.getElementById('subSlotVal').textContent = stats.subscription?.slotDay && stats.subscription?.slotTime ? `${stats.subscription.slotDay} - ${stats.subscription.slotTime}` : '-';
+
+      // Attendance Summary
+      const timelineBox = document.getElementById('presenceTimelineBox');
+      timelineBox.innerHTML = '';
+      const presenceList = stats.presence || [];
+      const presentCount = presenceList.filter(p => p.present).length;
+      const totalCount = presenceList.length;
+      const percent = totalCount > 0 ? Math.round((presentCount / totalCount) * 100) : 0;
+
+      let summaryStr = localT.presenceSummaryText
+        .replace('{present}', presentCount)
+        .replace('{total}', totalCount)
+        .replace('{percent}', percent);
+      document.getElementById('presenceSummaryText').textContent = summaryStr;
+
+      if (presenceList.length === 0) {
+        timelineBox.innerHTML = `<div class="no-data-msg">${localT.presenceNoData}</div>`;
+      } else {
+        // Sort descending
+        const sortedPresence = [...presenceList].sort((a,b) => new Date(b.date) - new Date(a.date));
+        sortedPresence.forEach(item => {
+          const block = document.createElement('div');
+          block.className = `presence-timeline-item ${item.present ? 'status-present' : 'status-absent'}`;
+          
+          block.innerHTML = `
+            <div class="presence-icon">${item.present ? '&#10004;' : '&#10008;'}</div>
+            <div class="presence-info">
+              <strong class="presence-date">${item.date}</strong>
+              <span class="presence-status">${item.present ? localT.presencePresent : (item.reason || localT.presenceAbsent)}</span>
+            </div>
+          `;
+          timelineBox.appendChild(block);
+        });
+      }
+
+      // Technical Evaluation
+      const tech = stats.suiviTechnique;
+      if (tech && (tech.respiration > 0 || tech.battement > 0 || tech.bras > 0 || tech.endurance > 0 || tech.comments)) {
+        document.getElementById('techRespirationVal').textContent = `${tech.respiration}/5`;
+        document.getElementById('techRespirationFill').style.width = `${(tech.respiration / 5) * 100}%`;
+        
+        document.getElementById('techKickVal').textContent = `${tech.kick}/5`;
+        document.getElementById('techKickFill').style.width = `${(tech.kick / 5) * 100}%`;
+
+        document.getElementById('techBrasVal').textContent = `${tech.bras}/5`;
+        document.getElementById('techBrasFill').style.width = `${(tech.bras / 5) * 100}%`;
+
+        document.getElementById('techEnduranceVal').textContent = `${tech.endurance}/5`;
+        document.getElementById('techEnduranceFill').style.width = `${(tech.endurance / 5) * 100}%`;
+
+        document.getElementById('techCommentsVal').textContent = tech.comments || '-';
+      } else {
+        document.getElementById('techEvaluationContainer').style.display = 'none';
+        document.getElementById('noTechDataBox').style.display = 'block';
+      }
+
+      // Badges
+      const badgesGrid = document.getElementById('badgesGrid');
+      badgesGrid.innerHTML = '';
+      const userBadges = stats.badges || [];
+
+      Object.keys(badgeDefinitions).forEach(badgeId => {
+        const badgeMeta = badgeDefinitions[badgeId];
+        const isUnlocked = userBadges.includes(badgeId);
+        
+        const badgeEl = document.createElement('div');
+        badgeEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+        badgeEl.innerHTML = `
+          <div class="badge-icon">${badgeMeta.symbol}</div>
+          <div class="badge-name">${badgeMeta.name}</div>
+          <div class="badge-desc">${badgeMeta.desc}</div>
+        `;
+        badgesGrid.appendChild(badgeEl);
+      });
+    }
+
+  });
+</script>
+
+<style>
+  .stats-page-container {
+    padding: 4rem 0;
+    min-height: 80vh;
+  }
+  .stats-main-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Loader & Error */
+  .stats-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 6rem 0;
+  }
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 242, 255, 0.1);
+    border-top: 3px solid var(--color-teal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .error-panel {
+    text-align: center;
+    padding: 3rem;
+    max-width: 500px;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .error-icon {
+    font-size: 3.5rem;
+    color: #ef4444;
+  }
+
+  /* Grid layout */
+  .stats-grid-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .stats-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .official-card-banner {
+    background: rgba(0, 242, 255, 0.08);
+    border: 1px solid rgba(0, 242, 255, 0.25);
+    color: var(--color-teal);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-radius: 50px;
+    margin-bottom: -1rem;
+  }
+
+  .stats-widget {
+    padding: 2rem;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+  }
+  .stats-widget h3 {
+    font-size: 1.2rem;
+    color: var(--color-teal);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.75rem;
+  }
+
+  /* Virtual Card Design (Simplified copy from portal) */
+  .virtual-card {
+    height: 220px;
+    border-radius: 20px;
+    padding: 1.5rem;
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .card-chip {
+    width: 45px;
+    height: 35px;
+    background: linear-gradient(135deg, #e5c060, #ba9539);
+    border-radius: 6px;
+  }
+  .card-logo {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    opacity: 0.85;
+  }
+  .card-tier-label {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.2rem;
+    opacity: 0.15;
+    letter-spacing: 2px;
+  }
+  .card-status-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+  }
+  .card-number {
+    font-family: monospace;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+  }
+  .card-holder {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+  .card-xp-sub {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    margin-top: -0.5rem;
+  }
+  .card-xp-sub .xp-val {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-teal);
+  }
+  .card-xp-sub .xp-lbl {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  /* Card Tier Themes (consistent with portal) */
+  .card-tier-starter {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+  }
+  .card-tier-silver {
+    background: linear-gradient(135deg, #2b3a4a, #101824);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  .card-tier-gold {
+    background: linear-gradient(135deg, #784c05, #120b00);
+    border-color: rgba(243, 156, 18, 0.4);
+    box-shadow: 0 0 25px rgba(243, 156, 18, 0.2);
+  }
+  .card-tier-gold .card-chip {
+    background: linear-gradient(135deg, #fff2a3, #e5c060);
+  }
+  .card-tier-diamond {
+    background: linear-gradient(135deg, #32104a, #0b1a30);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
+  }
+
+  /* Sub Details */
+  .sub-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .sub-detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    padding-bottom: 0.5rem;
+  }
+  .sub-detail-row span {
+    color: var(--text-secondary);
+  }
+  .sub-detail-row strong {
+    color: #fff;
+  }
+
+  /* Presence history */
+  .presence-summary-text {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .presence-history-timeline h4 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .presence-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1rem;
+  }
+  .presence-timeline-item {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border: var(--border-glass);
+  }
+  .presence-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .status-present {
+    border-left: 3px solid #10b981;
+  }
+  .status-present .presence-icon {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+  }
+  .status-absent {
+    border-left: 3px solid #ef4444;
+  }
+  .status-absent .presence-icon {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+  }
+  .presence-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .presence-date {
+    font-size: 0.8rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .presence-status {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Technical Progress */
+  .tech-progress-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+  .tech-lbl-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .tech-bar-bg {
+    height: 8px;
+    background: rgba(255,255,255,0.03);
+    border: var(--border-glass);
+    border-radius: 50px;
+    overflow: hidden;
+  }
+  .tech-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-blue), var(--color-teal));
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+    width: 0;
+    transition: width 0.8s ease-in-out;
+  }
+  .coach-comments-box {
+    margin-top: 1.5rem;
+    background: rgba(0, 242, 255, 0.03);
+    border-left: 3px solid var(--color-teal);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.25rem;
+  }
+  .coach-comments-box strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-teal);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .coach-comments-box p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  /* Badges */
+  .badges-earned-title {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.25rem;
+  }
+  .badges-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.25rem;
+  }
+  .badge-item {
+    background: rgba(255, 255, 255, 0.015);
+    border: var(--border-glass);
+    border-radius: 16px;
+    padding: 1.25rem 0.75rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-smooth);
+  }
+  .badge-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.25rem;
+  }
+  .badge-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #fff;
+  }
+  .badge-desc {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    line-height: 1.3;
+  }
+  .badge-item.unlocked:hover {
+    border-color: var(--color-teal);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-3px);
+  }
+  .badge-item.locked {
+    opacity: 0.2;
+    filter: grayscale(1);
+  }
+
+  .portal-btn-primary {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    border: none;
+    border-radius: 50px;
+    color: #000;
+    font-family: var(--font-display);
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px rgba(0, 136, 255, 0.3);
+  }
+  .portal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 242, 255, 0.5);
+  }
+  .no-data-msg {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .stats-grid-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

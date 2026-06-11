@@ -18,6 +18,23 @@
   function = "admin-gate"
 
 
+# ── Redirect Member Area APIs to Netlify Function ──────────────────────
+[[redirects]]
+  from   = "/api/member/*"
+  to     = "/.netlify/functions/members/member/:splat"
+  status = 200
+
+[[redirects]]
+  from   = "/api/admin/members/*"
+  to     = "/.netlify/functions/members/admin/members/:splat"
+  status = 200
+
+[[redirects]]
+  from   = "/api/admin/members"
+  to     = "/.netlify/functions/members/admin/members"
+  status = 200
+
+
 # ── Redirect old .html URLs → clean URLs (301 permanent) ──────────────────────
 # Protects Google-indexed pages, shared links, and bookmarks from 404ing.
 

@@ -13,158 +13,651 @@ const getRelativePath = (path, targetLang) => {
   if (targetLang === 'fr') return path;
   return `/${targetLang}${path === '/' ? '' : path}`;
 };
+
+const pageTranslations = {
+  fr: {
+    metaTitle: "Espace Membres | AQA Sports Academy",
+    metaDesc: "Accedez a votre espace membre AQA : planning de seances, suivi de progression, historique de paiements et informations de groupe.",
+    welcomeTitle: "Bienvenue dans l'Espace Athletes",
+    welcomeDesc: "Suivez votre progression, consultez vos plannings de natation et de plongee, gerez vos abonnements, et visualisez vos badges de reussite.",
+    tabLogin: "Se Connecter",
+    tabRegister: "Creer un Compte",
+    labelEmail: "Adresse Email :",
+    labelPassword: "Mot de passe :",
+    labelFullName: "Nom Complet :",
+    labelPhone: "Numero de Telephone :",
+    labelBirthDate: "Date de Naissance :",
+    labelCategory: "Categorie d'entrainement :",
+    catMen: "Homme",
+    catWomen: "Femme",
+    catTeens: "Ados Garcon (13-16 ans)",
+    catKids: "Enfant (5-12 ans)",
+    catApnea: "Apnee (AQA Apnea)",
+    labelIsMember: "Etes-vous deja adherent a l'academie AQA ?",
+    optionYes: "Oui, je suis deja inscrit",
+    optionNo: "Non, je souhaite rejoindre la communaute",
+    btnConnect: "Se connecter",
+    btnRegister: "S'inscrire",
+    errorLogin: "Email ou mot de passe incorrect.",
+    errorGeneric: "Une erreur est survenue, veuillez reessayer.",
+    registerSuccessPending: "Inscription reussie ! Votre compte a ete cree et est en attente de validation par l'administrateur. Nous vous contacterons rapidement.",
+    registerSuccessActive: "Inscription reussie ! Vous pouvez maintenant vous connecter pour acceder a l'espace communaute.",
+    alreadyRegistered: "Deja inscrit ? Connectez-vous ici",
+    needAccount: "Pas encore de compte ? Enregistrez-vous ici",
+    loading: "Chargement..."
+  },
+  ar: {
+    metaTitle: "فضاء الاعضاء | اكاديمية اكا الرياضية",
+    metaDesc: "قم بالولوج الى فضاء الاعضاء الخاص بك: جداول الحصص، متابعة التقدم، سجل المدفوعات ومعلومات المجموعة.",
+    welcomeTitle: "مرحبا بكم في فضاء الرياضيين",
+    welcomeDesc: "تابع تقدمك، واطلع على جداول السباحة والغوص، وسجل مدفوعاتك، واستعرض شارات الانجاز الخاصة بك.",
+    tabLogin: "تسجيل الدخول",
+    tabRegister: "انشاء حساب",
+    labelEmail: "البريد الالكتروني :",
+    labelPassword: "كلمة المرور :",
+    labelFullName: "الاسم الكامل :",
+    labelPhone: "رقم الهاتف :",
+    labelBirthDate: "تاريخ الميلاد :",
+    labelCategory: "فئة التدريب :",
+    catMen: "رجال",
+    catWomen: "نساء",
+    catTeens: "مراهقون ذكور (13-16 سنة)",
+    catKids: "اطفال (5-12 سنة)",
+    catApnea: "غوص حر (أكا للغوص الحر)",
+    labelIsMember: "هل انت مسجل بالفعل في اكاديمية اكا ؟",
+    optionYes: "نعم، انا مشترك بالفعل",
+    optionNo: "لا، اريد الانضمام الى المجتمع",
+    btnConnect: "تسجيل الدخول",
+    btnRegister: "تسجيل",
+    errorLogin: "البريد الالكتروني او كلمة المرور غير صحيحة.",
+    errorGeneric: "حدث خطا ما، يرجى المحاولة مرة اخرى.",
+    registerSuccessPending: "تم التسجيل بنجاح! تم انشاء حسابك وهو قيد المراجعة من طرف الادارة. سنتصل بك قريبا.",
+    registerSuccessActive: "تم التسجيل بنجاح! يمكنك الان تسجيل الدخول للولوج الى فضاء المجتمع.",
+    alreadyRegistered: "مسجل بالفعل؟ سجل دخولك هنا",
+    needAccount: "ليس لديك حساب؟ انشئ حسابا هنا",
+    loading: "جاري التحميل..."
+  },
+  en: {
+    metaTitle: "Members Area | AQA Sports Academy",
+    metaDesc: "Access your AQA member space: session planning, progress tracking, payment history, and group information.",
+    welcomeTitle: "Welcome to the Athlete Space",
+    welcomeDesc: "Track your progress, check your swimming and apnea schedules, manage your subscriptions, and view your achievement badges.",
+    tabLogin: "Sign In",
+    tabRegister: "Create Account",
+    labelEmail: "Email Address:",
+    labelPassword: "Password:",
+    labelFullName: "Full Name:",
+    labelPhone: "Phone Number:",
+    labelBirthDate: "Birth Date:",
+    labelCategory: "Training Category:",
+    catMen: "Men",
+    catWomen: "Women",
+    catTeens: "Teen Boys (13-16 years)",
+    catKids: "Kids (5-12 years)",
+    catApnea: "Apnea (AQA Apnea)",
+    labelIsMember: "Are you already an AQA Academy member?",
+    optionYes: "Yes, I am already a member",
+    optionNo: "No, I want to join the community",
+    btnConnect: "Sign In",
+    btnRegister: "Register",
+    errorLogin: "Incorrect email or password.",
+    errorGeneric: "An error occurred, please try again.",
+    registerSuccessPending: "Registration successful! Your account is created and pending approval by an administrator. We will contact you soon.",
+    registerSuccessActive: "Registration successful! You can now log in to access the community space.",
+    alreadyRegistered: "Already registered? Login here",
+    needAccount: "Don't have an account? Sign up here",
+    loading: "Loading..."
+  }
+};
+
+const localT = pageTranslations[lang] || pageTranslations.fr;
 ---
 
-<BaseLayout title="Espace Membres | AQA Sports Academy — Suivi & Plannings"
-  description="Accédez à votre espace membre AQA : planning de séances, suivi de progression, historique de paiements et informations de groupe."
-  keywords="espace membre aqa, suivi natation, planning piscine membre, portail aqa sports"
+<BaseLayout title={localT.metaTitle}
+  description={localT.metaDesc}
   currentPage="/clients" lang={lang}>
+  
   <Navbar currentPage="/clients" lang={lang} />
 
-<div class="page-hero">
-        <span class="hero-badge">🏅 Espace Adhérents</span>
-        <h1>Bienvenue, Athlète AQA</h1>
-        <div class="section-divider"></div>
-        <p>Tout ce dont vous avez besoin pour suivre votre progression, gérer votre inscription et rester connecté à votre académie.</p>
+  <div class="auth-page-container">
+    <div class="auth-grid container">
+      
+      <!-- Welcome Panel -->
+      <div class="auth-welcome-panel">
+        <span class="badge">&#9733; Espace Adherents</span>
+        <h1>{localT.welcomeTitle}</h1>
+        <div class="divider"></div>
+        <p>{localT.welcomeDesc}</p>
+        
+        <div class="features-list">
+          <div class="feature-item">
+            <span class="icon-wrap">&#128200;</span>
+            <div>
+              <strong>Suivi de Progression</strong>
+              <span>Visualisez vos seances, retours des coachs et notes techniques.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="icon-wrap">&#127941;</span>
+            <div>
+              <strong>XP et Badges</strong>
+              <span>Gagnez des points d'experience et debloquez des badges virtuels.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="icon-wrap">&#128203;</span>
+            <div>
+              <strong>Planning & Formules</strong>
+              <span>Consultez vos horaires et changez de creneau en ligne.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Auth Form Card -->
+      <div class="auth-form-panel">
+        <div class="glass-panel auth-card">
+          
+          <div class="auth-tabs">
+            <button id="tabLoginBtn" class="tab-btn active">{localT.tabLogin}</button>
+            <button id="tabRegisterBtn" class="tab-btn">{localT.tabRegister}</button>
+          </div>
+
+          <div id="authAlert" class="auth-alert" style="display: none;"></div>
+
+          <!-- LOGIN FORM -->
+          <form id="loginForm" class="auth-form active" autocomplete="off">
+            <div class="form-group">
+              <label for="loginEmail">{localT.labelEmail}</label>
+              <input type="email" id="loginEmail" required class="form-control" placeholder="nom@exemple.com">
+            </div>
+
+            <div class="form-group">
+              <label for="loginPassword">{localT.labelPassword}</label>
+              <input type="password" id="loginPassword" required class="form-control" placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="auth-submit-btn">
+              <span class="btn-text">{localT.btnConnect}</span>
+              <span class="btn-spinner" style="display: none;">...</span>
+            </button>
+
+            <p class="form-toggle-link" id="linkToRegister">{localT.needAccount}</p>
+          </form>
+
+          <!-- REGISTER FORM -->
+          <form id="registerForm" class="auth-form" autocomplete="off" style="display: none;">
+            <div class="form-group">
+              <label for="registerFullName">{localT.labelFullName}</label>
+              <input type="text" id="registerFullName" required class="form-control" placeholder="Sid Ahmed">
+            </div>
+
+            <div class="form-group">
+              <label for="registerEmail">{localT.labelEmail}</label>
+              <input type="email" id="registerEmail" required class="form-control" placeholder="nom@exemple.com">
+            </div>
+
+            <div class="form-group">
+              <label for="registerPassword">{localT.labelPassword}</label>
+              <input type="password" id="registerPassword" required class="form-control" placeholder="Minimum 6 caracteres">
+            </div>
+
+            <div class="form-group">
+              <label for="registerPhone">{localT.labelPhone}</label>
+              <input type="tel" id="registerPhone" required class="form-control" placeholder="0540000000">
+            </div>
+
+            <div class="form-group">
+              <label for="registerBirthDate">{localT.labelBirthDate}</label>
+              <input type="date" id="registerBirthDate" required class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="registerCategory">{localT.labelCategory}</label>
+              <select id="registerCategory" required class="form-control">
+                <option value="homme">{localT.catMen}</option>
+                <option value="femme">{localT.catWomen}</option>
+                <option value="ados">{localT.catTeens}</option>
+                <option value="enfants">{localT.catKids}</option>
+                <option value="apnea">{localT.catApnea}</option>
+              </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label for="registerIsMember">{localT.labelIsMember}</label>
+              <select id="registerIsMember" required class="form-control">
+                <option value="true">{localT.optionYes}</option>
+                <option value="false">{localT.optionNo}</option>
+              </select>
+            </div>
+
+            <button type="submit" class="auth-submit-btn">
+              <span class="btn-text">{localT.btnRegister}</span>
+              <span class="btn-spinner" style="display: none;">...</span>
+            </button>
+
+            <p class="form-toggle-link" id="linkToLogin">{localT.alreadyRegistered}</p>
+          </form>
+
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <div class="container">
-        <!-- Quick access -->
-        <div class="access-grid">
-            <a href={getRelativePath('/groupes', lang)} class="access-card">
-                <div class="access-icon">📅</div>
-                <div class="access-title">Mon Groupe & Horaires</div>
-                <div class="access-desc">Consultez votre groupe, vos horaires de séances et les piscines assignées.</div>
-            </a>
-            <a href={getRelativePath('/inscription', lang)} class="access-card">
-                <div class="access-icon">📝</div>
-                <div class="access-title">Inscription & Renouvellement</div>
-                <div class="access-desc">Inscrivez-vous ou renouvelez votre abonnement en quelques clics.</div>
-            </a>
-            <a href={getRelativePath('/tarifs', lang)} class="access-card">
-                <div class="access-icon">💳</div>
-                <div class="access-title">Tarifs & Paiements</div>
-                <div class="access-desc">Consultez nos formules, tarifs et modalités de paiement.</div>
-            </a>
-            <a href={getRelativePath('/app', lang)} class="access-card">
-                <div class="access-icon">📱</div>
-                <div class="access-title">Application AQA</div>
-                <div class="access-desc">Téléchargez l'app pour suivre vos séances, votre progression et recevoir des notifications.</div>
-            </a>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats-row">
-            <div class="stat-item"><div class="stat-num">500+</div><div class="stat-lbl">Athlètes actifs</div></div>
-            <div class="stat-item"><div class="stat-num">8+</div><div class="stat-lbl">Coachs d'élite</div></div>
-            <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Piscines</div></div>
-            <div class="stat-item"><div class="stat-num">98%</div><div class="stat-lbl">Satisfaction</div></div>
-        </div>
-
-        <!-- Member portal -->
-        <div class="portal-section">
-            <h2>📱 Portail Membre — Application AQA</h2>
-            <div class="portal-features">
-                <div class="portal-feature"><span>📊</span><div class="portal-feature-text"><strong>Suivi de progression</strong><span>Graphiques et historique de vos séances</span></div></div>
-                <div class="portal-feature"><span>🗓️</span><div class="portal-feature-text"><strong>Planning interactif</strong><span>Vos horaires toujours à jour</span></div></div>
-                <div class="portal-feature"><span>🔔</span><div class="portal-feature-text"><strong>Notifications</strong><span>Rappels de séances et actualités</span></div></div>
-                <div class="portal-feature"><span>🎯</span><div class="portal-feature-text"><strong>Objectifs personnels</strong><span>Fixez et suivez vos buts</span></div></div>
-            </div>
-            <div class="app-cta-row">
-                <a href={getRelativePath('/app', lang)} class="app-btn primary">📲 Télécharger l'App</a>
-                <a href="https://wa.me/213540454907?text=Bonjour%2C%20j%27ai%20besoin%20d%27aide%20sur%20mon%20espace%20membre." class="app-btn secondary" target="_blank" rel="noopener">💬 Support WhatsApp</a>
-            </div>
-        </div>
-
-        <!-- FAQ -->
-        <h3 class="section-title-left">Questions fréquentes</h3>
-        <div class="faq-list">
-            <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">Comment connaître mon groupe et mes horaires ? <span class="arrow">▼</span></div>
-                <div class="faq-a">Consultez la page <a href={getRelativePath('/groupes', lang)} style="color:#00ffff">Groupes</a> pour voir tous les créneaux disponibles. Votre coach vous communique également votre groupe lors de l'inscription.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">Comment renouveler mon abonnement ? <span class="arrow">▼</span></div>
-                <div class="faq-a">Rendez-vous sur la page <a href={getRelativePath('/inscription', lang)} style="color:#00ffff">Inscription</a> ou contactez-nous directement par WhatsApp pour un renouvellement rapide.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">Comment accéder à l'application AQA ? <span class="arrow">▼</span></div>
-                <div class="faq-a">Téléchargez l'application AQA sur la page <a href={getRelativePath('/app', lang)} style="color:#00ffff">AQA App</a>. Elle est disponible pour Android et vous permet de suivre votre progression en temps réel.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">Comment contacter mon coach ? <span class="arrow">▼</span></div>
-                <div class="faq-a">Vous pouvez contacter l'équipe AQA par WhatsApp au +213 540 45 49 07 ou par email à aqa.sports.academy@gmail.com. Votre coach est également disponible lors des séances.</div>
-            </div>
-        </div>
-    </div>
-
-    
-
-    
-    
-    <script>
-        function toggleFaq(el) {
-            const item = el.parentElement;
-            item.classList.toggle('open');
-        }
-    </script>
-
-  <Footer  lang={lang} />
+  <Footer lang={lang} />
 </BaseLayout>
 
+<script is:inline define:vars={{ lang }}>
+  // Inline JS client-side checking and redirection
+  document.addEventListener('astro:page-load', () => {
+    // Determine target URL for portal based on language
+    const getPortalPath = () => {
+      if (lang === 'fr') return '/clients/portal';
+      return `/${lang}/clients/portal`;
+    };
+
+    // Auto redirect if token exists
+    const token = localStorage.getItem('aqa_member_token');
+    if (token) {
+      window.location.href = getPortalPath();
+      return;
+    }
+
+    const tabLoginBtn = document.getElementById('tabLoginBtn');
+    const tabRegisterBtn = document.getElementById('tabRegisterBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const linkToRegister = document.getElementById('linkToRegister');
+    const linkToLogin = document.getElementById('linkToLogin');
+    const authAlert = document.getElementById('authAlert');
+
+    // Tab switching
+    function showLogin() {
+      tabLoginBtn.classList.add('active');
+      tabRegisterBtn.classList.remove('active');
+      loginForm.style.display = 'block';
+      registerForm.style.display = 'none';
+      authAlert.style.display = 'none';
+    }
+
+    function showRegister() {
+      tabRegisterBtn.classList.add('active');
+      tabLoginBtn.classList.remove('active');
+      registerForm.style.display = 'block';
+      loginForm.style.display = 'none';
+      authAlert.style.display = 'none';
+    }
+
+    if (tabLoginBtn) tabLoginBtn.addEventListener('click', showLogin);
+    if (tabRegisterBtn) tabRegisterBtn.addEventListener('click', showRegister);
+    if (linkToRegister) linkToRegister.addEventListener('click', showRegister);
+    if (linkToLogin) linkToLogin.addEventListener('click', showLogin);
+
+    // Form handlers
+    if (loginForm) {
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const submitBtn = loginForm.querySelector('.auth-submit-btn');
+        const spinner = submitBtn.querySelector('.btn-spinner');
+        const text = submitBtn.querySelector('.btn-text');
+
+        // Reset alert
+        authAlert.style.display = 'none';
+        authAlert.className = 'auth-alert';
+
+        // Show loading
+        spinner.style.display = 'inline-block';
+        text.style.display = 'none';
+        submitBtn.disabled = true;
+
+        try {
+          const res = await fetch('/api/member/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            localStorage.setItem('aqa_member_token', data.token);
+            localStorage.setItem('aqa_member_info', JSON.stringify(data.member));
+            
+            // Redirect to dashboard portal
+            window.location.href = getPortalPath();
+          } else {
+            authAlert.textContent = data.error || 'Email ou mot de passe incorrect.';
+            authAlert.className = 'auth-alert error';
+            authAlert.style.display = 'block';
+          }
+        } catch (err) {
+          authAlert.textContent = 'Erreur lors de la connexion. Veuillez reessayer.';
+          authAlert.className = 'auth-alert error';
+          authAlert.style.display = 'block';
+        } finally {
+          spinner.style.display = 'none';
+          text.style.display = 'inline-block';
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    if (registerForm) {
+      registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fullName = document.getElementById('registerFullName').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const phone = document.getElementById('registerPhone').value;
+        const birthDate = document.getElementById('registerBirthDate').value;
+        const gender = document.getElementById('registerCategory').value;
+        const isAqaMember = document.getElementById('registerIsMember').value === 'true';
+
+        const submitBtn = registerForm.querySelector('.auth-submit-btn');
+        const spinner = submitBtn.querySelector('.btn-spinner');
+        const text = submitBtn.querySelector('.btn-text');
+
+        // Reset alert
+        authAlert.style.display = 'none';
+        authAlert.className = 'auth-alert';
+
+        // Show loading
+        spinner.style.display = 'inline-block';
+        text.style.display = 'none';
+        submitBtn.disabled = true;
+
+        try {
+          const res = await fetch('/api/member/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, fullName, phone, birthDate, gender, isAqaMember })
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            authAlert.className = 'auth-alert success';
+            if (isAqaMember) {
+              authAlert.textContent = 'Inscription reussie ! Compte cree et en attente de validation par l\'administrateur.';
+            } else {
+              authAlert.textContent = 'Inscription reussie ! Vous pouvez maintenant vous connecter.';
+            }
+            authAlert.style.display = 'block';
+            
+            // Reset form
+            registerForm.reset();
+            
+            // Scroll to top of panel
+            document.querySelector('.auth-card').scrollIntoView({ behavior: 'smooth' });
+
+            // Switch to login tab after 3 seconds
+            setTimeout(() => {
+              showLogin();
+              document.getElementById('loginEmail').value = email;
+            }, 3000);
+
+          } else {
+            authAlert.textContent = data.error || 'Erreur lors de la creation du compte.';
+            authAlert.className = 'auth-alert error';
+            authAlert.style.display = 'block';
+          }
+        } catch (err) {
+          authAlert.textContent = 'Erreur de connexion reseau. Veuillez reessayer.';
+          authAlert.className = 'auth-alert error';
+          authAlert.style.display = 'block';
+        } finally {
+          spinner.style.display = 'none';
+          text.style.display = 'inline-block';
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  });
+</script>
+
 <style>
-
-        *{margin:0;padding:0;box-sizing:border-box}
-        html{background:#000;scroll-behavior:smooth}
-        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:transparent;color:#fff;overflow-x:hidden}
-        .bg-frame{position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:-1;pointer-events:none}
-        .container{max-width:1100px;margin:0 auto;padding:2rem 1rem}
-        .page-hero{text-align:center;padding:5rem 1rem 3rem}
-        .page-hero h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:800;background:linear-gradient(135deg,#00ffff,#0099ff,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
-        .page-hero p{color:rgba(255,255,255,.8);max-width:650px;margin:0 auto}
-        .hero-badge{display:inline-block;background:rgba(0,255,255,.1);border:1px solid rgba(0,255,255,.4);color:#00ffff;padding:.4rem 1.2rem;border-radius:50px;font-size:.85rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
-        .section-divider{width:80px;height:3px;background:linear-gradient(90deg,#00ffff,#0099ff);margin:1.5rem auto;border-radius:2px}
-
-        /* Access Cards */
-        .access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:3rem 0}
-        .access-card{background:rgba(0,153,255,.05);border:1px solid rgba(0,153,255,.25);border-radius:20px;padding:2rem;text-align:center;transition:all .3s ease;text-decoration:none;color:inherit;display:block}
-        .access-card:hover{transform:translateY(-6px);border-color:rgba(0,255,255,.6);box-shadow:0 0 25px rgba(0,255,255,.15)}
-        .access-icon{font-size:3rem;margin-bottom:1rem}
-        .access-title{font-size:1.1rem;font-weight:700;color:#00ffff;margin-bottom:.5rem}
-        .access-desc{font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.5}
-
-        /* Member portal CTA */
-        .portal-section{background:linear-gradient(135deg,rgba(0,153,255,.1),rgba(0,255,255,.05));border:1px solid rgba(0,255,255,.3);border-radius:20px;padding:3rem;margin:3rem 0}
-        .portal-section h2{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#00ffff,#0099ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;text-align:center}
-        .portal-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:2rem 0}
-        .portal-feature{display:flex;align-items:flex-start;gap:0.8rem;padding:1rem;background:rgba(0,0,0,.3);border-radius:12px;border:1px solid rgba(0,153,255,.2)}
-        .portal-feature span:first-child{font-size:1.5rem;flex-shrink:0}
-        .portal-feature-text strong{display:block;color:#fff;font-size:.95rem;margin-bottom:.2rem}
-        .portal-feature-text span{color:rgba(255,255,255,.6);font-size:.8rem}
-        .app-cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
-        .app-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.8rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s ease}
-        .app-btn.primary{background:linear-gradient(135deg,#0099ff,#00ffff);color:#000}
-        .app-btn.secondary{background:rgba(0,255,255,.1);border:2px solid rgba(0,255,255,.4);color:#00ffff}
-        .app-btn:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(0,255,255,.4)}
-
-        /* Stats loyalty */
-        .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin:3rem 0}
-        .stat-item{background:rgba(0,153,255,.07);border:1px solid rgba(0,153,255,.2);border-radius:16px;padding:1.5rem;text-align:center}
-        .stat-num{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#00ffff,#0099ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .stat-lbl{font-size:.85rem;color:rgba(255,255,255,.65);margin-top:.3rem}
-
-        /* FAQ */
-        .faq-list{margin:2rem 0}
-        .faq-item{border:1px solid rgba(0,153,255,.2);border-radius:12px;margin-bottom:.8rem;overflow:hidden}
-        .faq-q{padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#fff;background:rgba(0,153,255,.05);transition:background .2s}
-        .faq-q:hover{background:rgba(0,153,255,.12)}
-        .faq-q .arrow{color:#00ffff;transition:transform .3s;font-size:1.2rem}
-        .faq-a{padding:0 1.5rem;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;color:rgba(255,255,255,.7);font-size:.9rem;line-height:1.6}
-        .faq-item.open .faq-a{max-height:200px;padding:1rem 1.5rem}
-        .faq-item.open .arrow{transform:rotate(180deg)}
-
-        .section-title-left{font-size:1.4rem;font-weight:700;background:linear-gradient(135deg,#00ffff,#0099ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.5rem}
-
-        @media(max-width:768px){.page-hero{padding:4rem 1rem 2rem}.app-cta-row{flex-direction:column;align-items:center}}
-    
+  .auth-page-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 3rem 0;
+  }
+  .auth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .auth-welcome-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .auth-welcome-panel h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--color-teal), var(--color-blue), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .auth-welcome-panel p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .auth-welcome-panel .badge {
+    display: inline-block;
+    align-self: flex-start;
+    background: rgba(0, 242, 255, 0.1);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    color: var(--color-teal);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .auth-welcome-panel .divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-blue));
+    border-radius: 2px;
+  }
+  .features-list {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .feature-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .feature-item .icon-wrap {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: var(--border-glass);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-teal);
+    flex-shrink: 0;
+  }
+  .feature-item strong {
+    display: block;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  .feature-item span {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+  
+  .auth-form-panel {
+    display: flex;
+    justify-content: center;
+  }
+  .auth-card {
+    width: 100%;
+    max-width: 460px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  }
+  .auth-card:hover {
+    border-color: rgba(0, 242, 255, 0.3);
+    box-shadow: var(--shadow-glow-active);
+  }
+  .auth-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 2rem;
+  }
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.75rem 0;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    position: relative;
+  }
+  .tab-btn.active {
+    color: var(--color-teal);
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-teal);
+    box-shadow: 0 0 10px var(--color-teal);
+  }
+  .auth-alert {
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .auth-alert.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+  }
+  .auth-alert.success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #a7f3d0;
+  }
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+  .form-control {
+    background: rgba(0, 0, 0, 0.4);
+    border: var(--border-glass);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    width: 100%;
+  }
+  .form-control:focus {
+    outline: none;
+    border-color: var(--color-teal);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+  }
+  select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 2.5rem;
+  }
+  .auth-submit-btn {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    border: none;
+    border-radius: 50px;
+    color: #000;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 0;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 136, 255, 0.3);
+  }
+  .auth-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 242, 255, 0.5);
+  }
+  .auth-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .form-toggle-link {
+    font-size: 0.85rem;
+    color: var(--color-teal);
+    text-align: center;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: var(--transition-smooth);
+  }
+  .form-toggle-link:hover {
+    color: var(--color-blue);
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 992px) {
+    .auth-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .auth-page-container {
+      padding: 1rem 0 3rem;
+    }
+    .auth-welcome-panel {
+      text-align: center;
+      align-items: center;
+    }
+    .auth-welcome-panel .divider {
+      margin: 0 auto;
+    }
+    .features-list {
+      text-align: left;
+    }
+  }
 </style>

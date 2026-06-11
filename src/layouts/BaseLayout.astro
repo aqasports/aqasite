@@ -90,6 +90,27 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
   <!-- Language persistence & redirection script -->
   <script is:inline>
     (function() {
+      let astroReferrer = '';
+      
+      // Track previous page client-side when using Astro's view transitions
+      document.addEventListener('astro:before-preparation', function() {
+        astroReferrer = window.location.pathname;
+      });
+
+      // Listen to language switcher clicks to update the preference before navigation
+      if (!window.aqaLangListenerInit) {
+        document.addEventListener('click', function(e) {
+          const btn = e.target.closest('[data-lang-btn]');
+          if (btn) {
+            const targetLang = btn.getAttribute('data-lang-btn');
+            if (targetLang) {
+              localStorage.setItem('aqa_lang', targetLang);
+            }
+          }
+        });
+        window.aqaLangListenerInit = true;
+      }
+
       function checkLang() {
         if (typeof localStorage === 'undefined') return;
         
@@ -104,11 +125,15 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
           if (savedLang && supportedLangs.includes(savedLang)) {
             const referrer = document.referrer;
             const currentOrigin = window.location.origin;
-            const isFromOurSite = referrer && referrer.startsWith(currentOrigin);
-            const isExplicitFR = isFromOurSite && (referrer.includes('/ar') || referrer.includes('/en'));
+            const isFromOurSite = (referrer && referrer.startsWith(currentOrigin)) || !!astroReferrer;
+            
+            // Check if the previous page (client-side or full-reload) had a language prefix
+            const prevPath = astroReferrer || (isFromOurSite ? new URL(referrer).pathname : '');
+            const isExplicitFR = prevPath.startsWith('/ar') || prevPath.startsWith('/en');
             
             if (isExplicitFR) {
               localStorage.setItem('aqa_lang', 'fr');
+              astroReferrer = ''; // reset after handling
             } else {
               const targetPath = '/' + savedLang + (path === '/' ? '' : path);
               window.location.href = targetPath;
@@ -137,8 +162,8 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
   <slot name="head" />
 </head>
 <body>
-  <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true"></iframe>
-  <div class="bg-logo"></div>
+  <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true" transition:persist transition:animate="none"></iframe>
+  <div class="bg-logo" transition:persist transition:animate="none"></div>
   <slot />
 </body>
 </html>

@@ -37,7 +37,7 @@ const getRelativePath = (path, targetLang) => {
 
   <!-- Floating CTA Button -->
   <a href={getRelativePath('/cards', lang)} class="floating-btn" aria-label="Voir les nouvelles formules AQA">
-    {t('floating_btn', '✨ Nouvelles formules')}
+    {t('floating_btn', 'Nouvelles formules')}
   </a>
 
   <!-- Loading Screen -->
@@ -48,6 +48,17 @@ const getRelativePath = (path, targetLang) => {
     </div>
     <div class="loading-text">{t('loading_text', 'CHARGEMENT...')}</div>
   </div>
+  <script is:inline>
+    (function() {
+      if (sessionStorage.getItem('aqa_loaded')) {
+        const loader = document.getElementById('loadingScreen');
+        if (loader) {
+          loader.style.display = 'none';
+          loader.classList.add('hidden');
+        }
+      }
+    })();
+  </script>
 
   <div class="container">
     <!-- Hero Section -->
@@ -409,73 +420,82 @@ const getRelativePath = (path, targetLang) => {
 </BaseLayout>
 
 <script is:inline>
-  // Hide loader
   document.addEventListener('astro:page-load', () => {
-    setTimeout(() => {
-      const loader = document.getElementById('loadingScreen');
-      if (loader) loader.classList.add('hidden');
-    }, 1200);
-  });
-
-  // Intersection Observer for Sections to animate appearance
-  const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px'
-  };
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        
-        // Stat Cards animate
-        entry.target.querySelectorAll('.stat-card').forEach((card, index) => {
-          setTimeout(() => {
-            card.classList.add('visible');
-            const num = card.querySelector('.stat-number');
-            if (num && !card.classList.contains('counted')) {
-              card.classList.add('counted');
-              animateNumber(num);
-            }
-          }, index * 100);
-        });
-
-        // Navigation Buttons animate
-        entry.target.querySelectorAll('.nav-btn').forEach((btn, index) => {
-          setTimeout(() => {
-            btn.classList.add('visible');
-          }, index * 40);
-        });
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.section, .hero').forEach(sec => {
-    sectionObserver.observe(sec);
-  });
-
-  function animateNumber(element) {
-    const target = parseInt(element.getAttribute('data-target') || 0);
-    const suffix = element.getAttribute('data-suffix') || '';
-    const duration = 2000;
-    let current = 0;
-    const increment = target / 60;
-    
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        element.textContent = target + suffix;
-        clearInterval(timer);
+    // Hide loader
+    const loader = document.getElementById('loadingScreen');
+    if (loader) {
+      if (sessionStorage.getItem('aqa_loaded')) {
+        loader.style.display = 'none';
+        loader.classList.add('hidden');
       } else {
-        element.textContent = Math.floor(current) + suffix;
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          sessionStorage.setItem('aqa_loaded', 'true');
+        }, 1200);
       }
-    }, duration / 60);
-  }
+    }
+
+    // Intersection Observer for Sections to animate appearance
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px'
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Stat Cards animate
+          entry.target.querySelectorAll('.stat-card').forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('visible');
+              const num = card.querySelector('.stat-number');
+              if (num && !card.classList.contains('counted')) {
+                card.classList.add('counted');
+                animateNumber(num);
+              }
+            }, index * 100);
+          });
+
+          // Navigation Buttons animate
+          entry.target.querySelectorAll('.nav-btn').forEach((btn, index) => {
+            setTimeout(() => {
+              btn.classList.add('visible');
+            }, index * 40);
+          });
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section, .hero').forEach(sec => {
+      sectionObserver.observe(sec);
+    });
+
+    function animateNumber(element) {
+      const target = parseInt(element.getAttribute('data-target') || 0);
+      const suffix = element.getAttribute('data-suffix') || '';
+      const duration = 2000;
+      let current = 0;
+      const increment = target / 60;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current) + suffix;
+        }
+      }, duration / 60);
+    }
+  });
 
   // Toggle We Listen Drawer
-  function toggleListenSection() {
+  window.toggleListenSection = function() {
     const btn = document.getElementById('listenBtn');
     const content = document.getElementById('listenContent');
+    if (!btn || !content) return;
     
     btn.classList.toggle('active');
     content.classList.toggle('open');
@@ -485,7 +505,7 @@ const getRelativePath = (path, targetLang) => {
         content.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 300);
     }
-  }
+  };
 </script>
 
 <style>

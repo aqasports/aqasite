@@ -85,8 +85,7 @@ function injectWhatsAppWidget() {
 }
 
 // ─── DOM Ready ────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function () {
-
+function initAqaNavbar() {
     // Close mobile menu on nav link click
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
         link.addEventListener('click', () => {
@@ -102,35 +101,50 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Auto-close on resize to desktop
-    window.addEventListener('resize', () => {
+    // Auto-close on resize to desktop (prevent duplicate listener)
+    if (window.aqaNavbarResizeListener) {
+        window.removeEventListener('resize', window.aqaNavbarResizeListener);
+    }
+    window.aqaNavbarResizeListener = () => {
         if (window.innerWidth > 768 && mobileMenuActive) toggleMobileMenu();
-    });
+    };
+    window.addEventListener('resize', window.aqaNavbarResizeListener);
 
-    // Scroll-hide header
+    // Scroll-hide header (prevent duplicate listener)
     let lastScrollY = window.scrollY;
     const header = document.querySelector('header');
     if (header) {
-        window.addEventListener('scroll', () => {
+        if (window.aqaHeaderScrollListener) {
+            window.removeEventListener('scroll', window.aqaHeaderScrollListener);
+        }
+        window.aqaHeaderScrollListener = () => {
             if (window.scrollY > lastScrollY && window.scrollY > 100) {
                 header.style.transform = 'translateY(-100%)';
             } else {
                 header.style.transform = 'translateY(0)';
             }
             lastScrollY = window.scrollY;
-        });
+        };
+        window.addEventListener('scroll', window.aqaHeaderScrollListener);
     }
 
-    // Prevent double-tap zoom on iOS — passive listener so it does NOT block scroll
+    // Prevent double-tap zoom on iOS (prevent duplicate listener)
     let lastTouchEnd = 0;
-    document.addEventListener('touchend', e => {
+    if (window.aqaTouchendListener) {
+        document.removeEventListener('touchend', window.aqaTouchendListener);
+    }
+    window.aqaTouchendListener = e => {
         const now = Date.now();
         if (now - lastTouchEnd <= 300 && e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
-            // do NOT call preventDefault here — it blocks scroll on touch/trackpad
+            // do NOT call preventDefault here
         }
         lastTouchEnd = now;
-    }, { passive: true });
+    };
+    document.addEventListener('touchend', window.aqaTouchendListener, { passive: true });
 
     // Inject WhatsApp widget
     injectWhatsAppWidget();
-});
+}
+
+document.addEventListener('DOMContentLoaded', initAqaNavbar);
+document.addEventListener('astro:page-load', initAqaNavbar);

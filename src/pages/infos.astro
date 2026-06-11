@@ -161,21 +161,30 @@ const getRelativePath = (path, targetLang) => {
 
   <script>
     document.addEventListener('astro:page-load', () => {
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-    }
-    // Simple active dot update
-    window.addEventListener('scroll', () => {
-      const dots = document.querySelectorAll('.nav-dot');
-      const sections = ['hero', 'vision', 'disciplines', 'method', 'team', 'advantages', 'cta'];
-      sections.forEach((id, i) => {
-        const rect = document.getElementById(id).getBoundingClientRect();
-        if (rect.top <= 150 && rect.bottom >= 150) dots[i].classList.add('active');
-        else dots[i].classList.remove('active');
-      });
+        (window as any).scrollToSection = function(id) {
+            const el = document.getElementById(id);
+            if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+        };
+
+        const updateActiveDots = () => {
+            const dots = document.querySelectorAll('.nav-dot');
+            const sections = ['hero', 'vision', 'disciplines', 'method', 'team', 'advantages', 'cta'];
+            sections.forEach((id, i) => {
+                const sec = document.getElementById(id);
+                if (sec && dots[i]) {
+                    const rect = sec.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 150) dots[i].classList.add('active');
+                    else dots[i].classList.remove('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', updateActiveDots);
+
+        document.addEventListener('astro:before-swap', () => {
+            window.removeEventListener('scroll', updateActiveDots);
+        }, { once: true });
     });
-      });
   </script>
 
   <Footer  lang={lang} />

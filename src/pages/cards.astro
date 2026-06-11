@@ -36,7 +36,7 @@ const getRelativePath = (path, targetLang) => {
     <div class="pricing-cards" id="cards">
       <!-- Starter -->
       <div class="card" role="button" aria-expanded="false">
-        <img src="images/1.webp" alt="Starter">
+        <img src="/images/1.webp" alt="Starter">
         <div class="features">
           <h3>Starter (1 mois)</h3>
           <ul>
@@ -49,7 +49,7 @@ const getRelativePath = (path, targetLang) => {
       
       <!-- Silver -->
       <div class="card" role="button" aria-expanded="false">
-        <img src="images/2.webp" alt="Silver">
+        <img src="/images/2.webp" alt="Silver">
         <div class="features">
           <h3>Silver (3 mois)</h3>
           <ul>
@@ -64,7 +64,7 @@ const getRelativePath = (path, targetLang) => {
       
       <!-- Gold -->
       <div class="card" role="button" aria-expanded="false">
-        <img src="images/3.webp" alt="Gold">
+        <img src="/images/3.webp" alt="Gold">
         <div class="features">
           <h3>Gold (6 mois)</h3>
           <ul>
@@ -81,7 +81,7 @@ const getRelativePath = (path, targetLang) => {
       
       <!-- Diamond -->
       <div class="card" role="button" aria-expanded="false">
-        <img src="images/4.webp" alt="Diamond">
+        <img src="/images/4.webp" alt="Diamond">
         <div class="features">
           <h3>Diamond (9 mois)</h3>
           <ul>
@@ -240,7 +240,6 @@ const getRelativePath = (path, targetLang) => {
 
 
 // ===== Cards toggle =====
-document.addEventListener('DOMContentLoaded', function() {
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     card.addEventListener('click', () => {
@@ -255,7 +254,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-});
 
 // ===== Video analysis popup =====
 const videoLinks = document.querySelectorAll('.video-link');
@@ -267,7 +265,7 @@ videoLinks.forEach(link => {
 });
 
 function openVideoPopup() {
-    closeAppPopup(); // ✅ ensure only video popup is open
+    closeAppPopup(); // ensure only video popup is open
     const popup = document.getElementById('videoPopup');
     if (popup) {
         popup.classList.add('active');
@@ -298,7 +296,7 @@ appLinks.forEach(link => {
 });
 
 function openAppPopup() {
-    closeVideoPopup(); // ✅ ensure only app popup is open
+    closeVideoPopup(); // ensure only app popup is open
     const popup = document.getElementById('appPopup');
     if (popup) {
         popup.classList.add('active');
