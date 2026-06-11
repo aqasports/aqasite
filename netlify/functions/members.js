@@ -53,14 +53,50 @@ async function supabaseFetch(urlPath, options = {}) {
 }
 
 // Helper: adjust schedule slot taken count in Supabase
+// Uses an atomic PostgreSQL RPC function to prevent race conditions (overbooking).
+// Falls back to the old read-then-write approach if the RPC is unavailable.
 async function adjustSlotTaken(poolKey, category, coachName, day, time, increment) {
+  try {
+    // Attempt atomic update via Supabase RPC (eliminates race condition)
+    const rpcUrl = `${SUPABASE_URL}/rest/v1/rpc/adjust_slot_taken`;
+    const rpcRes = await fetch(rpcUrl, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        p_pool_key: poolKey,
+        p_category: category,
+        p_coach_name: coachName,
+        p_day: day,
+        p_time: time,
+        p_increment: increment
+      })
+    });
+
+    if (rpcRes.ok) {
+      const result = await rpcRes.json();
+      if (result && result.success === false) {
+        console.warn('Atomic slot update rejected:', result.error);
+        return false;
+      }
+      return true;
+    }
+    // If RPC returns non-ok status, fall through to legacy path
+    console.warn('RPC adjust_slot_taken returned non-ok status, falling back to legacy update.');
+  } catch (e) {
+    console.error('Error calling atomic slot RPC, falling back:', e);
+  }
+
+  // Legacy fallback: read-then-write (race-prone but safe for low concurrency)
   try {
     const queryParams = `pool_key=eq.${encodeURIComponent(poolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(coachName)}&day=eq.${encodeURIComponent(day)}&time=eq.${encodeURIComponent(time)}`;
     const rows = await supabaseFetch(`schedule?${queryParams}`);
     if (rows && rows.length > 0) {
       const slot = rows[0];
       const newTaken = Math.max(0, Math.min(slot.total, slot.taken + increment));
-      
       await supabaseFetch(`schedule?${queryParams}`, {
         method: 'PATCH',
         body: JSON.stringify({ taken: newTaken })
@@ -68,7 +104,7 @@ async function adjustSlotTaken(poolKey, category, coachName, day, time, incremen
       return true;
     }
   } catch (e) {
-    console.error('Error adjusting slot taken in Supabase:', e);
+    console.error('Error adjusting slot taken in Supabase (fallback):', e);
   }
   return false;
 }

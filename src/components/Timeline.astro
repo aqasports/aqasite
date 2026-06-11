@@ -1,0 +1,83 @@
+---
+export interface Props {
+  noDataText?: string;
+}
+const { noDataText = "Aucun historique disponible" } = Astro.props;
+---
+<div class="history-timeline" id="historyTimeline">
+  <div class="no-data-msg">{noDataText}</div>
+</div>
+
+<style>
+  .history-timeline {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .history-timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Style for history-item dynamic content */
+  :global(.history-item) {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  :global(.history-item:last-child) {
+    margin-bottom: 0;
+  }
+  :global(.history-dot) {
+    position: absolute;
+    left: -23px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 242, 255, 0.5);
+    border: 2px solid rgb(10, 15, 30);
+    box-shadow: 0 0 8px rgba(0, 242, 255, 0.6);
+  }
+  :global(.history-item:nth-child(even) .history-dot) {
+    background: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+  }
+  :global(.history-content) {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: var(--transition-smooth);
+  }
+  :global(.history-content:hover) {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(0, 242, 255, 0.15);
+    transform: translateX(3px);
+  }
+  :global(.history-header-row) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.35rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  :global(.history-event-title) {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  :global(.history-date) {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  :global(.history-details) {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>

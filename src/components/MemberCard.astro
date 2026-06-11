@@ -1,0 +1,179 @@
+---
+export interface Props {
+  scanTooltip?: string;
+}
+
+const { scanTooltip = "Scanner pour entrer" } = Astro.props;
+---
+
+<div id="memberCard" class="virtual-card">
+  <div class="card-shine"></div>
+  <div class="card-chip"></div>
+  <div class="card-logo">AQA SPORTS</div>
+  <div class="card-tier-label" id="cardTier">Tier</div>
+  <div class="card-number" id="cardId">ID: AQA-0000</div>
+  <div class="card-holder" id="cardHolder">NAME</div>
+  <div class="card-expiry" id="cardExpiry">Expiry</div>
+  <div class="card-qr-box">
+    <img id="cardQrCode" src="" alt="Scan QR">
+    <span class="qr-tooltip">{scanTooltip}</span>
+  </div>
+</div>
+
+<style>
+  .virtual-card {
+    width: 100%;
+    max-width: 370px;
+    aspect-ratio: 5 / 3;
+    border-radius: 20px;
+    padding: 1.5rem;
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+  }
+  .card-shine {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 65%);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+  .virtual-card:hover .card-shine {
+    opacity: 1;
+  }
+  .virtual-card > * {
+    position: relative;
+    z-index: 3;
+  }
+  .card-chip {
+    display: none;
+  }
+  .card-logo {
+    display: none;
+  }
+  .card-tier-label {
+    position: absolute;
+    left: 45%;
+    top: 22%;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--color-teal);
+    text-transform: uppercase;
+    opacity: 0.95;
+  }
+  .card-number {
+    position: absolute;
+    left: 45%;
+    top: 54%;
+    font-family: monospace;
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    margin: 0;
+  }
+  .card-holder {
+    position: absolute;
+    left: 45%;
+    top: 38%;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50%;
+  }
+  .card-expiry {
+    position: absolute;
+    left: 45%;
+    top: 68%;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+  }
+  .card-qr-box {
+    position: absolute;
+    left: 9%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22%;
+    height: 22%;
+    background: #fff;
+    padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-qr-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .qr-tooltip {
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: var(--color-teal);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+  }
+  .card-qr-box:hover .qr-tooltip {
+    opacity: 1;
+    bottom: 115%;
+  }
+
+  /* Holographic Tier Colors */
+  .card-tier-starter {
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_starter.png') no-repeat center center / cover;
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
+  }
+  .card-tier-silver {
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_silver.png') no-repeat center center / cover;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  }
+  .card-tier-gold {
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_gold.png') no-repeat center center / cover;
+    border-color: rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.25);
+  }
+  .card-tier-diamond {
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_diamond.png') no-repeat center center / cover;
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.4);
+  }
+  .card-tier-emerald {
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('/images/card_emerald.png') no-repeat center center / cover;
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 35px rgba(16, 185, 129, 0.4);
+  }
+</style>

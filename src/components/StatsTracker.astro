@@ -1,0 +1,134 @@
+---
+/**
+ * StatsTracker.astro
+ * Premium animated KPI stat card for admin dashboard.
+ * Accepts: label, value, icon (svg string), trend (number, e.g. +5), color ('teal'|'gold'|'pink'|'green')
+ */
+export interface Props {
+  label: string;
+  valueId: string;
+  icon?: string;
+  color?: 'teal' | 'gold' | 'pink' | 'green';
+  trendId?: string;
+}
+
+const { label, valueId, icon, color = 'teal', trendId } = Astro.props;
+
+const colorMap = {
+  teal:  { accent: '#00f2ff', glow: 'rgba(0,242,255,0.15)', bg: 'rgba(0,242,255,0.05)' },
+  gold:  { accent: '#ffd700', glow: 'rgba(255,215,0,0.15)',  bg: 'rgba(255,215,0,0.05)'  },
+  pink:  { accent: '#ff6eb4', glow: 'rgba(255,110,180,0.15)',bg: 'rgba(255,110,180,0.05)'},
+  green: { accent: '#00e676', glow: 'rgba(0,230,118,0.15)', bg: 'rgba(0,230,118,0.05)'  },
+};
+const c = colorMap[color];
+---
+
+<div class="stats-tracker-card" style={`--accent:${c.accent};--glow:${c.glow};--bg:${c.bg}`}>
+  {icon && (
+    <div class="st-icon" set:html={icon} />
+  )}
+  <div class="st-body">
+    <div class="st-value" id={valueId}>—</div>
+    <div class="st-label">{label}</div>
+    {trendId && (
+      <div class="st-trend" id={trendId}></div>
+    )}
+  </div>
+  <div class="st-shimmer"></div>
+</div>
+
+<style>
+  .stats-tracker-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.4rem 1.6rem;
+    background: linear-gradient(135deg, var(--bg) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid var(--accent);
+    border-opacity: 0.25;
+    border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px var(--glow), inset 0 0 0 1px rgba(255,255,255,0.04);
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    cursor: default;
+  }
+  .stats-tracker-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 40px var(--glow), inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  /* Shimmer on hover */
+  .st-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.05) 50%, transparent 75%);
+    transform: translateX(-100%);
+    transition: transform 0s;
+  }
+  .stats-tracker-card:hover .st-shimmer {
+    animation: shimmer-sweep 0.6s ease forwards;
+  }
+  @keyframes shimmer-sweep {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(100%); }
+  }
+
+  /* Icon */
+  .st-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glow);
+    border-radius: 12px;
+    color: var(--accent);
+    font-size: 1.6rem;
+  }
+  .st-icon :global(svg) {
+    width: 26px;
+    height: 26px;
+    color: var(--accent);
+    filter: drop-shadow(0 0 6px var(--accent));
+  }
+
+  /* Body */
+  .st-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .st-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 20px var(--accent);
+    transition: opacity 0.3s;
+  }
+  .st-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.45);
+    font-weight: 600;
+  }
+  .st-trend {
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+  }
+  .st-trend.up   { color: #00e676; }
+  .st-trend.down { color: #ff5252; }
+  .st-trend.flat { color: rgba(255,255,255,0.35); }
+
+  /* Count-up animation class (JS will trigger) */
+  .st-value.loading {
+    opacity: 0.3;
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import StatsTracker from '../components/StatsTracker.astro';
 
 import scheduleData from '../data/schedule.json';
 
@@ -234,63 +235,44 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
 
-        <div class="stats-grid">
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
 
-          <div class="stat-card">
+          <StatsTracker
+            label="Infrastructures"
+            valueId="dashInfraCount"
+            color="teal"
+            icon={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`}
+          />
 
-            <div class="stat-icon icon-blue">INF</div>
+          <StatsTracker
+            label="Formations Actives"
+            valueId="dashFormationsCount"
+            color="gold"
+            icon={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>`}
+          />
 
-            <div class="stat-info">
+          <StatsTracker
+            label="Capacité Totale"
+            valueId="dashCapacity"
+            color="teal"
+            icon={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`}
+          />
 
-              <span class="stat-label">Infrastructures</span>
+          <StatsTracker
+            label="Créneaux Pris"
+            valueId="dashTaken"
+            color="pink"
+            trendId="dashTakenTrend"
+            icon={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>`}
+          />
 
-              <span class="stat-value" id="dashInfraCount">0</span>
-
-            </div>
-
-          </div>
-
-          <div class="stat-card">
-
-            <div class="stat-icon icon-teal">FOR</div>
-
-            <div class="stat-info">
-
-              <span class="stat-label">Formations Actives</span>
-
-              <span class="stat-value" id="dashFormationsCount">0</span>
-
-            </div>
-
-          </div>
-
-          <div class="stat-card">
-
-            <div class="stat-icon icon-cyan">MEM</div>
-
-            <div class="stat-info">
-
-              <span class="stat-label">Capacité Totale</span>
-
-              <span class="stat-value" id="dashCapacity">0</span>
-
-            </div>
-
-          </div>
-
-          <div class="stat-card">
-
-            <div class="stat-icon icon-purple">OK</div>
-
-            <div class="stat-info">
-
-              <span class="stat-label">Inscriptions</span>
-
-              <span class="stat-value" id="dashTaken">0</span>
-
-            </div>
-
-          </div>
+          <StatsTracker
+            label="Membres Actifs"
+            valueId="dashActiveMembersCount"
+            color="green"
+            trendId="dashMembersTrend"
+            icon={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`}
+          />
 
         </div>
 
@@ -1907,6 +1889,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
     renderInfrastructures();
     initCountersInput();
     updateDashboardStats();
+    fetchLiveMemberCount();
   }
 
 
@@ -2048,31 +2031,29 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
       const locOccupancy = locCapacity > 0 ? Math.round((locTaken / locCapacity) * 100) : 0;
+      const chartColorClass = locOccupancy > 85 ? 'chart-red' : 'chart-teal';
+      const progressBgColor = locOccupancy > 85 ? '#ef4444' : '#00f2ff';
 
       const row = document.createElement('div');
-
       row.className = 'dash-location-row';
-
       row.innerHTML = `
-
-        <div class="loc-row-header">
-
-          <strong>${loc.name || locKey}</strong>
-
-          <span>${locTaken}/${locCapacity} places (${locOccupancy}%)</span>
-
+        <div class="dash-location-info">
+          <div class="loc-row-header">
+            <strong>${loc.name || locKey}</strong>
+            <span>${locTaken}/${locCapacity} places</span>
+          </div>
+          <div class="tel-bar-wrap">
+            <div class="tel-bar" style="width: ${locOccupancy}%; background-color: ${progressBgColor}"></div>
+          </div>
         </div>
-
-        <div class="tel-bar-wrap">
-
-          <div class="tel-bar" style="width: ${locOccupancy}%; background-color: ${locOccupancy > 85 ? '#ef4444' : '#00f2ff'}"></div>
-
-        </div>
-
+        <svg viewBox="0 0 36 36" class="circular-chart ${chartColorClass}">
+          <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          <path class="circle" stroke-dasharray="${locOccupancy}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          <text x="18" y="20.35" class="percentage">${locOccupancy}%</text>
+        </svg>
       `;
 
       locationStatsContainer.appendChild(row);
-
     });
 
 
@@ -2081,7 +2062,14 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     document.getElementById('dashTaken').textContent = globalTaken;
 
-
+    // Trend for taken slots
+    const takenTrendEl = document.getElementById('dashTakenTrend');
+    if (takenTrendEl) {
+      const ratio = globalCapacity > 0 ? Math.round((globalTaken / globalCapacity) * 100) : 0;
+      const cls = ratio >= 85 ? 'up' : (ratio < 30 ? 'down' : 'flat');
+      takenTrendEl.textContent = `${ratio}% d'occupation`;
+      takenTrendEl.className = `st-trend ${cls}`;
+    }
 
     if (alertsContainer.children.length === 0) {
 
@@ -2089,6 +2077,51 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     }
 
+  }
+
+  // Count-up animation for StatsTracker .st-value elements
+  function animateCountUp(el, target) {
+    if (isNaN(target) || target === 0) { el.textContent = target; return; }
+    let start = 0;
+    const step = Math.max(1, Math.ceil(target / 50));
+    el.textContent = '0';
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = start;
+      if (start >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  // Live member count from admin API
+  async function fetchLiveMemberCount() {
+    const membersTrendEl = document.getElementById('dashMembersTrend');
+    const membersCountEl = document.getElementById('dashActiveMembersCount');
+    if (!membersCountEl) return;
+    try {
+      const token = localStorage.getItem('adminToken');
+      if (!token) return;
+      const res = await fetch('/api/admin/members', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      let members = [];
+      if (data && Array.isArray(data.members)) members = data.members;
+      else if (data && Array.isArray(data)) members = data;
+      const active = members.filter(m => m.status === 'active').length;
+      const pending = members.filter(m => m.status === 'pending').length;
+      animateCountUp(membersCountEl, active);
+      if (membersTrendEl && pending > 0) {
+        membersTrendEl.textContent = `${pending} en attente`;
+        membersTrendEl.className = 'st-trend up';
+      } else if (membersTrendEl) {
+        membersTrendEl.textContent = 'Tous actifs ✓';
+        membersTrendEl.className = 'st-trend flat';
+      }
+    } catch (err) {
+      console.warn('[Admin] Could not fetch live member count:', err);
+      if (membersCountEl) membersCountEl.textContent = '—';
+    }
   }
 
 
@@ -4488,7 +4521,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
   .dash-location-stats { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem; }
 
-  .dash-location-row { display: flex; flex-direction: column; gap: 6px; }
+  .dash-location-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.02); }
+
+  .dash-location-row:last-child { border-bottom: none; }
+
+  .dash-location-info { display: flex; flex-direction: column; gap: 8px; flex: 1; }
 
   .loc-row-header { display: flex; justify-content: space-between; font-size: 0.9rem; }
 
@@ -4906,7 +4943,40 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     }
 
+  /* Circular SVG gauge */
+  .circular-chart {
+    display: block;
+    max-width: 50px;
+    max-height: 50px;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
   }
-
+  .circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.04);
+    stroke-width: 3.8;
+  }
+  .circle {
+    fill: none;
+    stroke-width: 3.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.8s ease;
+  }
+  .chart-teal .circle {
+    stroke: #00f2ff;
+    filter: drop-shadow(0 0 3px rgba(0, 242, 255, 0.4));
+  }
+  .chart-red .circle {
+    stroke: #ef4444;
+    filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.4));
+  }
+  .percentage {
+    fill: #fff;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-anchor: middle;
+  }
 </style>
 
