@@ -24,6 +24,13 @@ const pageTranslations = {
     hello: "Bonjour",
     xpText: "XP points",
     
+    // Tabs
+    tabProfile: "Mon Profil & Carte",
+    tabTech: "Suivi Technique & Presences",
+    tabGallery: "Recompenses & Galerie",
+    tabActivities: "Sports & Activites",
+    tabWizard: "Rejoindre l'Academie",
+    
     // Pending approval state
     pendingTitle: "Compte en cours de validation",
     pendingDesc: "Votre demande d'adhesion a l'academie AQA est en cours de validation par nos administrateurs. Des que votre inscription sera verifiee, vous aurez acces a vos statistiques, votre badge et votre suivi technique.",
@@ -88,7 +95,30 @@ const pageTranslations = {
     slotsPreviewTitle: "Apercu des Places Disponibles",
     placesLeft: "place restante",
     placesLeftPlural: "places restantes",
-    slotFull: "Complet"
+    slotFull: "Complet",
+    
+    // Wizard
+    wizStep1: "Categorie",
+    wizStep2: "Piscine",
+    wizStep3: "Formule",
+    wizStep4: "Creneau",
+    wizStep5: "Validation",
+    wizCategoryTitle: "Choisissez votre categorie",
+    wizPoolTitle: "Choisissez votre piscine partner",
+    wizFormulaTitle: "Choisissez votre formule d'adhesion",
+    wizSlotTitle: "Choisissez votre creneau & coach",
+    wizValidationTitle: "Reglement & Validation",
+    wizSelectCategory: "Selectionnez une categorie",
+    wizSelectPool: "Selectionnez une piscine",
+    wizSelectFormula: "Selectionnez une formule",
+    wizSelectSlot: "Selectionnez un creneau disponible",
+    wizRulesLabel: "Je m'engage a respecter le reglement de l'academie AQA Sports :",
+    wizRule1: "Je fournirai un certificat medical d'aptitude de moins de 3 mois.",
+    wizRule2: "Je respecterai l'hygiene de la piscine (bonnet obligatoire, douche avant acces).",
+    wizRule3: "Je m'engage a respecter les horaires et le coach attribue.",
+    wizSubmit: "Soumettre ma demande d'adhesion",
+    wizPrev: "Precedent",
+    wizNext: "Suivant"
   },
   ar: {
     metaTitle: "لوحة تحكم العضو | اكاديمية اكا الرياضية",
@@ -97,6 +127,12 @@ const pageTranslations = {
     backToHome: "العودة للرئيسية",
     hello: "مرحبا",
     xpText: "نقطة خبرة",
+    
+    tabProfile: "ملفي وبطاقتي",
+    tabTech: "المتابعة والغياب",
+    tabGallery: "الجوائز والمعرض",
+    tabActivities: "الرياضات والنشاطات",
+    tabWizard: "الانضمام للأكاديمية",
     
     pendingTitle: "الحساب قيد المراجعة",
     pendingDesc: "طلب انضمامك الى اكاديمية اكا قيد التحقق من طرف الادارة. بمجرد تاكيد تسجيلك، ستتمكن من الوصول الى احصائياتك، شاراتك ومتابعتك التقنية.",
@@ -159,7 +195,29 @@ const pageTranslations = {
     slotsPreviewTitle: "عرض الاماكن المتاحة",
     placesLeft: "مكان شاغر",
     placesLeftPlural: "اماكن شاغرة",
-    slotFull: "مكتمل"
+    slotFull: "مكتمل",
+    
+    wizStep1: "الفئة",
+    wizStep2: "المسبح",
+    wizStep3: "الصيغة",
+    wizStep4: "الحصة",
+    wizStep5: "التأكيد",
+    wizCategoryTitle: "اختر فئة التدريب الخاصة بك",
+    wizPoolTitle: "اختر المسبح المفضل لديك",
+    wizFormulaTitle: "اختر صيغة الاشتراك المناسبة",
+    wizSlotTitle: "اختر الحصة المتاحة والمدرب",
+    wizValidationTitle: "شروط العضوية والتأكيد",
+    wizSelectCategory: "يرجى اختيار الفئة",
+    wizSelectPool: "يرجى اختيار المسبح",
+    wizSelectFormula: "يرجى اختيار الصيغة",
+    wizSelectSlot: "اختر حصة تدريبية مناسبة",
+    wizRulesLabel: "أتعهد بالالتزام بالقانون الداخلي لأكاديمية أكا الرياضية :",
+    wizRule1: "سأقدم شهادة طبية تثبت قدرتي البدنية لا تتجاوز 3 أشهر.",
+    wizRule2: "سألتزم بقواعد النظافة الخاصة بالمسبح (الغطاء الإلزامي والاستحمام).",
+    wizRule3: "أتعهد باحترام المواعيد المحددة والمدرب الموجه لي.",
+    wizSubmit: "إرسال طلب الانضمام",
+    wizPrev: "السابق",
+    wizNext: "التالي"
   },
   en: {
     metaTitle: "Member Dashboard | AQA Sports Academy",
@@ -168,6 +226,12 @@ const pageTranslations = {
     backToHome: "Back to Home",
     hello: "Hello",
     xpText: "XP points",
+    
+    tabProfile: "My Profile & Card",
+    tabTech: "Tech Progress & Presence",
+    tabGallery: "Rewards & Gallery",
+    tabActivities: "Sports & Activities",
+    tabWizard: "Join the Academy",
     
     pendingTitle: "Account Pending Approval",
     pendingDesc: "Your AQA Academy registration request is currently under review by our administrators. Once validated, you will get access to your stats, virtual card badge, and tech evaluation.",
@@ -230,19 +294,41 @@ const pageTranslations = {
     slotsPreviewTitle: "Available Slots Preview",
     placesLeft: "place left",
     placesLeftPlural: "places left",
-    slotFull: "Fully Booked"
+    slotFull: "Fully Booked",
+    
+    wizStep1: "Category",
+    wizStep2: "Pool",
+    wizStep3: "Formula",
+    wizStep4: "Slot",
+    wizStep5: "Validation",
+    wizCategoryTitle: "Select your category",
+    wizPoolTitle: "Select your partner pool location",
+    wizFormulaTitle: "Select your formula tier",
+    wizSlotTitle: "Select your slot & coach",
+    wizValidationTitle: "Regulations & Validation",
+    wizSelectCategory: "Please choose a category",
+    wizSelectPool: "Please choose a pool",
+    wizSelectFormula: "Please choose a formula",
+    wizSelectSlot: "Choose an available training slot",
+    wizRulesLabel: "I pledge to respect the AQA Sports Academy internal regulations:",
+    wizRule1: "I will provide a valid medical certificate of physical fitness (less than 3 months old).",
+    wizRule2: "I will respect pool hygiene guidelines (compulsory cap and shower before entry).",
+    wizRule3: "I will respect scheduled timings and my assigned coach.",
+    wizSubmit: "Submit Membership Application",
+    wizPrev: "Previous",
+    wizNext: "Next"
   }
 };
 
 const localT = pageTranslations[lang] || pageTranslations.fr;
 
-// Badge structures metadata mapping
+// Badge definitions using custom SVG shapes rather than emojis
 const badgeDefinitions = {
-  first_dive: { name: "Premier Plongeon", desc: "Premier saut reussi", symbol: "&#127946;" },
-  crawling_king: { name: "Maitre du Crawl", desc: "100m crawl non-stop", symbol: "&#9889;" },
-  apnea_master: { name: "Maitre Apneiste", desc: "2min d'apnee statique", symbol: "&#9201;" },
-  butterfly_king: { name: "Maitre Papillon", desc: "Technique papillon valide", symbol: "&#129419;" },
-  endurance_pro: { name: "Endurant Pro", desc: "1h d'entrainement continu", symbol: "&#128293;" }
+  first_dive: { name: "Premier Plongeon", desc: "Premier saut reussi", type: "star" },
+  crawling_king: { name: "Maitre du Crawl", desc: "100m crawl non-stop", type: "lightning" },
+  apnea_master: { name: "Maitre Apneiste", desc: "2min d'apnee statique", type: "timer" },
+  butterfly_king: { name: "Maitre Papillon", desc: "Technique papillon valide", type: "wave" },
+  endurance_pro: { name: "Endurant Pro", desc: "1h d'entrainement continu", type: "flame" }
 };
 ---
 
@@ -268,12 +354,22 @@ const badgeDefinitions = {
     <p>{localT.loading}</p>
   </div>
 
+  <!-- Lightbox Modal for Action Gallery -->
+  <div id="galleryLightbox" class="lightbox-overlay" style="display: none;">
+    <button class="lightbox-close" id="closeLightboxBtn">&times;</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Fullscreen Action Shot">
+    </div>
+  </div>
+
   <!-- MAIN PORTAL WRAPPER -->
   <main id="portalContent" class="container portal-main" style="display: none;">
     
     <!-- PENDING APPROVAL CONTAINER -->
     <div id="statePending" class="glass-panel state-panel" style="display: none;">
-      <div class="state-icon">&#9203;</div>
+      <div class="state-icon-svg">
+        <svg viewBox="0 0 24 24" width="64" height="64" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </div>
       <h2>{localT.pendingTitle}</h2>
       <p>{localT.pendingDesc}</p>
       <a href="https://wa.me/213540454907?text=Bonjour%2C%20je%20viens%20de%20m%27inscrire%20sur%20l%27espace%20membre%20et%20j%27attend%20ma%20validation." target="_blank" rel="noopener" class="portal-btn-primary">
@@ -284,245 +380,568 @@ const badgeDefinitions = {
     <!-- REGISTERED ACTIVE MEMBER PORTAL -->
     <div id="stateMember" style="display: none;">
       
-      <!-- Welcome Line -->
+      <!-- Welcome Line & Tab Buttons -->
       <div class="portal-welcome-bar">
-        <h2>{localT.hello}, <span id="memberName">Athlete</span> !</h2>
-        <div class="user-xp-badge">
-          <span class="xp-val" id="memberXP">0</span> <span class="xp-lbl">{localT.xpText}</span>
+        <div>
+          <h2>{localT.hello}, <span id="memberName">Athlete</span> !</h2>
+          <div class="user-xp-badge">
+            <span class="xp-val" id="memberXP">0</span> <span class="xp-lbl">{localT.xpText}</span>
+          </div>
         </div>
-      </div>
-
-      <div class="portal-grid">
         
-        <!-- COLUMN LEFT: Card & Sub -->
-        <div class="portal-col">
-          
-          <!-- Virtual Card -->
-          <div id="memberCard" class="virtual-card">
-            <div class="card-chip"></div>
-            <div class="card-logo">AQA SPORTS</div>
-            <div class="card-tier-label" id="cardTier">Tier</div>
-            <div class="card-number" id="cardId">ID: AQA-0000</div>
-            <div class="card-holder" id="cardHolder">NAME</div>
-            <div class="card-expiry" id="cardExpiry">Expiry</div>
-            <div class="card-qr-box">
-              <img id="cardQrCode" src="" alt="Scan QR">
-              <span class="qr-tooltip">{localT.scanTooltip}</span>
-            </div>
-          </div>
+        <!-- Tab Navigation for Member -->
+        <div class="tab-navigation glass-panel">
+          <button class="tab-btn active" data-tab="tabProfilePanel">{localT.tabProfile}</button>
+          <button class="tab-btn" data-tab="tabTechPanel">{localT.tabTech}</button>
+          <button class="tab-btn" data-tab="tabGalleryPanel">{localT.tabGallery}</button>
+        </div>
+      </div>
 
-          <!-- Subscription Info -->
-          <div class="glass-panel portal-widget">
-            <h3>{localT.subInfo}</h3>
-            
-            <div class="sub-details-list">
-              <div class="sub-detail-row">
-                <span>{localT.subTier}</span>
-                <strong id="subTierVal">-</strong>
-              </div>
-              <div class="sub-detail-row">
-                <span>{localT.subPool}</span>
-                <strong id="subPoolVal">-</strong>
-              </div>
-              <div class="sub-detail-row">
-                <span>{localT.subCoach}</span>
-                <strong id="subCoachVal">-</strong>
-              </div>
-              <div class="sub-detail-row">
-                <span>{localT.subSlot}</span>
-                <strong id="subSlotVal">-</strong>
-              </div>
-              <div class="sub-detail-row">
-                <span>{localT.subExpiry}</span>
-                <strong id="subExpiryVal">-</strong>
+      <!-- MEMBER TAB CONTENT PANELS -->
+      <div class="tab-panels-wrapper">
+        
+        <!-- PANEL 1: PROFILE & CARD -->
+        <div id="tabProfilePanel" class="tab-panel active">
+          <div class="portal-grid">
+            <div class="portal-col">
+              <!-- Virtual Card -->
+              <div id="memberCard" class="virtual-card">
+                <div class="card-chip"></div>
+                <div class="card-logo">AQA SPORTS</div>
+                <div class="card-tier-label" id="cardTier">Tier</div>
+                <div class="card-number" id="cardId">ID: AQA-0000</div>
+                <div class="card-holder" id="cardHolder">NAME</div>
+                <div class="card-expiry" id="cardExpiry">Expiry</div>
+                <div class="card-qr-box">
+                  <img id="cardQrCode" src="" alt="Scan QR">
+                  <span class="qr-tooltip">{localT.scanTooltip}</span>
+                </div>
               </div>
             </div>
 
-            <!-- Upgrade/Change Box -->
-            <div id="changeSubContainer" class="change-sub-wrap">
-              <button id="btnOpenChange" class="portal-btn-secondary">{localT.btnChangeSub}</button>
-              
-              <!-- Change request pending notice -->
-              <div id="changePendingNotice" class="change-pending-notice" style="display: none;">
-                &#9888; {localT.changePending}
-              </div>
-
-              <!-- Inline Change Form -->
-              <form id="changeSubForm" class="change-sub-form" style="display: none;">
-                <h4>{localT.changeSubTitle}</h4>
-                <p class="form-desc">{localT.changeSubDesc}</p>
+            <div class="portal-col">
+              <!-- Subscription Info -->
+              <div class="glass-panel portal-widget">
+                <h3>{localT.subInfo}</h3>
                 
-                <div class="form-group">
-                  <label>{localT.labelNewTier}</label>
-                  <select id="changeTier" class="form-control" required>
-                    <option value="Starter">Starter</option>
-                    <option value="Silver">Silver</option>
-                    <option value="Gold">Gold</option>
-                    <option value="Diamond">Diamond</option>
-                  </select>
+                <div class="sub-details-list">
+                  <div class="sub-detail-row">
+                    <span>{localT.subTier}</span>
+                    <strong id="subTierVal">-</strong>
+                  </div>
+                  <div class="sub-detail-row">
+                    <span>{localT.subPool}</span>
+                    <strong id="subPoolVal">-</strong>
+                  </div>
+                  <div class="sub-detail-row">
+                    <span>{localT.subCoach}</span>
+                    <strong id="subCoachVal">-</strong>
+                  </div>
+                  <div class="sub-detail-row">
+                    <span>{localT.subSlot}</span>
+                    <strong id="subSlotVal">-</strong>
+                  </div>
+                  <div class="sub-detail-row">
+                    <span>{localT.subExpiry}</span>
+                    <strong id="subExpiryVal">-</strong>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label>{localT.labelNewPool}</label>
-                  <select id="changePool" class="form-control" required>
-                    <option value="reghaia">Reghaia</option>
-                    <option value="cheraga">Cheraga</option>
-                  </select>
-                </div>
+                <!-- Upgrade/Change Box -->
+                <div id="changeSubContainer" class="change-sub-wrap">
+                  <button id="btnOpenChange" class="portal-btn-secondary">{localT.btnChangeSub}</button>
+                  
+                  <div id="changePendingNotice" class="change-pending-notice" style="display: none;">
+                    {localT.changePending}
+                  </div>
 
-                <div class="form-group">
-                  <label>{localT.labelNewCoach}</label>
-                  <input type="text" id="changeCoach" class="form-control" placeholder="Nom du coach desire" required>
-                </div>
+                  <form id="changeSubForm" class="change-sub-form" style="display: none;">
+                    <h4>{localT.changeSubTitle}</h4>
+                    <p class="form-desc">{localT.changeSubDesc}</p>
+                    
+                    <div class="form-group">
+                      <label>{localT.labelNewTier}</label>
+                      <select id="changeTier" class="form-control" required>
+                        <option value="Starter">Starter</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Diamond">Diamond</option>
+                      </select>
+                    </div>
 
-                <div class="form-group">
-                  <label>{localT.labelNewSlot}</label>
-                  <input type="text" id="changeSlot" class="form-control" placeholder="Ex: Samedi 21h - 23h" required>
-                </div>
+                    <div class="form-group">
+                      <label>{localT.labelNewPool}</label>
+                      <select id="changePool" class="form-control" required>
+                        <option value="reghaia">Reghaia</option>
+                        <option value="cheraga">Cheraga</option>
+                      </select>
+                    </div>
 
-                <div class="form-actions">
-                  <button type="submit" class="portal-btn-primary">{localT.btnSubmitChange}</button>
-                  <button type="button" id="btnCancelChange" class="portal-btn-cancel">{localT.btnCancelChange}</button>
+                    <div class="form-group">
+                      <label>{localT.labelNewCoach}</label>
+                      <input type="text" id="changeCoach" class="form-control" placeholder="Nom du coach desire" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label>{localT.labelNewSlot}</label>
+                      <input type="text" id="changeSlot" class="form-control" placeholder="Ex: Samedi 21h - 23h" required>
+                    </div>
+
+                    <div class="form-actions">
+                      <button type="submit" class="portal-btn-primary">{localT.btnSubmitChange}</button>
+                      <button type="button" id="btnCancelChange" class="portal-btn-cancel">{localT.btnCancelChange}</button>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
-
           </div>
-
         </div>
 
-        <!-- COLUMN RIGHT: Stats, Tech, Badges -->
-        <div class="portal-col">
-          
-          <!-- Presence Tracker -->
-          <div class="glass-panel portal-widget">
-            <h3>{localT.presenceTracker}</h3>
-            <div id="presenceSummaryText" class="presence-summary-text">Summary</div>
+        <!-- PANEL 2: TECH PROGRESS & PRESENCE -->
+        <div id="tabTechPanel" class="tab-panel">
+          <div class="portal-grid">
             
-            <div class="presence-history-timeline">
-              <h4>{localT.presenceTimeline}</h4>
-              <div id="presenceTimelineBox" class="presence-timeline-grid">
-                <!-- Timeline items populate here -->
+            <!-- Presence Statistics -->
+            <div class="portal-col">
+              <div class="glass-panel portal-widget">
+                <h3>{localT.presenceTracker}</h3>
+                
+                <div class="presence-stat-block">
+                  <div class="circular-progress">
+                    <svg class="progress-ring" width="120" height="120">
+                      <circle class="progress-ring-circle-bg" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                      <circle class="progress-ring-circle" id="presenceRing" stroke="var(--color-teal)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                    </svg>
+                    <div class="progress-text" id="presencePercentText">0%</div>
+                  </div>
+                  <div id="presenceSummaryText" class="presence-summary-text-center">Summary</div>
+                </div>
+
+                <div class="presence-history-timeline">
+                  <h4>{localT.presenceTimeline}</h4>
+                  <div id="presenceTimelineBox" class="presence-timeline-grid">
+                    <!-- Timeline items populate here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technical Evaluation -->
+            <div class="portal-col">
+              <div class="glass-panel portal-widget">
+                <h3>{localT.suiviTechnique}</h3>
+                <div id="techEvaluationContainer">
+                  <div class="tech-progress-group">
+                    <div class="tech-lbl-row">
+                      <span>{localT.techRespiration}</span>
+                      <span id="techRespirationVal">0/5</span>
+                    </div>
+                    <div class="tech-bar-bg"><div id="techRespirationFill" class="tech-bar-fill"></div></div>
+                  </div>
+                  <div class="tech-progress-group">
+                    <div class="tech-lbl-row">
+                      <span>{localT.techKick}</span>
+                      <span id="techKickVal">0/5</span>
+                    </div>
+                    <div class="tech-bar-bg"><div id="techKickFill" class="tech-bar-fill"></div></div>
+                  </div>
+                  <div class="tech-progress-group">
+                    <div class="tech-lbl-row">
+                      <span>{localT.techBras}</span>
+                      <span id="techBrasVal">0/5</span>
+                    </div>
+                    <div class="tech-bar-bg"><div id="techBrasFill" class="tech-bar-fill"></div></div>
+                  </div>
+                  <div class="tech-progress-group">
+                    <div class="tech-lbl-row">
+                      <span>{localT.techEndurance}</span>
+                      <span id="techEnduranceVal">0/5</span>
+                    </div>
+                    <div class="tech-bar-bg"><div id="techEnduranceFill" class="tech-bar-fill"></div></div>
+                  </div>
+
+                  <div class="coach-comments-box">
+                    <strong>{localT.coachComments}</strong>
+                    <p id="techCommentsVal">-</p>
+                  </div>
+                </div>
+                <div id="noTechDataBox" style="display: none;" class="no-data-msg">
+                  {localT.noTechData}
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Technical Evaluation -->
-          <div class="glass-panel portal-widget">
-            <h3>{localT.suiviTechnique}</h3>
-            <div id="techEvaluationContainer">
-              <div class="tech-progress-group">
-                <div class="tech-lbl-row">
-                  <span>{localT.techRespiration}</span>
-                  <span id="techRespirationVal">0/5</span>
+        <!-- PANEL 3: BADGES & GALLERY -->
+        <div id="tabGalleryPanel" class="tab-panel">
+          <div class="portal-grid">
+            <!-- Badges -->
+            <div class="portal-col">
+              <div class="glass-panel portal-widget">
+                <h3>{localT.achievements}</h3>
+                <div class="badges-earned-title">{localT.badgesEarned}</div>
+                <div id="badgesGrid" class="badges-grid-container">
+                  <!-- Badges populate here -->
                 </div>
-                <div class="tech-bar-bg"><div id="techRespirationFill" class="tech-bar-fill"></div></div>
-              </div>
-              <div class="tech-progress-group">
-                <div class="tech-lbl-row">
-                  <span>{localT.techKick}</span>
-                  <span id="techKickVal">0/5</span>
-                </div>
-                <div class="tech-bar-bg"><div id="techKickFill" class="tech-bar-fill"></div></div>
-              </div>
-              <div class="tech-progress-group">
-                <div class="tech-lbl-row">
-                  <span>{localT.techBras}</span>
-                  <span id="techBrasVal">0/5</span>
-                </div>
-                <div class="tech-bar-bg"><div id="techBrasFill" class="tech-bar-fill"></div></div>
-              </div>
-              <div class="tech-progress-group">
-                <div class="tech-lbl-row">
-                  <span>{localT.techEndurance}</span>
-                  <span id="techEnduranceVal">0/5</span>
-                </div>
-                <div class="tech-bar-bg"><div id="techEnduranceFill" class="tech-bar-fill"></div></div>
-              </div>
-
-              <div class="coach-comments-box">
-                <strong>{localT.coachComments}</strong>
-                <p id="techCommentsVal">-</p>
               </div>
             </div>
-            <div id="noTechDataBox" style="display: none;" class="no-data-msg">
-              {localT.noTechData}
+
+            <!-- Gallery -->
+            <div class="portal-col">
+              <div class="glass-panel portal-widget">
+                <h3>{localT.galleryTitle}</h3>
+                <div id="galleryGrid" class="gallery-grid-container">
+                  <!-- Gallery items populate here -->
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- Badges & Achievements -->
-          <div class="glass-panel portal-widget">
-            <h3>{localT.achievements}</h3>
-            <div class="badges-earned-title">{localT.badgesEarned}</div>
-            <div id="badgesGrid" class="badges-grid-container">
-              <!-- Badges populate here -->
-            </div>
-          </div>
-
-          <!-- Photo Gallery -->
-          <div class="glass-panel portal-widget">
-            <h3>{localT.galleryTitle}</h3>
-            <div id="galleryGrid" class="gallery-grid-container">
-              <!-- Gallery items populate here -->
-            </div>
-          </div>
-
         </div>
 
       </div>
+
     </div>
 
     <!-- NON-MEMBER COMMUNITY PORTAL -->
     <div id="stateNonMember" style="display: none;">
-      <div class="non-member-hero">
+      
+      <div class="non-member-welcome-bar">
         <h2>{localT.nonMemberTitle}</h2>
-        <div class="divider"></div>
-        <p>{localT.nonMemberDesc}</p>
-        <a href={getRelativePath('/inscription', lang)} class="portal-btn-primary action-btn">
-          {localT.btnJoinClub}
-        </a>
-      </div>
-
-      <div class="portal-grid">
         
-        <!-- Interactive Slots Preview -->
-        <div class="glass-panel portal-widget">
-          <h3>{localT.slotsPreviewTitle}</h3>
-          <div class="slots-preview-grid" id="slotsPreviewApp" data-schedule={JSON.stringify(scheduleData)}>
-            <!-- Interactive preview populated via JS -->
+        <!-- Tab Navigation for Non-Member -->
+        <div class="tab-navigation glass-panel">
+          <button class="tab-btn active" data-tab="tabActivitiesPanel">{localT.tabActivities}</button>
+          <button class="tab-btn" data-tab="tabWizardPanel" id="tabWizardBtn">{localT.tabWizard}</button>
+        </div>
+      </div>
+
+      <div class="tab-panels-wrapper">
+        
+        <!-- PANEL 1: ACTIVITIES -->
+        <div id="tabActivitiesPanel" class="tab-panel active">
+          
+          <div class="non-member-hero-banner">
+            <p>{localT.nonMemberDesc}</p>
+            <button class="portal-btn-primary" id="btnGoToWizard">{localT.btnJoinClub}</button>
           </div>
+
+          <div class="activities-showcase-section">
+            <h3 class="widget-subtitle">AQA Sports Catalog</h3>
+            <div class="sports-catalog-grid">
+              
+              <!-- Swimming Adults -->
+              <div class="sport-catalog-card">
+                <div class="sport-card-image" style="background-image: url('/images/swim.webp');"></div>
+                <div class="sport-card-content">
+                  <h4>Natation Adultes</h4>
+                  <p>Perfectionnement technique et physique pour adultes. Tous niveaux, du debutant au nageur confirme.</p>
+                  <button class="sport-card-btn select-activity-btn" data-category="homme">Choisir cette activite</button>
+                </div>
+              </div>
+
+              <!-- Swimming Kids -->
+              <div class="sport-catalog-card">
+                <div class="sport-card-image" style="background-image: url('/images/swim.webp');"></div>
+                <div class="sport-card-content">
+                  <h4>Natation Enfants</h4>
+                  <p>Apprentissage ludique et securise pour les enfants de 5 a 12 ans. Progression par etapes avec suivi.</p>
+                  <button class="sport-card-btn select-activity-btn" data-category="kid">Choisir cette activite</button>
+                </div>
+              </div>
+
+              <!-- Apnea -->
+              <div class="sport-catalog-card">
+                <div class="sport-card-image" style="background-image: url('/images/apnea.webp');"></div>
+                <div class="sport-card-content">
+                  <h4>Apnee (AQA Apnea)</h4>
+                  <p>Cours d'apnee statique et dynamique. Apprenez le relachement mental, les regles de securite et depassez vos limites.</p>
+                  <button class="sport-card-btn select-activity-btn" data-category="apnea">Choisir cette activite</button>
+                </div>
+              </div>
+
+              <!-- Open Water -->
+              <div class="sport-catalog-card">
+                <div class="sport-card-image" style="background-image: url('/images/sea.webp');"></div>
+                <div class="sport-card-content">
+                  <h4>Eau Libre</h4>
+                  <p>Natation technique en mer. Developpez votre endurance et apprenez a vous orienter en milieu naturel.</p>
+                  <button class="sport-card-btn select-activity-btn" data-category="homme">Choisir cette activite</button>
+                </div>
+              </div>
+
+              <!-- Scuba Diving -->
+              <div class="sport-catalog-card">
+                <div class="sport-card-image" style="background-image: url('/images/scuba.webp');"></div>
+                <div class="sport-card-content">
+                  <h4>Plongee Sous-Marine</h4>
+                  <p>Explorez les profondeurs marines. Formations certifiantes en bouteille encadrees par nos moniteurs.</p>
+                  <button class="sport-card-btn select-activity-btn" data-category="homme">Choisir cette activite</button>
+                </div>
+              </div>
+
+              <!-- Outdoor Sports -->
+              <div class="sport-catalog-card">
+                <div class="sport-card-image" style="background-image: url('/images/horse.webp');"></div>
+                <div class="sport-card-content">
+                  <h4>Sports de Nature</h4>
+                  <p>Equitation academique et randonnees organisees en plein air pour decouvrir les paysages algeriens.</p>
+                  <button class="sport-card-btn select-activity-btn" data-category="homme">Choisir cette activite</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="glass-panel portal-widget" style="margin-top: 3rem;">
+            <h3>{localT.benefitsTitle}</h3>
+            <div class="benefits-grid">
+              <div class="benefit-card">
+                <div class="benefit-card-icon">
+                  <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <h4>{localT.benefit1Title}</h4>
+                <p>{localT.benefit1Desc}</p>
+              </div>
+              <div class="benefit-card">
+                <div class="benefit-card-icon">
+                  <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"><path d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                </div>
+                <h4>{localT.benefit2Title}</h4>
+                <p>{localT.benefit2Desc}</p>
+              </div>
+              <div class="benefit-card">
+                <div class="benefit-card-icon">
+                  <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                </div>
+                <h4>{localT.benefit3Title}</h4>
+                <p>{localT.benefit3Desc}</p>
+              </div>
+              <div class="benefit-card">
+                <div class="benefit-card-icon">
+                  <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+                <h4>{localT.benefit4Title}</h4>
+                <p>{localT.benefit4Desc}</p>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Club Benefits & Community Gallery -->
-        <div class="glass-panel portal-widget">
-          <h3>{localT.benefitsTitle}</h3>
+        <!-- PANEL 2: WIZARD SUBSCRIPTION -->
+        <div id="tabWizardPanel" class="tab-panel">
           
-          <div class="benefits-grid">
-            <div class="benefit-card">
-              <div class="benefit-icon">&#127946;</div>
-              <h4>{localT.benefit1Title}</h4>
-              <p>{localT.benefit1Desc}</p>
+          <div class="wizard-container glass-panel">
+            
+            <!-- Wizard Step Header -->
+            <div class="wizard-header">
+              <div class="wizard-step-indicator active" data-step="1">
+                <span class="step-num">1</span>
+                <span class="step-lbl">{localT.wizStep1}</span>
+              </div>
+              <div class="wizard-step-indicator" data-step="2">
+                <span class="step-num">2</span>
+                <span class="step-lbl">{localT.wizStep2}</span>
+              </div>
+              <div class="wizard-step-indicator" data-step="3">
+                <span class="step-num">3</span>
+                <span class="step-lbl">{localT.wizStep3}</span>
+              </div>
+              <div class="wizard-step-indicator" data-step="4">
+                <span class="step-num">4</span>
+                <span class="step-lbl">{localT.wizStep4}</span>
+              </div>
+              <div class="wizard-step-indicator" data-step="5">
+                <span class="step-num">5</span>
+                <span class="step-lbl">{localT.wizStep5}</span>
+              </div>
             </div>
-            <div class="benefit-card">
-              <div class="benefit-icon">&#128202;</div>
-              <h4>{localT.benefit2Title}</h4>
-              <p>{localT.benefit2Desc}</p>
+
+            <!-- Wizard Errors -->
+            <div id="wizardErrorMsg" class="wizard-error-banner" style="display: none;">
+              Error text
             </div>
-            <div class="benefit-card">
-              <div class="benefit-icon">&#128241;</div>
-              <h4>{localT.benefit3Title}</h4>
-              <p>{localT.benefit3Desc}</p>
+
+            <!-- Wizard Step Contents -->
+            <div class="wizard-body">
+              
+              <!-- STEP 1: CATEGORY -->
+              <div class="wizard-step-content active" id="wizStepContent1">
+                <h3>{localT.wizCategoryTitle}</h3>
+                <div class="wizard-selection-grid">
+                  <div class="wizard-option-card" data-val="homme">
+                    <div class="option-icon">
+                      <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <h4>Hommes</h4>
+                    <p>Adultes</p>
+                  </div>
+                  <div class="wizard-option-card" data-val="femme">
+                    <div class="option-icon">
+                      <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h4>Femmes</h4>
+                    <p>Adultes et Adolescentes</p>
+                  </div>
+                  <div class="wizard-option-card" data-val="teen_boy">
+                    <div class="option-icon">
+                      <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                    </div>
+                    <h4>Ados Garçons</h4>
+                    <p>13-16 ans</p>
+                  </div>
+                  <div class="wizard-option-card" data-val="kid">
+                    <div class="option-icon">
+                      <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path><path d="M8 12.5a4 4 0 0 0 8 0"></path><circle cx="9" cy="9.5" r="1"></circle><circle cx="15" cy="9.5" r="1"></circle></svg>
+                    </div>
+                    <h4>Enfants</h4>
+                    <p>5-12 ans</p>
+                  </div>
+                  <div class="wizard-option-card" data-val="apnea">
+                    <div class="option-icon">
+                      <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    </div>
+                    <h4>AQA Apnée</h4>
+                    <p>Apnee technique</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 2: POOL -->
+              <div class="wizard-step-content" id="wizStepContent2">
+                <h3>{localT.wizPoolTitle}</h3>
+                <div class="wizard-selection-grid">
+                  <div class="wizard-option-card" data-val="reghaia">
+                    <div class="option-icon">
+                      <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none"><path d="M2 6h20M2 10h20M2 14h20M2 18h20"></path></svg>
+                    </div>
+                    <h4>Piscine Reghaia</h4>
+                    <p>Complexe Omnisports</p>
+                  </div>
+                  <div class="wizard-option-card" data-val="cheraga">
+                    <div class="option-icon">
+                      <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h4>Piscine Cheraga</h4>
+                    <p>Club Aqua Premium</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 3: FORMULA -->
+              <div class="wizard-step-content" id="wizStepContent3">
+                <h3>{localT.wizFormulaTitle}</h3>
+                <div class="wizard-selection-grid grid-formula">
+                  
+                  <div class="wizard-option-card" data-val="Starter">
+                    <div class="formula-badge">1 MOIS</div>
+                    <h4>Starter</h4>
+                    <div class="formula-price">5 000 DA</div>
+                    <ul class="formula-features">
+                      <li>Séance de 2 heures</li>
+                      <li>Accès 1 fois par semaine</li>
+                      <li>Suivi de présence</li>
+                    </ul>
+                  </div>
+
+                  <div class="wizard-option-card" data-val="Silver">
+                    <div class="formula-badge">3 MOIS</div>
+                    <h4>Silver</h4>
+                    <div class="formula-price">13 500 DA</div>
+                    <ul class="formula-features">
+                      <li>Séance de 2 heures</li>
+                      <li>Accès 1 à 2 fois / semaine</li>
+                      <li>Évaluation technique</li>
+                    </ul>
+                  </div>
+
+                  <div class="wizard-option-card" data-val="Gold">
+                    <div class="formula-badge text-gold">6 MOIS</div>
+                    <h4>Gold</h4>
+                    <div class="formula-price">24 000 DA</div>
+                    <ul class="formula-features">
+                      <li>Séance de 2 heures</li>
+                      <li>Accès 2 fois par semaine</li>
+                      <li>Suivi technique complet</li>
+                      <li>Badges & Achievements</li>
+                    </ul>
+                  </div>
+
+                  <div class="wizard-option-card" data-val="Diamond">
+                    <div class="formula-badge text-purple">9 MOIS</div>
+                    <h4>Diamond</h4>
+                    <div class="formula-price">32 000 DA</div>
+                    <ul class="formula-features">
+                      <li>Accès Prioritaire</li>
+                      <li>Séances sur-mesure</li>
+                      <li>Badges & Galerie photo</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- STEP 4: SLOT & COACH -->
+              <div class="wizard-step-content" id="wizStepContent4">
+                <h3>{localT.wizSlotTitle}</h3>
+                
+                <div class="wizard-form-group">
+                  <label>{localT.wizSelectSlot}</label>
+                  <select id="wizardSlotSelect" class="form-control">
+                    <option value="">-- Charger les creneaux --</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- STEP 5: VALIDATION -->
+              <div class="wizard-step-content" id="wizStepContent5">
+                <h3>{localT.wizValidationTitle}</h3>
+                
+                <div class="wizard-validation-panel glass-panel">
+                  <p class="rules-header"><strong>{localT.wizRulesLabel}</strong></p>
+                  <ul class="rules-list">
+                    <li>
+                      <label class="checkbox-container">
+                        <input type="checkbox" id="ruleCheck1">
+                        <span class="checkbox-checkmark"></span>
+                        <span class="checkbox-text">{localT.wizRule1}</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="checkbox-container">
+                        <input type="checkbox" id="ruleCheck2">
+                        <span class="checkbox-checkmark"></span>
+                        <span class="checkbox-text">{localT.wizRule2}</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="checkbox-container">
+                        <input type="checkbox" id="ruleCheck3">
+                        <span class="checkbox-checkmark"></span>
+                        <span class="checkbox-text">{localT.wizRule3}</span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
             </div>
-            <div class="benefit-card">
-              <div class="benefit-icon">&#127941;</div>
-              <h4>{localT.benefit4Title}</h4>
-              <p>{localT.benefit4Desc}</p>
+
+            <!-- Wizard Footer Buttons -->
+            <div class="wizard-footer">
+              <button class="portal-btn-secondary wiz-btn-prev" id="wizPrevBtn" style="display: none;">{localT.wizPrev}</button>
+              <button class="portal-btn-primary wiz-btn-next" id="wizNextBtn">{localT.wizNext}</button>
+              <button class="portal-btn-primary wiz-btn-submit" id="wizSubmitBtn" style="display: none;">{localT.wizSubmit}</button>
             </div>
+
           </div>
 
         </div>
 
       </div>
+
     </div>
 
   </main>
@@ -532,6 +951,7 @@ const badgeDefinitions = {
 
 <script is:inline define:vars={{ lang, badgeDefinitions, localT }}>
   document.addEventListener('astro:page-load', () => {
+    
     // Redirection helper if token is missing
     const redirectToLogin = () => {
       if (lang === 'fr') window.location.href = '/clients';
@@ -559,6 +979,48 @@ const badgeDefinitions = {
         redirectToLogin();
       });
     }
+
+    // Dynamic Tab Logic
+    const initTabs = () => {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wrapper = btn.closest('.portal-welcome-bar, .non-member-welcome-bar').nextElementSibling;
+          
+          btn.closest('.tab-navigation').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          wrapper.querySelectorAll('.tab-panel').forEach(panel => {
+            panel.classList.remove('active');
+          });
+
+          const targetPanel = document.getElementById(btn.dataset.tab);
+          if (targetPanel) {
+            targetPanel.classList.add('active');
+          }
+        });
+      });
+    };
+    initTabs();
+
+    // Lightbox modal functionality
+    const setupLightbox = () => {
+      const lightbox = document.getElementById('galleryLightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const closeBtn = document.getElementById('closeLightboxBtn');
+
+      if (!lightbox || !lightboxImg || !closeBtn) return;
+
+      closeBtn.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = 'none';
+        }
+      });
+    };
+    setupLightbox();
 
     // Fetch member profile
     async function fetchProfile() {
@@ -593,7 +1055,7 @@ const badgeDefinitions = {
 
     fetchProfile();
 
-    // Render logic
+    // Main Render logic
     function renderDashboard(profile) {
       if (profile.status === 'pending') {
         statePending.style.display = 'block';
@@ -602,7 +1064,7 @@ const badgeDefinitions = {
 
       if (!profile.isAqaMember) {
         stateNonMember.style.display = 'block';
-        renderNonMemberSlots();
+        setupWizard(profile);
         return;
       }
 
@@ -613,7 +1075,7 @@ const badgeDefinitions = {
       document.getElementById('memberName').textContent = profile.fullName;
       document.getElementById('memberXP').textContent = profile.xp || 0;
 
-      // Render Membership Card
+      // Render Membership Card with Holo gradients
       const card = document.getElementById('memberCard');
       const tier = profile.membershipTier || 'Starter';
       card.className = `virtual-card card-tier-${tier.toLowerCase()}`;
@@ -699,29 +1161,41 @@ const badgeDefinitions = {
       const totalCount = presenceList.length;
       const percent = totalCount > 0 ? Math.round((presentCount / totalCount) * 100) : 0;
 
-      // Update Presence summary text
+      // Update Presence summary text & circular progress
       let summaryStr = localT.presenceSummary
         .replace('{present}', presentCount)
         .replace('{total}', totalCount)
         .replace('{percent}', percent);
       document.getElementById('presenceSummaryText').textContent = summaryStr;
+      
+      // Update circular progress ring
+      document.getElementById('presencePercentText').textContent = `${percent}%`;
+      const circle = document.getElementById('presenceRing');
+      if (circle) {
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        circle.style.strokeDasharray = `${circumference}`;
+        const offset = circumference - (percent / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+      }
 
       if (presenceList.length === 0) {
         timelineBox.innerHTML = `<div class="no-data-msg">${localT.presenceNoData}</div>`;
       } else {
-        // Sort descending by date
         const sortedPresence = [...presenceList].sort((a,b) => new Date(b.date) - new Date(a.date));
         sortedPresence.forEach(item => {
           const block = document.createElement('div');
           block.className = `presence-timeline-item ${item.present ? 'status-present' : 'status-absent'}`;
           
-          // Use western standard digits for Arabic dates if scanned
-          const dateStr = item.date; 
-          
           block.innerHTML = `
-            <div class="presence-icon">${item.present ? '&#10004;' : '&#10008;'}</div>
+            <div class="presence-icon">
+              ${item.present ? 
+                '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>' : 
+                '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+              }
+            </div>
             <div class="presence-info">
-              <strong class="presence-date">${dateStr}</strong>
+              <strong class="presence-date">${item.date}</strong>
               <span class="presence-status">${item.present ? localT.presencePresent : (item.reason || localT.presenceAbsent)}</span>
             </div>
           `;
@@ -731,12 +1205,12 @@ const badgeDefinitions = {
 
       // Technical Evaluation
       const tech = profile.suiviTechnique;
-      if (tech && (tech.respiration > 0 || tech.battement > 0 || tech.bras > 0 || tech.endurance > 0 || tech.comments)) {
+      if (tech && (tech.respiration > 0 || tech.kick > 0 || tech.bras > 0 || tech.endurance > 0 || tech.comments)) {
         document.getElementById('techRespirationVal').textContent = `${tech.respiration}/5`;
         document.getElementById('techRespirationFill').style.width = `${(tech.respiration / 5) * 100}%`;
         
-        document.getElementById('techKickVal').textContent = `${tech.kick}/5`;
-        document.getElementById('techKickFill').style.width = `${(tech.kick / 5) * 100}%`;
+        document.getElementById('techKickVal').textContent = `${tech.kick || tech.battement || 0}/5`;
+        document.getElementById('techKickFill').style.width = `${((tech.kick || tech.battement || 0) / 5) * 100}%`;
 
         document.getElementById('techBrasVal').textContent = `${tech.bras}/5`;
         document.getElementById('techBrasFill').style.width = `${(tech.bras / 5) * 100}%`;
@@ -750,10 +1224,18 @@ const badgeDefinitions = {
         document.getElementById('noTechDataBox').style.display = 'block';
       }
 
-      // Badges
+      // Badges with custom SVG vector icons instead of emojis
       const badgesGrid = document.getElementById('badgesGrid');
       badgesGrid.innerHTML = '';
       const userBadges = profile.badges || [];
+
+      const svgPaths = {
+        star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>',
+        lightning: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>',
+        timer: '<circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>',
+        wave: '<path d="M2 12a5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1 5-5 5 5 0 0 1 5 5"></path><path d="M2 17a5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1 5-5 5 5 0 0 1 5 5"></path>',
+        flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>'
+      };
 
       Object.keys(badgeDefinitions).forEach(badgeId => {
         const badgeMeta = badgeDefinitions[badgeId];
@@ -762,14 +1244,18 @@ const badgeDefinitions = {
         const badgeEl = document.createElement('div');
         badgeEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
         badgeEl.innerHTML = `
-          <div class="badge-icon">${badgeMeta.symbol}</div>
+          <div class="badge-icon-svg">
+            <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              ${svgPaths[badgeMeta.type]}
+            </svg>
+          </div>
           <div class="badge-name">${badgeMeta.name}</div>
           <div class="badge-desc">${badgeMeta.desc}</div>
         `;
         badgesGrid.appendChild(badgeEl);
       });
 
-      // Gallery
+      // Gallery with full screen lightbox triggering
       const galleryGrid = document.getElementById('galleryGrid');
       galleryGrid.innerHTML = '';
       const galleryPhotos = profile.gallery || [];
@@ -780,80 +1266,258 @@ const badgeDefinitions = {
           const wrapper = document.createElement('div');
           wrapper.className = 'gallery-photo-item';
           wrapper.innerHTML = `<img src="${url}" alt="Action Shot" class="gallery-photo">`;
+          wrapper.addEventListener('click', () => {
+            const lightbox = document.getElementById('galleryLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            if (lightbox && lightboxImg) {
+              lightboxImg.src = url;
+              lightbox.style.display = 'flex';
+            }
+          });
           galleryGrid.appendChild(wrapper);
         });
       }
     }
 
-    // Render available slots interactive grid (for Non-Members)
-    function renderNonMemberSlots() {
-      const container = document.getElementById('slotsPreviewApp');
-      if (!container) return;
-      
-      const schedule = JSON.parse(container.dataset.schedule || '{}');
-      container.innerHTML = '';
+    // Step-by-Step wizard logic (for Non-Members)
+    function setupWizard(profile) {
+      let currentStep = 1;
+      let selectedCategory = '';
+      let selectedPool = '';
+      let selectedFormula = '';
+      let selectedSlotText = '';
+      let selectedCoach = '';
+      let selectedSlotDay = '';
+      let selectedSlotTime = '';
+      let schedule = {};
 
-      Object.keys(schedule).forEach(poolKey => {
-        const pool = schedule[poolKey];
-        if (!pool || !pool.categories) return;
+      const nextBtn = document.getElementById('wizNextBtn');
+      const prevBtn = document.getElementById('wizPrevBtn');
+      const submitBtn = document.getElementById('wizSubmitBtn');
+      const errorBanner = document.getElementById('wizardErrorMsg');
 
-        const poolCard = document.createElement('div');
-        poolCard.className = 'pool-preview-card glass-panel';
-        
-        let poolTitle = pool.name || poolKey;
-        if (poolKey === 'reghaia') poolTitle = lang === 'ar' ? 'مسبح الرغاية' : 'Piscine Reghaia';
-        else if (poolKey === 'cheraga') poolTitle = lang === 'ar' ? 'مسبح الشراقة' : 'Piscine Cheraga';
-        
-        let poolHtml = `<h4>${poolTitle}</h4><div class="pool-slots-list">`;
-
-        let slotsFound = false;
-
-        Object.keys(pool.categories).forEach(catKey => {
-          const category = pool.categories[catKey];
-          if (!category || !category.coaches) return;
-
-          category.coaches.forEach(coach => {
-            if (!coach.slots) return;
-            coach.slots.forEach(slot => {
-              slotsFound = true;
-              const remaining = slot.total - slot.taken;
-              const isFull = remaining <= 0;
-              
-              let statusClass = isFull ? 'slot-full' : (remaining <= 3 ? 'slot-low' : 'slot-available');
-              let placesText = '';
-              if (isFull) {
-                placesText = localT.slotFull;
-              } else {
-                const suffix = remaining > 1 ? localT.placesLeftPlural : localT.placesLeft;
-                placesText = `${remaining} ${suffix}`;
-              }
-
-              poolHtml += `
-                <div class="slot-preview-item ${statusClass}">
-                  <span class="slot-time">${slot.day} - ${slot.time}</span>
-                  <span class="slot-coach">${coach.name}</span>
-                  <span class="slot-count">${placesText}</span>
-                </div>
-              `;
-            });
+      // Bind activity card quick selection
+      document.querySelectorAll('.select-activity-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedCategory = btn.dataset.category;
+          
+          // Style step 1 options
+          document.querySelectorAll('#wizStepContent1 .wizard-option-card').forEach(c => {
+            c.classList.remove('selected');
+            if (c.dataset.val === selectedCategory) c.classList.add('selected');
           });
-        });
 
-        if (!slotsFound) {
-          poolHtml += `<div class="no-data-msg">Aucun creneau disponible.</div>`;
+          // Switch tab to Wizard
+          const wizardTabBtn = document.getElementById('tabWizardBtn');
+          if (wizardTabBtn) {
+            wizardTabBtn.click();
+            goToStep(2);
+          }
+        });
+      });
+
+      // Action Join Club on Hero banner
+      const btnGoToWizard = document.getElementById('btnGoToWizard');
+      if (btnGoToWizard) {
+        btnGoToWizard.addEventListener('click', () => {
+          const wizardTabBtn = document.getElementById('tabWizardBtn');
+          if (wizardTabBtn) wizardTabBtn.click();
+        });
+      }
+
+      // Step 1 Category selector
+      document.querySelectorAll('#wizStepContent1 .wizard-option-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('#wizStepContent1 .wizard-option-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedCategory = card.dataset.val;
+          errorBanner.style.display = 'none';
+        });
+      });
+
+      // Step 2 Pool selector
+      document.querySelectorAll('#wizStepContent2 .wizard-option-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('#wizStepContent2 .wizard-option-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedPool = card.dataset.val;
+          errorBanner.style.display = 'none';
+        });
+      });
+
+      // Step 3 Formula selector
+      document.querySelectorAll('#wizStepContent3 .wizard-option-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('#wizStepContent3 .wizard-option-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedFormula = card.dataset.val;
+          errorBanner.style.display = 'none';
+        });
+      });
+
+      // Navigation
+      nextBtn.addEventListener('click', () => {
+        if (validateStep(currentStep)) {
+          if (currentStep === 3) {
+            loadSlotsAndCoaches().then(() => {
+              goToStep(currentStep + 1);
+            });
+          } else {
+            goToStep(currentStep + 1);
+          }
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        goToStep(currentStep - 1);
+      });
+
+      // Submit
+      submitBtn.addEventListener('click', async () => {
+        if (!document.getElementById('ruleCheck1').checked || 
+            !document.getElementById('ruleCheck2').checked || 
+            !document.getElementById('ruleCheck3').checked) {
+          showError("Veuillez accepter toutes les regles et conditions pour continuer.");
+          return;
         }
 
-        poolHtml += '</div>';
-        poolCard.innerHTML = poolHtml;
-        container.appendChild(poolCard);
+        submitBtn.disabled = true;
+        errorBanner.style.display = 'none';
+
+        try {
+          const response = await fetch('/api/member/apply-membership', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              tier: selectedFormula,
+              poolKey: selectedPool,
+              coachName: selectedCoach,
+              slotDay: selectedSlotDay,
+              slotTime: selectedSlotTime
+            })
+          });
+
+          const resData = await response.json();
+          if (resData.success) {
+            window.location.reload();
+          } else {
+            showError(resData.error || "Une erreur est survenue lors de la soumission");
+          }
+        } catch (e) {
+          showError("Erreur de connexion reseau: " + e.message);
+        } finally {
+          submitBtn.disabled = false;
+        }
       });
+
+      function showError(text) {
+        errorBanner.textContent = text;
+        errorBanner.style.display = 'block';
+      }
+
+      function validateStep(step) {
+        errorBanner.style.display = 'none';
+        if (step === 1 && !selectedCategory) {
+          showError(localT.wizSelectCategory);
+          return false;
+        }
+        if (step === 2 && !selectedPool) {
+          showError(localT.wizSelectPool);
+          return false;
+        }
+        if (step === 3 && !selectedFormula) {
+          showError(localT.wizSelectFormula);
+          return false;
+        }
+        if (step === 4) {
+          const selectVal = document.getElementById('wizardSlotSelect').value;
+          if (!selectVal) {
+            showError(localT.wizSelectSlot);
+            return false;
+          }
+          // Parse values
+          const parts = selectVal.split('|');
+          selectedCoach = parts[0];
+          selectedSlotDay = parts[1];
+          selectedSlotTime = parts[2];
+        }
+        return true;
+      }
+
+      function goToStep(step) {
+        currentStep = step;
+        errorBanner.style.display = 'none';
+
+        // Toggle content views
+        document.querySelectorAll('.wizard-step-content').forEach(el => el.classList.remove('active'));
+        document.getElementById(`wizStepContent${step}`).classList.add('active');
+
+        // Toggle step indicators
+        document.querySelectorAll('.wizard-step-indicator').forEach(el => {
+          const elStep = parseInt(el.dataset.step);
+          el.classList.remove('active');
+          if (elStep <= step) el.classList.add('active');
+        });
+
+        // Toggle footer buttons
+        prevBtn.style.display = step > 1 ? 'block' : 'none';
+        nextBtn.style.display = step < 5 ? 'block' : 'none';
+        submitBtn.style.display = step === 5 ? 'block' : 'none';
+      }
+
+      async function loadSlotsAndCoaches() {
+        const select = document.getElementById('wizardSlotSelect');
+        select.innerHTML = '<option value="">Chargement des creneaux...</option>';
+        try {
+          const res = await fetch('/api/schedule');
+          schedule = await res.json();
+          select.innerHTML = `<option value="">-- ${localT.wizSelectSlot} --</option>`;
+          
+          const pool = schedule[selectedPool];
+          if (!pool || !pool.categories || !pool.categories[selectedCategory]) {
+            select.innerHTML = '<option value="">Aucun creneau disponible pour ces choix.</option>';
+            return;
+          }
+
+          const categoryObj = pool.categories[selectedCategory];
+          let foundAny = false;
+
+          categoryObj.coaches.forEach(coach => {
+            if (!coach.slots) return;
+            coach.slots.forEach(slot => {
+              foundAny = true;
+              const remaining = slot.total - slot.taken;
+              const isFull = remaining <= 0;
+              const val = `${coach.name}|${slot.day}|${slot.time}`;
+              const placesText = isFull ? `[${localT.slotFull}]` : `(${remaining} ${remaining > 1 ? localT.placesLeftPlural : localT.placesLeft})`;
+              
+              const option = document.createElement('option');
+              option.value = val;
+              option.textContent = `${slot.day} ${slot.time} - ${coach.name} ${placesText}`;
+              if (isFull) option.disabled = true;
+              select.appendChild(option);
+            });
+          });
+
+          if (!foundAny) {
+            select.innerHTML = '<option value="">Aucun creneau configure pour cette categorie.</option>';
+          }
+
+        } catch (e) {
+          select.innerHTML = '<option value="">Erreur de chargement des creneaux</option>';
+        }
+      }
+
     }
 
   });
 </script>
 
 <style>
-  /* Base Portal layout & components */
+  /* Upgraded Portal core stylesheet */
   .portal-header {
     background: rgba(3, 7, 18, 0.85);
     border-bottom: var(--border-glass);
@@ -898,7 +1562,7 @@ const badgeDefinitions = {
     box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
   }
 
-  /* Loader */
+  /* Loader Overlay */
   .portal-loader-overlay {
     position: fixed;
     top: 0;
@@ -943,17 +1607,16 @@ const badgeDefinitions = {
     align-items: center;
     gap: 1.5rem;
   }
-  .state-icon {
-    font-size: 4rem;
+  .state-icon-svg {
     color: var(--color-teal);
     animation: pulse 2s infinite ease-in-out;
   }
   @keyframes pulse {
     0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 1; }
   }
 
-  .portal-welcome-bar {
+  .portal-welcome-bar, .non-member-welcome-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -961,36 +1624,87 @@ const badgeDefinitions = {
     flex-wrap: wrap;
     gap: 1.5rem;
   }
-  .portal-welcome-bar h2 {
+  .portal-welcome-bar h2, .non-member-welcome-bar h2 {
     font-size: 2.2rem;
     font-weight: 800;
+    margin: 0;
   }
   .user-xp-badge {
     background: linear-gradient(135deg, rgba(0, 136, 255, 0.15), rgba(0, 242, 255, 0.15));
     border: var(--border-active);
     border-radius: 50px;
-    padding: 0.5rem 1.5rem;
-    display: flex;
+    padding: 0.4rem 1.25rem;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     box-shadow: var(--shadow-glow);
+    margin-top: 0.5rem;
   }
   .xp-val {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     color: var(--color-teal);
   }
   .xp-lbl {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-secondary);
   }
 
+  /* Navigation Tabs */
+  .tab-navigation {
+    padding: 0.35rem;
+    border-radius: 50px;
+    display: flex;
+    gap: 0.25rem;
+    background: rgba(15, 23, 42, 0.4);
+    border: var(--border-glass);
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+  .tab-btn:hover {
+    color: #fff;
+  }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.25);
+  }
+
+  /* Tab panels wrapper */
+  .tab-panels-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  .tab-panel.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Dashboard Grid */
   .portal-grid {
     display: grid;
-    grid-template-columns: 380px 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: start;
   }
@@ -999,10 +1713,9 @@ const badgeDefinitions = {
     flex-direction: column;
     gap: 2rem;
   }
-
   .portal-widget {
     padding: 2rem;
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
   .portal-widget h3 {
     font-size: 1.25rem;
@@ -1012,7 +1725,7 @@ const badgeDefinitions = {
     padding-bottom: 0.75rem;
   }
 
-  /* Virtual Membership Card styling */
+  /* Virtual Membership Card styling with shine */
   .virtual-card {
     height: 220px;
     border-radius: 20px;
@@ -1023,19 +1736,24 @@ const badgeDefinitions = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
     transition: var(--transition-smooth);
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
   .virtual-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-    pointer-events: none;
+    top: -50%; left: -50%; right: -50%; bottom: -50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0) 60%);
+    transform: rotate(25deg);
+    transition: 0.8s;
+  }
+  .virtual-card:hover::before {
+    left: 100%;
+    top: 100%;
   }
   .virtual-card:hover {
-    transform: translateY(-5px) scale(1.02);
+    transform: translateY(-5px) scale(1.01);
   }
   .card-chip {
     width: 45px;
@@ -1062,7 +1780,7 @@ const badgeDefinitions = {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 2.2rem;
-    opacity: 0.15;
+    opacity: 0.12;
     letter-spacing: 2px;
   }
   .card-number {
@@ -1123,31 +1841,28 @@ const badgeDefinitions = {
     bottom: 85px;
   }
 
-  /* Card Tier Themes */
+  /* Holographic Tier Colors */
   .card-tier-starter {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+    background: linear-gradient(135deg, #1e293b, #0f172a, #020617);
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.1);
   }
   .card-tier-silver {
-    background: linear-gradient(135deg, #2b3a4a, #101824);
+    background: linear-gradient(135deg, #475569, #334155, #1e293b);
     border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
   }
   .card-tier-gold {
-    background: linear-gradient(135deg, #784c05, #120b00);
-    border-color: rgba(243, 156, 18, 0.4);
-    box-shadow: 0 0 25px rgba(243, 156, 18, 0.2);
-  }
-  .card-tier-gold .card-chip {
-    background: linear-gradient(135deg, #fff2a3, #e5c060);
+    background: linear-gradient(135deg, #b45309, #78350f, #451a03);
+    border-color: rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
   }
   .card-tier-diamond {
-    background: linear-gradient(135deg, #32104a, #0b1a30);
-    border-color: rgba(168, 85, 247, 0.4);
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
+    background: linear-gradient(135deg, #6b21a8, #4c1d95, #1e1b4b);
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.3);
   }
 
-  /* Sub Details */
+  /* Subscription Widget details */
   .sub-details-list {
     display: flex;
     flex-direction: column;
@@ -1168,6 +1883,7 @@ const badgeDefinitions = {
     color: #fff;
   }
 
+  /* Upgrade change request styling */
   .change-sub-wrap {
     margin-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -1223,13 +1939,50 @@ const badgeDefinitions = {
     line-height: 1.4;
   }
 
-  /* Presence history */
-  .presence-summary-text {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
+  /* Presence tracking stats UI */
+  .presence-stat-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: var(--border-glass);
   }
+  .circular-progress {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem auto;
+  }
+  .progress-ring {
+    transform: rotate(-90deg);
+  }
+  .progress-ring-circle {
+    stroke-dasharray: 314.16;
+    stroke-dashoffset: 314.16;
+    transition: stroke-dashoffset 0.8s ease-in-out;
+    stroke-linecap: round;
+  }
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  .presence-summary-text-center {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+    text-align: center;
+  }
+
+  /* Presence Timeline */
   .presence-history-timeline h4 {
     font-size: 0.9rem;
     color: var(--text-secondary);
@@ -1239,7 +1992,7 @@ const badgeDefinitions = {
   }
   .presence-timeline-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 1rem;
   }
   .presence-timeline-item {
@@ -1258,8 +2011,6 @@ const badgeDefinitions = {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 0.85rem;
     flex-shrink: 0;
   }
   .status-present {
@@ -1296,7 +2047,7 @@ const badgeDefinitions = {
     text-overflow: ellipsis;
   }
 
-  /* Technical Evaluation */
+  /* Technical Skill Bars */
   .tech-progress-group {
     display: flex;
     flex-direction: column;
@@ -1326,7 +2077,7 @@ const badgeDefinitions = {
   }
   .coach-comments-box {
     margin-top: 1.5rem;
-    background: rgba(0, 242, 255, 0.03);
+    background: rgba(0, 242, 255, 0.02);
     border-left: 3px solid var(--color-teal);
     border-radius: 0 10px 10px 0;
     padding: 1rem 1.25rem;
@@ -1345,7 +2096,7 @@ const badgeDefinitions = {
     color: var(--text-primary);
   }
 
-  /* Badges */
+  /* Badges earned */
   .badges-earned-title {
     font-size: 0.9rem;
     color: var(--text-secondary);
@@ -1370,10 +2121,10 @@ const badgeDefinitions = {
     gap: 0.5rem;
     transition: var(--transition-smooth);
   }
-  .badge-icon {
-    font-size: 2.2rem;
+  .badge-icon-svg {
     margin-bottom: 0.25rem;
     transition: var(--transition-smooth);
+    color: var(--text-muted);
   }
   .badge-name {
     font-family: var(--font-display);
@@ -1386,24 +2137,27 @@ const badgeDefinitions = {
     color: var(--text-secondary);
     line-height: 1.3;
   }
+  .badge-item.unlocked .badge-icon-svg {
+    color: var(--color-teal);
+    filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.35));
+  }
   .badge-item.unlocked:hover {
     border-color: var(--color-teal);
     box-shadow: var(--shadow-glow);
     transform: translateY(-3px);
   }
-  .badge-item.unlocked:hover .badge-icon {
+  .badge-item.unlocked:hover .badge-icon-svg {
     transform: scale(1.15);
   }
   .badge-item.locked {
-    opacity: 0.2;
-    filter: grayscale(1);
+    opacity: 0.25;
     cursor: not-allowed;
   }
 
-  /* Gallery */
+  /* Gallery Photos */
   .gallery-grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 1rem;
   }
   .gallery-photo-item {
@@ -1425,51 +2179,164 @@ const badgeDefinitions = {
     object-fit: cover;
   }
 
-  /* Non-member Panel */
-  .non-member-hero {
+  /* Action Lightbox full screen modal */
+  .lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(3, 7, 18, 0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 2rem; right: 2rem;
+    background: transparent;
+    border: none;
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2001;
+    transition: var(--transition-smooth);
+  }
+  .lightbox-close:hover {
+    color: var(--color-teal);
+    transform: scale(1.1);
+  }
+  .lightbox-content {
+    max-width: 90%;
+    max-height: 85%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: var(--border-glass);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    object-fit: contain;
+  }
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Non-Member Views */
+  .non-member-welcome-bar {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .non-member-hero-banner {
     text-align: center;
     background: linear-gradient(135deg, rgba(0, 136, 255, 0.08), rgba(0, 242, 255, 0.04));
-    border: 1px solid rgba(0, 242, 255, 0.25);
-    border-radius: 24px;
-    padding: 4rem 2rem;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 20px;
+    padding: 3rem 2rem;
     margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
-  .non-member-hero h2 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    background: linear-gradient(135deg, var(--color-teal), var(--color-blue), #fff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .non-member-hero p {
-    max-width: 700px;
+  .non-member-hero-banner p {
     font-size: 1.15rem;
-    line-height: 1.7;
+    line-height: 1.6;
+    max-width: 750px;
+    margin: 0;
+  }
+  .widget-subtitle {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--color-teal);
+    padding-left: 0.75rem;
+  }
+
+  /* Sports Catalog Cards */
+  .sports-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .sport-catalog-card {
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 20px;
+    overflow: hidden;
+    border: var(--border-glass);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+  }
+  .sport-catalog-card:hover {
+    border-color: rgba(0, 242, 255, 0.25);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-5px);
+  }
+  .sport-card-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .sport-card-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 50%;
+    background: linear-gradient(to top, rgba(15, 23, 42, 1), transparent);
+  }
+  .sport-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-grow: 1;
+    justify-content: space-between;
+    background: rgba(15, 23, 42, 0.6);
+  }
+  .sport-card-content h4 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: #fff;
+  }
+  .sport-card-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
     color: var(--text-secondary);
   }
-  .non-member-hero .divider {
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-teal), var(--color-blue));
-    border-radius: 2px;
+  .sport-card-btn {
+    background: rgba(0, 242, 255, 0.05);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    color: var(--color-teal);
+    font-family: var(--font-display);
+    font-weight: 700;
+    padding: 0.65rem 1.25rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    width: 100%;
+    margin-top: 0.5rem;
   }
-  .action-btn {
-    padding: 0.9rem 2.5rem;
-    font-size: 1.1rem;
-    margin-top: 1rem;
+  .sport-card-btn:hover {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #000;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.35);
   }
+
+  /* Benefits */
   .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
-    margin-top: 1rem;
   }
   .benefit-card {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.25);
     border-radius: 16px;
     padding: 1.5rem;
     border: var(--border-glass);
@@ -1479,8 +2346,7 @@ const badgeDefinitions = {
     border-color: rgba(0, 242, 255, 0.15);
     transform: translateY(-2px);
   }
-  .benefit-icon {
-    font-size: 2.2rem;
+  .benefit-card-icon {
     color: var(--color-teal);
     margin-bottom: 0.75rem;
   }
@@ -1493,73 +2359,295 @@ const badgeDefinitions = {
     font-size: 0.85rem;
     color: var(--text-secondary);
     line-height: 1.5;
+    margin: 0;
   }
 
-  /* Slots Interactive Preview */
-  .slots-preview-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  /* WIZARD CONTAINER AND COMPONENT */
+  .wizard-container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
   }
-  .pool-preview-card {
-    padding: 1.5rem;
-    border-radius: 16px;
-  }
-  .pool-preview-card h4 {
-    font-size: 1.1rem;
-    margin-bottom: 1.25rem;
-    border-left: 3px solid var(--color-teal);
-    padding-left: 0.75rem;
-  }
-  .pool-slots-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  .wizard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    flex-wrap: wrap;
     gap: 1rem;
   }
-  .slot-preview-item {
-    background: rgba(0,0,0,0.25);
-    border-radius: 12px;
-    padding: 1rem;
+  .wizard-step-indicator {
     display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    border: 1px solid rgba(255,255,255,0.03);
-    font-size: 0.9rem;
-  }
-  .slot-time {
-    font-weight: 700;
-    color: #fff;
-  }
-  .slot-coach {
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-  }
-  .slot-count {
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
     font-weight: 600;
+    font-family: var(--font-display);
     font-size: 0.85rem;
-    margin-top: 0.25rem;
+    transition: var(--transition-smooth);
   }
-  .slot-available {
-    border-left: 3px solid #10b981;
+  .step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
   }
-  .slot-available .slot-count {
-    color: #34d399;
+  .wizard-step-indicator.active {
+    color: var(--color-teal);
   }
-  .slot-low {
-    border-left: 3px solid #f59e0b;
-  }
-  .slot-low .slot-count {
-    color: #fbbf24;
-  }
-  .slot-full {
-    border-left: 3px solid #ef4444;
-    opacity: 0.45;
-  }
-  .slot-full .slot-count {
-    color: #f87171;
+  .wizard-step-indicator.active .step-num {
+    border-color: var(--color-teal);
+    background: rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
   }
 
-  /* Utility Buttons */
+  /* Wizard Content step panels */
+  .wizard-step-content {
+    display: none;
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  .wizard-step-content.active {
+    display: block;
+  }
+  .wizard-step-content h3 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  /* Option selection cards for Steps 1, 2, 3 */
+  .wizard-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1.25rem;
+  }
+  .grid-formula {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  .wizard-option-card {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    border: var(--border-glass);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+  }
+  .wizard-option-card:hover {
+    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.02);
+  }
+  .wizard-option-card.selected {
+    border-color: var(--color-teal);
+    background: rgba(0, 242, 255, 0.03);
+    box-shadow: var(--shadow-glow);
+  }
+  .option-icon {
+    color: var(--text-secondary);
+    transition: var(--transition-smooth);
+  }
+  .wizard-option-card.selected .option-icon {
+    color: var(--color-teal);
+  }
+  .wizard-option-card h4 {
+    font-size: 0.95rem;
+    margin: 0;
+    color: #fff;
+  }
+  .wizard-option-card p {
+    font-size: 0.75rem;
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.3;
+  }
+
+  /* Formula specific properties */
+  .formula-badge {
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+  }
+  .formula-price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--color-teal);
+  }
+  .formula-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 0.75rem;
+    width: 100%;
+  }
+  .text-gold {
+    color: #fbbf24 !important;
+    background: rgba(245, 158, 11, 0.1) !important;
+  }
+  .text-purple {
+    color: #c084fc !important;
+    background: rgba(168, 85, 247, 0.1) !important;
+  }
+
+  /* Step 4 Form controls */
+  .wizard-form-group {
+    max-width: 450px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .wizard-form-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .form-control {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: var(--border-glass);
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    outline: none;
+  }
+  .form-control:focus {
+    border-color: var(--color-teal);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+  }
+
+  /* Step 5 Validation Checkbox styling */
+  .wizard-validation-panel {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+  .rules-header {
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+  .rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .checkbox-container {
+    display: flex;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    user-select: none;
+    align-items: flex-start;
+  }
+  .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0; width: 0;
+  }
+  .checkbox-checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: rgba(255,255,255,0.05);
+    border: var(--border-glass);
+    border-radius: 5px;
+    transition: var(--transition-smooth);
+  }
+  .checkbox-container:hover input ~ .checkbox-checkmark {
+    background-color: rgba(255,255,255,0.1);
+  }
+  .checkbox-container input:checked ~ .checkbox-checkmark {
+    background-color: var(--color-teal);
+    border-color: transparent;
+  }
+  .checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .checkbox-container input:checked ~ .checkbox-checkmark:after {
+    display: block;
+  }
+  .checkbox-container .checkbox-checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 10px;
+    border: solid #000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .checkbox-text {
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  /* Wizard Footer controls */
+  .wizard-footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  .wiz-btn-prev {
+    width: auto;
+    padding: 0.7rem 1.5rem;
+  }
+  .wiz-btn-next, .wiz-btn-submit {
+    width: auto;
+    padding: 0.7rem 2rem;
+  }
+  .wizard-error-banner {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  /* Buttons */
   .portal-btn-primary {
     background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
     border: none;
@@ -1581,8 +2669,8 @@ const badgeDefinitions = {
     box-shadow: 0 6px 20px rgba(0, 242, 255, 0.5);
   }
   .portal-btn-secondary {
-    background: rgba(0, 242, 255, 0.08);
-    border: 1px solid rgba(0, 242, 255, 0.3);
+    background: rgba(0, 242, 255, 0.06);
+    border: 1px solid rgba(0, 242, 255, 0.25);
     color: var(--color-teal);
     border-radius: 50px;
     padding: 0.75rem 1.5rem;
@@ -1596,8 +2684,8 @@ const badgeDefinitions = {
     display: block;
   }
   .portal-btn-secondary:hover {
-    background: rgba(0, 242, 255, 0.15);
-    box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+    background: rgba(0, 242, 255, 0.12);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
   }
   .no-data-msg {
     color: var(--text-muted);
@@ -1610,8 +2698,14 @@ const badgeDefinitions = {
     .portal-grid {
       grid-template-columns: 1fr;
     }
-    .portal-welcome-bar {
+    .portal-welcome-bar, .non-member-welcome-bar {
       margin-bottom: 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .tab-navigation {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

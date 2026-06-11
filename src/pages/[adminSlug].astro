@@ -2991,26 +2991,26 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
             <div class="field-group">
               <label style="font-size: 0.75rem; color: var(--text-secondary);">Formule / Tier</label>
               <select class="form-control inline-tier-${m.id}" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
-                <option value="Starter">Starter</option>
-                <option value="Silver" selected>Silver</option>
-                <option value="Gold">Gold</option>
-                <option value="Diamond">Diamond</option>
+                <option value="Starter" ${m.membershipTier === 'Starter' ? 'selected' : ''}>Starter</option>
+                <option value="Silver" ${(!m.membershipTier || m.membershipTier === 'Silver') ? 'selected' : ''}>Silver</option>
+                <option value="Gold" ${m.membershipTier === 'Gold' ? 'selected' : ''}>Gold</option>
+                <option value="Diamond" ${m.membershipTier === 'Diamond' ? 'selected' : ''}>Diamond</option>
               </select>
             </div>
             <div class="field-group">
               <label style="font-size: 0.75rem; color: var(--text-secondary);">Piscine</label>
               <select class="form-control inline-pool-${m.id}" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
-                <option value="reghaia">Reghaia</option>
-                <option value="cheraga">Cheraga</option>
+                <option value="reghaia" ${m.subscription?.poolKey === 'reghaia' ? 'selected' : ''}>Reghaia</option>
+                <option value="cheraga" ${m.subscription?.poolKey === 'cheraga' ? 'selected' : ''}>Cheraga</option>
               </select>
             </div>
             <div class="field-group">
               <label style="font-size: 0.75rem; color: var(--text-secondary);">Coach</label>
-              <input type="text" class="form-control inline-coach-${m.id}" placeholder="Ex: Coach Youcef" value="Coach Youcef" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+              <input type="text" class="form-control inline-coach-${m.id}" placeholder="Ex: Coach Youcef" value="${m.subscription?.coachName || 'Coach Youcef'}" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
             </div>
             <div class="field-group">
               <label style="font-size: 0.75rem; color: var(--text-secondary);">Creneau (Jour Heure)</label>
-              <input type="text" class="form-control inline-slot-${m.id}" placeholder="Ex: Samedi 21h - 23h" value="Samedi 21h - 23h" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+              <input type="text" class="form-control inline-slot-${m.id}" placeholder="Ex: Samedi 21h - 23h" value="${m.subscription?.slotTime || 'Samedi 21h - 23h'}" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
             </div>
             <div class="field-group">
               <label style="font-size: 0.75rem; color: var(--text-secondary);">Fin Abonnement</label>

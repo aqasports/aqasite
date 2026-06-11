@@ -389,6 +389,78 @@ router.post('/member/change-subscription', verifyMemberToken, (req, res) => {
   }
 });
 
+// POST /api/member/apply-membership
+router.post('/member/apply-membership', verifyMemberToken, (req, res) => {
+  try {
+    const { tier, poolKey, coachName, slotDay, slotTime } = req.body;
+    if (!tier || !poolKey || !coachName || !slotDay || !slotTime) {
+      return res.status(400).json({ success: false, error: 'Informations incompletes' });
+    }
+
+    const members = loadMembers();
+    const user = members.find(m => m.id === req.member.id);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Membre introuvable' });
+    }
+
+    const safeTier = sanitize(tier, 50);
+    const safePoolKey = sanitize(poolKey, 50);
+    const safeCoachName = sanitize(coachName, 100);
+    const safeSlotDay = sanitize(slotDay, 30);
+    const safeSlotTime = sanitize(slotTime, 30);
+
+    // Read schedule.json to check slot availability
+    if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
+      return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
+    }
+    const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
+    const pool = schedule[safePoolKey];
+    if (!pool) {
+      return res.status(400).json({ success: false, error: 'Piscine introuvable' });
+    }
+    const category = user.gender || 'homme';
+    const cat = pool.categories[category];
+    if (!cat) {
+      return res.status(400).json({ success: false, error: 'Categorie introuvable pour cette piscine' });
+    }
+    const coach = cat.coaches.find(c => c.name === safeCoachName);
+    if (!coach) {
+      return res.status(400).json({ success: false, error: 'Entraineur introuvable' });
+    }
+    const slot = coach.slots.find(s => s.day === safeSlotDay && s.time === safeSlotTime);
+    if (!slot) {
+      return res.status(400).json({ success: false, error: 'Creneau introuvable dans le planning' });
+    }
+    if ((slot.taken || 0) >= slot.total) {
+      return res.status(400).json({ success: false, error: 'Ce creneau est deja complet' });
+    }
+
+    user.isAqaMember = true;
+    user.status = 'pending';
+    user.membershipTier = safeTier;
+    user.subscription = {
+      category: category,
+      poolKey: safePoolKey,
+      coachName: safeCoachName,
+      slotDay: safeSlotDay,
+      slotTime: safeSlotTime,
+      startDate: new Date().toISOString().split('T')[0],
+      endDate: '',
+      status: 'pending'
+    };
+    user.subscriptionChangeRequest = null;
+
+    saveMembers(members);
+
+    res.json({
+      success: true,
+      message: 'Votre demande d\'adhesion a bien ete soumise.'
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // GET /api/member/public-stats (QR-code scanning endpoint)
 router.get('/member/public-stats', (req, res) => {
   try {

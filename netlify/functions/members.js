@@ -565,6 +565,93 @@ exports.handler = async (event, context) => {
     }
 
     // ----------------------------------------------------
+    // POST /member/apply-membership
+    // ----------------------------------------------------
+    if (method === 'POST' && pathPart === '/member/apply-membership') {
+      const decoded = verifyMemberToken(event);
+      if (!decoded) {
+        return {
+          statusCode: 401,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Session invalide' })
+        };
+      }
+
+      const { tier, poolKey, coachName, slotDay, slotTime } = JSON.parse(event.body || '{}');
+      if (!tier || !poolKey || !coachName || !slotDay || !slotTime) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Informations incompletes' })
+        };
+      }
+
+      const safeTier = sanitize(tier, 50);
+      const safePoolKey = sanitize(poolKey, 50);
+      const safeCoachName = sanitize(coachName, 100);
+      const safeSlotDay = sanitize(slotDay, 30);
+      const safeSlotTime = sanitize(slotTime, 30);
+
+      const users = await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`);
+      if (!users || users.length === 0) {
+        return {
+          statusCode: 404,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Compte introuvable' })
+        };
+      }
+      const user = users[0];
+      const category = user.gender || 'homme';
+
+      // Real-time capacity check
+      const queryParams = `pool_key=eq.${encodeURIComponent(safePoolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(safeCoachName)}&day=eq.${encodeURIComponent(safeSlotDay)}&time=eq.${encodeURIComponent(safeSlotTime)}`;
+      const rows = await supabaseFetch(`schedule?${queryParams}`);
+      if (!rows || rows.length === 0) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Creneau introuvable dans le planning' })
+        };
+      }
+      const slot = rows[0];
+      if (slot.taken >= slot.total) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Ce creneau est deja complet' })
+        };
+      }
+
+      const sub = {
+        category: category,
+        poolKey: safePoolKey,
+        coachName: safeCoachName,
+        slotDay: safeSlotDay,
+        slotTime: safeSlotTime,
+        startDate: new Date().toISOString().split('T')[0],
+        endDate: '',
+        status: 'pending'
+      };
+
+      await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          is_aqa_member: true,
+          status: 'pending',
+          membership_tier: safeTier,
+          subscription: sub,
+          subscription_change_request: null
+        })
+      });
+
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify({ success: true, message: 'Votre demande d\'adhesion a bien ete soumise.' })
+      };
+    }
+
+    // ----------------------------------------------------
     // GET /member/public-stats
     // ----------------------------------------------------
     if (method === 'GET' && pathPart === '/member/public-stats') {
