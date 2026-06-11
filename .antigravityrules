@@ -1,0 +1,19 @@
+# Antigravity Assistant Instructions and Rules
+
+This configuration file outlines the specific operational constraints and standards that must be adhered to at all times when working on this repository.
+
+## Rule 1: No Emojis at All
+- Do not use emojis in the codebase (including comments, html templates, texts, or strings).
+- Do not use emojis in commit messages or repository logs.
+- Do not use emojis in assistant responses or explanations.
+- Keep the communication tone professional and text-only.
+
+## Rule 2: No Indian Numbers for Arabic
+- Always use standard Western Arabic numerals (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) in all Arabic text and translations.
+- Do not use Eastern Arabic-Indic numerals (such as ٠, ١, ٢, ٣, ٤, ٥, ٦, ٧, ٨, ٩) under any circumstances.
+
+## Rule 3: No Lazy Work
+- Write fully functional, complete, and correct code changes.
+- Do not use placeholders, incomplete code blocks, or "TODO" comments.
+- Do not truncate code files or leave sections incomplete for the user to fill.
+- Ensure all templates build successfully before finishing tasks.

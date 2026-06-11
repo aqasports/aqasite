@@ -53,3 +53,6 @@ Thumbs.db
 # Windows AppData
 %AppData%
 
+# Agent skills dependencies
+.agents/
+
