@@ -1762,19 +1762,14 @@
     let authenticated = false;
 
     try {
-      const res = await fetch('/api/admin-auth', {
+      const { ok, data } = await safeFetchJson('/api/admin-auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: pwd })
       });
 
-      const contentType = res.headers.get('content-type') || '';
-      if (!res.ok || contentType.includes('text/html')) {
-        let errText = 'Mot de passe incorrect ou erreur serveur.';
-        try {
-          const data = await res.json();
-          errText = data.error || errText;
-        } catch(e) {}
+      if (!ok) {
+        const errText = data?.error || 'Mot de passe incorrect ou erreur serveur.';
         errDiv.style.display = 'block';
         errDiv.textContent = 'Erreur: ' + errText;
         document.getElementById('adminPassword').value = '';
@@ -1785,7 +1780,6 @@
         return;
       }
 
-      const data = await res.json();
       if (data.success && data.token) {
         token = data.token;
         authenticated = true;
@@ -1830,15 +1824,11 @@
     let valid = false;
 
     try {
-      const res = await fetch('/api/verify-token', {
+      const { ok, data } = await safeFetchJson('/api/verify-token', {
         headers: authHeaders()
       });
-      const contentType = res.headers.get('content-type') || '';
-      if (res.ok && !contentType.includes('text/html')) {
-        const data = await res.json();
-        if (data.success) {
-          valid = true;
-        }
+      if (ok && data && data.success) {
+        valid = true;
       }
     } catch (e) {
       console.warn("Session check failed:", e);

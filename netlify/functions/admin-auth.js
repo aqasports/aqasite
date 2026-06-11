@@ -94,31 +94,11 @@ exports.handler = async (event, context) => {
     // Resolve stored hash
     const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
 
-    const inputHash = crypto.createHash('sha256').update(password).digest('hex');
-    const bcryptSanityCheck = bcrypt.compareSync(
-      crypto.createHash('sha256').update('test').digest('hex'),
-      '$2b$12$60SxUu.wyJr5T9nCEKBkc.61fLI1GPc5xTC7Oz85ojzNX/b5puljm'
-    );
-
     if (!verifyPassword(password, storedHash)) {
       return {
         statusCode: 401,
         headers: corsHeaders,
-        body: JSON.stringify({ 
-          success: false, 
-          error: 'Mot de passe incorrect',
-          debug: {
-            githubTokenExists: !!githubToken,
-            fetchedFromGithub,
-            storedHashLength: storedHash.length,
-            storedHashPrefix: storedHash.substring(0, 10),
-            isBcrypt: storedHash.startsWith('$2a$') || storedHash.startsWith('$2b$'),
-            inputHashLength: inputHash.length,
-            inputHashPrefix: inputHash.substring(0, 10),
-            passwordLength: password.length,
-            bcryptSanityCheck
-          }
-        })
+        body: JSON.stringify({ success: false, error: 'Mot de passe incorrect' })
       };
     }
 

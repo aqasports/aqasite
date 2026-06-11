@@ -67,17 +67,8 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
       <div class="login-meme">
-
-        <div class="tenor-gif-embed" data-postid="15088356" data-share-method="host" data-aspect-ratio="1.33333" data-width="100%">
-
-          <a href="https://tenor.com/view/irrelevant-rust-playrust-egoism-who-are-you-gif-15088356">Irrelevant Rust GIF</a>
-
-        </div>
-
-        <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTl5dG40ZzRpY3F1dTNkOWt0YjN4N2p0cGtkNm91aGR4cTZ6N3g1NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/F37vjAFGcM7mjbxfAb/giphy.gif" alt="Admin Authorization Meme">
         <p class="meme-label">who are you</p>
-
       </div>
 
 
@@ -1665,19 +1656,14 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
     let authenticated = false;
 
     try {
-      const res = await fetch('/api/admin-auth', {
+      const { ok, data } = await safeFetchJson('/api/admin-auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: pwd })
       });
 
-      const contentType = res.headers.get('content-type') || '';
-      if (!res.ok || contentType.includes('text/html')) {
-        let errText = 'Mot de passe incorrect ou erreur serveur.';
-        try {
-          const data = await res.json();
-          errText = data.error || errText;
-        } catch(e) {}
+      if (!ok) {
+        const errText = data?.error || 'Mot de passe incorrect ou erreur serveur.';
         errDiv.style.display = 'block';
         errDiv.textContent = 'Erreur: ' + errText;
         document.getElementById('adminPassword').value = '';
@@ -1688,7 +1674,6 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
         return;
       }
 
-      const data = await res.json();
       if (data.success && data.token) {
         token = data.token;
         authenticated = true;
@@ -1733,15 +1718,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
     let valid = false;
 
     try {
-      const res = await fetch('/api/verify-token', {
+      const { ok, data } = await safeFetchJson('/api/verify-token', {
         headers: authHeaders()
       });
-      const contentType = res.headers.get('content-type') || '';
-      if (res.ok && !contentType.includes('text/html')) {
-        const data = await res.json();
-        if (data.success) {
-          valid = true;
-        }
+      if (ok && data && data.success) {
+        valid = true;
       }
     } catch (e) {
       console.warn("Session check failed:", e);
@@ -3914,11 +3895,13 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
 
-  .login-meme .tenor-gif-embed {
+  .login-meme img {
 
     display: block;
 
     width: 100%;
+
+    height: auto;
 
   }
 
