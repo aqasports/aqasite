@@ -315,8 +315,67 @@ router.get('/member/profile', verifyMemberToken, (req, res) => {
     // Return profile without password hash
     const profile = { ...user };
     delete profile.passwordHash;
+    if (!profile.profilePhotoUrl) profile.profilePhotoUrl = '';
+    if (!profile.subscriptionHistory) profile.subscriptionHistory = [];
 
     res.json({ success: true, profile });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// POST /api/member/update-profile
+router.post('/member/update-profile', verifyMemberToken, (req, res) => {
+  try {
+    const { fullName, phone, birthDate, gender, profilePhotoData } = req.body;
+    const members = loadMembers();
+    const user = members.find(m => m.id === req.member.id);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Membre introuvable' });
+    }
+
+    if (fullName !== undefined) user.fullName = sanitize(fullName, 100);
+    if (phone !== undefined) user.phone = sanitize(phone, 30);
+    if (birthDate !== undefined) user.birthDate = sanitize(birthDate, 20);
+    if (gender !== undefined) user.gender = sanitize(gender, 20);
+
+    let newPhotoUrl = null;
+    if (profilePhotoData) {
+      // In local api, mock photo path
+      newPhotoUrl = `/uploads/local-avatar-${Date.now()}.png`;
+      user.profilePhotoUrl = newPhotoUrl;
+    }
+
+    saveMembers(members);
+    res.json({ success: true, message: 'Profil mis a jour avec succes', profilePhotoUrl: newPhotoUrl || undefined });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// POST /api/member/change-password
+router.post('/api/member/change-password', verifyMemberToken, (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ success: false, error: 'Champs requis manquants' });
+    }
+
+    const members = loadMembers();
+    const user = members.find(m => m.id === req.member.id);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Compte introuvable' });
+    }
+
+    if (!bcrypt.compareSync(currentPassword, user.passwordHash)) {
+      return res.status(400).json({ success: false, error: 'Mot de passe actuel incorrect' });
+    }
+
+    const salt = bcrypt.genSaltSync(10);
+    user.passwordHash = bcrypt.hashSync(newPassword, salt);
+
+    saveMembers(members);
+    res.json({ success: true, message: 'Mot de passe mis a jour avec succes' });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

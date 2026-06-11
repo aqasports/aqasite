@@ -474,13 +474,122 @@ exports.handler = async (event, context) => {
         presence: user.presence,
         suiviTechnique: user.suivi_technique,
         gallery: user.gallery,
-        subscriptionChangeRequest: user.subscription_change_request
+        subscriptionChangeRequest: user.subscription_change_request,
+        profilePhotoUrl: user.profile_photo_url || '',
+        subscriptionHistory: user.subscription_history || []
       };
 
       return {
         statusCode: 200,
         headers: corsHeaders,
         body: JSON.stringify({ success: true, profile })
+      };
+    }
+
+    // ----------------------------------------------------
+    // POST /member/update-profile
+    // ----------------------------------------------------
+    if (method === 'POST' && pathPart === '/member/update-profile') {
+      const decoded = verifyMemberToken(event);
+      if (!decoded) {
+        return {
+          statusCode: 401,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Non autorise ou session expiree' })
+        };
+      }
+
+      const { fullName, phone, birthDate, gender, profilePhotoData } = JSON.parse(event.body || '{}');
+
+      const updates = {};
+      if (fullName !== undefined) updates.full_name = sanitize(fullName, 100);
+      if (phone !== undefined) updates.phone = sanitize(phone, 30);
+      if (birthDate !== undefined) updates.birth_date = sanitize(birthDate, 20);
+      if (gender !== undefined) updates.gender = sanitize(gender, 20);
+
+      let newPhotoUrl = null;
+      if (profilePhotoData) {
+        try {
+          newPhotoUrl = await uploadToCloudinary(profilePhotoData);
+          updates.profile_photo_url = newPhotoUrl;
+        } catch (e) {
+          console.error("Cloudinary upload error in update-profile:", e);
+          return {
+            statusCode: 500,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: 'Erreur lors du telechargement de la photo de profil' })
+          };
+        }
+      }
+
+      await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`, {
+        method: 'PATCH',
+        body: JSON.stringify(updates)
+      });
+
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify({
+          success: true,
+          message: 'Profil mis a jour avec succes',
+          profilePhotoUrl: newPhotoUrl || undefined
+        })
+      };
+    }
+
+    // ----------------------------------------------------
+    // POST /member/change-password
+    // ----------------------------------------------------
+    if (method === 'POST' && pathPart === '/member/change-password') {
+      const decoded = verifyMemberToken(event);
+      if (!decoded) {
+        return {
+          statusCode: 401,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Non autorise ou session expiree' })
+        };
+      }
+
+      const { currentPassword, newPassword } = JSON.parse(event.body || '{}');
+      if (!currentPassword || !newPassword) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Champs requis manquants' })
+        };
+      }
+
+      const users = await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`);
+      if (!users || users.length === 0) {
+        return {
+          statusCode: 404,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Compte introuvable' })
+        };
+      }
+
+      const user = users[0];
+      if (!bcrypt.compareSync(currentPassword, user.password_hash)) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Mot de passe actuel incorrect' })
+        };
+      }
+
+      const salt = bcrypt.genSaltSync(10);
+      const newHash = bcrypt.hashSync(newPassword, salt);
+
+      await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ password_hash: newHash })
+      });
+
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify({ success: true, message: 'Mot de passe mis a jour avec succes' })
       };
     }
 
@@ -552,9 +661,25 @@ exports.handler = async (event, context) => {
         requestedAt: new Date().toISOString()
       };
 
+      const history = user.subscription_history || [];
+      history.push({
+        event: 'change_requested',
+        date: new Date().toISOString(),
+        details: {
+          tier: safeTier,
+          poolKey: safePoolKey,
+          coachName: safeCoachName,
+          slotDay: safeSlotDay,
+          slotTime: safeSlotTime
+        }
+      });
+
       await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`, {
         method: 'PATCH',
-        body: JSON.stringify({ subscription_change_request: changeReq })
+        body: JSON.stringify({
+          subscription_change_request: changeReq,
+          subscription_history: history
+        })
       });
 
       return {
@@ -633,6 +758,19 @@ exports.handler = async (event, context) => {
         status: 'pending'
       };
 
+      const history = user.subscription_history || [];
+      history.push({
+        event: 'membership_applied',
+        date: new Date().toISOString(),
+        details: {
+          tier: safeTier,
+          poolKey: safePoolKey,
+          coachName: safeCoachName,
+          slotDay: safeSlotDay,
+          slotTime: safeSlotTime
+        }
+      });
+
       await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`, {
         method: 'PATCH',
         body: JSON.stringify({
@@ -640,7 +778,8 @@ exports.handler = async (event, context) => {
           status: 'pending',
           membership_tier: safeTier,
           subscription: sub,
-          subscription_change_request: null
+          subscription_change_request: null,
+          subscription_history: history
         })
       });
 
@@ -809,12 +948,27 @@ exports.handler = async (event, context) => {
         status: 'active'
       };
 
+      const history = user.subscription_history || [];
+      history.push({
+        event: 'membership_approved',
+        date: new Date().toISOString(),
+        details: {
+          tier: safeMembershipTier,
+          poolKey: safePoolKey,
+          coachName: safeCoachName,
+          slotDay: safeSlotDay,
+          slotTime: safeSlotTime,
+          endDate: safeEndDate
+        }
+      });
+
       await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
         method: 'PATCH',
         body: JSON.stringify({
           status: 'active',
           membership_tier: safeMembershipTier,
-          subscription: updatedSub
+          subscription: updatedSub,
+          subscription_history: history
         })
       });
 
@@ -893,6 +1047,28 @@ exports.handler = async (event, context) => {
           endDate: sanitize(subscription.endDate, 30),
           status: sanitize(subscription.status, 20)
         };
+
+        const oldSub = user.subscription;
+        if (oldSub && (
+          oldSub.poolKey !== updates.subscription.poolKey ||
+          oldSub.coachName !== updates.subscription.coachName ||
+          oldSub.slotDay !== updates.subscription.slotDay ||
+          oldSub.slotTime !== updates.subscription.slotTime
+        )) {
+          const history = user.subscription_history || [];
+          history.push({
+            event: 'membership_updated_by_admin',
+            date: new Date().toISOString(),
+            details: {
+              tier: membershipTier || user.membership_tier,
+              poolKey: updates.subscription.poolKey,
+              coachName: updates.subscription.coachName,
+              slotDay: updates.subscription.slotDay,
+              slotTime: updates.subscription.slotTime
+            }
+          });
+          updates.subscription_history = history;
+        }
       }
 
       await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
@@ -1108,12 +1284,26 @@ exports.handler = async (event, context) => {
           status: 'active'
         };
 
+        const history = user.subscription_history || [];
+        history.push({
+          event: 'change_approved',
+          date: new Date().toISOString(),
+          details: {
+            tier: changeReq.tier,
+            poolKey: changeReq.poolKey,
+            coachName: changeReq.coachName,
+            slotDay: changeReq.slotDay,
+            slotTime: changeReq.slotTime
+          }
+        });
+
         await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
           method: 'PATCH',
           body: JSON.stringify({
             membership_tier: changeReq.tier,
             subscription: newSub,
-            subscription_change_request: null
+            subscription_change_request: null,
+            subscription_history: history
           })
         });
 
@@ -1125,9 +1315,25 @@ exports.handler = async (event, context) => {
           body: JSON.stringify({ success: true, message: 'Changement de formule approuve avec succes' })
         };
       } else {
+        const history = user.subscription_history || [];
+        history.push({
+          event: 'change_rejected',
+          date: new Date().toISOString(),
+          details: {
+            tier: changeReq.tier,
+            poolKey: changeReq.poolKey,
+            coachName: changeReq.coachName,
+            slotDay: changeReq.slotDay,
+            slotTime: changeReq.slotTime
+          }
+        });
+
         await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
           method: 'PATCH',
-          body: JSON.stringify({ subscription_change_request: null })
+          body: JSON.stringify({
+            subscription_change_request: null,
+            subscription_history: history
+          })
         });
         return {
           statusCode: 200,
