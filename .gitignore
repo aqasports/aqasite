@@ -1,5 +1,11 @@
+dist/
 node_modules/
 uploads/
+messages.json
+*.apk
+*.bat
+*.ps1
+package-loc
 
 # Environment files — NEVER commit these
 .env
@@ -30,7 +36,6 @@ deploy.trigger
 # Large media files — too big for GitHub (>100MB), must be hosted separately
 *.mov
 *.mp4
-dist/events/
 
 
 # Old translation system — deleted
