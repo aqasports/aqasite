@@ -111,6 +111,46 @@ function adjustSlotTaken(poolKey, category, coachName, day, time, increment) {
   }
 }
 
+function getGroupsFromSubscription(sub) {
+  if (!sub) return [];
+  if (Array.isArray(sub.groups) && sub.groups.length > 0) {
+    return sub.groups;
+  }
+  if (sub.poolKey && sub.coachName && sub.slotDay && sub.slotTime) {
+    return [{
+      poolKey: sub.poolKey,
+      coachName: sub.coachName,
+      slotDay: sub.slotDay,
+      slotTime: sub.slotTime
+    }];
+  }
+  return [];
+}
+
+async function syncSubscriptionGroups(oldSub, newSub, category, oldStatus, newStatus) {
+  const oldActive = oldStatus === 'active';
+  const newActive = newStatus === 'active';
+  
+  const oldGroups = oldActive ? getGroupsFromSubscription(oldSub) : [];
+  const newGroups = newActive ? getGroupsFromSubscription(newSub) : [];
+  
+  const groupKey = (g) => `${g.poolKey}|${g.coachName}|${g.slotDay}|${g.slotTime}`;
+  const oldKeys = new Set(oldGroups.map(groupKey));
+  const newKeys = new Set(newGroups.map(groupKey));
+  
+  for (const g of oldGroups) {
+    if (!newKeys.has(groupKey(g))) {
+      await adjustSlotTaken(g.poolKey, category, g.coachName, g.slotDay, g.slotTime, -1);
+    }
+  }
+  
+  for (const g of newGroups) {
+    if (!oldKeys.has(groupKey(g))) {
+      await adjustSlotTaken(g.poolKey, category, g.coachName, g.slotDay, g.slotTime, 1);
+    }
+  }
+}
+
 const jwt = require('jsonwebtoken');
 
 // JWT Sign and Verify Helpers
@@ -384,9 +424,17 @@ router.post('/api/member/change-password', verifyMemberToken, (req, res) => {
 // POST /api/member/change-subscription
 router.post('/member/change-subscription', verifyMemberToken, (req, res) => {
   try {
-    const { tier, poolKey, coachName, slotDay, slotTime } = req.body;
-    if (!tier || !poolKey || !coachName || !slotDay || !slotTime) {
-      return res.status(400).json({ success: false, error: 'Informations de changement de formule incompletes' });
+    let { tier, groups, poolKey, coachName, slotDay, slotTime } = req.body;
+    if (!groups || !Array.isArray(groups)) {
+      if (poolKey && coachName && slotDay && slotTime) {
+        groups = [{ poolKey, coachName, slotDay, slotTime }];
+      } else {
+        groups = [];
+      }
+    }
+
+    if (!tier || groups.length === 0) {
+      return res.status(400).json({ success: false, error: 'Informations incompletes' });
     }
 
     const members = loadMembers();
@@ -396,43 +444,61 @@ router.post('/member/change-subscription', verifyMemberToken, (req, res) => {
     }
 
     const safeTier = sanitize(tier, 50);
-    const safePoolKey = sanitize(poolKey, 50);
-    const safeCoachName = sanitize(coachName, 100);
-    const safeSlotDay = sanitize(slotDay, 30);
-    const safeSlotTime = sanitize(slotTime, 30);
+    const TIER_LIMITS = {
+      'starter': 1, 'silver': 2, 'gold': 3, 'diamond': 4, 'emerald': 5,
+      'Starter': 1, 'Silver': 2, 'Gold': 3, 'Diamond': 4, 'Emerald': 5
+    };
+    const maxGroups = TIER_LIMITS[safeTier] || 1;
+    if (groups.length > maxGroups) {
+      return res.status(400).json({ success: false, error: `Votre formule (${safeTier}) ne permet de choisir que maximum ${maxGroups} créneau(x)` });
+    }
 
     // Read schedule.json to check slot availability
     if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
       return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
     }
     const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
-    const pool = schedule[safePoolKey];
-    if (!pool) {
-      return res.status(400).json({ success: false, error: 'Piscine introuvable' });
-    }
     const category = user.gender || 'homme';
-    const cat = pool.categories[category];
-    if (!cat) {
-      return res.status(400).json({ success: false, error: 'Catégorie introuvable pour cette piscine' });
-    }
-    const coach = cat.coaches.find(c => c.name === safeCoachName);
-    if (!coach) {
-      return res.status(400).json({ success: false, error: 'Entraîneur introuvable' });
-    }
-    const slot = coach.slots.find(s => s.day === safeSlotDay && s.time === safeSlotTime);
-    if (!slot) {
-      return res.status(400).json({ success: false, error: 'Créneau introuvable dans le planning' });
-    }
-    if ((slot.taken || 0) >= slot.total) {
-      return res.status(400).json({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' });
+
+    const safeGroups = [];
+    for (const g of groups) {
+      if (!g.poolKey || !g.coachName || !g.slotDay || !g.slotTime) {
+        return res.status(400).json({ success: false, error: 'Informations de créneau incomplètes' });
+      }
+      const sPoolKey = sanitize(g.poolKey, 50);
+      const sCoachName = sanitize(g.coachName, 100);
+      const sSlotDay = sanitize(g.slotDay, 30);
+      const sSlotTime = sanitize(g.slotTime, 30);
+
+      const pool = schedule[sPoolKey];
+      if (!pool) {
+        return res.status(400).json({ success: false, error: `Piscine introuvable: ${sPoolKey}` });
+      }
+      const cat = pool.categories[category];
+      if (!cat) {
+        return res.status(400).json({ success: false, error: `Catégorie introuvable pour la piscine: ${sPoolKey}` });
+      }
+      const coach = cat.coaches.find(c => c.name === sCoachName);
+      if (!coach) {
+        return res.status(400).json({ success: false, error: `Entraîneur introuvable: ${sCoachName}` });
+      }
+      const slot = coach.slots.find(s => s.day === sSlotDay && s.time === sSlotTime);
+      if (!slot) {
+        return res.status(400).json({ success: false, error: `Créneau introuvable dans le planning: ${sSlotDay} ${sSlotTime}` });
+      }
+      if ((slot.taken || 0) >= slot.total) {
+        return res.status(400).json({ success: false, error: `Le créneau (${sSlotDay} - ${sSlotTime}) avec ${sCoachName} est complet.` });
+      }
+      safeGroups.push({ poolKey: sPoolKey, coachName: sCoachName, slotDay: sSlotDay, slotTime: sSlotTime });
     }
 
     user.subscriptionChangeRequest = {
       tier: safeTier,
-      poolKey: safePoolKey,
-      coachName: safeCoachName,
-      slotDay: safeSlotDay,
-      slotTime: safeSlotTime,
+      groups: safeGroups,
+      poolKey: safeGroups[0].poolKey,
+      coachName: safeGroups.map(g => g.coachName).join(', '),
+      slotDay: safeGroups.map(g => g.slotDay).join(', '),
+      slotTime: safeGroups.map(g => g.slotTime).join(', '),
       status: 'pending',
       requestedAt: new Date().toISOString()
     };
@@ -451,8 +517,16 @@ router.post('/member/change-subscription', verifyMemberToken, (req, res) => {
 // POST /api/member/apply-membership
 router.post('/member/apply-membership', verifyMemberToken, (req, res) => {
   try {
-    const { tier, poolKey, coachName, slotDay, slotTime } = req.body;
-    if (!tier || !poolKey || !coachName || !slotDay || !slotTime) {
+    let { tier, groups, poolKey, coachName, slotDay, slotTime } = req.body;
+    if (!groups || !Array.isArray(groups)) {
+      if (poolKey && coachName && slotDay && slotTime) {
+        groups = [{ poolKey, coachName, slotDay, slotTime }];
+      } else {
+        groups = [];
+      }
+    }
+
+    if (!tier || groups.length === 0) {
       return res.status(400).json({ success: false, error: 'Informations incompletes' });
     }
 
@@ -463,35 +537,52 @@ router.post('/member/apply-membership', verifyMemberToken, (req, res) => {
     }
 
     const safeTier = sanitize(tier, 50);
-    const safePoolKey = sanitize(poolKey, 50);
-    const safeCoachName = sanitize(coachName, 100);
-    const safeSlotDay = sanitize(slotDay, 30);
-    const safeSlotTime = sanitize(slotTime, 30);
+    const TIER_LIMITS = {
+      'starter': 1, 'silver': 2, 'gold': 3, 'diamond': 4, 'emerald': 5,
+      'Starter': 1, 'Silver': 2, 'Gold': 3, 'Diamond': 4, 'Emerald': 5
+    };
+    const maxGroups = TIER_LIMITS[safeTier] || 1;
+    if (groups.length > maxGroups) {
+      return res.status(400).json({ success: false, error: `Votre formule (${safeTier}) ne permet de choisir que maximum ${maxGroups} créneau(x)` });
+    }
 
     // Read schedule.json to check slot availability
     if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
       return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
     }
     const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
-    const pool = schedule[safePoolKey];
-    if (!pool) {
-      return res.status(400).json({ success: false, error: 'Piscine introuvable' });
-    }
     const category = user.gender || 'homme';
-    const cat = pool.categories[category];
-    if (!cat) {
-      return res.status(400).json({ success: false, error: 'Categorie introuvable pour cette piscine' });
-    }
-    const coach = cat.coaches.find(c => c.name === safeCoachName);
-    if (!coach) {
-      return res.status(400).json({ success: false, error: 'Entraineur introuvable' });
-    }
-    const slot = coach.slots.find(s => s.day === safeSlotDay && s.time === safeSlotTime);
-    if (!slot) {
-      return res.status(400).json({ success: false, error: 'Creneau introuvable dans le planning' });
-    }
-    if ((slot.taken || 0) >= slot.total) {
-      return res.status(400).json({ success: false, error: 'Ce creneau est deja complet' });
+
+    const safeGroups = [];
+    for (const g of groups) {
+      if (!g.poolKey || !g.coachName || !g.slotDay || !g.slotTime) {
+        return res.status(400).json({ success: false, error: 'Informations de créneau incomplètes' });
+      }
+      const sPoolKey = sanitize(g.poolKey, 50);
+      const sCoachName = sanitize(g.coachName, 100);
+      const sSlotDay = sanitize(g.slotDay, 30);
+      const sSlotTime = sanitize(g.slotTime, 30);
+
+      const pool = schedule[sPoolKey];
+      if (!pool) {
+        return res.status(400).json({ success: false, error: `Piscine introuvable: ${sPoolKey}` });
+      }
+      const cat = pool.categories[category];
+      if (!cat) {
+        return res.status(400).json({ success: false, error: `Catégorie introuvable pour la piscine: ${sPoolKey}` });
+      }
+      const coach = cat.coaches.find(c => c.name === sCoachName);
+      if (!coach) {
+        return res.status(400).json({ success: false, error: `Entraîneur introuvable: ${sCoachName}` });
+      }
+      const slot = coach.slots.find(s => s.day === sSlotDay && s.time === sSlotTime);
+      if (!slot) {
+        return res.status(400).json({ success: false, error: `Créneau introuvable dans le planning: ${sSlotDay} ${sSlotTime}` });
+      }
+      if ((slot.taken || 0) >= slot.total) {
+        return res.status(400).json({ success: false, error: `Le créneau (${sSlotDay} - ${sSlotTime}) avec ${sCoachName} est complet.` });
+      }
+      safeGroups.push({ poolKey: sPoolKey, coachName: sCoachName, slotDay: sSlotDay, slotTime: sSlotTime });
     }
 
     user.isAqaMember = true;
@@ -499,10 +590,11 @@ router.post('/member/apply-membership', verifyMemberToken, (req, res) => {
     user.membershipTier = safeTier;
     user.subscription = {
       category: category,
-      poolKey: safePoolKey,
-      coachName: safeCoachName,
-      slotDay: safeSlotDay,
-      slotTime: safeSlotTime,
+      groups: safeGroups,
+      poolKey: safeGroups[0].poolKey,
+      coachName: safeGroups.map(g => g.coachName).join(', '),
+      slotDay: safeGroups.map(g => g.slotDay).join(', '),
+      slotTime: safeGroups.map(g => g.slotTime).join(', '),
       startDate: new Date().toISOString().split('T')[0],
       endDate: '',
       status: 'pending'
@@ -582,8 +674,8 @@ router.get('/admin/members', verifyAdminToken, (req, res) => {
 // POST /api/admin/members/approve
 router.post('/admin/members/approve', verifyAdminToken, (req, res) => {
   try {
-    const { memberId, membershipTier, poolKey, coachName, slotDay, slotTime, endDate } = req.body;
-    if (!memberId || !membershipTier || !poolKey || !coachName || !slotDay || !slotTime || !endDate) {
+    const { memberId, membershipTier, poolKey, coachName, slotDay, slotTime, endDate, groups } = req.body;
+    if (!memberId || !membershipTier || !endDate) {
       return res.status(400).json({ success: false, error: 'Tous les parametres d\'inscription sont requis' });
     }
 
@@ -594,54 +686,46 @@ router.post('/admin/members/approve', verifyAdminToken, (req, res) => {
     }
 
     const safeMembershipTier = sanitize(membershipTier, 50);
-    const safePoolKey = sanitize(poolKey, 50);
-    const safeCoachName = sanitize(coachName, 100);
-    const safeSlotDay = sanitize(slotDay, 30);
-    const safeSlotTime = sanitize(slotTime, 30);
     const safeEndDate = sanitize(endDate, 30);
 
-    // Update member profile
-    // Read schedule.json to check slot availability
-    if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
-      return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
-    }
-    const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
-    const pool = schedule[safePoolKey];
-    if (!pool) {
-      return res.status(400).json({ success: false, error: 'Piscine introuvable' });
-    }
-    const category = user.gender || 'homme';
-    const cat = pool.categories[category];
-    if (!cat) {
-      return res.status(400).json({ success: false, error: 'Catégorie introuvable pour cette piscine' });
-    }
-    const coach = cat.coaches.find(c => c.name === safeCoachName);
-    if (!coach) {
-      return res.status(400).json({ success: false, error: 'Entraîneur introuvable' });
-    }
-    const slot = coach.slots.find(s => s.day === safeSlotDay && s.time === safeSlotTime);
-    if (!slot) {
-      return res.status(400).json({ success: false, error: 'Créneau introuvable dans le planning' });
-    }
-    if ((slot.taken || 0) >= slot.total) {
-      return res.status(400).json({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' });
+    let finalGroups = [];
+    if (groups && Array.isArray(groups) && groups.length > 0) {
+      finalGroups = groups;
+    } else if (poolKey && coachName && slotDay && slotTime) {
+      finalGroups = [{ poolKey, coachName, slotDay, slotTime }];
+    } else if (user.subscription) {
+      finalGroups = getGroupsFromSubscription(user.subscription);
     }
 
-    user.status = 'active';
-    user.membershipTier = safeMembershipTier;
-    user.subscription = {
+    if (finalGroups.length === 0) {
+      return res.status(400).json({ success: false, error: 'Aucun créneau sélectionné' });
+    }
+
+    const safeGroups = finalGroups.map(g => ({
+      poolKey: sanitize(g.poolKey, 50),
+      coachName: sanitize(g.coachName, 100),
+      slotDay: sanitize(g.slotDay, 30),
+      slotTime: sanitize(g.slotTime, 30)
+    }));
+
+    const updatedSub = {
       category: user.gender || 'homme',
-      poolKey: safePoolKey,
-      coachName: safeCoachName,
-      slotDay: safeSlotDay,
-      slotTime: safeSlotTime,
+      groups: safeGroups,
+      poolKey: safeGroups[0]?.poolKey || '',
+      coachName: safeGroups.map(g => g.coachName).join(', '),
+      slotDay: safeGroups.map(g => g.slotDay).join(', '),
+      slotTime: safeGroups.map(g => g.slotTime).join(', '),
       startDate: new Date().toISOString().split('T')[0],
       endDate: safeEndDate,
       status: 'active'
     };
 
-    // Increment slot count
-    adjustSlotTaken(safePoolKey, user.gender || 'homme', safeCoachName, safeSlotDay, safeSlotTime, 1);
+    // Adjust slot capacity
+    await syncSubscriptionGroups(user.subscription, updatedSub, user.gender || 'homme', user.status, 'active');
+
+    user.status = 'active';
+    user.membershipTier = safeMembershipTier;
+    user.subscription = updatedSub;
 
     saveMembers(members);
 
@@ -668,40 +752,55 @@ router.post('/api/admin/members/update', verifyAdminToken, (req, res) => {
       return res.status(404).json({ success: false, error: 'Membre introuvable' });
     }
 
-    // Handle subscription slot modifications
-    const oldSub = user.subscription;
-    const newSub = subscription;
-
     let safeNewSub = null;
-    if (newSub) {
+    if (subscription) {
+      const subGroups = getGroupsFromSubscription(subscription);
       safeNewSub = {
-        category: sanitize(newSub.category, 20),
-        poolKey: sanitize(newSub.poolKey, 50),
-        coachName: sanitize(newSub.coachName, 100),
-        slotDay: sanitize(newSub.slotDay, 30),
-        slotTime: sanitize(newSub.slotTime, 30),
-        startDate: sanitize(newSub.startDate, 30),
-        endDate: sanitize(newSub.endDate, 30),
-        status: sanitize(newSub.status, 20)
+        category: sanitize(subscription.category, 20),
+        groups: subGroups.map(g => ({
+          poolKey: sanitize(g.poolKey, 50),
+          coachName: sanitize(g.coachName, 100),
+          slotDay: sanitize(g.slotDay, 30),
+          slotTime: sanitize(g.slotTime, 30)
+        })),
+        poolKey: sanitize(subscription.poolKey || (subGroups[0]?.poolKey || ''), 50),
+        coachName: sanitize(subscription.coachName || subGroups.map(g => g.coachName).join(', '), 100),
+        slotDay: sanitize(subscription.slotDay || subGroups.map(g => g.slotDay).join(', '), 30),
+        slotTime: sanitize(subscription.slotTime || subGroups.map(g => g.slotTime).join(', '), 30),
+        startDate: sanitize(subscription.startDate, 30),
+        endDate: sanitize(subscription.endDate, 30),
+        status: sanitize(subscription.status, 20)
       };
+
+      const oldSub = user.subscription;
+      const groupKey = (g) => `${g.poolKey}|${g.coachName}|${g.slotDay}|${g.slotTime}`;
+      const oldKeys = getGroupsFromSubscription(oldSub).map(groupKey).join(',');
+      const newKeys = getGroupsFromSubscription(safeNewSub).map(groupKey).join(',');
+
+      if (oldKeys !== newKeys) {
+        const history = user.subscription_history || [];
+        history.push({
+          event: 'membership_updated_by_admin',
+          date: new Date().toISOString(),
+          details: {
+            tier: membershipTier || user.membershipTier,
+            poolKey: safeNewSub.poolKey,
+            coachName: safeNewSub.coachName,
+            slotDay: safeNewSub.slotDay,
+            slotTime: safeNewSub.slotTime,
+            groups: safeNewSub.groups
+          }
+        });
+        user.subscription_history = history;
+      }
     }
 
-    if (safeNewSub && oldSub && user.status === 'active' && status === 'active') {
-      const slotChanged = oldSub.poolKey !== safeNewSub.poolKey ||
-                           oldSub.coachName !== safeNewSub.coachName ||
-                           oldSub.slotDay !== safeNewSub.slotDay ||
-                           oldSub.slotTime !== safeNewSub.slotTime;
-      
-      if (slotChanged) {
-        // Decrement old slot if it was active
-        if (oldSub.poolKey && oldSub.coachName && oldSub.slotDay && oldSub.slotTime) {
-          adjustSlotTaken(oldSub.poolKey, oldSub.category || 'homme', oldSub.coachName, oldSub.slotDay, oldSub.slotTime, -1);
-        }
-        // Increment new slot
-        if (safeNewSub.poolKey && safeNewSub.coachName && safeNewSub.slotDay && safeNewSub.slotTime) {
-          adjustSlotTaken(safeNewSub.poolKey, safeNewSub.category || 'homme', safeNewSub.coachName, safeNewSub.slotDay, safeNewSub.slotTime, 1);
-        }
-      }
+    // Sync capacities
+    if (safeNewSub) {
+      const newStatus = status || user.status;
+      await syncSubscriptionGroups(user.subscription, safeNewSub, gender || user.gender || 'homme', user.status, newStatus);
+    } else if (status && status !== user.status) {
+      await syncSubscriptionGroups(user.subscription, user.subscription, gender || user.gender || 'homme', user.status, status);
     }
 
     // Update fields
@@ -838,55 +937,53 @@ router.post('/api/admin/members/approve-change', verifyAdminToken, (req, res) =>
     }
 
     if (action === 'approve') {
-      // Read schedule.json to check slot availability for the new requested slot
+      // Read schedule.json to check slot availability for the new requested slots
       if (!fs.existsSync(SCHEDULE_FILE_PATH)) {
         return res.status(500).json({ success: false, error: 'Fichier planning introuvable' });
       }
       const schedule = JSON.parse(fs.readFileSync(SCHEDULE_FILE_PATH, 'utf8'));
-      const pool = schedule[changeReq.poolKey];
-      if (!pool) {
-        return res.status(400).json({ success: false, error: 'Nouveau planning introuvable pour cette piscine' });
-      }
       const category = user.gender || 'homme';
-      const cat = pool.categories[category];
-      if (!cat) {
-        return res.status(400).json({ success: false, error: 'Catégorie introuvable pour ce nouveau créneau' });
-      }
-      const coach = cat.coaches.find(c => c.name === changeReq.coachName);
-      if (!coach) {
-        return res.status(400).json({ success: false, error: 'Entraîneur introuvable pour ce nouveau créneau' });
-      }
-      const slot = coach.slots.find(s => s.day === changeReq.slotDay && s.time === changeReq.slotTime);
-      if (!slot) {
-        return res.status(400).json({ success: false, error: 'Nouveau créneau introuvable dans le planning' });
-      }
-      if ((slot.taken || 0) >= slot.total) {
-        return res.status(400).json({ success: false, error: 'Le nouveau créneau demandé est complet (plus de places disponibles)' });
+      const changeGroups = getGroupsFromSubscription(changeReq);
+
+      for (const g of changeGroups) {
+        const pool = schedule[g.poolKey];
+        if (!pool) {
+          return res.status(400).json({ success: false, error: `Piscine introuvable: ${g.poolKey}` });
+        }
+        const cat = pool.categories[category];
+        if (!cat) {
+          return res.status(400).json({ success: false, error: `Catégorie introuvable pour la piscine: ${g.poolKey}` });
+        }
+        const coach = cat.coaches.find(c => c.name === g.coachName);
+        if (!coach) {
+          return res.status(400).json({ success: false, error: `Entraîneur introuvable: ${g.coachName}` });
+        }
+        const slot = coach.slots.find(s => s.day === g.slotDay && s.time === g.slotTime);
+        if (!slot) {
+          return res.status(400).json({ success: false, error: `Créneau introuvable dans le planning: ${g.slotDay} ${g.slotTime}` });
+        }
+        if ((slot.taken || 0) >= slot.total) {
+          return res.status(400).json({ success: false, error: `Le créneau (${g.slotDay} - ${g.slotTime}) avec ${g.coachName} est déjà complet.` });
+        }
       }
 
-      const oldSub = user.subscription;
-
-      // Decrement slot count of the old sub if it was active
-      if (user.status === 'active' && oldSub && oldSub.poolKey && oldSub.coachName && oldSub.slotDay && oldSub.slotTime) {
-        adjustSlotTaken(oldSub.poolKey, oldSub.category || 'homme', oldSub.coachName, oldSub.slotDay, oldSub.slotTime, -1);
-      }
-
-      // Update subscription details with new requested slot
-      user.membershipTier = changeReq.tier;
-      user.subscription = {
-        category: user.gender || 'homme',
-        poolKey: changeReq.poolKey,
-        coachName: changeReq.coachName,
-        slotDay: changeReq.slotDay,
-        slotTime: changeReq.slotTime,
-        startDate: user.subscription.startDate || new Date().toISOString().split('T')[0],
-        endDate: user.subscription.endDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // default 1 month if none exists
+      const newSub = {
+        category: category,
+        groups: changeGroups,
+        poolKey: changeGroups[0]?.poolKey || '',
+        coachName: changeGroups.map(g => g.coachName).join(', '),
+        slotDay: changeGroups.map(g => g.slotDay).join(', '),
+        slotTime: changeGroups.map(g => g.slotTime).join(', '),
+        startDate: user.subscription?.startDate || new Date().toISOString().split('T')[0],
+        endDate: user.subscription?.endDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // default 1 month if none exists
         status: 'active'
       };
 
-      // Increment slot count of the new sub
-      adjustSlotTaken(changeReq.poolKey, user.gender || 'homme', changeReq.coachName, changeReq.slotDay, changeReq.slotTime, 1);
-      
+      // Adjust slot capacity
+      await syncSubscriptionGroups(user.subscription, newSub, category, user.status, 'active');
+
+      user.membershipTier = changeReq.tier;
+      user.subscription = newSub;
       user.subscriptionChangeRequest = null;
       saveMembers(members);
       return res.json({ success: true, message: 'Changement de formule approuve avec succes' });

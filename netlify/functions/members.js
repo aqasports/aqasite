@@ -73,6 +73,46 @@ async function adjustSlotTaken(poolKey, category, coachName, day, time, incremen
   return false;
 }
 
+function getGroupsFromSubscription(sub) {
+  if (!sub) return [];
+  if (Array.isArray(sub.groups) && sub.groups.length > 0) {
+    return sub.groups;
+  }
+  if (sub.poolKey && sub.coachName && sub.slotDay && sub.slotTime) {
+    return [{
+      poolKey: sub.poolKey,
+      coachName: sub.coachName,
+      slotDay: sub.slotDay,
+      slotTime: sub.slotTime
+    }];
+  }
+  return [];
+}
+
+async function syncSubscriptionGroups(oldSub, newSub, category, oldStatus, newStatus) {
+  const oldActive = oldStatus === 'active';
+  const newActive = newStatus === 'active';
+  
+  const oldGroups = oldActive ? getGroupsFromSubscription(oldSub) : [];
+  const newGroups = newActive ? getGroupsFromSubscription(newSub) : [];
+  
+  const groupKey = (g) => `${g.poolKey}|${g.coachName}|${g.slotDay}|${g.slotTime}`;
+  const oldKeys = new Set(oldGroups.map(groupKey));
+  const newKeys = new Set(newGroups.map(groupKey));
+  
+  for (const g of oldGroups) {
+    if (!newKeys.has(groupKey(g))) {
+      await adjustSlotTaken(g.poolKey, category, g.coachName, g.slotDay, g.slotTime, -1);
+    }
+  }
+  
+  for (const g of newGroups) {
+    if (!oldKeys.has(groupKey(g))) {
+      await adjustSlotTaken(g.poolKey, category, g.coachName, g.slotDay, g.slotTime, 1);
+    }
+  }
+}
+
 function getLocalSchedulePath() {
   const possiblePaths = [
     path.join(__dirname, '..', 'src', 'data', 'schedule.json'),
@@ -606,8 +646,16 @@ exports.handler = async (event, context) => {
         };
       }
 
-      const { tier, poolKey, coachName, slotDay, slotTime } = JSON.parse(event.body || '{}');
-      if (!tier || !poolKey || !coachName || !slotDay || !slotTime) {
+      let { tier, groups, poolKey, coachName, slotDay, slotTime } = JSON.parse(event.body || '{}');
+      if (!groups || !Array.isArray(groups)) {
+        if (poolKey && coachName && slotDay && slotTime) {
+          groups = [{ poolKey, coachName, slotDay, slotTime }];
+        } else {
+          groups = [];
+        }
+      }
+
+      if (!tier || groups.length === 0) {
         return {
           statusCode: 400,
           headers: corsHeaders,
@@ -616,10 +664,18 @@ exports.handler = async (event, context) => {
       }
 
       const safeTier = sanitize(tier, 50);
-      const safePoolKey = sanitize(poolKey, 50);
-      const safeCoachName = sanitize(coachName, 100);
-      const safeSlotDay = sanitize(slotDay, 30);
-      const safeSlotTime = sanitize(slotTime, 30);
+      const TIER_LIMITS = {
+        'starter': 1, 'silver': 2, 'gold': 3, 'diamond': 4, 'emerald': 5,
+        'Starter': 1, 'Silver': 2, 'Gold': 3, 'Diamond': 4, 'Emerald': 5
+      };
+      const maxGroups = TIER_LIMITS[safeTier] || 1;
+      if (groups.length > maxGroups) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: `Votre formule (${safeTier}) ne permet de choisir que maximum ${maxGroups} créneau(x)` })
+        };
+      }
 
       const users = await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`);
       if (!users || users.length === 0) {
@@ -632,31 +688,48 @@ exports.handler = async (event, context) => {
       const user = users[0];
       const category = user.gender || 'homme';
 
-      // Real-time capacity check
-      const queryParams = `pool_key=eq.${encodeURIComponent(safePoolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(safeCoachName)}&day=eq.${encodeURIComponent(safeSlotDay)}&time=eq.${encodeURIComponent(safeSlotTime)}`;
-      const rows = await supabaseFetch(`schedule?${queryParams}`);
-      if (!rows || rows.length === 0) {
-        return {
-          statusCode: 400,
-          headers: corsHeaders,
-          body: JSON.stringify({ success: false, error: 'Créneau introuvable dans le planning' })
-        };
-      }
-      const slot = rows[0];
-      if (slot.taken >= slot.total) {
-        return {
-          statusCode: 400,
-          headers: corsHeaders,
-          body: JSON.stringify({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' })
-        };
+      // Verify all requested groups
+      const safeGroups = [];
+      for (const g of groups) {
+        if (!g.poolKey || !g.coachName || !g.slotDay || !g.slotTime) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: 'Informations de créneau incomplètes' })
+          };
+        }
+        const sPoolKey = sanitize(g.poolKey, 50);
+        const sCoachName = sanitize(g.coachName, 100);
+        const sSlotDay = sanitize(g.slotDay, 30);
+        const sSlotTime = sanitize(g.slotTime, 30);
+
+        const queryParams = `pool_key=eq.${encodeURIComponent(sPoolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(sCoachName)}&day=eq.${encodeURIComponent(sSlotDay)}&time=eq.${encodeURIComponent(sSlotTime)}`;
+        const rows = await supabaseFetch(`schedule?${queryParams}`);
+        if (!rows || rows.length === 0) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: `Créneau introuvable dans le planning: ${sSlotDay} ${sSlotTime}` })
+          };
+        }
+        const slot = rows[0];
+        if (slot.taken >= slot.total) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: `Le créneau (${sSlotDay} - ${sSlotTime}) avec ${sCoachName} est complet.` })
+          };
+        }
+        safeGroups.push({ poolKey: sPoolKey, coachName: sCoachName, slotDay: sSlotDay, slotTime: sSlotTime });
       }
 
       const changeReq = {
         tier: safeTier,
-        poolKey: safePoolKey,
-        coachName: safeCoachName,
-        slotDay: safeSlotDay,
-        slotTime: safeSlotTime,
+        groups: safeGroups,
+        poolKey: safeGroups[0].poolKey,
+        coachName: safeGroups.map(g => g.coachName).join(', '),
+        slotDay: safeGroups.map(g => g.slotDay).join(', '),
+        slotTime: safeGroups.map(g => g.slotTime).join(', '),
         status: 'pending',
         requestedAt: new Date().toISOString()
       };
@@ -667,10 +740,11 @@ exports.handler = async (event, context) => {
         date: new Date().toISOString(),
         details: {
           tier: safeTier,
-          poolKey: safePoolKey,
-          coachName: safeCoachName,
-          slotDay: safeSlotDay,
-          slotTime: safeSlotTime
+          poolKey: changeReq.poolKey,
+          coachName: changeReq.coachName,
+          slotDay: changeReq.slotDay,
+          slotTime: changeReq.slotTime,
+          groups: safeGroups
         }
       });
 
@@ -702,8 +776,16 @@ exports.handler = async (event, context) => {
         };
       }
 
-      const { tier, poolKey, coachName, slotDay, slotTime } = JSON.parse(event.body || '{}');
-      if (!tier || !poolKey || !coachName || !slotDay || !slotTime) {
+      let { tier, groups, poolKey, coachName, slotDay, slotTime } = JSON.parse(event.body || '{}');
+      if (!groups || !Array.isArray(groups)) {
+        if (poolKey && coachName && slotDay && slotTime) {
+          groups = [{ poolKey, coachName, slotDay, slotTime }];
+        } else {
+          groups = [];
+        }
+      }
+
+      if (!tier || groups.length === 0) {
         return {
           statusCode: 400,
           headers: corsHeaders,
@@ -712,10 +794,18 @@ exports.handler = async (event, context) => {
       }
 
       const safeTier = sanitize(tier, 50);
-      const safePoolKey = sanitize(poolKey, 50);
-      const safeCoachName = sanitize(coachName, 100);
-      const safeSlotDay = sanitize(slotDay, 30);
-      const safeSlotTime = sanitize(slotTime, 30);
+      const TIER_LIMITS = {
+        'starter': 1, 'silver': 2, 'gold': 3, 'diamond': 4, 'emerald': 5,
+        'Starter': 1, 'Silver': 2, 'Gold': 3, 'Diamond': 4, 'Emerald': 5
+      };
+      const maxGroups = TIER_LIMITS[safeTier] || 1;
+      if (groups.length > maxGroups) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: `Votre formule (${safeTier}) ne permet de choisir que maximum ${maxGroups} créneau(x)` })
+        };
+      }
 
       const users = await supabaseFetch(`members?id=eq.${encodeURIComponent(decoded.id)}`);
       if (!users || users.length === 0) {
@@ -728,31 +818,48 @@ exports.handler = async (event, context) => {
       const user = users[0];
       const category = user.gender || 'homme';
 
-      // Real-time capacity check
-      const queryParams = `pool_key=eq.${encodeURIComponent(safePoolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(safeCoachName)}&day=eq.${encodeURIComponent(safeSlotDay)}&time=eq.${encodeURIComponent(safeSlotTime)}`;
-      const rows = await supabaseFetch(`schedule?${queryParams}`);
-      if (!rows || rows.length === 0) {
-        return {
-          statusCode: 400,
-          headers: corsHeaders,
-          body: JSON.stringify({ success: false, error: 'Creneau introuvable dans le planning' })
-        };
-      }
-      const slot = rows[0];
-      if (slot.taken >= slot.total) {
-        return {
-          statusCode: 400,
-          headers: corsHeaders,
-          body: JSON.stringify({ success: false, error: 'Ce creneau est deja complet' })
-        };
+      // Verify all requested groups
+      const safeGroups = [];
+      for (const g of groups) {
+        if (!g.poolKey || !g.coachName || !g.slotDay || !g.slotTime) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: 'Informations de créneau incomplètes' })
+          };
+        }
+        const sPoolKey = sanitize(g.poolKey, 50);
+        const sCoachName = sanitize(g.coachName, 100);
+        const sSlotDay = sanitize(g.slotDay, 30);
+        const sSlotTime = sanitize(g.slotTime, 30);
+
+        const queryParams = `pool_key=eq.${encodeURIComponent(sPoolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(sCoachName)}&day=eq.${encodeURIComponent(sSlotDay)}&time=eq.${encodeURIComponent(sSlotTime)}`;
+        const rows = await supabaseFetch(`schedule?${queryParams}`);
+        if (!rows || rows.length === 0) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: `Créneau introuvable: ${sSlotDay} ${sSlotTime}` })
+          };
+        }
+        const slot = rows[0];
+        if (slot.taken >= slot.total) {
+          return {
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ success: false, error: `Le créneau (${sSlotDay} - ${sSlotTime}) avec ${sCoachName} est complet.` })
+          };
+        }
+        safeGroups.push({ poolKey: sPoolKey, coachName: sCoachName, slotDay: sSlotDay, slotTime: sSlotTime });
       }
 
       const sub = {
         category: category,
-        poolKey: safePoolKey,
-        coachName: safeCoachName,
-        slotDay: safeSlotDay,
-        slotTime: safeSlotTime,
+        groups: safeGroups,
+        poolKey: safeGroups[0].poolKey,
+        coachName: safeGroups.map(g => g.coachName).join(', '),
+        slotDay: safeGroups.map(g => g.slotDay).join(', '),
+        slotTime: safeGroups.map(g => g.slotTime).join(', '),
         startDate: new Date().toISOString().split('T')[0],
         endDate: '',
         status: 'pending'
@@ -764,10 +871,11 @@ exports.handler = async (event, context) => {
         date: new Date().toISOString(),
         details: {
           tier: safeTier,
-          poolKey: safePoolKey,
-          coachName: safeCoachName,
-          slotDay: safeSlotDay,
-          slotTime: safeSlotTime
+          poolKey: sub.poolKey,
+          coachName: sub.coachName,
+          slotDay: sub.slotDay,
+          slotTime: sub.slotTime,
+          groups: safeGroups
         }
       });
 
@@ -891,8 +999,8 @@ exports.handler = async (event, context) => {
     // POST /admin/members/approve
     // ----------------------------------------------------
     if (method === 'POST' && pathPart === '/admin/members/approve') {
-      const { memberId, membershipTier, poolKey, coachName, slotDay, slotTime, endDate } = JSON.parse(event.body || '{}');
-      if (!memberId || !membershipTier || !poolKey || !coachName || !slotDay || !slotTime || !endDate) {
+      const { memberId, membershipTier, poolKey, coachName, slotDay, slotTime, endDate, groups } = JSON.parse(event.body || '{}');
+      if (!memberId || !membershipTier || !endDate) {
         return {
           statusCode: 400,
           headers: corsHeaders,
@@ -910,39 +1018,40 @@ exports.handler = async (event, context) => {
       }
 
       const safeMembershipTier = sanitize(membershipTier, 50);
-      const safePoolKey = sanitize(poolKey, 50);
-      const safeCoachName = sanitize(coachName, 100);
-      const safeSlotDay = sanitize(slotDay, 30);
-      const safeSlotTime = sanitize(slotTime, 30);
       const safeEndDate = sanitize(endDate, 30);
-
       const user = users[0];
 
-      // Real-time capacity check
-      const queryParams = `pool_key=eq.${encodeURIComponent(safePoolKey)}&category=eq.${encodeURIComponent(user.gender || 'homme')}&coach_name=eq.${encodeURIComponent(safeCoachName)}&day=eq.${encodeURIComponent(safeSlotDay)}&time=eq.${encodeURIComponent(safeSlotTime)}`;
-      const rows = await supabaseFetch(`schedule?${queryParams}`);
-      if (!rows || rows.length === 0) {
+      let finalGroups = [];
+      if (groups && Array.isArray(groups) && groups.length > 0) {
+        finalGroups = groups;
+      } else if (poolKey && coachName && slotDay && slotTime) {
+        finalGroups = [{ poolKey, coachName, slotDay, slotTime }];
+      } else if (user.subscription) {
+        finalGroups = getGroupsFromSubscription(user.subscription);
+      }
+
+      if (finalGroups.length === 0) {
         return {
           statusCode: 400,
           headers: corsHeaders,
-          body: JSON.stringify({ success: false, error: 'Créneau introuvable dans le planning' })
+          body: JSON.stringify({ success: false, error: 'Aucun créneau sélectionné' })
         };
       }
-      const slot = rows[0];
-      if (slot.taken >= slot.total) {
-        return {
-          statusCode: 400,
-          headers: corsHeaders,
-          body: JSON.stringify({ success: false, error: 'Ce créneau est déjà complet (plus de places disponibles)' })
-        };
-      }
+
+      const safeGroups = finalGroups.map(g => ({
+        poolKey: sanitize(g.poolKey, 50),
+        coachName: sanitize(g.coachName, 100),
+        slotDay: sanitize(g.slotDay, 30),
+        slotTime: sanitize(g.slotTime, 30)
+      }));
 
       const updatedSub = {
         category: user.gender || 'homme',
-        poolKey: safePoolKey,
-        coachName: safeCoachName,
-        slotDay: safeSlotDay,
-        slotTime: safeSlotTime,
+        groups: safeGroups,
+        poolKey: safeGroups[0]?.poolKey || '',
+        coachName: safeGroups.map(g => g.coachName).join(', '),
+        slotDay: safeGroups.map(g => g.slotDay).join(', '),
+        slotTime: safeGroups.map(g => g.slotTime).join(', '),
         startDate: new Date().toISOString().split('T')[0],
         endDate: safeEndDate,
         status: 'active'
@@ -954,13 +1063,17 @@ exports.handler = async (event, context) => {
         date: new Date().toISOString(),
         details: {
           tier: safeMembershipTier,
-          poolKey: safePoolKey,
-          coachName: safeCoachName,
-          slotDay: safeSlotDay,
-          slotTime: safeSlotTime,
-          endDate: safeEndDate
+          poolKey: updatedSub.poolKey,
+          coachName: updatedSub.coachName,
+          slotDay: updatedSub.slotDay,
+          slotTime: updatedSub.slotTime,
+          endDate: safeEndDate,
+          groups: safeGroups
         }
       });
+
+      // Adjust slot capacity
+      await syncSubscriptionGroups(user.subscription, updatedSub, user.gender || 'homme', user.status, 'active');
 
       await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
         method: 'PATCH',
@@ -971,9 +1084,6 @@ exports.handler = async (event, context) => {
           subscription_history: history
         })
       });
-
-      // Adjust slot capacity
-      await adjustSlotTaken(safePoolKey, user.gender || 'homme', safeCoachName, safeSlotDay, safeSlotTime, 1);
 
       return {
         statusCode: 200,
@@ -1006,24 +1116,6 @@ exports.handler = async (event, context) => {
       }
 
       const user = users[0];
-      const oldSub = user.subscription;
-      const newSub = subscription;
-
-      if (newSub && oldSub && user.status === 'active' && status === 'active') {
-        const slotChanged = oldSub.poolKey !== newSub.poolKey ||
-                             oldSub.coachName !== newSub.coachName ||
-                             oldSub.slotDay !== newSub.slotDay ||
-                             oldSub.slotTime !== newSub.slotTime;
-        if (slotChanged) {
-          if (oldSub.poolKey && oldSub.coachName && oldSub.slotDay && oldSub.slotTime) {
-            await adjustSlotTaken(oldSub.poolKey, oldSub.category || 'homme', oldSub.coachName, oldSub.slotDay, oldSub.slotTime, -1);
-          }
-          if (newSub.poolKey && newSub.coachName && newSub.slotDay && newSub.slotTime) {
-            await adjustSlotTaken(newSub.poolKey, newSub.category || 'homme', newSub.coachName, newSub.slotDay, newSub.slotTime, 1);
-          }
-        }
-      }
-
       const updates = {};
       if (fullName) updates.full_name = sanitize(fullName, 100);
       if (phone !== undefined) updates.phone = sanitize(phone, 30);
@@ -1036,25 +1128,34 @@ exports.handler = async (event, context) => {
       if (badges !== undefined) {
         updates.badges = Array.isArray(badges) ? badges.map(b => sanitize(b, 50)) : [];
       }
+
+      let updatedSubscription = null;
       if (subscription) {
-        updates.subscription = {
+        const subGroups = getGroupsFromSubscription(subscription);
+        updatedSubscription = {
           category: sanitize(subscription.category, 20),
-          poolKey: sanitize(subscription.poolKey, 50),
-          coachName: sanitize(subscription.coachName, 100),
-          slotDay: sanitize(subscription.slotDay, 30),
-          slotTime: sanitize(subscription.slotTime, 30),
+          groups: subGroups.map(g => ({
+            poolKey: sanitize(g.poolKey, 50),
+            coachName: sanitize(g.coachName, 100),
+            slotDay: sanitize(g.slotDay, 30),
+            slotTime: sanitize(g.slotTime, 30)
+          })),
+          poolKey: sanitize(subscription.poolKey || (subGroups[0]?.poolKey || ''), 50),
+          coachName: sanitize(subscription.coachName || subGroups.map(g => g.coachName).join(', '), 100),
+          slotDay: sanitize(subscription.slotDay || subGroups.map(g => g.slotDay).join(', '), 30),
+          slotTime: sanitize(subscription.slotTime || subGroups.map(g => g.slotTime).join(', '), 30),
           startDate: sanitize(subscription.startDate, 30),
           endDate: sanitize(subscription.endDate, 30),
           status: sanitize(subscription.status, 20)
         };
+        updates.subscription = updatedSubscription;
 
         const oldSub = user.subscription;
-        if (oldSub && (
-          oldSub.poolKey !== updates.subscription.poolKey ||
-          oldSub.coachName !== updates.subscription.coachName ||
-          oldSub.slotDay !== updates.subscription.slotDay ||
-          oldSub.slotTime !== updates.subscription.slotTime
-        )) {
+        const groupKey = (g) => `${g.poolKey}|${g.coachName}|${g.slotDay}|${g.slotTime}`;
+        const oldKeys = getGroupsFromSubscription(oldSub).map(groupKey).join(',');
+        const newKeys = getGroupsFromSubscription(updatedSubscription).map(groupKey).join(',');
+
+        if (oldKeys !== newKeys) {
           const history = user.subscription_history || [];
           history.push({
             event: 'membership_updated_by_admin',
@@ -1064,11 +1165,20 @@ exports.handler = async (event, context) => {
               poolKey: updates.subscription.poolKey,
               coachName: updates.subscription.coachName,
               slotDay: updates.subscription.slotDay,
-              slotTime: updates.subscription.slotTime
+              slotTime: updates.subscription.slotTime,
+              groups: updatedSubscription.groups
             }
           });
           updates.subscription_history = history;
         }
+      }
+
+      // Sync capacities
+      if (updatedSubscription) {
+        const newStatus = status || user.status;
+        await syncSubscriptionGroups(user.subscription, updatedSubscription, gender || user.gender || 'homme', user.status, newStatus);
+      } else if (status && status !== user.status) {
+        await syncSubscriptionGroups(user.subscription, user.subscription, gender || user.gender || 'homme', user.status, status);
       }
 
       await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
@@ -1249,38 +1359,38 @@ exports.handler = async (event, context) => {
       }
 
       if (action === 'approve') {
-        // Real-time capacity check for the new requested slot
-        const queryParams = `pool_key=eq.${encodeURIComponent(changeReq.poolKey)}&category=eq.${encodeURIComponent(user.gender || 'homme')}&coach_name=eq.${encodeURIComponent(changeReq.coachName)}&day=eq.${encodeURIComponent(changeReq.slotDay)}&time=eq.${encodeURIComponent(changeReq.slotTime)}`;
-        const rows = await supabaseFetch(`schedule?${queryParams}`);
-        if (!rows || rows.length === 0) {
-          return {
-            statusCode: 400,
-            headers: corsHeaders,
-            body: JSON.stringify({ success: false, error: 'Nouveau créneau introuvable dans le planning' })
-          };
-        }
-        const slot = rows[0];
-        if (slot.taken >= slot.total) {
-          return {
-            statusCode: 400,
-            headers: corsHeaders,
-            body: JSON.stringify({ success: false, error: 'Le nouveau créneau demandé est complet (plus de places disponibles)' })
-          };
-        }
-
-        const oldSub = user.subscription;
-        if (user.status === 'active' && oldSub && oldSub.poolKey && oldSub.coachName && oldSub.slotDay && oldSub.slotTime) {
-          await adjustSlotTaken(oldSub.poolKey, oldSub.category || 'homme', oldSub.coachName, oldSub.slotDay, oldSub.slotTime, -1);
+        // Real-time capacity check for all new requested slots
+        const category = user.gender || 'homme';
+        const changeGroups = getGroupsFromSubscription(changeReq);
+        for (const g of changeGroups) {
+          const queryParams = `pool_key=eq.${encodeURIComponent(g.poolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(g.coachName)}&day=eq.${encodeURIComponent(g.slotDay)}&time=eq.${encodeURIComponent(g.slotTime)}`;
+          const rows = await supabaseFetch(`schedule?${queryParams}`);
+          if (!rows || rows.length === 0) {
+            return {
+              statusCode: 400,
+              headers: corsHeaders,
+              body: JSON.stringify({ success: false, error: `Nouveau créneau introuvable dans le planning: ${g.slotDay} ${g.slotTime}` })
+            };
+          }
+          const slot = rows[0];
+          if (slot.taken >= slot.total) {
+            return {
+              statusCode: 400,
+              headers: corsHeaders,
+              body: JSON.stringify({ success: false, error: `Le créneau (${g.slotDay} - ${g.slotTime}) avec ${g.coachName} est déjà complet.` })
+            };
+          }
         }
 
         const newSub = {
-          category: user.gender || 'homme',
-          poolKey: changeReq.poolKey,
-          coachName: changeReq.coachName,
-          slotDay: changeReq.slotDay,
-          slotTime: changeReq.slotTime,
-          startDate: user.subscription.startDate || new Date().toISOString().split('T')[0],
-          endDate: user.subscription.endDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          category: category,
+          groups: changeGroups,
+          poolKey: changeGroups[0]?.poolKey || '',
+          coachName: changeGroups.map(g => g.coachName).join(', '),
+          slotDay: changeGroups.map(g => g.slotDay).join(', '),
+          slotTime: changeGroups.map(g => g.slotTime).join(', '),
+          startDate: user.subscription?.startDate || new Date().toISOString().split('T')[0],
+          endDate: user.subscription?.endDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
           status: 'active'
         };
 
@@ -1290,12 +1400,15 @@ exports.handler = async (event, context) => {
           date: new Date().toISOString(),
           details: {
             tier: changeReq.tier,
-            poolKey: changeReq.poolKey,
-            coachName: changeReq.coachName,
-            slotDay: changeReq.slotDay,
-            slotTime: changeReq.slotTime
+            poolKey: newSub.poolKey,
+            coachName: newSub.coachName,
+            slotDay: newSub.slotDay,
+            slotTime: newSub.slotTime,
+            groups: changeGroups
           }
         });
+
+        await syncSubscriptionGroups(user.subscription, newSub, category, user.status, 'active');
 
         await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
           method: 'PATCH',
@@ -1306,8 +1419,6 @@ exports.handler = async (event, context) => {
             subscription_history: history
           })
         });
-
-        await adjustSlotTaken(changeReq.poolKey, user.gender || 'homme', changeReq.coachName, changeReq.slotDay, changeReq.slotTime, 1);
 
         return {
           statusCode: 200,
