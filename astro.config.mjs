@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -99,28 +100,27 @@ export default defineConfig({
               req.on('end', () => {
                 try {
                   const data = body ? JSON.parse(body) : {};
-                  const JWT_SECRET = process.env.JWT_SECRET || 'aqa-sports-default-jwt-secret-key-2026';
+                  const JWT_SECRET = process.env.JWT_SECRET;
+                  if (!JWT_SECRET) throw new Error('FATAL: JWT_SECRET environment variable is not set');
+                  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+                  if (!ADMIN_PASSWORD) throw new Error('FATAL: ADMIN_PASSWORD environment variable is not set');
 
                   function signToken(payload) {
-                    const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
-                    const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
-                    const signature = crypto.createHmac('sha256', JWT_SECRET)
-                      .update(`${header}.${body}`)
-                      .digest('base64url');
-                    return `${header}.${body}.${signature}`;
+                    const cleanPayload = { ...payload };
+                    const options = {};
+                    if (cleanPayload.exp) {
+                      const diffMs = cleanPayload.exp - Date.now();
+                      if (diffMs > 0) {
+                        options.expiresIn = Math.floor(diffMs / 1000);
+                      }
+                      delete cleanPayload.exp;
+                    }
+                    return jwt.sign(cleanPayload, JWT_SECRET, options);
                   }
 
                   function verifyToken(token) {
                     try {
-                      const [header, body, signature] = token.split('.');
-                      if (!header || !body || !signature) return null;
-                      const expectedSig = crypto.createHmac('sha256', JWT_SECRET)
-                        .update(`${header}.${body}`)
-                        .digest('base64url');
-                      if (signature !== expectedSig) return null;
-                      const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
-                      if (payload.exp && Date.now() > payload.exp) return null;
-                      return payload;
+                      return jwt.verify(token, JWT_SECRET);
                     } catch (e) {
                       return null;
                     }
@@ -164,7 +164,7 @@ export default defineConfig({
                       return;
                     }
                     const cfg = loadAdminConfig();
-                    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+                    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
                     if (!verifyPassword(password, storedHash)) {
                       res.writeHead(401, { 'Content-Type': 'application/json' });
@@ -201,7 +201,7 @@ export default defineConfig({
                   else if (pathname === '/api/save-admin-config' && req.method === 'POST') {
                     const { currentPassword, passwordHash, loginSlug, extraSlugs } = data;
                     const cfg = loadAdminConfig();
-                    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+                    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
                     const requiresVerification = passwordHash || currentPassword;
                     if (requiresVerification) {
@@ -281,7 +281,7 @@ export default defineConfig({
                   else if (pathname === '/api/deploy' && req.method === 'POST') {
                     const { password } = data;
                     const cfg = loadAdminConfig();
-                    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+                    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
                     if (!password || !verifyPassword(password, storedHash)) {
                       res.writeHead(401, { 'Content-Type': 'application/json' });

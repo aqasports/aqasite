@@ -4,9 +4,40 @@
 const nodemailer = require("nodemailer");
 
 exports.handler = async function(event, context) {
+  const allowedOrigins = [
+    'https://aqasports.pro',
+    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
+    'https://aqasuivi.netlify.app'
+  ];
+  const requestOrigin = event.headers.origin || event.headers.Origin || '';
+  const corsOrigin = allowedOrigins.includes(requestOrigin)
+    ? requestOrigin
+    : (requestOrigin.startsWith('http://localhost:') || requestOrigin.startsWith('http://127.0.0.1:')
+        ? requestOrigin
+        : allowedOrigins[0]);
+
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': corsOrigin,
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
+    'Content-Type': 'application/json'
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: ''
+    };
+  }
+
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
+      headers: corsHeaders,
       body: JSON.stringify({ error: "Method Not Allowed" })
     };
   }
@@ -20,6 +51,7 @@ exports.handler = async function(event, context) {
     if (honeypot) {
       return {
         statusCode: 200,
+        headers: corsHeaders,
         body: JSON.stringify({ success: true, message: "OK" }) // Silently reject
       };
     }
@@ -30,6 +62,7 @@ exports.handler = async function(event, context) {
     if (!hasTextContent && !hasAudioContent) {
       return {
         statusCode: 400,
+        headers: corsHeaders,
         body: JSON.stringify({
           success: false,
           error: "Au moins un contenu (texte ou audio) est requis"
@@ -87,12 +120,14 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 200,
+      headers: corsHeaders,
       body: JSON.stringify({ success: true, message: "Message envoyé avec succès" })
     };
   } catch (error) {
     console.error("Error sending message:", error);
     return {
       statusCode: 500,
+      headers: corsHeaders,
       body: JSON.stringify({ success: false, error: "Erreur lors de l'envoi du message" })
     };
   }

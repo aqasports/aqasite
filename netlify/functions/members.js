@@ -8,19 +8,23 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
+if (!SUPABASE_URL) {
+  throw new Error('FATAL: SUPABASE_URL environment variable is not set');
+}
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-const JWT_SECRET = process.env.JWT_SECRET || 'aqa-sports-default-jwt-secret-key-2026';
+if (!SUPABASE_ANON_KEY) {
+  throw new Error('FATAL: SUPABASE_ANON_KEY environment variable is not set');
+}
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('FATAL: JWT_SECRET environment variable is not set');
+}
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const owner = 'aqasports';
 const repo = 'aqasite';
 
-// CORS headers configuration
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Content-Type': 'application/json'
-};
+// Simple in-memory counter for member login attempts
+const loginAttempts = new Map(); // email -> {count, resetAt}
 
 // Helper: Query Supabase REST API
 async function supabaseFetch(urlPath, options = {}) {
@@ -48,76 +52,23 @@ async function supabaseFetch(urlPath, options = {}) {
   return res.json();
 }
 
-// Helper: adjust schedule slot taken count
+// Helper: adjust schedule slot taken count in Supabase
 async function adjustSlotTaken(poolKey, category, coachName, day, time, increment) {
-  // If running locally, attempt local filesystem write first
-  const localPath = getLocalSchedulePath();
-  if (localPath) {
-    try {
-      const data = JSON.parse(fs.readFileSync(localPath, 'utf8'));
-      const pool = data[poolKey];
-      if (pool && pool.categories[category]) {
-        const coach = pool.categories[category].coaches.find(c => c.name === coachName);
-        if (coach) {
-          const slot = coach.slots.find(s => s.day === day && s.time === time);
-          if (slot) {
-            slot.taken = Math.max(0, Math.min(slot.total, (slot.taken || 0) + increment));
-            fs.writeFileSync(localPath, JSON.stringify(data, null, 2), 'utf8');
-            return true;
-          }
-        }
-      }
-    } catch (e) {
-      console.error('Local schedule update error:', e);
-    }
-  }
-
-  // Update schedule via GitHub API in production
-  if (GITHUB_TOKEN) {
-    try {
-      const filePath = 'src/data/schedule.json';
-      const fileRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
-        headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'AQA-Sports-Control-Center'
-        }
+  try {
+    const queryParams = `pool_key=eq.${encodeURIComponent(poolKey)}&category=eq.${encodeURIComponent(category)}&coach_name=eq.${encodeURIComponent(coachName)}&day=eq.${encodeURIComponent(day)}&time=eq.${encodeURIComponent(time)}`;
+    const rows = await supabaseFetch(`schedule?${queryParams}`);
+    if (rows && rows.length > 0) {
+      const slot = rows[0];
+      const newTaken = Math.max(0, Math.min(slot.total, slot.taken + increment));
+      
+      await supabaseFetch(`schedule?${queryParams}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ taken: newTaken })
       });
-      if (fileRes.ok) {
-        const fileData = await fileRes.json();
-        const content = Buffer.from(fileData.content, 'base64').toString('utf8');
-        const schedule = JSON.parse(content);
-
-        const pool = schedule[poolKey];
-        if (pool && pool.categories[category]) {
-          const coach = pool.categories[category].coaches.find(c => c.name === coachName);
-          if (coach) {
-            const slot = coach.slots.find(s => s.day === day && s.time === time);
-            if (slot) {
-              slot.taken = Math.max(0, Math.min(slot.total, (slot.taken || 0) + increment));
-              const updatedContent = Buffer.from(JSON.stringify(schedule, null, 2)).toString('base64');
-              await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
-                method: 'PUT',
-                headers: {
-                  'Authorization': `token ${GITHUB_TOKEN}`,
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/vnd.github.v3+json',
-                  'User-Agent': 'AQA-Sports-Control-Center'
-                },
-                body: JSON.stringify({
-                  message: 'update: schedule.json slots via Member approval',
-                  content: updatedContent,
-                  sha: fileData.sha
-                })
-              });
-              return true;
-            }
-          }
-        }
-      }
-    } catch (e) {
-      console.error('Error adjusting slot taken count via GitHub:', e);
+      return true;
     }
+  } catch (e) {
+    console.error('Error adjusting slot taken in Supabase:', e);
   }
   return false;
 }
@@ -134,28 +85,65 @@ function getLocalSchedulePath() {
   return null;
 }
 
+async function getMergedSchedule() {
+  let scheduleData = {};
+  try {
+    const localPath = getLocalSchedulePath();
+    if (localPath && fs.existsSync(localPath)) {
+      scheduleData = JSON.parse(fs.readFileSync(localPath, 'utf8'));
+    }
+  } catch (e) {
+    console.error('Failed to read local schedule baseline:', e);
+  }
+
+  try {
+    const dbSlots = await supabaseFetch('schedule');
+    if (dbSlots && Array.isArray(dbSlots)) {
+      dbSlots.forEach(dbSlot => {
+        const pool = scheduleData[dbSlot.pool_key];
+        if (pool && pool.categories && pool.categories[dbSlot.category]) {
+          const cat = pool.categories[dbSlot.category];
+          if (cat.coaches) {
+            const coach = cat.coaches.find(c => c.name === dbSlot.coach_name);
+            if (coach && coach.slots) {
+              const slot = coach.slots.find(s => s.day === dbSlot.day && s.time === dbSlot.time);
+              if (slot) {
+                slot.taken = dbSlot.taken;
+                slot.total = dbSlot.total;
+                if (dbSlot.slot_type) slot.type = dbSlot.slot_type;
+              }
+            }
+          }
+        }
+      });
+    }
+  } catch (e) {
+    console.error('Failed to merge schedule from Supabase:', e);
+  }
+
+  return scheduleData;
+}
+
+const jwt = require('jsonwebtoken');
+
 // JWT Helper: Sign Token
 function signToken(payload) {
-  const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
-  const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
-  const signature = crypto.createHmac('sha256', JWT_SECRET)
-    .update(`${header}.${body}`)
-    .digest('base64url');
-  return `${header}.${body}.${signature}`;
+  const cleanPayload = { ...payload };
+  const options = {};
+  if (cleanPayload.exp) {
+    const diffMs = cleanPayload.exp - Date.now();
+    if (diffMs > 0) {
+      options.expiresIn = Math.floor(diffMs / 1000);
+    }
+    delete cleanPayload.exp;
+  }
+  return jwt.sign(cleanPayload, JWT_SECRET, options);
 }
 
 // JWT Helper: Verify Token
 function verifyToken(token) {
   try {
-    const [header, body, signature] = token.split('.');
-    if (!header || !body || !signature) return null;
-    const expectedSig = crypto.createHmac('sha256', JWT_SECRET)
-      .update(`${header}.${body}`)
-      .digest('base64url');
-    if (signature !== expectedSig) return null;
-    const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
-    if (payload.exp && Date.now() > payload.exp) return null;
-    return payload;
+    return jwt.verify(token, JWT_SECRET);
   } catch (e) {
     return null;
   }
@@ -222,8 +210,40 @@ async function uploadToCloudinary(fileData) {
   return data.secure_url;
 }
 
+// Helper: sanitize user inputs to prevent XSS and limit length
+function sanitize(str, maxLength = 500) {
+  if (!str) return '';
+  return String(str)
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .trim()
+    .slice(0, maxLength);
+}
+
 // Main Netlify Function Handler
 exports.handler = async (event, context) => {
+  const allowedOrigins = [
+    'https://aqasports.pro',
+    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
+    'https://aqasuivi.netlify.app'
+  ];
+  const requestOrigin = event.headers.origin || event.headers.Origin || '';
+  const corsOrigin = allowedOrigins.includes(requestOrigin)
+    ? requestOrigin
+    : (requestOrigin.startsWith('http://localhost:') || requestOrigin.startsWith('http://127.0.0.1:')
+        ? requestOrigin
+        : allowedOrigins[0]);
+
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': corsOrigin,
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
+    'Content-Type': 'application/json'
+  };
+
   // CORS options preflight
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -239,6 +259,18 @@ exports.handler = async (event, context) => {
 
   try {
     // ----------------------------------------------------
+    // GET /schedule
+    // ----------------------------------------------------
+    if (method === 'GET' && pathPart === '/schedule') {
+      const schedule = await getMergedSchedule();
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify(schedule)
+      };
+    }
+
+    // ----------------------------------------------------
     // POST /member/register
     // ----------------------------------------------------
     if (method === 'POST' && pathPart === '/member/register') {
@@ -252,8 +284,14 @@ exports.handler = async (event, context) => {
         };
       }
 
+      const safeEmail = sanitize(email, 150).toLowerCase();
+      const safeFullName = sanitize(fullName, 100);
+      const safePhone = sanitize(phone, 30);
+      const safeBirthDate = sanitize(birthDate, 20);
+      const safeGender = sanitize(gender, 20);
+
       // Check if existing
-      const existing = await supabaseFetch(`members?email=eq.${encodeURIComponent(email.toLowerCase())}`);
+      const existing = await supabaseFetch(`members?email=eq.${encodeURIComponent(safeEmail)}`);
       if (existing && existing.length > 0) {
         return {
           statusCode: 400,
@@ -270,12 +308,12 @@ exports.handler = async (event, context) => {
 
       const newMember = {
         id: crypto.randomBytes(16).toString('hex'),
-        email: email.toLowerCase(),
+        email: safeEmail,
         password_hash: passwordHash,
-        full_name: fullName,
-        phone: phone || '',
-        birth_date: birthDate || '',
-        gender,
+        full_name: safeFullName,
+        phone: safePhone,
+        birth_date: safeBirthDate,
+        gender: safeGender,
         is_aqa_member: isMemberBool,
         status,
         membership_tier: tier,
@@ -334,7 +372,23 @@ exports.handler = async (event, context) => {
         };
       }
 
-      const users = await supabaseFetch(`members?email=eq.${encodeURIComponent(email.toLowerCase())}`);
+      const emailKey = email.toLowerCase();
+      const attempts = loginAttempts.get(emailKey) || { count: 0, resetAt: Date.now() + 15 * 60 * 1000 };
+      if (Date.now() > attempts.resetAt) {
+        attempts.count = 0;
+        attempts.resetAt = Date.now() + 15 * 60 * 1000;
+      }
+      if (attempts.count >= 5) {
+        return {
+          statusCode: 429,
+          headers: corsHeaders,
+          body: JSON.stringify({ success: false, error: 'Trop de tentatives. Réessayez dans 15 minutes.' })
+        };
+      }
+      attempts.count++;
+      loginAttempts.set(emailKey, attempts);
+
+      const users = await supabaseFetch(`members?email=eq.${encodeURIComponent(emailKey)}`);
       if (!users || users.length === 0) {
         return {
           statusCode: 401,
@@ -351,6 +405,9 @@ exports.handler = async (event, context) => {
           body: JSON.stringify({ success: false, error: 'Email ou mot de passe incorrect' })
         };
       }
+
+      // Successful login - clear rate limit attempts
+      loginAttempts.delete(emailKey);
 
       const token = signToken({
         id: user.id,
@@ -449,12 +506,18 @@ exports.handler = async (event, context) => {
         };
       }
 
+      const safeTier = sanitize(tier, 50);
+      const safePoolKey = sanitize(poolKey, 50);
+      const safeCoachName = sanitize(coachName, 100);
+      const safeSlotDay = sanitize(slotDay, 30);
+      const safeSlotTime = sanitize(slotTime, 30);
+
       const changeReq = {
-        tier,
-        poolKey,
-        coachName,
-        slotDay,
-        slotTime,
+        tier: safeTier,
+        poolKey: safePoolKey,
+        coachName: safeCoachName,
+        slotDay: safeSlotDay,
+        slotTime: safeSlotTime,
         status: 'pending',
         requestedAt: new Date().toISOString()
       };
@@ -590,15 +653,22 @@ exports.handler = async (event, context) => {
         };
       }
 
+      const safeMembershipTier = sanitize(membershipTier, 50);
+      const safePoolKey = sanitize(poolKey, 50);
+      const safeCoachName = sanitize(coachName, 100);
+      const safeSlotDay = sanitize(slotDay, 30);
+      const safeSlotTime = sanitize(slotTime, 30);
+      const safeEndDate = sanitize(endDate, 30);
+
       const user = users[0];
       const updatedSub = {
         category: user.gender || 'homme',
-        poolKey,
-        coachName,
-        slotDay,
-        slotTime,
+        poolKey: safePoolKey,
+        coachName: safeCoachName,
+        slotDay: safeSlotDay,
+        slotTime: safeSlotTime,
         startDate: new Date().toISOString().split('T')[0],
-        endDate,
+        endDate: safeEndDate,
         status: 'active'
       };
 
@@ -606,13 +676,13 @@ exports.handler = async (event, context) => {
         method: 'PATCH',
         body: JSON.stringify({
           status: 'active',
-          membership_tier: membershipTier,
+          membership_tier: safeMembershipTier,
           subscription: updatedSub
         })
       });
 
       // Adjust slot capacity
-      await adjustSlotTaken(poolKey, user.gender || 'homme', coachName, slotDay, slotTime, 1);
+      await adjustSlotTaken(safePoolKey, user.gender || 'homme', safeCoachName, safeSlotDay, safeSlotTime, 1);
 
       return {
         statusCode: 200,
@@ -664,16 +734,29 @@ exports.handler = async (event, context) => {
       }
 
       const updates = {};
-      if (fullName) updates.full_name = fullName;
-      if (phone !== undefined) updates.phone = phone;
-      if (birthDate !== undefined) updates.birth_date = birthDate;
-      if (gender) updates.gender = gender;
+      if (fullName) updates.full_name = sanitize(fullName, 100);
+      if (phone !== undefined) updates.phone = sanitize(phone, 30);
+      if (birthDate !== undefined) updates.birth_date = sanitize(birthDate, 20);
+      if (gender) updates.gender = sanitize(gender, 20);
       if (isAqaMember !== undefined) updates.is_aqa_member = isAqaMember === true || isAqaMember === 'true';
-      if (status) updates.status = status;
-      if (membershipTier) updates.membership_tier = membershipTier;
+      if (status) updates.status = sanitize(status, 20);
+      if (membershipTier) updates.membership_tier = sanitize(membershipTier, 50);
       if (xp !== undefined) updates.xp = parseInt(xp) || 0;
-      if (badges !== undefined) updates.badges = badges;
-      if (subscription) updates.subscription = subscription;
+      if (badges !== undefined) {
+        updates.badges = Array.isArray(badges) ? badges.map(b => sanitize(b, 50)) : [];
+      }
+      if (subscription) {
+        updates.subscription = {
+          category: sanitize(subscription.category, 20),
+          poolKey: sanitize(subscription.poolKey, 50),
+          coachName: sanitize(subscription.coachName, 100),
+          slotDay: sanitize(subscription.slotDay, 30),
+          slotTime: sanitize(subscription.slotTime, 30),
+          startDate: sanitize(subscription.startDate, 30),
+          endDate: sanitize(subscription.endDate, 30),
+          status: sanitize(subscription.status, 20)
+        };
+      }
 
       await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
         method: 'PATCH',
@@ -712,10 +795,12 @@ exports.handler = async (event, context) => {
       const user = users[0];
       let presence = user.presence || [];
       presence = presence.filter(p => p.date !== date);
+      
+      const safeReason = sanitize(reason, 200);
       presence.push({
         date,
         present: present === true || present === 'true',
-        reason: reason || ''
+        reason: safeReason
       });
 
       await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {
@@ -752,12 +837,13 @@ exports.handler = async (event, context) => {
         };
       }
 
+      const safeComments = sanitize(comments, 500);
       const techRemarks = {
         respiration: parseInt(respiration) || 0,
         battement: parseInt(battement) || 0,
         bras: parseInt(bras) || 0,
         endurance: parseInt(endurance) || 0,
-        comments: comments || ''
+        comments: safeComments
       };
 
       await supabaseFetch(`members?id=eq.${encodeURIComponent(memberId)}`, {

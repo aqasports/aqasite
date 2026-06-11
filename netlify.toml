@@ -25,6 +25,11 @@
   status = 200
 
 [[redirects]]
+  from   = "/api/schedule"
+  to     = "/.netlify/functions/members/schedule"
+  status = 200
+
+[[redirects]]
   from   = "/api/verify-token"
   to     = "/.netlify/functions/verify-token"
   status = 200

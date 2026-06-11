@@ -25,10 +25,25 @@ let lastFetched = 0;
 const CACHE_DURATION = 3600000; // 1 hour
 
 exports.handler = async function(event, context) {
+  const allowedOrigins = [
+    'https://aqasports.pro',
+    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
+    'https://aqasuivi.netlify.app'
+  ];
+  const requestOrigin = event.headers.origin || event.headers.Origin || '';
+  const corsOrigin = allowedOrigins.includes(requestOrigin)
+    ? requestOrigin
+    : (requestOrigin.startsWith('http://localhost:') || requestOrigin.startsWith('http://127.0.0.1:')
+        ? requestOrigin
+        : allowedOrigins[0]);
+
   const headers = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
     'Content-Type': 'application/json'
   };
 

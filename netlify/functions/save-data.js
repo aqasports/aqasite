@@ -1,30 +1,53 @@
 const owner = 'aqasports';
 const repo = 'aqasite';
 
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('FATAL: JWT_SECRET environment variable is not set');
+}
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+if (!ADMIN_PASSWORD) {
+  throw new Error('FATAL: ADMIN_PASSWORD environment variable is not set');
+}
+
 exports.handler = async (event, context) => {
-  // Only allow POST requests
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
-      },
-      body: JSON.stringify({ success: false, error: 'Method Not Allowed' })
-    };
-  }
+  const allowedOrigins = [
+    'https://aqasports.pro',
+    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
+    'https://aqasuivi.netlify.app'
+  ];
+  const requestOrigin = event.headers.origin || event.headers.Origin || '';
+  const corsOrigin = allowedOrigins.includes(requestOrigin)
+    ? requestOrigin
+    : (requestOrigin.startsWith('http://localhost:') || requestOrigin.startsWith('http://127.0.0.1:')
+        ? requestOrigin
+        : allowedOrigins[0]);
+
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': corsOrigin,
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
+    'Content-Type': 'application/json'
+  };
 
   // Handle preflight options requests
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
-      },
+      headers: corsHeaders,
       body: ''
+    };
+  }
+
+  // Only allow POST requests
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers: corsHeaders,
+      body: JSON.stringify({ success: false, error: 'Method Not Allowed' })
     };
   }
 
@@ -32,7 +55,7 @@ exports.handler = async (event, context) => {
   if (!githubToken) {
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: corsHeaders,
       body: JSON.stringify({ 
         success: false, 
         error: "Le jeton GITHUB_TOKEN n'est pas configuré dans Netlify. Veuillez l'ajouter dans les variables d'environnement de votre site Netlify." 
@@ -45,7 +68,7 @@ exports.handler = async (event, context) => {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return {
       statusCode: 401,
-      headers: { 'Content-Type': 'application/json' },
+      headers: corsHeaders,
       body: JSON.stringify({ success: false, error: 'Non autorisé' })
     };
   }
@@ -74,32 +97,22 @@ exports.handler = async (event, context) => {
   }
 
   const crypto = require('crypto');
+  const jwt = require('jsonwebtoken');
   function verifyToken(token, secret) {
     try {
-      const [header, body, signature] = token.split('.');
-      if (!header || !body || !signature) return null;
-      const expectedSig = crypto.createHmac('sha256', secret)
-        .update(`${header}.${body}`)
-        .digest('base64url');
-      if (signature !== expectedSig) return null;
-      const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
-      if (payload.exp && Date.now() > payload.exp) return null;
-      return payload;
+      return jwt.verify(token, secret);
     } catch (e) {
       return null;
     }
   }
 
-  const secret = process.env.JWT_SECRET || expectedHash;
+  const secret = JWT_SECRET;
   const decoded = verifyToken(token, secret);
 
   if (!decoded || !decoded.isAdmin) {
     return {
       statusCode: 403,
-      headers: { 
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
+      headers: corsHeaders,
       body: JSON.stringify({ success: false, error: 'Jeton de connexion invalide ou expiré' })
     };
   }
@@ -111,7 +124,7 @@ exports.handler = async (event, context) => {
   } catch (e) {
     return {
       statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
+      headers: corsHeaders,
       body: JSON.stringify({ success: false, error: 'Invalid JSON body' })
     };
   }
@@ -120,7 +133,7 @@ exports.handler = async (event, context) => {
   if (!fileType || !payload) {
     return {
       statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
+      headers: corsHeaders,
       body: JSON.stringify({ success: false, error: 'fileType and payload are required' })
     };
   }
@@ -147,7 +160,7 @@ exports.handler = async (event, context) => {
   } else {
     return {
       statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
+      headers: corsHeaders,
       body: JSON.stringify({ success: false, error: 'Invalid fileType' })
     };
   }
@@ -167,14 +180,11 @@ exports.handler = async (event, context) => {
         }
         return inputHash === storedHash;
       };
-      const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+      const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
       if (!currentPassword || !verifyPassword(currentPassword, storedHash)) {
         return {
           statusCode: 401,
-          headers: { 
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          },
+          headers: corsHeaders,
           body: JSON.stringify({ success: false, error: 'Mot de passe actuel incorrect' })
         };
       }
@@ -230,10 +240,7 @@ exports.handler = async (event, context) => {
     if (updateRes.ok) {
       return {
         statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
+        headers: corsHeaders,
         body: JSON.stringify({ 
           success: true, 
           message: 'Données enregistrées avec succès ! Le site est en cours de reconstruction sur Netlify.' 
@@ -243,14 +250,14 @@ exports.handler = async (event, context) => {
       const errorData = await updateRes.json();
       return {
         statusCode: updateRes.status,
-        headers: { 'Content-Type': 'application/json' },
+        headers: corsHeaders,
         body: JSON.stringify({ success: false, error: errorData.message || 'GitHub API error' })
       };
     }
   } catch (err) {
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: corsHeaders,
       body: JSON.stringify({ success: false, error: err.message })
     };
   }

@@ -3,15 +3,29 @@ const bcrypt = require('bcryptjs');
 
 const owner = 'aqasports';
 const repo = 'aqasite';
-const JWT_SECRET = process.env.JWT_SECRET || 'aqa-sports-default-jwt-secret-key-2026';
+
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('FATAL: JWT_SECRET environment variable is not set');
+}
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+if (!ADMIN_PASSWORD) {
+  throw new Error('FATAL: ADMIN_PASSWORD environment variable is not set');
+}
+
+const jwt = require('jsonwebtoken');
 
 function signToken(payload, secret) {
-  const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
-  const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
-  const signature = crypto.createHmac('sha256', secret)
-    .update(`${header}.${body}`)
-    .digest('base64url');
-  return `${header}.${body}.${signature}`;
+  const cleanPayload = { ...payload };
+  const options = {};
+  if (cleanPayload.exp) {
+    const diffMs = cleanPayload.exp - Date.now();
+    if (diffMs > 0) {
+      options.expiresIn = Math.floor(diffMs / 1000);
+    }
+    delete cleanPayload.exp;
+  }
+  return jwt.sign(cleanPayload, secret, options);
 }
 
 function verifyPassword(password, storedHash) {
@@ -24,10 +38,25 @@ function verifyPassword(password, storedHash) {
 
 exports.handler = async (event, context) => {
   // CORS Headers
+  const allowedOrigins = [
+    'https://aqasports.pro',
+    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
+    'https://aqasuivi.netlify.app'
+  ];
+  const requestOrigin = event.headers.origin || event.headers.Origin || '';
+  const corsOrigin = allowedOrigins.includes(requestOrigin)
+    ? requestOrigin
+    : (requestOrigin.startsWith('http://localhost:') || requestOrigin.startsWith('http://127.0.0.1:')
+        ? requestOrigin
+        : allowedOrigins[0]);
+
   const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true'
   };
 
   if (event.httpMethod === 'OPTIONS') {
@@ -92,7 +121,7 @@ exports.handler = async (event, context) => {
     }
 
     // Resolve stored hash
-    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
     if (!verifyPassword(password, storedHash)) {
       return {
@@ -130,8 +159,7 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // Create JWT secret based on config passwordHash (acts as static secret in repository)
-    const signingKey = process.env.JWT_SECRET || storedHash;
+    const signingKey = JWT_SECRET;
     const token = signToken({ isAdmin: true, exp: Date.now() + 2 * 60 * 60 * 1000 }, signingKey);
 
     // Cookie max-age = 2 hours (7200s), Secure, HttpOnly, SameSite=Strict

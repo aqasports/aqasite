@@ -12,7 +12,19 @@ const path = require('path');
 
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
-const JWT_SECRET = process.env.JWT_SECRET || 'aqa-sports-default-jwt-secret-key-2026';
+
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('FATAL: JWT_SECRET environment variable is not set');
+}
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+if (!ADMIN_PASSWORD) {
+  throw new Error('FATAL: ADMIN_PASSWORD environment variable is not set');
+}
+
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+
 
 const messageRouter = require('./api/send-message');
 
@@ -134,7 +146,7 @@ function loadAdminConfig() {
 
   } catch(e) {
 
-    return { passwordHash: process.env.ADMIN_PASSWORD ? crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD).digest('hex') : '', loginSlug: 'aqacontrol2026', extraSlugs: [] };
+    return { passwordHash: crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex'), loginSlug: 'aqacontrol2026', extraSlugs: [] };
 
   }
 
@@ -159,26 +171,24 @@ let adminConfig = loadAdminConfig();
 
 // ==================== ADMIN AUTH ====================
 
+const jwt = require('jsonwebtoken');
+
 function signToken(payload) {
-  const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
-  const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
-  const signature = crypto.createHmac('sha256', JWT_SECRET)
-    .update(`${header}.${body}`)
-    .digest('base64url');
-  return `${header}.${body}.${signature}`;
+  const cleanPayload = { ...payload };
+  const options = {};
+  if (cleanPayload.exp) {
+    const diffMs = cleanPayload.exp - Date.now();
+    if (diffMs > 0) {
+      options.expiresIn = Math.floor(diffMs / 1000);
+    }
+    delete cleanPayload.exp;
+  }
+  return jwt.sign(cleanPayload, JWT_SECRET, options);
 }
 
 function verifyToken(token) {
   try {
-    const [header, body, signature] = token.split('.');
-    if (!header || !body || !signature) return null;
-    const expectedSig = crypto.createHmac('sha256', JWT_SECRET)
-      .update(`${header}.${body}`)
-      .digest('base64url');
-    if (signature !== expectedSig) return null;
-    const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
-    if (payload.exp && Date.now() > payload.exp) return null;
-    return payload;
+    return jwt.verify(token, JWT_SECRET);
   } catch (e) {
     return null;
   }
@@ -213,7 +223,7 @@ app.post('/api/admin-auth', loginLimiter, (req, res) => {
   if (!password) return res.status(400).json({ success: false, error: 'Mot de passe requis' });
 
   const cfg = loadAdminConfig();
-  const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+  const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
   if (!verifyPassword(password, storedHash)) {
     return res.status(401).json({ success: false, error: 'Mot de passe incorrect' });
@@ -246,7 +256,7 @@ app.post('/api/save-admin-config', verifyAdminToken, (req, res) => {
   try {
     const { currentPassword, passwordHash, loginSlug, extraSlugs } = req.body;
     const cfg = loadAdminConfig();
-    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+    const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
     const requiresVerification = passwordHash || currentPassword;
     if (requiresVerification) {
@@ -304,38 +314,81 @@ app.use('/api', membersRouter);
 
 
 
-// Get schedule endpoint
+async function supabaseFetch(urlPath, options = {}) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    throw new Error('Supabase environment variables not set');
+  }
+  const url = `${SUPABASE_URL}/rest/v1/${urlPath}`;
+  const headers = {
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation',
+    ...options.headers
+  };
+  const res = await fetch(url, {
+    ...options,
+    headers
+  });
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Supabase Error (${res.status}): ${errorText}`);
+  }
+  if (res.status === 204) return [];
+  return res.json();
+}
 
-app.get('/api/schedule', (req, res) => {
-
-  try {
-
-    const fs = require('fs');
-
-    const path = require('path');
-
-    const filePath = path.join(__dirname, 'src', 'data', 'schedule.json');
-
-    if (fs.existsSync(filePath)) {
-
-      const data = fs.readFileSync(filePath, 'utf8');
-
-      res.setHeader('Content-Type', 'application/json');
-
-      res.status(200).send(data);
-
-    } else {
-
-      res.status(404).json({ success: false, message: 'Planning introuvable' });
-
+async function getMergedSchedule() {
+  const fs = require('fs');
+  const path = require('path');
+  const filePath = path.join(__dirname, 'src', 'data', 'schedule.json');
+  let scheduleData = {};
+  if (fs.existsSync(filePath)) {
+    try {
+      scheduleData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    } catch (e) {
+      console.error('Failed to parse schedule.json baseline:', e);
     }
-
-  } catch (err) {
-
-    res.status(500).json({ success: false, message: err.message });
-
   }
 
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    try {
+      const dbSlots = await supabaseFetch('schedule');
+      if (dbSlots && Array.isArray(dbSlots)) {
+        dbSlots.forEach(dbSlot => {
+          const pool = scheduleData[dbSlot.pool_key];
+          if (pool && pool.categories && pool.categories[dbSlot.category]) {
+            const cat = pool.categories[dbSlot.category];
+            if (cat.coaches) {
+              const coach = cat.coaches.find(c => c.name === dbSlot.coach_name);
+              if (coach && coach.slots) {
+                const slot = coach.slots.find(s => s.day === dbSlot.day && s.time === dbSlot.time);
+                if (slot) {
+                  slot.taken = dbSlot.taken;
+                  slot.total = dbSlot.total;
+                  if (dbSlot.slot_type) slot.type = dbSlot.slot_type;
+                }
+              }
+            }
+          }
+        });
+      }
+    } catch (e) {
+      console.error('Failed to merge schedule from Supabase:', e);
+    }
+  }
+  return scheduleData;
+}
+
+// Get schedule endpoint
+app.get('/api/schedule', async (req, res) => {
+  try {
+    const schedule = await getMergedSchedule();
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(schedule);
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 });
 
 
@@ -489,7 +542,7 @@ app.post('/api/save-counters', verifyAdminToken, (req, res) => {
 app.post('/api/deploy', verifyAdminToken, deployLimiter, (req, res) => {
   const { password } = req.body;
   const cfg = loadAdminConfig();
-  const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
+  const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
   if (!password || !verifyPassword(password, storedHash)) {
     return res.status(401).json({ success: false, error: 'Mot de passe incorrect pour le déploiement' });

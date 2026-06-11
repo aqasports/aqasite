@@ -46,8 +46,10 @@ export default async function adminGate(request, context) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
-  // Get the JWT_SECRET from env (same as Netlify functions use)
-  const JWT_SECRET = Deno.env.get('JWT_SECRET') || 'aqa-sports-default-jwt-secret-key-2026';
+  const JWT_SECRET = Deno.env.get('JWT_SECRET');
+  if (!JWT_SECRET) {
+    throw new Error('FATAL: JWT_SECRET environment variable is not set');
+  }
 
   // Read session cookie
   const cookieHeader = request.headers.get('cookie') || '';

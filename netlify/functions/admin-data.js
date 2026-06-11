@@ -2,20 +2,19 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('FATAL: JWT_SECRET environment variable is not set');
+}
+
 const owner = 'aqasports';
 const repo = 'aqasite';
 
+const jwt = require('jsonwebtoken');
+
 function verifyToken(token, secret) {
   try {
-    const [header, body, signature] = token.split('.');
-    if (!header || !body || !signature) return null;
-    const expectedSig = crypto.createHmac('sha256', secret)
-      .update(`${header}.${body}`)
-      .digest('base64url');
-    if (signature !== expectedSig) return null;
-    const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
-    if (payload.exp && Date.now() > payload.exp) return null;
-    return payload;
+    return jwt.verify(token, secret);
   } catch (e) {
     return null;
   }
@@ -37,10 +36,25 @@ function readJsonFile(relativePath) {
 }
 
 exports.handler = async (event, context) => {
+  const allowedOrigins = [
+    'https://aqasports.pro',
+    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
+    'https://aqasuivi.netlify.app'
+  ];
+  const requestOrigin = event.headers.origin || event.headers.Origin || '';
+  const corsOrigin = allowedOrigins.includes(requestOrigin)
+    ? requestOrigin
+    : (requestOrigin.startsWith('http://localhost:') || requestOrigin.startsWith('http://127.0.0.1:')
+        ? requestOrigin
+        : allowedOrigins[0]);
+
   const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS'
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true'
   };
 
   if (event.httpMethod === 'OPTIONS') {
@@ -92,7 +106,7 @@ exports.handler = async (event, context) => {
     }
   }
 
-  const secret = process.env.JWT_SECRET || expectedHash;
+  const secret = JWT_SECRET;
   const decoded = verifyToken(token, secret);
 
   if (!decoded || !decoded.isAdmin) {
