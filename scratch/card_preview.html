@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>AQA Cards Preview</title>
+  <style>
+    :root {
+      --color-teal: #00f2ff;
+      --color-blue: #0088ff;
+      --font-display: 'Outfit', 'Inter', sans-serif;
+      --transition-smooth: transform 0.1s ease, box-shadow 0.3s ease;
+    }
+    body {
+      background: #060b13;
+      color: #fff;
+      font-family: var(--font-display);
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    h1 {
+      margin-bottom: 2rem;
+      font-weight: 800;
+      color: var(--color-teal);
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+      gap: 3rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .card-title {
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1.1rem;
+      color: #94a3b8;
+    }
+
+    /* Card Layout Styles (copied from portal.astro) */
+    .virtual-card {
+      width: 370px;
+      aspect-ratio: 5 / 3;
+      border-radius: 20px;
+      padding: 1.5rem;
+      position: relative;
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      box-sizing: border-box;
+    }
+    .virtual-card > * {
+      position: relative;
+      z-index: 3;
+    }
+    .card-shine {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 65%);
+      pointer-events: none;
+      mix-blend-mode: overlay;
+      z-index: 2;
+    }
+    .card-chip {
+      display: none;
+    }
+    .card-logo {
+      display: none;
+    }
+    .card-tier-label {
+      position: absolute;
+      left: 45%;
+      top: 22%;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--color-teal);
+      text-transform: uppercase;
+      opacity: 0.95;
+    }
+    .card-number {
+      position: absolute;
+      left: 45%;
+      top: 54%;
+      font-family: monospace;
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      margin: 0;
+    }
+    .card-holder {
+      position: absolute;
+      left: 45%;
+      top: 38%;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 50%;
+    }
+    .card-expiry {
+      position: absolute;
+      left: 45%;
+      top: 68%;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+    }
+    .card-qr-box {
+      position: absolute;
+      left: 9%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22%;
+      height: 22%;
+      background: #fff;
+      padding: 3px;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-qr-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Background Assets */
+    .card-tier-starter {
+      background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('../public/images/card_starter.png') no-repeat center center / cover;
+      box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
+    }
+    .card-tier-silver {
+      background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('../public/images/card_silver.png') no-repeat center center / cover;
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+    }
+    .card-tier-gold {
+      background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('../public/images/card_gold.png') no-repeat center center / cover;
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.25);
+    }
+    .card-tier-diamond {
+      background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('../public/images/card_diamond.png') no-repeat center center / cover;
+      border-color: rgba(168, 85, 247, 0.5);
+      box-shadow: 0 0 35px rgba(168, 85, 247, 0.4);
+    }
+    .card-tier-emerald {
+      background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)), url('../public/images/card_emerald.png') no-repeat center center / cover;
+      border-color: rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 35px rgba(16, 185, 129, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <h1>AQA Membership Cards Layout Check</h1>
+  <div class="cards-grid">
+    
+    <!-- Starter -->
+    <div class="card-container">
+      <div class="card-title">Starter</div>
+      <div class="virtual-card card-tier-starter">
+        <div class="card-shine"></div>
+        <div class="card-tier-label">Starter</div>
+        <div class="card-holder">Ahmed Benali</div>
+        <div class="card-number">ID: AQA-3A4B9F</div>
+        <div class="card-expiry">Valide: 2026-12-31</div>
+        <div class="card-qr-box">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://aqasports.pro/clients/stats?id=123" alt="QR">
+        </div>
+      </div>
+    </div>
+
+    <!-- Silver -->
+    <div class="card-container">
+      <div class="card-title">Silver</div>
+      <div class="virtual-card card-tier-silver">
+        <div class="card-shine"></div>
+        <div class="card-tier-label">Silver</div>
+        <div class="card-holder">Sarah Mansouri</div>
+        <div class="card-number">ID: AQA-BC23D9</div>
+        <div class="card-expiry">Valide: 2026-12-31</div>
+        <div class="card-qr-box">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://aqasports.pro/clients/stats?id=123" alt="QR">
+        </div>
+      </div>
+    </div>
+
+    <!-- Gold -->
+    <div class="card-container">
+      <div class="card-title">Gold</div>
+      <div class="virtual-card card-tier-gold">
+        <div class="card-shine"></div>
+        <div class="card-tier-label">Gold</div>
+        <div class="card-holder">Mohamed Khellaf</div>
+        <div class="card-number">ID: AQA-E5F811</div>
+        <div class="card-expiry">Valide: 2026-12-31</div>
+        <div class="card-qr-box">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://aqasports.pro/clients/stats?id=123" alt="QR">
+        </div>
+      </div>
+    </div>
+
+    <!-- Diamond -->
+    <div class="card-container">
+      <div class="card-title">Diamond</div>
+      <div class="virtual-card card-tier-diamond">
+        <div class="card-shine"></div>
+        <div class="card-tier-label">Diamond</div>
+        <div class="card-holder">Yacine Bensaada</div>
+        <div class="card-number">ID: AQA-9F22C8</div>
+        <div class="card-expiry">Valide: 2026-12-31</div>
+        <div class="card-qr-box">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://aqasports.pro/clients/stats?id=123" alt="QR">
+        </div>
+      </div>
+    </div>
+
+    <!-- Emerald -->
+    <div class="card-container">
+      <div class="card-title">Emerald (Admin-Only)</div>
+      <div class="virtual-card card-tier-emerald">
+        <div class="card-shine"></div>
+        <div class="card-tier-label">Emerald</div>
+        <div class="card-holder">Amine Oudjane</div>
+        <div class="card-number">ID: AQA-77D922</div>
+        <div class="card-expiry">Valide: 2026-12-31</div>
+        <div class="card-qr-box">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://aqasports.pro/clients/stats?id=123" alt="QR">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
