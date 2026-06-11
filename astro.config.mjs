@@ -289,8 +289,8 @@ export default defineConfig({
                       return;
                     }
 
-                    const batPath = path.join(__dirname, 'deploy-now.bat');
-                    exec(`"${batPath}" < nul`, (error, stdout, stderr) => {
+                    const pythonCmd = 'python auto_git.py';
+                    exec(pythonCmd, { cwd: __dirname }, (error, stdout, stderr) => {
                       if (error) {
                         res.writeHead(500, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ success: false, message: error.message, stdout, stderr }));

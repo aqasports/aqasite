@@ -549,31 +549,18 @@ app.post('/api/deploy', verifyAdminToken, deployLimiter, (req, res) => {
   }
 
   try {
-
     const { exec } = require('child_process');
-
     const path = require('path');
-
-    const batPath = path.join(__dirname, 'deploy-now.bat');
-
-    exec(`"${batPath}" < nul`, (error, stdout, stderr) => {
-
+    const pythonCmd = 'python auto_git.py';
+    exec(pythonCmd, { cwd: __dirname }, (error, stdout, stderr) => {
       if (error) {
-
         res.status(500).json({ success: false, message: error.message, stdout, stderr });
-
       } else {
-
         res.status(200).json({ success: true, message: 'Déploiement exécuté avec succès', stdout });
-
       }
-
     });
-
   } catch (err) {
-
     res.status(500).json({ success: false, message: err.message });
-
   }
 
 });
