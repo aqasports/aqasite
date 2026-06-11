@@ -406,6 +406,7 @@ const badgeDefinitions = {
             <div class="portal-col">
               <!-- Virtual Card -->
               <div id="memberCard" class="virtual-card">
+                <div class="card-shine"></div>
                 <div class="card-chip"></div>
                 <div class="card-logo">AQA SPORTS</div>
                 <div class="card-tier-label" id="cardTier">Tier</div>
@@ -1079,6 +1080,29 @@ const badgeDefinitions = {
       const card = document.getElementById('memberCard');
       const tier = profile.membershipTier || 'Starter';
       card.className = `virtual-card card-tier-${tier.toLowerCase()}`;
+      
+      // Setup dynamic 3D tilt and reflection effect
+      if (card && !card._tiltBound) {
+        card._tiltBound = true;
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((centerY - y) / centerY) * 15; // Max 15 degrees tilt
+          const rotateY = ((x - centerX) / centerX) * 15;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          
+          const percentX = (x / rect.width) * 100;
+          const percentY = (y / rect.height) * 100;
+          card.style.setProperty('--shine-x', `${percentX}%`);
+          card.style.setProperty('--shine-y', `${percentY}%`);
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      }
       document.getElementById('cardTier').textContent = tier.toUpperCase();
       document.getElementById('cardId').textContent = `ID: AQA-${profile.id.slice(0,6).toUpperCase()}`;
       document.getElementById('cardHolder').textContent = profile.fullName;
@@ -1737,23 +1761,27 @@ const badgeDefinitions = {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-    transition: var(--transition-smooth);
     border: 1px solid rgba(255, 255, 255, 0.15);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
   }
-  .virtual-card::before {
-    content: '';
+  .card-shine {
     position: absolute;
-    top: -50%; left: -50%; right: -50%; bottom: -50%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0) 60%);
-    transform: rotate(25deg);
-    transition: 0.8s;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 65%);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+    opacity: 0;
   }
-  .virtual-card:hover::before {
-    left: 100%;
-    top: 100%;
+  .virtual-card:hover .card-shine {
+    opacity: 1;
   }
-  .virtual-card:hover {
-    transform: translateY(-5px) scale(1.01);
+  .virtual-card > * {
+    position: relative;
+    z-index: 3;
   }
   .card-chip {
     width: 45px;
@@ -1843,23 +1871,23 @@ const badgeDefinitions = {
 
   /* Holographic Tier Colors */
   .card-tier-starter {
-    background: linear-gradient(135deg, #1e293b, #0f172a, #020617);
-    box-shadow: 0 0 25px rgba(0, 242, 255, 0.1);
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/1.webp') no-repeat center center / cover;
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
   }
   .card-tier-silver {
-    background: linear-gradient(135deg, #475569, #334155, #1e293b);
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/2.webp') no-repeat center center / cover;
     border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
   }
   .card-tier-gold {
-    background: linear-gradient(135deg, #b45309, #78350f, #451a03);
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/3.webp') no-repeat center center / cover;
     border-color: rgba(245, 158, 11, 0.4);
-    box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.25);
   }
   .card-tier-diamond {
-    background: linear-gradient(135deg, #6b21a8, #4c1d95, #1e1b4b);
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('/images/4.webp') no-repeat center center / cover;
     border-color: rgba(168, 85, 247, 0.5);
-    box-shadow: 0 0 35px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.4);
   }
 
   /* Subscription Widget details */
