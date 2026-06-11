@@ -94,6 +94,8 @@ exports.handler = async (event, context) => {
     // Resolve stored hash
     const storedHash = cfg.passwordHash || crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'AqaSports2026!').digest('hex');
 
+    const inputHash = crypto.createHash('sha256').update(password).digest('hex');
+
     if (!verifyPassword(password, storedHash)) {
       return {
         statusCode: 401,
@@ -106,7 +108,10 @@ exports.handler = async (event, context) => {
             fetchedFromGithub,
             storedHashLength: storedHash.length,
             storedHashPrefix: storedHash.substring(0, 10),
-            isBcrypt: storedHash.startsWith('$2a$') || storedHash.startsWith('$2b$')
+            isBcrypt: storedHash.startsWith('$2a$') || storedHash.startsWith('$2b$'),
+            inputHashLength: inputHash.length,
+            inputHashPrefix: inputHash.substring(0, 10),
+            passwordLength: password.length
           }
         })
       };
