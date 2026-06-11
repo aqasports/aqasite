@@ -20,6 +20,11 @@
 
 # ── Redirect Member Area APIs to Netlify Function ──────────────────────
 [[redirects]]
+  from   = "/api/deploy"
+  to     = "/.netlify/functions/deploy"
+  status = 200
+
+[[redirects]]
   from   = "/api/admin-auth"
   to     = "/.netlify/functions/admin-auth"
   status = 200
