@@ -44,3 +44,7 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Windows AppData
+%AppData%
+
