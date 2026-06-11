@@ -1313,28 +1313,11 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
     if (!isLocal && url === '/api/deploy') {
-
-      return {
-
-        ok: true,
-
-        status: 200,
-
-        data: {
-
-          success: true,
-
-          stdout: "Le site est configuré en mode automatique. Chaque enregistrement de modification déclenche automatiquement une reconstruction et une publication sur Netlify. Aucun déploiement manuel n'est nécessaire."
-
-        }
-
-      };
-
+      url = '/.netlify/functions/deploy';
     }
 
-
-
     if (!isLocal && url === '/api/admin-auth') {
+
       url = '/.netlify/functions/admin-auth';
     }
     if (!isLocal && url === '/api/verify-token') {
@@ -2814,7 +2797,8 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
       } else {
         statusEl.textContent = 'Échec de déploiement';
         statusEl.className = 'deploy-status error';
-        consoleLogs.textContent += '\n[ERROR]\n' + (data.message || 'Erreur inconnue') + '\n' + (data.stderr || '');
+        consoleLogs.textContent += '\n[ERROR]\n' + (data.error || data.message || 'Erreur inconnue');
+
       }
     } catch(e) {
       statusEl.textContent = 'Échec réseau: ' + e.message;
