@@ -98,7 +98,17 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 401,
         headers: corsHeaders,
-        body: JSON.stringify({ success: false, error: 'Mot de passe incorrect' })
+        body: JSON.stringify({ 
+          success: false, 
+          error: 'Mot de passe incorrect',
+          debug: {
+            githubTokenExists: !!githubToken,
+            fetchedFromGithub,
+            storedHashLength: storedHash.length,
+            storedHashPrefix: storedHash.substring(0, 10),
+            isBcrypt: storedHash.startsWith('$2a$') || storedHash.startsWith('$2b$')
+          }
+        })
       };
     }
 
