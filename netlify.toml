@@ -148,6 +148,14 @@
   to     = "/webtv"
   status = 301
 
+# ── Mercur Storefront Proxy (dev: localhost:9000, prod: api.aqasports.com) ─────
+# Proxies /api/store/* to Medusa backend so store.html fetch() works without CORS
+[[redirects]]
+  from   = "/api/store/*"
+  to     = "http://localhost:9000/store/:splat"
+  status = 200
+  force  = true
+
 # ── Fallback SPA-style: unknown routes → 404 ──────────────────────────────────
 [[redirects]]
   from   = "/*"

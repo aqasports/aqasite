@@ -1,6 +1,9 @@
 /**
- * AQA Sports Academy — Navbar & Global UI
+ * AQA Sports Academy — Navbar & Global UI  v2.1
  * Handles: mobile menu, scroll-hide, lang switcher bootstrap, WhatsApp widget
+ *
+ * FIX v2.1: astro:page-load only fires inside Astro SPA routing.
+ * Plain .html pages use DOMContentLoaded. We support both via initNavbar().
  */
 
 let mobileMenuActive = false;
@@ -9,25 +12,25 @@ let mobileMenuActive = false;
 function toggleMobileMenu() {
     const overlay    = document.getElementById('mobileMenuOverlay');
     const toggle     = document.querySelector('.menu-toggle');
+    if (!overlay) return; // guard: overlay must exist
     mobileMenuActive = !mobileMenuActive;
 
     if (mobileMenuActive) {
         overlay.classList.add('active');
-        toggle.classList.add('active');
+        if (toggle) toggle.classList.add('active');
         document.body.style.overflow = 'hidden';
     } else {
         overlay.classList.remove('active');
-        toggle.classList.remove('active');
+        if (toggle) toggle.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
 }
 
-// ─── Language Switcher (now real — delegates to i18n.js) ──────────────
+// ─── Language Switcher (delegates to i18n.js) ─────────────────────────
 function setLanguage(lang) {
     if (window.i18n) {
         window.i18n.setLang(lang);
     } else {
-        // i18n.js not yet loaded — store and let it pick up on init
         localStorage.setItem('aqa_lang', lang);
         location.reload();
     }
@@ -94,9 +97,8 @@ function injectWhatsAppWidget() {
     document.body.appendChild(wa);
 }
 
-// ─── DOM Ready ────────────────────────────────────────────────────────
-document.addEventListener('astro:page-load', function () {
-    // Also reset mobile state just in case of transition
+// ─── Core init function (shared between DOMContentLoaded & astro:page-load)
+function initNavbar() {
     mobileMenuActive = false;
     document.body.style.overflow = 'auto';
 
@@ -131,7 +133,7 @@ document.addEventListener('astro:page-load', function () {
                 header.style.transform = 'translateY(0)';
             }
             lastScrollY = window.scrollY;
-        });
+        }, { passive: true });
     }
 
     // Prevent double-tap zoom on iOS
@@ -140,8 +142,23 @@ document.addEventListener('astro:page-load', function () {
         const now = Date.now();
         if (now - lastTouchEnd <= 300) e.preventDefault();
         lastTouchEnd = now;
-    }, false);
+    }, { passive: false });
 
     // Inject WhatsApp widget
+    injectWhatsAppWidget();
+}
+
+// ─── DOM Ready — works on plain .html AND Astro pages ─────────────────
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavbar);
+} else {
+    // Already interactive (script deferred or placed before </body>)
+    initNavbar();
+}
+
+// Also handle Astro view transitions (SPA routing)
+document.addEventListener('astro:page-load', () => {
+    mobileMenuActive = false;
+    document.body.style.overflow = 'auto';
     injectWhatsAppWidget();
 });

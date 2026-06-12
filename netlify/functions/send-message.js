@@ -1,12 +1,12 @@
-// netlify/functions/send-message.js
+﻿// netlify/functions/send-message.js
 // Netlify serverless function to handle audio message submissions
 
 const nodemailer = require("nodemailer");
 
 exports.handler = async function(event, context) {
   const allowedOrigins = [
-    'https://aqasports.pro',
-    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
     'https://aqasports.com',
     'https://www.aqasports.com',
     'https://aqasuivi.netlify.app'

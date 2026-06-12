@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
 # Block junk/internal files from crawlers
@@ -9,4 +9,4 @@ Disallow: /deploy.trigger
 Disallow: /messages.json
 Disallow: /package-lock.json
 
-Sitemap: https://aqasports.pro/sitemap.xml
+Sitemap: https://aqasports.com/sitemap.xml

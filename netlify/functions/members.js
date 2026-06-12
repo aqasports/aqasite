@@ -1,4 +1,4 @@
-try {
+﻿try {
   require('dotenv').config();
 } catch (e) {}
 
@@ -299,8 +299,8 @@ function sanitize(str, maxLength = 500) {
 // Main Netlify Function Handler
 exports.handler = async (event, context) => {
   const allowedOrigins = [
-    'https://aqasports.pro',
-    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
     'https://aqasports.com',
     'https://www.aqasports.com',
     'https://aqasuivi.netlify.app'

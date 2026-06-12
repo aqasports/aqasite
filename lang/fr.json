@@ -64,5 +64,29 @@
 
   "loading_text": "CHARGEMENT...",
 
-  "wa_tooltip": "Contactez-nous sur WhatsApp"
+  "wa_tooltip": "Contactez-nous sur WhatsApp",
+
+  "store_badge": "🛍️ Boutique Officielle",
+  "store_hero_title": "AQA Store",
+  "store_hero_desc": "Équipez-vous avec les accessoires, guides et équipements sélectionnés par nos coachs d'élite.",
+  "store_cat_all": "Tout",
+  "store_cat_gear": "Équipement",
+  "store_cat_guides": "Guides & Programmes",
+  "store_cat_accessories": "Accessoires",
+  "store_order_btn": "Commander",
+  "store_notify_btn": "M'alerter",
+  "store_download_btn": "Télécharger",
+  "store_cta_title": "📦 Commander par WhatsApp",
+  "store_cta_desc": "Pour toute commande ou question, contactez-nous directement sur WhatsApp pour un service rapide et personnalisé.",
+  "store_cta_btn": "💬 WhatsApp",
+  "store_wishlist_label": "Favoris",
+  "store_search_placeholder": "Rechercher un produit...",
+  "store_wear_title": "AQA Wear 👕",
+  "store_wear_desc": "Découvrez notre ligne de vêtements techniques AQA : maillots, t-shirts, bonnets et équipement de marque.",
+  "store_wear_btn": "Voir la collection →",
+  "store_no_results": "Aucun produit trouvé",
+
+  "wear_status": "/// SYSTÈME : VERROUILLÉ ///",
+  "wear_terminal_text": "> TRANSMISSION ENTRANTE...\n> SOURCE: AQA\n> MESSAGE: NE MANQUEZ JAMAIS LA SORTIE.\n> ACTION REQUISE: REJOIGNEZ LA LISTE PRIORITAIRE.",
+  "wear_wa_btn": "[ ACCÉDER AU GROUPE WA ]"
 }

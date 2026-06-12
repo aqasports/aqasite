@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+﻿const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 const owner = 'aqasports';
@@ -39,8 +39,8 @@ function verifyPassword(password, storedHash) {
 exports.handler = async (event, context) => {
   // CORS Headers
   const allowedOrigins = [
-    'https://aqasports.pro',
-    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
     'https://aqasports.com',
     'https://www.aqasports.com',
     'https://aqasuivi.netlify.app'

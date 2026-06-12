@@ -1,4 +1,4 @@
-const owner = 'aqasports';
+﻿const owner = 'aqasports';
 const repo = 'aqasite';
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -12,8 +12,8 @@ if (!ADMIN_PASSWORD) {
 
 exports.handler = async (event, context) => {
   const allowedOrigins = [
-    'https://aqasports.pro',
-    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
     'https://aqasports.com',
     'https://www.aqasports.com',
     'https://aqasuivi.netlify.app'

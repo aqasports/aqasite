@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+﻿const crypto = require('crypto');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -20,8 +20,8 @@ function verifyToken(token, secret) {
 
 exports.handler = async (event, context) => {
   const allowedOrigins = [
-    'https://aqasports.pro',
-    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
     'https://aqasports.com',
     'https://www.aqasports.com',
     'https://aqasuivi.netlify.app'

@@ -64,5 +64,29 @@
 
   "loading_text": "LOADING...",
 
-  "wa_tooltip": "Contact us on WhatsApp"
+  "wa_tooltip": "Contact us on WhatsApp",
+
+  "store_badge": "🛍️ Official Store",
+  "store_hero_title": "AQA Store",
+  "store_hero_desc": "Gear up with accessories, guides and equipment selected by our elite coaches.",
+  "store_cat_all": "All",
+  "store_cat_gear": "Equipment",
+  "store_cat_guides": "Guides & Programmes",
+  "store_cat_accessories": "Accessories",
+  "store_order_btn": "Order",
+  "store_notify_btn": "Notify Me",
+  "store_download_btn": "Download",
+  "store_cta_title": "📦 Order via WhatsApp",
+  "store_cta_desc": "For any order or product question, contact us directly on WhatsApp for fast, personal service.",
+  "store_cta_btn": "💬 WhatsApp",
+  "store_wishlist_label": "Wishlist",
+  "store_search_placeholder": "Search a product...",
+  "store_wear_title": "AQA Wear 👕",
+  "store_wear_desc": "Discover our AQA technical clothing line: swimsuits, t-shirts, caps and branded gear.",
+  "store_wear_btn": "View collection →",
+  "store_no_results": "No products found",
+
+  "wear_status": "/// SYSTEM STATUS: LOCKED ///",
+  "wear_terminal_text": "> INCOMING TRANSMISSION...\n> SOURCE: AQA\n> MESSAGE: NEVER MISS THE RELEASE.\n> ACTION REQUIRED: JOIN PRIORITY LIST.",
+  "wear_wa_btn": "[ ACCESS WA GROUP ]"
 }

@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
 # Block junk/internal files from crawlers
@@ -12,4 +12,4 @@ Disallow: /digger
 Disallow: /aqacontrol2026
 
 
-Sitemap: https://aqasports.pro/sitemap.xml
+Sitemap: https://aqasports.com/sitemap.xml

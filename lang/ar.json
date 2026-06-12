@@ -64,5 +64,29 @@
 
   "loading_text": "جار التحميل...",
 
-  "wa_tooltip": "تواصل معنا على واتساب"
+  "wa_tooltip": "تواصل معنا على واتساب",
+
+  "store_badge": "🛍️ المتجر الرسمي",
+  "store_hero_title": "متجر AQA",
+  "store_hero_desc": "تجهّز بالمعدات والإكسسوارات والأدلة المختارة من مدربينا النخبة.",
+  "store_cat_all": "الكل",
+  "store_cat_gear": "معدات",
+  "store_cat_guides": "أدلة وبرامج",
+  "store_cat_accessories": "إكسسوارات",
+  "store_order_btn": "اطلب الآن",
+  "store_notify_btn": "أبلغني",
+  "store_download_btn": "تحميل",
+  "store_cta_title": "📦 اطلب عبر واتساب",
+  "store_cta_desc": "لأي طلب أو سؤال حول منتجاتنا، تواصل معنا مباشرةً عبر واتساب لخدمة سريعة وشخصية.",
+  "store_cta_btn": "💬 واتساب",
+  "store_wishlist_label": "المفضلة",
+  "store_search_placeholder": "ابحث عن منتج...",
+  "store_wear_title": "ملابس AQA 👕",
+  "store_wear_desc": "اكتشف تشكيلة ملابس AQA التقنية: ملابس سباحة، قمصان، قبعات ومعدات ذات علامة AQA.",
+  "store_wear_btn": "عرض المجموعة →",
+  "store_no_results": "لم يتم العثور على منتجات",
+
+  "wear_status": "/// حالة النظام: مقفل ///",
+  "wear_terminal_text": "يصل بث...ن، المصدر: AQA، الرسالة: لا تفوتك الإصدار أبداً. إجراء مطلوب: انضم للقائمة الأولوية.",
+  "wear_wa_btn": "[ انضم لمجموعة WA ]"
 }

@@ -1,4 +1,4 @@
-// netlify/functions/reviews.js - DEBUG VERSION
+﻿// netlify/functions/reviews.js - DEBUG VERSION
 const https = require('https');
 
 function httpsRequest(options, postData = null) {
@@ -26,8 +26,8 @@ const CACHE_DURATION = 3600000; // 1 hour
 
 exports.handler = async function(event, context) {
   const allowedOrigins = [
-    'https://aqasports.pro',
-    'https://www.aqasports.pro',
+    'https://aqasports.com',
+    'https://www.aqasports.com',
     'https://aqasports.com',
     'https://www.aqasports.com',
     'https://aqasuivi.netlify.app'

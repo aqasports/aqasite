@@ -1,4 +1,4 @@
-require('dotenv').config();
+﻿require('dotenv').config();
 
 const express = require('express');
 
@@ -52,9 +52,9 @@ app.use(helmet({
 
 const allowedOrigins = [
 
-  'https://aqasports.pro',
+  'https://aqasports.com',
 
-  'https://www.aqasports.pro',
+  'https://www.aqasports.com',
 
   'https://aqasports.com',
 
