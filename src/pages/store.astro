@@ -2,12 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import storeData from '../data/store.json';
 
 export interface Props {
   lang?: string;
 }
 
 const { lang = 'fr' } = Astro.props;
+const products = storeData.filter((product) => product.active !== false);
+const featuredProducts = products.filter((product) => product.featured).slice(0, 4);
+const categories = ['Tout', ...Array.from(new Set(products.map((product) => product.category).filter(Boolean)))];
 
 const getRelativePath = (path, targetLang) => {
   if (targetLang === 'fr') return path;
@@ -15,315 +19,641 @@ const getRelativePath = (path, targetLang) => {
 };
 ---
 
-<BaseLayout title="AQA Store — Équipements & Accessoires Natation Officiel Algérie"
-  description="Boutique officielle AQA Sports : lunettes, bonnets, combinaisons et accessoires de natation et d'apnée. Matériel de qualité professionnelle livré en Algérie."
-  keywords="équipements natation algérie, boutique natation, lunettes natation, bonnet piscine, matériel apnée algérie"
-  currentPage="/store" lang={lang}>
+<BaseLayout
+  title="AQA Store — Boutique Officielle AQA Sports"
+  description="Boutique officielle AQA Sports : equipements de natation, apnee, packs performance et accessoires selectionnes par les coachs AQA."
+  keywords="AQA Store, boutique natation Algerie, equipement natation, apnee, accessoires AQA Sports"
+  currentPage="/store"
+  lang={lang}
+>
   <Navbar currentPage="/store" lang={lang} />
 
-<div class="page-hero">
-        <span class="hero-badge">🛍️ Boutique Officielle</span>
+  <main class="store-shell">
+    <section class="store-hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Boutique officielle AQA Sports</span>
         <h1>AQA Store</h1>
-        <div class="section-divider"></div>
-        <p>Équipez-vous avec les accessoires, guides et équipements sélectionnés par nos coachs d'élite.</p>
-    </div>
-
-    <div class="container">
-        <!-- Category tabs -->
-        <div class="category-tabs">
-            <button class="category-tab active">Tout</button>
-            <button class="category-tab">Équipement</button>
-            <button class="category-tab">Guides & Programmes</button>
-            <button class="category-tab">Accessoires</button>
+        <p>Equipement aquatique, packs coachs et accessoires club selectionnes pour nager mieux, plus vite et avec le style AQA.</p>
+        <div class="hero-actions">
+          <a href="#catalogue" class="primary-action">Explorer</a>
+          <a href={getRelativePath('/wear', lang)} class="secondary-action">AQA Wear</a>
         </div>
+      </div>
 
-        <!-- Products -->
-        <div class="products-grid">
-            <div class="product-card">
-                <span class="product-badge">⭐ Bestseller</span>
-                <div class="product-img">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M10 9a2 2 0 11-4 0 2 2 0 014 0zM14 14a2 2 0 114 0 2 2 0 01-4 0z"/></svg>
-                </div>
-                <div class="product-body">
-                    <div class="product-name">Lunettes de Natation Pro</div>
-                    <div class="product-desc">Anti-buée, UV400, ajustables — validées par les coachs AQA.</div>
-                    <div class="product-footer">
-                        <span class="product-price">Sur commande</span>
-                        <a href={getRelativePath('/infos', lang)} class="product-btn">Commander</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <span class="product-badge">📘 Guide</span>
-                <div class="product-img">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-                </div>
-                <div class="product-body">
-                    <div class="product-name">Guide Technique AQA — Natation</div>
-                    <div class="product-desc">Programme PDF complet : drills, exercices, plans d'entraînement débutant → expert.</div>
-                    <div class="product-footer">
-                        <span class="product-price">Bientôt</span>
-                        <a href={getRelativePath('/infos', lang)} class="product-btn">Notifier</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <span class="product-badge">🌊 Apnée</span>
-                <div class="product-img">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2s10 4.48 10 10z"/><path d="M12 8v8M8 12h8"/></svg>
-                </div>
-                <div class="product-body">
-                    <div class="product-name">Kit Initiation Apnée</div>
-                    <div class="product-desc">Masque, tuba et palmes sélectionnés par nos instructeurs d'apnée certifiés.</div>
-                    <div class="product-footer">
-                        <span class="product-price">Sur commande</span>
-                        <a href={getRelativePath('/infos', lang)} class="product-btn">Commander</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <span class="product-badge">📱 App</span>
-                <div class="product-img">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                </div>
-                <div class="product-body">
-                    <div class="product-name">AQA App — Suivi Personnalisé</div>
-                    <div class="product-desc">Téléchargez l'application mobile AQA pour suivre votre progression et vos séances.</div>
-                    <div class="product-footer">
-                        <span class="product-price">Gratuit</span>
-                        <a href={getRelativePath('/app', lang)} class="product-btn">Télécharger</a>
-                    </div>
-                </div>
-            </div>
+      <div class="hero-product" aria-label="AQA Store featured products">
+        <div class="hero-product-image">
+          <img src="/images/logo.webp" alt="AQA Sports" loading="eager" />
         </div>
+        <div class="hero-product-meta">
+          <span>Selection coach</span>
+          <strong>{products.length} produits</strong>
+        </div>
+      </div>
+    </section>
 
-        <!-- AQA Wear Link -->
-        <div class="wear-section">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 7l4-3h8l4 3v4l-2 2v8H6v-8l-2-2V7z"/><path d="M9 4l1.5 2h3L15 4"/></svg>
-            <div>
-                <div class="section-title" style="text-align:left; font-size:1.3rem;">AQA Wear 👕</div>
-                <p style="color: rgba(255,255,255,0.7); margin: 0.5rem 0;">Découvrez notre ligne de vêtements techniques AQA : maillots, t-shirts, bonnets et équipement de marque.</p>
-                <a href={getRelativePath('/wear', lang)}>Voir la collection →</a>
+    <section class="store-metrics" aria-label="AQA Store highlights">
+      <div>
+        <span>01</span>
+        <strong>Selection AQA</strong>
+        <p>Materiel retenu par les coachs.</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>Commande rapide</strong>
+        <p>Validation directe par WhatsApp.</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>Packs clubs</strong>
+        <p>Options pour nageurs, kids et apnee.</p>
+      </div>
+    </section>
+
+    {featuredProducts.length > 0 && (
+      <section class="featured-band" aria-label="Produits mis en avant">
+        <div class="section-heading">
+          <span>Featured</span>
+          <h2>Selections du moment</h2>
+        </div>
+        <div class="featured-grid">
+          {featuredProducts.map((product) => (
+            <article class="featured-card">
+              <img src={product.image} alt={product.title} loading="lazy" />
+              <div>
+                <span>{product.badge}</span>
+                <h3>{product.title}</h3>
+                <p>{product.priceLabel}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section id="catalogue" class="catalogue-section">
+      <div class="section-heading catalogue-heading">
+        <div>
+          <span>Catalogue</span>
+          <h2>Shop AQA</h2>
+        </div>
+        <div class="category-tabs" role="tablist" aria-label="Categories produits">
+          {categories.map((category, index) => (
+            <button class={`category-tab${index === 0 ? ' active' : ''}`} type="button" data-category={category}>
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="products-grid">
+        {products.map((product) => (
+          <article class="product-card" data-product-card data-category={product.category}>
+            <div class="product-image">
+              <img src={product.image} alt={product.title} loading="lazy" />
+              <span class="product-badge">{product.badge}</span>
             </div>
-        </div>
+            <div class="product-body">
+              <div class="product-kicker">{product.category} · {product.inventory}</div>
+              <h3>{product.title}</h3>
+              <p>{product.summary}</p>
+              <div class="product-tags">{product.details}</div>
+              <div class="product-footer">
+                <strong>{product.priceLabel}</strong>
+                <button
+                  type="button"
+                  class="product-btn"
+                  data-add-product
+                  data-id={product.id}
+                  data-title={product.title}
+                  data-price={product.priceLabel}
+                >
+                  {product.ctaLabel || 'Ajouter'}
+                </button>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
 
-        <!-- CTA -->
-        <div class="store-cta">
-            <h2>📦 Commander par WhatsApp</h2>
-            <p>Pour toute commande ou question sur nos produits, contactez-nous directement sur WhatsApp pour un service rapide et personnalisé.</p>
-            <a href="https://wa.me/213540454907?text=Bonjour%2C%20je%20souhaite%20commander%20un%20produit%20AQA%20Store" class="cta-btn" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
-        </div>
-    </div>
+    <aside class="order-dock" aria-label="AQA Bag">
+      <div>
+        <span>AQA Bag</span>
+        <strong id="bagCount">0 article</strong>
+      </div>
+      <button type="button" id="checkoutBtn">Commander</button>
+    </aside>
 
-  <Footer  lang={lang} />
+    <section class="store-cta">
+      <div>
+        <span>Service AQA</span>
+        <h2>Commande assistee par l'equipe</h2>
+        <p>Les tailles, disponibilites et packs sont confirmes avant validation pour eviter les achats inutiles.</p>
+      </div>
+      <a href="https://wa.me/213540454907?text=Bonjour%2C%20je%20souhaite%20commander%20un%20produit%20AQA%20Store" target="_blank" rel="noopener noreferrer">WhatsApp AQA</a>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
 </BaseLayout>
 
+<script is:inline>
+  const bag = new Map();
+  const bagCount = document.getElementById('bagCount');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  function refreshBag() {
+    const total = Array.from(bag.values()).reduce((sum, item) => sum + item.qty, 0);
+    bagCount.textContent = total <= 1 ? `${total} article` : `${total} articles`;
+    checkoutBtn.classList.toggle('is-ready', total > 0);
+  }
+
+  document.querySelectorAll('[data-add-product]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const item = {
+        id: button.dataset.id,
+        title: button.dataset.title,
+        price: button.dataset.price,
+        qty: 1
+      };
+      const current = bag.get(item.id);
+      bag.set(item.id, current ? { ...current, qty: current.qty + 1 } : item);
+      button.textContent = 'Ajoute';
+      window.setTimeout(() => { button.textContent = button.getAttribute('data-original-label') || 'Ajouter'; }, 900);
+      refreshBag();
+    });
+    button.setAttribute('data-original-label', button.textContent.trim());
+  });
+
+  document.querySelectorAll('.category-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const category = tab.dataset.category;
+      document.querySelectorAll('.category-tab').forEach((item) => item.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('[data-product-card]').forEach((card) => {
+        const isVisible = category === 'Tout' || card.dataset.category === category;
+        card.classList.toggle('is-hidden', !isVisible);
+      });
+    });
+  });
+
+  checkoutBtn.addEventListener('click', () => {
+    const items = Array.from(bag.values());
+    const lines = items.length
+      ? items.map((item) => `- ${item.title} x${item.qty} (${item.price})`).join('%0A')
+      : 'Je souhaite avoir des informations sur AQA Store.';
+    const message = `Bonjour AQA Sports,%0AJe souhaite commander:%0A${lines}`;
+    window.open(`https://wa.me/213540454907?text=${message}`, '_blank', 'noopener,noreferrer');
+  });
+</script>
+
 <style>
+  .store-shell {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 7rem 1.25rem 4rem;
+  }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { background: #000; scroll-behavior: smooth; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: transparent;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        .bg-frame { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; border: none; z-index: -1; pointer-events: none; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  .store-hero {
+    min-height: 520px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    align-items: center;
+    gap: 3rem;
+  }
 
-        .page-hero {
-            text-align: center;
-            padding: 5rem 1rem 3rem;
-        }
-        .page-hero h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #0099ff, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-        .page-hero p { font-size: clamp(1rem, 3vw, 1.2rem); color: rgba(255,255,255,0.8); max-width: 700px; margin: 0 auto; }
-        .hero-badge {
-            display: inline-block;
-            background: rgba(0,255,255,0.1);
-            border: 1px solid rgba(0,255,255,0.4);
-            color: #00ffff;
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-        }
-        .section-divider { width: 80px; height: 3px; background: linear-gradient(90deg, #00ffff, #0099ff); margin: 1.5rem auto; border-radius: 2px; }
-        .section-title {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
+  .eyebrow,
+  .section-heading span,
+  .store-cta span,
+  .hero-product-meta span {
+    display: inline-flex;
+    color: var(--color-teal);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
-        /* Category tabs */
-        .category-tabs {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-        .category-tab {
-            padding: 0.6rem 1.4rem;
-            border: 1px solid rgba(0,153,255,0.4);
-            border-radius: 25px;
-            background: rgba(0,153,255,0.1);
-            color: rgba(255,255,255,0.8);
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .category-tab.active, .category-tab:hover {
-            background: rgba(0,255,255,0.2);
-            border-color: #00ffff;
-            color: #00ffff;
-        }
+  .hero-copy h1 {
+    margin-top: 0.8rem;
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    line-height: 0.86;
+    letter-spacing: 0;
+    background: linear-gradient(135deg, #ffffff 5%, var(--color-teal) 45%, var(--color-blue) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-        /* Products grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .product-card {
-            background: rgba(0,153,255,0.05);
-            border: 1px solid rgba(0,153,255,0.25);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0,255,255,0.6);
-            box-shadow: 0 0 25px rgba(0,255,255,0.15);
-        }
-        .product-badge {
-            position: absolute;
-            top: 0.8rem; left: 0.8rem;
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .product-img {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, rgba(0,153,255,0.1), rgba(0,255,255,0.05));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-img svg { width: 70px; height: 70px; stroke: rgba(0,255,255,0.4); }
-        .product-body { padding: 1.2rem; }
-        .product-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
-        .product-desc { font-size: 0.83rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
-        .product-footer { display: flex; align-items: center; justify-content: space-between; }
-        .product-price {
-            font-size: 1.1rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .product-btn {
-            padding: 0.5rem 1.1rem;
-            background: linear-gradient(135deg, rgba(0,153,255,0.3), rgba(0,255,255,0.3));
-            border: 1px solid rgba(0,255,255,0.5);
-            border-radius: 20px;
-            color: #00ffff;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .product-btn:hover {
-            background: linear-gradient(135deg, rgba(0,153,255,0.5), rgba(0,255,255,0.5));
-            transform: scale(1.05);
-        }
+  .hero-copy p {
+    max-width: 620px;
+    margin-top: 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.22rem);
+  }
 
-        /* CTA section */
-        .store-cta {
-            background: linear-gradient(135deg, rgba(0,153,255,0.1), rgba(0,255,255,0.05));
-            border: 1px solid rgba(0,255,255,0.3);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            margin: 3rem 0;
-        }
-        .store-cta h2 { font-size: 1.8rem; font-weight: 700; color: #00ffff; margin-bottom: 1rem; }
-        .store-cta p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; max-width: 500px; margin: 0 auto 1.5rem; }
-        .cta-btn {
-            display: inline-block;
-            padding: 0.9rem 2rem;
-            background: linear-gradient(135deg, #0099ff, #00ffff);
-            color: #000;
-            font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0,255,255,0.5); }
+  .hero-actions {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
 
-        /* AQA Wear link section */
-        .wear-section {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            background: rgba(0,153,255,0.05);
-            border: 1px solid rgba(0,153,255,0.25);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        .wear-section svg { width: 60px; height: 60px; stroke: #00ffff; flex-shrink: 0; }
-        .wear-section a {
-            display: inline-block;
-            margin-top: 0.8rem;
-            padding: 0.6rem 1.5rem;
-            background: linear-gradient(135deg, rgba(0,153,255,0.3), rgba(0,255,255,0.3));
-            border: 1px solid rgba(0,255,255,0.4);
-            border-radius: 25px;
-            color: #00ffff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .wear-section a:hover { background: rgba(0,255,255,0.3); }
+  .primary-action,
+  .secondary-action,
+  .store-cta a,
+  .order-dock button {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 0.8rem 1.25rem;
+    font-weight: 800;
+    border: 1px solid rgba(0, 242, 255, 0.35);
+  }
 
-        @media (max-width: 768px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .wear-section { flex-direction: column; text-align: center; }
-        }
-        @media (max-width: 480px) {
-            .products-grid { grid-template-columns: 1fr; }
-        }
-    
+  .primary-action,
+  .store-cta a,
+  .order-dock button.is-ready {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+    color: #020617;
+  }
+
+  .secondary-action,
+  .order-dock button {
+    background: rgba(15, 23, 42, 0.72);
+    color: var(--color-teal);
+  }
+
+  .hero-product {
+    position: relative;
+    min-height: 440px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background:
+      linear-gradient(145deg, rgba(0, 136, 255, 0.16), rgba(0, 242, 255, 0.04)),
+      rgba(15, 23, 42, 0.55);
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-product::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    opacity: 0.16;
+  }
+
+  .hero-product-image {
+    position: absolute;
+    inset: 3rem;
+    display: grid;
+    place-items: center;
+  }
+
+  .hero-product-image img {
+    width: min(78%, 330px);
+    height: auto;
+    filter: drop-shadow(0 0 35px rgba(0, 242, 255, 0.42));
+  }
+
+  .hero-product-meta {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(3, 7, 18, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+  }
+
+  .hero-product-meta strong {
+    color: #fff;
+    font-size: 1.1rem;
+  }
+
+  .store-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0 4rem;
+  }
+
+  .store-metrics div,
+  .featured-card,
+  .product-card,
+  .store-cta,
+  .order-dock {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.62);
+    backdrop-filter: blur(22px);
+  }
+
+  .store-metrics div {
+    padding: 1.2rem;
+  }
+
+  .store-metrics span {
+    color: var(--color-teal);
+    font-weight: 900;
+  }
+
+  .store-metrics strong {
+    display: block;
+    margin-top: 0.45rem;
+    color: #fff;
+  }
+
+  .store-metrics p {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .section-heading {
+    margin-bottom: 1.25rem;
+  }
+
+  .section-heading h2 {
+    margin-top: 0.35rem;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: 0;
+  }
+
+  .featured-grid,
+  .products-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .featured-card {
+    overflow: hidden;
+  }
+
+  .featured-card img {
+    width: 100%;
+    aspect-ratio: 1.35;
+    object-fit: cover;
+    display: block;
+  }
+
+  .featured-card div {
+    padding: 1rem;
+  }
+
+  .featured-card span,
+  .product-kicker,
+  .product-tags {
+    color: var(--color-teal);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .featured-card h3 {
+    margin-top: 0.45rem;
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .featured-card p {
+    margin-top: 0.2rem;
+    font-size: 0.88rem;
+  }
+
+  .catalogue-section {
+    margin-top: 4rem;
+  }
+
+  .catalogue-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1.5rem;
+  }
+
+  .category-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .category-tab {
+    min-height: 38px;
+    padding: 0.55rem 0.9rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 242, 255, 0.22);
+    background: rgba(15, 23, 42, 0.72);
+    color: rgba(255, 255, 255, 0.78);
+    cursor: pointer;
+    font-weight: 800;
+  }
+
+  .category-tab.active,
+  .category-tab:hover {
+    color: #020617;
+    background: var(--color-teal);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-card {
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 242, 255, 0.42);
+  }
+
+  .product-card.is-hidden {
+    display: none;
+  }
+
+  .product-image {
+    position: relative;
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .product-image img {
+    width: 100%;
+    aspect-ratio: 1.08;
+    object-fit: cover;
+    display: block;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    padding: 0.34rem 0.62rem;
+    border-radius: 6px;
+    background: rgba(3, 7, 18, 0.82);
+    color: var(--color-teal);
+    border: 1px solid rgba(0, 242, 255, 0.32);
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .product-body {
+    display: flex;
+    min-height: 270px;
+    flex-direction: column;
+    padding: 1.1rem;
+  }
+
+  .product-body h3 {
+    margin-top: 0.45rem;
+    font-size: 1.28rem;
+    letter-spacing: 0;
+  }
+
+  .product-body p {
+    margin-top: 0.65rem;
+    font-size: 0.94rem;
+  }
+
+  .product-tags {
+    margin-top: 0.95rem;
+  }
+
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  .product-footer strong {
+    color: #fff;
+  }
+
+  .product-btn {
+    min-width: 92px;
+    min-height: 40px;
+    border: 1px solid rgba(0, 242, 255, 0.4);
+    border-radius: 8px;
+    background: rgba(0, 242, 255, 0.12);
+    color: var(--color-teal);
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  .product-btn:hover {
+    background: var(--color-teal);
+    color: #020617;
+  }
+
+  .order-dock {
+    position: sticky;
+    z-index: 20;
+    bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: min(520px, calc(100vw - 2rem));
+    margin: 2rem auto 0;
+    padding: 0.75rem;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.45);
+  }
+
+  .order-dock span {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .order-dock strong {
+    color: #fff;
+  }
+
+  .store-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding: 2rem;
+  }
+
+  .store-cta h2 {
+    margin-top: 0.4rem;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    letter-spacing: 0;
+  }
+
+  .store-cta p {
+    max-width: 620px;
+    margin-top: 0.55rem;
+  }
+
+  @media (max-width: 980px) {
+    .store-hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .hero-product {
+      min-height: 340px;
+    }
+
+    .store-metrics,
+    .featured-grid,
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .catalogue-heading,
+    .store-cta {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .category-tabs {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .store-shell {
+      padding-top: 5.5rem;
+    }
+
+    .hero-actions,
+    .store-metrics,
+    .featured-grid,
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-actions {
+      display: grid;
+    }
+
+    .product-body {
+      min-height: auto;
+    }
+  }
 </style>
