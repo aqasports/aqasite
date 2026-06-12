@@ -1,5 +1,5 @@
 /* AQA Sports 2.0 Design System & Global Stylesheet */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
   /* Obsidian & Neon-Teal Palette */
@@ -23,7 +23,7 @@
   
   /* Fonts */
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
   /* Layout */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -186,6 +186,25 @@ body::before {
   opacity: 0.02;
   z-index: -1;
   pointer-events: none;
+}
+
+/* Double Bezel Layout Archetype (Principal UI/UX Architect) */
+.double-bezel {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 6px;
+  border-radius: 26px;
+  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.85);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.double-bezel:hover {
+  border-color: rgba(0, 242, 255, 0.1);
+  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 242, 255, 0.03);
+}
+.double-bezel > .glass-panel {
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 1px 0 0 rgba(255, 255, 255, 0.03) !important;
 }
 
 
