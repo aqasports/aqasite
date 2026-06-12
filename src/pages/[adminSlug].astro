@@ -4773,11 +4773,49 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
 
 
-  .formations-editor-grid, .infrastructures-editor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+  .formations-editor-grid, .infrastructures-editor-grid, .store-editor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
 
   .config-card { display: flex; flex-direction: column; gap: 1.25rem; }
 
   .card-config-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 1rem; }
+
+  .store-product-preview {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem;
+    border: 1px solid rgba(0, 242, 255, 0.14);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .store-product-preview img {
+    width: 86px;
+    height: 86px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .store-product-preview span {
+    display: block;
+    color: var(--color-teal);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .store-product-preview strong {
+    display: block;
+    margin-top: 0.25rem;
+    color: #fff;
+  }
+
+  .store-product-preview small {
+    color: rgba(255,255,255,0.62);
+  }
 
   .card-config-header strong { font-family: 'Outfit', sans-serif; color: var(--color-primary); }
 
@@ -4925,7 +4963,7 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
 
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
 
-    .formations-editor-grid, .infrastructures-editor-grid { grid-template-columns: 1fr; }
+    .formations-editor-grid, .infrastructures-editor-grid, .store-editor-grid { grid-template-columns: 1fr; }
 
   }
 
@@ -5122,6 +5160,8 @@ const passwordHash = adminConfig.passwordHash || '65cdacaf34486fbb5c32641665f6f5
       width: 100%;
 
     }
+
+  }
 
   /* Circular SVG gauge */
   .circular-chart {

@@ -655,5 +655,23 @@ const getRelativePath = (path, targetLang) => {
     .product-body {
       min-height: auto;
     }
+
+    .order-dock {
+      width: calc(100vw - 1rem);
+      max-width: calc(100vw - 1rem);
+      gap: 0.5rem;
+      padding: 0.6rem;
+    }
+
+    .order-dock > div {
+      min-width: 0;
+    }
+
+    .order-dock button {
+      min-width: 112px;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.84rem;
+      flex-shrink: 0;
+    }
   }
 </style>

@@ -120,6 +120,7 @@ exports.handler = async (event, context) => {
   // Load and return JSON data files
   const schedule = readJsonFile('src/data/schedule.json') || {};
   const formations = readJsonFile('src/data/formation.json') || [];
+  const store = readJsonFile('src/data/store.json') || [];
   const infrastructures = readJsonFile('src/data/infrastructure.json') || [];
   const counters = readJsonFile('src/data/counters.json') || {};
 
@@ -130,6 +131,7 @@ exports.handler = async (event, context) => {
       success: true,
       schedule,
       formations,
+      store,
       infrastructures,
       counters,
       config: {

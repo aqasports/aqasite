@@ -148,6 +148,9 @@ exports.handler = async (event, context) => {
   } else if (fileType === 'formation') {
     filePath = 'src/data/formation.json';
     commitMessage = 'update: formation.json via Admin Control Center';
+  } else if (fileType === 'store') {
+    filePath = 'src/data/store.json';
+    commitMessage = 'update: store.json via Admin Control Center';
   } else if (fileType === 'infrastructure') {
     filePath = 'src/data/infrastructure.json';
     commitMessage = 'update: infrastructure.json via Admin Control Center';
