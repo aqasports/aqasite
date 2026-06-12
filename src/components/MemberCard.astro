@@ -1,9 +1,19 @@
 ---
 export interface Props {
   scanTooltip?: string;
+  showQr?: boolean;
+  showXp?: boolean;
+  showStatus?: boolean;
+  statusText?: string;
 }
 
-const { scanTooltip = "Scanner pour entrer" } = Astro.props;
+const {
+  scanTooltip = "Scanner pour entrer",
+  showQr = true,
+  showXp = false,
+  showStatus = false,
+  statusText = "Active"
+} = Astro.props;
 ---
 
 <div id="memberCard" class="virtual-card">
@@ -11,13 +21,21 @@ const { scanTooltip = "Scanner pour entrer" } = Astro.props;
   <div class="card-chip"></div>
   <div class="card-logo">AQA SPORTS</div>
   <div class="card-tier-label" id="cardTier">Tier</div>
+  {showStatus && <div class="card-status-badge" id="cardStatus">{statusText}</div>}
   <div class="card-number" id="cardId">ID: AQA-0000</div>
   <div class="card-holder" id="cardHolder">NAME</div>
-  <div class="card-expiry" id="cardExpiry">Expiry</div>
-  <div class="card-qr-box">
-    <img id="cardQrCode" src="" alt="Scan QR">
-    <span class="qr-tooltip">{scanTooltip}</span>
-  </div>
+  {!showXp && <div class="card-expiry" id="cardExpiry">Expiry</div>}
+  {showXp && (
+    <div class="card-xp-sub">
+      <span class="xp-val" id="cardXP">0</span> <span class="xp-lbl">XP points</span>
+    </div>
+  )}
+  {showQr && (
+    <div class="card-qr-box">
+      <img id="cardQrCode" src="" alt="Scan QR">
+      <span class="qr-tooltip">{scanTooltip}</span>
+    </div>
+  )}
 </div>
 
 <style>
@@ -107,6 +125,38 @@ const { scanTooltip = "Scanner pour entrer" } = Astro.props;
     font-size: 0.72rem;
     color: rgba(255, 255, 255, 0.75);
     margin: 0;
+  }
+  .card-status-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+  }
+  .card-xp-sub {
+    position: absolute;
+    left: 45%;
+    top: 68%;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .card-xp-sub .xp-val {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-teal);
+  }
+  .card-xp-sub .xp-lbl {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
   }
   .card-qr-box {
     position: absolute;

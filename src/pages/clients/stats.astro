@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import MemberCard from '../../components/MemberCard.astro';
 
 export interface Props {
   lang?: string;
@@ -160,18 +161,8 @@ const badgeDefinitions = {
           
           <div class="official-card-banner">{localT.memberCard}</div>
           
-          <!-- Member Card Mockup -->
-          <div id="memberCard" class="virtual-card">
-            <div class="card-chip"></div>
-            <div class="card-logo">AQA SPORTS</div>
-            <div class="card-tier-label" id="cardTier">Tier</div>
-            <div class="card-status-badge">{localT.activeStatus}</div>
-            <div class="card-number" id="cardId">ID: AQA-0000</div>
-            <div class="card-holder" id="cardHolder">NAME</div>
-            <div class="card-xp-sub">
-              <span class="xp-val" id="cardXP">0</span> <span class="xp-lbl">{localT.xpPoints}</span>
-            </div>
-          </div>
+          <!-- Member Card -->
+          <MemberCard showQr={false} showXp={true} showStatus={true} statusText={localT.activeStatus} />
 
           <!-- Subscription Info Box -->
           <div class="glass-panel stats-widget">
@@ -500,113 +491,7 @@ const badgeDefinitions = {
     padding-bottom: 0.75rem;
   }
 
-  /* Virtual Card Design (Simplified copy from portal) */
-  .virtual-card {
-    height: 220px;
-    border-radius: 20px;
-    padding: 1.5rem;
-    position: relative;
-    color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-  }
-  .card-chip {
-    width: 45px;
-    height: 35px;
-    background: linear-gradient(135deg, #e5c060, #ba9539);
-    border-radius: 6px;
-  }
-  .card-logo {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    opacity: 0.85;
-  }
-  .card-tier-label {
-    position: absolute;
-    top: 50%;
-    left: 1.5rem;
-    transform: translateY(-50%);
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 2.2rem;
-    opacity: 0.15;
-    letter-spacing: 2px;
-  }
-  .card-status-badge {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: rgba(16, 185, 129, 0.15);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #34d399;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 50px;
-    text-transform: uppercase;
-  }
-  .card-number {
-    font-family: monospace;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    margin-top: 1rem;
-  }
-  .card-holder {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-  }
-  .card-xp-sub {
-    display: flex;
-    gap: 0.4rem;
-    align-items: center;
-    margin-top: -0.5rem;
-  }
-  .card-xp-sub .xp-val {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--color-teal);
-  }
-  .card-xp-sub .xp-lbl {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-  }
 
-  /* Card Tier Themes (consistent with portal) */
-  .card-tier-starter {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
-  }
-  .card-tier-silver {
-    background: linear-gradient(135deg, #2b3a4a, #101824);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-  }
-  .card-tier-gold {
-    background: linear-gradient(135deg, #784c05, #120b00);
-    border-color: rgba(243, 156, 18, 0.4);
-    box-shadow: 0 0 25px rgba(243, 156, 18, 0.2);
-  }
-  .card-tier-gold .card-chip {
-    background: linear-gradient(135deg, #fff2a3, #e5c060);
-  }
-  .card-tier-diamond {
-    background: linear-gradient(135deg, #32104a, #0b1a30);
-    border-color: rgba(168, 85, 247, 0.4);
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
-  }
 
   /* Sub Details */
   .sub-details-list {

@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
+import NotificationToast from '../components/NotificationToast.astro';
 
 export interface Props {
   title: string;
@@ -165,5 +166,6 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
   <iframe src="/scroll.html" class="bg-frame" tabindex="-1" aria-hidden="true" transition:persist transition:animate="none"></iframe>
   <div class="bg-logo" transition:persist transition:animate="none"></div>
   <slot />
+  <NotificationToast />
 </body>
 </html>
