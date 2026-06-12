@@ -1662,6 +1662,7 @@ const badgeDefinitions = {
     }
 
     // Fetch member profile
+    let _redirecting = false; // guard against double-redirect
     async function fetchProfile() {
       try {
         const response = await fetch('/api/member/profile', {
@@ -1670,9 +1671,12 @@ const badgeDefinitions = {
             'Authorization': `Bearer ${token}`
           }
         });
-        
+
+        // Any auth failure → clear token and leave
         if (response.status === 401 || response.status === 403) {
           localStorage.removeItem('aqa_member_token');
+          localStorage.removeItem('aqa_member_info');
+          _redirecting = true;
           redirectToLogin();
           return;
         }
@@ -1681,21 +1685,36 @@ const badgeDefinitions = {
         if (data.success) {
           renderDashboard(data.profile);
         } else {
+          // API returned success:false — token is likely invalid/expired
+          localStorage.removeItem('aqa_member_token');
+          localStorage.removeItem('aqa_member_info');
+          _redirecting = true;
           redirectToLogin();
         }
       } catch (e) {
         console.error("Failed to load user profile:", e);
-        redirectToLogin();
-      } finally {
-        if (loader) {
-          loader.classList.add('fade-out');
-          setTimeout(() => {
-            loader.style.display = 'none';
-          }, 400);
+        // Network error — do NOT remove the token (could be transient)
+        // Show an error state instead of looping
+        _redirecting = true;
+        if (loader) loader.style.display = 'none';
+        if (content) {
+          content.style.display = 'block';
+          const errDiv = document.createElement('div');
+          errDiv.style.cssText = 'text-align:center;padding:4rem 2rem;color:rgba(255,255,255,0.5);';
+          errDiv.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48" style="margin:0 auto 1rem;display:block;color:#ef4444"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><p style="font-size:1rem;color:#fff;font-weight:700;margin-bottom:0.5rem">Connexion impossible</p><p style="font-size:0.85rem">Veuillez vérifier votre connexion et <a href="/clients/portal" style="color:#00f2ff">réessayer</a>.</p>';
+          content.appendChild(errDiv);
         }
-        if (content) content.style.display = 'block';
+      } finally {
+        if (!_redirecting) {
+          if (loader) {
+            loader.classList.add('fade-out');
+            setTimeout(() => { loader.style.display = 'none'; }, 400);
+          }
+          if (content) content.style.display = 'block';
+        }
       }
     }
+
 
     // ─────────────────────────────────────────────────
     // PARTICLE CANVAS — Hero Banner Background
@@ -1843,9 +1862,11 @@ const badgeDefinitions = {
 
       // Sidebar logout button (new sidebar has its own button)
       document.getElementById('logoutBtnSidebar')?.addEventListener('click', () => {
-        localStorage.removeItem('portalToken');
+        localStorage.removeItem('aqa_member_token');
+        localStorage.removeItem('aqa_member_info');
         window.location.href = '/clients';
       });
+
 
       // Start particle canvas
       initParticleCanvas();
