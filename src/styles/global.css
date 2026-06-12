@@ -51,7 +51,7 @@ html {
 }
 
 body {
-  background: var(--bg-primary);
+  background: transparent;
   min-height: 100vh;
   line-height: 1.6;
   position: relative;
